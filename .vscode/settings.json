@@ -1,0 +1,12 @@
+{
+  "files.watcherExclude": {
+    "**/research/**": true
+  },
+  "search.exclude": {
+    "**/research/**": true
+  },
+  "git.repositoryScanIgnoredFolders": [
+    "research"
+  ],
+  "git.autoRepositoryDetection": "openEditors"
+}
