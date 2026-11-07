@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anvil Robotics — pick arms for cold-chain warehouses</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+  :root { --steel: #dcdedd; --deck: #f5f6f5; --ink: #16191a; --safety: #ff5c00; --grid: #a8adaa; }
+  body { background: var(--deck); color: var(--ink);
+         font: 15px/1.55 "Oswald", "Haettenschweiler", "Impact", sans-serif; }
+  .mono { font-family: "IBM Plex Mono", Consolas, monospace; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 14px 40px;
+           border-bottom: 2px solid var(--ink); font-size: 12px; letter-spacing: 0.22em;
+           text-transform: uppercase; }
+  header a { color: inherit; text-decoration: none; margin-left: 26px; }
+  section { padding: 70px 40px; border-bottom: 1px solid var(--grid); }
+  .l { width: 56%; }
+  .r { width: 52%; margin-left: 48%; }
+  h1 { font-size: 84px; line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase; }
+  h2 { font-size: 46px; line-height: 0.98; letter-spacing: -0.02em; text-transform: uppercase; }
+  p { margin-top: 20px; max-width: 50ch; }
+  .stamp { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--safety);
+           font-family: "IBM Plex Mono", Consolas, monospace; }
+  .dark { background: var(--ink); color: var(--deck); }
+  .dark .stamp { color: var(--safety); }
+  .spec { width: 100%; margin-top: 34px; border-collapse: collapse;
+          font-family: "IBM Plex Mono", Consolas, monospace; font-size: 14px; }
+  .spec th { text-align: left; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+             padding: 10px 0; border-bottom: 2px solid currentColor; }
+  .spec td { padding: 12px 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  .dark .spec td { border-color: #3b4042; }
+  .spec td:first-child { width: 42%; }
+  .spec td:last-child { text-align: right; color: var(--safety); }
+  .bar { display: flex; gap: 3px; margin-top: 30px; height: 46px; align-items: flex-end; }
+  .bar i { display: block; width: 14px; background: var(--safety); }
+  .cta { display: inline-block; margin-top: 30px; padding: 14px 26px; background: var(--safety);
+         color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.2em;
+         text-transform: uppercase; }
+  .note { margin-top: 28px; padding-left: 18px; border-left: 3px solid var(--safety); font-size: 14px; }
+  footer { padding: 30px 40px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+           display: flex; justify-content: space-between; }
+  @media (max-width: 760px) {
+    h1 { font-size: 46px; } h2 { font-size: 30px; }
+    .l, .r { width: 100%; margin-left: 0; }
+    section { padding: 46px 18px; } header, footer { padding: 14px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header><b>ANVIL ROBOTICS</b><nav><a href="#">Arm</a><a href="#">Deployments</a><a href="#">Safety file</a><a href="#">Contact</a></nav></header>
+
+<section>
+  <div class="l">
+    <p class="stamp">AR-4 / cold chain / −24 °C rated</p>
+    <h1>An arm that works at minus twenty-four.</h1>
+    <p>Most pick arms are specified in a warm lab and then asked to survive a freezer aisle. The AR-4
+      was built the other way round: harmonic drives rated for the cold, heated encoder housings, and
+      a wrist that keeps its repeatability through an eight-hour shift at depth.</p>
+    <div class="bar"><i style="height:14px"></i><i style="height:22px"></i><i style="height:31px"></i><i style="height:38px"></i><i style="height:46px"></i></div>
+    <a class="cta" href="#">Request the spec sheet</a>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="r">
+    <p class="stamp">Specification — AR-4</p>
+    <h2>Numbers, measured on the line.</h2>
+    <table class="spec">
+      <tr><th>Parameter</th><th>Condition</th><th>Value</th></tr>
+      <tr><td>Payload</td><td>at full extension</td><td>18 kg</td></tr>
+      <tr><td>Reach</td><td>shoulder to wrist flange</td><td>1 420 mm</td></tr>
+      <tr><td>Repeatability</td><td>after 8 h at −24 °C</td><td>±0.04 mm</td></tr>
+      <tr><td>Cycle</td><td>tote to conveyor, 600 mm</td><td>2.1 s</td></tr>
+      <tr><td>Duty</td><td>continuous, no warm-up</td><td>100%</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="l">
+    <p class="stamp">Deployment</p>
+    <h2>Bolted down in a shift, not a quarter.</h2>
+    <p>The arm arrives on its own frame with the controller and the safety scanner already wired and
+      commissioned. Two people, a pallet truck and a shift — then it picks against your WMS over the
+      interface you already run.</p>
+    <p class="note">At a grocery DC outside Rotterdam: eleven arms, installed over four nights, no
+      line stoppage. First full week averaged 1 340 picks per arm per shift.</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="r">
+    <p class="stamp">Safety and service</p>
+    <h2>The file, before the order.</h2>
+    <p>Category 3 PL d safety architecture, TÜV assessed, with the assessment shared before you
+      commit. Field service across the Benelux and the UK, four-hour response, spares held in
+      Rotterdam and Coventry.</p>
+    <a class="cta" href="#">Talk to an engineer</a>
+  </div>
+</section>
+
+<footer><span>Anvil Robotics BV</span><span>Rotterdam · Coventry</span><span>AR-4 rev. C</span></footer>
+
+</body>
+</html>

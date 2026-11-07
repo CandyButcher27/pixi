@@ -1,0 +1,69 @@
+{
+  "required": [
+    {
+      "rule": "full_bleed_sections",
+      "op": ">=",
+      "value": 1,
+      "source": "contrast:tesla",
+      "why": "at least one section breaks the page container"
+    },
+    {
+      "rule": "display_dominance",
+      "op": ">=",
+      "value": 3.5,
+      "source": "near:physics",
+      "why": "display typography carries the hierarchy instead of card chrome"
+    },
+    {
+      "rule": "largest_card_row",
+      "op": "<=",
+      "value": 2,
+      "source": "near:physics+contrast:tesla+outlier:terminal",
+      "why": "information is a sequence, not a row of equal boxes"
+    },
+    {
+      "rule": "max_radius",
+      "op": "<=",
+      "value": 24,
+      "source": "contrast:tesla+outlier:terminal",
+      "why": "geometry stays inside the reference range"
+    }
+  ],
+  "forbidden": [
+    {
+      "rule": "gradients",
+      "op": "<=",
+      "value": 0,
+      "source": "slop_law",
+      "why": "gradient backdrops are the loudest AI tell"
+    },
+    {
+      "rule": "pill_controls",
+      "op": "<=",
+      "value": 0,
+      "source": "slop_law",
+      "why": "fully rounded pill CTAs"
+    },
+    {
+      "rule": "glass_panels",
+      "op": "<=",
+      "value": 0,
+      "source": "slop_law",
+      "why": "glassmorphism panels"
+    },
+    {
+      "rule": "generic_display_font",
+      "op": "==",
+      "value": false,
+      "source": "slop_law",
+      "why": "Inter / system-ui defaults on the display face"
+    },
+    {
+      "rule": "hero_asymmetry",
+      "op": ">=",
+      "value": 0.08,
+      "source": "slop_law",
+      "why": "centred hero column is the default AI composition"
+    }
+  ]
+}

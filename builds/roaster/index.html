@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rua Nova — coffee roasted in Lisbon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+  :root { --bone: #f3ede1; --ink: #241a12; --oxblood: #6b1f14; --clay: #b8724a; }
+  body { background: var(--bone); color: var(--ink);
+         font: 16px/1.6 "Iowan Old Style", Palatino, "Book Antiqua", Georgia, serif; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 22px 36px; }
+  header b { font-size: 14px; letter-spacing: 0.34em; text-transform: uppercase; }
+  header a { color: inherit; text-decoration: none; font-size: 13px; letter-spacing: 0.2em;
+             text-transform: uppercase; margin-left: 26px; }
+  section { padding: 76px 36px 84px; }
+  .l { width: 58%; }
+  .r { width: 54%; margin-left: 46%; }
+  h1 { font-size: 168px; line-height: 0.82; letter-spacing: -0.05em; font-weight: 400;
+       font-style: italic; }
+  h1 span { display: block; font-style: normal; letter-spacing: -0.03em; }
+  h2 { font-size: 76px; line-height: 0.94; letter-spacing: -0.03em; font-weight: 400; }
+  p { margin-top: 24px; max-width: 44ch; }
+  .kicker { font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); }
+  .bleed { width: 100vw; background: var(--oxblood); color: var(--bone); }
+  .bleed .kicker { color: #e0a98c; }
+  .link { display: inline-block; margin-top: 30px; font-size: 13px; letter-spacing: 0.2em;
+          text-transform: uppercase; color: inherit; border-bottom: 2px solid currentColor;
+          text-decoration: none; padding-bottom: 5px; }
+  dl { margin-top: 40px; }
+  dl > div { display: flex; gap: 24px; padding: 18px 0; border-top: 1px solid rgba(36,26,18,0.25); }
+  .bleed dl > div { border-color: rgba(243,237,225,0.3); }
+  dt { min-width: 34%; font-size: 22px; }
+  dd { font-size: 15px; }
+  .weight { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; }
+  footer { padding: 40px 36px 64px; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; }
+  footer p { max-width: none; margin-top: 8px; }
+  @media (max-width: 760px) {
+    h1 { font-size: 76px; } h2 { font-size: 40px; }
+    .l, .r { width: 100%; margin-left: 0; }
+    section { padding: 48px 20px; } header, footer { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header><b>Rua Nova</b><nav><a href="#">Coffees</a><a href="#">Subscription</a><a href="#">The roastery</a></nav></header>
+
+<section>
+  <div class="l">
+    <p class="kicker">Roasted at Rua Nova do Carvalho 41</p>
+    <h1>Slow<span>Roast</span></h1>
+    <p>We roast eighteen kilos at a time, on a 1957 Probat, four mornings a week. Everything is sold
+      within nine days of the roast date printed on the bag, because coffee is produce and we would
+      rather run out than sell you something tired.</p>
+    <a class="link" href="#">This week's roast list</a>
+  </div>
+</section>
+
+<section class="bleed">
+  <div class="r">
+    <p class="kicker">On the bar now</p>
+    <h2>Four lots, until they're gone.</h2>
+    <dl>
+      <div><dt>Kieni <span class="weight">Kenya</span></dt><dd>Blackcurrant, tomato leaf, hard sugar. Washed SL28. Roasted for filter.</dd></div>
+      <div><dt>Tarrazú <span class="weight">Costa Rica</span></dt><dd>Cocoa nib and orange peel. Honey process. Takes milk without disappearing.</dd></div>
+      <div><dt>Guji <span class="weight">Ethiopia</span></dt><dd>Peach, jasmine, black tea tannin. Natural, dried on raised beds.</dd></div>
+      <div><dt>Serra <span class="weight">Brazil</span></dt><dd>Our espresso base. Brazil nut, molasses, low acidity.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="l">
+    <p class="kicker">Subscription</p>
+    <h2>A bag, posted Thursday.</h2>
+    <p>Tell us how you brew and how much you drink. We choose the lot, roast it Wednesday night and
+      post it Thursday morning. Pause it whenever you like — most people pause it in August.</p>
+    <a class="link" href="#">Set up a subscription</a>
+  </div>
+</section>
+
+<section class="bleed">
+  <div class="r">
+    <p class="kicker">The roastery</p>
+    <h2>Open to the street.</h2>
+    <p>The roaster faces the window because the smell is the only advertising we have ever paid for.
+      Cuppings on the first Saturday of every month, ten o'clock, free, no booking, six seats.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Rua Nova do Carvalho 41 · 1200-292 Lisboa</p>
+  <p>Wednesday to Sunday, 08:00–18:00</p>
+</footer>
+
+</body>
+</html>

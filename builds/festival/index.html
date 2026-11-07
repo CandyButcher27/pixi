@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NULL SIGNAL — three nights of experimental electronics</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0; }
+  :root { --black: #0b0b0b; --acid: #d8ff2e; --bone: #f2f0e9; --wire: #575a4a; }
+  body { background: var(--black); color: var(--bone);
+         font: 16px/1.45 "Oswald", "Haettenschweiler", "Franklin Gothic Medium", Impact, sans-serif;
+         text-transform: uppercase; letter-spacing: 0.02em; }
+  header { display: flex; justify-content: space-between; padding: 16px 32px;
+           border-bottom: 3px solid var(--acid); font-size: 12px; letter-spacing: 0.3em; }
+  header a { color: inherit; text-decoration: none; margin-left: 22px; }
+  section { padding: 64px 32px; border-bottom: 3px solid var(--wire); }
+  .l { width: 62%; }
+  .r { width: 58%; margin-left: 42%; text-align: right; }
+  h1 { font-size: 152px; line-height: 0.8; letter-spacing: -0.04em; color: var(--acid); }
+  h1 em { font-style: normal; -webkit-text-stroke: 2px var(--acid); color: transparent; display: block; }
+  h2 { font-size: 82px; line-height: 0.86; letter-spacing: -0.03em; }
+  p { margin-top: 20px; max-width: 40ch; font-family: "Courier New", monospace;
+      text-transform: none; letter-spacing: 0; font-size: 15px; line-height: 1.6; }
+  .r p { margin-left: auto; }
+  .tag { font-size: 12px; letter-spacing: 0.34em; color: var(--acid); }
+  .bleed { width: 100vw; background: var(--acid); color: var(--black); border-bottom: none; }
+  .bleed .tag { color: var(--black); }
+  .bleed p { color: #1a1a1a; }
+  .ticket { display: inline-block; margin-top: 28px; padding: 15px 30px; background: var(--acid);
+            color: var(--black); text-decoration: none; font-size: 14px; letter-spacing: 0.22em; }
+  .bleed .ticket { background: var(--black); color: var(--acid); }
+  .bill { margin-top: 34px; }
+  .bill div { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0;
+              border-top: 2px solid var(--wire); font-size: 26px; }
+  .bleed .bill div { border-color: rgba(11,11,11,0.35); }
+  .bill span { font-size: 12px; letter-spacing: 0.24em; padding-top: 12px; opacity: 0.75;
+               font-family: "Courier New", monospace; }
+  .bill b:nth-child(1) { font-size: 34px; }
+  footer { padding: 34px 32px; font-size: 12px; letter-spacing: 0.28em; display: flex;
+           justify-content: space-between; }
+  @media (max-width: 760px) {
+    h1 { font-size: 62px; } h2 { font-size: 38px; }
+    .l, .r { width: 100%; margin-left: 0; text-align: left; }
+    .bill div { font-size: 19px; } .bill b:nth-child(1) { font-size: 22px; }
+    section { padding: 44px 18px; } header, footer { padding: 14px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header><b>NULL SIGNAL</b><nav><a href="#">Bill</a><a href="#">Site</a><a href="#">Tickets</a></nav></header>
+
+<section>
+  <div class="l">
+    <p class="tag">Nov 14–16 · Tempelhof Hangar 4 · Berlin</p>
+    <h1>Null<em>Signal</em></h1>
+    <p>Three nights of modular synthesis, tape decay, feedback systems and things that break halfway
+      through and are kept in anyway. Concrete floor, no seating, one very large PA.</p>
+    <a class="ticket" href="#">Weekend pass — €96</a>
+  </div>
+</section>
+
+<section class="bleed">
+  <div class="r">
+    <p class="tag">Friday — Hangar</p>
+    <h2>Room One</h2>
+    <div class="bill">
+      <div><b>Kali Malone</b><span>22:00 — Organ, 90 min</span></div>
+      <div><b>Beatriz Ferreyra</b><span>23:45 — Acousmatic, 8 channels</span></div>
+      <div><b>Errorsmith</b><span>01:15 — Live modular</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="l">
+    <p class="tag">Saturday — Tank</p>
+    <h2>Room Two</h2>
+    <div class="bill">
+      <div><b>Nkisi</b><span>21:30 — Live, 120 BPM upward</span></div>
+      <div><b>Lucrecia Dalt</b><span>23:00 — Voice and tape</span></div>
+      <div><b>Rrose</b><span>00:30 — Extended set, 3 hrs</span></div>
+    </div>
+    <p>Room Two is a fuel tank. It is round, it is loud, and the reverb tail is roughly four seconds.
+      Several artists have written pieces specifically for it. Bring ear protection; we sell it at cost.</p>
+  </div>
+</section>
+
+<section class="bleed">
+  <div class="r">
+    <p class="tag">Practical</p>
+    <h2>No phones on the floor</h2>
+    <p>Cameras are stickered at the door. Sets are not streamed and not recorded, except by the artist.
+      Doors 21:00. Last U-Bahn 00:40; the night bus runs every twenty minutes until five.</p>
+    <a class="ticket" href="#">Get a pass</a>
+  </div>
+</section>
+
+<footer><span>Null Signal e.V.</span><span>Tempelhofer Damm, Berlin</span><span>Nov 14–16</span></footer>
+
+</body>
+</html>

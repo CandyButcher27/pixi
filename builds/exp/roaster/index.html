@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torra — Micro-Roastery, Lisboa</title>
+<style>
+  :root{
+    --font-display:"Iowan Old Style","Sitka Text",Georgia,serif;
+    --font-body:Charter,Georgia,serif;
+    --font-mono:ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+
+    --canvas:#F4EBDD;
+    --canvas-line:#DCCEB4;
+    --ink:#241C15;
+    --ink-dim:#6B5D4D;
+    --accent:#1F6B63;
+    --accent-deep:#153F3A;
+    --dark-bg:#1B1410;
+    --dark-ink:#F4EBDD;
+    --dark-dim:#9C8E7E;
+
+    --radius:10px;
+    --radius-sm:6px;
+    --wrap:1160px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 40px;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  svg{display:block;}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .eyebrow.on-dark{color:var(--dark-dim);}
+
+  /* ---------- header ---------- */
+  header.nav{
+    background:var(--canvas);
+    border-bottom:1px solid var(--canvas-line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 40px;
+    max-width:var(--wrap);
+    margin:0 auto;
+  }
+  .wordmark{
+    font-family:var(--font-display);
+    font-size:22px;
+    font-weight:400;
+    letter-spacing:.02em;
+  }
+  .nav-links{display:flex;gap:32px;align-items:center;}
+  .nav-links a{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim);}
+  .nav-links a:hover{color:var(--accent);}
+
+  /* ---------- shared section rhythm ---------- */
+  section{padding:110px 0;}
+  .grid-2{display:grid;gap:64px;align-items:center;}
+  .hero .grid-2{grid-template-columns:1.4fr 1fr;}
+  .process .grid-2{grid-template-columns:1fr 1.4fr;}
+  .origins .grid-2{grid-template-columns:1.5fr 1fr;}
+  .visit .grid-2{grid-template-columns:1fr 1.4fr;}
+
+  h1,h2{font-family:var(--font-display);font-weight:400;margin:0;color:var(--ink);}
+  h2{font-size:34px;line-height:1.15;margin-bottom:28px;}
+
+  /* ---------- hero ---------- */
+  .hero h1{
+    font-size:clamp(56px,8vw,124px);
+    line-height:1.02;
+    margin:18px 0 28px;
+    letter-spacing:-0.01em;
+  }
+  .hero .lede{
+    font-size:19px;
+    max-width:46ch;
+    color:var(--ink-dim);
+    margin:0 0 36px;
+  }
+  .cta-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+  .cta{
+    display:inline-block;
+    background:var(--accent);
+    color:var(--dark-ink);
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:17px 26px;
+    border-radius:var(--radius);
+  }
+  .cta:hover{background:var(--accent-deep);}
+  .link-arrow{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--ink-dim);border-bottom:1px solid var(--canvas-line);padding-bottom:2px;}
+  .link-arrow:hover{color:var(--accent);border-color:var(--accent);}
+
+  .roast-panel{
+    border:1px solid var(--canvas-line);
+    border-radius:12px;
+    padding:32px 28px;
+    background:transparent;
+  }
+  .roast-panel svg{width:100%;height:auto;margin:14px 0 18px;}
+  .roast-labels{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);}
+
+  /* ---------- process ---------- */
+  .process-quote{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:32px;
+    line-height:1.28;
+    color:var(--ink);
+    margin:16px 0 0;
+    max-width:26ch;
+  }
+  .steps{border-top:1px solid var(--canvas-line);}
+  .step{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:22px;
+    padding:26px 0;
+    border-bottom:1px solid var(--canvas-line);
+  }
+  .step .num{font-family:var(--font-mono);font-size:14px;color:var(--accent);padding-top:3px;}
+  .step h3{font-family:var(--font-display);font-weight:400;font-size:21px;margin:0 0 8px;}
+  .step p{margin:0;color:var(--ink-dim);font-size:15px;max-width:56ch;}
+
+  /* ---------- origins ---------- */
+  .origin-table{width:100%;border-collapse:collapse;}
+  .origin-table thead th{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    text-align:left;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--ink-dim);
+  }
+  .origin-table td{
+    padding:20px 12px 20px 0;
+    border-bottom:1px solid var(--canvas-line);
+    vertical-align:top;
+  }
+  .origin-table td.name{font-family:var(--font-display);font-size:19px;}
+  .origin-table td.notes{color:var(--ink-dim);font-size:14px;max-width:34ch;}
+  .origin-table td.mono{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);white-space:nowrap;}
+
+  .compass-panel{text-align:center;}
+  .compass-panel svg{margin:0 auto 18px;}
+  .coords{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-dim);}
+
+  /* ---------- visit (full bleed) ---------- */
+  .visit{
+    background:var(--dark-bg);
+    color:var(--dark-ink);
+    width:100%;
+  }
+  .visit h2{color:var(--dark-ink);}
+  .motif{opacity:.9;}
+  .address-block p{margin:0 0 6px;font-size:16px;}
+  .address-block .addr{font-size:18px;margin-bottom:22px;}
+  .hours{margin-top:26px;border-top:1px solid #3A3026;padding-top:20px;}
+  .hours-row{display:flex;justify-content:space-between;padding:8px 0;font-family:var(--font-mono);font-size:13px;color:var(--dark-dim);max-width:320px;}
+  .hours-row span:last-child{color:var(--dark-ink);}
+  .contact{margin-top:26px;font-family:var(--font-mono);font-size:13px;color:var(--dark-dim);}
+  .contact a{color:var(--dark-ink);border-bottom:1px solid var(--accent);}
+
+  /* ---------- footer ---------- */
+  footer{padding:70px 0 46px;border-top:1px solid var(--canvas-line);}
+  .footer-row{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  .footer-col p{margin:0 0 14px;color:var(--ink-dim);font-size:14px;max-width:34ch;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-links a{font-family:var(--font-mono);font-size:13px;color:var(--ink-dim);}
+  .footer-links a:hover{color:var(--accent);}
+  .colophon{margin-top:50px;font-family:var(--font-mono);font-size:11px;color:var(--ink-dim);letter-spacing:.04em;}
+
+  @media (max-width:860px){
+    .hero .grid-2,.process .grid-2,.origins .grid-2,.visit .grid-2{grid-template-columns:1fr;}
+    section{padding:70px 0;}
+    .wrap{padding:0 22px;}
+    .nav-row{padding:18px 22px;}
+    .footer-row{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-row">
+    <div class="wordmark">Torra</div>
+    <nav class="nav-links">
+      <a href="#process">Process</a>
+      <a href="#origins">Origins</a>
+      <a href="#visit">Visit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap grid-2">
+      <div>
+        <span class="eyebrow">Micro-roastery, Lisboa</span>
+        <h1>Roasted three streets from the Tejo.</h1>
+        <p class="lede">We buy green coffee direct from three family farms, roast it in twelve-kilo batches behind the shop window on Rua de São Paulo, and sell what's left of that batch until it's gone.</p>
+        <div class="cta-row">
+          <a class="cta" href="#origins">See today's roast</a>
+          <a class="link-arrow" href="#visit">Find the roastery →</a>
+        </div>
+      </div>
+      <div class="roast-panel">
+        <span class="eyebrow">Today's curve</span>
+        <svg viewBox="0 0 320 140" preserveAspectRatio="none">
+          <path d="M 4 118 C 60 108, 100 96, 140 74 C 190 48, 230 30, 316 8" fill="none" stroke="#1F6B63" stroke-width="2"/>
+          <circle cx="4" cy="118" r="3" fill="#1F6B63"/>
+          <circle cx="188" cy="42" r="3" fill="#1F6B63"/>
+          <circle cx="316" cy="8" r="3" fill="#1F6B63"/>
+        </svg>
+        <div class="roast-labels">
+          <span>Charge 200°C</span>
+          <span>First crack 9:40</span>
+          <span>Drop 11:20</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="process">
+    <div class="wrap grid-2">
+      <div>
+        <span class="eyebrow">Process</span>
+        <p class="process-quote">"We roast to reveal the farm, not the roaster."</p>
+      </div>
+      <div>
+        <h2>How we roast</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="num">01</span>
+            <div><h3>Select</h3><p>Each lot is cupped blind against the last three harvests before we commit to a bag. Half of what we sample never makes the list.</p></div>
+          </div>
+          <div class="step">
+            <span class="num">02</span>
+            <div><h3>Roast</h3><p>Twelve kilos at a time, on a 1950s drum rebuilt in Marvila. Every batch is logged by temperature, not by the clock.</p></div>
+          </div>
+          <div class="step">
+            <span class="num">03</span>
+            <div><h3>Rest</h3><p>Beans rest a minimum of five days before sale — long enough for the CO₂ to settle, never long enough to go stale on the shelf.</p></div>
+          </div>
+          <div class="step">
+            <span class="num">04</span>
+            <div><h3>Grind &amp; cup</h3><p>Ground to order at the counter, or left whole for the bag. We cup a spoonful of every batch before it goes out.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="origins" id="origins">
+    <div class="wrap grid-2">
+      <div>
+        <h2>Where it comes from</h2>
+        <table class="origin-table">
+          <thead>
+            <tr><th>Origin</th><th>Altitude</th><th>Process</th><th>Cupping notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">Ethiopia<br><span class="coords" style="font-size:12px;">Yirgacheffe, Gedeo Zone</span></td>
+              <td class="mono">1,900m</td>
+              <td class="mono">Washed</td>
+              <td class="notes">Bergamot, jasmine, black tea</td>
+            </tr>
+            <tr>
+              <td class="name">Colombia<br><span class="coords" style="font-size:12px;">Huila, Acevedo</span></td>
+              <td class="mono">1,700m</td>
+              <td class="mono">Washed</td>
+              <td class="notes">Red apple, panela, clove</td>
+            </tr>
+            <tr>
+              <td class="name">Brazil<br><span class="coords" style="font-size:12px;">Cerrado Mineiro</span></td>
+              <td class="mono">1,100m</td>
+              <td class="mono">Natural</td>
+              <td class="notes">Hazelnut, dark chocolate, molasses</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="compass-panel">
+        <svg width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="58" fill="none" stroke="#6B5D4D" stroke-width="1"/>
+          <line x1="70" y1="12" x2="70" y2="26" stroke="#6B5D4D" stroke-width="1"/>
+          <line x1="70" y1="114" x2="70" y2="128" stroke="#6B5D4D" stroke-width="1"/>
+          <line x1="12" y1="70" x2="26" y2="70" stroke="#6B5D4D" stroke-width="1"/>
+          <line x1="114" y1="70" x2="128" y2="70" stroke="#6B5D4D" stroke-width="1"/>
+          <line x1="70" y1="70" x2="70" y2="24" stroke="#1F6B63" stroke-width="2"/>
+          <circle cx="70" cy="70" r="3" fill="#1F6B63"/>
+        </svg>
+        <div class="coords">38.7169° N, 9.1399° W · Lisboa</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap grid-2">
+      <div>
+        <span class="eyebrow on-dark">Est. 2019</span>
+        <svg class="motif" width="180" height="180" viewBox="0 0 180 180">
+          <g fill="none" stroke="#1F6B63" stroke-width="1.4">
+            <rect x="10" y="10" width="40" height="40"/>
+            <rect x="50" y="10" width="40" height="40"/>
+            <rect x="90" y="10" width="40" height="40"/>
+            <rect x="130" y="10" width="40" height="40"/>
+            <rect x="10" y="50" width="40" height="40"/>
+            <rect x="90" y="50" width="40" height="40"/>
+            <rect x="50" y="90" width="40" height="40"/>
+            <rect x="130" y="90" width="40" height="40"/>
+            <path d="M10 10 L50 50 M50 10 L10 50 M90 50 L130 90 M130 50 L90 90"/>
+          </g>
+        </svg>
+      </div>
+      <div class="address-block">
+        <h2>Visit the roastery</h2>
+        <p class="addr">Rua de São Paulo 34<br>1200-251 Lisboa, Portugal</p>
+        <div class="hours">
+          <div class="hours-row"><span>Mon–Fri</span><span>08:00 – 17:00</span></div>
+          <div class="hours-row"><span>Saturday</span><span>09:00 – 14:00</span></div>
+          <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+        <div class="contact">
+          <a href="mailto:ola@torra.pt">ola@torra.pt</a> &nbsp;·&nbsp; +351 21 555 0134
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="footer-col">
+      <div class="wordmark">Torra</div>
+      <p>Small-batch coffee roaster on Rua de São Paulo, Cais do Sodré, Lisboa.</p>
+    </div>
+    <div class="footer-col footer-links">
+      <a href="#process">Process</a>
+      <a href="#origins">Origins</a>
+      <a href="#visit">Visit</a>
+    </div>
+    <div class="footer-col footer-links">
+      <a href="mailto:ola@torra.pt">Email</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="wrap colophon">© 2026 Torra, Lisboa. All beans accounted for.</div>
+</footer>
+
+</body>
+</html>
