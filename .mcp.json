@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "design-catalogue": {
+      "command": ".venv/Scripts/python.exe",
+      "args": ["-m", "designmcp.server"],
+      "cwd": "."
+    }
+  }
+}
