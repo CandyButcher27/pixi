@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgenticOS — an operating layer for agent work</title>
+<meta name="description" content="AgenticOS routes, forges, and secures autonomous work across a set of independent, composable modules." />
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="nav-float">
+  <div class="nav-mark">
+    <svg viewBox="0 0 18 18" fill="none">
+      <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1"/>
+      <circle cx="9" cy="9" r="1.6" fill="currentColor"/>
+      <path d="M9 1.5V4M9 14V16.5M1.5 9H4M14 9H16.5" stroke="currentColor" stroke-width="1"/>
+    </svg>
+    AgenticOS
+  </div>
+  <div class="nav-links">
+    <a href="#modules">modules</a>
+    <a href="#convergence">architecture</a>
+    <a href="#start">start</a>
+  </div>
+  <a class="nav-cta" href="https://github.com" target="_blank" rel="noopener">view source →</a>
+</nav>
+
+<header class="hero">
+  <canvas class="hero-field" id="field"></canvas>
+  <div class="hero-vignette"></div>
+  <div class="hero-inner">
+    <div class="kicker"><span class="dot"></span>seven modules, one router</div>
+    <h1 class="headline">One router.<br>Every agent, <em>wired</em>.</h1>
+    <p class="hero-sub">AgenticOS is a monorepo of independent tools — a model router, a design-generation pipeline, a retrieval curriculum, a security layer — built to be used alone or wired together.</p>
+    <div class="hero-actions">
+      <a class="btn-glass" href="#modules">
+        see the modules
+        <svg viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section id="convergence">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">// architecture</div>
+      <h2 class="section-title">Every module speaks through <em>one</em> router.</h2>
+      <p class="section-lead">Token-router sits in the middle: a caller sends a prompt, it picks the best available free or cheap model from a hand-verified catalog, and returns the response. Everything else in the monorepo calls through it instead of hard-coding a provider.</p>
+    </div>
+    <div class="diagram-frame">
+      <div class="diagram-inner">
+        <svg id="routerDiagram" viewBox="0 0 1096 460" width="100%" height="auto" role="img" aria-label="Diagram of AgenticOS modules routing through Token-router to model providers">
+          <!-- left: callers -->
+          <path class="flow-path pulse" d="M78 40 C 300 40, 400 180, 548 226" />
+          <path class="flow-path pulse rev" d="M78 135 C 300 135, 400 200, 548 228" />
+          <path class="flow-path pulse" d="M78 230 L 508 230" />
+          <path class="flow-path pulse rev" d="M78 325 C 300 325, 400 260, 548 232" />
+          <path class="flow-path pulse" d="M78 420 C 300 420, 400 280, 548 234" />
+
+          <!-- right: providers -->
+          <path class="flow-path pulse" d="M588 226 C 750 190, 850 90, 1018 40" />
+          <path class="flow-path pulse rev" d="M588 228 C 750 210, 850 190, 1018 167" />
+          <path class="flow-path pulse" d="M588 232 C 750 250, 850 270, 1018 293" />
+          <path class="flow-path pulse rev" d="M588 234 C 750 300, 850 360, 1018 420" />
+
+          <!-- caller nodes -->
+          <g>
+            <circle class="node-circle" cx="60" cy="40" r="18"/>
+            <text class="node-label" x="86" y="44">Claude Code</text>
+            <circle class="node-circle" cx="60" cy="135" r="18"/>
+            <text class="node-label" x="86" y="139">Frontend</text>
+            <circle class="node-circle" cx="60" cy="230" r="18"/>
+            <text class="node-label" x="86" y="234">RagForge</text>
+            <circle class="node-circle" cx="60" cy="325" r="18"/>
+            <text class="node-label" x="86" y="329">CyberSecrity</text>
+            <circle class="node-circle" cx="60" cy="420" r="18"/>
+            <text class="node-label" x="86" y="424">Scraper</text>
+          </g>
+
+          <!-- hub -->
+          <circle class="node-circle hub" cx="548" cy="230" r="40"/>
+          <text class="node-label hub-label" x="548" y="226" text-anchor="middle">Token</text>
+          <text class="node-label hub-label" x="548" y="240" text-anchor="middle">router</text>
+
+          <!-- provider nodes -->
+          <g text-anchor="end">
+            <circle class="node-circle" cx="1036" cy="40" r="16"/>
+            <text class="node-label" x="1010" y="44">Groq</text>
+            <circle class="node-circle" cx="1036" cy="167" r="16"/>
+            <text class="node-label" x="1010" y="171">OpenRouter</text>
+            <circle class="node-circle" cx="1036" cy="293" r="16"/>
+            <text class="node-label" x="1010" y="297">Gemini</text>
+            <circle class="node-circle" cx="1036" cy="420" r="16"/>
+            <text class="node-label" x="1010" y="424">Ollama Cloud</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modules">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">// modules</div>
+      <h2 class="section-title">Independent by design, <em>composable</em> by router.</h2>
+      <p class="section-lead">Most of this is early-stage. Nothing here pretends to be finished — the status line under each card is honest about where it stands.</p>
+    </div>
+
+    <div class="modules-grid">
+      <article class="module-card">
+        <span class="idx">01 / router</span>
+        <h3>Token-router</h3>
+        <p>Picks the best available free or cheap model from a hand-curated, key-verified catalog — Groq, OpenRouter, Gemini, Ollama Cloud — via litellm. Exposed as a FastAPI endpoint and an MCP tool.</p>
+        <span class="status live"><span class="dot"></span>active</span>
+      </article>
+
+      <article class="module-card">
+        <span class="idx">02 / design</span>
+        <h3>Frontend</h3>
+        <p>A design-reference catalogue and generation pipeline — ~75 static site homages indexed by screenshot + VLM metadata, retrieved semantically to compose new pages. Driven entirely through the router.</p>
+        <span class="status live"><span class="dot"></span>active</span>
+      </article>
+
+      <article class="module-card">
+        <span class="idx">03 / retrieval</span>
+        <h3>RagForge</h3>
+        <p>A twelve-level adaptive-retrieval curriculum — from naive chunking up through query rewriting, reranking, and agentic RAG. Planning-only for now; the PRD is written.</p>
+        <span class="status"><span class="dot"></span>planning</span>
+      </article>
+
+      <article class="module-card">
+        <span class="idx">04 / security</span>
+        <h3>CyberSecrity</h3>
+        <p>Reserved for defensive tooling pulled out of the cybersec inspirations — fraud/mule detection, convergence-based alerting, the patterns proven in MulePredator.</p>
+        <span class="status"><span class="dot"></span>placeholder</span>
+      </article>
+
+      <article class="module-card">
+        <span class="idx">05 / ingest</span>
+        <h3>Scraper</h3>
+        <p>Data acquisition layer feeding the rest of the system — not yet built, reserved so retrieval and detection modules have a real source instead of static fixtures.</p>
+        <span class="status"><span class="dot"></span>placeholder</span>
+      </article>
+
+      <article class="module-card">
+        <span class="idx">06 / reference</span>
+        <h3>inspirations/</h3>
+        <p>Studied, not shipped — hackathon token-routing entries, cybersecurity repos, and trading systems pulled in for pattern research, kept out of the core codebase's own logic.</p>
+        <span class="status"><span class="dot"></span>reference</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap band-inner">
+    <p class="statement">Nothing here is a framework you adopt whole. Each module works <em>alone</em> — the router is what lets them work <em>together</em>.</p>
+  </div>
+</section>
+
+<section id="start" class="close-cta">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">// start</div>
+      <h2 class="section-title">Pick a module, <em>read</em> its CLAUDE.md, start there.</h2>
+      <p class="section-lead">Every folder with real code keeps its own architecture doc. There's no onboarding flow beyond that — this is a working monorepo, not a product.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-glass" href="https://github.com" target="_blank" rel="noopener">
+        browse the repo
+        <svg viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H4M11 3V10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid-tex"></div>
+  <div class="wrap footer-top">
+    <div class="footer-col" style="max-width:280px;">
+      <h4>AGENTICOS</h4>
+      <p class="footer-note">A monorepo of independent, early-stage tools for routing, generating, retrieving, and defending — wired together by one router.</p>
+    </div>
+    <div class="footer-col">
+      <h4>MODULES</h4>
+      <a href="#modules">Token-router</a>
+      <a href="#modules">Frontend</a>
+      <a href="#modules">RagForge</a>
+    </div>
+    <div class="footer-col">
+      <h4>PROJECT</h4>
+      <a href="#convergence">Architecture</a>
+      <a href="#start">Start here</a>
+      <a href="https://github.com" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+  <div class="footer-word wrap" aria-hidden="true">AgenticOS</div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 AgenticOS — early-stage monorepo</span>
+    <span>built module by module</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
