@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resend — Email for developers</title>
+<meta name="description" content="Resend is the email platform for developers. Build, test, and scale transactional and marketing email with one clean API.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav-bar" id="navBar">
+  <div class="nav-bar__inner">
+    <a href="#" class="wordmark" aria-label="Resend home">
+      <svg class="wordmark__mark" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M2 4.5 12 11 22 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 4.5V18.5C2 19.0523 2.44772 19.5 3 19.5H21C21.5523 19.5 22 19.0523 22 18.5V4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>resend</span>
+      <span class="wordmark__badge">3.0</span>
+    </a>
+
+    <nav class="nav-bar__center" aria-label="Primary">
+      <a href="#platform">Platform</a>
+      <a href="#code">Developers</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#customers">Customers</a>
+      <a href="#docs">Docs</a>
+    </nav>
+
+    <div class="nav-bar__right">
+      <a href="#" class="link-quiet nav-bar__signin">Sign in</a>
+      <a href="#" class="btn btn-primary">Start building</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="nav-bar__mobile" id="navMobile" aria-label="Mobile">
+    <a href="#platform">Platform</a>
+    <a href="#code">Developers</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#customers">Customers</a>
+    <a href="#docs">Docs</a>
+    <a href="#" class="link-quiet">Sign in</a>
+    <a href="#" class="btn btn-primary">Start building</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO STRIPE -->
+  <section class="hero-stripe">
+    <div class="hero-stripe__inner">
+      <h1 class="hero-stripe__headline">Email for<br>developers.</h1>
+      <div class="hero-stripe__foot">
+        <p class="hero-stripe__subtitle">One API to send transactional and marketing email your users actually receive — built by the team behind React Email.</p>
+        <div class="hero-stripe__actions">
+          <a href="#" class="btn btn-primary">Start building</a>
+          <a href="#docs" class="link-arrow">Read the docs<span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATMOSPHERIC: INTEGRATE THIS WEEKEND -->
+  <section class="band band--glow-blue" id="code">
+    <div class="band__inner code-story">
+      <div class="code-story__copy">
+        <h2 class="display-xl">Integrate this weekend.<br>Send on Monday.</h2>
+        <p class="body-lg">Official SDKs for the languages you already use. Install the package, drop in an API key, and your first email is on its way in under five minutes.</p>
+        <div class="lang-row" role="tablist" aria-label="Choose a language">
+          <button class="code-tab is-active" role="tab" aria-selected="true" data-lang="node">Node.js</button>
+          <button class="code-tab" role="tab" aria-selected="false" data-lang="python">Python</button>
+          <button class="code-tab" role="tab" aria-selected="false" data-lang="ruby">Ruby</button>
+          <button class="code-tab" role="tab" aria-selected="false" data-lang="curl">cURL</button>
+        </div>
+      </div>
+
+      <div class="code-window">
+        <div class="code-window__chrome">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+          <span class="code-window__filename" id="codeFilename">send.js</span>
+        </div>
+        <pre class="code-window__body"><code id="codeBody">
+<span class="tok-kw">import</span> { Resend } <span class="tok-kw">from</span> <span class="tok-str">'resend'</span>;
+
+<span class="tok-kw">const</span> resend = <span class="tok-kw">new</span> Resend(<span class="tok-str">'re_123456789'</span>);
+
+<span class="tok-kw">await</span> resend.emails.send({
+  from: <span class="tok-str">'onboarding@resend.dev'</span>,
+  to: <span class="tok-str">'user@example.com'</span>,
+  subject: <span class="tok-str">'Welcome aboard'</span>,
+  html: <span class="tok-str">'&lt;strong&gt;It just works.&lt;/strong&gt;'</span>,
+});</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE GRID -->
+  <section class="band" id="platform">
+    <div class="band__inner">
+      <h2 class="display-lg">Everything the send button hides.</h2>
+      <div class="feature-grid">
+
+        <article class="feature-card">
+          <div class="feature-card__status"><span class="status-dot status-dot--green"></span>Delivered</div>
+          <h3 class="heading-md">Deliverability</h3>
+          <p class="body-md">Dedicated sending IPs, automatic warm-up, and reputation monitoring so your mail lands in the inbox instead of the junk folder.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__status"><span class="status-dot status-dot--blue"></span>Real-time</div>
+          <h3 class="heading-md">Webhooks</h3>
+          <p class="body-md">Subscribe to sent, delivered, opened, clicked, bounced, and complained events the moment they happen. No polling.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__status"><span class="status-dot status-dot--yellow"></span>Batched</div>
+          <h3 class="heading-md">Batch sending</h3>
+          <p class="body-md">Queue up to 100 personalized emails in a single API call. One request, a hundred recipients, zero rate-limit headaches.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__status"><span class="status-dot status-dot--green"></span>Verified</div>
+          <h3 class="heading-md">Domains</h3>
+          <p class="body-md">Verify DKIM, SPF, and DMARC in minutes with copy-paste DNS records. Full custom-domain sending, no shared reputation.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__status"><span class="status-dot status-dot--blue"></span>Segmented</div>
+          <h3 class="heading-md">Audiences</h3>
+          <p class="body-md">Manage contact lists and send broadcasts to segments without leaving the API you already send transactional mail through.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__status"><span class="status-dot status-dot--red"></span>Tracked</div>
+          <h3 class="heading-md">Analytics</h3>
+          <p class="body-md">Opens, clicks, and bounce trends per domain and per template, so you know what's landing and what's getting flagged.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL MOCKUP BAND -->
+  <section class="band band--deep">
+    <div class="band__inner email-band">
+      <h2 class="display-xl">Emails people<br>actually open.</h2>
+      <p class="body-lg email-band__lede">Build templates in React, preview them pixel-perfect across clients, and ship copy your users read instead of skim past.</p>
+
+      <div class="email-mockup">
+        <div class="email-mockup__bar">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="email-mockup__body">
+          <p class="email-mockup__from">Acme <span>&lt;hello@acme.dev&gt;</span></p>
+          <h4 class="email-mockup__subject">Your invoice is ready</h4>
+          <p class="email-mockup__text">Hi Sam,</p>
+          <p class="email-mockup__text">Your March invoice has been generated and is ready to view. Total due is $482.00, payable by April 3rd.</p>
+          <a href="#" class="email-mockup__cta">View invoice</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATMOSPHERIC: DELIVERABILITY -->
+  <section class="band band--glow-red">
+    <div class="band__inner deliver-split">
+      <h2 class="display-xl">Reach humans,<br>not spam folders.</h2>
+      <div class="deliver-split__stats">
+        <div class="stat">
+          <span class="stat__num">99.9<span class="stat__unit">%</span></span>
+          <span class="stat__label">Average inbox placement across monitored sends</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num">&lt;50<span class="stat__unit">ms</span></span>
+          <span class="stat__label">API response time, most regions</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num">4B<span class="stat__unit">+</span></span>
+          <span class="stat__label">Emails sent through the platform to date</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="band" id="pricing">
+    <div class="band__inner">
+      <h2 class="display-lg">Pricing that scales with your sends.</h2>
+      <div class="pricing-grid">
+
+        <article class="pricing-tier">
+          <div class="pricing-tier__top">
+            <h3 class="heading-sm">Free</h3>
+            <p class="body-sm">For side projects and testing.</p>
+          </div>
+          <p class="pricing-tier__price">$0<span>/mo</span></p>
+          <ul class="pricing-tier__list">
+            <li>3,000 emails / month</li>
+            <li>100 emails / day</li>
+            <li>1 verified domain</li>
+            <li>Community support</li>
+          </ul>
+          <a href="#" class="btn btn-outline pricing-tier__cta">Start free</a>
+        </article>
+
+        <article class="pricing-tier pricing-tier--featured">
+          <div class="pricing-tier__top">
+            <h3 class="heading-sm">Pro</h3>
+            <p class="body-sm">For production applications.</p>
+          </div>
+          <p class="pricing-tier__price">$20<span>/mo</span></p>
+          <ul class="pricing-tier__list">
+            <li>50,000 emails / month</li>
+            <li>No daily cap</li>
+            <li>Unlimited domains</li>
+            <li>Webhooks &amp; analytics</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary pricing-tier__cta">Start building</a>
+        </article>
+
+        <article class="pricing-tier">
+          <div class="pricing-tier__top">
+            <h3 class="heading-sm">Enterprise</h3>
+            <p class="body-sm">For high-volume senders.</p>
+          </div>
+          <p class="pricing-tier__price">Custom</p>
+          <ul class="pricing-tier__list">
+            <li>Dedicated IPs</li>
+            <li>Custom volume &amp; SLA</li>
+            <li>SSO &amp; audit logs</li>
+            <li>Dedicated support channel</li>
+          </ul>
+          <a href="#" class="btn btn-outline pricing-tier__cta">Talk to sales</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="customers">
+  <div class="footer__inner">
+    <div class="footer__grid">
+      <div class="footer__col">
+        <p class="footer__label">Product</p>
+        <a href="#platform">Platform</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Status</a>
+        <a href="#">Changelog</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__label">Developers</p>
+        <a href="#docs">Documentation</a>
+        <a href="#code">SDKs</a>
+        <a href="#">API reference</a>
+        <a href="#">Webhooks</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__label">Company</p>
+        <a href="#">About</a>
+        <a href="#customers">Customers</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__label">Legal</p>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__status"><span class="status-dot status-dot--green"></span>All systems operational</div>
+      <p class="caption">&copy; 2026 Resend, Inc.</p>
+    </div>
+  </div>
+  <div class="footer__wordmark" aria-hidden="true">resend</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

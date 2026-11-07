@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revolut — One account. Every currency. Zero borders.</title>
+<meta name="description" content="Hold, exchange and spend in 30+ currencies at the real rate. Budgeting, crypto and stock trading built into one card and one app.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav-bar">
+  <div class="container">
+    <a href="#" class="nav-logo">revolut</a>
+    <nav class="nav-links">
+      <a href="#features">Personal</a>
+      <a href="#compare">Business</a>
+      <a href="#faq">Company</a>
+    </nav>
+    <div class="nav-actions">
+      <span class="nav-lang">EN</span>
+      <a href="#" class="nav-login">Log in</a>
+      <a href="#" class="btn btn-primary nav-cta">Get the app</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile nav panel -->
+<nav class="mobile-nav" id="mobileNav" hidden>
+  <div class="container mobile-nav-inner">
+    <a href="#">Personal</a>
+    <a href="#">Business</a>
+    <a href="#">Company</a>
+    <a href="#">Log in</a>
+    <a href="#" class="btn btn-primary mobile-nav-cta">Get the app</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-head">
+        <h1 class="display-xxl">Money without borders.</h1>
+        <p class="hero-sub body-lg">Hold, exchange and spend in 30&#43; currencies at the real exchange rate &#8212; with budgeting, crypto and stock trading built into the same app.</p>
+        <a href="#" class="btn btn-primary">Get the app</a>
+      </div>
+
+      <div class="converter" aria-label="Currency converter">
+        <div class="converter-row">
+          <div class="converter-field">
+            <label for="amountFrom">You send</label>
+            <div class="converter-inputs">
+              <input type="text" inputmode="decimal" id="amountFrom" value="1,000">
+              <select id="currencyFrom" aria-label="From currency">
+                <option value="USD" selected>USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+                <option value="INR">INR</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="converter-swap" id="swapBtn" aria-label="Swap currencies" type="button">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5H14M14 6.5L11 3.5M14 6.5L11 9.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11.5H4M4 11.5L7 8.5M4 11.5L7 14.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="converter-field">
+            <label for="amountTo">They receive</label>
+            <div class="converter-inputs">
+              <input type="text" inputmode="decimal" id="amountTo" value="924.10" readonly>
+              <select id="currencyTo" aria-label="To currency">
+                <option value="EUR" selected>EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+                <option value="INR">INR</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <p class="converter-rate">Real exchange rate &#8212; <strong id="rateText">1 USD = 0.9241 EUR</strong>, no hidden markup.</p>
+      </div>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track" id="tickerTrack"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGETING PRODUCT MOCKUP -->
+  <section class="mockup-band">
+    <div class="container">
+      <div class="mockup-grid">
+        <div class="mockup-copy">
+          <h2 class="display-lg">See exactly where your money goes.</h2>
+          <p class="body-lg">Every payment sorts itself into a category the moment it lands &#8212; groceries, transport, subscriptions &#8212; so your spending pattern is visible before the statement ever arrives.</p>
+        </div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-balance">
+              <span>Total balance</span>
+              <strong>$4,286.50</strong>
+            </div>
+            <div class="phone-bars">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="phone-cats">
+              <div class="phone-cat"><span>Groceries</span><span>$412</span></div>
+              <div class="phone-cat"><span>Transport</span><span>$96</span></div>
+              <div class="phone-cat"><span>Subscriptions</span><span>$58</span></div>
+              <div class="phone-cat"><span>Dining out</span><span>$210</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-head">
+        <h2 class="display-md">Everything a bank does. Some things it never learned to.</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <svg viewBox="0 0 28 28" fill="none"><path d="M4 10H24M24 10L18 4M24 10L18 16" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 18H4M4 18L10 12M4 18L10 24" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 class="heading-sm">Real-rate exchange</h3>
+          <p class="body-md">Convert between 30&#43; currencies at the interbank rate, whether you're paying rent abroad or splitting a bill on holiday.</p>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 28 28" fill="none"><circle cx="9" cy="14" r="6" stroke="#191c1f" stroke-width="1.6"/><circle cx="19" cy="14" r="6" stroke="#191c1f" stroke-width="1.6"/></svg>
+          <h3 class="heading-sm">Crypto &amp; stocks, built in</h3>
+          <p class="body-md">Buy fractional shares and major cryptocurrencies from the same balance you use to pay for coffee &#8212; no separate broker account.</p>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 28 28" fill="none"><path d="M4 20L10 12L15 16L24 5" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 5H24V11" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3 class="heading-sm">Spending, understood</h3>
+          <p class="body-md">Automatic categories and weekly summaries turn a wall of transactions into a pattern you can actually act on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD MOCKUP -->
+  <section class="card-band">
+    <div class="container">
+      <div class="card-grid">
+        <div class="card-copy">
+          <h2 class="display-lg">One card. Every currency, at the real rate.</h2>
+          <p class="body-lg">Metal, weighted, and cut from stainless steel &#8212; it holds every currency you exchange into and spends in whichever one costs you least.</p>
+          <a href="#compare" class="btn btn-outline-dark">Compare cards</a>
+        </div>
+        <div class="metal-card">
+          <div class="foot foot-top">
+            <span class="brand">METAL</span>
+            <div class="chip"></div>
+          </div>
+          <div class="num">5412&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&#8226;&#8226;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;&#8226;&#8226;&#8226;&#8226;&nbsp;&nbsp;&nbsp;&nbsp;9021</div>
+          <div class="foot">
+            <span>Valid thru <b>09/29</b></span>
+            <b>revolut</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="compare" id="compare">
+    <div class="container">
+      <div class="compare-head">
+        <h2 class="display-md">Five tiers. Pick the one your life actually needs.</h2>
+        <p class="body-lg">Every plan holds the real exchange rate. What changes is how much of the world it covers for free.</p>
+      </div>
+      <div class="compare-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Standard</th>
+              <th>Plus</th>
+              <th class="featured">Premium</th>
+              <th>Metal</th>
+              <th>Ultra</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Physical card</th>
+              <td>&#8212;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td>
+            </tr>
+            <tr>
+              <th scope="row">Fee-free exchange</th>
+              <td>$1,000/mo</td><td>$2,000/mo</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td>
+            </tr>
+            <tr>
+              <th scope="row">Free ATM withdrawals</th>
+              <td>$200/mo</td><td>$400/mo</td><td>$800/mo</td><td>$1,200/mo</td><td>Unlimited</td>
+            </tr>
+            <tr>
+              <th scope="row">Crypto &amp; stocks</th>
+              <td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td>
+            </tr>
+            <tr>
+              <th scope="row">Airport lounge access</th>
+              <td>&#8212;</td><td>&#8212;</td><td>&#8212;</td><td>2 visits/mo</td><td>Unlimited</td>
+            </tr>
+            <tr>
+              <th scope="row">Priority support</th>
+              <td>&#8212;</td><td>&#8212;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans">
+    <div class="container">
+      <div class="plans-head">
+        <h2 class="display-md">Choose your subscription.</h2>
+        <p class="body-lg">Switch, upgrade or cancel at any time &#8212; nothing here locks you in.</p>
+      </div>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <span class="plan-tag">Free forever</span>
+          <h3 class="heading-lg plan-name">Standard</h3>
+          <div class="plan-price"><b>$0</b><span>&nbsp;/mo</span></div>
+          <ul class="plan-features">
+            <li>Free virtual card</li>
+            <li>$1,000 fee-free exchange</li>
+            <li>$200 free ATM withdrawals</li>
+          </ul>
+          <a href="#" class="btn btn-soft">Get started</a>
+        </div>
+        <div class="plan-card">
+          <span class="plan-tag">For regular travel</span>
+          <h3 class="heading-lg plan-name">Plus</h3>
+          <div class="plan-price"><b>$3.99</b><span>&nbsp;/mo</span></div>
+          <ul class="plan-features">
+            <li>Physical card included</li>
+            <li>$2,000 fee-free exchange</li>
+            <li>Delayed flight refunds</li>
+          </ul>
+          <a href="#" class="btn btn-soft">Get started</a>
+        </div>
+        <div class="plan-card featured">
+          <span class="plan-tag">Recommended</span>
+          <h3 class="heading-lg plan-name">Premium</h3>
+          <div class="plan-price"><b>$9.99</b><span>&nbsp;/mo</span></div>
+          <ul class="plan-features">
+            <li>Unlimited fee-free exchange</li>
+            <li>Global medical insurance</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Get started</a>
+        </div>
+        <div class="plan-card">
+          <span class="plan-tag">For the metal card</span>
+          <h3 class="heading-lg plan-name">Metal</h3>
+          <div class="plan-price"><b>$16.99</b><span>&nbsp;/mo</span></div>
+          <ul class="plan-features">
+            <li>Stainless steel card</li>
+            <li>2% cashback on spending</li>
+            <li>2 lounge visits / mo</li>
+          </ul>
+          <a href="#" class="btn btn-soft">Get started</a>
+        </div>
+        <div class="plan-card">
+          <span class="plan-tag">No ceiling</span>
+          <h3 class="heading-lg plan-name">Ultra</h3>
+          <div class="plan-price"><b>$45</b><span>&nbsp;/mo</span></div>
+          <ul class="plan-features">
+            <li>Unlimited lounge access</li>
+            <li>Dedicated relationship manager</li>
+            <li>Highest cashback tier</li>
+          </ul>
+          <a href="#" class="btn btn-soft">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section class="download">
+    <div class="container">
+      <div class="download-grid">
+        <div class="download-copy">
+          <h2 class="display-md">Get the app.</h2>
+          <p class="body-lg">Open an account in minutes &#8212; no branch, no paperwork, no waiting.</p>
+        </div>
+        <div class="download-tiles">
+          <a href="#" class="download-tile">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4V16M12 16L8 12M12 16L16 12" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20H19" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span class="lines"><small>Download on the</small><strong>App Store</strong></span>
+          </a>
+          <a href="#" class="download-tile">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4V16M12 16L8 12M12 16L16 12" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20H19" stroke="#191c1f" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span class="lines"><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="faq-head">
+        <h2 class="display-md">Questions, answered plainly.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Is Revolut a bank?<span class="plus"></span></summary>
+          <p class="body-md">In most markets Revolut operates under an e-money or banking licence depending on region, and eligible balances are safeguarded or deposit-protected accordingly. The specifics are shown in-app before you open an account.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which currencies can I hold?<span class="plus"></span></summary>
+          <p class="body-md">You can hold and exchange between 30&#43; currencies inside the app, and spend in over 150 with a card that auto-converts at the point of sale.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the real exchange rate work?<span class="plus"></span></summary>
+          <p class="body-md">Standard and Plus get a fee-free exchange allowance each month at the interbank rate; Premium, Metal and Ultra get it unlimited. Past the allowance, a small fair-usage fee applies.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I trade crypto and stocks from the same balance?<span class="plus"></span></summary>
+          <p class="body-md">Yes &#8212; crypto and fractional stock trading sit in the same app and the same balance, so moving money between spending, saving and investing takes one tap, not a transfer to a separate broker.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo footer-logo">revolut</a>
+        <p>One account for every currency you'll ever need &#8212; banking, exchange, crypto and budgeting, built as one app.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Personal</h4>
+        <ul>
+          <li><a href="#">Cards</a></li>
+          <li><a href="#">Exchange</a></li>
+          <li><a href="#">Crypto</a></li>
+          <li><a href="#">Budgeting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Business</h4>
+        <ul>
+          <li><a href="#">Business accounts</a></li>
+          <li><a href="#">Payment gateway</a></li>
+          <li><a href="#">Expense cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Fees</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal caption">&#169; 2026 Revolut. Card issued by our banking partners; balances in eligible currencies may be safeguarded rather than deposit-insured. See in-app disclosures for your region.</p>
+      <span class="caption">Made for the design catalogue</span>
+    </div>
+    <div class="footer-word" aria-hidden="true">revolut</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

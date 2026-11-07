@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vercel - Frontend Cloud for the Edge</title>
+<meta name="description" content="Vercel is the frontend cloud for building, previewing, and deploying every commit on a global edge network. Built for Next.js and every modern framework.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav-bar">
+  <div class="shell nav-shell">
+    <a class="wordmark" href="#top" aria-label="Vercel home">
+      <svg class="wordmark-mark" viewBox="0 0 74 64" aria-hidden="true"><path d="M37 0L74 64H0L37 0Z"/></svg>
+      <span>Vercel</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#network">Edge Network</a>
+      <a href="#frameworks">Frameworks</a>
+      <a href="#deploy">Deploy Log</a>
+      <a href="#">Docs</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost-sm" href="#">Log In</a>
+      <a class="btn btn-primary-sm" href="#">Sign Up</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#network">Edge Network</a>
+    <a href="#frameworks">Frameworks</a>
+    <a href="#deploy">Deploy Log</a>
+    <a href="#">Docs</a>
+    <a href="#">Log In</a>
+    <a href="#">Sign Up</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero-band" id="top">
+    <div class="hero-mesh" aria-hidden="true"></div>
+    <div class="shell hero-shell">
+      <p class="eyebrow">GEIST · FRONTEND CLOUD</p>
+      <h1 class="hero-h1">Push to git.<br>Live on the edge in seconds.</h1>
+      <p class="hero-lead">Vercel builds, previews, and deploys every commit on a global edge network purpose-built for Next.js and the modern web. No servers to provision, no pipelines to babysit.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">Start Deploying</a>
+        <a class="btn btn-secondary" href="#">Get a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="network-band" id="network">
+    <div class="shell network-shell">
+      <div class="network-copy">
+        <p class="eyebrow">EDGE NETWORK</p>
+        <h2 class="heading-lg">One push. Every region, live at once.</h2>
+        <p class="body-copy">A commit lands once and Vercel's edge propagates it to every point of presence in parallel: static assets, server functions, and middleware all resolving from the region closest to the request. No cache to warm, no region to pick by hand.</p>
+        <dl class="network-facts">
+          <div><dt>310+</dt><dd>Edge points of presence</dd></div>
+          <div><dt>&lt;50ms</dt><dd>Median edge response</dd></div>
+        </dl>
+      </div>
+      <svg class="network-graph" viewBox="0 0 560 420" role="img" aria-label="Diagram of a central deployment node connected to six global edge regions">
+        <g class="graph-links" stroke="#171717" stroke-width="1">
+          <path d="M280 210 L96 74"></path>
+          <path d="M280 210 L440 60"></path>
+          <path d="M280 210 L488 210"></path>
+          <path d="M280 210 L430 356"></path>
+          <path d="M280 210 L150 366"></path>
+          <path d="M280 210 L70 230"></path>
+        </g>
+        <g class="graph-pulses" fill="#0070f3">
+          <circle r="3" cx="280" cy="210"><animateMotion dur="3.2s" repeatCount="indefinite" path="M0 0 L-184 -136"/></circle>
+          <circle r="3" cx="280" cy="210"><animateMotion dur="2.6s" begin="0.3s" repeatCount="indefinite" path="M0 0 L160 -150"/></circle>
+          <circle r="3" cx="280" cy="210"><animateMotion dur="3s" begin="0.6s" repeatCount="indefinite" path="M0 0 L208 0"/></circle>
+          <circle r="3" cx="280" cy="210"><animateMotion dur="2.8s" begin="0.9s" repeatCount="indefinite" path="M0 0 L150 146"/></circle>
+          <circle r="3" cx="280" cy="210"><animateMotion dur="3.4s" begin="1.2s" repeatCount="indefinite" path="M0 0 L-130 156"/></circle>
+          <circle r="3" cx="280" cy="210"><animateMotion dur="2.4s" begin="1.5s" repeatCount="indefinite" path="M0 0 L-210 20"/></circle>
+        </g>
+        <g class="graph-nodes">
+          <circle class="node node-origin" cx="280" cy="210" r="12"></circle>
+          <g class="node"><circle cx="96" cy="74" r="6"></circle><text x="96" y="56">SFO</text></g>
+          <g class="node"><circle cx="440" cy="60" r="6"></circle><text x="440" y="42">LHR</text></g>
+          <g class="node"><circle cx="488" cy="210" r="6"></circle><text x="488" y="192">NRT</text></g>
+          <g class="node"><circle cx="430" cy="356" r="6"></circle><text x="430" y="380">SYD</text></g>
+          <g class="node"><circle cx="150" cy="366" r="6"></circle><text x="150" y="390">GRU</text></g>
+          <g class="node"><circle cx="70" cy="230" r="6"></circle><text x="70" y="252">FRA</text></g>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="frameworks-band" id="frameworks">
+    <p class="frameworks-label">WORKS WITH YOUR STACK</p>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>Next.js</span><span>SvelteKit</span><span>Nuxt</span><span>Astro</span><span>Remix</span><span>Vue</span><span>React</span><span>Angular</span>
+        <span aria-hidden="true">Next.js</span><span aria-hidden="true">SvelteKit</span><span aria-hidden="true">Nuxt</span><span aria-hidden="true">Astro</span><span aria-hidden="true">Remix</span><span aria-hidden="true">Vue</span><span aria-hidden="true">React</span><span aria-hidden="true">Angular</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="deploy-band" id="deploy">
+    <div class="shell">
+      <p class="deploy-lead">Every commit becomes a preview. Every merge to main becomes production.</p>
+      <div class="code-block">
+        <div class="code-block-tab">terminal</div>
+        <pre class="code-lines"><span class="ln"><span class="prompt">$</span> git push origin main</span>
+<span class="ln muted">Vercel CLI 34.2.0</span>
+<span class="ln muted">Inspect:  https://vercel.com/acme/frontend/8f2a91c</span>
+<span class="ln link">Preview:  https://frontend-git-main-acme.vercel.app</span>
+<span class="ln muted">Building…</span>
+<span class="ln muted">Route (app)                          Size</span>
+<span class="ln muted">┌ ○ /                                 4.1 kB</span>
+<span class="ln muted">└ ○ /pricing                          2.3 kB</span>
+<span class="ln muted">Build Completed in 41s</span>
+<span class="ln link">✓ Deployment ready</span>
+<span class="ln link">Production: https://frontend.acme.com</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-band">
+    <div class="shell stats-shell">
+      <div class="stat">
+        <p class="stat-num" data-count-to="310" data-suffix="+">310+</p>
+        <p class="stat-label">Edge points of presence</p>
+      </div>
+      <div class="stat">
+        <p class="stat-num">99.99%</p>
+        <p class="stat-label">Uptime SLA</p>
+      </div>
+      <div class="stat">
+        <p class="stat-num">&lt;50ms</p>
+        <p class="stat-label">Median edge response</p>
+      </div>
+      <div class="stat">
+        <p class="stat-num" data-count-to="4" data-suffix="M">4M</p>
+        <p class="stat-label">Deployments served monthly</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="shell cta-shell">
+      <h2 class="hero-h1 cta-h2">Start deploying today.</h2>
+      <a class="btn btn-primary" href="#">Start Deploying</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer-shell">
+    <div class="footer-brand">
+      <a class="wordmark" href="#top" aria-label="Vercel home">
+        <svg class="wordmark-mark" viewBox="0 0 74 64" aria-hidden="true"><path d="M37 0L74 64H0L37 0Z"/></svg>
+        <span>Vercel</span>
+      </a>
+      <p class="footer-tagline">The frontend cloud.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <p class="footer-col-title">Platform</p>
+        <a href="#network">Edge Network</a>
+        <a href="#frameworks">Frameworks</a>
+        <a href="#deploy">Deploy Log</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Legal</p>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <p>&copy; 2026 Vercel Inc.</p>
+    <div class="footer-social">
+      <a href="#">GitHub</a>
+      <a href="#">X</a>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

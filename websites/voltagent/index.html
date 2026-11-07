@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoltAgent — The TypeScript framework for building AI agents</title>
+<meta name="description" content="VoltAgent is an open-source TypeScript framework for building AI agents: multi-agent orchestration, tools, memory, voice, and observability, as code.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2300d992' d='M13 2 3 14h7l-1 8 11-14h-7l0-6Z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav-bar" id="nav-bar">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="VoltAgent home">
+      <svg class="brand-mark" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M13 2 3 14h7l-1 8 11-14h-7l0-6Z" fill="currentColor"/>
+      </svg>
+      <span>voltagent</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="#primitives">Framework</a>
+      <a href="#voltops">VoltOps</a>
+      <a href="#quickstart">Docs</a>
+      <a href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-outline nav-cta-desktop" href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">Star on GitHub</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>The TypeScript framework for building AI&nbsp;agents.</h1>
+      <p class="lead">Multi-agent orchestration, tools, memory, and voice — wired to observability from the first line. As code, not a black box.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#quickstart">npm create voltagent-app@latest</a>
+        <a class="btn btn-outline" href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="trace-panel" aria-label="Example agent run trace">
+      <div class="trace-head">
+        <span class="trace-tag">voltagent · trace</span>
+        <span class="trace-status"><span class="trace-status-dot"></span>live</span>
+      </div>
+      <ol class="trace-body" id="trace-body">
+        <li><span class="t-time">14:02:01</span><span class="t-role">agent</span><span class="t-msg">supportAgent received message</span></li>
+        <li><span class="t-time">14:02:01</span><span class="t-role">tool</span><span class="t-msg">lookupOrder(orderId="8841")</span></li>
+        <li><span class="t-time">14:02:02</span><span class="t-role">tool</span><span class="t-msg">&#8594; order found, status: shipped</span></li>
+        <li><span class="t-time">14:02:02</span><span class="t-role">llm</span><span class="t-msg">gpt-4o-mini generating reply</span></li>
+        <li id="trace-last"><span class="t-time">14:02:03</span><span class="t-role">agent</span><span class="t-msg">reply sent</span><span class="t-state" id="trace-state">running<span class="cursor" aria-hidden="true"></span></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="rhythm-divider" role="presentation"></div>
+
+  <section class="primitives" id="primitives">
+    <h2>Agents are code, not a black box.</h2>
+    <div class="card-grid">
+      <article class="card">
+        <code class="card-key">tools</code>
+        <p>Give agents real capabilities: call a function, hit an API, or connect any MCP server without writing glue code.</p>
+      </article>
+      <article class="card">
+        <code class="card-key">memory</code>
+        <p>Conversation history and long-term recall out of the box, backed by SQLite, LibSQL, or Postgres.</p>
+      </article>
+      <article class="card">
+        <code class="card-key">subAgents</code>
+        <p>Compose a supervisor agent that delegates to specialists and coordinates multi-step work across a team.</p>
+      </article>
+      <article class="card">
+        <code class="card-key">voice</code>
+        <p>Real-time speech in and out, so an agent can run a phone call as naturally as a chat thread.</p>
+      </article>
+      <article class="card">
+        <code class="card-key">workflow</code>
+        <p>Chain deterministic steps with agent reasoning for when a plain function isn't enough and a loose agent is too much.</p>
+      </article>
+      <article class="card">
+        <code class="card-key">llm</code>
+        <p>Swap OpenAI, Anthropic, Google, or Groq with one config key — any Vercel AI SDK provider, no rewrites.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="voltops" id="voltops">
+    <div class="voltops-panel">
+      <table class="trace-table">
+        <thead>
+          <tr><th>step</th><th>type</th><th>model</th><th>duration</th><th>status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>agent.start</td><td>gpt-4o-mini</td><td>&mdash;</td><td class="status-done">done</td></tr>
+          <tr><td>2</td><td>tool.call</td><td>search_docs</td><td>128ms</td><td class="status-done">done</td></tr>
+          <tr><td>3</td><td>tool.call</td><td>lookup_order</td><td>94ms</td><td class="status-done">done</td></tr>
+          <tr><td>4</td><td>agent.respond</td><td>gpt-4o-mini</td><td>812ms</td><td class="status-done">done</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="voltops-copy">
+      <h2>Watch every step, in production.</h2>
+      <p>VoltOps is a visual console for the agents you already built: live traces, replay any run, and a graph of who called what, in what order, with which model. No SDK lock-in — instrument what you have.</p>
+      <a class="link-arrow" href="#quickstart">See it running <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" stroke="currentColor" stroke-width="1.4" fill="none"/></svg></a>
+    </div>
+  </section>
+
+  <div class="rhythm-divider green" role="presentation"></div>
+
+  <section class="quickstart" id="quickstart">
+    <p class="quickstart-command">npm create voltagent-app@latest</p>
+    <p class="quickstart-sub">One command scaffolds an agent, wires a model provider, and starts the VoltOps dev server.</p>
+
+    <div class="code-mockup">
+      <div class="code-head">
+        <span>agent.ts</span>
+        <button class="copy-btn" id="copy-btn" type="button" aria-label="Copy code">copy</button>
+      </div>
+      <pre class="code-body"><code><span class="c-kw">import</span> { Agent, VoltAgent } <span class="c-kw">from</span> <span class="c-str">"@voltagent/core"</span>;
+<span class="c-kw">import</span> { openai } <span class="c-kw">from</span> <span class="c-str">"@ai-sdk/openai"</span>;
+
+<span class="c-kw">const</span> supportAgent = <span class="c-kw">new</span> <span class="c-fn">Agent</span>({
+  name: <span class="c-str">"support-agent"</span>,
+  instructions: <span class="c-str">"Triage incoming tickets and draft a reply."</span>,
+  llm: <span class="c-fn">openai</span>(<span class="c-str">"gpt-4o-mini"</span>),
+  tools: [lookupOrder, refundOrder],
+});
+
+<span class="c-kw">new</span> <span class="c-fn">VoltAgent</span>({ agents: { supportAgent } });</code></pre>
+    </div>
+  </section>
+
+  <section class="oss">
+    <h2>Open source. MIT licensed.</h2>
+    <p>Built in the open, run on your own infrastructure, no usage metering on the framework itself. Read the source, file an issue, or ship a PR.</p>
+    <div class="oss-links">
+      <a class="btn btn-outline" href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://discord.gg/voltagent" target="_blank" rel="noopener">Discord</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <span class="footer-heading">Product</span>
+      <a href="#primitives">Framework</a>
+      <a href="#voltops">VoltOps</a>
+      <a href="#primitives">Voice</a>
+      <a href="#primitives">MCP</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-heading">Resources</span>
+      <a href="#quickstart">Quickstart</a>
+      <a href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">Docs</a>
+      <a href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">Examples</a>
+      <a href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">Changelog</a>
+    </div>
+    <div class="footer-col">
+      <span class="footer-heading">Community</span>
+      <a href="https://github.com/voltagent/voltagent" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://discord.gg/voltagent" target="_blank" rel="noopener">Discord</a>
+      <a href="https://x.com/voltagent_dev" target="_blank" rel="noopener">X</a>
+    </div>
+    <div class="footer-col footer-legal">
+      <span class="footer-heading">Legal</span>
+      <a href="#top">Terms</a>
+      <a href="#top">Privacy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 VoltAgent. MIT licensed.</span>
+  </div>
+  <div class="footer-wordmark" aria-hidden="true">voltagent</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

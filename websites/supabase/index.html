@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supabase — Postgres, instantly. Open source.</title>
+<meta name="description" content="Supabase is an open source Postgres platform: database, auth, storage, edge functions and realtime, built to be self-hosted or managed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-row">
+    <a href="#" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none">
+        <path d="M13.5 2L4 14.5H11.5L10.5 22L20 9.5H12.5L13.5 2Z" fill="#3ecf8e"/>
+      </svg>
+      supabase
+    </a>
+    <ul class="nav-links">
+      <li><a href="#database">Database</a></li>
+      <li><a href="#auth">Auth</a></li>
+      <li><a href="#storage">Storage</a></li>
+      <li><a href="#functions">Edge Functions</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#">Docs</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="link-plain">Sign in</a>
+      <a href="#" class="btn btn-primary">Start your project</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu" id="navToggle"><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <h1 class="display-xxl">Build on Postgres.<br>Skip the infrastructure.</h1>
+    <p class="body-lg">Supabase gives every project a full Postgres database, generated APIs, authentication, file storage and edge functions — open source, and yours to self-host whenever you want.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Start your project</a>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup">
+        <div class="mockup-tabs">
+          <button class="mockup-tab active" data-tab="table">Table Editor</button>
+          <button class="mockup-tab" data-tab="sql">SQL Editor</button>
+        </div>
+
+        <div class="mockup-body table-editor active" data-body="table">
+          <div class="table-toolbar">
+            <span class="table-name">public.orders</span>
+            <span class="tag">247 rows</span>
+            <span class="tag">RLS enabled</span>
+          </div>
+          <table class="data-grid">
+            <thead>
+              <tr>
+                <th>id</th><th>customer_email</th><th>total_cents</th><th>status</th><th>paid</th><th>created_at</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>a13f-90c2</td><td>marta@northline.io</td><td>18400</td><td>fulfilled</td><td class="bool-true">true</td><td>2026-07-21 09:14:02</td></tr>
+              <tr><td>b204-7e11</td><td>devon@usewhorl.com</td><td>4200</td><td>pending</td><td class="bool-true">true</td><td>2026-07-21 09:12:47</td></tr>
+              <tr><td>c9a0-4bd3</td><td>jian@lumeoptics.co</td><td>96000</td><td>fulfilled</td><td class="bool-true">true</td><td>2026-07-21 08:58:19</td></tr>
+              <tr><td>d551-1f0a</td><td>o.reyes@fielddesk.app</td><td>1500</td><td>refunded</td><td class="null">null</td><td>2026-07-21 08:41:03</td></tr>
+              <tr><td>e77c-9902</td><td>hana@bramblestudio.com</td><td>32900</td><td>fulfilled</td><td class="bool-true">true</td><td>2026-07-21 08:33:56</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mockup-body sql-editor" data-body="sql">
+          <div class="sql-toolbar">
+            <span class="mute">query.sql</span>
+            <span class="run-btn">Run ▸</span>
+          </div>
+          <pre class="sql-code"><span class="sql-cmt">-- top customers this week, by revenue</span>
+<span class="sql-kw">select</span> customer_email,
+       <span class="sql-kw">count</span>(*) <span class="sql-kw">as</span> orders,
+       <span class="sql-kw">sum</span>(total_cents) / <span class="sql-str">100.0</span> <span class="sql-kw">as</span> revenue
+<span class="sql-kw">from</span> orders
+<span class="sql-kw">where</span> created_at > now() - <span class="sql-kw">interval</span> <span class="sql-str">'7 days'</span>
+<span class="sql-kw">group by</span> customer_email
+<span class="sql-kw">order by</span> revenue <span class="sql-kw">desc</span>
+<span class="sql-kw">limit</span> <span class="sql-str">5</span>;</pre>
+          <div class="sql-result">5 rows · 41ms · via connection pooler</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="database">
+  <div class="container">
+    <div class="product-row">
+      <div class="product-copy">
+        <span class="icon-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>
+          Database
+        </span>
+        <h2 class="display-md">A real Postgres database, not an abstraction over one.</h2>
+        <p class="body-md">Every project is a dedicated Postgres instance — full SQL, extensions, triggers, foreign keys, the ecosystem you already know. Run migrations from the CLI, branch a copy for a pull request, or connect directly with any Postgres client.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Instant REST and GraphQL APIs generated from your schema</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Row Level Security policies enforced at the database layer</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> 40+ extensions, including pgvector for embeddings</li>
+        </ul>
+      </div>
+      <div class="product-visual">
+        <div class="schema-diagram">
+          <div class="schema-tables">
+            <div class="schema-table">
+              <div class="schema-table-head">customers</div>
+              <div class="schema-col"><span class="key">id</span><span class="type">uuid</span></div>
+              <div class="schema-col"><span>email</span><span class="type">text</span></div>
+              <div class="schema-col"><span>plan</span><span class="type">text</span></div>
+            </div>
+            <div class="schema-table">
+              <div class="schema-table-head">orders</div>
+              <div class="schema-col"><span class="key">id</span><span class="type">uuid</span></div>
+              <div class="schema-col"><span>customer_id</span><span class="type">uuid → fk</span></div>
+              <div class="schema-col"><span>total_cents</span><span class="type">int8</span></div>
+              <div class="schema-col"><span>status</span><span class="type">text</span></div>
+            </div>
+            <div class="schema-table">
+              <div class="schema-table-head">line_items</div>
+              <div class="schema-col"><span class="key">id</span><span class="type">uuid</span></div>
+              <div class="schema-col"><span>order_id</span><span class="type">uuid → fk</span></div>
+              <div class="schema-col"><span>sku</span><span class="type">text</span></div>
+            </div>
+          </div>
+          <svg class="schema-lines" viewBox="0 0 100 20" preserveAspectRatio="none">
+            <line x1="24" y1="6" x2="43" y2="6" stroke="#dfdfdf" stroke-width="0.3"/>
+            <line x1="67" y1="6" x2="76" y2="6" stroke="#dfdfdf" stroke-width="0.3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="auth">
+  <div class="container">
+    <div class="product-row reverse">
+      <div class="product-copy">
+        <span class="icon-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 3v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V5z"/></svg>
+          Auth
+        </span>
+        <h2 class="display-md">Authentication that talks directly to your data.</h2>
+        <p class="body-md">Email, magic links, phone OTP or any of the major OAuth providers — every signed-in user maps to a row your Postgres policies already understand. No second identity system to keep in sync.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Social, SSO and phone auth out of the box</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Policies written once, enforced on every query</li>
+        </ul>
+      </div>
+      <div class="product-visual">
+        <div class="auth-mockup">
+          <div class="auth-mockup-head">Providers</div>
+          <div class="provider-row"><span class="provider-name">Email</span><span class="switch on"></span></div>
+          <div class="provider-row"><span class="provider-name">GitHub</span><span class="switch on"></span></div>
+          <div class="provider-row"><span class="provider-name">Google</span><span class="switch on"></span></div>
+          <div class="provider-row"><span class="provider-name">Phone (SMS)</span><span class="switch"></span></div>
+          <div class="provider-row"><span class="provider-name">SAML SSO</span><span class="switch"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="storage">
+  <div class="container">
+    <div class="product-row">
+      <div class="product-copy">
+        <span class="icon-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7l2-3h6l2 3h8v12H3z"/></svg>
+          Storage
+        </span>
+        <h2 class="display-md">Store files under the same permissions as your rows.</h2>
+        <p class="body-md">Upload images, video or any large object to S3-compatible storage, and gate access with the exact Row Level Security policies you already wrote for your tables — a user's avatar is just another row they own.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Resumable uploads, on-the-fly image transforms</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> CDN-backed delivery, private buckets by default</li>
+        </ul>
+      </div>
+      <div class="product-visual">
+        <div class="storage-mockup">
+          <div class="storage-path">avatars / public /</div>
+          <div class="file-row"><span class="file-name">hana-r.png</span><span class="file-size">84 KB</span><span class="file-policy locked">owner-only</span></div>
+          <div class="file-row"><span class="file-name">devon-m.jpg</span><span class="file-size">112 KB</span><span class="file-policy locked">owner-only</span></div>
+          <div class="file-row"><span class="file-name">default.svg</span><span class="file-size">3 KB</span><span class="file-policy">public</span></div>
+          <div class="file-row"><span class="file-name">jian-l.png</span><span class="file-size">67 KB</span><span class="file-policy locked">owner-only</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="functions">
+  <div class="container">
+    <div class="product-row reverse">
+      <div class="product-copy">
+        <span class="icon-label" style="color:var(--ink-mute-2)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg>
+          Edge Functions
+        </span>
+        <h2 class="display-md">Server-side logic, deployed next to your users.</h2>
+        <p class="body-md mute">Write TypeScript, deploy with a single command, and it runs on Deno at the edge — close to wherever the request came from. Reach for it when a policy alone isn't enough: webhooks, third-party calls, scheduled jobs.</p>
+        <div class="regions">
+          <span class="region-tag">iad1</span><span class="region-tag">fra1</span><span class="region-tag">sin1</span><span class="region-tag">gru1</span><span class="region-tag">syd1</span>
+        </div>
+      </div>
+      <div class="product-visual">
+        <div class="fn-mockup">
+          <div class="fn-header">
+            <span class="fn-name">functions/send-receipt/index.ts</span>
+            <span class="fn-status"><span class="dot"></span> deployed</span>
+          </div>
+          <pre class="fn-code"><span class="fn-kw">import</span> { createClient } <span class="fn-kw">from</span> <span class="fn-str">"@supabase/supabase-js"</span>
+
+Deno.<span class="fn-fn">serve</span>(<span class="fn-kw">async</span> (req) => {
+  <span class="fn-kw">const</span> { order_id } = <span class="fn-kw">await</span> req.<span class="fn-fn">json</span>()
+  <span class="fn-kw">const</span> db = <span class="fn-fn">createClient</span>(URL, KEY)
+
+  <span class="fn-kw">const</span> { data } = <span class="fn-kw">await</span> db
+    .<span class="fn-fn">from</span>(<span class="fn-str">"orders"</span>)
+    .<span class="fn-fn">select</span>(<span class="fn-str">"*, customers(email)"</span>)
+    .<span class="fn-fn">eq</span>(<span class="fn-str">"id"</span>, order_id)
+    .<span class="fn-fn">single</span>()
+
+  <span class="fn-kw">return new</span> Response(<span class="fn-str">"sent"</span>)
+})</pre>
+          <div class="fn-log">→ cold start 34ms · 128MB · region auto-selected</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="product-row">
+      <div class="product-copy">
+        <span class="icon-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0116 0M7.5 12a4.5 4.5 0 019 0"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>
+          Realtime
+        </span>
+        <h2 class="display-md">Listen to your database, live.</h2>
+        <p class="body-md">Subscribe to inserts, updates and deletes as they happen in Postgres, broadcast messages between clients, or track who's present in a room — all over the same connection, no separate pub/sub service to run.</p>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Postgres change data capture, filtered per client</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#24b47e" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg> Presence and cursor state for multiplayer UI</li>
+        </ul>
+      </div>
+      <div class="product-visual">
+        <div class="realtime-mockup">
+          <div class="realtime-doc">
+spec/checkout.md<br>
+&nbsp;&nbsp;## Refund flow<br>
+&nbsp;&nbsp;Trigger a refund when status<br>
+&nbsp;&nbsp;moves to `cancelled` and the<br>
+&nbsp;&nbsp;order is under 14 days old.<br>
+&nbsp;&nbsp;Log the reason to `refunds`.
+          </div>
+          <span class="cursor-tag cursor-a">Marta</span>
+          <span class="cursor-tag cursor-b">Devon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="pricing">
+  <div class="container">
+    <h2 class="display-lg" style="text-align:center">Pricing that scales with one project, not per seat.</h2>
+    <p class="body-md mute" style="text-align:center;max-width:520px;margin:var(--sp-md) auto 0;">Start free. Move to Pro when a project needs to stay warm in production.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="tier-name">Free</div>
+        <div class="tier-desc">For side projects and evaluating Supabase.</div>
+        <div class="price">$0<span> /month</span></div>
+        <a href="#" class="btn btn-outline">Start for free</a>
+        <ul class="tier-features">
+          <li>2 organizations, projects pause after 1 week idle</li>
+          <li>500MB database, 1GB file storage</li>
+          <li>50,000 monthly active users</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="tier-name">Pro</div>
+        <div class="tier-desc">For production apps that need to stay online.</div>
+        <div class="price">$25<span> /month</span></div>
+        <a href="#" class="btn btn-outline">Get started</a>
+        <ul class="tier-features">
+          <li>Projects never pause</li>
+          <li>8GB database, 100GB file storage</li>
+          <li>100,000 monthly active users</li>
+          <li>7-day log retention</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="tier-name">Team</div>
+        <div class="tier-desc">For teams that need SSO and audit trails.</div>
+        <div class="price">$599<span> /month</span></div>
+        <a href="#" class="btn btn-primary">Get started</a>
+        <ul class="tier-features">
+          <li>Everything in Pro</li>
+          <li>SOC2, SSO for dashboard access</li>
+          <li>28-day log retention</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-desc">Custom volume, compliance and support.</div>
+        <div class="price" style="font-size:22px">Talk to us</div>
+        <a href="#" class="btn btn-outline">Contact sales</a>
+        <ul class="tier-features">
+          <li>Dedicated infrastructure</li>
+          <li>Custom contracts and uptime SLAs</li>
+          <li>Designated support engineer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2 class="display-lg">Start with a free Postgres database.</h2>
+    <p class="body-md">No credit card. Upgrade only when a project needs to run in production.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Start your project</a>
+      <a href="#" class="link">Browse the docs</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <svg class="logo-mark" viewBox="0 0 24 24" fill="none">
+            <path d="M13.5 2L4 14.5H11.5L10.5 22L20 9.5H12.5L13.5 2Z" fill="#3ecf8e"/>
+          </svg>
+          supabase
+        </a>
+        <p class="caption">The open source Postgres platform for database, auth, storage and edge functions.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#database">Database</a></li>
+          <li><a href="#auth">Auth</a></li>
+          <li><a href="#storage">Storage</a></li>
+          <li><a href="#functions">Edge Functions</a></li>
+          <li><a href="#">Realtime</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">CLI reference</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="caption mute">© 2026 Supabase, Inc.</span>
+      <div class="footer-social">
+        <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.17c0 4.49 2.87 8.3 6.84 9.64.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.9-1.33 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0022 12.17C22 6.58 17.52 2 12 2z"/></svg></a>
+        <a href="#" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.2 4.2 0 00-7.1 3.8A11.8 11.8 0 013 4.6a4.2 4.2 0 001.3 5.6c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.7 3.4 4a4.3 4.3 0 01-1.9.1 4.2 4.2 0 003.9 2.9A8.4 8.4 0 012 18.6a11.9 11.9 0 006.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z"/></svg></a>
+        <a href="#" aria-label="Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 5.5A17.6 17.6 0 0015.6 4l-.4.8a15 15 0 00-6.4 0L8.4 4A17.6 17.6 0 004 5.5C1.4 9.4.7 13.2 1 17a17.7 17.7 0 005.4 2.7l.9-1.5a11.6 11.6 0 01-1.8-.9l.4-.3a12.6 12.6 0 0010.2 0l.4.3c-.6.3-1.2.6-1.8.9l.9 1.5A17.7 17.7 0 0023 17c.4-4.4-.7-8.1-3-11.5zM9 14.4c-.9 0-1.6-.8-1.6-1.8 0-1 .7-1.8 1.6-1.8s1.6.8 1.6 1.8-.7 1.8-1.6 1.8zm6 0c-.9 0-1.6-.8-1.6-1.8 0-1 .7-1.8 1.6-1.8s1.6.8 1.6 1.8-.7 1.8-1.6 1.8z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

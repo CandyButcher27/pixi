@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Together AI — The AI Native Cloud</title>
+<meta name="description" content="Train, fine-tune and run open-source AI models at scale. GPU clusters and inference built for the pace research moves at.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a href="#" class="nav-logo">together.ai</a>
+    <div class="nav-links">
+      <a href="#platform">Platform</a>
+      <a href="#research">Research</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#blog">Blog</a>
+      <a href="#docs">Docs</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#" class="nav-signin" id="signin-btn">Sign in</a>
+      <button class="btn btn-ghost-dark" id="contact-btn">Contact sales</button>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-drawer" id="drawer">
+  <a href="#platform">Platform</a>
+  <a href="#research">Research</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#blog">Blog</a>
+  <a href="#docs">Docs</a>
+  <button class="btn btn-primary">Get started now</button>
+</div>
+
+<!-- ============================================================ HERO -->
+<header class="hero on-dark" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">AI Native Cloud</p>
+      <h1>Build what&rsquo;s next on the AI Native Cloud.</h1>
+      <p>Train, fine-tune, and run open-source models on infrastructure built for research speed &mdash; serverless inference, dedicated GPU clusters, and a fine-tuning stack that doesn&rsquo;t make you wait for a queue.</p>
+      <div class="hero-cta">
+        <button class="btn btn-mint">Get started now</button>
+        <button class="btn btn-white">Talk to sales</button>
+      </div>
+      <div class="hero-meta">
+        <div><strong>200+</strong>Open models served</div>
+        <div><strong>4,000+</strong>NVIDIA GPUs online</div>
+        <div><strong>11x</strong>Faster than vLLM</div>
+      </div>
+    </div>
+    <svg class="hero-ribbon" viewBox="0 0 560 460" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Together AI brand gradient ribbon">
+      <defs>
+        <linearGradient id="ribbonGrad1" x1="40" y1="40" x2="520" y2="420" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#fc4c02"/>
+          <stop offset="0.52" stop-color="#ef2cc1"/>
+          <stop offset="1" stop-color="#bdbbff"/>
+        </linearGradient>
+        <linearGradient id="ribbonGrad2" x1="500" y1="20" x2="60" y2="440" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#fc4c02" stop-opacity="0.55"/>
+          <stop offset="0.5" stop-color="#ef2cc1" stop-opacity="0.55"/>
+          <stop offset="1" stop-color="#bdbbff" stop-opacity="0.55"/>
+        </linearGradient>
+        <linearGradient id="ribbonGrad3" x1="0" y1="230" x2="560" y2="230" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#fc4c02" stop-opacity="0.3"/>
+          <stop offset="0.5" stop-color="#ef2cc1" stop-opacity="0.3"/>
+          <stop offset="1" stop-color="#bdbbff" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+      <path d="M40 340 C 140 420, 260 60, 380 120 C 460 160, 480 300, 520 260" stroke="url(#ribbonGrad3)" stroke-width="120" stroke-linecap="round"/>
+      <path d="M70 380 C 160 300, 220 40, 340 80 C 440 112, 470 260, 500 120" stroke="url(#ribbonGrad2)" stroke-width="64" stroke-linecap="round"/>
+      <path d="M55 400 C 170 360, 230 20, 360 60 C 450 88, 470 220, 505 90" stroke="url(#ribbonGrad1)" stroke-width="26" stroke-linecap="round"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ============================================================ RESEARCH -->
+<section class="band-dark on-dark" id="research">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Research</p>
+        <h2>Grounded in cutting-edge research.</h2>
+      </div>
+      <p>Together AI runs an open research lab alongside the cloud &mdash; the work behind it ends up in the inference stack, not just a paper.</p>
+    </div>
+    <div class="research-grid">
+      <article class="research-card">
+        <p class="eyebrow">Attention</p>
+        <h3>FlashAttention&#8209;3</h3>
+        <p>Rewrote attention to use the full memory bandwidth of Hopper GPUs, cutting training and inference time on long-context models.</p>
+        <p class="card-foot">Tri Dao et al. &middot; GA Dec &rsquo;25</p>
+      </article>
+      <article class="research-card">
+        <p class="eyebrow">Decoding</p>
+        <h3>Sequoia</h3>
+        <p>A speculative-decoding tree that scales to large draft budgets, giving lossless speedups on long-form generation without a bigger model.</p>
+        <p class="card-foot">Together Research &middot; GA Dec &rsquo;25</p>
+      </article>
+      <article class="research-card">
+        <p class="eyebrow">Multi-agent</p>
+        <h3>Mixture-of-Agents</h3>
+        <p>Layered open models proposing and refining each other&rsquo;s answers outperform a single frontier model on reasoning benchmarks.</p>
+        <p class="card-foot">Together Research &middot; GA Dec &rsquo;25</p>
+      </article>
+      <article class="research-card">
+        <p class="eyebrow">Data</p>
+        <h3>RedPajama</h3>
+        <p>A fully open reproduction of the LLaMA training set &mdash; 30 trillion tokens, documented end to end, free to build on.</p>
+        <p class="card-foot">Together Research &middot; GA Dec &rsquo;25</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PLATFORM -->
+<section class="band-light" id="platform">
+  <div class="wrap">
+    <div class="platform-head">
+      <p class="eyebrow">Full-stack cloud</p>
+      <h2>One platform, four ways to run a model.</h2>
+      <p>Serverless when you want an endpoint in a minute. Dedicated when you need the whole GPU. Fine-tuning when the base model isn&rsquo;t quite yours yet.</p>
+    </div>
+
+    <div class="tab-rail" role="tablist" aria-label="Platform capabilities">
+      <button class="tab-pill" role="tab" aria-selected="true" data-tab="inference">Inference</button>
+      <button class="tab-pill" role="tab" aria-selected="false" data-tab="finetune">Fine-tuning</button>
+      <button class="tab-pill" role="tab" aria-selected="false" data-tab="clusters">GPU Clusters</button>
+      <button class="tab-pill" role="tab" aria-selected="false" data-tab="dedicated">Dedicated Endpoints</button>
+    </div>
+
+    <div class="tab-panel is-active" data-panel="inference">
+      <div class="tab-copy">
+        <h3>Serverless inference</h3>
+        <p>Call 200+ open models &mdash; Llama, Qwen, DeepSeek, FLUX &mdash; through one API. Pay per token, no cold starts, no capacity to plan for.</p>
+        <ul>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Sub-100ms time-to-first-token on Turbo endpoints</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Chat, vision, image, audio and code models</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Drop-in OpenAI-compatible SDK</li>
+        </ul>
+      </div>
+      <div class="code-mock">
+        <p class="code-label">inference.py</p>
+        <pre><span class="tok-cmt"># chat completion against an open model</span>
+<span class="tok-key">from</span> together <span class="tok-key">import</span> Together
+
+client = Together()
+response = client.chat.completions.create(
+    model=<span class="tok-str">"meta-llama/Llama-3.3-70B"</span>,
+    messages=[{<span class="tok-str">"role"</span>: <span class="tok-str">"user"</span>, <span class="tok-str">"content"</span>: <span class="tok-str">"explain LoRA"</span>}],
+    stream=<span class="tok-fn">True</span>,
+)</pre>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-panel="finetune">
+      <div class="tab-copy">
+        <h3>Fine-tuning</h3>
+        <p>Bring your dataset, pick a base model, and get back weights you own &mdash; full fine-tunes or LoRA adapters, no infrastructure to babysit.</p>
+        <ul>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>LoRA and full parameter fine-tuning</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Export weights any time, no lock-in</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Serve the result serverless the moment it&rsquo;s done</li>
+        </ul>
+      </div>
+      <div class="code-mock">
+        <p class="code-label">finetune.py</p>
+        <pre><span class="tok-cmt"># launch a LoRA fine-tune job</span>
+client.fine_tuning.create(
+    training_file=<span class="tok-str">"file-b8c19..."</span>,
+    model=<span class="tok-str">"meta-llama/Llama-3.3-70B"</span>,
+    lora=<span class="tok-fn">True</span>,
+    n_epochs=<span class="tok-fn">3</span>,
+)</pre>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-panel="clusters">
+      <div class="tab-copy">
+        <h3>GPU clusters</h3>
+        <p>Reserved H100 and H200 clusters with InfiniBand networking, for teams training their own models instead of adapting someone else&rsquo;s.</p>
+        <ul>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>H100 / H200 with InfiniBand at cluster scale</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Slurm or Kubernetes, your choice</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Monthly or reserved-term pricing</li>
+        </ul>
+      </div>
+      <div class="code-mock">
+        <p class="code-label">cluster.yaml</p>
+        <pre><span class="tok-cmt"># reserve a training cluster</span>
+cluster:
+  gpu: h200
+  nodes: <span class="tok-fn">32</span>
+  interconnect: infiniband
+  scheduler: slurm</pre>
+      </div>
+    </div>
+
+    <div class="tab-panel" data-panel="dedicated">
+      <div class="tab-copy">
+        <h3>Dedicated endpoints</h3>
+        <p>A model pinned to hardware only you use &mdash; fixed latency, private weights, autoscale rules you set instead of a shared queue.</p>
+        <ul>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Single-tenant GPU, no noisy neighbors</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Autoscale floor and ceiling you define</li>
+          <li><svg viewBox="0 0 12 12"><path d="M1 6l3 3 7-7" stroke="#000" stroke-width="1.5" fill="none"/></svg>Your fine-tuned weights, private by default</li>
+        </ul>
+      </div>
+      <div class="code-mock">
+        <p class="code-label">deploy.py</p>
+        <pre><span class="tok-cmt"># stand up a dedicated endpoint</span>
+client.endpoints.create(
+    model=<span class="tok-str">"org/custom-70b-lora"</span>,
+    hardware=<span class="tok-str">"1x_h100"</span>,
+    autoscale={<span class="tok-str">"min"</span>: <span class="tok-fn">1</span>, <span class="tok-str">"max"</span>: <span class="tok-fn">4</span>},
+)</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ STATS -->
+<section class="band-light">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-tile mint">
+        <div class="num">4,000+</div>
+        <div class="label">NVIDIA GPUs in the fleet</div>
+      </div>
+      <div class="stat-tile peri">
+        <div class="num">200+</div>
+        <div class="label">Open models on serverless</div>
+      </div>
+      <div class="stat-tile canvas-soft">
+        <div class="num">99.9%</div>
+        <div class="label">Inference API uptime</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ TESTIMONIALS -->
+<section class="band-light">
+  <div class="wrap">
+    <div class="platform-head">
+      <p class="eyebrow">Who&rsquo;s building here</p>
+      <h2>AI natives build on Together AI.</h2>
+    </div>
+    <div class="testimonial-grid">
+      <article class="testimonial-card">
+        <p>We moved our agent stack off a closed frontier model and onto fine-tuned Llama on Together &mdash; latency dropped and we stopped worrying about a rate limit shipping day.</p>
+        <p class="byline">Applied ML team &middot; Series B, developer tools</p>
+      </article>
+      <article class="testimonial-card">
+        <p>Dedicated endpoints meant we could pin our fine-tune to fixed hardware and forget about it. No more noisy-neighbor latency spikes during peak traffic.</p>
+        <p class="byline">Infrastructure lead &middot; Consumer AI product</p>
+      </article>
+      <article class="testimonial-card">
+        <p>Training on a reserved H200 cluster with real InfiniBand was the first time our multi-node runs actually scaled linearly instead of stalling on network.</p>
+        <p class="byline">Research engineering &middot; Foundation model lab</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PRICING -->
+<section class="band-light" id="pricing">
+  <div class="wrap">
+    <div class="platform-head">
+      <p class="eyebrow">Pricing</p>
+      <h2>Serverless inference, priced per token.</h2>
+      <p>No commitment, no minimums. Wholesale pricing available once you outgrow serverless.</p>
+    </div>
+
+    <div class="pricing-controls">
+      <div class="pricing-tabs" role="tablist" aria-label="Model category">
+        <button class="pricing-tab" aria-selected="true">Text</button>
+        <button class="pricing-tab" aria-selected="false">Vision</button>
+        <button class="pricing-tab" aria-selected="false">Image</button>
+        <button class="pricing-tab" aria-selected="false">Audio</button>
+      </div>
+      <div class="toggle-rail" role="group" aria-label="Pricing plan">
+        <button class="toggle-pill" aria-pressed="true" data-plan="standard">Standard</button>
+        <button class="toggle-pill" aria-pressed="false" data-plan="wholesale">Wholesale</button>
+      </div>
+    </div>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Input</th>
+          <th>Output</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="model-name">Llama 3.3 70B Turbo</span><span class="model-sub">Meta</span></td>
+          <td class="mono-num" data-standard="$0.88" data-wholesale="$0.62">$0.88 / M tok</td>
+          <td class="mono-num" data-standard="$0.88" data-wholesale="$0.62">$0.88 / M tok</td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Qwen2.5 72B Instruct</span><span class="model-sub">Alibaba</span></td>
+          <td class="mono-num" data-standard="$1.20" data-wholesale="$0.84">$1.20 / M tok</td>
+          <td class="mono-num" data-standard="$1.20" data-wholesale="$0.84">$1.20 / M tok</td>
+        </tr>
+        <tr>
+          <td><span class="model-name">DeepSeek-V3</span><span class="model-sub">DeepSeek</span></td>
+          <td class="mono-num" data-standard="$1.25" data-wholesale="$0.90">$1.25 / M tok</td>
+          <td class="mono-num" data-standard="$1.25" data-wholesale="$0.90">$1.25 / M tok</td>
+        </tr>
+        <tr>
+          <td><span class="model-name">Mixtral 8x22B</span><span class="model-sub">Mistral AI</span></td>
+          <td class="mono-num" data-standard="$1.20" data-wholesale="$0.85">$1.20 / M tok</td>
+          <td class="mono-num" data-standard="$1.20" data-wholesale="$0.85">$1.20 / M tok</td>
+        </tr>
+        <tr>
+          <td><span class="model-name">FLUX.1 [dev]</span><span class="model-sub">Black Forest Labs</span></td>
+          <td class="mono-num" data-standard="$0.025" data-wholesale="$0.018">$0.025 / image</td>
+          <td class="mono-num" data-standard="&mdash;" data-wholesale="&mdash;">&mdash;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ ARTICLES -->
+<section class="band-light" id="blog">
+  <div class="wrap">
+    <div class="platform-head">
+      <p class="eyebrow">Blog</p>
+      <h2>What&rsquo;s new at Together AI.</h2>
+    </div>
+    <div class="article-grid">
+      <article class="article-card">
+        <div class="article-thumb"></div>
+        <div class="article-body">
+          <p class="eyebrow">Product</p>
+          <h3>Dedicated endpoints now support multi-LoRA serving</h3>
+          <p>Swap between fine-tuned adapters on a single dedicated deployment without cold-starting new hardware for each one.</p>
+          <p class="article-byline">Product &middot; 6 min read</p>
+        </div>
+      </article>
+      <article class="article-card">
+        <div class="article-thumb"></div>
+        <div class="article-body">
+          <p class="eyebrow">Research</p>
+          <h3>Speculative decoding gets a bigger draft budget</h3>
+          <p>How the Sequoia decoding tree keeps lossless speedups intact as the draft model's guess budget grows.</p>
+          <p class="article-byline">Research &middot; 9 min read</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CTA -->
+<section class="cta-band">
+  <div class="wrap cta-inner">
+    <h2>Start building on Together AI.</h2>
+    <div class="cta-actions">
+      <button class="btn btn-primary">Get started now</button>
+      <button class="btn btn-ghost-dark">Contact sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER -->
+<footer class="footer" id="docs">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="nav-logo">together.ai</p>
+        <p>The AI Native Cloud &mdash; training, fine-tuning and inference for open models, run on GPU infrastructure built for research speed.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#platform">Inference</a></li>
+          <li><a href="#platform">Fine-tuning</a></li>
+          <li><a href="#platform">GPU Clusters</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Research</h4>
+        <ul>
+          <li><a href="#research">Publications</a></li>
+          <li><a href="#research">RedPajama</a></li>
+          <li><a href="#research">Open models</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Docs</h4>
+        <ul>
+          <li><a href="#">Quickstart</a></li>
+          <li><a href="#">API reference</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="caption">&copy; 2026 Together AI, Inc.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2h3.3l-7.2 8.2L23.5 22h-6.6l-5.2-6.8L5.7 22H2.4l7.7-8.8L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 4h-2l12.3 16z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0112 6.8c.85 0 1.71.11 2.51.33 1.9-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg></a>
+        <a href="#" aria-label="Discord"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 5.3A17.7 17.7 0 0015.6 4l-.3.6c1.7.4 2.6 1 3.5 1.6-1.6-.8-3.2-1.2-4.8-1.2s-3.2.4-4.8 1.2c.9-.6 1.9-1.2 3.5-1.6L12.4 4a17.7 17.7 0 00-4.7 1.3C4.9 8.9 4.2 12.4 4.5 15.8a17.9 17.9 0 004.9 2.4l.6-1c-.9-.3-1.7-.7-2.5-1.2l.4-.3a12.9 12.9 0 008 0l.4.3c-.8.5-1.6.9-2.5 1.2l.6 1a17.8 17.8 0 004.9-2.4c.4-3.8-.6-7.3-2.9-10.5zM9.7 13.7c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5c.8 0 1.4.7 1.3 1.5 0 .8-.6 1.5-1.3 1.5zm4.6 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5c.8 0 1.4.7 1.3 1.5 0 .8-.6 1.5-1.3 1.5z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-wordmark" aria-hidden="true">together.ai</p>
+</footer>
+
+<button class="chat-launcher" id="chat-btn" aria-label="Contact us">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H8l-4 4V5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+</button>
+<div class="chat-note" id="chat-note">Sales and support run on email &mdash; hello@together.ai. This launcher is a placeholder in the design reference.</div>
+
+<script src="app.js"></script>
+</body>
+</html>
