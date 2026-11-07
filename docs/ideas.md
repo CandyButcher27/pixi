@@ -1,0 +1,1 @@
+we can have a system that we specifically use nematron model when we want an abstrt frontend site to be generated and then in this case we have a loop wherein we call nematron in image and text modes, and it makes a site then screenshot goes to it, then again it takes a screenshot and the loop keeps going over till a proper frontend site has been built.
