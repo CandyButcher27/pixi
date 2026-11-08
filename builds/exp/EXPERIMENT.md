@@ -122,3 +122,38 @@ same five mandate types (`full_bleed_sections`, `centroid_flips`, `display_domin
 the contract leaves free with the same house style: ruled tables in place of cards, a 2px
 radius, a left-anchored oversized headline. The corpus bottleneck is relieved; the mandate
 vocabulary is now the binding constraint.
+
+## Rerun with two-way mandates (2026-11-08, `builds/exp3/`)
+
+Contracts now carry bands on hero side, imagery, density and geometry, set by the reference
+majority and able to point either way, plus a ceiling on display size. Before any build, over
+30 briefs: distinct mandate sets 12 -> 25, mean Jaccard distance between contracts
+0.318 -> 0.576.
+
+| brief | hero | geometry | imagery | density | verify |
+|---|---|---|---|---|---|
+| analytics | left | rounded (28px) | absent | high | 15/15 |
+| roaster | left | sharp (0px) | absent | high | 14/14 |
+| festival | right | rounded (28px) | absent | high | 14/14 |
+
+    within-arm mean pairwise distance
+    control (recorded)   0.565
+    exp  (fixed mandates)        0.221
+    exp2 (+ live reference pool) 0.276
+    exp3 (+ two-way mandates)    0.392
+
+Pairs: analytics–roaster 0.349, analytics–festival 0.282, roaster–festival 0.544.
+
+**The contract is the lever.** The pages moved apart on exactly the axes where their contracts
+differed: hero side (festival's contract demanded a right-weighted hero) and geometry. Where
+all three contracts agreed (no imagery, high density, card-light), all three pages agree too.
+The remaining gap to control comes from those three briefs' triples agreeing with each other,
+not from the agent ignoring the contract.
+
+Two new gaming patterns:
+- `max_radius >= 20` is met by a single 28px panel on a page that is otherwise square
+  (analytics, festival). `max_radius` reads the largest radius only, so "rounded geometry" can
+  be one element.
+- The direction line was taken from the contrast reference alone and could contradict a band
+  (roaster: direction said dominant imagery, band said < 0.06). Fixed: direction now uses
+  the same majority.
