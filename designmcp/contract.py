@@ -161,10 +161,10 @@ def _intent(grammars: dict[str, dict], refs: dict[str, dict]) -> list[str]:
 def _direction(grammars: dict[str, dict]) -> str:
     g = grammars["contrast"]
     bits = [
-        f"{g.get('density', 'medium')}-density",
+        f"{_majority(grammars, 'density')[0] or 'medium'}-density",
         "typography-dominant" if g.get("display_dominance", 0) >= 3 else "balanced-hierarchy",
-        f"{g.get('imagery', 'present')} imagery",
-        f"{g.get('geometry', 'sharp')} geometry",
+        f"{_majority(grammars, 'imagery')[0] or 'present'} imagery",
+        f"{_majority(grammars, 'geometry')[0] or 'sharp'} geometry",
         f"{g.get('section_rhythm', 'uniform')} section rhythm",
     ]
     return ", ".join(bits)

@@ -133,3 +133,13 @@ def test_bands_follow_the_triple_in_both_directions():
             ("max_radius", ">=", 20), ("elements_per_1k", ">=", 55)} <= image_right
     assert {("hero_weight_split", "<=", 0.42), ("imagery_ratio", "<", 0.06),
             ("max_radius", "<=", 5), ("elements_per_1k", "<", 28)} <= bare_left
+
+
+def test_direction_line_agrees_with_the_bands():
+    grammars = {role: dict(r["grammar"]) for role, r in REFS.items()}
+    grammars["contrast"]["imagery"] = "dominant"
+    grammars["near"]["imagery"] = "absent"
+    c =contract_mod.build({role: {"id": f"ref-{role}", "grammar": g} for role, g in grammars.items()})
+    imagery_rules = {(r["op"], r["value"]) for r in c["inherited"]["required"] if r["rule"] == "imagery_ratio"}
+    assert imagery_rules == {("<", 0.06)}
+    assert "absent imagery" in c["identity"]["direction"]
