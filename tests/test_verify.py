@@ -15,16 +15,16 @@ from designmcp import contract as contract_mod, verify as verify_mod  # noqa: E4
 REFS = {
     "near": {"id": "ref-near", "grammar": {
         "hero_alignment": "left", "section_rhythm": "uniform", "card_reliance": "low",
-        "geometry": "soft", "imagery": "present", "density": "medium", "text_density": "medium",
-        "display_dominance": 3.0, "max_radius": 8, "full_bleed_sections": 0, "sections": 5}},
+        "geometry": "soft", "imagery": "present", "density": "low", "text_density": "medium",
+        "display_dominance": 8.0, "max_radius": 8, "full_bleed_sections": 0, "sections": 5}},
     "contrast": {"id": "ref-contrast", "grammar": {
         "hero_alignment": "left", "section_rhythm": "alternating", "card_reliance": "none",
-        "geometry": "sharp", "imagery": "present", "density": "high", "text_density": "high",
-        "display_dominance": 3.0, "max_radius": 0, "full_bleed_sections": 2, "sections": 6}},
+        "geometry": "sharp", "imagery": "absent", "density": "high", "text_density": "high",
+        "display_dominance": 9.0, "max_radius": 0, "full_bleed_sections": 2, "sections": 6}},
     "outlier": {"id": "ref-outlier", "grammar": {
         "hero_alignment": "right", "section_rhythm": "alternating", "card_reliance": "none",
         "geometry": "sharp", "imagery": "absent", "density": "low", "text_density": "low",
-        "display_dominance": 3.0, "max_radius": 0, "full_bleed_sections": 1, "sections": 4}},
+        "display_dominance": 7.0, "max_radius": 0, "full_bleed_sections": 1, "sections": 4}},
 }
 
 GENERIC = """<!doctype html><html><head><meta charset="utf-8"><style>
@@ -114,3 +114,22 @@ def test_contract_carries_positive_mandates_not_only_prohibitions():
     c = contract_mod.build(REFS)
     rules = {r["rule"] for r in c["inherited"]["required"]}
     assert {"full_bleed_sections", "centroid_flips", "display_dominance"} <= rules, rules
+
+
+def test_bands_follow_the_triple_in_both_directions():
+    def refs(**overrides):
+        return {role: {"id": f"ref-{role}", "grammar": {**r["grammar"], **overrides}}
+                for role, r in REFS.items()}
+
+    def rules(c):
+        return {(r["rule"], r["op"], r["value"]) for r in c["inherited"]["required"]}
+
+    image_right = rules(contract_mod.build(refs(hero_alignment="right", imagery="dominant",
+                                                geometry="rounded", density="high")))
+    bare_left = rules(contract_mod.build(refs(hero_alignment="left", imagery="absent",
+                                              geometry="sharp", density="low")))
+
+    assert {("hero_weight_split", ">=", 0.58), ("imagery_ratio", ">=", 0.30),
+            ("max_radius", ">=", 20), ("elements_per_1k", ">=", 55)} <= image_right
+    assert {("hero_weight_split", "<=", 0.42), ("imagery_ratio", "<", 0.06),
+            ("max_radius", "<=", 5), ("elements_per_1k", "<", 28)} <= bare_left

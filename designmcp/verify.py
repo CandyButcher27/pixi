@@ -10,7 +10,8 @@ from pathlib import Path
 from . import measure
 
 DERIVED = {
-    "hero_asymmetry": lambda g: abs(g["hero_weight_split"] - 0.5) if g.get("hero_weight_split") is not None else 0.0,
+    "hero_asymmetry": lambda g, raw: abs(g["hero_weight_split"] - 0.5) if g.get("hero_weight_split") is not None else 0.0,
+    "elements_per_1k": lambda g, raw: round(raw["element_count"] / max(raw["page_height"] / 1000, 1), 1),
 }
 
 OPS = {
@@ -24,7 +25,7 @@ OPS = {
 
 def metric(grammar: dict, raw: dict, rule: str):
     if rule in DERIVED:
-        return DERIVED[rule](grammar)
+        return DERIVED[rule](grammar, raw)
     if rule in grammar:
         return grammar[rule]
     return raw.get(rule)
