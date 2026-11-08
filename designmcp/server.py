@@ -47,7 +47,7 @@ def search_designs(brief: str) -> str:
             f"{g['full_bleed_sections']} full-bleed sections, {g['card_reliance']} card use "
             f"(largest row {g['largest_card_row']}), {g['geometry']} geometry (max radius {g['max_radius']}px), "
             f"display dominance {g['display_dominance']}x, {g['imagery']} imagery, {g['density']} density\n"
-            f"source: {r['path']}/index.html"
+            f"source: {r['path'] if r['collection'] == 'live' else r['path'] + '/index.html'}"
         )
     return "\n\n".join(out) + "\n\nNext: call get_design_contract with this same brief."
 
@@ -62,7 +62,9 @@ def get_design(design_id: str, include_source: bool = False) -> str:
     e = entries[design_id]
     body = [f"# {design_id} ({e['collection']})", "", "## composition grammar",
             json.dumps(e["grammar"], indent=2), "", "## retrieval text", e["text"][:1200]]
-    if include_source:
+    if e["collection"] == "live":
+        body += ["", f"live site, no local source: {e['path']}"]
+    elif include_source:
         html = ROOT / e["path"] / "index.html"
         body += ["", "## source", html.read_text(encoding="utf-8", errors="ignore")[:20000]]
     else:

@@ -14,13 +14,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = Path(__file__).resolve().parent / "catalog.json"
+LIVE_MEASURED = ROOT / "research/harvest/galleries/measured.jsonl"
+LIVE_SITES = ROOT / "research/harvest/galleries/sites_merged.jsonl"
 
 COLLECTIONS = {
     "websites": "brand homage",
     "portfolio-concepts": "original concept",
     "video_animated": "scroll-driven build",
 }
-
 CATEGORICAL = ["hero_alignment", "section_rhythm", "card_reliance", "geometry", "imagery",
                "density", "text_density"]
 # field -> the spread over which a difference counts as maximal
@@ -31,10 +32,28 @@ STOPWORDS = {"a", "an", "the", "for", "of", "and", "with", "to", "in", "on", "ma
              "me", "site", "website", "page", "landing", "design", "app", "web", "create"}
 
 
+def live_entries(measured: Path = LIVE_MEASURED, sites: Path = LIVE_SITES) -> dict[str, dict]:
+    if not measured.exists():
+        return {}
+    meta = {}
+    if sites.exists():
+        meta = {s["url"]: s for s in map(json.loads, sites.read_text(encoding="utf-8").splitlines())}
+    out = {}
+    for row in map(json.loads, measured.read_text(encoding="utf-8").splitlines()):
+        if "grammar" not in row or "error" in row["grammar"]:
+            continue
+        site = meta.get(row["url"], {})
+        host = row["url"].split("//", 1)[-1].strip("/")
+        tags = [t.split(":", 1)[-1] for t in site.get("tags", [])]
+        out[f"live:{host}"] = {"collection": "live", "path": row["url"], "grammar": row["grammar"],
+                               "text": " ".join([host, *site.get("titles", []), *tags])}
+    return out
+
+
 def load(path: Path = CATALOG) -> dict[str, dict]:
     if not path.exists():
         raise FileNotFoundError(f"{path} missing — run scripts/annotate_designs.py first")
-    return json.loads(path.read_text(encoding="utf-8"))["entries"]
+    return json.loads(path.read_text(encoding="utf-8"))["entries"] | live_entries()
 
 
 def tokens(text: str) -> list[str]:
