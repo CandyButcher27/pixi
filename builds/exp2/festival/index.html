@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGNAL DECAY 07 — Gemaal Zuid, Rotterdam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&family=Instrument+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9E6DD; --ink:#111110; --signal:#FF4317; --night:#0C0D0C; --rule:#B9B4A6; --mute:#5B584F;
+  --display:"Bricolage Grotesque", sans-serif;
+  --body:"Instrument Sans", "Franklin Gothic Book", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  --gutter:clamp(20px,4vw,56px);
+  --rhythm:120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em;text-transform:uppercase}
+.btn{display:inline-block;font:500 14px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;text-decoration:none;
+  padding:18px 26px;border-radius:3px;background:var(--ink);color:var(--paper);border:0;cursor:pointer}
+.btn:hover{background:var(--signal);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+header.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--ink)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:24px}
+header.top nav{display:flex;gap:28px}
+header.top nav a{text-decoration:none}
+header.top nav a:hover{color:var(--signal)}
+.mark{font:800 18px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+
+section{padding-block:var(--rhythm)}
+h2{font:800 clamp(48px,6.6vw,96px)/.9 var(--display);letter-spacing:-.045em}
+.kicker{display:flex;gap:18px;align-items:baseline;margin-bottom:40px;color:var(--mute)}
+.kicker b{color:var(--signal);font-weight:500}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:7fr 5fr;gap:var(--gutter);align-items:stretch}
+.hero h1{font:800 clamp(88px,13.4vw,196px)/.8 var(--display);letter-spacing:-.06em;margin-left:-.04em}
+.hero h1 span{display:block}
+.hero h1 .slash{color:var(--signal)}
+.hero .lede{max-width:34ch;font-size:22px;line-height:1.4;margin:48px 0 40px}
+.hero .facts{display:grid;grid-template-columns:auto 1fr;gap:10px 28px;border-top:1px solid var(--ink);padding-top:20px;margin-bottom:40px}
+.hero .facts dt{color:var(--mute)}
+.hero .facts dd{font:400 15px/1.4 var(--mono)}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero figure{display:flex;flex-direction:column;gap:12px}
+.hero canvas{width:100%;flex:1;min-height:760px;background:var(--ink);border-radius:3px;display:block}
+.hero figcaption{display:flex;justify-content:space-between;color:var(--mute)}
+
+/* statement */
+.statement .wrap{display:grid;grid-template-columns:8fr 4fr;gap:var(--gutter);border-top:1px solid var(--ink);padding-top:48px}
+.statement p.big{font:400 clamp(30px,3.3vw,48px)/1.12 var(--display);letter-spacing:-.025em}
+.statement p.big em{font-style:normal;color:var(--signal)}
+.statement aside{display:flex;flex-direction:column;gap:28px;padding-top:10px}
+.statement aside p{font-size:15px;color:var(--mute);border-left:2px solid var(--signal);padding-left:16px}
+
+/* lineup */
+.night{display:grid;grid-template-columns:220px 1fr;gap:var(--gutter);border-top:1px solid var(--ink);padding:36px 0 44px}
+.night h3{font:800 28px/1 var(--display);letter-spacing:-.02em}
+.night h3 small{display:block;margin-top:10px;font:400 13px/1.4 var(--mono);text-transform:uppercase;color:var(--mute)}
+.night ol{list-style:none}
+.night li{display:grid;grid-template-columns:1fr 90px 150px 60px;align-items:baseline;gap:20px;border-bottom:1px solid var(--rule);padding:10px 0}
+.night li:last-child{border-bottom:0}
+.night .name{font:800 var(--s,30px)/1 var(--display);letter-spacing:-.035em}
+.night .name i{font-style:normal;font-weight:400;font-size:.55em;color:var(--mute);letter-spacing:-.01em}
+.night li:hover .name{color:var(--signal)}
+
+/* band */
+.band{position:relative;background:var(--night);color:var(--paper);padding:0;height:100vh;min-height:760px;overflow:hidden}
+.band canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.band .over{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-block:var(--rhythm)}
+.band .q{font:800 clamp(56px,8.8vw,132px)/.86 var(--display);letter-spacing:-.05em;max-width:11ch}
+.band .q span{color:var(--signal)}
+.band .meta{display:flex;justify-content:space-between;gap:24px;color:#A7A396}
+
+/* rooms */
+.room{display:grid;gap:var(--gutter);align-items:center;padding:48px 0;border-top:1px solid var(--ink)}
+.room.l{grid-template-columns:7fr 5fr}
+.room.r{grid-template-columns:5fr 7fr}
+.room.r canvas{order:2}
+.room canvas{width:100%;height:640px;display:block;border-radius:3px;background:var(--ink)}
+.room h3{font:800 clamp(44px,5.2vw,76px)/.9 var(--display);letter-spacing:-.045em;margin:14px 0 22px}
+.room p{max-width:44ch}
+.room ul{list-style:none;margin-top:26px;border-top:1px solid var(--rule)}
+.room ul li{display:flex;justify-content:space-between;border-bottom:1px solid var(--rule);padding:9px 0;font:400 14px/1.4 var(--mono)}
+
+/* tickets */
+.tickets .head{display:flex;justify-content:space-between;align-items:end;gap:var(--gutter);margin-bottom:48px}
+.tickets .head p{max-width:36ch;color:var(--mute)}
+.tier{display:grid;grid-template-columns:80px 1.3fr 2fr 140px auto;gap:28px;align-items:center;border-top:1px solid var(--ink);padding:30px 0}
+.tier:last-child{border-bottom:1px solid var(--ink)}
+.tier .n{color:var(--mute)}
+.tier h3{font:800 38px/1 var(--display);letter-spacing:-.03em}
+.tier .price{font:800 44px/1 var(--display);letter-spacing:-.04em}
+.tier .price small{font:400 13px var(--mono);color:var(--mute);margin-left:4px}
+.tier.sold h3,.tier.sold .price{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--signal);color:var(--mute)}
+
+/* practical */
+.practical .wrap{display:grid;grid-template-columns:4fr 8fr;gap:var(--gutter)}
+.practical dl div{display:grid;grid-template-columns:200px 1fr;gap:28px;border-top:1px solid var(--ink);padding:22px 0}
+.practical dt{font:800 22px/1.15 var(--display);letter-spacing:-.02em}
+.practical dd{color:#2B2A26;max-width:60ch}
+
+/* footer */
+footer{border-top:1px solid var(--ink);padding-block:var(--rhythm) 40px}
+footer .wrap{display:grid;grid-template-columns:7fr 5fr;gap:var(--gutter);align-items:end}
+footer .big{font:800 clamp(160px,26vw,380px)/.75 var(--display);letter-spacing:-.07em;color:var(--signal)}
+footer .cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;font-size:15px}
+footer .cols p{margin-top:8px}
+footer .base{display:flex;justify-content:space-between;margin-top:56px;color:var(--mute)}
+
+@media (max-width:900px){
+  :root{--rhythm:80px}
+  .hero .wrap,.statement .wrap,.practical .wrap,footer .wrap,.room.l,.room.r{grid-template-columns:1fr}
+  .room.r canvas{order:0}
+  .hero canvas{min-height:380px}
+  .night{grid-template-columns:1fr}
+  .night li{grid-template-columns:1fr 70px;}
+  .night li .room-c,.night li .orig{display:none}
+  .tier{grid-template-columns:1fr auto}
+  .tier .n,.tier p{display:none}
+  .practical dl div{grid-template-columns:1fr;gap:8px}
+  header.top nav{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#">SIGNAL DECAY 07</a>
+    <nav class="mono">
+      <a href="#lineup">Lineup</a><a href="#rooms">Rooms</a><a href="#tickets">Tickets</a><a href="#practical">Practical</a>
+    </nav>
+    <a class="btn" href="#tickets">Tickets</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1><span>SIGNAL</span><span><span class="slash">/</span>DECAY</span></h1>
+      <p class="lede">Three nights of music made by machines that are slowly falling apart, and by the people who refuse to fix them.</p>
+      <dl class="facts mono">
+        <dt>When</dt><dd>19 — 21 March 2027, 20:00 until the pumps stop</dd>
+        <dt>Where</dt><dd>Gemaal Zuid, a decommissioned pumping station, Rotterdam</dd>
+        <dt>Who</dt><dd>41 artists, 3 rooms, 1,800 people per night</dd>
+      </dl>
+      <div class="ctas">
+        <a class="btn" href="#tickets">Get a weekend pass — €145</a>
+        <a class="btn ghost" href="#lineup">Read the lineup</a>
+      </div>
+    </div>
+    <figure>
+      <canvas id="scope" aria-label="Live oscilloscope trace drifting out of phase"></canvas>
+      <figcaption class="mono"><span>Fig. 1 — X/Y trace, 1:1.003</span><span id="phase">phase 0.000</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="statement">
+  <div class="wrap">
+    <p class="big">We book sound that is <em>not finished</em>. Feedback patches left running for six hours. Tape loops recorded until the oxide flakes. Modular systems handed a seed and no instructions. If you know exactly what the set will sound like, it is not on this bill.</p>
+    <aside>
+      <p>Every performance is unrepeatable. Nothing is recorded, streamed or archived. Phones go in a pouch at the door.</p>
+      <p>The building pumped the Maas polder dry for 92 years. Its turbine hall still hums at 50 Hz, and we tune the weekend to it.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="lineup" id="lineup">
+  <div class="wrap">
+    <div class="kicker mono"><b>02</b><span>Lineup — running order subject to entropy</span></div>
+    <h2 style="margin-bottom:56px">Who is playing</h2>
+
+    <div class="night">
+      <h3>Friday<small>19.03 / doors 20:00<br>Turbine Hall opens 22:00</small></h3>
+      <ol>
+        <li style="--s:64px"><span class="name">Hollow Lattice <i>live A/V</i></span><span class="mono">01:30</span><span class="mono room-c">Turbine Hall</span><span class="mono orig">NO</span></li>
+        <li style="--s:46px"><span class="name">Mira Okonedo</span><span class="mono">23:40</span><span class="mono room-c">Turbine Hall</span><span class="mono orig">UK</span></li>
+        <li style="--s:34px"><span class="name">Vessel Fatigue</span><span class="mono">22:00</span><span class="mono room-c">Sluice</span><span class="mono orig">NL</span></li>
+        <li style="--s:28px"><span class="name">Juno Abrahamsen <i>6-hr feedback</i></span><span class="mono">20:00</span><span class="mono room-c">Reservoir</span><span class="mono orig">DK</span></li>
+        <li style="--s:28px"><span class="name">Kettle &amp; Wire</span><span class="mono">03:10</span><span class="mono room-c">Sluice</span><span class="mono orig">BE</span></li>
+      </ol>
+    </div>
+
+    <div class="night">
+      <h3>Saturday<small>20.03 / doors 19:00<br>Runs to 08:00</small></h3>
+      <ol>
+        <li style="--s:64px"><span class="name">Sœur Dropout</span><span class="mono">02:00</span><span class="mono room-c">Turbine Hall</span><span class="mono orig">FR</span></li>
+        <li style="--s:46px"><span class="name">Tamsin Reyes-Ilk <i>tape</i></span><span class="mono">00:15</span><span class="mono room-c">Turbine Hall</span><span class="mono orig">MX</span></li>
+        <li style="--s:34px"><span class="name">Oxide Flake Orchestra</span><span class="mono">21:30</span><span class="mono room-c">Reservoir</span><span class="mono orig">DE</span></li>
+        <li style="--s:28px"><span class="name">ANT1PHASE</span><span class="mono">04:00</span><span class="mono room-c">Turbine Hall</span><span class="mono orig">JP</span></li>
+        <li style="--s:28px"><span class="name">Lin Halvorsen</span><span class="mono">06:00</span><span class="mono room-c">Sluice</span><span class="mono orig">NO</span></li>
+      </ol>
+    </div>
+
+    <div class="night">
+      <h3>Sunday<small>21.03 / doors 16:00<br>Daylight session</small></h3>
+      <ol>
+        <li style="--s:64px"><span class="name">Gemaal Ensemble <i>premiere</i></span><span class="mono">21:00</span><span class="mono room-c">Turbine Hall</span><span class="mono orig">NL</span></li>
+        <li style="--s:46px"><span class="name">Paz Moreno-Thiel</span><span class="mono">19:00</span><span class="mono room-c">Reservoir</span><span class="mono orig">AR</span></li>
+        <li style="--s:34px"><span class="name">Low Water Mark</span><span class="mono">17:30</span><span class="mono room-c">Sluice</span><span class="mono orig">IS</span></li>
+        <li style="--s:28px"><span class="name">Dao Quiet Unit</span><span class="mono">16:00</span><span class="mono room-c">Reservoir</span><span class="mono orig">VN</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-label="Spectrogram of the turbine hall">
+  <canvas id="spectro"></canvas>
+  <div class="wrap over">
+    <p class="mono">03 — Saturday, 04:12, Turbine Hall, recorded nowhere</p>
+    <p class="q">The room is the <span>last</span> instrument.</p>
+    <div class="meta mono"><span>0 Hz</span><span>Spectrogram of the hall at rest, 50 Hz mains hum in vermilion</span><span>20 kHz</span></div>
+  </div>
+</section>
+
+<section class="rooms" id="rooms">
+  <div class="wrap">
+    <div class="kicker mono"><b>04</b><span>Three rooms, three acoustics</span></div>
+    <h2 style="margin-bottom:56px">Where it happens</h2>
+
+    <div class="room l">
+      <canvas class="art" data-kind="hall" aria-label="Turbine hall reverb visualised as decaying rings"></canvas>
+      <div>
+        <span class="mono" style="color:var(--mute)">Room A</span>
+        <h3>Turbine Hall</h3>
+        <p>A 38-metre cathedral of riveted steel with a 9-second reverb tail. Headline sets, quadraphonic rig, the original pumps left in place as acoustic baffles.</p>
+        <ul><li><span>Capacity</span><span>1,200</span></li><li><span>System</span><span>Quad, 48 kW</span></li><li><span>RT60</span><span>9.1 s</span></li></ul>
+      </div>
+    </div>
+
+    <div class="room r">
+      <canvas class="art" data-kind="sluice" aria-label="Sluice room visualised as stacked waveforms"></canvas>
+      <div>
+        <span class="mono" style="color:var(--mute)">Room B</span>
+        <h3>Sluice</h3>
+        <p>The long, low concrete channel where the water used to leave. Dry, loud and close. Club sets, rhythm that breaks in interesting places.</p>
+        <ul><li><span>Capacity</span><span>400</span></li><li><span>System</span><span>Stereo, 24 kW</span></li><li><span>RT60</span><span>0.6 s</span></li></ul>
+      </div>
+    </div>
+
+    <div class="room l">
+      <canvas class="art" data-kind="reservoir" aria-label="Reservoir visualised as a slow drifting grid"></canvas>
+      <div>
+        <span class="mono" style="color:var(--mute)">Room C</span>
+        <h3>Reservoir</h3>
+        <p>An empty holding tank with a flooded floor you walk across on boards. Durational and seated work, long-form drone, pieces that start before you arrive.</p>
+        <ul><li><span>Capacity</span><span>200</span></li><li><span>System</span><span>16-ch ambisonic</span></li><li><span>RT60</span><span>4.3 s</span></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tickets" id="tickets">
+  <div class="wrap">
+    <div class="kicker mono"><b>05</b><span>Tickets — no resale above face value</span></div>
+    <div class="head">
+      <h2>Get in</h2>
+      <p>Prices include the city tax and the phone pouch. Under-26 and Rotterdam Pas holders pay half on every tier.</p>
+    </div>
+    <div class="tier sold"><span class="n mono">T/01</span><h3>Early decay</h3><p>Weekend pass, first 400.</p><span class="price">€110</span><span class="mono">Sold out</span></div>
+    <div class="tier"><span class="n mono">T/02</span><h3>Weekend</h3><p>All three nights, all rooms, re-entry until 03:00.</p><span class="price">€145</span><a class="btn" href="#">Buy</a></div>
+    <div class="tier"><span class="n mono">T/03</span><h3>Single night</h3><p>Friday, Saturday or Sunday. Choose at checkout.</p><span class="price">€65</span><a class="btn ghost" href="#">Buy</a></div>
+    <div class="tier"><span class="n mono">T/04</span><h3>Reservoir only</h3><p>Seated durational programme, Sunday 16:00 — 22:00.</p><span class="price">€30</span><a class="btn ghost" href="#">Buy</a></div>
+  </div>
+</section>
+
+<section class="practical" id="practical">
+  <div class="wrap">
+    <div>
+      <div class="kicker mono"><b>06</b><span>Practical</span></div>
+      <h2>Before you come</h2>
+    </div>
+    <dl>
+      <div><dt>Getting there</dt><dd>Tram 2 to Gemaal Zuid, then 400 m along the dyke. Night buses every 20 minutes until 07:00. Bike parking for 900 inside the old coal yard.</dd></div>
+      <div><dt>Phones</dt><dd>Sealed in a pouch at the door, opened at the exit. Emergency phone points in every room. No photography, no recording, no exceptions for artists either.</dd></div>
+      <div><dt>Hearing</dt><dd>The Turbine Hall peaks around 103 dB. Free moulded earplugs at the cloakroom; quiet room behind the Reservoir.</dd></div>
+      <div><dt>Access</dt><dd>Step-free routes to all three rooms, a raised viewing platform in the Turbine Hall, and seated tickets for every Reservoir piece. Companions go free.</dd></div>
+      <div><dt>Weather</dt><dd>March on the Maas is cold. The building is unheated except for 3,000 people. Bring a layer you are happy to lose in the cloakroom.</dd></div>
+    </dl>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="big" aria-hidden="true">07</div>
+    <div>
+      <div class="cols">
+        <div><span class="mono" style="color:var(--mute)">Contact</span><p>hello@signaldecay.example<br>Press: press@signaldecay.example</p></div>
+        <div><span class="mono" style="color:var(--mute)">Address</span><p>Gemaal Zuid<br>Polderweg 7, Rotterdam</p></div>
+      </div>
+      <form style="margin-top:36px;display:flex;gap:10px" onsubmit="event.preventDefault();this.querySelector('button').textContent='Noted';">
+        <label class="mono" for="em" style="position:absolute;left:-9999px">Email</label>
+        <input id="em" type="email" required placeholder="Email for line-up drops" style="flex:1;font:400 15px var(--body);padding:16px;border:1.5px solid var(--ink);border-radius:3px;background:transparent">
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="wrap base mono"><span>SIGNAL DECAY — Stichting Ruisbron</span><span>Nothing here is recorded</span></div>
+</footer>
+
+<script>
+(() => {
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SIGNAL = '#FF4317', PAPER = '#E9E6DD';
+
+  function fit(c) {
+    const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    c.width = Math.max(1, r.width * d); c.height = Math.max(1, r.height * d);
+    const x = c.getContext('2d'); x.setTransform(d, 0, 0, d, 0, 0);
+    return [x, r.width, r.height];
+  }
+
+  const scope = document.getElementById('scope'), phaseEl = document.getElementById('phase');
+  let [sx, sw, sh] = fit(scope);
+  function drawScope(t) {
+    sx.fillStyle = 'rgba(17,17,16,0.22)'; sx.fillRect(0, 0, sw, sh);
+    const ph = t * 0.00021, a = Math.min(sw, sh) * 0.42, cx = sw / 2, cy = sh / 2;
+    sx.strokeStyle = SIGNAL; sx.lineWidth = 1.4; sx.beginPath();
+    for (let i = 0; i <= 900; i++) {
+      const u = i / 900 * Math.PI * 2 * 3;
+      const decay = 1 - 0.12 * Math.sin(u * 0.5 + ph * 3);
+      const x = cx + a * decay * Math.sin(3 * u + ph);
+      const y = cy + a * 1.25 * decay * Math.sin(2 * u) + Math.sin(u * 40 + t * 0.01) * 1.2;
+      i ? sx.lineTo(x, y) : sx.moveTo(x, y);
+    }
+    sx.stroke();
+    sx.strokeStyle = 'rgba(233,230,221,0.12)'; sx.lineWidth = 1;
+    for (let g = 1; g < 10; g++) {
+      sx.beginPath(); sx.moveTo(sw * g / 10, 0); sx.lineTo(sw * g / 10, sh); sx.stroke();
+      sx.beginPath(); sx.moveTo(0, sh * g / 10); sx.lineTo(sw, sh * g / 10); sx.stroke();
+    }
+    phaseEl.textContent = 'phase ' + (ph % (Math.PI * 2)).toFixed(3);
+  }
+
+  const spec = document.getElementById('spectro');
+  let [px, pw, phh] = fit(spec);
+  let col = 0;
+  function noise(i, j) { const s = Math.sin(i * 12.9898 + j * 78.233) * 43758.5453; return s - Math.floor(s); }
+  function specColumn(k) {
+    const w = 3, x = (k * w) % pw, rows = Math.ceil(phh / 3);
+    for (let r = 0; r < rows; r++) {
+      const f = 1 - r / rows;
+      let v = Math.pow(noise(k, r), 6) * 0.5 + 0.18 * Math.exp(-f * 4) * noise(k * 0.3 | 0, r);
+      if (Math.abs(f - 0.08) < 0.006 || Math.abs(f - 0.16) < 0.004) v = 0.9;
+      v += 0.35 * Math.exp(-Math.pow((f - (0.5 + 0.3 * Math.sin(k * 0.013))) * 18, 2));
+      const hot = Math.abs(f - 0.08) < 0.006;
+      px.fillStyle = hot ? SIGNAL : `rgba(233,230,221,${Math.min(v, 1) * 0.55})`;
+      px.fillRect(x, r * 3, w, 3);
+    }
+    px.fillStyle = 'rgba(12,13,12,0.85)'; px.fillRect((x + w) % pw, 0, w * 6, phh);
+  }
+  function fillSpec() { px.fillStyle = '#0C0D0C'; px.fillRect(0, 0, pw, phh); for (let k = 0; k < pw / 3; k++) specColumn(k); col = Math.ceil(pw / 3); }
+  fillSpec();
+
+  const arts = [...document.querySelectorAll('canvas.art')].map(c => { const [x, w, h] = fit(c); return { c, x, w, h, kind: c.dataset.kind }; });
+  function drawArt(o, t) {
+    const { x, w, h, kind } = o;
+    x.fillStyle = '#111110'; x.fillRect(0, 0, w, h);
+    if (kind === 'hall') {
+      for (let i = 0; i < 26; i++) {
+        const r = ((i * 22 + t * 0.03) % 572);
+        x.strokeStyle = i % 7 === 0 ? SIGNAL : `rgba(233,230,221,${0.6 * (1 - r / 572)})`;
+        x.lineWidth = i % 7 === 0 ? 2 : 1;
+        x.beginPath(); x.arc(w * 0.32, h * 0.62, r, 0, Math.PI * 2); x.stroke();
+      }
+    } else if (kind === 'sluice') {
+      for (let l = 0; l < 22; l++) {
+        const y0 = 30 + l * (h - 60) / 21;
+        x.strokeStyle = l === 13 ? SIGNAL : 'rgba(233,230,221,0.7)'; x.lineWidth = l === 13 ? 2 : 1;
+        x.beginPath();
+        for (let i = 0; i <= w; i += 3) {
+          const env = Math.exp(-Math.pow((i - w * (0.5 + 0.3 * Math.sin(t * 0.0004 + l))) / (w * 0.12), 2));
+          const y = y0 - env * 26 * Math.abs(Math.sin(i * 0.15 + l + t * 0.003)) * (noise(i >> 3, l) > 0.3 ? 1 : 0.2);
+          i ? x.lineTo(i, y) : x.moveTo(i, y);
+        }
+        x.stroke();
+      }
+    } else {
+      const n = 28;
+      for (let i = 0; i <= n; i++) for (let j = 0; j <= n * h / w; j++) {
+        const gx = i * w / n, gy = j * w / n;
+        const d = Math.sin(i * 0.4 + t * 0.0007) * Math.cos(j * 0.35 - t * 0.0005);
+        const s = 1.2 + 2.6 * (d + 1);
+        x.fillStyle = (i === 19 && j === 6) ? SIGNAL : `rgba(233,230,221,${0.25 + 0.35 * (d + 1)})`;
+        x.fillRect(gx + d * 6, gy - d * 6, s, s);
+      }
+    }
+  }
+
+  function frame(t) {
+    drawScope(t);
+    for (let i = 0; i < 2; i++) specColumn(col++);
+    arts.forEach(o => drawArt(o, t));
+    if (!still) requestAnimationFrame(frame);
+  }
+  if (still) { for (let i = 0; i < 6; i++) drawScope(1200); arts.forEach(o => drawArt(o, 1200)); }
+  else requestAnimationFrame(frame);
+
+  addEventListener('resize', () => {
+    [sx, sw, sh] = fit(scope); [px, pw, phh] = fit(spec); fillSpec();
+    arts.forEach(o => Object.assign(o, (([x, w, h]) => ({ x, w, h }))(fit(o.c))));
+    if (still) { drawScope(1200); arts.forEach(o => drawArt(o, 1200)); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarry — every slow request has a line number</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3f0e8;--ink:#16150f;--rule:#c9c3b3;--mute:#6b6658;--signal:#d4420c;--ok:#2f6b3a;
+  --display:"Bricolage Grotesque",sans-serif;--body:"IBM Plex Sans",sans-serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:0 48px}
+.mono{font-family:var(--mono)}
+.btn{display:inline-block;font:500 15px/1 var(--body);padding:15px 22px;border-radius:2px;text-decoration:none;border:1.5px solid var(--ink)}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-line{background:transparent}
+.btn-signal{background:var(--signal);border-color:var(--signal);color:#fff}
+
+header{border-bottom:1px solid var(--rule)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:800 22px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--signal)}
+header nav{display:flex;gap:32px;font-size:14px;color:var(--mute)}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--ink)}
+
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+
+/* 1 hero: left anchor, right side is a live tail */
+.hero .wrap{display:grid;grid-template-columns:1fr 340px;gap:64px;padding-top:88px;padding-bottom:96px;align-items:end}
+.hero h1{font:800 112px/.9 var(--display);letter-spacing:-.045em;margin:28px 0 36px}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.hero .lede{font-size:21px;line-height:1.5;max-width:30ch;color:#34322a}
+.hero .actions{display:flex;gap:12px;margin-top:40px}
+.tail{border-top:2px solid var(--ink);font:400 12.5px/1 var(--mono)}
+.tail h2{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:14px 0;display:flex;justify-content:space-between;color:var(--mute)}
+.tail h2 b{color:var(--signal);font-weight:500}
+.tail ol{list-style:none}
+.tail li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--rule);opacity:0;transform:translateY(-4px);animation:in .4s forwards}
+.tail li .ms{color:var(--ok)}
+.tail li.slow .ms{color:var(--signal)}
+@keyframes in{to{opacity:1;transform:none}}
+
+/* 2 full-bleed ink band: right anchor */
+.band{background:var(--ink);color:var(--paper)}
+.band .wrap{display:grid;grid-template-columns:300px 1fr;gap:120px;padding-top:112px;padding-bottom:112px}
+.band .kicker{color:#a19b8a}
+.install{align-self:end;font:400 14px/1.9 var(--mono);color:#cfc9b8;border-left:2px solid var(--signal);padding-left:20px}
+.install .c{color:#7d7868}
+.install .k{color:#f0a37f}
+.install-note{margin-top:20px;font-size:14px;color:#a19b8a;max-width:34ch}
+.band h2{font:800 64px/.98 var(--display);letter-spacing:-.035em;margin:20px 0 40px auto;max-width:13ch;text-align:right}
+.band .kicker,.price .kicker.r{text-align:right}
+.band table{width:100%;border-collapse:collapse;font:400 14px/1.3 var(--mono)}
+.band th{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#a19b8a;text-align:left;padding:0 0 12px}
+.band th.r,.band td.r{text-align:right}
+.band td{padding:16px 0;border-top:1px solid #3a382f}
+.band td.p99{color:#f0a37f}
+.band td.hot{color:var(--signal);font-weight:500}
+.band td .where{display:block;color:#7d7868;font-size:12px;margin-top:4px}
+
+/* 3 sequence: left anchor */
+.how .wrap{display:grid;grid-template-columns:1fr 360px;gap:96px;padding-top:120px;padding-bottom:120px}
+.how h2{font:800 64px/.98 var(--display);letter-spacing:-.035em;margin:20px 0 56px;max-width:14ch}
+.how ol{list-style:none;counter-reset:s}
+.how li{counter-increment:s;display:grid;grid-template-columns:120px 1fr;gap:24px;padding:32px 0;border-top:1px solid var(--rule)}
+.how li::before{content:"0" counter(s);font:800 56px/1 var(--display);letter-spacing:-.04em;color:var(--rule)}
+.how li h3{font:500 26px/1.2 var(--display);letter-spacing:-.015em;margin-bottom:10px}
+.how li p{color:#45423a;max-width:56ch}
+.how code{font:400 14px var(--mono);background:#e6e1d4;padding:2px 6px;border-radius:2px}
+.pull{align-self:start;position:sticky;top:48px;border-top:2px solid var(--ink);padding-top:20px}
+.pull .fig{font:800 96px/.9 var(--display);letter-spacing:-.05em;margin:14px 0}
+.pull p{font-size:15px;color:#45423a}
+
+/* 4 pricing: right anchor */
+.price{border-top:1px solid var(--rule)}
+.price .wrap{display:grid;grid-template-columns:360px 1fr;gap:96px;padding-top:120px;padding-bottom:120px}
+.price .fig{font:800 88px/.92 var(--display);letter-spacing:-.045em;margin-top:20px}
+.price .fig small{display:block;font:500 15px/1.4 var(--body);letter-spacing:0;color:var(--mute);margin-top:16px}
+.price h2{font:800 48px/1 var(--display);letter-spacing:-.03em;margin:0 0 32px;text-align:right}
+.price table{width:100%;border-collapse:collapse}
+.price th{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:left;padding-bottom:12px}
+.price td{padding:20px 16px 20px 0;border-top:1px solid var(--rule);vertical-align:top}
+.price td:first-child{font:500 22px/1.2 var(--display)}
+.price td .sub{display:block;font:400 14px/1.5 var(--body);color:var(--mute);margin-top:4px}
+.price td.amt{font:500 15px var(--mono);white-space:nowrap}
+.price tr:last-child td{border-bottom:2px solid var(--ink)}
+.price .foot{display:flex;gap:12px;margin-top:32px;align-items:center;justify-content:flex-end}
+.price .foot span{font-size:14px;color:var(--mute);margin-left:12px}
+
+/* 5 close */
+.close .wrap{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end;padding-top:96px;padding-bottom:40px;border-top:2px solid var(--ink)}
+.close h2{font:800 72px/.95 var(--display);letter-spacing:-.04em;max-width:15ch}
+footer .wrap{display:flex;justify-content:space-between;padding-top:24px;padding-bottom:32px;font:400 12px var(--mono);color:var(--mute);border-top:1px solid var(--rule)}
+
+@media (max-width:960px){
+  .wrap{padding:0 20px}
+  header nav{display:none}
+  .hero .wrap,.band .wrap,.how .wrap,.price .wrap,.close .wrap{grid-template-columns:1fr;gap:48px}
+  .hero h1{font-size:64px}
+  .band h2,.how h2{font-size:44px}
+  .close h2{font-size:48px}
+  .how li{grid-template-columns:64px 1fr}
+  .how li::before{font-size:36px}
+  .pull{position:static}
+  .band table .where{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">quarry<span>.</span></a>
+    <nav><a href="#how">How it works</a><a href="#endpoints">Endpoints</a><a href="#pricing">Pricing</a><a href="#">Docs</a><a href="#">Sign in</a></nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Request analytics for backend services</p>
+        <h1>Every slow request has a <em>line number.</em></h1>
+        <p class="lede">Quarry ties p99 latency, query count and dollar cost to the handler, the ORM call and the commit that caused it.</p>
+        <div class="actions">
+          <a class="btn btn-solid" href="#">Start tracing free</a>
+          <a class="btn btn-line" href="#how">Read the setup</a>
+        </div>
+      </div>
+      <aside class="tail" aria-label="Live request tail">
+        <h2>live tail <b>&gt; 250ms</b></h2>
+        <ol id="tail"></ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band" id="endpoints">
+    <div class="wrap">
+      <div class="install">
+        <div class="c"># 1. install</div>
+        <div><span class="k">pip</span> install quarry-agent</div>
+        <div class="c"># 2. wrap your app</div>
+        <div><span class="k">from</span> quarry <span class="k">import</span> trace</div>
+        <div>app = trace(app, key=QUARRY_KEY)</div>
+        <p class="install-note">Python, Go, Node, Ruby, JVM.</p>
+      </div>
+      <div>
+        <p class="kicker">This hour, production</p>
+        <h2>The five endpoints costing you the most.</h2>
+        <table>
+          <thead><tr><th>p99</th><th>Queries</th><th>$ / 1M req</th><th class="r">Endpoint · cause</th></tr></thead>
+          <tbody>
+            <tr><td class="hot">1,840ms</td><td>212</td><td class="p99">$41.20</td><td class="r">GET /v2/orders/:id<span class="where">orders/views.py:142 · N+1 on line_items</span></td></tr>
+            <tr><td class="hot">960ms</td><td>38</td><td class="p99">$19.75</td><td class="r">POST /checkout<span class="where">payments/charge.go:88 · retry loop on 409</span></td></tr>
+            <tr><td>612ms</td><td>4</td><td class="p99">$12.10</td><td class="r">GET /search<span class="where">search/query.rb:57 · unindexed ILIKE</span></td></tr>
+            <tr><td>288ms</td><td>9</td><td class="p99">$4.30</td><td class="r">GET /v2/users/me<span class="where">auth/session.py:31 · cache miss 71%</span></td></tr>
+            <tr><td>251ms</td><td>6</td><td class="p99">$2.05</td><td class="r">POST /webhooks/stripe<span class="where">hooks/stripe.ts:19 · sync email send</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap">
+      <div>
+        <p class="kicker">How it works</p>
+        <h2>From deploy to the guilty line in one query.</h2>
+        <ol>
+          <li><div><h3>Wrap the app, not every function.</h3><p>The agent hooks your framework's router and database driver. Each request becomes a span tree with handler, SQL, cache and outbound HTTP calls already attached. No decorators, no manual spans.</p></div></li>
+          <li><div><h3>Group by what you actually change.</h3><p>Latency and cost roll up by route, by query fingerprint and by git SHA. Ask <code>p99 by route where sha = HEAD</code> and see which endpoint your last deploy made slower.</p></div></li>
+          <li><div><h3>Follow it to the source line.</h3><p>Every regression links to the file and line that issued the slow query, with the before and after query plans side by side. Paste the link into the PR.</p></div></li>
+          <li><div><h3>Set budgets, get paged less.</h3><p>Give each route a latency and cost budget. Quarry alerts on the budget breach, not on CPU, so the page you get at 3am already names the handler.</p></div></li>
+        </ol>
+      </div>
+      <aside class="pull">
+        <p class="kicker">Setup</p>
+        <p class="fig">3 lines.</p>
+        <p>Median time from install to first regression found, across 1,200 teams: 41 minutes.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="price" id="pricing">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Pricing</p>
+        <p class="fig">$0.18<small>per million spans ingested. Retention and seats are not billed.</small></p>
+      </div>
+      <div>
+        <h2>Pay for what you trace.</h2>
+        <table>
+          <thead><tr><th>Plan</th><th>Includes</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr><td>Hobby<span class="sub">Side projects, one service</span></td><td>50M spans / month, 7-day retention, query explorer</td><td class="amt">$0</td></tr>
+            <tr><td>Team<span class="sub">Production services</span></td><td>Unlimited services, 30-day retention, budgets and alerts, git SHA rollups</td><td class="amt">$0.18 / 1M</td></tr>
+            <tr><td>Enterprise<span class="sub">Regulated workloads</span></td><td>Self-hosted collector, 13-month retention, SSO, audit log</td><td class="amt">Talk to us</td></tr>
+          </tbody>
+        </table>
+        <div class="foot"><a class="btn btn-signal" href="#">Start tracing free</a><span>No card for Hobby.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap">
+      <h2>Stop guessing which handler it was.</h2>
+      <a class="btn btn-solid" href="#">Create a project</a>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap"><span>quarry. — request analytics</span><span>SOC 2 Type II · status: operational</span></div>
+</footer>
+<script>
+const rows=[["GET /v2/orders/:id","1840ms",1],["POST /checkout","960ms",1],["GET /search","612ms",0],["GET /v2/users/me","288ms",0],["POST /webhooks/stripe","251ms",0],["GET /v2/orders/:id","1702ms",1],["GET /reports/daily","433ms",0]];
+const tail=document.getElementById("tail");
+let i=0;
+function push(){
+  const [r,ms,slow]=rows[i++%rows.length];
+  const li=document.createElement("li");
+  if(slow)li.className="slow";
+  li.innerHTML=`<span>${r}</span><span class="ms">${ms}</span>`;
+  tail.prepend(li);
+  if(tail.children.length>7)tail.lastElementChild.remove();
+}
+for(let k=0;k<7;k++)push();
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)setInterval(push,1800);
+</script>
+</body>
+</html>
