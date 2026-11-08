@@ -14,13 +14,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = Path(__file__).resolve().parent / "catalog.json"
+LIVE_MEASURED = ROOT / "research/harvest/galleries/measured.jsonl"
+LIVE_SITES = ROOT / "research/harvest/galleries/sites_merged.jsonl"
 
 COLLECTIONS = {
     "websites": "brand homage",
     "portfolio-concepts": "original concept",
     "video_animated": "scroll-driven build",
 }
-
 CATEGORICAL = ["hero_alignment", "section_rhythm", "card_reliance", "geometry", "imagery",
                "density", "text_density"]
 # field -> the spread over which a difference counts as maximal
@@ -31,10 +32,28 @@ STOPWORDS = {"a", "an", "the", "for", "of", "and", "with", "to", "in", "on", "ma
              "me", "site", "website", "page", "landing", "design", "app", "web", "create"}
 
 
+def live_entries(measured: Path = LIVE_MEASURED, sites: Path = LIVE_SITES) -> dict[str, dict]:
+    if not measured.exists():
+        return {}
+    meta = {}
+    if sites.exists():
+        meta = {s["url"]: s for s in map(json.loads, sites.read_text(encoding="utf-8").splitlines())}
+    out = {}
+    for row in map(json.loads, measured.read_text(encoding="utf-8").splitlines()):
+        if "grammar" not in row or "error" in row["grammar"]:
+            continue
+        site = meta.get(row["url"], {})
+        host = row["url"].split("//", 1)[-1].strip("/")
+        tags = [t.split(":", 1)[-1] for t in site.get("tags", [])]
+        out[f"live:{host}"] = {"collection": "live", "path": row["url"], "grammar": row["grammar"],
+                               "text": " ".join([host, *site.get("titles", []), *tags])}
+    return out
+
+
 def load(path: Path = CATALOG) -> dict[str, dict]:
     if not path.exists():
         raise FileNotFoundError(f"{path} missing — run scripts/annotate_designs.py first")
-    return json.loads(path.read_text(encoding="utf-8"))["entries"]
+    return json.loads(path.read_text(encoding="utf-8"))["entries"] | live_entries()
 
 
 def tokens(text: str) -> list[str]:
@@ -85,6 +104,7 @@ def relevance(brief: str, entries: dict[str, dict]) -> dict[str, float]:
 
 
 SEPARATION = 0.45  # a reference closer than this to an already-picked one adds nothing
+OUTLIER_QUANTILE = 5  # outlier comes from the rarest 1/5 of the corpus
 
 
 def select(brief: str, entries: dict[str, dict] | None = None) -> dict[str, dict]:
@@ -113,7 +133,11 @@ def select(brief: str, entries: dict[str, dict] | None = None) -> dict[str, dict
                           key=lambda i: distance(near, entries[i]))
 
     pool = far_from([near_id, contrast_id])
-    if pool:  # rarest grammar in the corpus, given it is far from both picks
+    rare = sorted(nov.values(), reverse=True)[len(nov) // OUTLIER_QUANTILE]
+    rare_pool = [i for i in pool if nov[i] >= rare]
+    if rare_pool:  # rare grammar that still fits the brief, so one entry does not win every query
+        outlier_id = max(rare_pool, key=lambda i: (rel[i], nov[i]))
+    elif pool:
         outlier_id = max(pool, key=lambda i: (nov[i], rel[i]))
     else:
         outlier_id = max((i for i in entries if i not in (near_id, contrast_id)),
