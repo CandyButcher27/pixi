@@ -104,6 +104,7 @@ def relevance(brief: str, entries: dict[str, dict]) -> dict[str, float]:
 
 
 SEPARATION = 0.45  # a reference closer than this to an already-picked one adds nothing
+OUTLIER_QUANTILE = 5  # outlier comes from the rarest 1/5 of the corpus
 
 
 def select(brief: str, entries: dict[str, dict] | None = None) -> dict[str, dict]:
@@ -132,7 +133,11 @@ def select(brief: str, entries: dict[str, dict] | None = None) -> dict[str, dict
                           key=lambda i: distance(near, entries[i]))
 
     pool = far_from([near_id, contrast_id])
-    if pool:  # rarest grammar in the corpus, given it is far from both picks
+    rare = sorted(nov.values(), reverse=True)[len(nov) // OUTLIER_QUANTILE]
+    rare_pool = [i for i in pool if nov[i] >= rare]
+    if rare_pool:  # rare grammar that still fits the brief, so one entry does not win every query
+        outlier_id = max(rare_pool, key=lambda i: (rel[i], nov[i]))
+    elif pool:
         outlier_id = max(pool, key=lambda i: (nov[i], rel[i]))
     else:
         outlier_id = max((i for i in entries if i not in (near_id, contrast_id)),
