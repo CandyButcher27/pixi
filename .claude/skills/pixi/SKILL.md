@@ -17,9 +17,13 @@ Fraunces, mono labels, numbered sections, italic headline word) from 5.0 to 3.0 
 
 Read the project before writing anything: README, package/pyproject metadata, existing pages,
 copy, logos, brand colours. Write a one-line brief ("landing page for <what> for <whom>").
-Ask the user one question only if the purpose is unclear. Output, unless the user says
-otherwise or the project already has a frontend to extend: one self-contained `index.html`
-(inline CSS/JS, Google Fonts allowed, no build step) in `pixi/` at the project root.
+Ask the user one question only if the purpose is unclear.
+
+**Pick the tier.** Unless the user already said, ask once:
+- **Simple** (default): one self-contained `index.html` (inline CSS/JS, Google Fonts allowed,
+  no build step) in `pixi/` at the project root. Opens by double-click.
+- **Advanced**: a React 19 + Astryx app (Vite) in `pixi-react/` at the project root, built
+  around a working demo of the project on its real data. Needs Node; served, not double-clicked.
 
 ## 2. Pick a reference
 
@@ -51,17 +55,35 @@ learn from. Use the first good one. If none pass, build without a reference and 
   IntersectionObserver. Where the project has a mechanism, make one small working demo of it.
   Wrap everything in `prefers-reduced-motion: reduce`.
 
+### Advanced tier: React + Astryx
+
+Same visual rules, plus:
+- Scaffold `pixi-react/` with Vite, `react`/`react-dom` 19, `@astryxdesign/core`,
+  `@astryxdesign/theme-neutral`, `@stylexjs/stylex`, dev `@astryxdesign/cli` and
+  `@vitejs/plugin-react`; `base: './'` in `vite.config.js`. Import `reset.css`, `astryx.css`,
+  the theme's `theme.css` in that order, wrap the app in `<Theme theme={neutralTheme}>`.
+- Look components up with `npx @astryxdesign/cli component <Name>` (`--list` for all 174) and
+  tokens with `npx @astryxdesign/cli docs tokens`. Never guess props.
+- Re-skin by overriding Astryx tokens (`--color-background-body`, `--color-text-primary`,
+  `--color-accent`, `--color-error`, `--font-family-body`, ...) on the app's root element, not
+  `:root`: the Theme wrapper sets them closer than `:root`.
+- Feed the demo real project data: run the project's own code (in Python where it is Python)
+  and write the output to `src/*.json`. Show disagreements in that data instead of hiding them.
+- `npx vite build`, then check `pixi-react/dist/index.html` below.
+
 ## 4. Check
 
 ```
 uv run --project PIXI python PIXI/scripts/pixi_check.py <path/to/index.html>
+uv run --project PIXI python PIXI/scripts/pixi_check.py <project>/pixi-react/dist/index.html
 ```
 
 Open the `pixi-shot.png` it writes and fix overlaps, cropped text and empty halves. It also
 prints a house-style score; above 3 of 7, push further toward the reference. It counts running
 CSS/SVG animations after scrolling; 0 means the page is static, so go back to the motion rule
-(requestAnimationFrame motion is not counted). Report the page path, the reference URL used,
-and the score.
+(requestAnimationFrame motion is not counted). Any console error is a bug to fix. Report the page
+path, the reference URL used, and the score; for the advanced tier also how to run it
+(`npm run dev`, or `npm run preview` after a build).
 
 ## Optional: the catalogue protocol
 
