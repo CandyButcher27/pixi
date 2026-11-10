@@ -52,3 +52,25 @@ The imagery-forbidden band comes from the reference majority, and the 85-entry c
 A third arm: the plain request plus one line, "include substantial original illustration".
 If it matches treatment on the 12 imagery pairs, the tool's measured value is "use images",
 and the mandate machinery adds nothing on top.
+
+## Standouts (second pass, 2026-11-10)
+
+All 50 screenshots shown unlabelled in random order (`/gallery` in `scripts/blind.py`); the
+rater starred the ones that stood out. Picks in `standouts.json`.
+
+| version | starred |
+|---|---|
+| treatment | 4: cyber, dental, jazz, writer |
+| control | 3: codeschool, jazz, ramen |
+
+- Every starred treatment page is one whose contract required imagery (ratio 0.30–0.39).
+  None of the 13 imagery-forbidden treatment pages was starred.
+- Two of the three starred control pages (codeschool, ramen) are pairs control won.
+- The rater named jazz as the favourite and starred both jazz pages; in the pairwise round the
+  treatment jazz page ("Late Set Records", canvas-drawn sleeves) won.
+- Standouts split 4–3: no sign that the tool produces exceptional pages more often. They
+  agree with the imagery pattern above.
+
+Measurement caveat this exposed: the control jazz page has a grid of eight CSS-drawn album
+covers yet measures `imagery_ratio` 0.00, because `measure.py` counts img/canvas/svg/video area,
+not CSS-drawn shapes. "Control pages have no imagery" partly reflects what the probe can see.
