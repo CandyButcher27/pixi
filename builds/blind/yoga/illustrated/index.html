@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saltgrass Yoga — a slow studio by the estuary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --clay:#c2643f; --clay-d:#8f3f22; --sand:#f3e6d3; --paper:#faf4ea;
+  --moss:#5f6e4a; --moss-d:#38432b; --ink:#2b2420; --dusk:#3d3a5c; --sun:#e9a94b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 "Work Sans",sans-serif}
+h1,h2,h3{font-family:Fraunces,serif;font-weight:300;line-height:1.05}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+nav{position:absolute;inset:0 0 auto;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:22px 32px;color:var(--paper)}
+nav .mark{font-family:Fraunces,serif;font-size:22px;font-style:italic}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+nav a{text-decoration:none}
+
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:var(--dusk)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero-copy{position:absolute;left:6vw;bottom:14vh;z-index:3;color:var(--paper);max-width:520px}
+.hero-copy h1{font-size:clamp(52px,8vw,112px)}
+.hero-copy h1 em{color:var(--sun)}
+.hero-copy p{margin:22px 0 30px;font-size:18px;opacity:.9;max-width:400px}
+.btn{display:inline-block;padding:14px 26px;border:1.5px solid currentColor;border-radius:999px;text-decoration:none;font-weight:500;font-size:15px}
+.btn.fill{background:var(--paper);color:var(--clay-d);border-color:var(--paper)}
+
+.breathe{padding:120px 0;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.breathe h2{font-size:clamp(38px,5vw,64px);margin-bottom:22px}
+.breathe p{max-width:440px;color:#5a4d45}
+.orb-box{position:relative;aspect-ratio:1;max-width:460px;justify-self:center;width:100%}
+.orb-box svg{width:100%;height:100%}
+#breathWord{font-family:Fraunces,serif;font-style:italic;font-size:26px;fill:var(--clay-d)}
+
+.classes{background:var(--sand);padding:110px 0}
+.classes h2{font-size:clamp(38px,5vw,64px);max-width:640px;margin-bottom:60px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:var(--paper);border-radius:180px 180px 14px 14px;padding:0 0 26px;overflow:hidden}
+.card svg{display:block;width:100%;height:auto}
+.card h3{font-size:28px;padding:18px 22px 6px}
+.card p{padding:0 22px;font-size:15px;color:#5a4d45}
+.card .meta{padding:14px 22px 0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--clay-d)}
+
+.week{padding:110px 0}
+.week-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:40px;flex-wrap:wrap}
+.week h2{font-size:clamp(38px,5vw,64px)}
+.days{display:flex;gap:8px;flex-wrap:wrap}
+.days button{font:inherit;font-size:14px;border:1.5px solid var(--ink);background:none;border-radius:999px;padding:8px 16px;cursor:pointer}
+.days button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.slots{border-top:1.5px solid var(--ink)}
+.slot{display:grid;grid-template-columns:120px 1fr 160px 120px;gap:20px;padding:20px 0;border-bottom:1px solid #d9c8b2;align-items:center}
+.slot .t{font-family:Fraunces,serif;font-size:26px}
+.slot .n{font-size:19px}
+.slot .who{color:#5a4d45;font-size:15px}
+.slot a{justify-self:end;font-size:14px}
+
+.room{position:relative;background:var(--moss-d);color:var(--sand);overflow:hidden}
+.room svg{display:block;width:100%;height:auto}
+.room-copy{position:absolute;right:6vw;top:50%;transform:translateY(-50%);max-width:380px}
+.room-copy h2{font-size:clamp(34px,4vw,54px);margin-bottom:18px}
+
+.join{background:var(--clay);color:var(--paper);padding:110px 0 0;position:relative;overflow:hidden}
+.join .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:center}
+.join h2{font-size:clamp(42px,6vw,84px)}
+.price{border-top:1.5px solid var(--paper)}
+.price div{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(250,244,234,.4)}
+.price b{font-family:Fraunces,serif;font-weight:500;font-size:22px}
+.join form{margin-top:28px;display:flex;gap:10px}
+.join input{flex:1;font:inherit;padding:13px 20px;border-radius:999px;border:0;background:var(--paper);color:var(--ink)}
+.join .btn{background:var(--ink);border-color:var(--ink);cursor:pointer;font-family:inherit}
+.join .waves{display:block;width:100%;margin-top:90px}
+footer{background:var(--ink);color:#bfb2a4;font-size:14px;padding:30px 0}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media (prefers-reduced-motion:no-preference){
+  .sway{animation:sway 9s ease-in-out infinite;transform-origin:50% 100%;transform-box:fill-box}
+  .drift{animation:drift 60s linear infinite}
+  @keyframes sway{50%{transform:rotate(2.5deg)}}
+  @keyframes drift{to{transform:translateX(-50%)}}
+}
+@media (max-width:900px){
+  nav ul{display:none}
+  .breathe,.join .wrap{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}
+  .slot{grid-template-columns:80px 1fr;gap:4px 16px}
+  .slot .who{grid-column:2}
+  .slot a{grid-column:2;justify-self:start}
+  .room-copy{position:static;transform:none;padding:40px 24px 60px;max-width:none}
+}
+@media (max-width:520px){.cards{grid-template-columns:1fr}.join form{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="mark">Saltgrass</span>
+  <ul><li><a href="#classes">Classes</a></li><li><a href="#week">Timetable</a></li><li><a href="#room">The room</a></li><li><a href="#join">Join</a></li></ul>
+</nav>
+
+<header class="hero">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3d3a5c"/><stop offset=".55" stop-color="#b8665a"/><stop offset="1" stop-color="#eeb469"/>
+      </linearGradient>
+      <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e3a565"/><stop offset="1" stop-color="#7c4a4a"/>
+      </linearGradient>
+    </defs>
+    <rect width="1440" height="900" fill="url(#sky)"/>
+    <circle cx="1010" cy="560" r="150" fill="#f6cd7c"/>
+    <circle cx="1010" cy="560" r="210" fill="#f6cd7c" opacity=".18"/>
+    <g fill="#f4e3c8" opacity=".5">
+      <circle cx="210" cy="120" r="1.6"/><circle cx="380" cy="80" r="1.2"/><circle cx="560" cy="160" r="1.4"/><circle cx="760" cy="60" r="1.1"/><circle cx="1260" cy="110" r="1.6"/><circle cx="1360" cy="210" r="1.2"/><circle cx="120" cy="260" r="1.1"/>
+    </g>
+    <g class="drift" fill="#f2c9a1" opacity=".55">
+      <path d="M120 300c40-20 90-20 130 0 30-14 70-12 96 6H90c6-4 18-6 30-6z"/>
+      <path d="M820 230c50-22 110-20 150 2 30-10 64-8 86 8H790c8-6 20-10 30-10z"/>
+      <path d="M1560 300c40-20 90-20 130 0 30-14 70-12 96 6h-256c6-4 18-6 30-6z"/>
+      <path d="M2260 230c50-22 110-20 150 2 30-10 64-8 86 8h-266c8-6 20-10 30-10z"/>
+    </g>
+    <path d="M0 640 C160 560 300 590 430 540 S700 470 860 560 1150 520 1300 580 1440 600 1440 600V900H0Z" fill="#8c5a6a"/>
+    <path d="M0 700 C200 640 380 690 560 650 S880 620 1040 670 1300 650 1440 690V900H0Z" fill="#6c4458"/>
+    <rect y="720" width="1440" height="180" fill="url(#water)"/>
+    <g stroke="#f6cd7c" stroke-linecap="round" opacity=".7">
+      <path d="M900 742h220" stroke-width="4"/><path d="M930 762h160" stroke-width="3"/><path d="M960 782h100" stroke-width="3"/><path d="M985 802h50" stroke-width="2"/>
+    </g>
+    <path d="M0 790 C240 770 420 800 640 780 S1100 770 1440 800V900H0Z" fill="#3a2c35"/>
+    <g fill="#3a2c35">
+      <g class="sway"><path d="M90 800c-4-60 6-110 22-150-4 50-6 100 0 150z"/><path d="M118 800c4-50 22-90 44-120-14 40-22 80-24 120z"/><path d="M70 800c-14-40-30-70-50-90 26 18 44 50 60 90z"/></g>
+      <g class="sway" style="animation-delay:-3s"><path d="M1300 800c-4-70 8-120 26-160-6 54-8 108-2 160z"/><path d="M1340 800c6-56 24-96 48-128-16 44-24 86-26 128z"/><path d="M1276 800c-12-44-26-74-46-96 24 20 42 54 58 96z"/></g>
+    </g>
+    <!-- figure in tree pose on a rock -->
+    <path d="M520 806c30-30 160-34 230-6 10 6 6 14-6 16H520c-10-2-6-6 0-10z" fill="#2a2028"/>
+    <g fill="#2a2028">
+      <circle cx="630" cy="444" r="24"/>
+      <path d="M622 420c10-18 34-16 40 2-6-4-14-6-20-4-6 0-14 0-20 2z"/>
+      <circle cx="652" cy="430" r="10"/>
+      <path d="M612 470c10-6 30-6 38 0l8 70c2 30 0 56-6 80h-42c-6-24-8-50-6-80z"/>
+      <path d="M614 478c-26-34-38-80-30-122l12 2c-2 40 6 76 28 106z"/>
+      <path d="M648 478c26-34 38-80 30-122l-12 2c2 40-6 76-28 106z"/>
+      <path d="M624 612l-4 186h18l8-186z"/>
+      <path d="M640 616c30 10 62 34 74 64-20 6-48 0-70-14z"/>
+      <path d="M700 680c-10-10-30-22-58-28l-8 22c22 2 44 10 60 22z"/>
+      <ellipse cx="626" cy="800" rx="20" ry="6"/>
+    </g>
+    <g stroke="#f6cd7c" stroke-width="1.5" fill="none" opacity=".35">
+      <path d="M560 360c40-30 100-30 140 0"/><path d="M540 340c50-40 130-40 180 0"/>
+    </g>
+  </svg>
+  <div class="hero-copy">
+    <h1>Stand still<br>by the <em>water</em>.</h1>
+    <p>A small, slow studio on the estuary path. Twelve mats, wide windows, no mirrors. Come as you are and leave a little looser.</p>
+    <a class="btn fill" href="#week">See this week</a>
+  </div>
+</header>
+
+<section class="wrap breathe">
+  <div>
+    <h2>Start with<br>four breaths.</h2>
+    <p>Every class here opens the same way: in for four, hold, out for six. Try it now with the circle. It is the whole practice in miniature, and the part most people skip.</p>
+  </div>
+  <div class="orb-box">
+    <svg viewBox="0 0 400 400" aria-label="Breathing guide">
+      <g fill="none" stroke="#c2643f" stroke-width="1.2" opacity=".35">
+        <circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="160" stroke-dasharray="2 8"/>
+      </g>
+      <g id="petals" transform="translate(200 200)"></g>
+      <circle id="orb" cx="200" cy="200" r="70" fill="#f3e6d3" stroke="#c2643f" stroke-width="1.5"/>
+      <text id="breathWord" x="200" y="208" text-anchor="middle">breathe in</text>
+    </svg>
+  </div>
+</section>
+
+<section class="classes" id="classes">
+  <div class="wrap">
+    <h2>Four ways in, from barely moving to properly sweating.</h2>
+    <div class="cards">
+      <article class="card">
+        <svg viewBox="0 0 300 260" aria-hidden="true">
+          <rect width="300" height="260" fill="#3d3a5c"/>
+          <circle cx="210" cy="80" r="34" fill="#f3e6d3"/><circle cx="224" cy="72" r="30" fill="#3d3a5c"/>
+          <g fill="#f3e6d3" opacity=".7"><circle cx="60" cy="50" r="2"/><circle cx="110" cy="90" r="1.5"/><circle cx="260" cy="150" r="1.5"/></g>
+          <rect x="30" y="226" width="240" height="8" rx="4" fill="#c2643f"/>
+          <g fill="#f3e6d3"><circle cx="78" cy="208" r="13"/><path d="M90 214c40-6 90-4 140 4l2 8H88z"/><path d="M226 222c10-4 20-4 26 0l-2 4h-24z"/></g>
+        </svg>
+        <h3>Restore</h3>
+        <p>Long holds on bolsters. Mostly lying down. Ends with a blanket and twenty minutes of nothing.</p>
+        <div class="meta">75 min · all levels</div>
+      </article>
+      <article class="card">
+        <svg viewBox="0 0 300 260" aria-hidden="true">
+          <rect width="300" height="260" fill="#5f6e4a"/>
+          <path d="M0 200c60-30 120-30 180-10s90 10 120 0v60H0z" fill="#38432b"/>
+          <rect x="30" y="226" width="240" height="8" rx="4" fill="#e9a94b"/>
+          <g fill="#f3e6d3"><circle cx="150" cy="128" r="13"/><path d="M140 144h20l4 44-14 6-14-6z"/><path d="M146 186l-10 12h28l-10-12z"/><path d="M100 220c10-20 30-30 50-30s40 10 50 30z"/><path d="M142 152c-16 8-28 24-34 44l8 2c6-14 16-28 28-36z"/><path d="M158 152c16 8 28 24 34 44l-8 2c-6-14-16-28-28-36z"/></g>
+        </svg>
+        <h3>Hatha</h3>
+        <p>Classic postures, held long enough to find them. Cues for every body, props on every mat.</p>
+        <div class="meta">60 min · beginner friendly</div>
+      </article>
+      <article class="card">
+        <svg viewBox="0 0 300 260" aria-hidden="true">
+          <rect width="300" height="260" fill="#c2643f"/>
+          <circle cx="70" cy="70" r="28" fill="#e9a94b"/>
+          <rect x="30" y="226" width="240" height="8" rx="4" fill="#2b2420"/>
+          <g fill="#faf4ea"><path d="M80 224l66-104 10 6-62 98z"/><path d="M220 224l-66-104-10 6 62 98z"/><path d="M144 116l10 0 30-30-8-8-28 28z"/><circle cx="188" cy="76" r="12"/><path d="M146 122l-40 52 8 6 40-50z"/></g>
+        </svg>
+        <h3>Flow</h3>
+        <p>Breath-linked sequences that build heat slowly. A new playlist and a new peak pose each week.</p>
+        <div class="meta">60 min · some practice</div>
+      </article>
+      <article class="card">
+        <svg viewBox="0 0 300 260" aria-hidden="true">
+          <rect width="300" height="260" fill="#e9a94b"/>
+          <g stroke="#8f3f22" stroke-width="2" fill="none" opacity=".5"><circle cx="150" cy="110" r="70"/><circle cx="150" cy="110" r="50"/></g>
+          <rect x="30" y="226" width="240" height="8" rx="4" fill="#8f3f22"/>
+          <g fill="#2b2420"><circle cx="150" cy="40" r="13"/><path d="M140 56h20l4 60h-28z"/><path d="M138 64l-50-30 4-8 52 26z"/><path d="M162 64l50-30-4-8-52 26z"/><path d="M138 114l-14 112h12l18-104z"/><path d="M160 114l4 46c26 6 44 0 58-10l-4-8c-14 6-28 10-46 6l-2-34z"/></g>
+        </svg>
+        <h3>Strong</h3>
+        <p>Balances, inversions and slow strength work. You will shake. That is the point.</p>
+        <div class="meta">60 min · regular practice</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="wrap week" id="week">
+  <div class="week-head">
+    <h2>This week</h2>
+    <div class="days" role="group" aria-label="Choose a day"></div>
+  </div>
+  <div class="slots" id="slots"></div>
+</section>
+
+<section class="room" id="room">
+  <svg viewBox="0 0 1440 640" aria-hidden="true">
+    <rect width="1440" height="640" fill="#38432b"/>
+    <g fill="#f3e6d3">
+      <path d="M140 80h360v380H140z" opacity=".12"/>
+      <path d="M560 80h360v380H560z" opacity=".12"/>
+    </g>
+    <g stroke="#f3e6d3" stroke-width="6" fill="none" opacity=".85">
+      <rect x="140" y="80" width="360" height="380" rx="180" ry="180"/>
+      <rect x="560" y="80" width="360" height="380" rx="180" ry="180"/>
+      <path d="M320 80v380M140 300h360M740 80v380M560 300h360" stroke-width="3"/>
+    </g>
+    <path d="M150 400c80-60 200-70 340-30v80H150z" fill="#5f6e4a"/>
+    <path d="M570 380c90-40 220-50 340 10v70H570z" fill="#5f6e4a"/>
+    <circle cx="830" cy="190" r="34" fill="#e9a94b"/>
+    <path d="M0 470h1440v170H0z" fill="#8a5e3c"/>
+    <g stroke="#6e4a2e" stroke-width="2"><path d="M0 520h1440M0 580h1440"/><path d="M200 470v50M520 520v60M860 470v50M1180 520v60M360 580v60M1020 580v60"/></g>
+    <g>
+      <path d="M150 530l230-10 40 60-250 12z" fill="#c2643f"/>
+      <path d="M520 528l230-6 30 60-250 8z" fill="#e9a94b"/>
+      <path d="M260 600l240-8 30 40H230z" fill="#5f6e4a"/>
+    </g>
+    <g class="sway">
+      <path d="M1000 470h70l-10-70h-50z" fill="#c2643f"/>
+      <path d="M1036 400c-30-60-70-90-110-100 40 30 70 70 90 100zM1034 400c10-70 40-120 80-140-30 40-50 90-60 140zM1032 400c-50-30-80-80-80-130 20 50 50 90 90 120z" fill="#7d8f5c"/>
+    </g>
+    <g fill="#f3e6d3" opacity=".9">
+      <rect x="1120" y="420" width="70" height="50" rx="8"/><rect x="1126" y="380" width="58" height="40" rx="8" opacity=".8"/><rect x="1132" y="346" width="46" height="34" rx="8" opacity=".6"/>
+    </g>
+  </svg>
+  <div class="room-copy">
+    <h2>The room</h2>
+    <p>One long, west-facing studio above the old boathouse. Cork floors, heated from below, arched windows that catch the last light on the evening classes. Mats, blocks and blankets provided.</p>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <div>
+      <h2>First week,<br>on the house.</h2>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='See you soon';">
+        <label class="sr" for="em" style="position:absolute;left:-9999px">Email</label>
+        <input id="em" type="email" required placeholder="you@example.com">
+        <button class="btn" type="submit">Claim it</button>
+      </form>
+    </div>
+    <div class="price">
+      <div><span>Drop in</span><b>£14</b></div>
+      <div><span>Ten classes</span><b>£115</b></div>
+      <div><span>Unlimited, monthly</span><b>£89</b></div>
+      <div><span>Concession</span><b>half</b></div>
+    </div>
+  </div>
+  <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 50c120-30 240-30 360 0s240 30 360 0 240-30 360 0 240 30 360 0v70H0z" fill="#8f3f22"/>
+    <path d="M0 80c120-24 240-24 360 0s240 24 360 0 240-24 360 0 240 24 360 0v40H0z" fill="#2b2420"/>
+  </svg>
+</section>
+
+<footer><div class="wrap"><span>Saltgrass Yoga · Boathouse Loft, Estuary Path</span><span>Open daily 6:30–21:00</span></div></footer>
+
+<script>
+const petals=document.getElementById('petals');
+for(let i=0;i<12;i++){
+  const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d','M0 0C-22 -40 -18 -90 0 -120C18 -90 22 -40 0 0Z');
+  p.setAttribute('fill',i%2?'#e9a94b':'#c2643f');
+  p.setAttribute('opacity','.55');
+  p.setAttribute('transform',`rotate(${i*30})`);
+  petals.appendChild(p);
+}
+const orb=document.getElementById('orb'),word=document.getElementById('breathWord');
+const phases=[['breathe in',4000,1],['hold',2000,1],['breathe out',6000,0]];
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let start=performance.now();
+function tick(now){
+  let t=(now-start)%12000,i=0;
+  while(t>phases[i][1]){t-=phases[i][1];i++}
+  const [label,dur,target]=phases[i],k=t/dur;
+  const v=i===0?k:i===1?1:1-k;
+  const e=still?.5:(1-Math.cos(v*Math.PI))/2;
+  word.textContent=label;
+  orb.setAttribute('r',60+50*e);
+  petals.setAttribute('transform',`translate(200 200) scale(${.55+.45*e}) rotate(${e*20})`);
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+const week={
+  Mon:[['07:00','Flow','Ines'],['12:30','Hatha','Tom'],['19:00','Restore','Ines']],
+  Tue:[['06:45','Strong','Priya'],['18:30','Flow','Tom'],['20:00','Restore','Maya']],
+  Wed:[['07:00','Hatha','Maya'],['12:30','Flow','Priya'],['19:00','Strong','Tom']],
+  Thu:[['06:45','Flow','Ines'],['18:30','Hatha','Maya'],['20:00','Restore','Priya']],
+  Fri:[['07:00','Strong','Priya'],['17:30','Flow','Ines']],
+  Sat:[['09:00','Flow','Tom'],['11:00','Hatha','Maya'],['16:00','Restore','Ines']],
+  Sun:[['10:00','Hatha','Priya'],['17:00','Restore','Maya']]
+};
+const days=document.querySelector('.days'),slots=document.getElementById('slots');
+const today=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()];
+function show(d){
+  days.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.textContent===d));
+  slots.innerHTML=week[d].map(([t,n,w])=>`<div class="slot"><span class="t">${t}</span><span class="n">${n}</span><span class="who">with ${w}</span><a href="#join">Book a mat</a></div>`).join('');
+}
+Object.keys(week).forEach(d=>{
+  const b=document.createElement('button');b.textContent=d;b.onclick=()=>show(d);days.appendChild(b);
+});
+show(today);
+</script>
+</body>
+</html>

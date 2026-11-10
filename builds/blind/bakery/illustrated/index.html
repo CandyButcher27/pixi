@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hollis Street Bakehouse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4ead8;
+  --paper2:#ecdcc0;
+  --ink:#2b1d14;
+  --crust:#b4612a;
+  --crust-dark:#7a3b17;
+  --butter:#e9b64c;
+  --jam:#a8323a;
+  --sage:#7d8b5e;
+  --line:2.2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Courier Prime",ui-monospace,monospace;font-size:17px;line-height:1.55;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;z-index:50;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 .25 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:900;letter-spacing:-.02em;line-height:.95}
+a{color:inherit}
+svg{display:block}
+.ink{fill:none;stroke:var(--ink);stroke-width:var(--line);stroke-linecap:round;stroke-linejoin:round}
+
+header.top{display:flex;justify-content:space-between;align-items:baseline;padding:22px clamp(16px,4vw,48px);border-bottom:2px solid var(--ink);gap:16px;flex-wrap:wrap}
+.mark{font-family:"Fraunces",serif;font-weight:900;font-size:22px;text-decoration:none}
+.mark i{font-weight:400;color:var(--crust)}
+nav{display:flex;gap:22px;font-size:14px;text-transform:uppercase;letter-spacing:.08em}
+nav a{text-decoration:none;border-bottom:1px dashed transparent}
+nav a:hover{border-color:var(--ink)}
+.open-now{font-size:13px;display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--sage);border:1.5px solid var(--ink)}
+
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);border-bottom:2px solid var(--ink)}
+.hero-copy{padding:clamp(28px,5vw,64px) clamp(16px,4vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:40px;border-right:2px solid var(--ink)}
+.hero-copy .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.14em}
+.hero h1{font-size:clamp(56px,8.4vw,132px)}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--crust)}
+.hero p.lede{max-width:34ch;font-size:18px}
+.stamp{display:inline-flex;align-items:center;gap:14px;font-size:14px}
+.stamp svg{width:84px;height:84px;animation:spin 24s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:14px 22px;text-decoration:none;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px;border:2px solid var(--ink);transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--crust)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.hero-art{background:var(--paper2);position:relative;overflow:hidden}
+.hero-art svg{width:100%;height:100%;min-height:520px}
+.steam path{animation:steam 4s ease-in-out infinite;opacity:.0}
+.steam path:nth-child(2){animation-delay:1.3s}
+.steam path:nth-child(3){animation-delay:2.6s}
+@keyframes steam{0%{opacity:0;transform:translateY(10px)}30%{opacity:.8}100%{opacity:0;transform:translateY(-40px)}}
+.flicker{animation:flick 1.6s ease-in-out infinite alternate;transform-origin:center bottom;transform-box:fill-box}
+@keyframes flick{from{transform:scaleY(1)}to{transform:scaleY(1.15) skewX(-3deg)}}
+.sign{transform-origin:50% 0;transform-box:fill-box;animation:swing 5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+.ticker{border-bottom:2px solid var(--ink);overflow:hidden;white-space:nowrap;font-family:"Fraunces",serif;font-style:italic;font-size:26px;padding:10px 0;background:var(--butter)}
+.ticker span{display:inline-block;animation:tick 40s linear infinite;padding-left:100%}
+@keyframes tick{to{transform:translateX(-100%)}}
+
+section{padding:clamp(48px,8vw,110px) clamp(16px,4vw,48px);border-bottom:2px solid var(--ink)}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:end;margin-bottom:48px}
+.sec-head .num{font-family:"Fraunces",serif;font-size:clamp(64px,10vw,140px);font-weight:400;font-style:italic;color:var(--crust);line-height:.8}
+.sec-head h2{font-size:clamp(36px,5vw,72px)}
+.sec-head p{grid-column:2;max-width:52ch}
+
+.case{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink)}
+.item{border-right:2px solid var(--ink);display:flex;flex-direction:column}
+.item:last-child{border-right:0}
+.item .plate{aspect-ratio:1;background:var(--paper2);border-bottom:2px solid var(--ink);display:grid;place-items:center;padding:18px;cursor:pointer}
+.item .plate svg{width:100%;height:100%;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.item:hover .plate svg{transform:rotate(-6deg) scale(1.06)}
+.item .info{padding:18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.item h3{font-size:26px}
+.item .price{display:flex;justify-content:space-between;font-size:14px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--ink)}
+.tag{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--crust-dark)}
+
+.day{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.day-art svg{width:100%;height:auto}
+.timeline{list-style:none;border-left:2px solid var(--ink)}
+.timeline li{padding:0 0 30px 28px;position:relative}
+.timeline li::before{content:"";position:absolute;left:-9px;top:6px;width:16px;height:16px;background:var(--paper);border:2px solid var(--ink);border-radius:50%}
+.timeline li.lit::before{background:var(--butter)}
+.timeline time{font-weight:700;font-size:14px;letter-spacing:.08em}
+.timeline h3{font-size:28px;margin:4px 0 6px}
+
+.baker{background:var(--ink);color:var(--paper);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,64px);align-items:center}
+.baker blockquote{font-family:"Fraunces",serif;font-size:clamp(30px,3.6vw,52px);line-height:1.1;font-weight:400}
+.baker blockquote em{color:var(--butter)}
+.baker cite{display:block;margin-top:28px;font-style:normal;font-size:15px;opacity:.85}
+.baker svg{width:100%;height:auto}
+.baker .ink{stroke:var(--paper)}
+
+.visit{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:0;padding:0}
+.map{border-right:2px solid var(--ink);background:var(--paper2)}
+.map svg{width:100%;height:100%;min-height:420px}
+.visit-info{padding:clamp(32px,5vw,64px) clamp(16px,4vw,48px);display:flex;flex-direction:column;gap:28px}
+.visit-info h2{font-size:clamp(40px,5vw,72px)}
+.hours{width:100%;border-collapse:collapse;font-size:15px}
+.hours td{padding:8px 0;border-bottom:1px dashed var(--ink)}
+.hours td:last-child{text-align:right}
+.hours tr.today td{font-weight:700;color:var(--crust-dark)}
+.pin{animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+.preorder{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center}
+.preorder h2{font-size:clamp(36px,5vw,64px)}
+form{display:flex;gap:0;flex-wrap:wrap;margin-top:22px}
+form input,form select{font:inherit;padding:14px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);min-width:0}
+form input{flex:1 1 220px;border-right:0}
+form select{flex:0 1 200px;border-right:0}
+form .btn{cursor:pointer}
+.msg{margin-top:12px;font-size:14px;min-height:1.5em}
+
+footer{padding:28px clamp(16px,4vw,48px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
+footer svg{width:140px;height:auto}
+
+@media (max-width:900px){
+  .hero,.day,.baker,.visit,.preorder{grid-template-columns:1fr}
+  .hero-copy{border-right:0;border-bottom:2px solid var(--ink)}
+  .hero-art svg{min-height:360px}
+  .case{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .item:nth-child(2){border-right:0}
+  .item:nth-child(-n+2){border-bottom:2px solid var(--ink)}
+  .map{border-right:0;border-bottom:2px solid var(--ink)}
+  nav{display:none}
+  .sec-head{grid-template-columns:1fr}
+  .sec-head p{grid-column:1}
+}
+@media (max-width:520px){
+  .case{grid-template-columns:1fr}
+  .item{border-right:0;border-bottom:2px solid var(--ink)}
+  .item:last-child{border-bottom:0}
+  form input,form select{flex:1 1 100%;border-right:2px solid var(--ink);border-bottom:0}
+  form .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="mark" href="#">Hollis St. <i>Bakehouse</i></a>
+  <nav>
+    <a href="#case">The case</a>
+    <a href="#morning">Our morning</a>
+    <a href="#visit">Visit</a>
+    <a href="#order">Pre-order</a>
+  </nav>
+  <div class="open-now"><span class="dot" id="dot"></span><span id="status">Ovens on since 4:00</span></div>
+</header>
+
+<div class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">No. 14 Hollis Street &mdash; since 1987</div>
+    <div>
+      <h1>Bread,<br><em>still warm,</em><br>on the corner.</h1>
+    </div>
+    <p class="lede">A four-person bakery baking naturally leavened loaves, laminated pastry and one very large cinnamon bun every morning. When it's gone, it's gone.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+      <a class="btn" href="#order">Hold a loaf for me</a>
+      <a class="btn ghost" href="#case">See today's case</a>
+    </div>
+    <div class="stamp">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="circ" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0"/></defs>
+        <circle cx="50" cy="50" r="47" class="ink"/>
+        <text font-family="Courier Prime" font-size="10.5" font-weight="700" letter-spacing="2.4" fill="#2b1d14"><textPath href="#circ">BAKED BEFORE SUNRISE &bull; EVERY DAY &bull;</textPath></text>
+        <path d="M34 56 q16 -26 32 0 q-16 8 -32 0z" fill="#b4612a" class="ink"/>
+        <path d="M42 50 l4 4 M50 46 l4 4 M58 50 l-3 4" class="ink"/>
+      </svg>
+      <span>Starter fed twice daily.<br>Named Gordon. 38 years old.</span>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <svg viewBox="0 0 700 620" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of the bakery storefront at dawn with loaves in the window and steam rising from the chimney">
+      <rect width="700" height="620" fill="#ecdcc0"/>
+      <circle cx="560" cy="130" r="70" fill="#e9b64c" opacity=".55"/>
+      <circle cx="560" cy="130" r="46" fill="#e9b64c"/>
+      <g class="ink" opacity=".5">
+        <path d="M40 120 q30 -16 60 0 q24 -14 50 2"/>
+        <path d="M430 70 q20 -10 40 0 q16 -8 30 2"/>
+      </g>
+      <!-- neighbouring buildings -->
+      <path d="M0 220 h110 v400 H0z" fill="#d9c4a0" class="ink"/>
+      <path d="M20 260 h30 v40 h-30z M64 260 h30 v40 h-30z M20 330 h30 v40 h-30z M64 330 h30 v40 h-30z" class="ink"/>
+      <path d="M600 250 h100 v370 H600z" fill="#d9c4a0" class="ink"/>
+      <path d="M620 290 h26 v50 h-26z M656 290 h26 v50 h-26z" class="ink"/>
+      <!-- chimney + steam -->
+      <path d="M470 120 h40 v90 h-40z" fill="#a8323a" class="ink"/>
+      <path d="M464 112 h52 v14 h-52z" fill="#7a3b17" class="ink"/>
+      <g class="steam ink" stroke-width="3">
+        <path d="M480 100 q-14 -20 0 -40 q14 -20 0 -40"/>
+        <path d="M494 96 q14 -22 0 -44 q-14 -22 0 -44"/>
+        <path d="M486 92 q-10 -18 4 -36 q12 -18 -2 -36"/>
+      </g>
+      <!-- main building -->
+      <path d="M130 200 L360 120 L590 200 V620 H130z" fill="#f4ead8" class="ink"/>
+      <path d="M150 200 L360 140 L570 200" class="ink"/>
+      <!-- brick hatches -->
+      <g class="ink" stroke-width="1.4" opacity=".55">
+        <path d="M150 230 h22 M190 244 h22 M520 236 h22 M548 252 h22 M160 560 h22 M540 580 h22 M520 548 h20"/>
+      </g>
+      <!-- upstairs windows -->
+      <g>
+        <path d="M200 230 h80 v80 h-80z" fill="#e9b64c" class="ink"/>
+        <path d="M240 230 v80 M200 270 h80" class="ink"/>
+        <path d="M440 230 h80 v80 h-80z" fill="#e9b64c" class="ink"/>
+        <path d="M480 230 v80 M440 270 h80" class="ink"/>
+        <path d="M444 300 q12 -18 24 0 M490 300 q10 -14 20 0" class="ink" stroke-width="1.6"/>
+        <path d="M196 312 h88 v10 h-88z M436 312 h88 v10 h-88z" fill="#7d8b5e" class="ink"/>
+        <circle cx="210" cy="306" r="8" fill="#a8323a" class="ink"/><circle cx="230" cy="304" r="7" fill="#a8323a" class="ink"/><circle cx="270" cy="306" r="8" fill="#a8323a" class="ink"/>
+      </g>
+      <!-- signboard -->
+      <path d="M190 342 h340 v50 h-340z" fill="#2b1d14" class="ink"/>
+      <text x="360" y="377" text-anchor="middle" font-family="Fraunces" font-weight="900" font-size="30" fill="#f4ead8" letter-spacing="1">HOLLIS BAKEHOUSE</text>
+      <!-- awning -->
+      <path d="M150 404 h420 l-20 56 h-380z" fill="#f4ead8" class="ink"/>
+      <path d="M150 404 h42 l-2 56 h-20z M234 404 h42 l-2 56 h-42z M318 404 h42 v56 h-42z M402 404 h42 l2 56 h-42z M486 404 h42 l2 56 h-20z" fill="#a8323a" class="ink"/>
+      <path d="M170 460 q21 16 42 0 q21 16 42 0 q21 16 42 0 q21 16 42 0 q21 16 42 0 q21 16 42 0 q21 16 42 0 q21 16 42 0 q21 16 42 0" fill="#f4ead8" class="ink"/>
+      <!-- shop window -->
+      <path d="M170 486 h250 v134 h-250z" fill="#e9c98a" class="ink"/>
+      <path d="M170 486 h250" class="ink" stroke-width="4"/>
+      <path d="M180 560 h230" class="ink"/>
+      <!-- loaves in window -->
+      <path d="M190 560 q24 -40 52 0z" fill="#b4612a" class="ink"/>
+      <path d="M204 548 l8 6 M218 542 l8 6 M230 548 l6 6" class="ink" stroke-width="1.6"/>
+      <path d="M254 560 c4 -18 20 -24 34 -18 c10 -12 30 -10 34 4 c12 0 16 10 10 14z" fill="#e9b64c" class="ink"/>
+      <path d="M272 548 q6 6 0 12 M296 542 q6 8 0 18" class="ink" stroke-width="1.6"/>
+      <ellipse cx="370" cy="550" rx="30" ry="12" fill="#b4612a" class="ink"/>
+      <path d="M350 548 l6 -4 M364 546 l6 -4 M378 546 l6 -4" class="ink" stroke-width="1.6"/>
+      <path d="M190 606 h210" class="ink"/>
+      <circle cx="210" cy="594" r="10" fill="#b4612a" class="ink"/><path d="M204 594 q6 -6 12 0" class="ink" stroke-width="1.4"/>
+      <circle cx="240" cy="594" r="10" fill="#b4612a" class="ink"/><path d="M234 594 q6 -6 12 0" class="ink" stroke-width="1.4"/>
+      <path d="M270 600 q20 -26 40 0z" fill="#e9b64c" class="ink"/>
+      <path d="M330 604 h60 v-14 h-60z" fill="#a8323a" class="ink"/>
+      <path d="M182 500 l40 40 M200 494 l60 60" stroke="#fff" stroke-width="4" opacity=".55" stroke-linecap="round"/>
+      <!-- door -->
+      <path d="M450 486 h100 v134 h-100z" fill="#7d8b5e" class="ink"/>
+      <path d="M466 502 h68 v54 h-68z" fill="#e9c98a" class="ink"/>
+      <circle cx="534" cy="580" r="5" fill="#e9b64c" class="ink"/>
+      <!-- hanging OPEN sign -->
+      <g class="sign">
+        <path d="M486 502 l14 18 l14 -18" class="ink" stroke-width="1.6"/>
+        <path d="M478 520 h44 v22 h-44z" fill="#f4ead8" class="ink"/>
+        <text x="500" y="536" text-anchor="middle" font-family="Courier Prime" font-weight="700" font-size="12" fill="#a8323a">OPEN</text>
+      </g>
+      <!-- bench + bike -->
+      <path d="M0 620 h700" class="ink" stroke-width="4"/>
+      <g class="ink">
+        <circle cx="640" cy="590" r="24"/><circle cx="700" cy="590" r="24"/>
+        <path d="M640 590 l24 -36 l30 0 l6 36 M664 554 l-6 -10 h-10 M694 554 l2 -14 h12"/>
+      </g>
+      <path d="M630 548 h50 v14 h-50z" fill="#b4612a" class="ink"/>
+      <!-- chalkboard -->
+      <g transform="translate(60 520)">
+        <path d="M0 100 L18 0 h44 L80 100 M10 50 h60" class="ink"/>
+        <path d="M12 6 h56 v60 h-56z" fill="#2b1d14" class="ink"/>
+        <text x="40" y="26" text-anchor="middle" fill="#f4ead8" font-family="Courier Prime" font-size="10">TODAY</text>
+        <text x="40" y="42" text-anchor="middle" fill="#e9b64c" font-family="Fraunces" font-style="italic" font-size="11">rye &amp;</text>
+        <text x="40" y="56" text-anchor="middle" fill="#e9b64c" font-family="Fraunces" font-style="italic" font-size="11">fig</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true"><span>Country sourdough &nbsp;&#10043;&nbsp; Seeded rye &nbsp;&#10043;&nbsp; Butter croissant &nbsp;&#10043;&nbsp; Cardamom knot &nbsp;&#10043;&nbsp; Plum galette &nbsp;&#10043;&nbsp; Baguette, twice a day &nbsp;&#10043;&nbsp; The Big Bun (Saturdays) &nbsp;&#10043;&nbsp; Coffee from down the road &nbsp;&#10043;&nbsp;</span></div>
+
+<section id="case">
+  <div class="sec-head">
+    <div class="num">i.</div>
+    <h2>In the case this morning</h2>
+    <p>Four things we'd stake the shop on. Everything else changes with the flour delivery and the fruit stall across the street.</p>
+  </div>
+  <div class="case">
+    <article class="item">
+      <div class="plate">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <ellipse cx="100" cy="160" rx="80" ry="12" fill="#2b1d14" opacity=".12"/>
+          <path d="M24 140 C24 70 176 70 176 140 C176 158 24 158 24 140z" fill="#b4612a" class="ink"/>
+          <path d="M40 130 C46 92 154 92 160 130" fill="#e9b64c" opacity=".35"/>
+          <path d="M60 96 q40 -26 80 0" class="ink" stroke-width="3"/>
+          <path d="M70 110 q30 -18 60 0" class="ink" stroke-width="2" opacity=".6"/>
+          <g fill="#f4ead8" opacity=".8"><circle cx="50" cy="120" r="2"/><circle cx="148" cy="122" r="2"/><circle cx="100" cy="88" r="1.6"/><circle cx="120" cy="100" r="1.6"/><circle cx="80" cy="104" r="1.6"/></g>
+        </svg>
+      </div>
+      <div class="info">
+        <span class="tag">36-hour ferment</span>
+        <h3>Country loaf</h3>
+        <p>Blistered crust, open crumb, a little sour. Our oldest recipe.</p>
+        <div class="price"><span>900 g</span><span>$9</span></div>
+      </div>
+    </article>
+    <article class="item">
+      <div class="plate">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <ellipse cx="100" cy="158" rx="78" ry="10" fill="#2b1d14" opacity=".12"/>
+          <path d="M20 140 Q30 96 60 104 Q76 70 100 72 Q124 70 140 104 Q170 96 180 140 Q160 150 140 136 Q120 150 100 140 Q80 150 60 136 Q40 150 20 140z" fill="#e9b64c" class="ink"/>
+          <path d="M60 104 Q80 120 70 140 M100 72 Q104 110 100 140 M140 104 Q120 120 130 140" class="ink"/>
+          <path d="M80 86 Q90 110 86 136 M120 86 Q110 110 114 136" class="ink" stroke-width="1.5"/>
+          <path d="M70 92 q14 -6 24 -2" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="info">
+        <span class="tag">27 layers, cultured butter</span>
+        <h3>Croissant</h3>
+        <p>Shatters on your shirt. We consider this a feature.</p>
+        <div class="price"><span>each</span><span>$4.50</span></div>
+      </div>
+    </article>
+    <article class="item">
+      <div class="plate">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <ellipse cx="100" cy="160" rx="74" ry="12" fill="#2b1d14" opacity=".12"/>
+          <circle cx="100" cy="104" r="66" fill="#b4612a" class="ink"/>
+          <path d="M100 104 m0 -6 a6 6 0 1 1 -6 6 a14 14 0 0 1 14 -14 a22 22 0 0 1 22 22 a32 32 0 0 1 -32 32 a42 42 0 0 1 -42 -42 a52 52 0 0 1 52 -52 a58 58 0 0 1 58 58" class="ink" stroke-width="3"/>
+          <path d="M60 70 q20 10 10 30 q30 -6 40 20 q16 -28 40 -14 q-6 -20 12 -30" fill="none" stroke="#f4ead8" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+        </svg>
+      </div>
+      <div class="info">
+        <span class="tag">Saturdays only</span>
+        <h3>The Big Bun</h3>
+        <p>Cinnamon, brown butter, cream-cheese glaze. Feeds two, or one honest person.</p>
+        <div class="price"><span>each</span><span>$7</span></div>
+      </div>
+    </article>
+    <article class="item">
+      <div class="plate">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <ellipse cx="100" cy="160" rx="84" ry="10" fill="#2b1d14" opacity=".12"/>
+          <g transform="rotate(-28 100 100)">
+            <path d="M14 100 C14 84 186 84 186 100 C186 116 14 116 14 100z" fill="#e9b64c" class="ink"/>
+            <path d="M40 98 q14 -12 28 0 M78 98 q14 -12 28 0 M116 98 q14 -12 28 0 M152 98 q10 -10 22 0" class="ink" stroke-width="2.6"/>
+          </g>
+          <g transform="rotate(-8 100 120)">
+            <path d="M30 128 C30 116 170 116 170 128 C170 140 30 140 30 128z" fill="#b4612a" class="ink"/>
+            <path d="M54 126 q12 -10 24 0 M90 126 q12 -10 24 0 M126 126 q12 -10 24 0" class="ink" stroke-width="2.4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="info">
+        <span class="tag">7 am &amp; 3 pm</span>
+        <h3>Baguette</h3>
+        <p>Baked twice a day so the afternoon crowd gets one that crackles too.</p>
+        <div class="price"><span>each</span><span>$4</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="morning">
+  <div class="sec-head">
+    <div class="num">ii.</div>
+    <h2>What happens before you wake up</h2>
+  </div>
+  <div class="day">
+    <div class="day-art">
+      <svg viewBox="0 0 520 480" role="img" aria-label="Illustration of the wood-fired oven with a baker's peel sliding a loaf inside">
+        <rect x="0" y="420" width="520" height="60" fill="#d9c4a0"/>
+        <path d="M0 420 h520" class="ink" stroke-width="3"/>
+        <!-- oven dome -->
+        <path d="M60 420 V260 C60 120 380 120 380 260 V420z" fill="#a8323a" class="ink"/>
+        <g class="ink" stroke-width="1.6" opacity=".7">
+          <path d="M80 300 h40 M140 300 h40 M200 300 h40 M260 300 h40 M320 300 h40"/>
+          <path d="M100 340 h40 M160 340 h40 M280 340 h40 M330 340 h30"/>
+          <path d="M80 380 h40 M300 380 h50"/>
+          <path d="M110 220 q40 -60 120 -64 M230 156 q70 4 110 64"/>
+        </g>
+        <!-- mouth -->
+        <path d="M130 420 V320 C130 250 310 250 310 320 V420z" fill="#2b1d14" class="ink"/>
+        <!-- fire -->
+        <g class="flicker">
+          <path d="M160 416 C150 380 180 370 176 340 C200 360 196 380 210 386 C214 360 232 352 236 330 C256 362 262 390 250 416z" fill="#e9b64c"/>
+          <path d="M184 416 C180 396 196 390 196 374 C210 390 212 400 220 404 C222 390 230 384 232 372 C242 392 244 404 238 416z" fill="#f4ead8"/>
+        </g>
+        <path d="M150 418 h120" stroke="#7a3b17" stroke-width="8" stroke-linecap="round"/>
+        <!-- loaf on peel -->
+        <path d="M250 392 C250 370 300 370 300 392z" fill="#e9c98a" class="ink"/>
+        <path d="M244 396 h70 l10 -4 h190" class="ink" stroke-width="4"/>
+        <path d="M244 392 h66 v6 h-66z" fill="#d9a865" class="ink"/>
+        <!-- chimney + smoke -->
+        <path d="M200 140 h40 V60 h-40z" fill="#7a3b17" class="ink"/>
+        <g class="steam ink" stroke-width="3">
+          <path d="M214 50 q-12 -16 0 -32 q12 -16 0 -32"/>
+          <path d="M226 46 q12 -18 0 -36 q-12 -18 0 -36"/>
+          <path d="M220 42 q-8 -14 4 -28"/>
+        </g>
+        <!-- wood pile -->
+        <g>
+          <circle cx="420" cy="404" r="16" fill="#b4612a" class="ink"/><circle cx="420" cy="404" r="6" class="ink"/>
+          <circle cx="454" cy="404" r="16" fill="#b4612a" class="ink"/><circle cx="454" cy="404" r="6" class="ink"/>
+          <circle cx="488" cy="404" r="16" fill="#b4612a" class="ink"/><circle cx="488" cy="404" r="6" class="ink"/>
+          <circle cx="437" cy="376" r="16" fill="#b4612a" class="ink"/><circle cx="437" cy="376" r="6" class="ink"/>
+          <circle cx="471" cy="376" r="16" fill="#b4612a" class="ink"/><circle cx="471" cy="376" r="6" class="ink"/>
+        </g>
+        <!-- clock -->
+        <g transform="translate(440 120)">
+          <circle r="46" fill="#f4ead8" class="ink"/>
+          <circle r="40" class="ink" stroke-width="1"/>
+          <g class="ink" stroke-width="2">
+            <path d="M0 -36 v6 M36 0 h-6 M0 36 v-6 M-36 0 h6"/>
+          </g>
+          <path id="hourHand" d="M0 0 L0 -20" class="ink" stroke-width="4"/>
+          <path id="minHand" d="M0 0 L0 -30" class="ink" stroke-width="2.4"/>
+          <circle r="3" fill="#2b1d14"/>
+        </g>
+      </svg>
+    </div>
+    <ol class="timeline" id="timeline">
+      <li data-h="4"><time>4:00 AM</time><h3>Fire's lit</h3><p>Maple and oak. The oven takes ninety minutes to come up to 260&deg;C.</p></li>
+      <li data-h="5"><time>5:30 AM</time><h3>Loaves in</h3><p>Shaped last night, proofed cold overnight, scored by hand. Forty at a time.</p></li>
+      <li data-h="7"><time>7:00 AM</time><h3>Doors open</h3><p>The first croissants are cooling. The regulars already know the bench.</p></li>
+      <li data-h="11"><time>11:00 AM</time><h3>Tomorrow begins</h3><p>Mixing starts for tomorrow's dough. Gordon the starter gets fed.</p></li>
+      <li data-h="15"><time>3:00 PM</time><h3>Second baguettes</h3><p>Then we sweep up and give what's left to the shelter on Arden Road.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="baker">
+  <div>
+    <blockquote>&ldquo;My mother opened this shop with one oven and a borrowed mixer. We have two ovens now, and we <em>still</em> borrow the mixer sometimes.&rdquo;</blockquote>
+    <cite>&mdash; Ines Hollis, head baker, second generation</cite>
+  </div>
+  <svg viewBox="0 0 400 400" role="img" aria-label="Line portrait of the baker holding a loaf">
+    <circle cx="200" cy="200" r="180" fill="#3a2a1f"/>
+    <path d="M90 380 C90 290 130 260 200 260 C270 260 310 290 310 380" fill="#f4ead8" class="ink"/>
+    <path d="M150 268 L200 330 L250 268" class="ink"/>
+    <path d="M170 300 v80 M230 300 v80" class="ink" stroke-width="1.6"/>
+    <circle cx="200" cy="180" r="62" fill="#d9a865" class="ink"/>
+    <path d="M138 170 C130 100 270 100 262 170 C250 140 150 140 138 170z" fill="#2b1d14" stroke="#f4ead8" stroke-width="2.2"/>
+    <path d="M140 132 C140 70 260 70 260 132 C260 110 236 96 200 100 C164 96 140 110 140 132z" fill="#f4ead8" class="ink"/>
+    <path d="M150 112 q12 -40 50 -40 q38 0 50 40" class="ink" stroke-width="1.6"/>
+    <path d="M178 182 q6 -6 12 0 M210 182 q6 -6 12 0" class="ink"/>
+    <path d="M186 212 q14 10 28 0" class="ink"/>
+    <circle cx="170" cy="200" r="7" fill="#b4612a" opacity=".5"/><circle cx="230" cy="200" r="7" fill="#b4612a" opacity=".5"/>
+    <path d="M120 330 C120 300 230 300 230 330 C230 346 120 346 120 330z" fill="#b4612a" class="ink"/>
+    <path d="M140 320 q10 -8 20 0 M170 316 q10 -8 20 0 M200 320 q10 -8 20 0" class="ink" stroke-width="1.8"/>
+    <path d="M110 346 q-10 -30 20 -34 M240 346 q10 -30 -20 -34" class="ink"/>
+    <g class="ink" stroke-width="1.4" opacity=".8">
+      <circle cx="320" cy="90" r="3"/><circle cx="80" cy="120" r="2"/><circle cx="330" cy="260" r="2"/><circle cx="60" cy="250" r="3"/>
+    </g>
+  </svg>
+</section>
+
+<section class="visit" id="visit">
+  <div class="map">
+    <svg viewBox="0 0 700 460" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Hand-drawn neighbourhood map showing the bakery at Hollis and Arden">
+      <rect width="700" height="460" fill="#ecdcc0"/>
+      <path d="M0 330 C140 300 220 380 360 350 C500 320 560 390 700 360 V460 H0z" fill="#9fb1a0" opacity=".6"/>
+      <path d="M0 330 C140 300 220 380 360 350 C500 320 560 390 700 360" class="ink" stroke-dasharray="2 8"/>
+      <text x="520" y="420" font-family="Fraunces" font-style="italic" font-size="20" fill="#2b1d14">Mill Creek</text>
+      <g fill="#f4ead8" class="ink">
+        <path d="M0 160 h700 v34 h-700z"/>
+        <path d="M300 0 h34 v460 h-34z"/>
+        <path d="M560 0 l30 0 l-120 460 h-30z"/>
+      </g>
+      <path d="M0 177 h700 M317 0 v460" stroke="#2b1d14" stroke-width="1.4" stroke-dasharray="10 10"/>
+      <text x="40" y="154" font-family="Courier Prime" font-weight="700" font-size="14" letter-spacing="3" fill="#2b1d14">HOLLIS STREET</text>
+      <text x="350" y="300" font-family="Courier Prime" font-weight="700" font-size="14" letter-spacing="3" fill="#2b1d14" transform="rotate(90 350 300)">ARDEN RD</text>
+      <!-- blocks -->
+      <g fill="#d9c4a0" class="ink" stroke-width="1.6">
+        <path d="M30 40 h110 v90 h-110z"/><path d="M160 40 h110 v90 h-110z"/>
+        <path d="M30 220 h110 v80 h-110z"/><path d="M160 220 h110 v70 h-110z"/>
+        <path d="M370 40 h150 v90 h-150z"/><path d="M370 220 h120 v70 h-120z"/>
+        <path d="M620 40 h70 v90 h-70z"/>
+      </g>
+      <!-- park -->
+      <g>
+        <path d="M30 40 h110 v90 h-110z" fill="#7d8b5e" opacity=".55"/>
+        <circle cx="60" cy="70" r="14" fill="#7d8b5e" class="ink"/><circle cx="104" cy="96" r="16" fill="#7d8b5e" class="ink"/><circle cx="84" cy="62" r="10" fill="#7d8b5e" class="ink"/>
+        <text x="40" y="124" font-family="Courier Prime" font-size="11" fill="#2b1d14">Linden Sq.</text>
+      </g>
+      <!-- market -->
+      <g transform="translate(380 236)">
+        <path d="M0 16 l12 -14 h76 l12 14z" fill="#a8323a" class="ink" stroke-width="1.6"/>
+        <text x="50" y="44" text-anchor="middle" font-family="Courier Prime" font-size="11" fill="#2b1d14">fruit stall</text>
+      </g>
+      <!-- coffee -->
+      <g transform="translate(410 70)">
+        <path d="M0 0 h28 v26 a14 14 0 0 1 -28 0z" fill="#f4ead8" class="ink"/>
+        <path d="M28 8 q12 0 10 12 q-2 8 -10 8" class="ink"/>
+        <text x="46" y="22" font-family="Courier Prime" font-size="11" fill="#2b1d14">our coffee</text>
+      </g>
+      <!-- the bakery pin -->
+      <g class="pin" transform="translate(0 0)">
+        <ellipse cx="250" cy="146" rx="18" ry="5" fill="#2b1d14" opacity=".25"/>
+        <path d="M250 144 C226 110 214 96 214 76 a36 36 0 0 1 72 0 C286 96 274 110 250 144z" fill="#b4612a" class="ink" stroke-width="2.6"/>
+        <path d="M232 82 C232 66 268 66 268 82 C268 88 232 88 232 82z" fill="#e9b64c" class="ink"/>
+        <path d="M242 76 l4 4 M252 72 l4 4" class="ink" stroke-width="1.4"/>
+      </g>
+      <path d="M200 100 C160 100 150 70 170 50" class="ink" stroke-dasharray="4 6"/>
+      <text x="150" y="36" font-family="Fraunces" font-style="italic" font-size="20" fill="#2b1d14">we're here!</text>
+      <!-- compass -->
+      <g transform="translate(640 230)" class="ink">
+        <circle r="26" fill="#f4ead8"/>
+        <path d="M0 -20 L6 0 L0 20 L-6 0z" fill="#a8323a"/>
+        <text y="-32" text-anchor="middle" font-family="Courier Prime" font-weight="700" font-size="12" fill="#2b1d14" stroke="none">N</text>
+      </g>
+    </svg>
+  </div>
+  <div class="visit-info">
+    <div>
+      <div class="tag">iii. Visit</div>
+      <h2>Corner of Hollis &amp; Arden</h2>
+    </div>
+    <p>14 Hollis Street. Two blocks from the creek path, across from the fruit stall. Bike rack out front; dogs welcome on the bench.</p>
+    <table class="hours" id="hours">
+      <tr data-d="1"><td>Monday</td><td>Closed &mdash; we sleep</td></tr>
+      <tr data-d="2"><td>Tuesday</td><td>7:00 &ndash; 15:00</td></tr>
+      <tr data-d="3"><td>Wednesday</td><td>7:00 &ndash; 15:00</td></tr>
+      <tr data-d="4"><td>Thursday</td><td>7:00 &ndash; 17:00</td></tr>
+      <tr data-d="5"><td>Friday</td><td>7:00 &ndash; 17:00</td></tr>
+      <tr data-d="6"><td>Saturday</td><td>7:00 &ndash; 14:00</td></tr>
+      <tr data-d="0"><td>Sunday</td><td>8:00 &ndash; 13:00</td></tr>
+    </table>
+    <p>(555) 014-1987 &middot; <a href="mailto:hello@hollisbakehouse.example">hello@hollisbakehouse.example</a></p>
+  </div>
+</section>
+
+<section class="preorder" id="order">
+  <div>
+    <h2>Hold a loaf for tomorrow.</h2>
+    <p>Tell us by 6 pm and we'll set one aside with your name on a paper tag. Pay when you pick it up.</p>
+    <form id="form">
+      <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+      <select name="item" aria-label="What to hold">
+        <option>Country loaf</option>
+        <option>Seeded rye</option>
+        <option>Baguette</option>
+        <option>Half-dozen croissants</option>
+        <option>The Big Bun</option>
+      </select>
+      <button class="btn" type="submit">Hold it</button>
+    </form>
+    <div class="msg" id="msg" role="status"></div>
+  </div>
+  <svg viewBox="0 0 220 220" width="220" aria-hidden="true">
+    <path d="M40 60 h140 l-10 140 h-120z" fill="#d9a865" class="ink"/>
+    <path d="M40 60 l10 -16 h120 l10 16" fill="#c7914f" class="ink"/>
+    <path d="M70 60 C70 10 150 10 150 60" class="ink" stroke-width="2"/>
+    <path d="M86 52 C84 20 112 4 120 20 C126 6 150 20 134 52" fill="#e9b64c" class="ink"/>
+    <path d="M100 40 l6 6 M114 34 l6 6" class="ink" stroke-width="1.4"/>
+    <path d="M110 100 h50 v30 h-50z" fill="#f4ead8" class="ink" transform="rotate(-8 135 115)"/>
+    <text id="tagname" x="135" y="120" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="13" fill="#2b1d14" transform="rotate(-8 135 115)">yours</text>
+    <path d="M60 150 h100 M64 170 h92" class="ink" stroke-width="1.4" opacity=".5"/>
+  </svg>
+</section>
+
+<footer>
+  <span>&copy; Hollis Street Bakehouse. Flour on everything since 1987.</span>
+  <svg viewBox="0 0 140 30" aria-hidden="true"><path d="M4 22 C4 6 60 6 60 22z M80 22 C80 10 136 10 136 22z" fill="#b4612a" class="ink" stroke-width="1.6"/><path d="M18 16 l5 4 M32 12 l5 4 M96 16 l5 4 M112 14 l5 4" class="ink" stroke-width="1.4"/></svg>
+</footer>
+
+<script>
+const now = new Date();
+const h = now.getHours() + now.getMinutes() / 60;
+document.getElementById('hourHand').setAttribute('transform', `rotate(${(h % 12) * 30})`);
+document.getElementById('minHand').setAttribute('transform', `rotate(${now.getMinutes() * 6})`);
+document.querySelectorAll('#timeline li').forEach(li => { if (h >= +li.dataset.h) li.classList.add('lit'); });
+const today = document.querySelector(`#hours tr[data-d="${now.getDay()}"]`);
+today.classList.add('today');
+const closed = now.getDay() === 1 || h < 7 || h >= 15;
+document.getElementById('status').textContent = closed ? 'Closed now — ovens back on at 4:00' : 'Open now — come by';
+document.getElementById('dot').style.background = closed ? '#a8323a' : '#7d8b5e';
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const name = f.get('name').trim();
+  document.getElementById('tagname').textContent = name.slice(0, 12);
+  document.getElementById('msg').textContent = `Done. One ${f.get('item').toLowerCase()} tagged for ${name}.`;
+  e.target.reset();
+});
+</script>
+</body>
+</html>

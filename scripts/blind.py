@@ -87,18 +87,17 @@ document.onkeydown=e=>{if(e.key==='Escape')document.getElementById('view').style
 def shoot() -> None:
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
-        for slug in BRIEFS:
-            for arm in ARMS:
-                page_file = BLIND / slug / arm / "index.html"
-                shot = page_file.with_name("screenshot.png")
-                if not page_file.exists() or shot.exists():
-                    continue
-                page = browser.new_page(viewport={"width": 1440, "height": 900})
-                page.goto(page_file.as_uri(), wait_until="load")
-                page.wait_for_timeout(1500)
-                page.screenshot(path=str(shot), full_page=True)
-                page.close()
-                print(f"shot {slug}/{arm}")
+        for page_file in sorted(BLIND.glob("*/*/index.html")):
+            slug, arm = page_file.parent.parent.name, page_file.parent.name
+            shot = page_file.with_name("screenshot.png")
+            if shot.exists():
+                continue
+            page = browser.new_page(viewport={"width": 1440, "height": 900})
+            page.goto(page_file.as_uri(), wait_until="load")
+            page.wait_for_timeout(1500)
+            page.screenshot(path=str(shot), full_page=True)
+            page.close()
+            print(f"shot {slug}/{arm}")
         browser.close()
 
 
@@ -113,7 +112,7 @@ def ready() -> list[str]:
 
 
 def tally(rows: list[dict]) -> dict[str, int]:
-    out = {"treatment": 0, "control": 0, "tie": 0, "both_generic": 0}
+    out = {a: 0 for a in ARMS} | {"tie": 0, "both_generic": 0}
     for r in rows:
         out[r[r["choice"]] if r["choice"] in ("left", "right") else r["choice"]] += 1
     return out
@@ -187,7 +186,11 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main() -> None:
+    global ARMS, RATINGS
     cmd = sys.argv[1] if len(sys.argv) > 1 else "serve"
+    if len(sys.argv) == 4:
+        ARMS = (sys.argv[2], sys.argv[3])
+        RATINGS = BLIND / f"ratings_{ARMS[0]}_{ARMS[1]}.jsonl"
     if cmd == "shoot":
         shoot()
     elif cmd == "summary":

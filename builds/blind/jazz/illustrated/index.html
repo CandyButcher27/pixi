@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Low Hour Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,800;1,9..144,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16120f;--paper:#efe4cf;--oxblood:#7a1f1b;--mustard:#d9a21b;--teal:#1f5a5a;--smoke:#cdbfa6;
+  --serif:"Fraunces",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+svg{display:block}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 4vw;border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:10}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;text-decoration:none}
+nav{display:flex;gap:28px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--oxblood)}
+
+.hero{display:grid;grid-template-columns:5fr 7fr;min-height:calc(100vh - 64px);border-bottom:2px solid var(--ink)}
+.hero-copy{padding:8vh 4vw 6vh;display:flex;flex-direction:column;justify-content:space-between;border-right:2px solid var(--ink)}
+.hero h1{font-size:clamp(56px,8.4vw,132px);line-height:.86;font-weight:800;letter-spacing:-.03em}
+.hero h1 em{font-weight:400;color:var(--oxblood)}
+.hero p{max-width:30ch;font-size:21px;margin:32px 0}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:16px 26px;text-decoration:none;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--ink)}
+.btn:hover{background:var(--oxblood);border-color:var(--oxblood)}
+.btn.ghost{background:transparent;color:var(--ink);margin-left:10px}
+.hero-art{background:var(--ink);position:relative;overflow:hidden}
+.hero-art svg{width:100%;height:100%}
+.spin{transform-origin:640px 470px;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.note{animation:float 7s ease-in-out infinite}
+.note:nth-of-type(2){animation-delay:-2s}.note:nth-of-type(3){animation-delay:-4s}
+@keyframes float{0%{transform:translate(0,0);opacity:0}20%{opacity:1}100%{transform:translate(-40px,-220px);opacity:0}}
+.sway{transform-origin:330px 760px;animation:sway 3.2s ease-in-out infinite alternate}
+@keyframes sway{to{transform:rotate(-2.5deg)}}
+
+.ticker{background:var(--mustard);border-bottom:2px solid var(--ink);overflow:hidden;white-space:nowrap;padding:12px 0}
+.ticker span{display:inline-block;padding-right:48px}
+
+section{padding:110px 4vw}
+.label-row{display:flex;justify-content:space-between;align-items:end;margin-bottom:56px;gap:24px;flex-wrap:wrap}
+h2{font-size:clamp(40px,5.5vw,84px);line-height:.95;font-weight:800;letter-spacing:-.02em}
+h2 em{font-weight:400}
+
+.catalog{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.sleeve{cursor:pointer}
+.sleeve .cover{position:relative;aspect-ratio:1;border:2px solid var(--ink);transition:transform .35s}
+.sleeve .cover svg{width:100%;height:100%}
+.sleeve .disc{position:absolute;inset:4%;border-radius:50%;background:repeating-radial-gradient(#111 0 2px,#222 2px 4px);z-index:-1;transition:transform .45s}
+.sleeve:hover .disc{transform:translateX(34%)}
+.sleeve:hover .cover>svg{transform:translateX(-4%)}
+.sleeve .cover>svg{transition:transform .45s;position:relative}
+.sleeve h3{font-size:22px;margin-top:16px;line-height:1.1}
+.sleeve .meta{display:flex;justify-content:space-between;margin-top:6px;color:#5a4d3e}
+.sleeve.playing h3{color:var(--oxblood)}
+.sleeve.playing h3::before{content:"\25B6  ";font-size:14px}
+
+.room{background:var(--teal);color:var(--paper);display:grid;grid-template-columns:7fr 5fr;padding:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.room-art{border-right:2px solid var(--ink)}
+.room-art svg{width:100%;height:100%}
+.room-copy{padding:90px 4vw;display:flex;flex-direction:column;justify-content:center}
+.room-copy p{margin:24px 0 36px;font-size:20px;max-width:34ch}
+.dates{list-style:none;border-top:1px solid rgba(239,228,207,.4)}
+.dates li{display:grid;grid-template-columns:90px 1fr auto;gap:12px;padding:16px 0;border-bottom:1px solid rgba(239,228,207,.4);align-items:baseline}
+.dates b{font-weight:400;font-size:22px}
+.flicker{animation:flick 2.4s infinite steps(1)}
+@keyframes flick{0%,100%{opacity:1}48%{opacity:.45}52%{opacity:1}74%{opacity:.7}}
+
+.roster{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);border-left:2px solid var(--ink)}
+.artist{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:28px}
+.artist svg{width:100%;height:auto;margin-bottom:20px}
+.artist h3{font-size:30px;line-height:1}
+.artist p{font-size:16px;margin-top:8px;color:#5a4d3e}
+
+.subscribe{background:var(--oxblood);color:var(--paper);display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
+.subscribe p{font-size:20px;margin-top:20px;max-width:36ch}
+form{display:flex;border:2px solid var(--paper)}
+form input{flex:1;background:transparent;border:0;color:var(--paper);padding:18px;font:inherit;font-size:18px;min-width:0}
+form input::placeholder{color:rgba(239,228,207,.6)}
+form button{background:var(--paper);color:var(--ink);border:0;padding:0 24px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+footer{display:flex;justify-content:space-between;padding:28px 4vw;flex-wrap:wrap;gap:12px}
+
+@media (max-width:900px){
+  nav{display:none}
+  .hero,.room,.subscribe{grid-template-columns:1fr}
+  .hero-copy{border-right:0;border-bottom:2px solid var(--ink);padding:48px 16px}
+  .hero-art{min-height:70vw}
+  .catalog{grid-template-columns:repeat(2,1fr);gap:18px}
+  .roster{grid-template-columns:1fr}
+  .room-art{border-right:0;border-bottom:2px solid var(--ink)}
+  section,.room-copy{padding:72px 16px}
+  header,footer{padding-left:16px;padding-right:16px}
+  .btn.ghost{margin:10px 0 0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">
+    <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#16120f"/><circle cx="17" cy="17" r="6" fill="#d9a21b"/><path d="M17 1a16 16 0 0 1 16 16H17z" fill="#7a1f1b"/><circle cx="17" cy="17" r="1.6" fill="#efe4cf"/></svg>
+    Low Hour
+  </a>
+  <nav class="mono"><a href="#catalog">Catalog</a><a href="#room">The Room</a><a href="#roster">Roster</a><a href="#list">Mailing list</a></nav>
+</header>
+
+<main>
+<section class="hero" style="padding:0">
+  <div class="hero-copy">
+    <div class="mono">Est. 1961 &middot; Pressed on 180g vinyl &middot; Brooklyn, NY</div>
+    <div>
+      <h1>Music for<br><em>after</em><br>midnight.</h1>
+      <p>Low Hour is an independent jazz label recording small groups live to tape, one room, no overdubs, sixty-two years running.</p>
+      <a class="btn" href="#catalog">Browse the catalog</a><a class="btn ghost" href="#room">Hear it live</a>
+    </div>
+    <div class="mono">Now spinning &mdash; <span id="now">LH-412 &middot; Ida Marsh Trio, "Blue Corridor"</span></div>
+  </div>
+
+  <div class="hero-art" aria-label="Illustration: a bassist in a smoky club beside a giant spinning record">
+    <svg viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="spot" cx="35%" cy="15%" r="75%"><stop offset="0" stop-color="#d9a21b" stop-opacity=".55"/><stop offset=".5" stop-color="#7a1f1b" stop-opacity=".25"/><stop offset="1" stop-color="#16120f" stop-opacity="0"/></radialGradient>
+        <pattern id="grooves" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#141414"/></pattern>
+        <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .94 0 0 0 0 .89 0 0 0 0 .81 0 0 0 .09 0"/></filter>
+      </defs>
+      <rect width="800" height="900" fill="#16120f"/>
+      <polygon points="230,0 360,0 620,900 -40,900" fill="url(#spot)"/>
+      <!-- brick wall -->
+      <g stroke="#2a211b" stroke-width="2" fill="none">
+        <path d="M0 120H800M0 180H800M0 240H800M0 300H800M0 360H800M0 420H800M0 480H800M0 540H800M0 600H800"/>
+        <path d="M80 120v60M240 120v60M400 120v60M560 120v60M720 120v60M160 180v60M320 180v60M480 180v60M640 180v60M80 240v60M240 240v60M400 240v60M560 240v60M720 240v60M160 300v60M320 300v60M480 300v60M640 300v60M80 360v60M240 360v60M400 360v60M560 360v60M720 360v60M160 420v60M320 420v60M480 420v60M640 420v60M80 480v60M240 480v60M400 480v60M560 480v60M720 480v60M160 540v60M320 540v60M480 540v60M640 540v60"/>
+      </g>
+      <!-- hanging lamp -->
+      <line x1="300" y1="0" x2="300" y2="70" stroke="#cdbfa6" stroke-width="2"/>
+      <path d="M262 70h76l18 34h-112z" fill="#d9a21b"/>
+      <ellipse cx="300" cy="106" rx="56" ry="6" fill="#efe4cf" class="flicker"/>
+      <!-- giant record -->
+      <g class="spin">
+        <circle cx="640" cy="470" r="300" fill="#0d0d0d"/>
+        <g fill="none" stroke="#262626" stroke-width="1.4">
+          <circle cx="640" cy="470" r="285"/><circle cx="640" cy="470" r="268"/><circle cx="640" cy="470" r="250"/><circle cx="640" cy="470" r="232"/><circle cx="640" cy="470" r="214"/><circle cx="640" cy="470" r="196"/><circle cx="640" cy="470" r="178"/><circle cx="640" cy="470" r="160"/><circle cx="640" cy="470" r="142"/><circle cx="640" cy="470" r="124"/>
+        </g>
+        <path d="M640 170a300 300 0 0 1 220 96l-30 26a260 260 0 0 0-190-82z" fill="#efe4cf" opacity=".09"/>
+        <circle cx="640" cy="470" r="100" fill="#7a1f1b"/>
+        <path d="M640 370a100 100 0 0 1 100 100H640z" fill="#d9a21b"/>
+        <circle cx="640" cy="470" r="44" fill="none" stroke="#efe4cf" stroke-width="2" stroke-dasharray="4 6"/>
+        <circle cx="640" cy="470" r="8" fill="#efe4cf"/>
+      </g>
+      <!-- tonearm -->
+      <g stroke="#cdbfa6" stroke-linecap="round" fill="none">
+        <circle cx="760" cy="120" r="26" fill="#2a211b" stroke-width="4"/>
+        <path d="M760 120 L700 330 L655 380" stroke-width="7"/>
+        <rect x="638" y="372" width="30" height="16" fill="#cdbfa6" transform="rotate(40 653 380)"/>
+      </g>
+      <!-- stage -->
+      <path d="M0 780 H800 V900 H0z" fill="#2a1512"/>
+      <path d="M0 780 H800" stroke="#7a1f1b" stroke-width="6"/>
+      <g stroke="#3d201b" stroke-width="2"><path d="M0 820H800M0 860H800"/></g>
+      <!-- bassist -->
+      <g class="sway">
+        <!-- body -->
+        <path d="M250 330 q-40 10-55 70 l-25 190 q-6 50 30 60 l20 120 h36 l6-120 h30 l10 120 h36 l-10-150 q30-40 18-110 l-12-120 q-14-50-56-60z" fill="#efe4cf"/>
+        <path d="M250 330 q-40 10-55 70 l-25 190 q60 20 130 4 l-12-200 q-14-50-38-64z" fill="#1f5a5a"/>
+        <!-- head -->
+        <circle cx="262" cy="282" r="38" fill="#7a1f1b"/>
+        <path d="M218 270 q44-46 92-6 l-6-26 q-40-36-84 4z" fill="#16120f"/>
+        <rect x="214" y="260" width="96" height="10" fill="#16120f"/>
+        <path d="M282 296 q10 6 18 0" stroke="#16120f" stroke-width="3" fill="none"/>
+        <!-- double bass -->
+        <g>
+          <path d="M392 230 l-14 170" stroke="#16120f" stroke-width="10" stroke-linecap="round"/>
+          <path d="M386 196 q16-10 22 6 l-6 34 h-18z" fill="#d9a21b"/>
+          <path d="M378 400 c60 0 90 40 70 96 c-10 28 -10 40 6 60 c30 40 20 130 -76 140 c-96 -10 -106 -100 -76 -140 c16 -20 16 -32 6 -60 c-20 -56 10 -96 70 -96z" fill="#b7651e"/>
+          <path d="M378 400 c60 0 90 40 70 96 c-10 28 -10 40 6 60 c30 40 20 130 -76 140z" fill="#8d4716"/>
+          <path d="M350 500 q-10 30 0 50 M406 500 q10 30 0 50" stroke="#16120f" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M366 610 h24" stroke="#16120f" stroke-width="8"/>
+          <path d="M374 226 L370 610 M382 226 L382 610 M390 226 L394 610" stroke="#efe4cf" stroke-width="1.4" opacity=".8"/>
+          <path d="M378 696 v60" stroke="#16120f" stroke-width="6"/>
+        </g>
+        <!-- arms -->
+        <path d="M250 370 q60 -40 132 -60" stroke="#1f5a5a" stroke-width="30" stroke-linecap="round" fill="none"/>
+        <circle cx="384" cy="306" r="16" fill="#7a1f1b"/>
+        <path d="M262 430 q50 80 112 92" stroke="#1f5a5a" stroke-width="30" stroke-linecap="round" fill="none"/>
+        <circle cx="378" cy="522" r="16" fill="#7a1f1b"/>
+      </g>
+      <!-- notes -->
+      <g fill="#d9a21b">
+        <g class="note"><circle cx="470" cy="420" r="10"/><rect x="478" y="372" width="4" height="50"/></g>
+        <g class="note"><circle cx="520" cy="470" r="9"/><circle cx="552" cy="460" r="9"/><path d="M527 470V416h4v54zM559 460V406h4v54zM527 416l36-10v10l-36 10z"/></g>
+        <g class="note"><circle cx="440" cy="500" r="8"/><rect x="447" y="458" width="4" height="44"/></g>
+      </g>
+      <!-- smoke -->
+      <path d="M120 760 c-30 -60 40 -90 10 -150 c-24 -48 30 -80 10 -130" stroke="#efe4cf" stroke-width="3" fill="none" opacity=".18"/>
+      <path d="M140 760 c-20 -50 30 -70 6 -120" stroke="#efe4cf" stroke-width="2" fill="none" opacity=".12"/>
+      <rect width="800" height="900" filter="url(#grain)"/>
+    </svg>
+  </div>
+</section>
+
+<div class="ticker mono" aria-hidden="true"><div id="tick"><span>New: Ida Marsh Trio &mdash; Blue Corridor</span><span>Reissue: Cal Okafor Quintet &mdash; Rooftop Suite (1964)</span><span>Fridays at The Room, 11pm</span><span>All-analog mastering, cut at half speed</span><span>New: Ida Marsh Trio &mdash; Blue Corridor</span><span>Reissue: Cal Okafor Quintet &mdash; Rooftop Suite (1964)</span><span>Fridays at The Room, 11pm</span><span>All-analog mastering, cut at half speed</span></div></div>
+
+<section id="catalog">
+  <div class="label-row">
+    <h2>The catalog,<br><em>new &amp; reissued.</em></h2>
+    <div class="mono">Every sleeve painted in-house &middot; click to cue</div>
+  </div>
+  <div class="catalog" id="sleeves">
+
+    <article class="sleeve" data-cue="LH-412 &middot; Ida Marsh Trio, &quot;Blue Corridor&quot;">
+      <div class="cover"><div class="disc"></div>
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#1f5a5a"/><rect x="20" y="20" width="70" height="160" fill="#efe4cf"/><rect x="104" y="20" width="76" height="76" fill="#d9a21b"/><circle cx="142" cy="140" r="40" fill="#16120f"/><circle cx="142" cy="140" r="12" fill="#7a1f1b"/><path d="M20 120h70M20 140h70M20 160h70" stroke="#16120f" stroke-width="3"/><text x="28" y="48" font-family="Fraunces" font-weight="800" font-size="20" fill="#16120f">IDA</text><text x="28" y="68" font-family="Fraunces" font-size="12" fill="#16120f">MARSH</text></svg>
+      </div>
+      <h3>Blue Corridor</h3><div class="meta mono"><span>Ida Marsh Trio</span><span>2026</span></div>
+    </article>
+
+    <article class="sleeve" data-cue="LH-088 &middot; Cal Okafor Quintet, &quot;Rooftop Suite&quot;">
+      <div class="cover"><div class="disc"></div>
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#d9a21b"/><path d="M0 140 L30 140 30 100 54 100 54 120 80 120 80 70 110 70 110 130 140 130 140 90 170 90 170 140 200 140 200 200 0 200z" fill="#16120f"/><rect x="88" y="80" width="6" height="8" fill="#d9a21b"/><rect x="100" y="96" width="6" height="8" fill="#d9a21b"/><rect x="150" y="104" width="6" height="8" fill="#d9a21b"/><circle cx="150" cy="44" r="22" fill="#efe4cf"/><circle cx="160" cy="38" r="20" fill="#d9a21b"/><path d="M20 30 q40 30 80 0" stroke="#7a1f1b" stroke-width="8" fill="none"/><text x="14" y="186" font-family="IBM Plex Mono" font-size="11" fill="#d9a21b" letter-spacing="2">ROOFTOP SUITE</text></svg>
+      </div>
+      <h3>Rooftop Suite</h3><div class="meta mono"><span>Cal Okafor 5tet</span><span>1964</span></div>
+    </article>
+
+    <article class="sleeve" data-cue="LH-397 &middot; Noor Halvorsen, &quot;Salt &amp; Brass&quot;">
+      <div class="cover"><div class="disc"></div>
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#efe4cf"/><path d="M40 160 C40 80 60 40 110 40 C150 40 170 70 150 90 C130 110 100 90 120 70" stroke="#7a1f1b" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M40 160 L20 186 L70 186z" fill="#7a1f1b"/><circle cx="62" cy="110" r="6" fill="#16120f"/><circle cx="64" cy="132" r="6" fill="#16120f"/><circle cx="58" cy="88" r="6" fill="#16120f"/><path d="M130 130 h50 v50 h-50z" fill="#1f5a5a"/><text x="138" y="162" font-family="Fraunces" font-style="italic" font-size="18" fill="#efe4cf">S&amp;B</text></svg>
+      </div>
+      <h3>Salt &amp; Brass</h3><div class="meta mono"><span>Noor Halvorsen</span><span>2025</span></div>
+    </article>
+
+    <article class="sleeve" data-cue="LH-142 &middot; The Delancey Four, &quot;Night Shift&quot;">
+      <div class="cover"><div class="disc"></div>
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#7a1f1b"/><g fill="#efe4cf"><rect x="20" y="20" width="12" height="160"/><rect x="44" y="20" width="12" height="120"/><rect x="68" y="20" width="12" height="160"/><rect x="92" y="20" width="12" height="90"/><rect x="116" y="20" width="12" height="160"/><rect x="140" y="20" width="12" height="130"/><rect x="164" y="20" width="12" height="160"/></g><g fill="#16120f"><rect x="34" y="20" width="9" height="80"/><rect x="82" y="20" width="9" height="80"/><rect x="130" y="20" width="9" height="80"/></g><circle cx="98" cy="150" r="26" fill="#d9a21b"/><text x="80" y="156" font-family="IBM Plex Mono" font-weight="600" font-size="16" fill="#16120f">D4</text></svg>
+      </div>
+      <h3>Night Shift</h3><div class="meta mono"><span>The Delancey Four</span><span>1971</span></div>
+    </article>
+
+  </div>
+</section>
+
+<section class="room" id="room">
+  <div class="room-art" aria-label="Illustration: the label's listening room storefront at night">
+    <svg viewBox="0 0 700 620" preserveAspectRatio="xMidYMid slice">
+      <rect width="700" height="620" fill="#0f2b2b"/>
+      <g fill="#efe4cf"><circle cx="60" cy="50" r="1.6"/><circle cx="170" cy="90" r="1.2"/><circle cx="260" cy="30" r="1.8"/><circle cx="420" cy="70" r="1.2"/><circle cx="540" cy="40" r="1.6"/><circle cx="640" cy="110" r="1.2"/><circle cx="330" cy="120" r="1"/></g>
+      <circle cx="590" cy="90" r="40" fill="#efe4cf"/><circle cx="606" cy="80" r="36" fill="#0f2b2b"/>
+      <!-- buildings -->
+      <path d="M0 200h120v420H0z" fill="#16120f"/>
+      <path d="M560 160h140v460H560z" fill="#16120f"/>
+      <g fill="#d9a21b" opacity=".75"><rect x="20" y="230" width="22" height="30"/><rect x="70" y="290" width="22" height="30"/><rect x="20" y="350" width="22" height="30"/><rect x="590" y="200" width="22" height="30"/><rect x="640" y="260" width="22" height="30"/><rect x="590" y="380" width="22" height="30"/></g>
+      <!-- the room facade -->
+      <path d="M120 180h440v440H120z" fill="#7a1f1b"/>
+      <path d="M120 180h440v30H120z" fill="#16120f"/>
+      <g stroke="#5e1714" stroke-width="2"><path d="M120 250H560M120 290H560M120 330H560"/></g>
+      <!-- neon sign -->
+      <g class="flicker">
+        <rect x="200" y="226" width="280" height="80" rx="40" fill="none" stroke="#d9a21b" stroke-width="5"/>
+        <text x="340" y="280" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="44" fill="#d9a21b">the Room</text>
+      </g>
+      <!-- awning -->
+      <path d="M150 340h380l20 50H130z" fill="#efe4cf"/>
+      <g fill="#1f5a5a"><path d="M168 340h30l-6 50h-34zM238 340h30l-2 50h-34zM308 340h30v50h-34zM378 340h30l4 50h-34zM448 340h30l8 50h-34z"/></g>
+      <path d="M130 390 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0 q15 14 30 0z" fill="#efe4cf"/>
+      <!-- window with silhouettes -->
+      <rect x="160" y="420" width="250" height="150" fill="#d9a21b"/>
+      <g fill="#16120f">
+        <circle cx="210" cy="480" r="16"/><path d="M186 570v-60q24-20 48 0v60z"/>
+        <path d="M250 470l20-40 6 3-18 40zM262 452l-30 60" stroke="#16120f" stroke-width="5"/>
+        <circle cx="300" cy="470" r="15"/><path d="M276 570v-66q24-18 48 0v66z"/>
+        <path d="M322 500 q30-6 40 20 l-6 4 q-10-20-34-16z"/><circle cx="364" cy="526" r="8"/>
+        <path d="M340 570h60v-20h-60z"/>
+      </g>
+      <path d="M160 420h250v150H160z M285 420v150" fill="none" stroke="#16120f" stroke-width="6"/>
+      <!-- door -->
+      <rect x="440" y="410" width="90" height="160" fill="#16120f"/>
+      <circle cx="516" cy="494" r="4" fill="#d9a21b"/>
+      <rect x="456" y="426" width="58" height="50" fill="#1f5a5a"/>
+      <!-- street -->
+      <path d="M0 570h700v50H0z" fill="#16120f"/>
+      <path d="M40 596h80M200 596h80M360 596h80M520 596h80" stroke="#cdbfa6" stroke-width="3" opacity=".5"/>
+      <!-- lamp post -->
+      <path d="M610 570V330" stroke="#cdbfa6" stroke-width="6"/>
+      <path d="M594 330h32l-6-26h-20z" fill="#cdbfa6"/>
+      <polygon points="600,334 620,334 680,570 540,570" fill="#d9a21b" opacity=".12"/>
+    </svg>
+  </div>
+  <div class="room-copy">
+    <div class="mono">Our listening room &middot; 214 Kent Ave</div>
+    <h2 style="margin-top:16px">Fridays,<br><em>eleven sharp.</em></h2>
+    <p>Sixty seats, one Steinway, a bar that closes when the band does. Every set is taped; the good ones become records.</p>
+    <ul class="dates">
+      <li><span class="mono">Nov 14</span><b>Ida Marsh Trio</b><span class="mono">$20</span></li>
+      <li><span class="mono">Nov 21</span><b>Noor Halvorsen Sextet</b><span class="mono">$25</span></li>
+      <li><span class="mono">Nov 28</span><b>Open session &amp; vinyl swap</b><span class="mono">Free</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="roster">
+  <div class="label-row">
+    <h2>On the <em>roster.</em></h2>
+    <div class="mono">14 artists &middot; 3 generations</div>
+  </div>
+  <div class="roster">
+    <div class="artist">
+      <svg viewBox="0 0 300 200" aria-hidden="true"><rect width="300" height="200" fill="#1f5a5a"/><g fill="#efe4cf"><rect x="40" y="110" width="220" height="60"/></g><g fill="#16120f"><rect x="54" y="110" width="10" height="36"/><rect x="74" y="110" width="10" height="36"/><rect x="104" y="110" width="10" height="36"/><rect x="124" y="110" width="10" height="36"/><rect x="144" y="110" width="10" height="36"/><rect x="174" y="110" width="10" height="36"/><rect x="194" y="110" width="10" height="36"/><rect x="224" y="110" width="10" height="36"/><rect x="244" y="110" width="10" height="36"/></g><circle cx="150" cy="60" r="28" fill="#7a1f1b"/><path d="M110 108 q40-40 80 0" fill="#d9a21b"/><path d="M100 108 l-30-34 M200 108 l30-34" stroke="#d9a21b" stroke-width="12" stroke-linecap="round"/></svg>
+      <h3>Ida Marsh</h3><p>Piano. Twelve records, two decades, still plays every Friday.</p>
+    </div>
+    <div class="artist">
+      <svg viewBox="0 0 300 200" aria-hidden="true"><rect width="300" height="200" fill="#d9a21b"/><path d="M90 40 v100 q0 30 30 30 h60 l20 -16 l-20 -16 h-46 v-98z" fill="#16120f"/><circle cx="196" cy="154" r="34" fill="none" stroke="#16120f" stroke-width="8"/><g fill="#efe4cf"><circle cx="104" cy="70" r="5"/><circle cx="104" cy="92" r="5"/><circle cx="104" cy="114" r="5"/></g><path d="M86 40 l-24 -20" stroke="#16120f" stroke-width="6"/><path d="M220 60 q20 -20 40 0 q20 20 40 0" stroke="#7a1f1b" stroke-width="6" fill="none"/></svg>
+      <h3>Noor Halvorsen</h3><p>Tenor saxophone. Nordic folk lines over Brooklyn swing.</p>
+    </div>
+    <div class="artist">
+      <svg viewBox="0 0 300 200" aria-hidden="true"><rect width="300" height="200" fill="#7a1f1b"/><ellipse cx="110" cy="130" rx="60" ry="18" fill="#d9a21b"/><ellipse cx="110" cy="124" rx="60" ry="18" fill="#efe4cf"/><ellipse cx="210" cy="90" rx="46" ry="14" fill="#d9a21b"/><path d="M110 142 v40 M80 150 l-14 32 M140 150 l14 32" stroke="#16120f" stroke-width="5"/><path d="M60 40 l60 70 M250 30 l-50 52" stroke="#efe4cf" stroke-width="7" stroke-linecap="round"/><circle cx="60" cy="40" r="8" fill="#efe4cf"/><circle cx="250" cy="30" r="8" fill="#efe4cf"/></svg>
+      <h3>Cal Okafor</h3><p>Drums. Founding member, 1961. The reissue series starts here.</p>
+    </div>
+  </div>
+</section>
+
+<section class="subscribe" id="list">
+  <div>
+    <h2>One letter<br><em>a month.</em></h2>
+    <p>New pressings before they sell out, set lists from The Room, and the occasional liner note we couldn't fit on the sleeve.</p>
+  </div>
+  <div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='You’re on the list';this.reset()">
+      <label for="email" class="mono" style="position:absolute;left:-9999px">Email</label>
+      <input id="email" type="email" required placeholder="you@example.com">
+      <button type="submit">Join</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="mono"><span>&copy; 2026 Low Hour Records</span><span>Recorded live to two-inch tape</span></footer>
+
+<script>
+document.querySelectorAll('.sleeve').forEach(s=>s.addEventListener('click',()=>{
+  document.querySelectorAll('.sleeve').forEach(x=>x.classList.remove('playing'));
+  s.classList.add('playing');
+  document.getElementById('now').innerHTML=s.dataset.cue;
+}));
+const tick=document.getElementById('tick');let x=0;
+(function run(){if(!matchMedia('(prefers-reduced-motion: reduce)').matches){x-=.6;if(-x>=tick.scrollWidth/2)x=0;tick.style.transform=`translateX(${x}px)`}requestAnimationFrame(run)})();
+</script>
+</body>
+</html>

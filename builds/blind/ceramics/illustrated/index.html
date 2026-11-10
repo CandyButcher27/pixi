@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mara Lindqvist — Stoneware &amp; Wood-fired Porcelain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe7da;
+  --paper-2:#e6dccb;
+  --ink:#2b2420;
+  --ink-soft:#6b5d52;
+  --clay:#b0643f;
+  --clay-dark:#7d4128;
+  --ash:#c9bfae;
+  --celadon:#8fa89a;
+  --tenmoku:#3b2a22;
+  --shino:#e9d6c0;
+  --kiln:#1d1714;
+  --ember:#e0793a;
+  --rule:rgba(43,36,32,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3{font-family:"Young Serif",Georgia,serif;font-weight:400;line-height:1.05;letter-spacing:-.01em}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+
+header{display:flex;justify-content:space-between;align-items:baseline;padding:26px 32px;max-width:1280px;margin:0 auto}
+.mark{font-family:"Young Serif",serif;font-size:22px;text-decoration:none}
+.mark span{color:var(--clay)}
+nav{display:flex;gap:28px}
+nav a{text-decoration:none;font-size:15px;color:var(--ink-soft)}
+nav a:hover{color:var(--clay)}
+
+.hero{padding:40px 0 0}
+.hero-top{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end;padding-bottom:28px}
+.hero h1{font-size:clamp(48px,8.2vw,124px)}
+.hero h1 em{font-style:normal;color:var(--clay)}
+.hero-top p{max-width:34ch;color:var(--ink-soft);font-size:18px}
+.shelf-wrap{position:relative;border-top:1px solid var(--rule)}
+#shelf{display:block;width:100%;height:auto}
+.shelf-tags{display:flex;justify-content:space-between;padding:12px 0 0;color:var(--ink-soft)}
+
+section{padding:120px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:48px;gap:24px}
+.sec-head h2{font-size:clamp(34px,4.4vw,60px)}
+
+.works{display:grid;grid-template-columns:repeat(12,1fr);gap:28px}
+.work{grid-column:span 4;cursor:pointer}
+.work:nth-child(1){grid-column:span 7}
+.work:nth-child(2){grid-column:span 5}
+.work:nth-child(6){grid-column:span 8}
+.work:nth-child(7){grid-column:span 4}
+.work .plate{background:var(--paper-2);aspect-ratio:4/3;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;position:relative}
+.work:nth-child(1) .plate,.work:nth-child(6) .plate{aspect-ratio:16/10}
+.work .plate svg{width:100%;height:100%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.work:hover .plate svg{transform:translateY(-6px) rotate(-1deg)}
+.work .meta{display:flex;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid var(--rule);margin-top:12px}
+.work h3{font-size:22px}
+.work .meta p{color:var(--ink-soft);font-size:14px}
+.sold{color:var(--clay-dark)}
+
+.process{background:var(--paper-2)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--rule)}
+.step{border-right:1px solid var(--rule);padding:0 20px 8px}
+.step svg{width:100%;height:auto;display:block;margin-bottom:18px}
+.step h3{font-size:24px;margin:6px 0 8px}
+.step p{font-size:15px;color:var(--ink-soft)}
+
+.kiln{background:var(--kiln);color:var(--shino);padding:120px 0 80px}
+.kiln .sec-head{border-color:rgba(233,214,192,.18)}
+.kiln-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+#kilnsvg{width:100%;height:auto;display:block}
+.kiln p{color:#b9a796;max-width:44ch}
+#curve{width:100%;height:auto;display:block;margin-top:28px}
+.kiln .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;border-top:1px solid rgba(233,214,192,.18);padding-top:18px}
+.kiln .stats b{display:block;font-family:"Young Serif",serif;font-weight:400;font-size:38px;color:var(--ember)}
+
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:64px}
+.about-grid h2{font-size:clamp(34px,4vw,54px)}
+.about-grid > div > p{margin-top:20px;color:var(--ink-soft);max-width:48ch}
+.shows{list-style:none}
+.shows li{display:grid;grid-template-columns:70px 1fr auto;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.shows li span:last-child{color:var(--ink-soft)}
+#hands{width:100%;height:auto;margin-top:36px}
+
+.contact{border-top:1px solid var(--rule)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.contact h2{font-size:clamp(40px,6vw,88px)}
+form{display:grid;gap:18px}
+label{display:grid;gap:6px;font-size:14px;color:var(--ink-soft)}
+input,textarea,select{font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);padding:8px 0;outline:none;border-radius:0}
+input:focus,textarea:focus,select:focus{border-color:var(--clay)}
+button{justify-self:start;font:500 16px "Instrument Sans",sans-serif;background:var(--ink);color:var(--paper);border:0;padding:14px 26px;cursor:pointer}
+button:hover{background:var(--clay)}
+footer{display:flex;justify-content:space-between;padding:28px 32px;max-width:1280px;margin:0 auto;color:var(--ink-soft);font-size:14px}
+
+.lightbox{position:fixed;inset:0;background:rgba(29,23,20,.92);display:none;align-items:center;justify-content:center;z-index:10;padding:32px}
+.lightbox.open{display:flex}
+.lightbox .inner{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;max-width:1000px;width:100%;color:var(--shino);align-items:center}
+.lightbox svg{width:100%;height:auto;background:var(--paper-2)}
+.lightbox h3{font-size:40px;margin-bottom:12px}
+.lightbox p{color:#b9a796}
+.lightbox .close{position:absolute;top:20px;right:28px;background:none;color:var(--shino);font-size:28px;padding:0}
+
+@media (max-width:900px){
+  .wrap,header,footer{padding-left:16px;padding-right:16px}
+  nav{gap:16px}
+  .hero-top,.kiln-grid,.about-grid,.contact-grid,.lightbox .inner{grid-template-columns:1fr;gap:28px}
+  .work,.work:nth-child(n){grid-column:span 12}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{border-bottom:1px solid var(--rule);padding-top:16px}
+  section{padding:80px 0}
+  .shelf-tags span:nth-child(n+3){display:none}
+}
+@media (max-width:520px){nav a:not(:last-child){display:none}.steps{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="mark" href="#">Mara Lindqvist<span>.</span></a>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#process">Process</a>
+    <a href="#kiln">Kiln</a>
+    <a href="#contact">Commissions</a>
+  </nav>
+</header>
+
+<div class="wrap hero">
+  <div class="hero-top">
+    <h1>Pots for the <em>long</em> table.</h1>
+    <p>Wheel-thrown stoneware and porcelain from a two-chamber wood kiln on the coast of Gotland. Made to be used daily, chipped occasionally, kept for decades.</p>
+  </div>
+  <div class="shelf-wrap">
+    <svg id="shelf" viewBox="0 0 1280 520" role="img" aria-label="Illustration of eight hand-thrown pots on a wooden studio shelf"></svg>
+    <div class="shelf-tags mono"><span>Studio shelf, Oct 2026</span><span>Firing no. 41</span><span>Iron, ash, shino</span><span>Scroll ↓</span></div>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head"><h2>From the last firing</h2><span class="mono">7 pieces — 3 available</span></div>
+    <div class="works" id="works"></div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="sec-head"><h2>Five weeks, one pot</h2><span class="mono">Clay to cooling</span></div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section class="kiln" id="kiln">
+  <div class="wrap">
+    <div class="sec-head"><h2>The anagama</h2><span class="mono">Built 2019 · 4.2 m³</span></div>
+    <div class="kiln-grid">
+      <svg id="kilnsvg" viewBox="0 0 700 420" role="img" aria-label="Cutaway illustration of a wood-fired kiln with flames moving through stacked pots"></svg>
+      <div>
+        <p>Twice a year, eight friends and I stoke the kiln around the clock for three days. Ash from the pine rides the flame through the chamber and melts onto the shoulders of the pots, so no two leave the same. Below is the log from firing no. 41.</p>
+        <svg id="curve" viewBox="0 0 520 220" role="img" aria-label="Temperature curve of firing 41 reaching 1310 degrees after 68 hours"></svg>
+        <div class="stats">
+          <div><b>68h</b><span class="mono">stoking</span></div>
+          <div><b>1310°</b><span class="mono">peak, front</span></div>
+          <div><b>6 t</b><span class="mono">pine burned</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>Trained in Mashiko, working in Visby.</h2>
+      <p>I spent four years apprenticed at a family pottery in Tochigi before coming home to set up a studio in a converted limestone barn. I dig a third of my clay from the island's marl beds and blend it with a Westerwald stoneware for strength.</p>
+      <svg id="hands" viewBox="0 0 520 300" role="img" aria-label="Line drawing of two hands centring clay on a potter's wheel"></svg>
+    </div>
+    <div>
+      <div class="sec-head" style="margin-bottom:8px"><span class="mono">Exhibitions &amp; collections</span></div>
+      <ul class="shows">
+        <li><span class="mono">2026</span><span>Ash &amp; Salt — Galleri Kvarnen, Stockholm</span><span>Solo</span></li>
+        <li><span class="mono">2025</span><span>Nordic Clay Biennale, Copenhagen</span><span>Group</span></li>
+        <li><span class="mono">2025</span><span>Röhsska Museum permanent collection</span><span>Acquired</span></li>
+        <li><span class="mono">2024</span><span>Firing Lines — Mashiko Ceramic Art Center</span><span>Group</span></li>
+        <li><span class="mono">2023</span><span>Table Ware — Konsthantverkarna</span><span>Solo</span></li>
+        <li><span class="mono">2022</span><span>Craft Council Emerging Maker Award</span><span>Prize</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Commission a table set.</h2>
+      <p style="margin-top:20px;color:var(--ink-soft);max-width:40ch">Restaurant and private table commissions open each spring. Lead time is one firing cycle, roughly six months.</p>
+      <p class="mono" style="margin-top:28px">studio@maralindqvist.se<br>Studio visits by appointment</p>
+    </div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Thank you — I reply within a week';">
+      <label>Name<input required name="name"></label>
+      <label>Email<input required type="email" name="email"></label>
+      <label>Kind of work
+        <select name="kind"><option>Table set (restaurant)</option><option>Table set (home)</option><option>Single piece</option><option>Exhibition loan</option></select>
+      </label>
+      <label>Tell me about the table<textarea rows="4" name="msg"></textarea></label>
+      <button type="submit">Send enquiry</button>
+    </form>
+  </div>
+</section>
+
+<footer><span>© 2026 Mara Lindqvist Keramik</span><span class="mono">Visby, Gotland</span></footer>
+
+<div class="lightbox" id="lb" role="dialog" aria-modal="true">
+  <button class="close" aria-label="Close" onclick="lb.classList.remove('open')">×</button>
+  <div class="inner"><div id="lbart"></div><div><h3 id="lbt"></h3><p id="lbd"></p></div></div>
+</div>
+
+<script>
+const NS="http://www.w3.org/2000/svg";
+let uid=0;
+function rng(seed){return()=>((seed=Math.imul(seed^seed>>>15,1|seed)+0x6D2B79F5|0,(seed>>>0)%10000)/10000)}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e}
+function smooth(pts){
+  let d=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    d+=`C${p1[0]+(p2[0]-p0[0])/6},${p1[1]+(p2[1]-p0[1])/6} ${p2[0]-(p3[0]-p1[0])/6},${p2[1]-(p3[1]-p1[1])/6} ${p2[0]},${p2[1]}`;
+  }
+  return d;
+}
+function profilePath(prof,cx,top,s){
+  const R=prof.map(([r,y])=>[cx+r*s,top+y*s]);
+  const L=prof.slice().reverse().map(([r,y])=>[cx-r*s,top+y*s]);
+  return smooth(R)+smooth(L).replace(/^M/,"L")+"Z";
+}
+
+const SHAPES={
+  moon:[[30,0],[33,4],[58,30],[66,62],[56,96],[30,116],[22,120]],
+  bottle:[[9,0],[10,4],[9,30],[24,52],[46,80],[48,112],[34,134],[24,138]],
+  bowl:[[70,0],[72,3],[64,26],[46,46],[24,54],[22,58]],
+  jar:[[34,0],[36,6],[34,14],[54,34],[60,70],[52,112],[34,132],[30,136]],
+  cylinder:[[34,0],[35,4],[33,40],[35,80],[38,106],[34,110]],
+  vase:[[22,0],[26,4],[18,28],[16,52],[36,92],[44,126],[32,150],[26,154]],
+  cup:[[30,0],[31,3],[29,30],[26,52],[18,62],[18,66]],
+  tsubo:[[28,0],[32,6],[28,14],[60,40],[72,80],[60,124],[36,148],[32,152]]
+};
+const GLAZES={
+  ash:{body:"#a86a4a",glaze:"#9aa98a",edge:"#c8c69a"},
+  celadon:{body:"#d9cfbf",glaze:"#8fb0a0",edge:"#b9d1c3"},
+  tenmoku:{body:"#b07a58",glaze:"#3b2a22",edge:"#8a4f2c"},
+  shino:{body:"#c5835c",glaze:"#ece0cf",edge:"#d9a27c"},
+  iron:{body:"#7d4128",glaze:"#5b3524",edge:"#b0643f"},
+  white:{body:"#e6dccb",glaze:"#f6f1e7",edge:"#d4cbbb"},
+  cobalt:{body:"#e6dccb",glaze:"#3e5372",edge:"#6d84a6"}
+};
+
+function pot(g,shape,glaze,cx,base,s,seed){
+  const prof=SHAPES[shape],H=prof[prof.length-1][1],top=base-H*s,G=GLAZES[glaze],r=rng(seed),id="p"+(uid++);
+  const d=profilePath(prof,cx,top,s);
+  const defs=el("defs",{},g);
+  el("path",{d},el("clipPath",{id:id+"c"},defs));
+  const lg=el("linearGradient",{id:id+"g",x1:0,x2:1,y1:0,y2:0},defs);
+  [[0,"#000",.35],[.3,"#fff",.12],[.45,"#fff",0],[1,"#000",.45]].forEach(([o,c,a])=>el("stop",{offset:o,"stop-color":c,"stop-opacity":a},lg));
+  el("ellipse",{cx,cy:base+2,rx:prof[prof.length-1][0]*s*1.6,ry:4*s/1.2,fill:"#2b2420",opacity:.18},g);
+  const c=el("g",{"clip-path":`url(#${id}c)`},g);
+  const maxR=Math.max(...prof.map(p=>p[0]))*s;
+  el("rect",{x:cx-maxR-2,y:top-2,width:maxR*2+4,height:H*s+4,fill:G.body},c);
+  const lvl=top+H*s*(.55+r()*.2);
+  const pts=[];
+  for(let x=cx-maxR-4;x<=cx+maxR+4;x+=4){
+    const drip=r()<.12?r()*H*s*.18:0;
+    pts.push([x,lvl+Math.sin(x*.07+seed)*3*s+drip]);
+  }
+  let gd=`M${cx-maxR-4},${top-4}`+pts.map(p=>`L${p[0].toFixed(1)},${p[1].toFixed(1)}`).join("")+`L${cx+maxR+4},${top-4}Z`;
+  el("path",{d:gd,fill:G.glaze},c);
+  el("path",{d:"M"+pts.map(p=>`${p[0].toFixed(1)},${(p[1]+1.5).toFixed(1)}`).join("L"),fill:"none",stroke:G.edge,"stroke-width":2.5*s/1.4,opacity:.9},c);
+  if(glaze==="ash"||glaze==="shino"){
+    for(let i=0;i<40;i++)el("circle",{cx:cx-maxR+r()*maxR*2,cy:top+r()*H*s*.6,r:(.6+r()*1.6)*s,fill:glaze==="ash"?"#d6d2a6":"#c78a64",opacity:.7},c);
+  }
+  if(glaze==="cobalt"){
+    for(let i=0;i<3;i++)el("path",{d:`M${cx-maxR},${top+H*s*(.25+i*.18)} q${maxR/2},${-8*s} ${maxR},0 t${maxR},0`,fill:"none",stroke:"#e6dccb","stroke-width":1.6*s,opacity:.65},c);
+  }
+  for(let y=top+8*s;y<base-4*s;y+=7*s)el("line",{x1:cx-maxR,x2:cx+maxR,y1:y+r()*2,y2:y+r()*2,stroke:"#000","stroke-width":.6,opacity:.07},c);
+  el("rect",{x:cx-maxR-2,y:top-2,width:maxR*2+4,height:H*s+4,fill:`url(#${id}g)`},c);
+  const rimR=prof[0][0]*s;
+  el("ellipse",{cx,cy:top+1.2*s,rx:rimR,ry:Math.max(2,rimR*.18),fill:"#1d1714",opacity:.55},g);
+  el("ellipse",{cx,cy:top+1.2*s,rx:rimR,ry:Math.max(2,rimR*.18),fill:"none",stroke:G.edge,"stroke-width":1.4},g);
+  el("path",{d,fill:"none",stroke:"#2b2420","stroke-width":1,opacity:.35},g);
+}
+
+/* hero shelf */
+(function(){
+  const s=document.getElementById("shelf");
+  const defs=el("defs",{},s);
+  const wood=el("linearGradient",{id:"wood",x1:0,x2:0,y1:0,y2:1},defs);
+  el("stop",{offset:0,"stop-color":"#a37a55"},wood);el("stop",{offset:1,"stop-color":"#7a5638"},wood);
+  el("rect",{x:0,y:0,width:1280,height:520,fill:"#efe7da"},s);
+  for(let i=0;i<9;i++)el("line",{x1:0,x2:1280,y1:30+i*44,y2:30+i*44,stroke:"#2b2420","stroke-width":.5,opacity:.06},s);
+  el("path",{d:"M1040,40 l90,0 l0,160 l-90,0z",fill:"#e6dccb",stroke:"#2b2420","stroke-opacity":.2},s);
+  el("path",{d:"M1052,60 q30,40 66,10 M1052,120 q24,-30 66,0 M1052,170 l66,0",fill:"none",stroke:"#b0643f","stroke-width":1.5},s);
+  el("text",{x:1052,y:192,"font-family":"JetBrains Mono","font-size":9,fill:"#6b5d52"},s).textContent="GLAZE TESTS 41";
+  el("rect",{x:0,y:430,width:1280,height:26,fill:"url(#wood)"},s);
+  el("rect",{x:0,y:456,width:1280,height:10,fill:"#5b3e28"},s);
+  for(let x=40;x<1280;x+=137)el("path",{d:`M${x},438 q20,4 40,0 t40,2`,fill:"none",stroke:"#5b3e28","stroke-width":1,opacity:.4},s);
+  el("path",{d:"M120,466 l0,54 M1160,466 l0,54",stroke:"#5b3e28","stroke-width":14},s);
+  const row=[["vase","ash",90,1.55],["tsubo","shino",250,1.6],["cup","tenmoku",395,1.3],["moon","celadon",530,1.9],["bottle","iron",700,1.85],["bowl","white",860,1.45],["jar","cobalt",1010,1.5],["cylinder","ash",1170,1.6]];
+  row.forEach(([sh,gl,x,sc],i)=>pot(s,sh,gl,x,430,sc,i*97+11));
+})();
+
+/* works */
+const WORKS=[
+  ["Moon jar no. 7","moon","celadon","Porcelain, celadon over iron slip. 38 cm.","€2,400",false],
+  ["Ash tsubo","tsubo","ash","Marl stoneware, natural ash from the firebox side. 41 cm.","Sold",true],
+  ["Tenmoku teacup","cup","tenmoku","Iron-saturate glaze, breaking rust at the lip. 8 cm.","€120",false],
+  ["Shino bottle","bottle","shino","Carbon-trapped shino, pinholed. 29 cm.","Sold",true],
+  ["Serving bowl","bowl","white","Ash-white over porcelain, trimmed foot. Ø 30 cm.","€380",false],
+  ["Storage jar, lidded","jar","cobalt","Stoneware, cobalt slip brushwork, wax-resist bands. 34 cm.","Sold",true],
+  ["Iron vase","vase","iron","Kaki-red iron glaze, rear shelf. 36 cm.","Sold",true]
+];
+const worksEl=document.getElementById("works");
+function drawWork(svg,w,i){
+  el("rect",{x:0,y:0,width:400,height:300,fill:"#e6dccb"},svg);
+  el("path",{d:"M0,250 L400,250 L400,300 L0,300Z",fill:"#d9cdb9"},svg);
+  pot(svg,w[1],w[2],200,252,["bowl","cup"].includes(w[1])?2.2:1.45,i*131+7);
+}
+WORKS.forEach((w,i)=>{
+  const a=document.createElement("article");a.className="work";a.tabIndex=0;
+  a.innerHTML=`<div class="plate"></div><div class="meta"><div><h3>${w[0]}</h3><p>${w[3]}</p></div><span class="mono ${w[5]?"sold":""}">${w[4]}</span></div>`;
+  const svg=el("svg",{viewBox:"0 0 400 300",preserveAspectRatio:"xMidYMax slice","aria-hidden":"true"},a.firstChild);
+  drawWork(svg,w,i);
+  const open=()=>{lbart.innerHTML="";const b=el("svg",{viewBox:"0 0 400 300"},lbart);drawWork(b,w,i);lbt.textContent=w[0];lbd.textContent=w[3]+" — "+w[4];lb.classList.add("open")};
+  a.onclick=open;a.onkeydown=e=>e.key==="Enter"&&open();
+  worksEl.appendChild(a);
+});
+const lb=document.getElementById("lb"),lbart=document.getElementById("lbart"),lbt=document.getElementById("lbt"),lbd=document.getElementById("lbd");
+lb.onclick=e=>e.target===lb&&lb.classList.remove("open");
+document.addEventListener("keydown",e=>e.key==="Escape"&&lb.classList.remove("open"));
+
+/* process steps */
+const ST="#2b2420",CL="#b0643f";
+const STEPS=[
+  ["01 · Week 1","Wedge","Island marl and Westerwald clay kneaded in a ram's head spiral, two hundred turns.",
+   `<path d="M40,150 q10,-40 60,-46 q50,-4 62,40 q4,14 -10,18 l-100,6 q-16,0 -12,-18z" fill="${CL}" opacity=".85"/>
+    <path d="M70,110 q30,10 60,0 M60,128 q40,12 80,0" stroke="#7d4128" fill="none"/>
+    <path d="M30,96 q20,-30 50,-22 l14,6 q6,4 0,10 l-22,10" fill="none" stroke="${ST}" stroke-width="2"/>
+    <path d="M170,96 q-20,-30 -50,-22 l-14,6 q-6,4 0,10 l22,10" fill="none" stroke="${ST}" stroke-width="2"/>
+    <line x1="10" y1="172" x2="190" y2="172" stroke="${ST}"/>`],
+  ["02 · Week 1","Throw","Pulled in three passes on a kick wheel. Walls left a little heavy for the ash to sit on.",
+   `<ellipse cx="100" cy="150" rx="80" ry="12" fill="none" stroke="${ST}" stroke-width="2"/>
+    <path d="M60,148 q-4,-50 18,-80 l44,0 q22,30 18,80z" fill="${CL}" opacity=".85"><animateTransform attributeName="transform" type="scale" values="1 1;1.02 .98;1 1" dur="2s" repeatCount="indefinite" additive="sum"/></path>
+    <ellipse cx="100" cy="68" rx="22" ry="4" fill="#7d4128"/>
+    <path d="M70,110 q30,6 60,0 M66,128 q34,6 68,0" stroke="#7d4128" fill="none" opacity=".6"/>
+    <path d="M100,162 l0,14 M30,176 l140,0" stroke="${ST}" stroke-width="2"/>`],
+  ["03 · Week 2","Trim","At leather hard, flipped and the foot ring carved with a hoop tool made from a bicycle spoke.",
+   `<path d="M50,60 q50,70 100,0z" fill="${CL}" opacity=".85"/>
+    <ellipse cx="100" cy="60" rx="50" ry="8" fill="#c27a55"/>
+    <ellipse cx="100" cy="60" rx="20" ry="3.5" fill="none" stroke="#7d4128" stroke-width="2"/>
+    <path d="M140,20 l-30,34" stroke="${ST}" stroke-width="3"/><path d="M106,50 q4,10 12,4 q-2,-8 -12,-4z" fill="none" stroke="${ST}" stroke-width="2"/>
+    <path d="M30,110 q20,-6 26,4 M150,104 q14,4 22,12" stroke="#7d4128" fill="none"/>
+    <line x1="10" y1="172" x2="190" y2="172" stroke="${ST}"/>`],
+  ["04 · Week 3","Glaze","Dipped by hand in wood-ash and feldspar glazes mixed from this kiln's own cleanings.",
+   `<path d="M40,110 l10,62 l100,0 l10,-62z" fill="none" stroke="${ST}" stroke-width="2"/>
+    <path d="M44,124 l112,0 l-8,48 l-96,0z" fill="#8fa89a"/>
+    <path d="M78,40 q-6,40 6,74 l32,0 q12,-34 6,-74z" fill="${CL}" opacity=".85"/>
+    <path d="M80,94 q20,8 40,0 l-4,20 l-32,0z" fill="#8fa89a"/>
+    <path d="M90,114 l0,10 M106,114 l0,14" stroke="#8fa89a" stroke-width="3" stroke-linecap="round"/>
+    <path d="M70,40 q30,-14 60,0" stroke="${ST}" fill="none" stroke-width="2"/>`],
+  ["05 · Week 5","Fire","Seventy hours in the anagama, then six days to cool before the door bricks come down.",
+   `<path d="M20,172 l0,-60 q80,-90 160,0 l0,60z" fill="none" stroke="${ST}" stroke-width="2"/>
+    <path d="M40,172 l0,-50 q60,-66 120,0 l0,50z" fill="#3b2a22"/>
+    <g fill="#e0793a"><path d="M70,172 q-10,-30 10,-50 q-4,24 10,30 q4,-30 20,-40 q-6,30 14,40 q8,-12 6,-26 q18,24 4,46z"><animate attributeName="opacity" values="1;.6;1" dur="1.2s" repeatCount="indefinite"/></path></g>
+    <path d="M150,60 l0,-40 l14,0 l0,48" fill="none" stroke="${ST}" stroke-width="2"/>
+    <path d="M157,16 q6,-8 0,-14" stroke="${ST}" fill="none" opacity=".5"/>`]
+];
+document.getElementById("steps").innerHTML=STEPS.map(([n,t,p,svg])=>`<div class="step"><svg viewBox="0 0 200 190" aria-hidden="true">${svg}</svg><span class="mono">${n}</span><h3>${t}</h3><p>${p}</p></div>`).join("");
+
+/* kiln cutaway */
+(function(){
+  const k=document.getElementById("kilnsvg");
+  const defs=el("defs",{},k);
+  const fg=el("radialGradient",{id:"fire",cx:.15,cy:.8,r:.9},defs);
+  [[0,"#ffd27a"],[.25,"#e0793a"],[.6,"#7d2f17"],[1,"#2a1a14"]].forEach(([o,c])=>el("stop",{offset:o,"stop-color":c},fg));
+  el("path",{d:"M0,380 L700,300 L700,420 L0,420Z",fill:"#2a211c"},k);
+  const shell="M40,370 L40,250 Q60,120 260,96 L600,60 Q660,70 640,180 L640,312Z";
+  el("path",{d:shell,fill:"#4a3a30"},k);
+  for(let i=0;i<14;i++)for(let j=0;j<5;j++)el("rect",{x:60+i*42+(j%2)*21,y:100+j*44-i*3,width:40,height:20,fill:"none",stroke:"#2a211c","stroke-width":1.5,opacity:.6},k);
+  const inner="M80,350 L80,262 Q100,160 270,138 L590,108 Q615,118 604,190 L604,298Z";
+  el("path",{d:inner,fill:"url(#fire)"},k);
+  el("path",{d:inner,fill:"none",stroke:"#e9d6c0","stroke-opacity":.25},k);
+  el("clipPath",{id:"inner"},defs).appendChild(el("path",{d:inner}));
+  const ig=el("g",{"clip-path":"url(#inner)"},k);
+  for(let f=0;f<7;f++){
+    const p=el("path",{d:`M60,${330-f*8} C220,${290-f*20} 360,${250-f*18} 640,${150+f*6}`,fill:"none",stroke:f%2?"#ffd27a":"#e0793a","stroke-width":6+f*2,"stroke-linecap":"round",opacity:.35,"stroke-dasharray":"60 90"},ig);
+    el("animate",{attributeName:"stroke-dashoffset",from:300,to:0,dur:(2+f*.4)+"s",repeatCount:"indefinite"},p);
+  }
+  [[300,290,"jar",.9],[360,282,"bottle",.85],[420,276,"vase",.8],[475,268,"cup",1.1],[525,262,"cylinder",.85],[300,206,"cup",1.0],[370,198,"bowl",.7],[450,190,"moon",.6]].forEach(([x,y,sh,sc],i)=>{
+    const prof=SHAPES[sh],H=prof[prof.length-1][1];
+    el("path",{d:profilePath(prof,x,y-H*sc,sc),fill:"#2a1a14",opacity:.82},ig);
+    el("path",{d:profilePath(prof,x,y-H*sc,sc),fill:"none",stroke:"#ffb45a","stroke-width":1.2,opacity:.8},ig);
+  });
+  el("rect",{x:270,y:292,width:300,height:8,fill:"#2a1a14"},ig);
+  el("rect",{x:270,y:208,width:230,height:6,fill:"#2a1a14"},ig);
+  el("rect",{x:20,y:300,width:70,height:56,fill:"#1d1714"},k);
+  el("path",{d:"M24,352 q10,-30 22,-20 q2,-20 18,-26 q-2,22 16,30 q4,10 -6,16z",fill:"#ffb45a"},k).appendChild(el("animate",{attributeName:"opacity",values:"1;.55;1",dur:"0.9s",repeatCount:"indefinite"}));
+  el("path",{d:"M0,356 l40,-6 l-36,-10z M0,344 l46,-2 l-40,-12z",fill:"#a37a55"},k);
+  el("rect",{x:604,y:40,width:40,height:272,fill:"#4a3a30"},k);
+  for(let i=0;i<4;i++){
+    const sm=el("circle",{cx:624,cy:30,r:12+i*4,fill:"#6b5d52",opacity:.3},k);
+    el("animate",{attributeName:"cy",values:"34;-30",dur:"4s",begin:i+"s",repeatCount:"indefinite"},sm);
+    el("animate",{attributeName:"opacity",values:".35;0",dur:"4s",begin:i+"s",repeatCount:"indefinite"},sm);
+  }
+  [["firebox",40,394],["front chamber",300,394],["chimney",590,394]].forEach(([t,x,y])=>{
+    el("text",{x,y,fill:"#b9a796","font-family":"JetBrains Mono","font-size":11,"letter-spacing":1},k).textContent=t.toUpperCase();
+  });
+})();
+
+/* firing curve */
+(function(){
+  const c=document.getElementById("curve");
+  const L=[[0,20],[6,180],[12,420],[20,620],[28,760],[36,880],[44,980],[50,1080],[56,1180],[62,1260],[66,1300],[68,1310],[72,1150],[84,900],[96,700]];
+  const x=h=>40+h/96*460,y=t=>190-t/1400*170;
+  for(let t=0;t<=1400;t+=350){el("line",{x1:40,x2:500,y1:y(t),y2:y(t),stroke:"#e9d6c0","stroke-opacity":.12},c);el("text",{x:0,y:y(t)+4,fill:"#8c7a6a","font-family":"JetBrains Mono","font-size":10},c).textContent=t+"°"}
+  [0,24,48,72,96].forEach(h=>el("text",{x:x(h)-8,y:212,fill:"#8c7a6a","font-family":"JetBrains Mono","font-size":10},c).textContent=h+"h");
+  el("rect",{x:x(0),y:20,width:x(68)-x(0),height:170,fill:"#e0793a",opacity:.06},c);
+  const d=smooth(L.map(([h,t])=>[x(h),y(t)]));
+  el("path",{d:d+`L${x(96)},190L${x(0)},190Z`,fill:"#e0793a",opacity:.15},c);
+  const line=el("path",{d,fill:"none",stroke:"#e0793a","stroke-width":2.5},c);
+  el("circle",{cx:x(68),cy:y(1310),r:5,fill:"#ffd27a"},c);
+  el("text",{x:x(68)-60,y:y(1310)-10,fill:"#e9d6c0","font-family":"JetBrains Mono","font-size":10},c).textContent="CONE 12 DOWN";
+  const len=line.getTotalLength();line.style.strokeDasharray=len;line.style.strokeDashoffset=len;
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){line.style.transition="stroke-dashoffset 2.4s ease";line.style.strokeDashoffset=0;o.disconnect()}}),{threshold:.4}).observe(c);
+})();
+
+/* hands */
+(function(){
+  const h=document.getElementById("hands");
+  h.innerHTML=`
+  <ellipse cx="260" cy="250" rx="200" ry="26" fill="none" stroke="#2b2420" stroke-width="1.5"/>
+  <ellipse cx="260" cy="246" rx="200" ry="26" fill="#d9cdb9"/>
+  <path d="M200,246 q-6,-50 20,-86 q40,-16 80,0 q26,36 20,86z" fill="#b0643f"/>
+  <path d="M206,210 q54,10 108,0 M212,184 q48,8 96,0" stroke="#7d4128" fill="none" opacity=".6"/>
+  <path d="M120,150 c30,-14 70,-6 92,20 c10,12 12,40 0,56 c-6,8 -20,6 -22,-4 c-4,-18 -10,-30 -30,-36 c-20,-6 -40,-8 -56,-4" fill="#efe7da" stroke="#2b2420" stroke-width="2"/>
+  <path d="M400,150 c-30,-14 -70,-6 -92,20 c-10,12 -12,40 0,56 c6,8 20,6 22,-4 c4,-18 10,-30 30,-36 c20,-6 40,-8 56,-4" fill="#efe7da" stroke="#2b2420" stroke-width="2"/>
+  <path d="M150,160 q20,8 34,30 M370,160 q-20,8 -34,30" stroke="#2b2420" fill="none" opacity=".4"/>
+  <path d="M60,150 l60,0 M400,150 l60,0" stroke="#2b2420" stroke-width="2"/>
+  <g stroke="#b0643f" stroke-width="1.4" fill="none" opacity=".7"><path d="M130,250 q130,30 260,0"><animate attributeName="stroke-dashoffset" values="0;-40" dur="1s" repeatCount="indefinite"/></path></g>
+  <text x="20" y="290" font-family="JetBrains Mono" font-size="10" fill="#6b5d52" letter-spacing="1">CENTRING · 140 RPM</text>`;
+  h.querySelector("g path").setAttribute("stroke-dasharray","6 14");
+})();
+</script>
+</body>
+</html>
