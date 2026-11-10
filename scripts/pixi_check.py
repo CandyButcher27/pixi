@@ -4,7 +4,7 @@
   uv run python scripts/pixi_check.py <project>/dist/index.html   # advanced tier: built React app
 
 Writes <page dir>/pixi-shot.png (full page, 1440 wide) and prints the house-style traits found,
-the running animation count and any console errors. Pages are served over HTTP so module scripts
+the running animation count, requestAnimationFrame callbacks per second and any console errors. Pages are served over HTTP so module scripts
 load. For a dist/ build the house-style text comes from the project's own source (index.html and
 src/), not the bundled component library CSS.
 """
@@ -46,6 +46,7 @@ def main() -> None:
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page(viewport={"width": 1440, "height": 900})
+        page.add_init_script("window.__raf=0;const r=window.requestAnimationFrame.bind(window);window.requestAnimationFrame=f=>{window.__raf++;return r(f)};")
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.on("console", lambda m: m.type == "error" and errors.append(m.text))
         page.goto(f"http://127.0.0.1:{server.server_port}/{page_file.name}", wait_until="networkidle")
@@ -56,6 +57,9 @@ def main() -> None:
             page.wait_for_timeout(120)
         page.wait_for_timeout(1800)
         animations = page.evaluate("document.getAnimations().length")
+        raf_start = page.evaluate("window.__raf")
+        page.wait_for_timeout(1000)
+        raf_per_second = page.evaluate("window.__raf") - raf_start
         body_bg = page.evaluate("getComputedStyle(document.body).backgroundColor")
         page.evaluate("window.scrollTo(0, 0)")
         page.wait_for_timeout(500)
@@ -67,6 +71,7 @@ def main() -> None:
     print(f"screenshot: {shot}")
     print(f"house style: {len(hits)}/7 {', '.join(hits) or '-'}  (lower is less Claude-looking; 3 or less is good)")
     print(f"motion: {animations} running CSS/SVG animations after scroll (0 means a static page)")
+    print(f"motion: {raf_per_second} requestAnimationFrame callbacks per second after scroll (0 means no scripted motion)")
     print(f"console errors: {len(errors)}" + (f"  first: {errors[0][:200]}" if errors else ""))
 
 
