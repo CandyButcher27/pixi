@@ -1,49 +1,34 @@
 ---
 name: design-build
-description: Build a frontend page against the design catalogue instead of from defaults. Use whenever the user asks for a landing page, marketing site, portfolio, dashboard shell, or any new UI in this repo — before writing any markup.
+description: Build a frontend page in this repo. Use whenever the user asks for a landing page, marketing site, portfolio, dashboard shell, or any new UI here — before writing any markup.
 ---
 
 # design-build
 
-Left alone, a model builds the same page every time: centred hero, gradient, three
-equal cards, pill CTA, Inter, testimonial strip, footer. That is mode collapse, not
-missing knowledge. This protocol replaces the default mode with a constrained one.
-
-The `design-catalogue` MCP server is the source of constraints. Do not skip it and
-do not build "in the spirit of" its output.
-
-## Protocol
-
-1. **`search_designs(brief)`** — returns three references: near, contrast, outlier.
-   Read all three grammars. The contrast and outlier are not decoration; they are
-   where the differentiation comes from.
-2. **`get_design_contract(brief, freeze_dir="<the directory you will build in>")`** —
-   returns the design intent, the inherited composition mandates, and the prohibitions,
-   and freezes that selection to disk. Always pass `freeze_dir`. Selection is fixed
-   before the page exists, so a disappointing page can never be rescued by retrieving a
-   more convenient reference afterwards.
-3. **Write `DESIGN_CONTRACT.md`** next to the page you are about to build. Copy every
-   inherited constraint verbatim, then add the brief-specific decisions that are
-   yours: typefaces (never a generic default), palette, section order, copy, and how
-   each mandate is realised structurally. **You may add constraints. You may never
-   weaken, reinterpret, or drop an inherited one.**
-4. **Build the page** against that contract. The mandates prevent known failure modes;
-   the design intent is what they are for. Satisfying the numbers while violating the
-   intent is a failed build — an alternating anchor whose other side is empty margin
-   passes `centroid_flips` and fails the intent behind it.
-5. **`verify_build(page_path, brief)`** — fix every violation and re-verify. Two
-   iterations maximum; if it still fails, say which mandate you could not satisfy and
-   why, rather than quietly relaxing it.
+Default: build straight from the brief, with the rules below. In blind human ratings
+(`builds/blind/RESULTS.md`, 2026-11-10) the plain request plus one illustration rule
+scored level with the full catalogue/contract protocol (6–4, p = 0.75) at a fraction of
+the cost, so the protocol is no longer required.
 
 ## Rules
 
-- Read the grammar, not the markup. `get_design(id, include_source=true)` exists for
-  when you need to see how a specific effect was implemented — reading it by default
-  produces a clone of the reference instead of a new design.
-- A page that satisfies every prohibition and no mandate has failed. Passing means the
-  positive composition obligations are measurably present in the render.
-- Without an MCP connection, the same thing is available as
-  `.venv/Scripts/python.exe scripts/design_cli.py contract "<brief>" <dir>` and
-  `... design_cli.py verify <dir>/index.html`.
-- `get_slop_law()` is the long form of the prohibitions. Read it when the contract's
-  one-line reasons are not enough.
+1. **Original illustration is a primary surface.** Draw substantial art yourself in SVG
+   or canvas (or use real photography when the user provides it). Not decoration in a
+   corner: it carries whole sections. Pages without it lost most head-to-heads.
+2. **None of the default AI landing page.** No gradient backdrops, glass panels, pill
+   CTAs, centred hero over three equal cards, or a generic display face (Inter,
+   system-ui, Arial). `get_slop_law()` on the `design-catalogue` MCP server has the long
+   form.
+3. **Specific copy.** Real-sounding names, numbers and details for the brief, not
+   three-word value propositions.
+4. **Look at it.** Take a full-page screenshot before reporting done and fix what reads
+   wrong: overlaps, cropped labels, empty halves.
+
+## Optional: the catalogue protocol
+
+Use only when the user asks for a reference-driven build. `search_designs(brief)` ->
+`get_design_contract(brief, freeze_dir=<build dir>)` -> write `DESIGN_CONTRACT.md` ->
+build -> `verify_build(page_path, brief)`, two repair rounds maximum, inherited rules
+never weakened. Without MCP: `uv run python scripts/design_cli.py contract "<brief>" <dir>`
+and `... design_cli.py verify <dir>/index.html`. Known faults: its imagery metric ignores
+inline SVG, and its contracts forbid imagery for many briefs.
