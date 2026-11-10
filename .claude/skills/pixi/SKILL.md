@@ -45,6 +45,11 @@ learn from. Use the first good one. If none pass, build without a reference and 
 - **None of the default AI landing page**: no gradient backdrops, glass panels, pill CTAs,
   centred hero over three equal cards, or Inter/system-ui display type.
 - **Specific copy** from the project: real names, numbers, features. No three-word value props.
+- **The page moves.** Animate the illustration itself, the way showcase sites loop project
+  video: threads marching, parts swinging, counters ticking, a drawing that turns. Reveal
+  sections with transform and opacity over 1.5s on `cubic-bezier(.19,1,.22,1)` via
+  IntersectionObserver. Where the project has a mechanism, make one small working demo of it.
+  Wrap everything in `prefers-reduced-motion: reduce`.
 
 ## 4. Check
 
@@ -53,8 +58,10 @@ uv run --project PIXI python PIXI/scripts/pixi_check.py <path/to/index.html>
 ```
 
 Open the `pixi-shot.png` it writes and fix overlaps, cropped text and empty halves. It also
-prints a house-style score; above 3 of 7, push further toward the reference. Report the page
-path, the reference URL used, and the score.
+prints a house-style score; above 3 of 7, push further toward the reference. It counts running
+CSS/SVG animations after scrolling; 0 means the page is static, so go back to the motion rule
+(requestAnimationFrame motion is not counted). Report the page path, the reference URL used,
+and the score.
 
 ## Optional: the catalogue protocol
 

@@ -25,12 +25,21 @@ def main() -> None:
         page = browser.new_page(viewport={"width": 1440, "height": 900})
         page.goto(page_file.as_uri(), wait_until="load")
         page.wait_for_timeout(1500)
+        height = page.evaluate("document.documentElement.scrollHeight")
+        for y in range(0, height, 450):
+            page.evaluate(f"window.scrollTo(0, {y})")
+            page.wait_for_timeout(120)
+        page.wait_for_timeout(1800)
+        animations = page.evaluate("document.getAnimations().length")
+        page.evaluate("window.scrollTo(0, 0)")
+        page.wait_for_timeout(500)
         page.screenshot(path=str(shot), full_page=True)
         browser.close()
     bg = (measure.measure(page_file).get("backgrounds") or [""])[0]
     hits = house_style(page_file.read_text(encoding="utf-8", errors="ignore"), bg)
     print(f"screenshot: {shot}")
     print(f"house style: {len(hits)}/7 {', '.join(hits) or '-'}  (lower is less Claude-looking; 3 or less is good)")
+    print(f"motion: {animations} running CSS/SVG animations after scroll (0 means a static page)")
 
 
 if __name__ == "__main__":
