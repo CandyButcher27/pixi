@@ -16,16 +16,16 @@ Some `websites/*/index.html` files are unregenerated placeholder stubs (generic 
 
 ## Building any UI in this repo
 
-Use the `design-build` skill and the `design-catalogue` MCP server (`designmcp/`,
-registered in `.mcp.json`). Do not write markup for a new page straight from a brief —
-that is the generic-output failure this repo exists to fix. The protocol is:
-`search_designs` -> `get_design_contract` -> write `DESIGN_CONTRACT.md` -> build ->
-`verify_build`, fixing violations, two iterations maximum.
+Use the `design-build` skill. Its default is a prompt rule set (original illustration as a
+primary surface, none of the default AI landing page, specific copy, screenshot check),
+because blind human ratings in `builds/blind/RESULTS.md` found it level with the full
+catalogue protocol. The `design-catalogue` MCP server (`designmcp/`, registered in
+`.mcp.json`) and its `search_designs` -> `get_design_contract` -> build -> `verify_build`
+protocol are optional, for reference-driven builds.
 
-Composition grammar is measured from the render (`designmcp/measure.py`), never guessed.
-The same measurement describes a catalogue entry and checks a built page, so any new
-contract rule must be expressible as a comparison against a number that probe produces.
-Inherited constraints may be added to, never weakened.
+When working on the catalogue protocol: composition grammar is measured from the render
+(`designmcp/measure.py`), never guessed, and any new contract rule must compare against a
+number that probe produces. Inherited constraints may be added to, never weakened.
 
 Re-run `scripts/annotate_designs.py <entry>` after adding or regenerating a catalogue
 entry, or it stays invisible to retrieval.

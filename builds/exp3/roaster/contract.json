@@ -1,0 +1,201 @@
+{
+  "identity": {
+    "references": {
+      "near": {
+        "id": "agenticos",
+        "grammar": {
+          "hero_alignment": "left",
+          "hero_weight_split": 0.298,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 7,
+          "card_reliance": "none",
+          "largest_card_row": 0,
+          "geometry": "pill",
+          "max_radius": 999,
+          "display_dominance": 13.75,
+          "display_weight": 400,
+          "generic_display_font": false,
+          "imagery": "absent",
+          "imagery_ratio": 0.007,
+          "density": "medium",
+          "text_density": "medium",
+          "gradients": 4,
+          "glass_panels": 1,
+          "palette_size": 3,
+          "sections": 5,
+          "page_height": 4312
+        }
+      },
+      "contrast": {
+        "id": "live:www.coffeesupreme.com",
+        "grammar": {
+          "hero_alignment": "centered",
+          "hero_weight_split": 0.508,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 29,
+          "card_reliance": "none",
+          "largest_card_row": 0,
+          "geometry": "sharp",
+          "max_radius": 0,
+          "display_dominance": 2.5,
+          "display_weight": 500,
+          "generic_display_font": false,
+          "imagery": "dominant",
+          "imagery_ratio": 1.215,
+          "density": "high",
+          "text_density": "high",
+          "gradients": 0,
+          "glass_panels": 0,
+          "palette_size": 4,
+          "sections": 2,
+          "page_height": 7543
+        }
+      },
+      "outlier": {
+        "id": "live:www.peppasauce.love",
+        "grammar": {
+          "hero_alignment": "unknown",
+          "hero_weight_split": null,
+          "section_rhythm": "alternating",
+          "full_bleed_sections": 21,
+          "card_reliance": "none",
+          "largest_card_row": 0,
+          "geometry": "rounded",
+          "max_radius": 72,
+          "display_dominance": 41.14,
+          "display_weight": 400,
+          "generic_display_font": false,
+          "imagery": "present",
+          "imagery_ratio": 0.156,
+          "density": "high",
+          "text_density": "medium",
+          "gradients": 0,
+          "glass_panels": 0,
+          "palette_size": 1,
+          "sections": 24,
+          "page_height": 7358
+        }
+      }
+    },
+    "direction": "high-density, balanced-hierarchy, dominant imagery, sharp geometry, uniform section rhythm",
+    "design_intent": [
+      "Information is expressed as sequences and spatial hierarchy \u2014 lists, tables, ruled rows, running text \u2014 not as a catalogue of equal cards.",
+      "The visual anchor moves through the page rather than sitting in one column, and the side it leaves should carry weight of its own, not empty margin.",
+      "Typography carries the hierarchy. Size, weight and spacing do the work that borders, shadows and container chrome would otherwise do.",
+      "The page is dense and rewards reading: specifics, numbers and detail rather than three-word value propositions."
+    ]
+  },
+  "inherited": {
+    "required": [
+      {
+        "rule": "full_bleed_sections",
+        "op": ">=",
+        "value": 1,
+        "source": "contrast:live:www.coffeesupreme.com",
+        "why": "at least one section breaks the page container"
+      },
+      {
+        "rule": "centroid_flips",
+        "op": ">=",
+        "value": 2,
+        "source": "outlier:live:www.peppasauce.love",
+        "why": "visual anchor alternates sides between major sections"
+      },
+      {
+        "rule": "display_dominance",
+        "op": ">=",
+        "value": 6.0,
+        "source": "outlier:live:www.peppasauce.love",
+        "why": "display typography carries the hierarchy instead of card chrome"
+      },
+      {
+        "rule": "largest_card_row",
+        "op": "<=",
+        "value": 2,
+        "source": "near:agenticos+contrast:live:www.coffeesupreme.com+outlier:live:www.peppasauce.love",
+        "why": "information is a sequence, not a row of equal boxes"
+      },
+      {
+        "rule": "display_dominance",
+        "op": "<=",
+        "value": 19.2,
+        "source": "median of triple",
+        "why": "display scale stays inside the reference range"
+      },
+      {
+        "rule": "hero_weight_split",
+        "op": "<=",
+        "value": 0.42,
+        "source": "near:agenticos",
+        "why": "hero_alignment is left in the references"
+      },
+      {
+        "rule": "imagery_ratio",
+        "op": "<",
+        "value": 0.06,
+        "source": "near:agenticos",
+        "why": "imagery is absent in the references"
+      },
+      {
+        "rule": "elements_per_1k",
+        "op": ">=",
+        "value": 55,
+        "source": "contrast:live:www.coffeesupreme.com+outlier:live:www.peppasauce.love",
+        "why": "density is high in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": "<=",
+        "value": 5,
+        "source": "contrast:live:www.coffeesupreme.com",
+        "why": "geometry is sharp in the references"
+      }
+    ],
+    "forbidden": [
+      {
+        "rule": "gradients",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "gradient backdrops are the loudest AI tell"
+      },
+      {
+        "rule": "pill_controls",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "fully rounded pill CTAs"
+      },
+      {
+        "rule": "glass_panels",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "glassmorphism panels"
+      },
+      {
+        "rule": "generic_display_font",
+        "op": "==",
+        "value": false,
+        "source": "slop_law",
+        "why": "Inter / system-ui defaults on the display face"
+      },
+      {
+        "rule": "hero_asymmetry",
+        "op": ">=",
+        "value": 0.08,
+        "source": "slop_law",
+        "why": "centred hero column is the default AI composition"
+      }
+    ]
+  },
+  "agent_owns": [
+    "product message, section order, and copy",
+    "the exact display and body typefaces (must not be a generic default)",
+    "the palette, within the direction above",
+    "how each composition mandate is realised structurally"
+  ],
+  "rule": "You may add constraints. You may not weaken or drop an inherited one.",
+  "brief": "independent coffee roaster in Lisbon",
+  "frozen_at": "2026-11-08T13:02:41+00:00"
+}

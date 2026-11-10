@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hilde Aune — Wood-fired stoneware & porcelain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#ECE5D8;--paper2:#E2D9C8;--ink:#1E1915;--mute:#6B6157;--iron:#9C3D1F;--ash:#7F9180;--kiln:#15110E;--rule:#1E191533}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{font:400 16px/1.55 "Hanken Grotesk",sans-serif;color:var(--ink);background:var(--paper)}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.serif{font-family:"Gloock",serif;font-weight:400}
+canvas{display:block;width:100%;height:100%}
+.wrap{max-width:1440px;margin:0 auto;padding:0 48px}
+
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:baseline;gap:40px;height:64px}
+header .mark{font-family:"Gloock",serif;font-size:22px}
+header nav{display:flex;gap:28px;margin-left:auto}
+header nav a{text-decoration:none;border-bottom:1px solid transparent}
+header nav a:hover{border-color:var(--ink)}
+header .status{color:var(--iron)}
+
+.split{display:grid;gap:0}
+.hero{grid-template-columns:600px 1fr;min-height:860px;border-bottom:1px solid var(--ink)}
+.hero .txt{padding:56px 48px 48px;display:flex;flex-direction:column;border-right:1px solid var(--ink)}
+.hero h1{font-family:"Gloock",serif;font-weight:400;font-size:112px;line-height:.9;letter-spacing:-.025em;margin:28px 0 28px}
+.hero h1 span{display:block}
+.hero h1 em{font-style:normal;color:var(--iron)}
+.hero .lede{font-size:21px;line-height:1.4;max-width:30ch}
+.facts{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.facts div{padding:14px 12px 0 0}
+.facts b{display:block;font-family:"Gloock",serif;font-weight:400;font-size:40px;line-height:1.1}
+.facts span{display:block;color:var(--mute);font-size:13px}
+.hero .img{position:relative}
+.cap{position:absolute;left:24px;bottom:20px;color:var(--ink)}
+.cap.lt{color:var(--paper)}
+
+.feature{grid-template-columns:1fr 620px;border-bottom:1px solid var(--ink)}
+.feature .img{min-height:980px;border-right:1px solid var(--ink);position:relative}
+.feature .txt{padding:64px 48px}
+.kicker{color:var(--iron);display:block;margin-bottom:18px}
+h2{font-family:"Gloock",serif;font-weight:400;font-size:72px;line-height:.95;letter-spacing:-.02em;margin-bottom:28px}
+h3{font-family:"Gloock",serif;font-weight:400;font-size:30px;line-height:1.1;margin:32px 0 12px}
+.feature p{margin-bottom:14px;max-width:52ch}
+.spec{width:100%;border-collapse:collapse;margin-top:28px}
+.spec th,.spec td{text-align:left;padding:7px 0;border-top:1px solid var(--rule);vertical-align:top;font-weight:400}
+.spec th{width:38%;font-family:"JetBrains Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
+.price{display:flex;justify-content:space-between;align-items:baseline;margin-top:28px;padding-top:18px;border-top:2px solid var(--ink)}
+.price b{font-family:"Gloock",serif;font-weight:400;font-size:40px;white-space:nowrap}
+
+.kilnsec{position:relative;background:var(--kiln);color:var(--paper);min-height:860px}
+.kilnsec .bg{position:absolute;inset:0}
+.kilnsec .txt{position:relative;width:560px;padding:72px 48px;background:var(--kiln);min-height:860px;border-right:1px solid #ECE5D833}
+.kilnsec h2{color:var(--paper)}
+.kilnsec .kicker{color:#E07A45}
+.log{width:100%;border-collapse:collapse;font-size:14px;margin-top:20px}
+.log td,.log th{padding:6px 0;border-top:1px solid #ECE5D826;text-align:left;font-weight:400}
+.log th{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;color:#ECE5D899}
+.log td:first-child{font-family:"JetBrains Mono",monospace;font-size:12px;width:70px}
+.log td:nth-child(2){font-family:"JetBrains Mono",monospace;font-size:12px;color:#E07A45;width:80px}
+.kilnsec p{color:#ECE5D8CC;max-width:44ch}
+
+.index{grid-template-columns:420px 1fr;border-bottom:1px solid var(--ink)}
+.index .img{border-right:1px solid var(--ink);position:relative}
+.index .txt{padding:64px 48px}
+.filters{display:flex;gap:18px;margin:0 0 18px}
+.filters button{font:500 12px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.04em;background:none;border:1px solid var(--ink);border-radius:0;padding:7px 12px;cursor:pointer;color:var(--ink)}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.works{width:100%;border-collapse:collapse;font-size:14px}
+.works th{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);text-align:left;font-weight:400;padding:8px 8px 8px 0;border-bottom:1px solid var(--ink)}
+.works td{padding:9px 8px 9px 0;border-bottom:1px solid var(--rule)}
+.works td:first-child{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mute)}
+.works td.n{font-family:"Gloock",serif;font-size:18px}
+.works td.r{text-align:right;font-family:"JetBrains Mono",monospace;font-size:12px}
+.works .sold{color:var(--mute);text-decoration:line-through}
+.works .avail{color:var(--iron)}
+.works tr.hide{display:none}
+
+.glaze{grid-template-columns:1fr 760px;border-bottom:1px solid var(--ink)}
+.glaze .txt{padding:64px 48px;border-right:1px solid var(--ink)}
+.recipes{display:grid;grid-template-columns:1fr 1fr;gap:28px 36px;margin-top:8px}
+.recipe h3{margin:0 0 6px;font-size:26px}
+.recipe .mono{color:var(--mute);display:block;margin-bottom:8px}
+.recipe table{width:100%;border-collapse:collapse;font-size:14px}
+.recipe td{padding:4px 0;border-top:1px solid var(--rule)}
+.recipe td+td{text-align:right;font-family:"JetBrains Mono",monospace;font-size:12px}
+.recipe p{font-size:14px;color:var(--mute);margin-top:8px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr)}
+.tile{position:relative;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.tile .mono{position:absolute;left:10px;bottom:8px;font-size:10px;background:var(--paper);padding:2px 5px}
+
+.shows{grid-template-columns:560px 1fr;border-bottom:1px solid var(--ink)}
+.shows .img{border-right:1px solid var(--ink);position:relative;min-height:1000px}
+.shows .txt{padding:64px 48px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.list{list-style:none;font-size:15px}
+.list li{display:grid;grid-template-columns:64px 1fr;padding:8px 0;border-top:1px solid var(--rule)}
+.list li .mono{color:var(--mute);padding-top:3px}
+.list li i{font-style:normal;color:var(--mute);display:block;font-size:13px}
+.commission{margin-top:40px;padding-top:24px;border-top:2px solid var(--ink);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.commission p{max-width:56ch}
+a.btn{display:inline-block;background:var(--iron);color:var(--paper);text-decoration:none;padding:16px 22px;border-radius:0;font-weight:500}
+a.btn:hover{background:var(--ink)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0 20px;margin-top:28px;font-size:14px}
+.steps div{border-top:1px solid var(--ink);padding-top:10px}
+.steps b{display:block;font-family:"Gloock",serif;font-weight:400;font-size:28px}
+
+footer{display:grid;grid-template-columns:760px 1fr;min-height:420px;background:var(--paper2)}
+footer .txt{padding:56px 48px;border-right:1px solid var(--ink)}
+footer .big{font-family:"Gloock",serif;font-size:56px;line-height:1;margin-bottom:24px}
+footer .big a{text-decoration:none;border-bottom:2px solid var(--iron)}
+footer .fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;font-size:14px}
+footer .fcols .mono{display:block;color:var(--mute);margin-bottom:6px}
+footer .small{margin-top:36px;font-size:12px;color:var(--mute)}
+footer .img{position:relative}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="mark">Hilde Aune</span>
+    <span class="mono status">Kiln cooling · firing 41 opens 14 Nov</span>
+    <nav class="mono">
+      <a href="#feature">Work</a><a href="#kiln">Kiln</a><a href="#index">Index</a><a href="#glaze">Glazes</a><a href="#shows">Shows</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="split hero">
+    <div class="txt">
+      <span class="mono">Stoneware &amp; porcelain · Jæren, Norway · since 2009</span>
+      <h1 class="serif"><span>Pots fired</span><span>for <em>84</em></span><span>hours.</span></h1>
+      <p class="lede">Hilde Aune throws jars, bottles and tea bowls on a kick wheel and fires them twice a year in a three-chamber noborigama fed with 6 tonnes of birch and spruce.</p>
+      <p style="margin-top:16px;max-width:44ch;color:var(--mute)">Every piece below is listed with its clay, its firing, where it sat in the kiln and whether it is still in the studio. Nothing is made to order in batches; commissions are taken for one firing at a time.</p>
+      <div class="facts">
+        <div><b>1305°</b><span>peak, chamber 1, cone 12 down</span></div>
+        <div><b>41</b><span>firings since the kiln was built in 2013</span></div>
+        <div><b>212</b><span>pots in the last load, 61 kept</span></div>
+      </div>
+    </div>
+    <div class="img">
+      <canvas data-scene="hero" aria-label="Group of wood-fired jars and bottles on a plinth"></canvas>
+      <span class="cap mono">Firing 40 · front chamber · ash shino, iron slip, raw</span>
+    </div>
+  </section>
+
+  <section class="split feature" id="feature">
+    <div class="img">
+      <canvas data-scene="moon" aria-label="Large moon jar with pale ash glaze running over iron-red clay"></canvas>
+      <span class="cap lt mono">HA-40-07 · moon jar · 46 × 44 cm</span>
+    </div>
+    <div class="txt">
+      <span class="kicker mono">Featured · firing 40, March 2026</span>
+      <h2>Moon jar with a broken ash line</h2>
+      <p>Thrown in two halves from 14 kg of Jæren red stoneware and joined at the shoulder while leather-hard. The seam stays visible: a slight lean to the north side, where the jar faced the firebox.</p>
+      <p>It spent 84 hours in the front chamber, second row from the throat. Wood ash fell on the shoulder and melted into a runny green glass that stopped two-thirds of the way down, then flashed the bare clay below to the colour of a brick at dusk.</p>
+      <p>The underside carries a flame mark from the wadding — three small pale moons where it stood on shell and kaolin.</p>
+      <table class="spec">
+        <tr><th>Clay body</th><td>Jæren red, 18% grog, local iron</td></tr>
+        <tr><th>Glaze</th><td>Natural ash over thin nuka on the rim</td></tr>
+        <tr><th>Firing</th><td>No. 40 · cone 11 · reduction from 980°C</td></tr>
+        <tr><th>Kiln position</th><td>Chamber 1, row 2, left of the throat</td></tr>
+        <tr><th>Dimensions</th><td>46 cm high · 44 cm wide · 11.2 kg</td></tr>
+        <tr><th>Food safe</th><td>Interior liner glaze, tested to EN 1388</td></tr>
+        <tr><th>Edition</th><td>One of four kept from this firing</td></tr>
+      </table>
+      <h3>From the notebook</h3>
+      <p style="color:var(--mute)">"The kiln gave too much ash this time. I almost cut the jar in half to see the wall. I'm glad I didn't." — 22 March</p>
+      <div class="price"><span class="mono">Available · ships crated from Stavanger</span><b>NOK 38 000</b></div>
+    </div>
+  </section>
+
+  <section class="kilnsec" id="kiln">
+    <div class="bg"><canvas data-scene="kiln" aria-label="Interior of the kiln at full heat, pots glowing in the chamber"></canvas></div>
+    <div class="txt">
+      <span class="kicker mono">The kiln · noborigama, built 2013</span>
+      <h2>Three chambers, four days, eleven people</h2>
+      <p>The kiln climbs the slope behind the studio. Each chamber is stoked from the side once the one below reaches temperature. Friends work six-hour shifts; the log is kept by hand and copied here.</p>
+      <table class="log">
+        <tr><th>Hour</th><th>Temp</th><th>Firing 40 log</th></tr>
+        <tr><td>00</td><td>20°</td><td>Firebox lit with birch kindling</td></tr>
+        <tr><td>14</td><td>600°</td><td>Quartz inversion passed, slow climb</td></tr>
+        <tr><td>31</td><td>980°</td><td>Damper in, body reduction begins</td></tr>
+        <tr><td>52</td><td>1240°</td><td>Cone 10 soft, chamber 1 side-stoking</td></tr>
+        <tr><td>68</td><td>1305°</td><td>Cone 12 down, peak held 3 h</td></tr>
+        <tr><td>76</td><td>1280°</td><td>Chamber 2 cone 10 down</td></tr>
+        <tr><td>84</td><td>1260°</td><td>Chamber 3 done, all ports bricked shut</td></tr>
+        <tr><td>+120</td><td>140°</td><td>Unbricked, 61 of 212 pots kept</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="split index" id="index">
+    <div class="img">
+      <canvas data-scene="strip" aria-label="Column of forms: bottle, tea bowl, cylinder, jar"></canvas>
+    </div>
+    <div class="txt">
+      <span class="kicker mono">Works index · 20 of 61 from firings 39–40</span>
+      <h2>The index</h2>
+      <div class="filters" role="group" aria-label="Filter works">
+        <button aria-pressed="true" data-f="all">All</button>
+        <button aria-pressed="false" data-f="avail">Available</button>
+        <button aria-pressed="false" data-f="jar">Jars</button>
+        <button aria-pressed="false" data-f="bowl">Bowls</button>
+        <button aria-pressed="false" data-f="bottle">Bottles</button>
+      </div>
+      <table class="works">
+        <thead><tr><th>No.</th><th>Title</th><th>Clay / glaze</th><th>Firing</th><th>H × W cm</th><th>Status</th><th style="text-align:right">NOK</th></tr></thead>
+        <tbody id="works"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="split glaze" id="glaze">
+    <div class="txt">
+      <span class="kicker mono">Glaze notebook · cone 10–12 reduction</span>
+      <h2>Four glazes, all from the coast</h2>
+      <p style="max-width:58ch;margin-bottom:28px">The ash comes from the kiln itself; the iron from a bog-ore seam a kilometre inland; the feldspar from a quarry the studio shares with a stonemason. Recipes are by weight, sieved at 80 mesh. Use them.</p>
+      <div class="recipes">
+        <div class="recipe"><h3>Jæren shino</h3><span class="mono">Satin · carbon trap</span>
+          <table><tr><td>Nepheline syenite</td><td>58</td></tr><tr><td>Spodumene</td><td>17</td></tr><tr><td>EPK kaolin</td><td>15</td></tr><tr><td>Soda ash</td><td>6</td></tr><tr><td>Local red clay</td><td>4</td></tr></table>
+          <p>Apply thick. Traps carbon below 980°C if reduction starts early.</p></div>
+        <div class="recipe"><h3>Birch ash celadon</h3><span class="mono">Gloss · runs above cone 11</span>
+          <table><tr><td>Washed birch ash</td><td>40</td></tr><tr><td>Potash feldspar</td><td>35</td></tr><tr><td>Silica</td><td>15</td></tr><tr><td>Whiting</td><td>10</td></tr><tr><td>Red iron oxide</td><td>+1.5</td></tr></table>
+          <p>Ash washed three times. Pools green in the wells of bowls.</p></div>
+        <div class="recipe"><h3>Bog-iron tenmoku</h3><span class="mono">Gloss · breaks rust on rims</span>
+          <table><tr><td>Potash feldspar</td><td>42</td></tr><tr><td>Silica</td><td>28</td></tr><tr><td>Whiting</td><td>18</td></tr><tr><td>Kaolin</td><td>12</td></tr><tr><td>Bog ore, calcined</td><td>+11</td></tr></table>
+          <p>Ore roasted at 800°C first, then ground. Darker in chamber 1.</p></div>
+        <div class="recipe"><h3>Nuka white</h3><span class="mono">Opaque · liner &amp; rims</span>
+          <table><tr><td>Rice-husk ash</td><td>45</td></tr><tr><td>Potash feldspar</td><td>30</td></tr><tr><td>Whiting</td><td>20</td></tr><tr><td>Kaolin</td><td>5</td></tr><tr><td>Tin oxide</td><td>+3</td></tr></table>
+          <p>Food-safe liner. Crawls if applied over 1.2 mm.</p></div>
+      </div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><canvas data-scene="tile" data-g="shino"></canvas><span class="mono">T-01 shino thin</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="shino2"></canvas><span class="mono">T-02 shino thick</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="cel"></canvas><span class="mono">T-03 celadon c10</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="cel2"></canvas><span class="mono">T-04 celadon c12</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="ten"></canvas><span class="mono">T-05 tenmoku</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="ten2"></canvas><span class="mono">T-06 tenmoku rust</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="nuka"></canvas><span class="mono">T-07 nuka</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="nuka2"></canvas><span class="mono">T-08 nuka over iron</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="ash"></canvas><span class="mono">T-09 raw ash ch.1</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="flash"></canvas><span class="mono">T-10 flashing ch.3</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="raw"></canvas><span class="mono">T-11 bare red</span></div>
+      <div class="tile"><canvas data-scene="tile" data-g="carbon"></canvas><span class="mono">T-12 carbon trap</span></div>
+    </div>
+  </section>
+
+  <section class="split shows" id="shows">
+    <div class="img">
+      <canvas data-scene="studio" aria-label="Shelf of tea bowls drying in the studio"></canvas>
+      <span class="cap mono">Drying shelf · 38 tea bowls for firing 41</span>
+    </div>
+    <div class="txt">
+      <span class="kicker mono">Exhibitions · stockists · press</span>
+      <h2>Where the pots go</h2>
+      <div class="cols">
+        <div>
+          <h3>Exhibitions</h3>
+          <ul class="list">
+            <li><span class="mono">2026</span><span>Ash &amp; Iron, solo<i>Galleri Format, Bergen · 4 Apr – 17 May</i></span></li>
+            <li><span class="mono">2025</span><span>Collect, with Officine Saffi<i>Somerset House, London</i></span></li>
+            <li><span class="mono">2025</span><span>Nordic Wood Fire<i>Kunstindustrimuseet, Oslo · group</i></span></li>
+            <li><span class="mono">2024</span><span>The Slow Kiln<i>Hostler Burrows, New York · two-person</i></span></li>
+            <li><span class="mono">2023</span><span>Mashiko Biennale<i>Tochigi, Japan · selected</i></span></li>
+            <li><span class="mono">2021</span><span>Earth, Fire, Coast<i>Stavanger Kunstmuseum · solo</i></span></li>
+          </ul>
+          <h3>Collections</h3>
+          <ul class="list">
+            <li><span class="mono">NO</span><span>Nasjonalmuseet, Oslo<i>Moon jar HA-33-02</i></span></li>
+            <li><span class="mono">UK</span><span>V&amp;A, London<i>Pair of tea bowls, 2022</i></span></li>
+            <li><span class="mono">DK</span><span>Designmuseum Danmark<i>Bottle, bog-iron tenmoku</i></span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Stockists</h3>
+          <ul class="list">
+            <li><span class="mono">OSL</span><span>Kollekt Studio<i>Tea bowls &amp; cups, standing stock</i></span></li>
+            <li><span class="mono">CPH</span><span>Tableau<i>Bottles, after each firing</i></span></li>
+            <li><span class="mono">LDN</span><span>Maud and Mabel<i>Larger works by appointment</i></span></li>
+            <li><span class="mono">NYC</span><span>Hostler Burrows<i>Moon jars, representing</i></span></li>
+          </ul>
+          <h3>Press</h3>
+          <ul class="list">
+            <li><span class="mono">2026</span><span>Ceramic Review 318<i>"The patience of ash", 8 pages</i></span></li>
+            <li><span class="mono">2025</span><span>Kinfolk 54<i>Studio visit, Jæren</i></span></li>
+            <li><span class="mono">2024</span><span>NRK Kultur<i>Radio, 22 min, firing 37</i></span></li>
+            <li><span class="mono">2022</span><span>Crafts Magazine<i>Maker of the month</i></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="commission">
+        <p><b>Commissions for firing 42 (May 2027)</b> open until 15 January. Up to eight pieces per firing: dinner sets of 6–12, single jars, or architectural tiles. Deposit 30%, balance when the kiln opens. Some pieces will not survive; you choose from what does.</p>
+        <a class="btn" href="mailto:studio@hildeaune.no?subject=Commission%20firing%2042">Request a commission</a>
+      </div>
+      <div class="steps">
+        <div><b>01</b>Brief by email or a studio visit</div>
+        <div><b>02</b>Test tiles from your clay &amp; glaze</div>
+        <div><b>03</b>Thrown Feb–Apr, fired May</div>
+        <div><b>04</b>Choose from the survivors</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="txt">
+    <p class="big"><a href="mailto:studio@hildeaune.no">studio@hildeaune.no</a></p>
+    <div class="fcols">
+      <div><span class="mono">Studio</span>Nærbø, Jæren<br>Open Saturdays 11–16<br>and the week after each firing</div>
+      <div><span class="mono">Next opening</span>Firing 41 · 14–16 Nov 2026<br>Coffee, soup, 150 pots<br>No booking needed</div>
+      <div><span class="mono">Elsewhere</span><a href="#">Instagram</a><br><a href="#">Newsletter (twice a year)</a><br><a href="#">Press kit, 40 MB</a></div>
+    </div>
+    <p class="small mono">© 2026 Hilde Aune · Images rendered from studio profiles · Org. 998 412 330</p>
+  </div>
+  <div class="img"><canvas data-scene="shards" aria-label="Kiln shards and wadding on the studio floor"></canvas></div>
+</footer>
+
+<script>
+const WORKS=[
+["40-07","Moon jar","Red · ash","40","46 × 44","avail","38 000","jar"],
+["40-11","Moon jar, small","Red · shino","40","31 × 30","sold","19 500","jar"],
+["40-02","Storage jar, lugs","Red · tenmoku","40","52 × 38","avail","32 000","jar"],
+["40-19","Bottle, long neck","Porcelain · celadon","40","34 × 14","avail","8 400","bottle"],
+["40-20","Bottle, flattened","Red · ash","40","28 × 19","sold","7 900","bottle"],
+["40-23","Bottle, pair","Red · raw flash","40","26 × 12","avail","12 000","bottle"],
+["40-31","Tea bowl","Red · shino","40","8 × 13","avail","2 600","bowl"],
+["40-32","Tea bowl","Red · carbon trap","40","9 × 12","sold","2 600","bowl"],
+["40-34","Tea bowl","Porcelain · nuka","40","8 × 12","avail","2 400","bowl"],
+["40-41","Serving bowl","Red · celadon","40","11 × 34","avail","6 800","bowl"],
+["40-44","Cylinder vase","Red · ash","40","38 × 16","avail","9 200","jar"],
+["39-03","Moon jar","Red · ash, heavy","39","48 × 45","sold","36 000","jar"],
+["39-05","Shouldered jar","Red · tenmoku","39","40 × 34","sold","24 000","jar"],
+["39-12","Bottle","Porcelain · ash","39","30 × 15","avail","7 600","bottle"],
+["39-14","Bottle, faceted","Red · shino","39","27 × 13","sold","7 200","bottle"],
+["39-21","Tea bowl","Red · ash","39","9 × 13","sold","2 600","bowl"],
+["39-22","Tea bowl, cut foot","Red · tenmoku","39","8 × 13","avail","2 800","bowl"],
+["39-27","Dinner plates ×6","Porcelain · nuka","39","3 × 27","sold","9 600","bowl"],
+["39-30","Lidded jar","Red · celadon","39","22 × 20","avail","8 800","jar"],
+["39-33","Water jar","Red · raw","39","36 × 33","avail","21 000","jar"]];
+const tb=document.getElementById('works');
+tb.innerHTML=WORKS.map(w=>`<tr data-k="${w[7]}" data-s="${w[5]}"><td>HA-${w[0]}</td><td class="n">${w[1]}</td><td>${w[2]}</td><td>No. ${w[3]}</td><td>${w[4]}</td><td class="${w[5]}">${w[5]==='avail'?'Available':'Sold'}</td><td class="r">${w[6]}</td></tr>`).join('');
+document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const f=b.dataset.f;
+  tb.querySelectorAll('tr').forEach(r=>r.classList.toggle('hide',!(f==='all'||(f==='avail'?r.dataset.s==='avail':r.dataset.k===f))));
+});
+
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const hex=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+const mix=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t];
+const PROF={
+  moon:[[0,.42],[.04,.46],[.18,.86],[.46,1],[.76,.86],[.95,.5],[1,.44]],
+  bottle:[[0,.13],[.04,.16],[.28,.14],[.42,.42],[.66,1],[.9,.88],[1,.62]],
+  jar:[[0,.6],[.05,.64],[.12,.62],[.3,1],[.7,.92],[1,.62]],
+  bowl:[[0,1],[.35,.96],[.75,.72],[1,.42]],
+  cyl:[[0,.86],[.04,.92],[.5,1],[.96,.98],[1,.9]],
+  tea:[[0,.96],[.5,1],[.86,.78],[1,.5]]
+};
+function prof(p,t){for(let i=1;i<p.length;i++){if(t<=p[i][0]){const a=p[i-1],b=p[i],u=(t-a[0])/(b[0]-a[0]),s=u*u*(3-2*u);return a[1]+(b[1]-a[1])*s}}return p[p.length-1][1]}
+const G={
+  ash:{glaze:'#7E8F6A',glaze2:'#B7BE8E',clay:'#9C4A2A',line:.62},
+  shino:{glaze:'#E3D3BE',glaze2:'#C98A62',clay:'#8E4428',line:.82},
+  ten:{glaze:'#2A1A12',glaze2:'#8A3B18',clay:'#6E3A22',line:.9},
+  cel:{glaze:'#9FB2A2',glaze2:'#D2DCCD',clay:'#C9B9A2',line:.9},
+  nuka:{glaze:'#EEE9DF',glaze2:'#D9CFBF',clay:'#A9572F',line:.75},
+  raw:{glaze:'#B4532C',glaze2:'#D8874E',clay:'#7A3820',line:.15}
+};
+function makeCanvas(c){const r=c.getBoundingClientRect();const W=Math.max(2,Math.round(r.width)),H=Math.max(2,Math.round(r.height));c.width=W;c.height=H;const ctx=c.getContext('2d');return{ctx,W,H,img:ctx.createImageData(W,H)}}
+function backdrop(d,wall,floor,horizon,R,grain){
+  const {W,H,img}=d,px=img.data,w=hex(wall),f=hex(floor);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=(y*W+x)*4,n=(R()-.5)*grain,base=y<horizon?w:f,sh=y<horizon?1-.08*(y/horizon):1-.18*((y-horizon)/(H-horizon+1));px[i]=base[0]*sh+n;px[i+1]=base[1]*sh+n;px[i+2]=base[2]*sh+n;px[i+3]=255}
+}
+function shadow(d,cx,cy,rx,ry,k){const {W,H,img}=d,px=img.data;for(let y=Math.max(0,cy-ry|0);y<Math.min(H,cy+ry);y++)for(let x=Math.max(0,cx-rx|0);x<Math.min(W,cx+rx);x++){const e=((x-cx)/rx)**2+((y-cy)/ry)**2;if(e<1){const i=(y*W+x)*4,m=1-k*(1-e);px[i]*=m;px[i+1]*=m;px[i+2]*=m}}}
+function pot(d,o,R){
+  const {W,H,img}=d,px=img.data,p=PROF[o.shape],g=G[o.glaze],gl=hex(g.glaze),gl2=hex(g.glaze2),cl=hex(g.clay);
+  const hp=o.h,rp=o.r,cx=o.x,base=o.y,top=base-hp;
+  shadow(d,cx+rp*.35,base,rp*1.25,rp*.16,.45);
+  const drip=[];for(let k=-rp-2;k<=rp+2;k++)drip.push(0);
+  let v=0;for(let k=0;k<drip.length;k++){v=v*.9+(R()-.5)*.4;drip[k]=v}
+  for(let k=0;k<drip.length;k++)if(R()<.03){const L=R()*.22;for(let j=-2;j<=2;j++)if(drip[k+j]!==undefined)drip[k+j]+=L*(1-Math.abs(j)/3)}
+  const lean=o.lean||0;
+  for(let y=Math.max(0,top|0);y<Math.min(H,base);y++){
+    const t=(y-top)/hp,r=prof(p,t)*rp,ox=cx+lean*(1-t)*rp;
+    for(let x=Math.max(0,ox-r|0);x<Math.min(W,ox+r);x++){
+      const u=(x-ox)/r;if(Math.abs(u)>=1)continue;
+      const nz=Math.sqrt(1-u*u),li=.28+.72*Math.max(0,nz*.82-u*.42),k=Math.round(x-ox+rp)|0;
+      const edge=g.line+(drip[k]||0)*.35+Math.sin(x*.04+o.seed)*.025;
+      let c;
+      if(t<edge){const pool=Math.max(0,Math.min(1,(edge-t)*6));c=mix(gl2,gl,pool*.7+.15*Math.sin(y*.05+x*.02));const sp=Math.pow(Math.max(0,1-Math.abs(u+.42)*3.2),4)*.55*Math.max(0,1-Math.abs(t-.35)*1.6);c=mix(c,[255,250,240],sp)}
+      else{c=mix(cl,[60,25,12],Math.min(1,(t-edge)*.8)*.4)}
+      if(R()<.012)c=mix(c,[30,18,10],.7);
+      const n=(R()-.5)*10,rim=t<.012?.55:1,foot=t>.985?.6:1;
+      const i=(y*W+x)*4;px[i]=c[0]*li*rim*foot+n;px[i+1]=c[1]*li*rim*foot+n;px[i+2]=c[2]*li*rim*foot+n;
+    }
+  }
+}
+function glow(d,cx,cy,rad,col,k){const {W,H,img}=d,px=img.data,c=hex(col);for(let y=0;y<H;y++)for(let x=0;x<W;x++){const e=Math.hypot(x-cx,y-cy)/rad;if(e<1){const i=(y*W+x)*4,a=k*(1-e)*(1-e);px[i]+=(c[0]-px[i])*a;px[i+1]+=(c[1]-px[i+1])*a;px[i+2]+=(c[2]-px[i+2])*a}}}
+const SCENES={
+  hero(d,R){const {W,H}=d,hz=H*.66;backdrop(d,'#D8CDBA','#BBAE98',hz,R,10);
+    pot(d,{shape:'bottle',glaze:'ten',x:W*.2,y:hz+H*.08,h:H*.46,r:W*.08,seed:1},R);
+    pot(d,{shape:'moon',glaze:'ash',x:W*.48,y:hz+H*.12,h:H*.5,r:W*.2,seed:2,lean:.04},R);
+    pot(d,{shape:'tea',glaze:'shino',x:W*.78,y:hz+H*.16,h:H*.13,r:W*.1,seed:3},R);
+    pot(d,{shape:'cyl',glaze:'nuka',x:W*.82,y:hz+H*.02,h:H*.32,r:W*.07,seed:4},R);},
+  moon(d,R){const {W,H}=d,hz=H*.7;backdrop(d,'#2B2420','#3B312A',hz,R,8);glow(d,W*.3,H*.25,W*.8,'#5A4A3C',.5);
+    pot(d,{shape:'moon',glaze:'ash',x:W*.5,y:hz+H*.08,h:H*.6,r:W*.36,seed:7,lean:.05},R);},
+  kiln(d,R){const {W,H}=d;backdrop(d,'#1A120D','#120C09',H*.78,R,6);glow(d,W*.72,H*.55,W*.55,'#F08A3C',.85);glow(d,W*.72,H*.6,W*.25,'#FFD27A',.6);
+    const cols=[.48,.58,.68,.78,.88,.98];cols.forEach((c,i)=>{pot(d,{shape:['jar','bottle','cyl','moon','bottle','jar'][i],glaze:'raw',x:W*c,y:H*.78,h:H*(.28+.12*(i%3)),r:W*.035+W*.012*(i%2),seed:i+11},R)});
+    [.52,.63,.74,.85,.95].forEach((c,i)=>pot(d,{shape:'tea',glaze:'raw',x:W*c,y:H*.42,h:H*.08,r:W*.03,seed:i+21},R));
+    const {img}=d,px=img.data;for(let y=Math.floor(H*.43);y<H*.45;y++)for(let x=Math.floor(W*.46);x<W;x++){const i=(y*W+x)*4;px[i]=70;px[i+1]=40;px[i+2]=26}
+    for(let k=0;k<1400;k++){const x=W*(.4+R()*.6)|0,y=R()*H|0,i=(y*W+x)*4;px[i]=255;px[i+1]=150+R()*80;px[i+2]=60}},
+  strip(d,R){const {W,H}=d,band=H/4,shapes=[['bottle','cel'],['tea','ten'],['cyl','ash'],['jar','shino']];
+    shapes.forEach((s,i)=>{const sub={...d};const y0=i*band;
+      for(let y=y0|0;y<y0+band&&y<H;y++)for(let x=0;x<W;x++){const j=(y*W+x)*4,n=(R()-.5)*8,b=i%2?[226,217,200]:[214,204,186];d.img.data[j]=b[0]+n;d.img.data[j+1]=b[1]+n;d.img.data[j+2]=b[2]+n;d.img.data[j+3]=255}
+      const h=s[0]==='tea'?band*.32:band*.72;pot(d,{shape:s[0],glaze:s[1],x:W*.5,y:y0+band*.88,h,r:s[0]==='tea'?W*.24:W*.2,seed:i+31},R)});},
+  studio(d,R){const {W,H}=d;backdrop(d,'#CFC3AE','#CFC3AE',H,R,10);const {img}=d,px=img.data;
+    const shelves=[.24,.44,.64,.84];shelves.forEach((sy,si)=>{for(let y=H*sy|0;y<H*sy+10;y++)for(let x=0;x<W;x++){const i=(y*W+x)*4;px[i]=120;px[i+1]=86;px[i+2]=58}
+      for(let k=0;k<5;k++)pot(d,{shape:'tea',glaze:si%2?'raw':'nuka',x:W*(.12+k*.19),y:H*sy,h:H*.07,r:W*.07,seed:si*10+k},R)});},
+  shards(d,R){const {W,H,ctx}=d;backdrop(d,'#CFC6B4','#CFC6B4',H,R,14);ctx.putImageData(d.img,0,0);d.done=true;const keys=Object.keys(G);
+    for(let s=0;s<34;s++){const cx=R()*W,cy=R()*H,rr=18+R()*46,g=G[keys[s%keys.length]],gl=R()<.55,n=3+(R()*3|0),a0=R()*6.3;
+      ctx.beginPath();for(let k=0;k<n;k++){const a=a0+k/n*6.283+(R()-.5)*.8,r=rr*(.55+R()*.6);ctx[k?'lineTo':'moveTo'](cx+Math.cos(a)*r,cy+Math.sin(a)*r)}ctx.closePath();
+      ctx.fillStyle='rgba(40,25,15,.25)';ctx.save();ctx.translate(4,5);ctx.fill();ctx.restore();
+      ctx.fillStyle=gl?g.glaze:g.clay;ctx.fill();ctx.lineWidth=3;ctx.strokeStyle=g.clay;ctx.stroke()}},
+  tile(d,R,c){const {W,H}=d,key=c.dataset.g,map={shino:['shino',.0],shino2:['shino',.25],cel:['cel',0],cel2:['cel',.3],ten:['ten',0],ten2:['ten',.3],nuka:['nuka',0],nuka2:['nuka',.3],ash:['ash',.2],flash:['raw',.4],raw:['raw',0],carbon:['shino',.6]}[key],g=G[map[0]],a=hex(g.glaze),b=hex(g.glaze2),cl=hex(g.clay),px=d.img.data;
+    const edge=[];let v=0;for(let x=0;x<W;x++){v=v*.92+(R()-.5)*1.4;edge.push(H*.62+v*6+(R()<.02?R()*40:0))}
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=(y*W+x)*4,t=y/H;let c;
+      if(key==='raw'||y>edge[x])c=mix(cl,[40,20,10],map[1]*.5+(y>edge[x]?.1:0));else{c=mix(b,a,.5+.5*Math.sin(x*.05+y*.03+map[1]*5)*Math.cos(y*.04));if(map[1]>.5&&R()<.25)c=mix(c,[30,24,20],.6)}
+      if(R()<.01)c=mix(c,[20,12,8],.8);const n=(R()-.5)*9,l=1-.12*t;px[i]=c[0]*l+n;px[i+1]=c[1]*l+n;px[i+2]=c[2]*l+n;px[i+3]=255}}
+};
+function render(){document.querySelectorAll('canvas[data-scene]').forEach((c,i)=>{const d=makeCanvas(c),R=rng(97+i*13);SCENES[c.dataset.scene](d,R,c);if(!d.done)d.ctx.putImageData(d.img,0,0)})}
+render();
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(render,200)});
+</script>
+</body>
+</html>

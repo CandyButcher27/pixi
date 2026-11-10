@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bracket Club — coding school for ages 7 to 15, Leeds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4efe4;--ink:#1b1916;--tomato:#e5482c;--mustard:#f1b42f;--chalk:#fbf8f1;--rule:#d8d0bf;--muted:#5d564b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.55 "Atkinson Hyperlegible",Georgia,serif}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:500;font-size:13px;letter-spacing:.02em}
+.wrap{max-width:1280px;margin:0 auto;padding:0 56px}
+.display{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;letter-spacing:-.045em;line-height:.88}
+h2.display{font-size:104px}
+h3{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--tomato);border-color:var(--tomato);color:#fff}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+
+header{border-bottom:1px solid var(--rule)}
+header .wrap{display:flex;align-items:center;gap:32px;height:72px}
+.logo{font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:24px;letter-spacing:-.03em;text-decoration:none}
+.logo b{color:var(--tomato)}
+header nav{display:flex;gap:24px;margin-left:auto;font-size:15px}
+header nav a{text-decoration:none}
+header nav a:hover{text-decoration:underline;text-underline-offset:4px}
+header .mono{color:var(--muted)}
+
+section{padding:76px 0}
+.split{display:grid;gap:64px;align-items:start}
+.s57{grid-template-columns:5fr 7fr}
+.s75{grid-template-columns:7fr 5fr}
+.kicker{display:block;color:var(--tomato);margin-bottom:18px;text-transform:uppercase}
+.lede{font-size:19px;max-width:44ch;margin-top:20px}
+.caption{color:var(--muted);margin-top:22px;max-width:36ch}
+.big{font-size:136px}
+.side-facts{margin-top:28px;border-top:1px solid var(--rule)}
+.side-facts li{list-style:none;display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.side-facts li span:last-child{font-family:"JetBrains Mono",monospace;font-size:13px}
+
+/* hero */
+.hero{padding:72px 0 88px}
+.hero h1{font-size:136px}
+.hero h1 em{font-style:normal;color:var(--tomato)}
+.hero .ctas{display:flex;gap:12px;margin-top:32px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule);font-size:15px;max-width:560px}
+.facts dt{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);padding-top:2px}
+.panel{background:var(--chalk);border:1px solid var(--rule);border-radius:28px;padding:28px 30px}
+.panel h3{margin-bottom:6px}
+.today li{list-style:none;display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:9px 0;border-bottom:1px dashed var(--rule);font-size:14px}
+.today li:last-child{border-bottom:0}
+.today .seat{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--tomato)}
+.today .seat.full{color:var(--muted);text-decoration:line-through}
+
+/* ladder */
+.band{background:var(--ink);color:var(--paper)}
+.band .caption{color:#b9b0a0}
+.band .kicker{color:var(--mustard)}
+.ages{display:flex;flex-wrap:wrap;gap:6px;margin-top:28px}
+.ages button{width:46px;height:40px;border-radius:10px;border:1px solid #4a443b;background:transparent;color:var(--paper);font:500 14px "JetBrains Mono",monospace;cursor:pointer}
+.ages button[aria-pressed=true]{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+.tablewrap{border:1px solid #3b362f;border-radius:28px;padding:8px 28px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font:500 12px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.06em;padding:14px 10px 12px 0;color:#b9b0a0}
+td{padding:16px 10px 16px 0;border-top:1px solid #3b362f;vertical-align:top;font-size:15px}
+td:first-child{font-family:"JetBrains Mono",monospace;font-size:13px;white-space:nowrap}
+td strong{display:block;font-family:"Bricolage Grotesque",Georgia,serif;font-size:21px;letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
+tr.on td{color:var(--mustard)}
+tr.on td:first-child::before{content:"→ "}
+
+/* saturday */
+.timeline li{list-style:none;display:grid;grid-template-columns:110px 1fr;gap:24px;padding:14px 0;border-top:1px solid var(--rule)}
+.timeline li:last-child{border-bottom:1px solid var(--rule)}
+.timeline time{font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--tomato);padding-top:3px}
+.timeline p{color:var(--muted);font-size:15px;margin-top:4px;max-width:62ch}
+
+/* projects */
+.projects li{list-style:none;display:grid;grid-template-columns:1fr 150px;gap:6px 24px;padding:16px 0;border-top:1px solid var(--rule)}
+.projects li:last-child{border-bottom:1px solid var(--rule)}
+.projects .who{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);text-align:right;padding-top:4px}
+.projects p{grid-column:1/-1;font-size:15px;color:var(--muted)}
+.projects .stack{color:var(--tomato)}
+
+/* fees */
+.fees{border:1px solid var(--rule);border-radius:28px;background:var(--chalk);padding:10px 28px 18px}
+.fees th{color:var(--muted)}
+.fees td{border-top-color:var(--rule)}
+.fees td:last-child{text-align:right;font-family:"JetBrains Mono",monospace;font-size:14px;white-space:nowrap}
+.terms{margin-top:24px;columns:2;column-gap:40px;font-size:15px}
+.terms li{list-style:none;padding:8px 0;border-bottom:1px solid var(--rule);break-inside:avoid}
+.terms b{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;color:var(--tomato);margin-right:8px}
+
+/* faq */
+.faq details{border-top:1px solid var(--rule);padding:16px 0}
+.faq details:last-child{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;font-family:"Bricolage Grotesque",Georgia,serif;font-weight:800;font-size:21px;letter-spacing:-.02em;list-style:none;display:flex;justify-content:space-between;gap:20px}
+.faq summary::after{content:"+";font-family:"JetBrains Mono",monospace;color:var(--tomato)}
+.faq details[open] summary::after{content:"−"}
+.faq p{margin-top:8px;color:var(--muted);font-size:15px;max-width:64ch}
+.contact{margin-top:28px}
+.contact .btn{margin-top:20px}
+
+footer{border-top:1px solid var(--rule);padding:28px 0 40px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;gap:32px;flex-wrap:wrap}
+footer .wrap span:first-child{margin-right:auto}
+
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  .split,.s57,.s75{grid-template-columns:1fr;gap:36px}
+  .hero h1,.big{font-size:72px}
+  h2.display{font-size:60px}
+  header nav{display:none}
+  .terms{columns:1}
+  .tablewrap{padding:4px 14px;overflow-x:auto}
+  section{padding:64px 0}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">{Bracket<b>Club</b>}</a>
+    <span class="mono">Leeds · LS6 · since 2017</span>
+    <nav aria-label="Main">
+      <a href="#ladder">Ages</a>
+      <a href="#saturday">A Saturday</a>
+      <a href="#shipped">Projects</a>
+      <a href="#fees">Fees</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap split s75">
+      <div>
+        <span class="kicker mono">Coding school · ages 7 to 15</span>
+        <h1 class="display">Kids who write <em>the rules.</em></h1>
+        <p class="lede">Bracket Club is a small coding school above the library on Headingley Lane. Twelve children per room, two teachers, and a ladder that starts with dragging blocks in Scratch at seven and ends with a fifteen-year-old deploying her own web app. Saturdays and two weekday evenings, term-time only.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#fees">Book a free taster Saturday</a>
+          <a class="btn" href="#ladder">Find your child's rung</a>
+        </div>
+        <dl class="facts">
+          <dt>RATIO</dt><dd>1 teacher to 6 children, always two adults in the room</dd>
+          <dt>LAPTOPS</dt><dd>Provided. Nothing to install at home until rung 4</dd>
+          <dt>TERMS</dt><dd>3 terms of 11 weeks, following the Leeds school calendar</dd>
+          <dt>DBS</dt><dd>Every teacher holds an enhanced DBS check, renewed yearly</dd>
+        </dl>
+      </div>
+      <aside class="panel" aria-label="This Saturday">
+        <span class="mono" style="color:var(--muted)">SAT 14 NOV · SEATS LEFT</span>
+        <h3>This Saturday</h3>
+        <ul class="today">
+          <li><span class="mono">09:30</span><span>Rung 1 · Scratch sprites</span><span class="seat full">full</span></li>
+          <li><span class="mono">09:30</span><span>Rung 3 · Python turtle</span><span class="seat">2 left</span></li>
+          <li><span class="mono">11:00</span><span>Rung 2 · micro:bit radios</span><span class="seat">4 left</span></li>
+          <li><span class="mono">13:30</span><span>Rung 4 · HTML from nothing</span><span class="seat">1 left</span></li>
+          <li><span class="mono">13:30</span><span>Rung 5 · Game jam (Godot)</span><span class="seat full">full</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band" id="ladder">
+    <div class="wrap split s57">
+      <div>
+        <span class="kicker mono">The ladder</span>
+        <div class="display big">7→15</div>
+        <p class="caption">Five rungs. A child moves up when they can build the rung's final project alone, not when a birthday says so. Pick an age to see where most children start.</p>
+        <div class="ages" role="group" aria-label="Child's age">
+          <button>7</button><button>8</button><button>9</button><button>10</button><button>11</button><button>12</button><button>13</button><button>14</button><button>15</button>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Ages</th><th>Rung and tools</th><th>Final project</th></tr></thead>
+          <tbody>
+            <tr data-min="7" data-max="8"><td>7–8</td><td><strong>1 · First loops</strong>Scratch 3, Bee-Bots, unplugged card games about sequences</td><td>An animated birthday card with three scenes and a sound that plays on click</td></tr>
+            <tr data-min="9" data-max="10"><td>9–10</td><td><strong>2 · Things that move</strong>micro:bit, MakeCode blocks, crocodile clips and LEDs</td><td>A two-player reaction game sent over the micro:bit radio</td></tr>
+            <tr data-min="11" data-max="11"><td>11</td><td><strong>3 · Typing it out</strong>Python 3 with turtle and Thonny, first variables and functions</td><td>A spirograph generator where the user picks colours and petals</td></tr>
+            <tr data-min="12" data-max="13"><td>12–13</td><td><strong>4 · The web</strong>HTML, CSS and plain JavaScript in VS Code, Git from week three</td><td>A personal site with a working quiz, published on a real URL</td></tr>
+            <tr data-min="14" data-max="15"><td>14–15</td><td><strong>5 · Shipping</strong>Python with Flask or Godot 4, pair programming, code review</td><td>A finished game or app shown to parents at the end-of-term demo night</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="saturday">
+    <div class="wrap split s75">
+      <ol class="timeline">
+        <li><time>09:20</time><div><h3>Drop-off and warm-up puzzle</h3><p>One printed logic puzzle on every desk. Early arrivals get the hard one. Parents sign in at the door, not online.</p></div></li>
+        <li><time>09:30</time><div><h3>Ten-minute show-and-tell</h3><p>Two children demo what they built at home. Nobody is forced to; the queue is usually long.</p></div></li>
+        <li><time>09:40</time><div><h3>New idea, taught once</h3><p>One concept per week, taught in under twelve minutes with a live example. Loops, then conditions, then lists. Never three things at once.</p></div></li>
+        <li><time>10:00</time><div><h3>Build block</h3><p>Fifty minutes on this term's project. Teachers circulate with a rule: ask two questions before touching the keyboard.</p></div></li>
+        <li><time>10:50</time><div><h3>Snack, outside if dry</h3><p>Fruit and crackers provided. We hold nut-free and gluten-free stock; tell us on the booking form.</p></div></li>
+        <li><time>11:05</time><div><h3>Bug hunt</h3><p>Each child swaps laptops with a partner and fixes one planted bug. This is the part they talk about in the car home.</p></div></li>
+        <li><time>12:30</time><div><h3>Commit and collect</h3><p>Work is saved to the child's own folder and a one-line note goes to parents saying what changed today.</p></div></li>
+      </ol>
+      <div>
+        <span class="kicker mono">A Saturday, minute by minute</span>
+        <div class="display big">3h 10m</div>
+        <p class="caption">From warm-up to pick-up. Weekday evenings run the same shape in 1h 45m, with the snack moved to the start.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="shipped">
+    <div class="wrap split s57">
+      <div>
+        <span class="kicker mono">What students shipped</span>
+        <div class="display big">412</div>
+        <p class="caption">Finished projects since 2017, each demoed in front of an audience. A few from last term, with permission from the children and their parents.</p>
+        <ul class="side-facts">
+          <li><span>Demo nights held</span><span>27</span></li>
+          <li><span>Children currently enrolled</span><span>148</span></li>
+          <li><span>Moved up a rung last term</span><span>61%</span></li>
+        </ul>
+      </div>
+      <ul class="projects">
+        <li><h3>Hedgehog Highway</h3><span class="who">Amara, 9 · rung 2</span><p>A micro:bit on a garden gate that counts hedgehogs at night and scrolls the total in the morning. <span class="stack">MakeCode · light sensor</span></p></li>
+        <li><h3>Times Table Dungeon</h3><span class="who">Rafi, 8 · rung 1</span><p>A Scratch maze where each door only opens with the right answer. His sister now plays it every breakfast. <span class="stack">Scratch 3</span></p></li>
+        <li><h3>Bus Late Again</h3><span class="who">Ellie, 14 · rung 5</span><p>A Flask app that reads the West Yorkshire bus feed and tells her whether to run for the 56. <span class="stack">Python · Flask · open data</span></p></li>
+        <li><h3>Petal Machine</h3><span class="who">Jonah, 11 · rung 3</span><p>A spirograph program with sliders for petals and colour, printed and framed by his gran. <span class="stack">Python · turtle</span></p></li>
+        <li><h3>Ghost Lift</h3><span class="who">Priya &amp; Tom, 15 · rung 5</span><p>A short Godot horror game set in a stuck lift, played 300 times at the summer demo night. <span class="stack">Godot 4 · GDScript</span></p></li>
+        <li><h3>My Cat, Ranked</h3><span class="who">Noor, 12 · rung 4</span><p>A personal site with a quiz about her cat. The quiz is harder than it should be. <span class="stack">HTML · CSS · JavaScript</span></p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="fees">
+    <div class="wrap split s75">
+      <div>
+        <div class="fees">
+          <table>
+            <thead><tr><th>Option</th><th>What's included</th><th>Per term</th></tr></thead>
+            <tbody>
+              <tr><td>SAT</td><td><strong>Saturday morning</strong>11 sessions of 3h 10m, snacks, laptop, demo night</td><td>£485</td></tr>
+              <tr><td>EVE</td><td><strong>One weekday evening</strong>Tuesday or Thursday, 11 sessions of 1h 45m</td><td>£270</td></tr>
+              <tr><td>BOTH</td><td><strong>Saturday plus evening</strong>For rungs 4 and 5 working on a long project</td><td>£695</td></tr>
+              <tr><td>SIB</td><td><strong>Second child</strong>Applied automatically to the lower fee</td><td>−15%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="terms">
+          <li><b>01</b>The first Saturday is free and does not commit you to a term.</li>
+          <li><b>02</b>Pay in full or in three monthly instalments, no fee.</li>
+          <li><b>03</b>Missed sessions can be made up on an evening the same term.</li>
+          <li><b>04</b>Leave after week two and we refund the remaining weeks.</li>
+          <li><b>05</b>Autumn term starts 7 Sep; spring 11 Jan; summer 19 Apr.</li>
+          <li><b>06</b>Pick-up is from the classroom door, never the street.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="kicker mono">Fees and terms</span>
+        <div class="display big">£14/hr</div>
+        <p class="caption">What a Saturday place works out to across a term. One place in six is a full bursary, no questions beyond a postcode; ask on the booking form.</p>
+        <a class="btn primary" href="#faq" style="margin-top:24px">Book the free Saturday</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="wrap split s57">
+      <div>
+        <span class="kicker mono">Questions parents ask</span>
+        <h2 class="display">Ask us.</h2>
+        <div class="contact">
+          <p class="caption">Kemi or Dan answer the phone on weekdays 10:00 to 16:00, or reply to email within a day.</p>
+          <ul class="side-facts">
+            <li><span>Phone</span><span>0113 496 0712</span></li>
+            <li><span>Email</span><span>hello@bracket.club</span></li>
+            <li><span>Address</span><span>1st floor, 14 Headingley Ln</span></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <details open><summary>My child has never coded. Where do they start?</summary><p>Everyone starts with a free taster Saturday on the rung their age suggests. By the end of the morning the teacher tells you whether to stay, move up or move down. About one in four children moves.</p></details>
+        <details><summary>Do they need their own laptop?</summary><p>No. We provide laptops for every session. From rung 4 we suggest a home computer for practice, and we keep a list of second-hand machines that work well under £150.</p></details>
+        <details><summary>How much screen time is it, really?</summary><p>Roughly 60% of a Saturday is at a screen. The rest is the warm-up puzzle, the taught idea on a whiteboard, the snack and unplugged games on rung 1.</p></details>
+        <details><summary>What about children with SEND?</summary><p>Around a fifth of our children have an EHCP or a diagnosis. Tell us what helps on the booking form; quiet desks, ear defenders and a visual timetable are standard.</p></details>
+        <details><summary>Can I stay and watch?</summary><p>On the taster Saturday, yes, at the back. After that we ask parents to leave, because children try harder things without an audience.</p></details>
+        <details><summary>Is this exam preparation?</summary><p>No. Children who go on to GCSE Computer Science tend to do well, but we teach for building things, not for papers.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>{Bracket Club} · Registered charity 1172204 · Ofsted registered EY557310</span>
+    <span>Safeguarding policy</span>
+    <span>Privacy</span>
+    <span class="mono">© 2026</span>
+  </div>
+</footer>
+
+<script>
+const rows = document.querySelectorAll('#ladder tbody tr');
+document.querySelectorAll('.ages button').forEach(b => {
+  b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => {
+    const age = +b.textContent;
+    document.querySelectorAll('.ages button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    rows.forEach(r => r.classList.toggle('on', age >= +r.dataset.min && age <= +r.dataset.max));
+  });
+});
+</script>
+</body>
+</html>

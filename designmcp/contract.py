@@ -32,8 +32,35 @@ SLOP_PROHIBITIONS = [
 
 MANDATE_FLOOR_DISPLAY = 2.5
 MANDATE_CAP_DISPLAY = 6.0   # a reference with 16px body text and a 260px headline is not a mandate
-MAX_RADIUS_CEILING = 24
-PILL_RADIUS = 100           # references whose own geometry is a pill cannot set the radius ceiling
+DISPLAY_CEILING_FACTOR = 1.4
+
+# Two-way bands on dimensions the slop law leaves free. Without them every contract
+# pushes the same direction and the agent fills the free axes with one house style
+# (ISS-8). Thresholds are the bucket edges in measure.grammar. Centred hero is a slop
+# tell, so hero bands exist only for a side.
+BANDS = [
+    ("hero_alignment", "hero_weight_split", {"left": [("<=", 0.42)], "right": [(">=", 0.58)]}),
+    ("imagery", "imagery_ratio", {"dominant": [(">=", 0.30)], "present": [(">=", 0.06), ("<", 0.30)],
+                                  "absent": [("<", 0.06)]}),
+    ("density", "elements_per_1k", {"high": [(">=", 55)], "medium": [(">=", 28), ("<", 55)],
+                                    "low": [("<", 28)]}),
+    ("geometry", "max_radius", {"sharp": [("<=", 5)], "soft": [(">=", 6), ("<=", 19)],
+                                "rounded": [(">=", 20), ("<=", 40)]}),
+]
+ABSTAIN = {"centered", "unknown", "pill"}  # slop-tell or unmeasured values do not vote
+
+
+def _majority(grammars: dict[str, dict], field: str) -> tuple[str | None, list[str]]:
+    votes: dict[str, list[str]] = {}
+    for role, g in grammars.items():
+        if g.get(field) not in ABSTAIN:
+            votes.setdefault(g.get(field), []).append(role)
+    if not votes:
+        return None, []
+    value, roles = max(votes.items(), key=lambda kv: len(kv[1]))
+    if len(roles) >= 2 or "near" not in sum(votes.values(), []):
+        return value, roles
+    return grammars["near"].get(field), ["near"]
 
 
 def build(refs: dict[str, dict]) -> dict:
@@ -71,18 +98,17 @@ def build(refs: dict[str, dict]) -> dict:
                          "source": "+".join(f"{role}:{refs[role]['id']}" for role in card_light),
                          "why": "information is a sequence, not a row of equal boxes"})
 
-    sharp = [role for role, g in grammars.items() if g.get("max_radius", 0) < PILL_RADIUS]
-    radius_ceiling = min(MAX_RADIUS_CEILING,
-                         max(grammars[r]["max_radius"] for r in sharp) if sharp else 12)
-    required.append({"rule": "max_radius", "op": "<=", "value": radius_ceiling,
-                     "source": "+".join(f"{role}:{refs[role]['id']}" for role in sharp) or "default",
-                     "why": "geometry stays inside the reference range"})
+    display_target = sorted(g.get("display_dominance", 0) for g in grammars.values())[1]
+    required.append({"rule": "display_dominance", "op": "<=",
+                     "value": max(display_floor + 2.0, round(DISPLAY_CEILING_FACTOR * display_target, 1)),
+                     "source": "median of triple", "why": "display scale stays inside the reference range"})
 
-    image_led = [role for role, g in grammars.items() if g.get("imagery") == "dominant"]
-    if len(image_led) >= 2:
-        required.append({"rule": "imagery_ratio", "op": ">=", "value": 0.25,
-                         "source": "+".join(f"{role}:{refs[role]['id']}" for role in image_led),
-                         "why": "imagery is a primary surface, not decoration"})
+    for field, metric, bands in BANDS:
+        value, roles = _majority(grammars, field)
+        source = "+".join(f"{role}:{refs[role]['id']}" for role in roles)
+        for op, bound in bands.get(value, []):
+            required.append({"rule": metric, "op": op, "value": bound, "source": source,
+                             "why": f"{field} is {value} in the references"})
 
     return {
         "identity": {
@@ -135,10 +161,10 @@ def _intent(grammars: dict[str, dict], refs: dict[str, dict]) -> list[str]:
 def _direction(grammars: dict[str, dict]) -> str:
     g = grammars["contrast"]
     bits = [
-        f"{g.get('density', 'medium')}-density",
+        f"{_majority(grammars, 'density')[0] or 'medium'}-density",
         "typography-dominant" if g.get("display_dominance", 0) >= 3 else "balanced-hierarchy",
-        f"{g.get('imagery', 'present')} imagery",
-        f"{g.get('geometry', 'sharp')} geometry",
+        f"{_majority(grammars, 'imagery')[0] or 'present'} imagery",
+        f"{_majority(grammars, 'geometry')[0] or 'sharp'} geometry",
         f"{g.get('section_rhythm', 'uniform')} section rhythm",
     ]
     return ", ".join(bits)

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Torra Marvila — torrefação independente, Lisboa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,800;1,9..144,400;1,9..144,800&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#EEE7D8; --ink:#1B1714; --cobalt:#1D3A9B; --roast:#3A2016; --tram:#E8B21C; --mute:#6B6157;
+  --display:"Fraunces",Georgia,serif; --text:"Newsreader",Georgia,serif; --mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{background:var(--stone)}
+body{background:var(--stone);color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.5}
+a{color:var(--cobalt)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:baseline;gap:28px;padding-top:14px;padding-bottom:14px}
+header .brand{font-family:var(--display);font-weight:800;font-size:22px;margin-right:auto;text-decoration:none;color:var(--ink)}
+header nav{display:flex;gap:22px}
+header nav a{color:var(--ink);text-decoration:none}
+header nav a:hover{color:var(--cobalt);text-decoration:underline}
+section{width:100%;background:var(--stone);border-bottom:1px solid var(--ink);padding:72px 0 80px}
+.grid{display:grid;gap:48px;align-items:start}
+.label{display:flex;gap:14px;color:var(--mute);margin-bottom:20px}
+.label b{color:var(--cobalt);font-weight:600}
+h1{font-family:var(--display);font-weight:800;font-size:136px;line-height:.88;letter-spacing:-.035em;font-variation-settings:"opsz" 144}
+h1 em,h2 em{font-style:italic;font-weight:400;color:var(--cobalt)}
+h2{font-family:var(--display);font-weight:800;font-size:64px;line-height:.95;letter-spacing:-.025em;font-variation-settings:"opsz" 144}
+h3{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1}
+p{max-width:64ch}
+.lede{font-size:22px;line-height:1.4;margin-top:32px;max-width:40ch}
+.body p+p{margin-top:14px}
+.ctas{display:flex;gap:12px;margin-top:36px}
+.btn{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:15px 22px;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--stone)}
+.btn:hover{background:var(--cobalt);border-color:var(--cobalt);color:var(--stone)}
+.facts{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:40px;padding-top:14px;border-top:1px solid var(--ink)}
+.facts span b{font-weight:600;color:var(--ink)}
+.facts span{color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+th{text-align:left;font-weight:500;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;font-size:11px;padding:8px 10px 8px 0;border-bottom:1.5px solid var(--ink)}
+td{padding:10px 10px 10px 0;border-bottom:1px solid rgba(27,23,20,.25);vertical-align:top}
+td.n{text-align:right;white-space:nowrap}
+td .name{font-family:var(--display);font-weight:800;font-size:18px;display:block;line-height:1.15}
+td .sub{color:var(--mute);font-size:11px}
+.log li{list-style:none;display:grid;grid-template-columns:62px 1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid rgba(27,23,20,.25);font-family:var(--mono);font-size:12.5px}
+.log li:first-child{border-top:1.5px solid var(--ink)}
+.log .live{color:var(--ink);background:var(--tram);padding:0 5px}
+.log .t{color:var(--mute)}
+.log-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.log-head h3{font-size:28px}
+.note{margin-top:14px;font-size:14px;color:var(--mute);max-width:44ch}
+.side h2{margin-bottom:22px}
+.side p{font-size:17px}
+.intro{font-size:19px;line-height:1.45;max-width:none;columns:2;column-gap:36px;margin-bottom:28px}
+.big-n{font-family:var(--display);font-weight:400;font-style:italic;font-size:96px;line-height:1;color:var(--cobalt);margin-top:28px}
+.big-n+.mono{color:var(--mute)}
+.roast{background:var(--roast);color:var(--stone)}
+.roast a{color:var(--tram)}
+.roast .label{color:#B9A994}
+.roast .label b{color:var(--tram)}
+.roast h2 em{color:var(--tram)}
+.roast th{color:#B9A994;border-color:var(--stone)}
+.roast td{border-color:rgba(238,231,216,.22)}
+.roast .body{columns:2;column-gap:40px;margin-top:30px;font-size:17px}
+.roast .body p{break-inside:avoid-column}
+.specs dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#B9A994;padding-top:12px;border-top:1px solid rgba(238,231,216,.22)}
+.specs dd{font-family:var(--display);font-size:22px;font-weight:800;padding:2px 0 12px}
+.plans li{list-style:none;display:grid;grid-template-columns:210px 1fr 130px 120px;gap:24px;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(27,23,20,.25)}
+.plans li:first-child{border-top:1.5px solid var(--ink)}
+.plans .price{font-family:var(--display);font-weight:800;font-size:34px;text-align:right}
+.plans .price small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--mute);display:block}
+.plans p{font-size:15.5px}
+.plans .mono{color:var(--mute)}
+.hours td:first-child{width:38%}
+.addr{font-family:var(--display);font-size:40px;font-weight:800;line-height:1.05;margin:4px 0 24px}
+.visit .body{margin-top:26px;font-size:17px}
+.mini dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;color:var(--mute);margin-top:18px}
+.mini dd{font-size:15.5px}
+footer{padding:36px 0 44px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:32px;font-family:var(--mono);font-size:12px;color:var(--mute)}
+footer .brand{font-family:var(--display);font-weight:800;font-size:28px;color:var(--ink)}
+footer ul{list-style:none}
+footer li{padding:3px 0}
+.tile{width:28px;height:28px;vertical-align:-6px;margin-right:10px}
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  h1{font-size:68px} h2{font-size:42px}
+  .grid{grid-template-columns:1fr !important}
+  header nav{display:none}
+  .roast .body{columns:1}
+  .plans li{grid-template-columns:1fr;gap:6px}
+  .plans .price{text-align:left}
+  footer .wrap{grid-template-columns:1fr}
+  .tbl{overflow-x:auto}
+  table{min-width:640px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#"><svg class="tile" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" fill="#1D3A9B"/><path d="M14 2 L26 14 L14 26 L2 14Z" fill="none" stroke="#EEE7D8" stroke-width="2"/><circle cx="14" cy="14" r="3.5" fill="#EEE7D8"/></svg>Torra Marvila</a>
+    <nav class="mono">
+      <a href="#lotes">Lotes</a><a href="#torra">Torrefação</a><a href="#assinatura">Assinatura</a><a href="#visita">Visita</a><a href="#visita">Grossista</a>
+    </nav>
+    <span class="mono">PT / EN</span>
+  </div>
+</header>
+<main>
+  <section id="topo">
+    <div class="wrap grid" style="grid-template-columns:8fr 4fr">
+      <div>
+        <div class="label mono"><b>N.º 01</b><span>Torrefação independente</span><span>Marvila, Lisboa — desde 2017</span></div>
+        <h1>Café torrado<br>às terças,<br><em>bebido</em> até<br>sexta.</h1>
+        <p class="lede">We roast small lots twice a week in a converted cork warehouse in Marvila, and ship them within 48 hours of the drop. Nothing sits on a shelf. Every bag is stamped with its batch number, its roast date and the person who roasted it.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#lotes">Comprar lotes actuais</a>
+          <a class="btn" href="#assinatura">Assinatura desde 14 €</a>
+        </div>
+        <div class="facts mono">
+          <span><b>7</b> lotes em torra</span>
+          <span><b>12 kg</b> por carga</span>
+          <span><b>48 h</b> da torra ao envio</span>
+          <span><b>38</b> cafés em Lisboa servem-nos</span>
+        </div>
+      </div>
+      <aside>
+        <div class="log-head"><h3>Na torra hoje</h3><span class="mono">ter 08 nov</span></div>
+        <ul class="log">
+          <li><span>#2214</span><span>Huila, Colômbia</span><span class="live">a torrar</span></li>
+          <li><span>#2213</span><span>Guji Hambela, Etiópia</span><span class="t">11:42</span></li>
+          <li><span>#2212</span><span>Sul de Minas, Brasil</span><span class="t">10:58</span></li>
+          <li><span>#2211</span><span>Kirinyaga, Quénia</span><span class="t">10:11</span></li>
+          <li><span>#2210</span><span>Mezcla Alfama</span><span class="t">09:27</span></li>
+          <li><span>#2209</span><span>Santa Bárbara, Honduras</span><span class="t">08:40</span></li>
+        </ul>
+        <p class="note">Carga 210 °C · drop médio 9:40 · desenvolvimento 18–22 %. Envio às quartas e sextas para todo o continente.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="lotes">
+    <div class="wrap grid" style="grid-template-columns:3fr 9fr">
+      <div class="side">
+        <div class="label mono"><b>N.º 02</b><span>Lotes actuais</span></div>
+        <h2>Sete <em>lotes</em>, nenhum eterno.</h2>
+        <div class="big-n">07</div>
+        <div class="mono">rotação a cada 5–7 semanas</div>
+      </div>
+      <div class="tbl">
+        <p class="intro">Every lot below was cupped blind against at least five others before we bought it, and every one is roasted within the week you order it. When a lot sells out it is gone: we do not re-source the same farm to keep a name alive, and we do not blend leftovers into the espresso. Scores are our own Monday cupping, not the importer's sheet. Prices include IVA at 6 %.</p>
+        <table>
+          <thead><tr><th>Lote</th><th>Produtor</th><th>Processo</th><th>Altitude</th><th>Notas de prova</th><th>SCA</th><th>250 g</th></tr></thead>
+          <tbody>
+            <tr><td><span class="name">Huila</span><span class="sub">Colômbia · pink bourbon</span></td><td>Finca El Mirador, família Ortega</td><td>Lavado, 36 h fermentação</td><td class="n">1 850 m</td><td>Toranja rosa, panela, chá preto. Doce e limpo, acidez viva.</td><td class="n">87.5</td><td class="n">15.50 €</td></tr>
+            <tr><td><span class="name">Guji Hambela</span><span class="sub">Etiópia · heirloom</span></td><td>Estação de lavagem Dimtu</td><td>Natural, camas africanas</td><td class="n">2 150 m</td><td>Morango, bergamota, cacau. Corpo de xarope.</td><td class="n">88.0</td><td class="n">16.00 €</td></tr>
+            <tr><td><span class="name">Kirinyaga</span><span class="sub">Quénia · SL28 / SL34</span></td><td>Cooperativa Rungeto, fábrica Kii</td><td>Lavado duplo</td><td class="n">1 750 m</td><td>Cassis, tomate, açúcar mascavado. Acidez fosfórica.</td><td class="n">88.5</td><td class="n">17.00 €</td></tr>
+            <tr><td><span class="name">Santa Bárbara</span><span class="sub">Honduras · pacas</span></td><td>Benjamín Paz, El Cedral</td><td>Honey amarelo</td><td class="n">1 600 m</td><td>Pêssego, mel de rosmaninho, avelã.</td><td class="n">86.5</td><td class="n">14.00 €</td></tr>
+            <tr><td><span class="name">Sul de Minas</span><span class="sub">Brasil · catuaí amarelo</span></td><td>Fazenda Recreio, família Junqueira</td><td>Natural, terreiro</td><td class="n">1 200 m</td><td>Chocolate de leite, amendoim torrado, uva passa.</td><td class="n">85.0</td><td class="n">12.00 €</td></tr>
+            <tr><td><span class="name">Mezcla Alfama</span><span class="sub">Brasil 60 · Honduras 40</span></td><td>Blend da casa para espresso</td><td>Natural + honey</td><td class="n">—</td><td>Feita para a bica: crema densa, açúcar queimado, final curto.</td><td class="n">85.5</td><td class="n">11.00 €</td></tr>
+            <tr><td><span class="name">Sidra Decaf</span><span class="sub">Equador · sidra</span></td><td>Finca Soledad, descafeinado EA</td><td>Lavado, acetato de etilo</td><td class="n">1 500 m</td><td>Ameixa, caramelo, cana. Para depois do jantar.</td><td class="n">85.0</td><td class="n">14.50 €</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Também em 1 kg com 12 % de desconto. Moemos por pedido para V60, Aeropress, moka, prensa ou espresso — diga-nos o método no checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="torra" class="roast">
+    <div class="wrap grid" style="grid-template-columns:8fr 4fr">
+      <div>
+        <div class="label mono"><b>N.º 03</b><span>A torrefação</span><span>Rua do Açúcar, Marvila</span></div>
+        <h2>Uma Probat de 1962<br>e um <em>caderno</em> de capa preta.</h2>
+        <div class="body">
+          <p>Our roaster is a cast-iron Probat UG15 that spent forty years in a torrefação in Porto before we rebuilt it in 2017. It holds twelve kilos, heats slowly, and forgives nothing. We roast to taste, not to colour: every new lot gets four test profiles on a sample roaster, is cupped blind by the three of us on Monday, and only the winning curve goes onto the big machine.</p>
+          <p>We roast lighter than the Portuguese tradition and darker than Oslo. The goal is coffee that works both as a filter on a Saturday morning and as a bica at a zinc counter, which is how most of Lisbon actually drinks it. The Mezcla Alfama exists because our neighbours asked for it.</p>
+          <p>Green coffee comes from four importers we have visited, with prices paid to producers published on each bag. In 2025 we paid an average of 6.10 USD/kg FOB — 2.3× the C-market on the day of contract.</p>
+          <p>Chaff goes to the community garden on Rua Zófimo Pedroso. Jute sacks go to anyone who asks at the door.</p>
+        </div>
+        <div class="tbl" style="margin-top:36px">
+          <table>
+            <thead><tr><th>Fase</th><th>Huila #2214</th><th>Guji #2213</th><th>Alfama #2210</th></tr></thead>
+            <tbody>
+              <tr><td>Carga</td><td>210 °C</td><td>202 °C</td><td>218 °C</td></tr>
+              <tr><td>Fim de secagem</td><td>4:35</td><td>4:50</td><td>4:20</td></tr>
+              <tr><td>Primeiro crack</td><td>8:05 · 196 °C</td><td>8:30 · 194 °C</td><td>8:10 · 197 °C</td></tr>
+              <tr><td>Drop</td><td>9:44 · 205 °C</td><td>10:02 · 203 °C</td><td>10:31 · 214 °C</td></tr>
+              <tr><td>Desenvolvimento</td><td>16.8 %</td><td>15.4 %</td><td>22.6 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <dl class="specs" style="margin-top:96px">
+        <dt>Máquina</dt><dd>Probat UG15, 1962</dd>
+        <dt>Carga</dt><dd>12 kg</dd>
+        <dt>Dias de torra</dt><dd>Terça e quinta</dd>
+        <dt>Volume semanal</dt><dd>~ 310 kg</dd>
+        <dt>Equipa</dt><dd>Inês, Tomás, Rui</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="assinatura">
+    <div class="wrap grid" style="grid-template-columns:4fr 8fr">
+      <div class="side">
+        <div class="label mono"><b>N.º 04</b><span>Assinatura</span></div>
+        <h2>O café <em>chega</em> antes de acabar.</h2>
+        <p style="margin-top:18px">Pause, skip or cancel from your account. No minimum term.</p>
+      </div>
+      <ul class="plans">
+        <li><h3>Bica</h3><p>One bag of Mezcla Alfama, ground or whole, every two weeks. For moka pots and home espresso.</p><span class="mono">250 g · 2 sem.</span><span class="price">14 €<small>/ envio</small></span></li>
+        <li><h3>Rotação</h3><p>The newest single-origin each fortnight, chosen by whoever roasted it, with a printed card: producer, curve, how we brew it.</p><span class="mono">250 g · 2 sem.</span><span class="price">16 €<small>/ envio</small></span></li>
+        <li><h3>Mesa longa</h3><p>Two different lots side by side every month, for households, studios and anyone who drinks more than three cups a day.</p><span class="mono">2 × 250 g · mês</span><span class="price">29 €<small>/ envio</small></span></li>
+        <li><h3>Escritório</h3><p>A kilo of espresso blend plus one filter lot, delivered by bicycle inside Lisbon, CTT elsewhere. Grinder servicing included.</p><span class="mono">1,25 kg · sem.</span><span class="price">42 €<small>/ envio</small></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="visita" class="visit">
+    <div class="wrap grid" style="grid-template-columns:8fr 4fr">
+      <div>
+        <div class="label mono"><b>N.º 05</b><span>Visita</span></div>
+        <h2>Bebe-se <em>ao balcão</em>, ao lado da máquina.</h2>
+        <div class="grid" style="grid-template-columns:7fr 5fr;margin-top:36px;gap:40px">
+          <div>
+            <div class="mono" style="color:var(--mute)">Morada</div>
+            <div class="addr">Rua do Açúcar 64,<br>1950-010 Lisboa</div>
+            <div class="body">
+              <p>The café is the front of the roastery: eight stools, one Linea, a batch brewer and whatever came out of the drum that morning. On roast days you can watch the cooling tray from the bar. Pastéis come from Ferrugem, two doors down, until they run out.</p>
+              <p>Getting here: bus 728 or 759 to Rua do Açúcar, or train to Braço de Prata and a seven-minute walk. Tram 28 does not come this far east, whatever the guidebook says.</p>
+            </div>
+          </div>
+          <table class="hours">
+            <thead><tr><th>Dia</th><th>Horário</th></tr></thead>
+            <tbody>
+              <tr><td>Segunda</td><td>Fechado — prova interna</td></tr>
+              <tr><td>Terça</td><td>08:00–17:00 · dia de torra</td></tr>
+              <tr><td>Quarta</td><td>08:00–17:00</td></tr>
+              <tr><td>Quinta</td><td>08:00–17:00 · dia de torra</td></tr>
+              <tr><td>Sexta</td><td>08:00–18:00</td></tr>
+              <tr><td>Sábado</td><td>09:00–15:00 · prova aberta 11:00</td></tr>
+              <tr><td>Domingo</td><td>09:00–13:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <dl class="mini" style="margin-top:110px">
+        <dt>Prova aberta</dt><dd>Saturdays at 11:00, free, eight places, sign up at the bar.</dd>
+        <dt>Grossista</dt><dd>Cafés, restaurants, offices. Training and equipment on loan. <a href="mailto:grossista@torramarvila.pt">grossista@torramarvila.pt</a></dd>
+        <dt>Envios</dt><dd>Continente 3.90 €, grátis acima de 35 €. Açores e Madeira 6.50 €.</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <div><div class="brand">Torra Marvila</div><p style="margin-top:8px">Torrefação independente · Rua do Açúcar 64, Lisboa · NIF 514 228 091</p></div>
+    <ul><li>Lotes</li><li>Assinatura</li><li>Grossista</li><li>Moagem</li></ul>
+    <ul><li>Instagram</li><li>Newsletter</li><li>Livro de reclamações</li></ul>
+    <ul><li>+351 21 868 40 12</li><li>ola@torramarvila.pt</li><li>Café: ter–dom</li></ul>
+  </div>
+</footer>
+</body>
+</html>

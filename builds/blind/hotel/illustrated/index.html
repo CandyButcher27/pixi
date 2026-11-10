@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dar Nouaria — A riad of eight rooms, Marrakech medina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --clay:#b5532f; --clay-deep:#7e3320; --plaster:#efe2cc; --sand:#e4cfa9;
+  --ink:#2a1712; --indigo:#1f2a4d; --saffron:#e7a23a; --mint:#2f6b5a; --rose:#c97b6a;
+  --serif:"Young Serif", Georgia, serif; --sans:"Instrument Sans", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--plaster);color:var(--ink);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.05}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+header.top{position:absolute;inset:0 0 auto 0;z-index:5;color:var(--plaster)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:22px}
+.mark{font-family:var(--serif);font-size:22px;letter-spacing:.02em;text-decoration:none;display:flex;gap:10px;align-items:center}
+nav a{text-decoration:none;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin-left:26px;opacity:.85}
+nav a:hover{opacity:1}
+
+.hero{position:relative;background:var(--clay-deep);min-height:100vh;overflow:hidden}
+.hero svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-copy{position:absolute;left:0;right:0;bottom:7vh;z-index:3;color:var(--plaster);pointer-events:none}
+.hero-copy .wrap{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px}
+.hero h1{font-size:clamp(46px,7.4vw,112px);letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--saffron)}
+.hero p{max-width:34ch;justify-self:end;font-size:18px}
+.hero .cta{pointer-events:auto;display:inline-block;margin-top:18px;background:var(--saffron);color:var(--ink);padding:14px 24px;text-decoration:none;font-weight:600;border-radius:999px 999px 4px 4px}
+.lantern-sway{transform-origin:top center;animation:sway 6s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.flicker{animation:flick 2.6s infinite}
+@keyframes flick{0%,100%{opacity:.9}40%{opacity:.6}60%{opacity:1}}
+.ripple{animation:rip 3s ease-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes rip{0%{transform:scale(.4);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+
+.intro{padding:120px 0 80px;display:grid;grid-template-columns:5fr 7fr;gap:60px;align-items:start}
+.intro .eyebrow{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--clay)}
+.intro h2{font-size:clamp(34px,4.4vw,60px);margin-top:14px}
+.intro .cols{columns:2;column-gap:36px;font-size:17px}
+.intro .cols p+p{margin-top:1em}
+.facts{display:flex;gap:44px;margin-top:40px;border-top:1px solid #0002;padding-top:22px;flex-wrap:wrap}
+.facts b{font-family:var(--serif);font-weight:400;font-size:40px;display:block;color:var(--clay)}
+.facts span{font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+
+.tilestrip{height:64px;background:var(--indigo)}
+.tilestrip svg{width:100%;height:100%;display:block}
+
+.rooms{background:var(--sand);padding:100px 0}
+.rooms-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:50px;flex-wrap:wrap}
+.rooms h2{font-size:clamp(34px,4.4vw,60px)}
+.rooms-head p{max-width:40ch}
+.doorgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.door{background:transparent;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.door svg{width:100%;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.door:hover svg,.door:focus-visible svg{transform:translateY(-6px)}
+.door .leaf{transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-box:fill-box}
+.door .leaf.l{transform-origin:left center}.door .leaf.r{transform-origin:right center}
+.door:hover .leaf.l,.door:focus-visible .leaf.l{transform:scaleX(.25)}
+.door:hover .leaf.r,.door:focus-visible .leaf.r{transform:scaleX(.25)}
+.door h3{font-size:24px;margin-top:14px}
+.door small{display:block;font-size:14px;opacity:.75}
+.door .price{font-family:var(--serif);color:var(--clay-deep);font-size:16px;margin-top:4px;display:block}
+.roomnote{margin-top:40px;background:var(--plaster);padding:26px 30px;border-left:6px solid var(--mint);min-height:94px}
+.roomnote h3{font-size:26px}
+
+.day{background:var(--indigo);color:var(--plaster);padding:110px 0 120px;position:relative;overflow:hidden}
+.day h2{font-size:clamp(34px,4.4vw,60px);max-width:16ch}
+.day .sun{width:100%;height:auto;display:block;margin:50px 0 10px}
+.hours{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.hours div{border-top:1px solid #efe2cc55;padding-top:14px}
+.hours b{font-family:var(--serif);font-weight:400;color:var(--saffron);font-size:22px;display:block}
+.hours p{font-size:15px;opacity:.85}
+
+.medina{padding:110px 0;display:grid;grid-template-columns:7fr 5fr;gap:50px;align-items:center}
+.medina svg{width:100%;height:auto;display:block}
+.medina h2{font-size:clamp(34px,4vw,54px)}
+.medina ol{list-style:none;margin-top:28px}
+.medina li{display:grid;grid-template-columns:64px 1fr;padding:12px 0;border-bottom:1px dashed #0003}
+.medina li b{font-family:var(--serif);font-weight:400;color:var(--clay)}
+
+.book{background:var(--clay);color:var(--plaster);padding:100px 0;position:relative;overflow:hidden}
+.book .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+.book h2{font-size:clamp(38px,5vw,72px)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--plaster);color:var(--ink);padding:30px;border-radius:200px 200px 8px 8px;padding-top:90px}
+form label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:grid;gap:6px}
+form input,form select{font:inherit;padding:11px 12px;border:1px solid #0003;background:#fff8;border-radius:4px}
+form .full{grid-column:1/-1}
+form button{grid-column:1/-1;font:600 16px var(--sans);background:var(--ink);color:var(--plaster);border:0;padding:15px;border-radius:4px;cursor:pointer}
+form output{grid-column:1/-1;font-size:15px;min-height:1.4em}
+.book .bgtile{position:absolute;inset:0;opacity:.13}
+
+footer{background:var(--ink);color:var(--sand);padding:50px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  nav{display:none}
+  .hero-copy .wrap,.intro,.medina,.book .wrap{grid-template-columns:1fr}
+  .hero p{justify-self:start}
+  .intro .cols{columns:1}
+  .doorgrid{grid-template-columns:repeat(2,1fr)}
+  .hours{grid-template-columns:1fr 1fr}
+  form{grid-template-columns:1fr;border-radius:120px 120px 8px 8px}
+}
+@media (max-width:560px){.wrap{padding:0 16px}.hero .wrap{padding:0 16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="zellige" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="60" height="60" fill="#1f2a4d"/>
+      <g transform="translate(30 30)">
+        <rect x="-14" y="-14" width="28" height="28" fill="#2f6b5a"/>
+        <rect x="-14" y="-14" width="28" height="28" fill="#2f6b5a" transform="rotate(45)"/>
+        <rect x="-7" y="-7" width="14" height="14" fill="#efe2cc"/>
+        <rect x="-7" y="-7" width="14" height="14" fill="#e7a23a" transform="rotate(45)"/>
+        <circle r="3" fill="#b5532f"/>
+      </g>
+      <g fill="#efe2cc"><path d="M0 0l8 0-8 8z"/><path d="M60 0l-8 0 8 8z"/><path d="M0 60l8 0-8-8z"/><path d="M60 60l-8 0 8-8z"/></g>
+    </pattern>
+    <pattern id="floor" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="40" height="40" fill="#efe2cc"/>
+      <rect width="20" height="20" fill="#2a1712"/><rect x="20" y="20" width="20" height="20" fill="#2a1712"/>
+    </pattern>
+    <pattern id="stucco" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M0 12 L12 0 L24 12 L12 24Z" fill="none" stroke="#7e3320" stroke-width="1.2" opacity=".5"/>
+      <circle cx="12" cy="12" r="2" fill="#7e3320" opacity=".45"/>
+    </pattern>
+    <radialGradient id="glow"><stop offset="0" stop-color="#ffd88a" stop-opacity=".9"/><stop offset="1" stop-color="#ffd88a" stop-opacity="0"/></radialGradient>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#">
+      <svg width="26" height="26" viewBox="-13 -13 26 26" aria-hidden="true"><rect x="-8" y="-8" width="16" height="16" fill="#e7a23a"/><rect x="-8" y="-8" width="16" height="16" fill="#e7a23a" transform="rotate(45)"/><circle r="3.5" fill="#7e3320"/></svg>
+      Dar Nouaria
+    </a>
+    <nav><a href="#rooms">Rooms</a><a href="#day">A day</a><a href="#medina">Finding us</a><a href="#book">Reserve</a></nav>
+  </div>
+</header>
+
+<section class="hero" aria-label="Illustration of the riad courtyard at dusk, seen through a horseshoe arch">
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1f2a4d"/><stop offset=".45" stop-color="#6d3a5c"/><stop offset=".75" stop-color="#d9714a"/><stop offset="1" stop-color="#f2b25c"/>
+      </linearGradient>
+      <linearGradient id="wallshade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#8f3d24"/><stop offset=".5" stop-color="#b5532f"/><stop offset="1" stop-color="#8f3d24"/>
+      </linearGradient>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#dusk)"/>
+    <g fill="#fff" id="stars"></g>
+    <path d="M760 150a34 34 0 1 0 22 60a28 28 0 1 1 -22 -60z" fill="#f7e6c0"/>
+
+    <g fill="#5a2a3a">
+      <rect x="520" y="200" width="56" height="230"/>
+      <rect x="530" y="168" width="36" height="32"/>
+      <path d="M548 130 l0 38" stroke="#5a2a3a" stroke-width="4"/>
+      <circle cx="548" cy="132" r="6"/><circle cx="548" cy="148" r="5"/>
+      <path d="M380 430 L380 360 L460 360 L460 330 L640 330 L640 380 L820 380 L820 430Z"/>
+      <path d="M300 430 q40 -60 80 -40 q30 -80 70 -10 L450 430Z" fill="#3f2f2a"/>
+      <path d="M760 430 q20 -90 50 -40 q40 -50 60 0 L870 430Z" fill="#3f2f2a"/>
+    </g>
+    <g fill="#e7a23a" opacity=".85"><rect x="534" y="230" width="8" height="14"/><rect x="554" y="230" width="8" height="14"/><rect x="544" y="290" width="8" height="14"/></g>
+
+    <rect x="300" y="420" width="600" height="160" fill="#c86a42"/>
+    <rect x="300" y="420" width="600" height="160" fill="url(#stucco)"/>
+    <g fill="#5e2617">
+      <path d="M350 580 L350 500 A40 40 0 0 1 430 500 L430 580Z"/>
+      <path d="M560 580 L560 480 A40 44 0 0 1 640 480 L640 580Z"/>
+      <path d="M770 580 L770 500 A40 40 0 0 1 850 500 L850 580Z"/>
+    </g>
+    <g fill="#e7a23a" class="flicker">
+      <path d="M362 580 L362 505 A28 28 0 0 1 418 505 L418 580Z" opacity=".55"/>
+      <path d="M782 580 L782 505 A28 28 0 0 1 838 505 L838 580Z" opacity=".45"/>
+    </g>
+    <rect x="300" y="414" width="600" height="10" fill="#7e3320"/>
+    <g fill="#2f6b5a"><rect x="300" y="410" width="600" height="6"/></g>
+
+    <path d="M200 800 L330 580 L870 580 L1000 800Z" fill="url(#floor)"/>
+    <path d="M200 800 L330 580 L870 580 L1000 800Z" fill="#2a1712" opacity=".18"/>
+
+    <g>
+      <ellipse cx="600" cy="680" rx="150" ry="38" fill="#2f6b5a"/>
+      <ellipse cx="600" cy="672" rx="136" ry="30" fill="#4c9a87"/>
+      <ellipse cx="600" cy="672" rx="70" ry="15" fill="none" stroke="#bfe4d8" stroke-width="2" class="ripple"/>
+      <ellipse cx="600" cy="672" rx="70" ry="15" fill="none" stroke="#bfe4d8" stroke-width="2" class="ripple" style="animation-delay:1.5s"/>
+      <rect x="590" y="616" width="20" height="56" fill="#efe2cc"/>
+      <ellipse cx="600" cy="616" rx="34" ry="8" fill="#efe2cc"/>
+      <path d="M600 604 q-26 -30 -34 12 M600 604 q26 -30 34 12" stroke="#cfeee4" stroke-width="3" fill="none" opacity=".9"/>
+      <circle cx="600" cy="600" r="5" fill="#cfeee4"/>
+    </g>
+
+    <g id="tree-l">
+      <path d="M420 690 L408 740 L472 740 L460 690Z" fill="#b5532f"/>
+      <rect x="404" y="684" width="72" height="10" fill="#7e3320"/>
+      <path d="M440 684 L440 590" stroke="#4a2a18" stroke-width="7"/>
+      <g fill="#2f6b5a"><circle cx="440" cy="560" r="44"/><circle cx="410" cy="580" r="30"/><circle cx="470" cy="580" r="30"/><circle cx="440" cy="530" r="30"/></g>
+      <g fill="#3f8a6f"><circle cx="425" cy="548" r="18"/><circle cx="462" cy="560" r="14"/></g>
+      <g fill="#f08a24"><circle cx="420" cy="570" r="6"/><circle cx="455" cy="540" r="6"/><circle cx="470" cy="585" r="6"/><circle cx="432" cy="595" r="5"/><circle cx="445" cy="518" r="5"/></g>
+    </g>
+    <use href="#tree-l" transform="translate(1200 0) scale(-1 1)"/>
+
+    <g transform="translate(700 728)">
+      <path d="M0 0 q-6 -24 6 -34 q-4 -10 2 -16 l6 8 l8 0 l6 -8 q6 6 2 16 q12 10 6 34 z" fill="#2a1712"/>
+      <path d="M-2 -2 q-22 4 -26 -16" stroke="#2a1712" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="9" cy="-36" r="1.6" fill="#e7a23a"/><circle cx="17" cy="-36" r="1.6" fill="#e7a23a"/>
+    </g>
+
+    <path fill-rule="evenodd" fill="url(#wallshade)" d="M0 0H1200V800H0Z M380 800 L380 520 A250 250 0 1 1 820 520 L820 800Z"/>
+    <path fill-rule="evenodd" fill="url(#stucco)" d="M0 0H1200V800H0Z M380 800 L380 520 A250 250 0 1 1 820 520 L820 800Z"/>
+    <path d="M380 800 L380 520 A250 250 0 1 1 820 520 L820 800" fill="none" stroke="#efe2cc" stroke-width="14"/>
+    <path d="M356 800 L356 520 A272 272 0 1 1 844 520 L844 800" fill="none" stroke="url(#zellige)" stroke-width="30"/>
+    <path d="M332 800 L332 520 A294 294 0 1 1 868 520 L868 800" fill="none" stroke="#efe2cc" stroke-width="4"/>
+    <g fill="#7e3320" opacity=".6">
+      <path d="M600 112 l12 22 -12 22 -12 -22z"/>
+    </g>
+
+    <g class="lantern-sway" style="transform-origin:180px 0">
+      <line x1="180" y1="0" x2="180" y2="180" stroke="#2a1712" stroke-width="2"/>
+      <circle cx="180" cy="250" r="90" fill="url(#glow)" class="flicker"/>
+      <path d="M160 190 L200 190 L214 220 L208 290 L180 316 L152 290 L146 220Z" fill="#2a1712"/>
+      <path d="M164 204 L196 204 L204 226 L198 284 L180 300 L162 284 L156 226Z" fill="#ffcf7a" class="flicker"/>
+      <g stroke="#2a1712" stroke-width="3" fill="none"><path d="M180 204v96 M160 230h40 M158 260h44"/><circle cx="180" cy="246" r="10"/></g>
+      <path d="M170 180 h20 l-4 10 h-12z" fill="#2a1712"/>
+    </g>
+    <g class="lantern-sway" style="transform-origin:1030px 0;animation-delay:-2s">
+      <line x1="1030" y1="0" x2="1030" y2="120" stroke="#2a1712" stroke-width="2"/>
+      <circle cx="1030" cy="180" r="70" fill="url(#glow)" class="flicker"/>
+      <ellipse cx="1030" cy="180" rx="34" ry="50" fill="#2a1712"/>
+      <ellipse cx="1030" cy="180" rx="26" ry="42" fill="#ffcf7a" class="flicker"/>
+      <g stroke="#2a1712" stroke-width="2.5" fill="none"><path d="M1030 138v84 M1006 165q24 12 48 0 M1006 196q24 12 48 0"/></g>
+      <path d="M1018 120 h24 l-6 12 h-12z" fill="#2a1712"/>
+    </g>
+    <rect x="0" y="560" width="1200" height="240" fill="#2a1712" opacity=".25"/>
+  </svg>
+  <div class="hero-copy">
+    <div class="wrap">
+      <h1>Eight rooms<br>around one <em>fountain</em>.</h1>
+      <div>
+        <p>A restored 1890s riad off Derb Sidi Bouloukat, eleven minutes on foot from Jemaa el-Fnaa and a world quieter.</p>
+        <a class="cta" href="#book">Check the dates</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap intro">
+  <div>
+    <div class="eyebrow">Dar Nouaria · Medina, Marrakech</div>
+    <h2>The street door is plain. Everything else is not.</h2>
+  </div>
+  <div>
+    <div class="cols">
+      <p>Riads were built to face inward. From the derb you see a studded cedar door and a wall the colour of the city; step through and the noise of the souk drops away to water and birdsong under two bitter-orange trees.</p>
+      <p>We kept the tadelakt walls, the hand-cut zellige and the carved plaster that took a family of maâlems three years to repair. We added deep mattresses, proper showers and a roof that catches the evening call to prayer from four minarets at once.</p>
+    </div>
+    <div class="facts">
+      <div><b>8</b><span>Rooms &amp; suites</span></div>
+      <div><b>11 min</b><span>Walk to the square</span></div>
+      <div><b>1</b><span>Hammam, wood-fired</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="tilestrip" aria-hidden="true"><svg preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#zellige)"/></svg></div>
+
+<section class="rooms" id="rooms">
+  <div class="wrap">
+    <div class="rooms-head">
+      <h2>Every door<br>is a different room.</h2>
+      <p>No two rooms share a palette. Hover or tap a door to open it.</p>
+    </div>
+    <div class="doorgrid" id="doors"></div>
+    <div class="roomnote" id="roomnote" aria-live="polite"><h3>Choose a door</h3><p>Each room is named for the colour its craftsman chose.</p></div>
+  </div>
+</section>
+
+<section class="day" id="day">
+  <div class="wrap">
+    <h2>A day here bends around the sun.</h2>
+    <svg class="sun" viewBox="0 0 1200 260" aria-label="Illustration of the sun's path over the medina rooftops through the day">
+      <path id="arcpath" d="M60 230 Q600 -110 1140 230" fill="none" stroke="#efe2cc" stroke-dasharray="4 8" opacity=".5"/>
+      <g id="skyline" fill="#141c36"></g>
+      <g id="sunmarks"></g>
+      <circle id="sundot" r="20" fill="#e7a23a"/>
+    </svg>
+    <div class="hours">
+      <div><b>06:40</b><p>Fajr from the roof. Mint tea is left at your door before you wake.</p></div>
+      <div><b>09:00</b><p>Breakfast by the fountain: msemen, amlou, oranges from the tree above you.</p></div>
+      <div><b>13:00</b><p>The souk is loud and the courtyard is cool. Plunge pool, then a nap.</p></div>
+      <div><b>17:30</b><p>Hammam and black-soap scrub, fired with cedar offcuts from the carpenters' souk.</p></div>
+      <div><b>20:00</b><p>Tagine on the roof under lanterns. Fatima's lamb with prunes, Thursdays.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap medina" id="medina">
+  <svg viewBox="0 0 700 560" aria-label="Hand-drawn map of the walk from Jemaa el-Fnaa to the riad">
+    <rect width="700" height="560" fill="#e4cfa9"/>
+    <g id="blocks" fill="#d3b98d" stroke="#b89b6c" stroke-width="1"></g>
+    <path d="M10 520 C120 480 90 400 180 380 S260 300 330 320 S420 260 460 200 S560 140 690 60" fill="none" stroke="#efe2cc" stroke-width="16" stroke-linecap="round"/>
+    <path d="M40 60 C140 120 200 90 250 170 S300 260 330 320" fill="none" stroke="#efe2cc" stroke-width="10" stroke-linecap="round"/>
+    <path d="M330 320 C380 380 460 360 520 430 S620 500 690 480" fill="none" stroke="#efe2cc" stroke-width="10" stroke-linecap="round"/>
+    <path id="route" d="M150 410 C200 380 230 340 290 330 S340 300 360 270 C380 240 420 250 440 220 C455 200 480 205 500 180" fill="none" stroke="#b5532f" stroke-width="4" stroke-dasharray="2 9" stroke-linecap="round"/>
+    <g transform="translate(150 410)">
+      <ellipse rx="70" ry="44" fill="#efe2cc" stroke="#b89b6c"/>
+      <g fill="#b5532f"><circle cx="-30" cy="-6" r="4"/><circle cx="-10" cy="10" r="4"/><circle cx="18" cy="-12" r="4"/><circle cx="30" cy="12" r="4"/><circle cx="2" cy="-20" r="3"/></g>
+      <text y="68" text-anchor="middle" font-family="Young Serif" font-size="16" fill="#2a1712">Jemaa el-Fnaa</text>
+    </g>
+    <g transform="translate(70 200)">
+      <rect x="-10" y="-70" width="20" height="70" fill="#7e3320"/><rect x="-6" y="-84" width="12" height="14" fill="#7e3320"/>
+      <text x="22" y="-30" font-family="Instrument Sans" font-size="13" fill="#2a1712">Koutoubia</text>
+    </g>
+    <g transform="translate(500 180)">
+      <circle r="34" fill="#b5532f" opacity=".18"/>
+      <rect x="-14" y="-14" width="28" height="28" fill="#e7a23a"/><rect x="-14" y="-14" width="28" height="28" fill="#e7a23a" transform="rotate(45)"/>
+      <circle r="6" fill="#7e3320"/>
+      <text x="0" y="-44" text-anchor="middle" font-family="Young Serif" font-size="18" fill="#7e3320">Dar Nouaria</text>
+    </g>
+    <g font-family="Instrument Sans" font-size="12" fill="#2a1712" opacity=".75">
+      <text x="300" y="356">Souk Semmarine</text>
+      <text x="380" y="292">spice square</text>
+      <text x="560" y="470">Ben Youssef</text>
+    </g>
+    <g transform="translate(640 500)" stroke="#2a1712" fill="none"><circle r="22"/><path d="M0 -18 L5 0 L0 18 L-5 0Z" fill="#2a1712"/></g>
+    <text x="640" y="466" text-anchor="middle" font-family="Young Serif" font-size="14">N</text>
+    <circle id="walker" r="7" fill="#1f2a4d"/>
+  </svg>
+  <div>
+    <h2>The medina is a maze. You will only need four turns.</h2>
+    <ol>
+      <li><b>00 min</b><span>Face the orange-juice carts on the north side of the square.</span></li>
+      <li><b>03 min</b><span>Into Souk Semmarine under the slatted roof; keep the slippers on your left.</span></li>
+      <li><b>07 min</b><span>Right at the spice square, past the man with the chameleons.</span></li>
+      <li><b>11 min</b><span>Blue door, brass hand of Fatima. Ring once — Youssef will hear.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="book" id="book">
+  <svg class="bgtile" aria-hidden="true" width="100%" height="100%"><rect width="100%" height="100%" fill="url(#zellige)"/></svg>
+  <div class="wrap">
+    <div>
+      <h2>Come for three nights. Stay for five.</h2>
+      <p style="margin-top:20px;max-width:38ch">Rates include breakfast, airport pickup and one hammam per stay. We answer every request personally, usually within the hour.</p>
+    </div>
+    <form id="bookform">
+      <label>Arrive<input type="date" name="in" required></label>
+      <label>Depart<input type="date" name="out" required></label>
+      <label>Guests<select name="g"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+      <label>Room<select name="room" id="roomselect"></select></label>
+      <label class="full">Email<input type="email" name="email" required placeholder="you@example.com"></label>
+      <button type="submit">Request these dates</button>
+      <output id="quote"></output>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>Dar Nouaria · 14 Derb Sidi Bouloukat, Medina, Marrakech</span><span>+212 524 00 00 00 · salam@darnouaria.ma</span></div></footer>
+
+<script>
+const rooms=[
+  {n:"Majorelle",d:"Courtyard suite, 34 m²",p:240,door:"#1d4fb8",frame:"#e7a23a",wall:"#efe2cc",note:"Cobalt doors, a carved cedar ceiling and a bath sunk into the floor."},
+  {n:"Safran",d:"Gallery room, 22 m²",p:165,door:"#d98c1e",frame:"#7e3320",wall:"#f3d9a6",note:"Saffron tadelakt walls and a window seat over the fountain."},
+  {n:"Atlas",d:"Roof room, 26 m²",p:195,door:"#2f6b5a",frame:"#efe2cc",wall:"#c97b6a",note:"Its own terrace with a view to the snow on the High Atlas in winter."},
+  {n:"Rose",d:"Garden room, 20 m²",p:150,door:"#a8434b",frame:"#efe2cc",wall:"#e9b9a8",note:"Dried damask roses from Kelaat M'Gouna in every drawer."},
+  {n:"Henna",d:"Gallery room, 21 m²",p:155,door:"#7e3320",frame:"#e7a23a",wall:"#d7a46b",note:"Hand-painted henna-pattern headboard by an artisan from Fes."},
+  {n:"Mint",d:"Courtyard room, 24 m²",p:175,door:"#4c9a87",frame:"#2a1712",wall:"#efe2cc",note:"Opens straight onto the orange trees. The quietest room in the house."},
+  {n:"Indigo",d:"Suite, 38 m²",p:260,door:"#1f2a4d",frame:"#c97b6a",wall:"#b8c4d8",note:"Two rooms, a fireplace and Tuareg indigo linens."},
+  {n:"Argan",d:"Roof suite, 40 m²",p:280,door:"#5a3a22",frame:"#e7a23a",wall:"#e4cfa9",note:"The whole top floor: a private plunge pool and an outdoor shower."}
+];
+const doorSVG=(r,i)=>{
+  const studs=[];for(let y=150;y<370;y+=26){studs.push(`<circle cx="98" cy="${y}" r="2.6" fill="${r.frame}"/><circle cx="202" cy="${y}" r="2.6" fill="${r.frame}"/>`)}
+  const motif=i%2?`<path d="M150 200 l16 16 -16 16 -16 -16z" fill="${r.frame}"/>`:`<circle cx="150" cy="216" r="14" fill="none" stroke="${r.frame}" stroke-width="3"/>`;
+  return `<svg viewBox="0 0 300 400" aria-hidden="true">
+    <rect width="300" height="400" fill="${r.wall}"/>
+    <rect width="300" height="400" fill="url(#stucco)" opacity=".5"/>
+    <path d="M60 400 L60 150 A92 92 0 1 1 240 150 L240 400Z" fill="${r.frame}"/>
+    <path d="M74 400 L74 155 A78 78 0 1 1 226 155 L226 400Z" fill="#2a1712"/>
+    <g class="roomview">
+      <rect x="74" y="60" width="152" height="340" fill="${r.wall}" opacity=".35"/>
+      <rect x="110" y="300" width="80" height="40" rx="4" fill="${r.door}" opacity=".7"/>
+      <rect x="104" y="290" width="92" height="14" rx="3" fill="#efe2cc"/>
+      <circle cx="150" cy="140" r="18" fill="#ffcf7a" opacity=".9"/><circle cx="150" cy="140" r="44" fill="url(#glow)"/>
+      <line x1="150" y1="70" x2="150" y2="122" stroke="#efe2cc"/>
+    </g>
+    <path class="leaf l" d="M76 400 L76 157 A76 76 0 0 1 150 80 L150 400Z" fill="${r.door}"/>
+    <path class="leaf r" d="M150 400 L150 80 A76 76 0 0 1 224 157 L224 400Z" fill="${r.door}"/>
+    <g class="leaf l" opacity=".9">${studs.filter((_,k)=>k%2==0).join('')}</g>
+    <g class="leaf r" opacity=".9">${studs.filter((_,k)=>k%2==1).join('')}</g>
+    <g pointer-events="none">${motif}</g>
+    <circle cx="140" cy="280" r="5" fill="${r.frame}"/><circle cx="160" cy="280" r="5" fill="${r.frame}"/>
+    <rect x="40" y="388" width="220" height="12" fill="url(#zellige)"/>
+  </svg>`;
+};
+const grid=document.getElementById('doors'),note=document.getElementById('roomnote'),sel=document.getElementById('roomselect');
+rooms.forEach((r,i)=>{
+  const b=document.createElement('button');b.className='door';b.type='button';
+  b.innerHTML=doorSVG(r,i)+`<h3>${r.n}</h3><small>${r.d}</small><span class="price">from €${r.p} / night</span>`;
+  const show=()=>{note.style.borderLeftColor=r.door;note.innerHTML=`<h3>${r.n} · €${r.p}</h3><p>${r.note}</p>`};
+  b.addEventListener('mouseenter',show);b.addEventListener('focus',show);
+  b.addEventListener('click',()=>{show();sel.value=r.n;document.getElementById('book').scrollIntoView()});
+  grid.appendChild(b);
+  sel.add(new Option(`${r.n} — €${r.p}`,r.n));
+});
+
+const stars=document.getElementById('stars');let s='';
+for(let i=0;i<70;i++){const x=Math.random()*1200,y=Math.random()*300;s+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(Math.random()*1.4+.3).toFixed(1)}" opacity="${(Math.random()*.7+.2).toFixed(2)}"/>`}
+stars.innerHTML=s;
+
+const sky=document.getElementById('skyline');let k='',x=0;
+while(x<1200){const w=40+Math.random()*70,h=30+Math.random()*50;k+=`<rect x="${x}" y="${260-h}" width="${w+1}" height="${h}"/>`;
+  if(Math.random()<.18){k+=`<rect x="${x+w/2-9}" y="${260-h-90}" width="18" height="90"/><rect x="${x+w/2-5}" y="${260-h-104}" width="10" height="14"/>`}
+  if(Math.random()<.2){k+=`<path d="M${x+10} ${260-h} a${w/2-10} ${w/2-10} 0 0 1 ${w-20} 0z"/>`}
+  x+=w}
+sky.innerHTML=k;
+const arc=document.getElementById('arcpath'),dot=document.getElementById('sundot'),marks=document.getElementById('sunmarks'),L=arc.getTotalLength();
+const tints=['#f2b25c','#f7d27a','#ffe7a3','#e7a23a','#d9714a'];
+[.08,.28,.5,.72,.9].forEach((t,i)=>{const p=arc.getPointAtLength(L*t);marks.innerHTML+=`<circle cx="${p.x}" cy="${p.y}" r="6" fill="${tints[i]}"/>`});
+const walker=document.getElementById('walker'),route=document.getElementById('route'),RL=route.getTotalLength();
+function tick(){
+  const day=document.getElementById('day').getBoundingClientRect(),vh=innerHeight;
+  const t=Math.min(1,Math.max(0,(vh-day.top)/(vh+day.height)));
+  const p=arc.getPointAtLength(L*(.05+t*.9));dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);
+  dot.setAttribute('fill',t<.5?'#ffd27a':'#e8743f');
+  const m=document.getElementById('medina').getBoundingClientRect();
+  const u=Math.min(1,Math.max(0,(vh*.8-m.top)/(m.height)));
+  const q=route.getPointAtLength(RL*u);walker.setAttribute('cx',q.x);walker.setAttribute('cy',q.y);
+}
+addEventListener('scroll',tick,{passive:true});tick();
+
+const blocks=document.getElementById('blocks');let bl='';
+for(let i=0;i<120;i++){const bx=Math.random()*680,by=Math.random()*540,bw=18+Math.random()*40,bh=14+Math.random()*34;bl+=`<rect x="${bx.toFixed(0)}" y="${by.toFixed(0)}" width="${bw.toFixed(0)}" height="${bh.toFixed(0)}" transform="rotate(${(Math.random()*20-10).toFixed(0)} ${bx.toFixed(0)} ${by.toFixed(0)})"/>`}
+blocks.innerHTML=bl;
+
+document.getElementById('bookform').addEventListener('submit',e=>{
+  e.preventDefault();const f=new FormData(e.target),a=new Date(f.get('in')),b=new Date(f.get('out')),n=Math.round((b-a)/864e5);
+  const out=document.getElementById('quote');
+  if(!(n>0)){out.textContent='Departure needs to be after arrival.';return}
+  const r=rooms.find(r=>r.n==f.get('room'));
+  out.textContent=`${n} night${n>1?'s':''} in ${r.n}: about €${n*r.p}. We'll write to ${f.get('email')} within the hour.`;
+});
+</script>
+</body>
+</html>

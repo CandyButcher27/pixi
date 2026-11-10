@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marginalia — the writing assistant that works in the margins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Caveat:wght@500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3ecdf;--paper2:#ebe2d0;--ink:#1d2340;--ink2:#3c4470;--red:#c8442b;--moss:#5d7a4a;--ochre:#d9a441;--rule:#c9bda5;
+  --serif:"Fraunces",Georgia,serif;--hand:"Caveat",cursive;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;max-width:1240px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;letter-spacing:-.02em;text-decoration:none}
+nav ul{display:flex;gap:28px;list-style:none;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+nav ul a{text-decoration:none}
+nav ul a:hover{color:var(--red)}
+.btn{display:inline-block;font-family:var(--mono);font-size:14px;letter-spacing:.04em;padding:14px 22px;background:var(--ink);color:var(--paper);text-decoration:none;border:2px solid var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--red)}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+.hero{display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:center;padding:40px 32px 80px;max-width:1240px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+h1{font-size:clamp(48px,6.4vw,92px);line-height:.95;font-weight:300;letter-spacing:-.035em;margin:18px 0 26px}
+h1 em{font-style:italic;font-weight:400}
+h1 s{text-decoration-color:var(--red);text-decoration-thickness:4px;color:var(--ink2)}
+.lede{font-size:20px;max-width:30ch;color:var(--ink2);margin-bottom:34px}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-art svg{width:100%;height:auto;display:block;overflow:visible}
+
+.draw{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);animation:draw 2.6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pop{opacity:0;animation:pop .6s ease forwards}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bob{animation:bob 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-2deg)}}
+
+.strip{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--ink);color:var(--paper);overflow:hidden}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);padding-top:26px;padding-bottom:26px}
+.strip div div{padding:0 20px;border-left:1px solid #ffffff30}
+.strip div div:first-child{border:0;padding-left:0}
+.strip b{display:block;font-size:40px;font-weight:300;font-style:italic;line-height:1}
+.strip span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+
+section{padding:110px 0}
+h2{font-size:clamp(38px,4.4vw,64px);font-weight:300;letter-spacing:-.03em;line-height:1}
+h2 em{font-style:italic;color:var(--red)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;border-top:2px solid var(--ink)}
+.step{padding:36px 30px 10px;border-right:1px solid var(--rule)}
+.step:last-child{border:0}
+.step svg{width:100%;height:210px;display:block;margin-bottom:22px}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--red)}
+.step h3{font-size:28px;font-weight:500;letter-spacing:-.02em;margin:6px 0 10px}
+.step p{color:var(--ink2);font-size:17px}
+
+.demo{background:var(--paper2);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.demo .wrap{display:grid;grid-template-columns:4fr 6fr;gap:70px;align-items:start}
+.demo p.sub{color:var(--ink2);margin:22px 0 30px;max-width:34ch}
+.tones{display:flex;flex-wrap:wrap;gap:10px}
+.tones button{font-family:var(--mono);font-size:13px;padding:10px 16px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.tones button[aria-pressed=true]{background:var(--red);border-color:var(--red);color:var(--paper)}
+.sheet{position:relative;background:#fbf7ee;border:2px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:48px 56px 48px 90px;min-height:420px;
+  background-image:linear-gradient(transparent 31px,#d8cdb6 32px);background-size:100% 32px;background-position:0 46px}
+.sheet:before{content:"";position:absolute;left:62px;top:0;bottom:0;width:2px;background:#e3a598}
+.sheet .label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);position:absolute;top:14px;left:90px}
+.sheet .orig{font-size:20px;line-height:32px;color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--red);opacity:.6}
+.sheet .out{font-size:22px;line-height:32px;margin-top:32px;min-height:128px}
+.sheet .out:after{content:"";display:inline-block;width:2px;height:22px;background:var(--red);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.sheet .note{position:absolute;right:-30px;bottom:-40px;font-family:var(--hand);font-size:28px;color:var(--red);transform:rotate(-5deg);background:var(--paper);padding:2px 12px;border:2px solid var(--red)}
+
+.voices{display:grid;grid-template-columns:7fr 5fr;gap:60px;align-items:center}
+blockquote{font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.18;letter-spacing:-.02em}
+blockquote em{color:var(--red)}
+cite{display:block;margin-top:26px;font-family:var(--mono);font-size:13px;font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
+.plan{border:2px solid var(--ink);padding:34px 30px;background:var(--paper);position:relative}
+.plan.feat{background:var(--ink);color:var(--paper)}
+.plan.feat .btn{background:var(--red);border-color:var(--red)}
+.plan h3{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.plan .price{font-size:64px;font-weight:300;letter-spacing:-.04em;line-height:1;margin:18px 0 6px}
+.plan .price small{font-size:18px;letter-spacing:0}
+.plan ul{list-style:none;margin:24px 0 30px;font-size:17px}
+.plan li{padding:8px 0;border-bottom:1px dashed currentColor;opacity:.9}
+.plan .stamp{position:absolute;top:-22px;right:18px;font-family:var(--hand);font-size:26px;color:var(--red);background:var(--paper);border:2px solid var(--red);padding:0 12px;transform:rotate(4deg)}
+
+footer{border-top:2px solid var(--ink);padding:60px 0 40px}
+footer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+footer svg{width:100%;max-width:520px;height:auto}
+footer .big{font-size:clamp(40px,5vw,72px);font-weight:300;font-style:italic;letter-spacing:-.03em;line-height:1;margin-bottom:28px}
+footer small{display:block;margin-top:40px;font-family:var(--mono);font-size:12px;color:var(--ink2)}
+
+@media (max-width:900px){
+  nav ul{display:none}
+  .hero,.demo .wrap,.voices,footer .wrap{grid-template-columns:1fr}
+  .steps,.plans{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--rule)}
+  .strip .wrap{grid-template-columns:1fr 1fr;gap:20px}
+  .strip div div{border:0;padding:0}
+  .sheet{padding:44px 22px 44px 54px}
+  .sheet:before{left:36px}.sheet .label{left:54px}
+  .sheet .note{right:6px}
+  .wrap,nav,.hero{padding-left:16px;padding-right:16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.draw{stroke-dashoffset:0}.pop{opacity:1}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">
+    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M6 26 L22 4 L26 8 L10 28 Z" fill="#1d2340"/><path d="M6 26 L4 29 L10 28" fill="#c8442b"/><circle cx="21" cy="9" r="1.6" fill="#f3ecdf"/></svg>
+    Marginalia
+  </a>
+  <ul><li><a href="#how">How it works</a></li><li><a href="#try">Try it</a></li><li><a href="#pricing">Pricing</a></li></ul>
+  <a class="btn ghost" href="#pricing">Start writing</a>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">An AI writing assistant</div>
+    <h1>Write the <s>first</s> <em>real</em> draft, not the hundredth.</h1>
+    <p class="lede">Marginalia reads alongside you and leaves notes in the margin — sharper verbs, clearer arguments, your own voice kept intact.</p>
+    <div class="actions"><a class="btn" href="#try">Try it on a sentence</a><a class="btn ghost" href="#how">See how it reads</a></div>
+  </div>
+
+  <div class="hero-art" aria-label="Illustration: a fountain pen writing on a sheet of paper while handwritten margin notes branch out from the text like a vine">
+    <svg viewBox="0 0 720 620">
+      <defs>
+        <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#1d2340" stroke-width="1.2"/></pattern>
+        <pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#c8442b"/></pattern>
+      </defs>
+      <!-- sun / lamp glow -->
+      <circle cx="590" cy="110" r="78" fill="#d9a441"/>
+      <circle cx="590" cy="110" r="78" fill="url(#dots)" opacity=".35"/>
+      <!-- desk -->
+      <path d="M0 540 Q360 505 720 540 L720 620 L0 620 Z" fill="#1d2340"/>
+      <path d="M0 540 Q360 505 720 540" fill="none" stroke="#f3ecdf" stroke-width="2" stroke-dasharray="2 8"/>
+      <!-- paper stack -->
+      <g transform="rotate(-6 300 320)">
+        <rect x="118" y="92" width="380" height="460" fill="#ebe2d0" stroke="#1d2340" stroke-width="2.5"/>
+        <rect x="108" y="82" width="380" height="460" fill="#fbf7ee" stroke="#1d2340" stroke-width="2.5"/>
+        <line x1="150" y1="82" x2="150" y2="542" stroke="#e3a598" stroke-width="2"/>
+        <g stroke="#d8cdb6" stroke-width="1.5">
+          <line x1="108" y1="150" x2="488" y2="150"/><line x1="108" y1="182" x2="488" y2="182"/><line x1="108" y1="214" x2="488" y2="214"/><line x1="108" y1="246" x2="488" y2="246"/><line x1="108" y1="278" x2="488" y2="278"/><line x1="108" y1="310" x2="488" y2="310"/><line x1="108" y1="342" x2="488" y2="342"/><line x1="108" y1="374" x2="488" y2="374"/><line x1="108" y1="406" x2="488" y2="406"/><line x1="108" y1="438" x2="488" y2="438"/><line x1="108" y1="470" x2="488" y2="470"/><line x1="108" y1="502" x2="488" y2="502"/>
+        </g>
+        <!-- handwriting scribbles -->
+        <g fill="none" stroke="#1d2340" stroke-width="2.4" stroke-linecap="round">
+          <path class="draw" style="--len:700;animation-delay:.1s" d="M165 143 q8-14 16 0 t16 0 t16 0 m10 0 q6-12 12 0 t12 0 t12 0 t12 0 m12 0 q7-13 14 0 t14 0 t14 0 m14 0 q5-10 10 0 t10 0 t10 0 t10 0 t10 0 m12 0 q6-12 12 0 t12 0"/>
+          <path class="draw" style="--len:700;animation-delay:.5s" d="M165 175 q6-12 12 0 t12 0 t12 0 t12 0 m14 0 q8-14 16 0 t16 0 m12 0 q5-10 10 0 t10 0 t10 0 m14 0 q7-13 14 0 t14 0 t14 0 t14 0 m10 0 q6-12 12 0 t12 0 t12 0"/>
+          <path class="draw" style="--len:700;animation-delay:.9s" d="M165 207 q7-13 14 0 t14 0 t14 0 m12 0 q6-12 12 0 t12 0 t12 0 t12 0 t12 0"/>
+          <path class="draw" style="--len:700;animation-delay:1.3s" d="M165 271 q6-12 12 0 t12 0 t12 0 m12 0 q8-14 16 0 t16 0 t16 0 m12 0 q5-10 10 0 t10 0 t10 0 t10 0 m14 0 q7-13 14 0 t14 0"/>
+          <path class="draw" style="--len:700;animation-delay:1.7s" d="M165 303 q7-13 14 0 t14 0 t14 0 t14 0 m12 0 q6-12 12 0 t12 0 m14 0 q8-14 16 0 t16 0 t16 0 t16 0"/>
+          <path class="draw" style="--len:500;animation-delay:2.1s" d="M165 335 q6-12 12 0 t12 0 t12 0 m12 0 q5-10 10 0 t10 0 t10 0"/>
+        </g>
+        <!-- strike-through + insertion caret in red -->
+        <g fill="none" stroke="#c8442b" stroke-width="3" stroke-linecap="round">
+          <path class="draw" style="--len:200;animation-delay:2.4s" d="M268 168 L360 166"/>
+          <path class="draw" style="--len:60;animation-delay:2.6s" d="M300 216 l8-14 l8 14"/>
+          <ellipse class="draw" style="--len:300;animation-delay:2.8s" cx="376" cy="298" rx="52" ry="17"/>
+        </g>
+        <text class="pop" style="animation-delay:2.8s" x="282" y="196" font-family="Caveat" font-size="26" fill="#c8442b">sharper</text>
+        <!-- ink blot -->
+        <path d="M410 420 q18-14 30 2 q14 -4 12 12 q12 10 -4 18 q-4 16-20 8 q-16 8-20-8 q-16-6-2-18 q-8-12 4-14z" fill="#1d2340" opacity=".9"/>
+        <circle cx="462" cy="410" r="5" fill="#1d2340"/><circle cx="398" cy="458" r="3.5" fill="#1d2340"/>
+      </g>
+      <!-- vine of suggestions growing out of the paper -->
+      <g fill="none" stroke="#5d7a4a" stroke-width="3" stroke-linecap="round">
+        <path class="draw" style="--len:900;animation-delay:1s" d="M470 300 C540 290 560 240 600 220 C640 200 660 250 650 300 C640 360 590 380 610 440"/>
+        <path class="draw" style="--len:300;animation-delay:1.8s" d="M600 220 C600 190 620 180 640 172"/>
+        <path class="draw" style="--len:300;animation-delay:2s" d="M650 300 C680 300 690 320 700 336"/>
+      </g>
+      <g fill="#5d7a4a" stroke="#1d2340" stroke-width="1.5">
+        <path class="pop" style="animation-delay:2.2s" d="M540 262 q-30-6-34-30 q28 0 34 30z"/>
+        <path class="pop" style="animation-delay:2.4s" d="M624 254 q24-22 50-10 q-20 26-50 10z"/>
+        <path class="pop" style="animation-delay:2.6s" d="M630 380 q-34 2-46-20 q32-10 46 20z"/>
+        <path class="pop" style="animation-delay:2.8s" d="M612 430 q20-24 46-16 q-16 28-46 16z"/>
+      </g>
+      <!-- suggestion tags on the vine -->
+      <g class="pop" style="animation-delay:2.5s" font-family="IBM Plex Mono" font-size="12">
+        <rect x="604" y="146" width="104" height="28" fill="#f3ecdf" stroke="#1d2340" stroke-width="2"/>
+        <text x="614" y="165" fill="#1d2340">cut 14 words</text>
+      </g>
+      <g class="pop" style="animation-delay:2.9s" font-family="IBM Plex Mono" font-size="12">
+        <rect x="620" y="338" width="96" height="28" fill="#c8442b" stroke="#1d2340" stroke-width="2"/>
+        <text x="630" y="357" fill="#f3ecdf">tone: warmer</text>
+      </g>
+      <g class="pop" style="animation-delay:3.2s" font-family="IBM Plex Mono" font-size="12">
+        <rect x="586" y="456" width="112" height="28" fill="#d9a441" stroke="#1d2340" stroke-width="2"/>
+        <text x="596" y="475" fill="#1d2340">cite a source?</text>
+      </g>
+      <!-- fountain pen -->
+      <g class="bob">
+        <g transform="translate(330 330) rotate(38)">
+          <rect x="-16" y="-250" width="32" height="150" rx="14" fill="#1d2340"/>
+          <rect x="-16" y="-250" width="32" height="150" rx="14" fill="url(#hatch)" opacity=".25"/>
+          <rect x="-18" y="-108" width="36" height="16" fill="#d9a441" stroke="#1d2340" stroke-width="2"/>
+          <rect x="-4" y="-246" width="5" height="70" rx="2.5" fill="#d9a441"/>
+          <path d="M-14 -92 L14 -92 L10 -40 L-10 -40 Z" fill="#c8442b" stroke="#1d2340" stroke-width="2"/>
+          <path d="M-10 -40 L10 -40 L0 0 Z" fill="#d9a441" stroke="#1d2340" stroke-width="2"/>
+          <line x1="0" y1="-30" x2="0" y2="-4" stroke="#1d2340" stroke-width="1.6"/>
+          <circle cx="0" cy="-30" r="3" fill="#1d2340"/>
+        </g>
+      </g>
+      <!-- little sparks from nib -->
+      <g stroke="#c8442b" stroke-width="2.5" stroke-linecap="round" class="pop" style="animation-delay:3s">
+        <line x1="318" y1="352" x2="306" y2="366"/><line x1="332" y1="360" x2="334" y2="378"/><line x1="308" y1="340" x2="292" y2="342"/>
+      </g>
+      <!-- coffee cup -->
+      <g transform="translate(36 430)">
+        <path d="M22 0 q-10-22 4-38 M42 0 q-10-22 4-38" fill="none" stroke="#3c4470" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+        <path d="M0 10 L70 10 L62 96 Q35 106 8 96 Z" fill="#c8442b" stroke="#1d2340" stroke-width="2.5"/>
+        <path d="M68 28 q26 0 22 26 q-4 22-26 18" fill="none" stroke="#1d2340" stroke-width="5"/>
+        <ellipse cx="35" cy="10" rx="35" ry="7" fill="#3c2414" stroke="#1d2340" stroke-width="2.5"/>
+        <path d="M14 46 h42 M18 60 h34" stroke="#f3ecdf" stroke-width="2" stroke-dasharray="4 5"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b>2.1M</b><span>drafts revised</span></div>
+    <div><b>38%</b><span>shorter, same meaning</span></div>
+    <div><b>0</b><span>words trained on yours</span></div>
+    <div><b>11</b><span>languages, one voice</span></div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">How it reads</div>
+    <h2>An editor who never<br>takes the <em>pen</em> away.</h2>
+    <div class="steps">
+      <article class="step">
+        <svg viewBox="0 0 320 210" aria-hidden="true">
+          <rect x="70" y="20" width="180" height="180" fill="#fbf7ee" stroke="#1d2340" stroke-width="2.5" transform="rotate(-3 160 110)"/>
+          <g fill="none" stroke="#1d2340" stroke-width="2.4" stroke-linecap="round" transform="rotate(-3 160 110)">
+            <path d="M92 56 q6-12 12 0 t12 0 t12 0 t12 0 m10 0 q6-12 12 0 t12 0 t12 0"/>
+            <path d="M92 86 q6-12 12 0 t12 0 m10 0 q6-12 12 0 t12 0 t12 0 t12 0 t12 0"/>
+            <path d="M92 116 q6-12 12 0 t12 0 t12 0 m10 0 q6-12 12 0 t12 0"/>
+            <path d="M92 146 q6-12 12 0 t12 0 t12 0 t12 0"/>
+          </g>
+          <path d="M210 150 l60-80 l14 10 l-60 80 z" fill="#1d2340"/><path d="M210 150 l-6 18 l20-8" fill="#d9a441" stroke="#1d2340" stroke-width="2"/>
+          <circle cx="44" cy="60" r="20" fill="#d9a441"/><circle cx="276" cy="36" r="8" fill="#c8442b"/>
+        </svg>
+        <div class="n">01 — Draft</div>
+        <h3>You write, badly, fast.</h3>
+        <p>No prompts, no chat window. Just a page. Marginalia stays quiet until you pause.</p>
+      </article>
+      <article class="step">
+        <svg viewBox="0 0 320 210" aria-hidden="true">
+          <rect x="40" y="20" width="160" height="180" fill="#fbf7ee" stroke="#1d2340" stroke-width="2.5"/>
+          <line x1="64" y1="20" x2="64" y2="200" stroke="#e3a598" stroke-width="2"/>
+          <g fill="none" stroke="#1d2340" stroke-width="2.4" stroke-linecap="round">
+            <path d="M76 56 q6-12 12 0 t12 0 t12 0 t12 0 t12 0"/>
+            <path d="M76 86 q6-12 12 0 t12 0 t12 0 t12 0"/>
+            <path d="M76 116 q6-12 12 0 t12 0 t12 0 t12 0 t12 0 t12 0"/>
+          </g>
+          <ellipse cx="132" cy="86" rx="42" ry="14" fill="none" stroke="#c8442b" stroke-width="2.6"/>
+          <path d="M174 82 C210 70 220 60 236 56" fill="none" stroke="#c8442b" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M228 50 l10 6 l-10 6" fill="none" stroke="#c8442b" stroke-width="2.6"/>
+          <rect x="230" y="28" width="80" height="58" fill="#c8442b" stroke="#1d2340" stroke-width="2" transform="rotate(5 270 57)"/>
+          <text x="240" y="54" font-family="Caveat" font-size="20" fill="#f3ecdf" transform="rotate(5 270 57)">too vague</text>
+          <text x="240" y="74" font-family="Caveat" font-size="20" fill="#f3ecdf" transform="rotate(5 270 57)">— which?</text>
+          <rect x="226" y="120" width="84" height="50" fill="#d9a441" stroke="#1d2340" stroke-width="2" transform="rotate(-4 268 145)"/>
+          <text x="236" y="150" font-family="Caveat" font-size="20" fill="#1d2340" transform="rotate(-4 268 145)">try "argue"</text>
+        </svg>
+        <div class="n">02 — Margin</div>
+        <h3>It leaves notes, not rewrites.</h3>
+        <p>Every suggestion sits in the margin with a reason. Accept it, ignore it, argue with it.</p>
+      </article>
+      <article class="step">
+        <svg viewBox="0 0 320 210" aria-hidden="true">
+          <rect x="30" y="40" width="120" height="150" fill="#ebe2d0" stroke="#1d2340" stroke-width="2.5" transform="rotate(-8 90 115)"/>
+          <g transform="rotate(-8 90 115)" stroke="#c8442b" stroke-width="2.4" stroke-linecap="round" fill="none">
+            <path d="M48 70 h80 M48 92 h60 M48 114 h84 M48 136 h50"/>
+            <path d="M44 66 l90 6 M44 110 l92 8" stroke-width="3"/>
+          </g>
+          <path d="M150 112 C170 100 180 100 196 108" fill="none" stroke="#1d2340" stroke-width="3" stroke-linecap="round"/>
+          <path d="M188 100 l10 8 l-12 6" fill="none" stroke="#1d2340" stroke-width="3"/>
+          <rect x="196" y="30" width="110" height="160" fill="#fbf7ee" stroke="#1d2340" stroke-width="2.5"/>
+          <g fill="none" stroke="#1d2340" stroke-width="2.4" stroke-linecap="round">
+            <path d="M212 66 q6-12 12 0 t12 0 t12 0 t12 0 t12 0 t12 0"/>
+            <path d="M212 96 q6-12 12 0 t12 0 t12 0 t12 0"/>
+            <path d="M212 126 q6-12 12 0 t12 0 t12 0 t12 0 t12 0"/>
+          </g>
+          <path d="M230 162 l12 12 l26-28" fill="none" stroke="#5d7a4a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="n">03 — Revise</div>
+        <h3>Your sentence, tightened.</h3>
+        <p>Revisions keep your rhythm and vocabulary. Readers hear you, only clearer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="demo" id="try">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Try it</div>
+      <h2>One sentence,<br><em>four</em> voices.</h2>
+      <p class="sub">Pick a tone. Marginalia rewrites the line in place — the original stays struck through so you can see exactly what changed.</p>
+      <div class="tones" role="group" aria-label="Tone">
+        <button aria-pressed="true" data-t="clear">Clear</button>
+        <button aria-pressed="false" data-t="warm">Warm</button>
+        <button aria-pressed="false" data-t="bold">Bold</button>
+        <button aria-pressed="false" data-t="formal">Formal</button>
+      </div>
+    </div>
+    <div class="sheet">
+      <div class="label">memo_to_team.txt</div>
+      <p class="orig">I just wanted to reach out and basically let everyone know that we are kind of going to be moving the launch date back a little bit due to some issues.</p>
+      <p class="out" id="out" aria-live="polite"></p>
+      <div class="note">−21 words</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap voices">
+    <div>
+      <blockquote>“It's the first tool that made my writing sound <em>more</em> like me, not less. The margin notes read like a good editor who's had coffee.”</blockquote>
+      <cite>Priya Okafor — essayist, three books in</cite>
+    </div>
+    <svg viewBox="0 0 400 360" aria-label="Illustration: a writer's desk lamp lighting an open notebook">
+      <path d="M40 320 Q200 300 360 320 L360 360 L40 360Z" fill="#1d2340"/>
+      <path d="M90 316 L60 140 L180 60" fill="none" stroke="#1d2340" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="60" cy="140" r="12" fill="#d9a441" stroke="#1d2340" stroke-width="3"/>
+      <circle cx="180" cy="60" r="10" fill="#d9a441" stroke="#1d2340" stroke-width="3"/>
+      <rect x="70" y="306" width="50" height="14" fill="#1d2340"/>
+      <path d="M170 50 L250 40 L270 110 L190 130 Z" fill="#c8442b" stroke="#1d2340" stroke-width="3"/>
+      <path d="M232 118 L340 300 L150 300 L208 124 Z" fill="#d9a441" opacity=".45"/>
+      <path d="M150 300 L246 284 L340 300 L246 312 Z" fill="#fbf7ee" stroke="#1d2340" stroke-width="3"/>
+      <line x1="246" y1="284" x2="246" y2="312" stroke="#1d2340" stroke-width="2"/>
+      <g stroke="#1d2340" stroke-width="1.6"><line x1="170" y1="298" x2="236" y2="290"/><line x1="174" y1="303" x2="236" y2="296"/><line x1="256" y1="290" x2="318" y2="298"/><line x1="256" y1="296" x2="312" y2="303"/></g>
+      <g fill="#c8442b"><circle cx="300" cy="80" r="4"/><circle cx="330" cy="130" r="3"/><circle cx="350" cy="60" r="5"/></g>
+      <path d="M318 40 l6 14 l14 6 l-14 6 l-6 14 l-6-14 l-14-6 l14-6z" fill="#d9a441" stroke="#1d2340" stroke-width="2"/>
+    </svg>
+  </div>
+</section>
+
+<section id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow">Pricing</div>
+    <h2>Cheaper than a <em>red pen</em><br>habit, nearly.</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Notebook</h3>
+        <div class="price">$0<small> /mo</small></div>
+        <p>For the occasional email you dread.</p>
+        <ul><li>40 margin notes a day</li><li>Clear &amp; Warm tones</li><li>Browser extension</li></ul>
+        <a class="btn ghost" href="#">Start free</a>
+      </div>
+      <div class="plan feat">
+        <span class="stamp">most loved</span>
+        <h3>Manuscript</h3>
+        <div class="price">$12<small> /mo</small></div>
+        <p>For people whose job is words.</p>
+        <ul><li>Unlimited notes &amp; rewrites</li><li>Your voice profile, learned locally</li><li>Docs, Notion, Gmail</li></ul>
+        <a class="btn" href="#">Try 14 days</a>
+      </div>
+      <div class="plan">
+        <h3>Newsroom</h3>
+        <div class="price">$9<small> /seat</small></div>
+        <p>For teams with a style guide.</p>
+        <ul><li>Shared house style rules</li><li>Review queue for editors</li><li>SSO &amp; audit log</li></ul>
+        <a class="btn ghost" href="#">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="big">Go write something.</p>
+      <a class="btn" href="#">Get Marginalia</a>
+      <small>© 2026 Marginalia Press. Your drafts are yours.</small>
+    </div>
+    <svg viewBox="0 0 520 220" aria-label="Illustration: a stack of books with a pen resting on top">
+      <rect x="60" y="170" width="380" height="40" fill="#1d2340"/>
+      <rect x="80" y="176" width="340" height="4" fill="#d9a441"/>
+      <rect x="90" y="130" width="320" height="40" fill="#c8442b" stroke="#1d2340" stroke-width="3"/>
+      <line x1="120" y1="130" x2="120" y2="170" stroke="#1d2340" stroke-width="2"/>
+      <rect x="70" y="94" width="300" height="36" fill="#5d7a4a" stroke="#1d2340" stroke-width="3" transform="rotate(-3 220 112)"/>
+      <rect x="110" y="62" width="250" height="32" fill="#d9a441" stroke="#1d2340" stroke-width="3" transform="rotate(2 235 78)"/>
+      <text x="150" y="85" font-family="Fraunces" font-style="italic" font-size="18" fill="#1d2340" transform="rotate(2 235 78)">second draft</text>
+      <g transform="rotate(-12 300 40)"><rect x="200" y="36" width="180" height="14" rx="7" fill="#1d2340"/><path d="M380 36 l24 7 l-24 7z" fill="#d9a441" stroke="#1d2340" stroke-width="2"/></g>
+      <path d="M440 200 q30-40 60-30" fill="none" stroke="#5d7a4a" stroke-width="3"/>
+      <path d="M470 176 q8-26 34-22 q-6 24-34 22z" fill="#5d7a4a" stroke="#1d2340" stroke-width="2"/>
+    </svg>
+  </div>
+</footer>
+
+<script>
+const lines={
+  clear:"We're moving the launch date back two weeks to fix a few issues.",
+  warm:"Quick heads-up, team: we're giving the launch two more weeks so it lands right.",
+  bold:"Launch moves back two weeks. We fix it first, then we ship.",
+  formal:"Please note that the launch has been rescheduled by two weeks to resolve outstanding issues."
+};
+const out=document.getElementById('out'),btns=document.querySelectorAll('.tones button');
+let timer;
+function type(t){
+  clearInterval(timer);out.textContent='';let i=0;const s=lines[t];
+  timer=setInterval(()=>{out.textContent=s.slice(0,++i);if(i>=s.length)clearInterval(timer)},28);
+}
+btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.setAttribute('aria-pressed',x===b));type(b.dataset.t)}));
+type('clear');
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledgerline — Spot exchange for people who read the order book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3efe6; --ink:#16140f; --mute:#6b665a; --rule:#d6cfbf;
+  --bid:#1f6b4a; --ask:#a63a24; --hi:#e8dcc0;
+  --serif:"Fraunces",Georgia,serif; --mono:"IBM Plex Mono",ui-monospace,monospace; --sans:"IBM Plex Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.5 var(--sans)}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:-.01em;text-decoration:none}
+.logo span{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--mute);margin-left:8px;vertical-align:middle}
+nav{display:flex;gap:28px;font-size:14px}
+nav a{text-decoration:none;color:var(--mute)}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-block;font:500 14px var(--sans);padding:10px 18px;border:1px solid var(--ink);text-decoration:none;background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--bid);border-color:var(--bid);color:var(--paper)}
+
+.tape{border-bottom:1px solid var(--rule);overflow:hidden;white-space:nowrap;font:13px var(--mono);padding:8px 0;color:var(--mute)}
+.tape div{display:inline-block;animation:roll 60s linear infinite}
+.tape b{color:var(--ink);font-weight:500;margin:0 6px 0 28px}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+.hero{display:grid;grid-template-columns:1.25fr 1fr;border-bottom:1px solid var(--ink)}
+.hero-copy{padding:72px 48px 56px 0;border-right:1px solid var(--ink)}
+.kicker{font:12px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--mute);margin-bottom:28px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,92px);line-height:.95;letter-spacing:-.03em}
+h1 em{font-style:italic;color:var(--bid)}
+.lede{max-width:500px;margin:32px 0 36px;font-size:18px;color:#3b372e}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;border-top:1px solid var(--rule)}
+.facts div{padding:16px 16px 0 0}
+.facts strong{display:block;font:500 26px var(--mono)}
+.facts small{font-size:13px;color:var(--mute)}
+
+.book{padding:28px 0 28px 32px;font-family:var(--mono);font-size:13px}
+.book-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.book-head h2{font:500 14px var(--mono)}
+.book-head .last{font-size:28px;font-weight:500}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;padding:3px 8px;position:relative}
+.row span{position:relative;z-index:1}
+.row span:nth-child(2),.row span:nth-child(3){text-align:right}
+.row i{position:absolute;right:0;top:0;bottom:0;opacity:.14}
+.ask i{background:var(--ask)} .bid i{background:var(--bid)}
+.ask span:first-child{color:var(--ask)} .bid span:first-child{color:var(--bid)}
+.cols{color:var(--mute);border-bottom:1px solid var(--rule);margin-bottom:4px}
+.spread{text-align:center;padding:8px;margin:6px 0;border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);color:var(--mute)}
+
+section{border-bottom:1px solid var(--ink)}
+.split{display:grid;grid-template-columns:280px 1fr}
+.label{padding:56px 32px 56px 0;border-right:1px solid var(--rule)}
+.label h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.05;letter-spacing:-.02em}
+.label p{font:12px var(--mono);color:var(--mute);margin-top:12px;text-transform:uppercase;letter-spacing:.1em}
+
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums}
+th{font-weight:400;color:var(--mute);text-align:right;padding:18px 16px 10px;border-bottom:1px solid var(--rule);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+td{text-align:right;padding:14px 16px;border-bottom:1px solid var(--rule)}
+th:first-child,td:first-child{text-align:left;padding-left:32px}
+td:first-child b{font-weight:500}
+td:first-child small{color:var(--mute);margin-left:8px}
+tr:hover td{background:var(--hi)}
+.up{color:var(--bid)} .dn{color:var(--ask)}
+svg.spark{width:96px;height:24px;vertical-align:middle}
+
+.ledger{display:grid;grid-template-columns:repeat(3,1fr)}
+.ledger article{padding:56px 32px;border-right:1px solid var(--rule)}
+.ledger article:last-child{border-right:0}
+.ledger .n{font:12px var(--mono);color:var(--mute)}
+.ledger h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;margin:14px 0 12px}
+.ledger p{color:#3b372e;font-size:15px}
+
+.fees td:first-child{padding-left:32px}
+.fees .note{padding:20px 32px;font-size:13px;color:var(--mute)}
+
+.reserve{display:grid;grid-template-columns:1fr 1fr;background:var(--ink);color:var(--paper)}
+.reserve > div{padding:72px 48px 72px 0}
+.reserve > div + div{padding-left:48px;border-left:1px solid #3a362c}
+.reserve h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.02em}
+.reserve p{color:#bdb6a5;margin-top:20px;max-width:440px}
+.ratio{font:500 72px var(--mono);letter-spacing:-.03em}
+.bar{height:10px;background:#3a362c;margin:18px 0 8px}
+.bar b{display:block;height:100%;width:100%;background:#7fbf9b}
+.reserve small{font:12px var(--mono);color:#8f8877}
+.hash{font:12px var(--mono);color:#8f8877;margin-top:28px;word-break:break-all}
+
+.close{padding:96px 0;text-align:left}
+.close h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,80px);line-height:.98;letter-spacing:-.03em;max-width:900px}
+.close .cta{margin-top:36px}
+
+footer{padding:32px 0 48px;font-size:13px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer p{max-width:620px}
+
+@media (max-width:900px){
+  nav{display:none}
+  .hero,.split,.ledger,.reserve{grid-template-columns:1fr}
+  .hero-copy{border-right:0;padding:48px 0;border-bottom:1px solid var(--ink)}
+  .book{padding:24px 0}
+  .label{border-right:0;border-bottom:1px solid var(--rule);padding:40px 0 24px}
+  th:first-child,td:first-child{padding-left:0}
+  .hide-sm{display:none}
+  .ledger article{border-right:0;border-bottom:1px solid var(--rule);padding:40px 0}
+  .reserve > div,.reserve > div + div{padding:48px 0;border-left:0}
+}
+@media (prefers-reduced-motion:reduce){.tape div{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Ledgerline<span>SPOT / EST. 2021</span></a>
+    <nav><a href="#markets">Markets</a><a href="#fees">Fees</a><a href="#reserves">Reserves</a><a href="#">API</a></nav>
+    <a class="btn ghost" href="#">Log in</a>
+  </div>
+</header>
+
+<div class="tape" aria-hidden="true"><div id="tape"></div></div>
+
+<main>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="kicker">Spot trading · 84 pairs · no leverage products</p>
+      <h1>An exchange that shows you the <em>whole book</em>.</h1>
+      <p class="lede">Ledgerline matches spot orders and nothing else. No lending desk, no yield wrappers, no token of our own. Every customer balance is published, hashed and checkable every 24 hours.</p>
+      <div class="cta">
+        <a class="btn" href="#">Open an account</a>
+        <a class="btn ghost" href="#markets">View markets</a>
+      </div>
+      <div class="facts">
+        <div><strong class="mono">0.08%</strong><small>taker fee, flat</small></div>
+        <div><strong class="mono">1.00:1</strong><small>reserves to liabilities</small></div>
+        <div><strong class="mono">0.4 ms</strong><small>median match time</small></div>
+      </div>
+    </div>
+
+    <div class="book" aria-label="Live BTC/USD order book (simulated)">
+      <div class="book-head">
+        <h2>BTC / USD</h2>
+        <span class="last" id="last">—</span>
+      </div>
+      <div class="row cols"><span>Price</span><span>Size</span><span>Total</span></div>
+      <div id="asks"></div>
+      <div class="spread" id="spread">spread —</div>
+      <div id="bids"></div>
+    </div>
+  </div>
+</div>
+
+<section id="markets">
+  <div class="wrap split">
+    <div class="label"><h2>Markets, quoted in dollars.</h2><p>Updated every 2s</p></div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Pair</th><th>Last</th><th>24h</th><th class="hide-sm">Volume</th><th class="hide-sm">7d</th></tr></thead>
+        <tbody id="mkt"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap ledger">
+    <article>
+      <p class="n">01 — Custody</p>
+      <h3>95% of assets sit in cold storage.</h3>
+      <p>Withdrawals above the hot-wallet limit are signed by three of five keyholders on air-gapped devices in separate cities. Typical wait: under four hours.</p>
+    </article>
+    <article>
+      <p class="n">02 — Matching</p>
+      <h3>Price-time priority. No exceptions.</h3>
+      <p>We do not run a market-making desk against customer flow, and we do not sell order flow. The matching rules are public and the engine logs are audited quarterly.</p>
+    </article>
+    <article>
+      <p class="n">03 — Withdrawals</p>
+      <h3>Your coins leave when you say so.</h3>
+      <p>No withdrawal holds for verified accounts, no minimums beyond network dust. We pass the network fee through at cost, shown before you confirm.</p>
+    </article>
+  </div>
+</section>
+
+<section id="fees" class="fees">
+  <div class="wrap split">
+    <div class="label"><h2>One fee table. It fits here.</h2><p>30-day volume</p></div>
+    <div>
+      <table>
+        <thead><tr><th>Volume (USD)</th><th>Maker</th><th>Taker</th></tr></thead>
+        <tbody>
+          <tr><td>Under 50,000</td><td>0.04%</td><td>0.08%</td></tr>
+          <tr><td>50,000 – 1M</td><td>0.02%</td><td>0.06%</td></tr>
+          <tr><td>1M – 25M</td><td>0.00%</td><td>0.04%</td></tr>
+          <tr><td>Over 25M</td><td>−0.01%</td><td>0.03%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Deposits by bank transfer are free. Card deposits cost 1.9%, which is what the card network charges us.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reserves" style="border-bottom:0">
+  <div class="reserve">
+    <div class="wrap" style="max-width:none;padding-left:max(24px,calc((100vw - 1240px)/2 + 24px))">
+      <h2>Proof of reserves, published daily.</h2>
+      <p>Each night we publish a Merkle tree of every customer balance alongside signed wallet attestations. Find your own leaf with your account ID and verify the root yourself.</p>
+      <p class="hash">root 7f3a91c0e4b2d8a65f0c1e93b7d24a8e0f6c5b1a9d3e72f48c06b5a1e9d0f2c7<br>block 871,204 · 2026-11-07 23:59 UTC</p>
+    </div>
+    <div>
+      <div class="ratio">100.3%</div>
+      <div class="bar"><b></b></div>
+      <small>BTC held 41,822.06 · liabilities 41,697.12</small>
+      <div class="bar"><b style="width:100%"></b></div>
+      <small>ETH held 512,940.4 · liabilities 511,203.9</small>
+      <div class="bar"><b style="width:100%"></b></div>
+      <small>USDC held 1.82B · liabilities 1.81B</small>
+    </div>
+  </div>
+</section>
+
+<div class="wrap close">
+  <h2>Trade on a venue you can audit from your laptop.</h2>
+  <div class="cta"><a class="btn" href="#">Open an account</a><a class="btn ghost" href="#">Read the matching rules</a></div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Ledgerline is a fictional exchange. Prices on this page are simulated. Crypto assets are volatile and you can lose the money you put in.</p>
+    <p class="mono">© 2026 Ledgerline</p>
+  </div>
+</footer>
+
+<script>
+const coins=[["BTC","Bitcoin",68420],["ETH","Ether",3512],["SOL","Solana",171.4],["XRP","XRP",0.612],["ADA","Cardano",0.468],["AVAX","Avalanche",36.2],["LINK","Chainlink",17.85],["DOT","Polkadot",7.41]].map(([s,n,p])=>({s,n,p,o:p,v:Math.random()*900+40,h:Array.from({length:20},()=>p)}));
+const fmt=(x,d)=>x.toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+const dp=p=>p<1?4:p<100?2:2;
+function spark(h){const lo=Math.min(...h),hi=Math.max(...h),r=hi-lo||1;const pts=h.map((v,i)=>`${i*5},${22-(v-lo)/r*20}`).join(" ");const c=h.at(-1)>=h[0]?"var(--bid)":"var(--ask)";return `<svg class="spark" viewBox="0 0 96 24"><polyline fill="none" stroke="${c}" stroke-width="1.3" points="${pts}"/></svg>`}
+function tick(){
+  coins.forEach(c=>{c.p*=1+(Math.random()-.5)*.003;c.h.push(c.p);c.h.shift()});
+  document.getElementById("mkt").innerHTML=coins.map(c=>{const ch=(c.p/c.o-1)*100;return `<tr><td><b>${c.s}</b><small>${c.n}</small></td><td>${fmt(c.p,dp(c.p))}</td><td class="${ch>=0?"up":"dn"}">${ch>=0?"+":""}${ch.toFixed(2)}%</td><td class="hide-sm">$${fmt(c.v,1)}M</td><td class="hide-sm">${spark(c.h)}</td></tr>`}).join("");
+  document.getElementById("tape").innerHTML=(coins.map(c=>{const ch=(c.p/c.o-1)*100;return `<b>${c.s}</b>${fmt(c.p,dp(c.p))} <span class="${ch>=0?"up":"dn"}">${ch>=0?"▲":"▼"}${Math.abs(ch).toFixed(2)}%</span>`}).join("")).repeat(2);
+  const mid=coins[0].p,lv=n=>Array.from({length:n},()=>Math.random()*1.8+.02);
+  let at=0,bt=0;
+  const asks=lv(8).map((s,i)=>({p:mid+0.5+i*Math.random()*4+i*2,s})).map(o=>(at+=o.s,{...o,t:at}));
+  const bids=lv(8).map((s,i)=>({p:mid-0.5-i*Math.random()*4-i*2,s})).map(o=>(bt+=o.s,{...o,t:bt}));
+  const max=Math.max(at,bt),row=(o,k)=>`<div class="row ${k}"><i style="width:${o.t/max*100}%"></i><span>${fmt(o.p,1)}</span><span>${o.s.toFixed(4)}</span><span>${o.t.toFixed(3)}</span></div>`;
+  document.getElementById("asks").innerHTML=asks.reverse().map(o=>row(o,"ask")).join("");
+  document.getElementById("bids").innerHTML=bids.map(o=>row(o,"bid")).join("");
+  document.getElementById("last").textContent=fmt(mid,1);
+  document.getElementById("spread").textContent=`spread ${(asks.at(-1).p-bids[0].p).toFixed(1)} · mid ${fmt(mid,1)}`;
+}
+tick();setInterval(tick,2000);
+</script>
+</body>
+</html>

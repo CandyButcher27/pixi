@@ -1,0 +1,201 @@
+{
+  "identity": {
+    "references": {
+      "near": {
+        "id": "playstation",
+        "grammar": {
+          "hero_alignment": "left",
+          "hero_weight_split": 0.192,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 6,
+          "card_reliance": "high",
+          "largest_card_row": 5,
+          "geometry": "pill",
+          "max_radius": 9999,
+          "display_dominance": 3.38,
+          "display_weight": 300,
+          "generic_display_font": true,
+          "imagery": "absent",
+          "imagery_ratio": 0,
+          "density": "medium",
+          "text_density": "medium",
+          "gradients": 12,
+          "glass_panels": 0,
+          "palette_size": 6,
+          "sections": 9,
+          "page_height": 4915
+        }
+      },
+      "contrast": {
+        "id": "live:milkshake.app",
+        "grammar": {
+          "hero_alignment": "left",
+          "hero_weight_split": 0.241,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 45,
+          "card_reliance": "high",
+          "largest_card_row": 50,
+          "geometry": "pill",
+          "max_radius": 33554400,
+          "display_dominance": 6.0,
+          "display_weight": 700,
+          "generic_display_font": true,
+          "imagery": "dominant",
+          "imagery_ratio": 3.174,
+          "density": "high",
+          "text_density": "high",
+          "gradients": 73,
+          "glass_panels": 4,
+          "palette_size": 6,
+          "sections": 13,
+          "page_height": 14414
+        }
+      },
+      "outlier": {
+        "id": "live:labs.chaingpt.org",
+        "grammar": {
+          "hero_alignment": "unknown",
+          "hero_weight_split": null,
+          "section_rhythm": "alternating",
+          "full_bleed_sections": 18,
+          "card_reliance": "low",
+          "largest_card_row": 2,
+          "geometry": "soft",
+          "max_radius": 14,
+          "display_dominance": 12.38,
+          "display_weight": 400,
+          "generic_display_font": false,
+          "imagery": "dominant",
+          "imagery_ratio": 0.304,
+          "density": "high",
+          "text_density": "high",
+          "gradients": 3,
+          "glass_panels": 0,
+          "palette_size": 5,
+          "sections": 10,
+          "page_height": 8901
+        }
+      }
+    },
+    "direction": "high-density, typography-dominant, dominant imagery, soft geometry, uniform section rhythm",
+    "design_intent": [
+      "The visual anchor moves through the page rather than sitting in one column, and the side it leaves should carry weight of its own, not empty margin.",
+      "Typography carries the hierarchy. Size, weight and spacing do the work that borders, shadows and container chrome would otherwise do.",
+      "The page is dense and rewards reading: specifics, numbers and detail rather than three-word value propositions.",
+      "Read as one system, the references are playstation for fit, live:milkshake.app for contrast, live:labs.chaingpt.org for the unusual grammar. Build in the space they bound \u2014 not a copy of any one of them."
+    ]
+  },
+  "inherited": {
+    "required": [
+      {
+        "rule": "full_bleed_sections",
+        "op": ">=",
+        "value": 1,
+        "source": "contrast:live:milkshake.app",
+        "why": "at least one section breaks the page container"
+      },
+      {
+        "rule": "centroid_flips",
+        "op": ">=",
+        "value": 2,
+        "source": "outlier:live:labs.chaingpt.org",
+        "why": "visual anchor alternates sides between major sections"
+      },
+      {
+        "rule": "display_dominance",
+        "op": ">=",
+        "value": 6.0,
+        "source": "outlier:live:labs.chaingpt.org",
+        "why": "display typography carries the hierarchy instead of card chrome"
+      },
+      {
+        "rule": "display_dominance",
+        "op": "<=",
+        "value": 8.4,
+        "source": "median of triple",
+        "why": "display scale stays inside the reference range"
+      },
+      {
+        "rule": "hero_weight_split",
+        "op": "<=",
+        "value": 0.42,
+        "source": "near:playstation+contrast:live:milkshake.app",
+        "why": "hero_alignment is left in the references"
+      },
+      {
+        "rule": "imagery_ratio",
+        "op": ">=",
+        "value": 0.3,
+        "source": "contrast:live:milkshake.app+outlier:live:labs.chaingpt.org",
+        "why": "imagery is dominant in the references"
+      },
+      {
+        "rule": "elements_per_1k",
+        "op": ">=",
+        "value": 55,
+        "source": "contrast:live:milkshake.app+outlier:live:labs.chaingpt.org",
+        "why": "density is high in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": ">=",
+        "value": 6,
+        "source": "outlier:live:labs.chaingpt.org",
+        "why": "geometry is soft in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": "<=",
+        "value": 19,
+        "source": "outlier:live:labs.chaingpt.org",
+        "why": "geometry is soft in the references"
+      }
+    ],
+    "forbidden": [
+      {
+        "rule": "gradients",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "gradient backdrops are the loudest AI tell"
+      },
+      {
+        "rule": "pill_controls",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "fully rounded pill CTAs"
+      },
+      {
+        "rule": "glass_panels",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "glassmorphism panels"
+      },
+      {
+        "rule": "generic_display_font",
+        "op": "==",
+        "value": false,
+        "source": "slop_law",
+        "why": "Inter / system-ui defaults on the display face"
+      },
+      {
+        "rule": "hero_asymmetry",
+        "op": ">=",
+        "value": 0.08,
+        "source": "slop_law",
+        "why": "centred hero column is the default AI composition"
+      }
+    ]
+  },
+  "agent_owns": [
+    "product message, section order, and copy",
+    "the exact display and body typefaces (must not be a generic default)",
+    "the palette, within the direction above",
+    "how each composition mandate is realised structurally"
+  ],
+  "rule": "You may add constraints. You may not weaken or drop an inherited one.",
+  "brief": "indie video game launch",
+  "frozen_at": "2026-11-08T18:12:13+00:00"
+}

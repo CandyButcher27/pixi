@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halden Dental — Unhurried dentistry in Elm Street</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4efe6;--ink:#1f2a24;--moss:#2f4a3c;--clay:#c8603f;--line:#d9d0c1;--soft:#e9e1d3}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:300;letter-spacing:-.02em;line-height:1.05}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);font-weight:600}
+header{border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{font-family:Fraunces,serif;font-size:24px;font-weight:500;text-decoration:none}
+.logo span{color:var(--clay)}
+nav ul{display:flex;gap:36px;list-style:none;font-size:15px}
+nav ul a{text-decoration:none}
+nav ul a:hover{color:var(--clay)}
+.call{font-size:15px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--clay);padding-bottom:2px}
+.hero{display:grid;grid-template-columns:7fr 5fr;gap:64px;padding:96px 0 80px;align-items:end}
+.hero h1{font-size:clamp(52px,7.4vw,112px)}
+.hero h1 em{font-style:italic;color:var(--moss)}
+.hero aside{border-left:1px solid var(--line);padding-left:32px}
+.hero aside p{margin-bottom:28px;font-size:18px}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);padding:16px 28px;text-decoration:none;font-weight:600;font-size:15px;transition:background .2s}
+.btn:hover{background:var(--clay)}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:28px 24px;border-right:1px solid var(--line)}
+.facts div:last-child{border-right:0}
+.facts b{display:block;font-family:Fraunces,serif;font-weight:300;font-size:44px;line-height:1}
+.facts small{font-size:14px;color:#5b6660}
+section{padding:120px 0}
+.split{display:grid;grid-template-columns:4fr 8fr;gap:64px}
+.split h2{font-size:clamp(38px,4.4vw,60px);position:sticky;top:40px;align-self:start}
+.services li{list-style:none;display:grid;grid-template-columns:64px 1fr 140px;gap:24px;padding:32px 0;border-top:1px solid var(--line);align-items:baseline;cursor:default;transition:padding .25s}
+.services li:last-child{border-bottom:1px solid var(--line)}
+.services li:hover{padding-left:12px}
+.services li:hover h3{color:var(--clay)}
+.services .n{font-family:Fraunces,serif;color:var(--clay);font-size:18px}
+.services h3{font-size:32px;margin-bottom:8px;transition:color .2s}
+.services p{color:#4b5650;max-width:52ch}
+.services .price{text-align:right;font-size:15px;font-weight:500}
+.dark{background:var(--moss);color:var(--paper)}
+.dark .eyebrow{color:#e9b8a4}
+.dark blockquote{font-family:Fraunces,serif;font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.15;max-width:22ch;margin:24px 0 40px}
+.dark cite{font-style:normal;font-size:15px;opacity:.8}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:80px;border-top:1px solid rgba(244,239,230,.25)}
+.steps div{padding:32px 32px 0 0}
+.steps div+div{padding-left:32px;border-left:1px solid rgba(244,239,230,.25)}
+.steps h3{font-size:26px;margin:12px 0 10px}
+.steps p{opacity:.85;font-size:16px}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
+.portrait{aspect-ratio:4/5;background:var(--soft);position:relative;overflow:hidden;margin-bottom:18px}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.team h3{font-size:24px}
+.team p{color:#5b6660;font-size:15px}
+.book{display:grid;grid-template-columns:5fr 7fr;gap:64px;border-top:1px solid var(--line);padding-top:120px}
+.book h2{font-size:clamp(40px,5vw,72px);margin-bottom:24px}
+.hours{margin-top:40px;font-size:15px}
+.hours div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+form{background:#fff;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;letter-spacing:.04em}
+form .full{grid-column:1/-1}
+input,select,textarea{font:inherit;font-weight:400;font-size:16px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:10px 0;color:var(--ink);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--clay)}
+form button{border:0;cursor:pointer;justify-self:start}
+#ok{grid-column:1/-1;color:var(--moss);font-weight:600;display:none}
+footer{border-top:1px solid var(--line);padding:48px 0;font-size:14px;color:#5b6660}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+@media (max-width:860px){
+  .wrap{padding:0 20px}
+  nav ul{display:none}
+  .hero,.split,.book{grid-template-columns:1fr;gap:40px}
+  .hero{padding:56px 0}
+  .hero aside{border-left:0;padding-left:0}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts div:nth-child(2){border-right:0}
+  .facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  section{padding:80px 0}
+  .split h2{position:static}
+  .services li{grid-template-columns:40px 1fr}
+  .services .price{grid-column:2;text-align:left}
+  .steps,.team{grid-template-columns:1fr}
+  .steps div+div{padding-left:0;border-left:0;border-top:1px solid rgba(244,239,230,.25)}
+  form{grid-template-columns:1fr;padding:28px}
+  .book{padding-top:80px}
+}
+</style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="#">Halden<span>.</span></a>
+    <ul>
+      <li><a href="#care">Care</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#team">Dentists</a></li>
+      <li><a href="#book">Visit</a></li>
+    </ul>
+    <a class="call" href="tel:+15550142200">(555) 014-2200</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <h1>Dentistry that<br>takes its <em>time</em><br>with you.</h1>
+    <aside>
+      <p class="eyebrow">Family &amp; cosmetic dental · Since 2009</p>
+      <p>Hour-long first visits, a dentist who explains every step, and no surprise invoices. Nervous patients are our specialty, not an exception.</p>
+      <a class="btn" href="#book">Book a first visit</a>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <div class="facts">
+      <div><b>60</b><small>minute first appointments</small></div>
+      <div><b>4.9</b><small>average from 1,200+ reviews</small></div>
+      <div><b>Same</b><small>day emergency slots</small></div>
+      <div><b>0%</b><small>payment plans up to 24 months</small></div>
+    </div>
+  </div>
+
+  <section id="care">
+    <div class="wrap split">
+      <h2>What we<br>look after</h2>
+      <ol class="services">
+        <li><span class="n">01</span><div><h3>Check-ups &amp; cleaning</h3><p>Full exam, hygienist clean and digital X-rays at low dose. We show you the images and talk them through.</p></div><span class="price">from $95</span></li>
+        <li><span class="n">02</span><div><h3>Children's dentistry</h3><p>Short, playful visits that build trust early. Under-12s are seen free with an enrolled parent.</p></div><span class="price">free under 12</span></li>
+        <li><span class="n">03</span><div><h3>Clear aligners</h3><p>Straighten gently with removable aligners, planned on a 3D scan so you see the result before you start.</p></div><span class="price">from $2,900</span></li>
+        <li><span class="n">04</span><div><h3>Whitening</h3><p>In-chair or take-home trays, shade-matched to look like you on a good day, not a filter.</p></div><span class="price">from $320</span></li>
+        <li><span class="n">05</span><div><h3>Implants &amp; crowns</h3><p>Restorations milled on site, often in a single visit, by a dentist with 15 years of implant work.</p></div><span class="price">consult free</span></li>
+        <li><span class="n">06</span><div><h3>Emergency care</h3><p>Toothache, a chip, a lost filling. Call before 11am and we'll see you today.</p></div><span class="price">from $120</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="approach" class="dark">
+    <div class="wrap">
+      <p class="eyebrow">Our approach</p>
+      <blockquote>"I hadn't been to a dentist in nine years. They never once made me feel bad about it."</blockquote>
+      <cite>— Priya M., patient since 2021</cite>
+      <div class="steps">
+        <div><span class="eyebrow">Step one</span><h3>Talk first</h3><p>Before anyone looks in your mouth, we sit down and ask what's worrying you.</p></div>
+        <div><span class="eyebrow">Step two</span><h3>See it yourself</h3><p>Intraoral camera on a screen beside you. You see what we see, in plain words.</p></div>
+        <div><span class="eyebrow">Step three</span><h3>A written plan</h3><p>Options, costs and timings on paper. Take it home, decide with no pressure.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <p class="eyebrow">The dentists</p>
+      <div class="team">
+        <div><div class="portrait"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#d9cdb8"/><circle cx="200" cy="200" r="78" fill="#2f4a3c"/><path d="M60 500c0-110 62-180 140-180s140 70 140 180z" fill="#2f4a3c"/></svg></div><h3>Dr. Elena Halden</h3><p>Founder · General &amp; implants</p></div>
+        <div><div class="portrait"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#e6c9b9"/><circle cx="200" cy="200" r="78" fill="#c8603f"/><path d="M60 500c0-110 62-180 140-180s140 70 140 180z" fill="#c8603f"/></svg></div><h3>Dr. Marcus Okafor</h3><p>Orthodontics · Clear aligners</p></div>
+        <div><div class="portrait"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><rect width="400" height="500" fill="#cfd6cc"/><circle cx="200" cy="200" r="78" fill="#1f2a24"/><path d="M60 500c0-110 62-180 140-180s140 70 140 180z" fill="#1f2a24"/></svg></div><h3>Dr. Sun-Hee Park</h3><p>Paediatric dentistry</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book" style="padding-top:0">
+    <div class="wrap book">
+      <div>
+        <p class="eyebrow">Visit</p>
+        <h2>Come in.<br>We'll put the kettle on.</h2>
+        <p>214 Elm Street, Suite 2 — street parking and a step-free entrance.</p>
+        <div class="hours">
+          <div><span>Mon – Thu</span><span>8:00 – 19:00</span></div>
+          <div><span>Friday</span><span>8:00 – 16:00</span></div>
+          <div><span>Saturday</span><span>9:00 – 13:00</span></div>
+          <div><span>Sunday</span><span>Emergencies by phone</span></div>
+        </div>
+      </div>
+      <form id="f">
+        <label>Name<input name="name" required autocomplete="name"></label>
+        <label>Phone<input name="phone" type="tel" required autocomplete="tel"></label>
+        <label class="full">Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Reason<select name="reason"><option>Check-up</option><option>Children's visit</option><option>Aligners</option><option>Whitening</option><option>Implants or crowns</option><option>Emergency</option></select></label>
+        <label>Preferred date<input name="date" type="date"></label>
+        <label class="full">Anything we should know?<textarea name="note" rows="3"></textarea></label>
+        <button class="btn" type="submit">Request appointment</button>
+        <p id="ok" role="status">Thanks — we'll call you within one working day to confirm.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Halden Dental</span>
+    <span>214 Elm Street · (555) 014-2200 · hello@haldendental.example</span>
+  </div>
+</footer>
+<script>
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();e.target.reset();document.getElementById('ok').style.display='block'})
+</script>
+</body>
+</html>

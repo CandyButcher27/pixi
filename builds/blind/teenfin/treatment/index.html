@@ -1,0 +1,424 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kitty — a money account for 13 to 17 year olds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE2;--paper2:#E9E2D3;--ink:#191714;--mute:#5E584E;--rule:#CFC6B4;
+  --tomato:#E5432A;--mint:#C6E6CF;--mintink:#1F6B3A;--plum:#2A1C3B;--plum2:#3A2A4E;--lilac:#D9CCEB;
+  --display:"Bricolage Grotesque",sans-serif;--body:"Figtree",sans-serif;--mono:"JetBrains Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{font:400 16px/1.55 var(--body);color:var(--ink);background:var(--paper)}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:32px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.eyebrow{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mute)}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.035em;line-height:.92}
+h2{font-size:64px}
+h3{font-size:22px;letter-spacing:-.01em;line-height:1.15}
+p{max-width:62ch}
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 24px;border-radius:14px;border:2px solid var(--ink);font:600 16px var(--body);text-decoration:none;background:var(--ink);color:var(--paper);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--tomato);border-color:var(--tomato);color:#fff}
+.pos{color:var(--mintink)}
+.neg{color:var(--ink)}
+
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.logo{font:800 26px var(--display);letter-spacing:-.04em;text-decoration:none}
+.logo b{color:var(--tomato)}
+nav ul{display:flex;gap:24px;list-style:none;margin-left:auto;font-size:15px}
+nav ul a{text-decoration:none}
+nav ul a:hover{color:var(--tomato)}
+nav .age{font-family:var(--mono);font-size:12px;color:var(--mute)}
+
+section{padding:96px 0}
+.hero{padding:72px 0 88px}
+.hero h1{font-size:120px;grid-column:1/9}
+.hero h1 em{font-style:normal;color:var(--tomato)}
+.hero .lede{grid-column:1/7;font-size:20px;margin-top:32px}
+.hero .actions{grid-column:1/9;display:flex;gap:14px;align-items:center;margin-top:36px}
+.hero .actions .mono{color:var(--mute);margin-left:10px}
+.hero .facts{grid-column:1/9;display:flex;gap:40px;margin-top:56px;padding-top:20px;border-top:2px solid var(--ink)}
+.hero .facts div{font-size:14px;color:var(--mute)}
+.hero .facts strong{display:block;font:800 34px var(--display);color:var(--ink);letter-spacing:-.03em}
+.mini{grid-column:9/13;grid-row:1/6;align-self:start;background:var(--ink);color:var(--paper);border-radius:28px;padding:24px 24px 18px;margin-top:8px}
+.mini .bal{font:800 54px var(--display);letter-spacing:-.04em;margin:6px 0 2px}
+.mini .eyebrow{color:#A79F92}
+.mini ol{list-style:none;margin-top:16px}
+.mini li{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid #3A3631;font-size:13px}
+.mini li .mono{font-size:12px}
+.mini li .pos{color:var(--mint)}
+.mini .note{font-size:12px;color:#A79F92;margin-top:10px}
+
+.ledger{border-top:1px solid var(--rule)}
+.ledger .side{grid-column:1/4;padding-top:96px}
+.ledger .side h2{font-size:56px;margin:14px 0 22px}
+.figs div{border-top:2px solid var(--ink);padding:10px 0 18px}
+.figs dt{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--mute)}
+.figs dd{font:800 76px var(--display);letter-spacing:-.04em;line-height:1}
+.how{counter-reset:s;list-style:none;columns:2;column-gap:32px;margin-top:28px}
+.how li{counter-increment:s;padding:10px 0 10px 36px;position:relative;border-top:1px solid var(--rule);font-size:14px;color:var(--mute)}
+.how li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:11px;font:500 12px var(--mono);color:var(--tomato)}
+.how li b{color:var(--ink)}
+.how li{break-inside:avoid}
+.ledger .main{grid-column:4/13}
+.ledger .main h2{font-size:64px;margin:0 0 28px}
+.statement{background:#FBF8F2;border:1px solid var(--rule);border-radius:24px;padding:28px 32px}
+.statement header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.statement header h3{font-size:28px}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute);padding:8px 0;border-bottom:2px solid var(--ink)}
+td{padding:9px 0;border-bottom:1px solid var(--rule);font-size:14px;vertical-align:top}
+td.n,th.n{text-align:right;font-family:var(--mono);font-size:13px}
+td .tag{font:500 11px var(--mono);color:var(--mute);margin-left:8px}
+tfoot td{border-bottom:0;font-weight:600;padding-top:14px}
+
+.pots{background:var(--plum);color:var(--paper)}
+.pots .main{grid-column:1/9}
+.pots .eyebrow{color:var(--lilac)}
+.pots h2{font-size:72px;margin:14px 0 18px}
+.pots .main>p{color:#CFC4DE;font-size:17px}
+.potlist{list-style:none;margin-top:36px}
+.potlist li{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.6fr;gap:20px;align-items:center;padding:16px 0;border-top:1px solid #4A3A60}
+.potlist li:last-child{border-bottom:1px solid #4A3A60}
+.potlist .name{font:800 24px var(--display);letter-spacing:-.02em}
+.potlist .name small{display:block;font:400 13px var(--body);color:#B9ADCB;letter-spacing:0;margin-top:2px}
+.potlist .mono{color:var(--lilac)}
+.bar{height:6px;background:var(--plum2);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--mint)}
+.pots .rate{grid-column:9/13;align-self:start;background:var(--plum2);border-radius:28px;padding:32px;margin-top:48px}
+.pots .rate .big{font:800 112px var(--display);letter-spacing:-.05em;line-height:.9;color:var(--mint)}
+.pots .rate p{font-size:14px;color:#CFC4DE;margin-top:12px}
+.pots .rate dl{margin-top:18px;font-size:13px}
+.pots .rate dl div{display:flex;justify-content:space-between;border-top:1px solid #54436B;padding:8px 0}
+.pots .rate dt{color:#B9ADCB}
+
+.guests .side{grid-column:1/4;padding-top:12px}
+.guests .side .eyebrow{display:block;margin-bottom:14px}
+.guests .figs dd{font-size:56px}
+.guests .side p{font-size:14px;color:var(--mute)}
+.guests .main{grid-column:5/13}
+.guests h2{font-size:64px;margin-bottom:24px}
+.guests .cols{columns:2;column-gap:32px;font-size:15px;margin-bottom:36px}
+.guests .cols p{margin-bottom:14px;break-inside:avoid}
+.perm td:not(:first-child),.perm th:not(:first-child){text-align:center;width:16%}
+.yes{color:var(--mintink);font-weight:600}
+.no{color:var(--tomato);font-weight:600}
+.ask{color:var(--mute);font-family:var(--mono);font-size:12px}
+
+.fees{background:var(--paper2)}
+.fees .main{grid-column:1/8}
+.fees td.n,.fees th.n{text-align:left;padding-left:24px}
+.fees h2{margin:14px 0 28px}
+.fees td.us{font-weight:600}
+.fees td.them{color:var(--mute)}
+.fees .notes{grid-column:1/8;font-size:13px;color:var(--mute);margin-top:8px}
+.fees .notes ol{columns:2;column-gap:32px}
+.fees .zero{grid-column:9/13;grid-row:1/3;align-self:start;margin-top:96px;background:var(--ink);color:var(--paper);border-radius:28px;padding:32px}
+.fees .zero dd{font:800 104px var(--display);letter-spacing:-.05em;line-height:.9;color:var(--tomato)}
+.fees .zero dt{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:#A79F92;margin-bottom:12px}
+.fees .notes ol{padding-left:18px}
+.fees .notes li{margin-bottom:10px}
+
+.calc .side{grid-column:1/5}
+.calc .main{grid-column:5/13}
+.calcbox{background:var(--tomato);color:#fff;border-radius:28px;padding:30px 32px;margin-top:20px}
+.calcbox label{display:block;font-size:14px;margin-bottom:8px}
+.calcbox input[type=range]{width:100%;accent-color:var(--ink)}
+.calcbox .out{font:800 64px var(--display);letter-spacing:-.04em;margin-top:12px}
+.calcbox .mono{opacity:.85}
+.calc h2{font-size:56px;margin-top:14px}
+.faq{list-style:none}
+.faq li{border-top:1px solid var(--rule);padding:18px 0;display:grid;grid-template-columns:1fr 1.5fr;gap:32px}
+.faq li:last-child{border-bottom:1px solid var(--rule)}
+.faq h3{font-size:20px}
+.faq p{font-size:15px;color:var(--mute)}
+
+.join{background:var(--ink);color:var(--paper);padding:110px 0 60px}
+.join h2{grid-column:1/10;font-size:104px}
+.join h2 em{font-style:normal;color:var(--tomato)}
+.join form{grid-column:1/9;display:flex;gap:12px;margin-top:40px;background:#2A2723;border-radius:24px;padding:14px}
+.join input{flex:1;height:56px;border-radius:14px;border:0;padding:0 18px;font:400 16px var(--body);background:var(--paper);color:var(--ink)}
+.join input.age{flex:0 0 120px}
+.join .btn{background:var(--tomato);border-color:var(--tomato);color:#fff}
+.join .steps{grid-column:10/13;grid-row:1/3;align-self:end;list-style:none;font-size:14px;color:#A79F92}
+.join .steps li{border-top:1px solid #3A3631;padding:12px 0}
+.join .steps b{display:block;font:800 26px var(--display);color:var(--paper);letter-spacing:-.02em}
+.join .small{grid-column:1/9;font-size:13px;color:#A79F92;margin-top:14px}
+.join .done{grid-column:1/9;margin-top:14px;font-family:var(--mono);color:var(--mint);min-height:20px}
+footer{background:var(--ink);color:#A79F92;font-size:13px;padding:0 0 48px}
+footer .wrap{border-top:1px solid #3A3631;padding-top:28px;display:flex;flex-wrap:wrap;gap:12px 32px}
+footer .legal{flex-basis:100%;max-width:90ch;font-size:12px;line-height:1.6}
+
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  .grid{grid-template-columns:1fr;gap:20px}
+  .grid>*{grid-column:1/-1 !important;grid-row:auto !important}
+  .hero h1{font-size:64px}.join h2{font-size:56px}h2,.pots h2,.guests h2{font-size:44px}
+  .hero .facts{flex-wrap:wrap;gap:20px}
+  nav ul{display:none}
+  .potlist li,.faq li{grid-template-columns:1fr}
+  .guests .cols{columns:1}
+  .statement{padding:20px 16px;overflow-x:auto}
+  .join form{flex-wrap:wrap}.join input.age{flex:1 1 100%}
+  section{padding:64px 0}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">kitty<b>.</b></a>
+    <span class="age">ages 13–17 · UK</span>
+    <ul>
+      <li><a href="#ledger">Statement</a></li>
+      <li><a href="#pots">Pots</a></li>
+      <li><a href="#guests">Parents</a></li>
+      <li><a href="#fees">Fees</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn ghost" href="#join">Get the card</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="wrap grid">
+    <h1>Your money. <em>Your</em> rules. Mostly.</h1>
+    <p class="lede">Kitty is a debit card and app for 13 to 17 year olds. The account is in your name. Your parents can top it up and set a couple of limits, but they're guests: they see totals, not every £3.20 meal deal, unless you choose to show them.</p>
+    <div class="actions">
+      <a class="btn" href="#join">Open an account in 6 minutes</a>
+      <a class="btn ghost" href="#fees">See every fee</a>
+      <span class="mono">No monthly fee. Ever.</span>
+    </div>
+    <div class="facts">
+      <div><strong>£0</strong>monthly fee</div>
+      <div><strong>4.1%</strong>AER on savings pots</div>
+      <div><strong>£250</strong>daily spend cap, you can lower it</div>
+      <div><strong>FSCS</strong>protected up to £85k</div>
+    </div>
+    <aside class="mini" aria-label="Example week">
+      <span class="eyebrow">Maya, 15 · this week</span>
+      <div class="bal">£182.40</div>
+      <span class="mono">+£6.85 rounded up into pots</span>
+      <ol>
+        <li><span>Babysitting, Thu</span><span class="mono pos">+£30.00</span></li>
+        <li><span>Greggs</span><span class="mono">−£3.20</span></li>
+        <li><span>Spotify Student</span><span class="mono">−£5.99</span></li>
+        <li><span>Bus pass top-up</span><span class="mono">−£12.00</span></li>
+        <li><span>Allowance from Mum</span><span class="mono pos">+£15.00</span></li>
+        <li><span>Vinted, cargo trousers</span><span class="mono pos">+£18.50</span></li>
+      </ol>
+      <p class="note">Mum sees: "£63.50 in, £21.19 out". That's it.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="ledger" id="ledger">
+  <div class="wrap grid">
+    <div class="side">
+      <span class="eyebrow">01 · October</span>
+      <dl class="figs">
+        <div><dt>in</dt><dd>£92</dd></div>
+        <div><dt>out</dt><dd>£60</dd></div>
+        <div><dt>saved</dt><dd class="pos">£2.68</dd></div>
+      </dl>
+    </div>
+    <div class="main">
+    <h2>Every penny, in plain English. Every round-up, on the record.</h2>
+    <div class="statement">
+      <header><h3>October, Maya's account</h3><span class="mono">opening £141.12</span></header>
+      <table>
+        <thead><tr><th>Date</th><th>What</th><th class="n">Amount</th><th class="n">Round-up</th><th class="n">Balance</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">01 Oct</td><td>Allowance from Mum<span class="tag">weekly</span></td><td class="n pos">+15.00</td><td class="n">—</td><td class="n">156.12</td></tr>
+          <tr><td class="mono">02 Oct</td><td>Tesco Express<span class="tag">food</span></td><td class="n">−2.45</td><td class="n">0.55</td><td class="n">153.12</td></tr>
+          <tr><td class="mono">04 Oct</td><td>Odeon, 2 tickets<span class="tag">split w/ Jas</span></td><td class="n">−17.80</td><td class="n">0.20</td><td class="n">135.12</td></tr>
+          <tr><td class="mono">05 Oct</td><td>Jas paid back<span class="tag">split</span></td><td class="n pos">+8.90</td><td class="n">—</td><td class="n">144.02</td></tr>
+          <tr><td class="mono">07 Oct</td><td>Spotify Student<span class="tag">subscription</span></td><td class="n">−5.99</td><td class="n">0.01</td><td class="n">138.02</td></tr>
+          <tr><td class="mono">09 Oct</td><td>Babysitting, the Okafors<span class="tag">earned</span></td><td class="n pos">+30.00</td><td class="n">—</td><td class="n">168.02</td></tr>
+          <tr><td class="mono">12 Oct</td><td>Superdrug<span class="tag">stuff</span></td><td class="n">−7.49</td><td class="n">0.51</td><td class="n">160.02</td></tr>
+          <tr><td class="mono">14 Oct</td><td>Bus pass top-up<span class="tag">travel</span></td><td class="n">−12.00</td><td class="n">—</td><td class="n">148.02</td></tr>
+          <tr><td class="mono">18 Oct</td><td>Vinted, cargo trousers<span class="tag">sold</span></td><td class="n pos">+18.50</td><td class="n">—</td><td class="n">166.52</td></tr>
+          <tr><td class="mono">21 Oct</td><td>Steam, Hollow Knight<span class="tag">games</span></td><td class="n">−11.39</td><td class="n">0.61</td><td class="n">154.52</td></tr>
+          <tr><td class="mono">26 Oct</td><td>Nan, half-term<span class="tag">gift</span></td><td class="n pos">+20.00</td><td class="n">—</td><td class="n">174.52</td></tr>
+          <tr><td class="mono">30 Oct</td><td>Greggs<span class="tag">food</span></td><td class="n">−3.20</td><td class="n">0.80</td><td class="n">170.64</td></tr>
+        </tbody>
+        <tfoot><tr><td></td><td>Closing · £92.40 in · £60.32 out</td><td class="n"></td><td class="n pos">£2.68 saved</td><td class="n">£170.64</td></tr></tfoot>
+      </table>
+    </div>
+      <ol class="how">
+        <li><b>Merchant names, not codes.</b> "Greggs Station Rd", not "GRG*4471 LDN".</li>
+        <li><b>Round-ups on by default.</b> Spend £3.20, £0.80 goes to a pot. Turn it off any time.</li>
+        <li><b>Payday tags.</b> Babysitting, Vinted, birthday money: tag it once, Kitty learns.</li>
+        <li><b>Monthly recap.</b> One screen on the 1st: in, out, saved, biggest spend.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="pots" id="pots">
+  <div class="wrap grid">
+    <div class="main">
+      <span class="eyebrow">02 · Pots</span>
+      <h2>Name it. Save for it. Watch it fill.</h2>
+      <p>Up to ten pots, each with a target and a date. Round-ups, payday splits and "save the change" rules feed them automatically. Money in a pot earns interest from day one and moves back to your card in one tap — no lock-ins, no penalties.</p>
+      <ul class="potlist">
+        <li><span class="name">Festival ticket<small>Reading, August</small></span><span class="mono">£168 / £265</span><span class="mono">63% · 41 wks</span><span class="bar"><i style="width:63%"></i></span></li>
+        <li><span class="name">New phone<small>rule: 20% of every payday</small></span><span class="mono">£212 / £499</span><span class="mono">42% · Mar</span><span class="bar"><i style="width:42%"></i></span></li>
+        <li><span class="name">Driving lessons<small>for when I'm 17</small></span><span class="mono">£340 / £1,200</span><span class="mono">28% · 2027</span><span class="bar"><i style="width:28%"></i></span></li>
+        <li><span class="name">Birthday presents<small>round-ups only</small></span><span class="mono">£31 / £60</span><span class="mono">52% · Dec</span><span class="bar"><i style="width:52%"></i></span></li>
+        <li><span class="name">Do not touch<small>locked by me until Jan</small></span><span class="mono">£95 / —</span><span class="mono">no target</span><span class="bar"><i style="width:100%"></i></span></li>
+      </ul>
+    </div>
+    <aside class="rate">
+      <span class="eyebrow">Interest on pots</span>
+      <div class="big">4.1%</div>
+      <p>AER, variable, paid monthly on every pot. On £500 that's about £1.71 a month for doing nothing.</p>
+      <dl>
+        <div><dt>Minimum to start</dt><dd class="mono">£1</dd></div>
+        <div><dt>Maximum per pot</dt><dd class="mono">£5,000</dd></div>
+        <div><dt>Withdrawal fee</dt><dd class="mono">£0</dd></div>
+        <div><dt>Paid on</dt><dd class="mono">the 1st</dd></div>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<section class="guests" id="guests">
+  <div class="wrap grid">
+    <div class="side">
+      <span class="eyebrow">03 · Parents</span>
+      <dl class="figs">
+        <div><dt>guests, max</dt><dd>2</dd></div>
+        <div><dt>daily cap range</dt><dd>£10–250</dd></div>
+        <div><dt>shared statement expires</dt><dd>7 days</dd></div>
+      </dl>
+    </div>
+    <div class="main">
+      <h2>Guests can top up. They can't snoop.</h2>
+      <div class="cols">
+        <p>An adult has to set the account up with you if you're under 16. After that they're a guest, and you can see exactly what they see.</p>
+        <p>Most teen cards are built for parents: every purchase pings their phone, and the "kid" gets a pocket-money view of their own money. We think that teaches hiding, not budgeting.</p>
+        <p>On Kitty, a guest sees your balance and monthly totals. They can send money, set a weekly allowance, and choose a daily spend cap between £10 and £250. They can freeze the card if it's lost.</p>
+        <p>They can't see individual purchases unless you share a statement, and they can't move money out of your pots. If you share, you choose which month, and it expires after 7 days.</p>
+        <p>Gambling, alcohol, tobacco, dating and adult merchant codes are blocked for everyone under 18. That's the law and our policy, not a parental setting.</p>
+      </div>
+      <table class="perm">
+        <thead><tr><th>Who can…</th><th>You</th><th>Guest</th><th>Kitty</th></tr></thead>
+        <tbody>
+          <tr><td>See balance and monthly totals</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>See each purchase</td><td class="yes">Yes</td><td class="ask">if shared</td><td class="ask">for fraud only</td></tr>
+          <tr><td>Top up or set an allowance</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="no">No</td></tr>
+          <tr><td>Set a daily spend cap</td><td class="yes">Lower only</td><td class="yes">£10–£250</td><td class="no">No</td></tr>
+          <tr><td>Move money out of a pot</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td></tr>
+          <tr><td>Freeze the card</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">If fraud</td></tr>
+          <tr><td>Close the account</td><td class="ask">16+ alone</td><td class="ask">under 16, with you</td><td class="no">No</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="fees" id="fees">
+  <div class="wrap grid">
+    <div class="main">
+      <span class="eyebrow">04 · Fees</span>
+      <h2>Here is every fee we charge.</h2>
+      <table>
+        <thead><tr><th>Thing</th><th class="n">Kitty</th><th class="n">Typical teen card¹</th></tr></thead>
+        <tbody>
+          <tr><td>Monthly fee</td><td class="n us">£0</td><td class="n them">£2.99–£4.99</td></tr>
+          <tr><td>Card (first one)</td><td class="n us">£0</td><td class="n them">£0–£4.99</td></tr>
+          <tr><td>Replacement card</td><td class="n us">£0 first, then £3</td><td class="n them">£5</td></tr>
+          <tr><td>Custom card design</td><td class="n us">£4.50 once</td><td class="n them">£7.99</td></tr>
+          <tr><td>Spending abroad</td><td class="n us">£0, Mastercard rate</td><td class="n them">0–2.99%</td></tr>
+          <tr><td>Cash machine, UK</td><td class="n us">£0, 8 a month</td><td class="n them">£0.50 each</td></tr>
+          <tr><td>Cash machine, abroad</td><td class="n us">£0 up to £200/mo, then 1%</td><td class="n them">£1.50 + 2%</td></tr>
+          <tr><td>Top up by bank transfer</td><td class="n us">£0</td><td class="n them">£0</td></tr>
+          <tr><td>Top up by guest's card</td><td class="n us">£0</td><td class="n them">0.5%</td></tr>
+          <tr><td>Moving to an adult account at 18</td><td class="n us">£0, same app</td><td class="n them">new account</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="zero"><dt>Maya paid in fees, 2026</dt><dd>£0</dd></dl>
+    <div class="notes">
+      <ol>
+        <li>Range across four UK prepaid teen cards, list prices checked November 2026. Some bundle features we don't offer, like cashback.</li>
+        <li>Kitty makes money from card interchange (a few pence the shop pays Mastercard) and the interest margin on balances. We don't sell data and don't show ads.</li>
+        <li>Kitty is an e-money account issued in partnership with a UK-authorised bank. Pot balances sit in the partner bank and are FSCS protected.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="calc" id="faq">
+  <div class="wrap grid">
+    <div class="side">
+      <span class="eyebrow">05 · Do the maths</span>
+      <div class="calcbox">
+        <label for="spend">Card purchases a week: <b id="n">12</b></label>
+        <input type="range" id="spend" min="1" max="40" value="12">
+        <div class="out" id="out">£280.80</div>
+        <span class="mono" id="sub">a year from round-ups, avg £0.45 each</span>
+      </div>
+    </div>
+    <div class="main">
+      <h2>Questions people actually ask.</h2>
+      <ul class="faq">
+        <li><h3>I'm 13. Can I sign up on my own?</h3><p>Not quite. Under 16 you need a parent or guardian to verify their ID once, which takes about two minutes. From 16 you can open and close it yourself.</p></li>
+        <li><h3>Does it work with Apple Pay and Google Pay?</h3><p>Yes, from the moment your card is approved, before the plastic arrives. Contactless limit is £100 per tap, same as adult cards.</p></li>
+        <li><h3>Can I get paid into it for a Saturday job?</h3><p>Yes. You get a real sort code and account number, so an employer can pay you by bank transfer. Payslips can be tagged automatically.</p></li>
+        <li><h3>Will this affect my credit score?</h3><p>No. It's a debit account with no overdraft, so there's no credit check and nothing is reported. You can't spend money you don't have.</p></li>
+        <li><h3>What happens when I turn 18?</h3><p>Guests are removed, the spend cap lifts, and you keep the same app, card number and pots. Nothing to move.</p></li>
+        <li><h3>Someone stole my card. Now what?</h3><p>Freeze it in the app in one tap; a guest can too. Disputed payments are investigated within 15 working days and refunded while we look.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap grid">
+    <h2>Six minutes. <em>One</em> ID check. Your own card.</h2>
+    <form id="f">
+      <input type="text" placeholder="Your first name" aria-label="First name" required>
+      <input class="age" type="number" min="13" max="17" placeholder="Age" aria-label="Age" required>
+      <input type="email" placeholder="Email, yours or a parent's" aria-label="Email" required>
+      <button class="btn" type="submit">Get the app link</button>
+    </form>
+    <ol class="steps">
+      <li><b>1 · Download</b>iOS 16+ or Android 10+</li>
+      <li><b>2 · ID check</b>passport or provisional</li>
+      <li><b>3 · Card</b>virtual now, plastic in 3 days</li>
+    </ol>
+    <p class="small">Ages 13–17, UK residents. Under 16 needs a parent or guardian to confirm. We'll send one email with the download link, then nothing unless you ask.</p>
+    <p class="done" id="done" aria-live="polite"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kitty Money Ltd</span>
+    <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Safeguarding</a><a href="#">Complaints</a><a href="#">Careers</a>
+    <p class="legal">Kitty Money Ltd is a concept for illustration. Interest rates are variable and shown as AER. Card issued by a partner bank pursuant to a licence from Mastercard International. Pot balances are protected by the FSCS up to £85,000 per person.</p>
+  </div>
+</footer>
+
+<script>
+const r=document.getElementById('spend'),n=document.getElementById('n'),o=document.getElementById('out');
+const upd=()=>{n.textContent=r.value;o.textContent='£'+(r.value*0.45*52).toFixed(2)};
+r.addEventListener('input',upd);upd();
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('done').textContent='Sent. Check your inbox (and spam, just in case).'});
+</script>
+</body>
+</html>

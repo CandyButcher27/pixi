@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>No Permit for Bayline — Estuary Climate Coalition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9dc; --ink:#16201b; --green:#1f4a3a; --tide:#cfe0d4; --signal:#e2502a;
+  --muted:#58635c; --rule:#16201b33;
+  --display:"Bricolage Grotesque", Georgia, serif;
+  --body:"Newsreader", Georgia, serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:0 48px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.label{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 24px;border-radius:12px;font:600 16px/1 var(--display);text-decoration:none;border:2px solid var(--ink)}
+.btn-primary{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn-ghost{background:transparent}
+
+/* nav */
+header.top{border-bottom:1px solid var(--rule)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.brand{font:800 18px/1 var(--display);letter-spacing:-.01em;text-decoration:none}
+.brand span{color:var(--signal)}
+header.top nav{display:flex;gap:28px;font-family:var(--mono);font-size:13px}
+header.top nav a{text-decoration:none}
+.deadline{font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:10px}
+
+/* hero */
+.hero{padding:72px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:64px;align-items:end}
+.hero h1{font:800 132px/.86 var(--display);letter-spacing:-.045em;margin:20px 0 32px}
+.hero h1 em{font-style:normal;color:var(--green)}
+.lead{font-size:21px;line-height:1.45;max-width:720px}
+.lead b{font-weight:500;background:var(--tide);padding:0 4px;border-radius:4px}
+.actions{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+.hero-side{border-left:2px solid var(--ink);padding-left:32px}
+.count{font:800 236px/.8 var(--display);letter-spacing:-.06em;color:var(--signal)}
+.count-cap{font:700 22px/1.15 var(--display);margin:14px 0 22px}
+.facts{list-style:none;border-top:1px solid var(--rule)}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:13px}
+.facts li span:last-child{font-weight:500}
+
+/* figures */
+.figures{padding:96px 0;border-top:1px solid var(--rule)}
+.figures .wrap{display:grid;grid-template-columns:1fr 2.7fr;gap:72px}
+.figures .thesis{margin-top:18px;font-size:15px}
+.figures h2,.timeline h2{font:700 52px/.95 var(--display);letter-spacing:-.03em;margin:16px 0 20px}
+.thesis{font-size:17px;color:var(--muted)}
+table.ledger{width:100%;border-collapse:collapse}
+.ledger th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:400;text-align:left;padding:0 0 12px;border-bottom:2px solid var(--ink)}
+.ledger td{padding:13px 16px 13px 0;border-bottom:1px solid var(--rule);vertical-align:baseline;font-size:17px}
+.ledger td.fig{font:700 30px/1 var(--display);letter-spacing:-.02em;white-space:nowrap}
+.ledger td.src{font-family:var(--mono);font-size:12px;color:var(--muted);padding-right:0;text-align:right}
+.ledger tr.hot td.fig{color:var(--signal)}
+
+/* timeline */
+.timeline{padding:96px 0;background:var(--tide)}
+.timeline .wrap{display:grid;grid-template-columns:2.2fr 1fr;gap:72px}
+ol.dates{list-style:none;margin-top:28px;border-top:2px solid var(--ink)}
+ol.dates li{display:grid;grid-template-columns:150px 1fr 120px;gap:24px;padding:16px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+ol.dates time{font-family:var(--mono);font-size:13px;font-weight:500}
+ol.dates strong{font:700 21px/1.2 var(--display);display:block;margin-bottom:4px}
+ol.dates p{font-size:16px;color:#2c3a33}
+ol.dates .st{font-family:var(--mono);font-size:12px;text-align:right}
+ol.dates .done{color:var(--muted)}
+ol.dates .next{color:var(--signal);font-weight:500}
+.bignum-panel{background:var(--paper);border-radius:28px;padding:36px 32px;align-self:start;position:sticky;top:24px}
+.bignum{font:800 112px/.85 var(--display);letter-spacing:-.05em;color:var(--green)}
+.bignum small{font-size:32px;letter-spacing:-.02em}
+.bignum-panel h3{font:700 20px/1.2 var(--display);margin:16px 0 14px}
+.deriv{list-style:none;font-family:var(--mono);font-size:12px}
+.deriv li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--rule)}
+.deriv li:last-child{border-bottom:0;font-weight:500}
+
+/* demands band */
+.demands{background:var(--green);color:var(--paper);padding:112px 0}
+.demands .wrap{display:grid;grid-template-columns:1fr 1.7fr;gap:80px}
+.demands h2{font:800 112px/.84 var(--display);letter-spacing:-.045em}
+.demands .label{color:var(--tide)}
+.demands .side-note{margin-top:28px;font-size:16px;color:var(--tide);max-width:340px}
+ol.asks{list-style:none;counter-reset:a}
+ol.asks li{counter-increment:a;display:grid;grid-template-columns:72px 1fr;gap:20px;padding:26px 0;border-top:1px solid #efe9dc40}
+ol.asks li::before{content:"0" counter(a);font:700 40px/1 var(--display);color:var(--signal)}
+ol.asks h3{font:700 27px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:8px}
+ol.asks p{font-size:17px;color:#e3e8df}
+ol.asks .who{display:block;margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--tide)}
+
+/* sign */
+.sign{padding:104px 0}
+.sign .wrap{display:grid;grid-template-columns:1.6fr 1fr;gap:72px;align-items:start}
+.sign h2{font:800 76px/.9 var(--display);letter-spacing:-.04em;margin:16px 0 20px}
+.sign .intro{font-size:18px;max-width:720px;margin-bottom:32px}
+form.comment{background:var(--ink);color:var(--paper);border-radius:28px;padding:36px;display:grid;grid-template-columns:1fr 1.4fr;gap:18px 20px}
+form.comment label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--tide);margin-bottom:8px}
+form.comment .full{grid-column:1/-1}
+form.comment input,form.comment textarea{width:100%;background:#26322c;border:1px solid #efe9dc33;color:var(--paper);border-radius:14px;padding:14px 16px;font:400 16px/1.4 var(--body)}
+form.comment textarea{min-height:150px;resize:vertical}
+form.comment .row{display:flex;align-items:center;justify-content:space-between;gap:20px}
+form.comment .row p{font-family:var(--mono);font-size:12px;color:#c9cfc8;max-width:440px}
+.tally{margin-top:20px;font-family:var(--mono);font-size:13px}
+.tally b{color:var(--signal);font-weight:500}
+.money h3{font:700 26px/1.1 var(--display);margin:12px 0 18px}
+.money dl{border-top:2px solid var(--ink)}
+.money dl div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.money dt{font-size:15px}
+.money dd{font-family:var(--mono);font-size:13px;font-weight:500}
+.money .note{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* footer */
+footer{border-top:2px solid var(--ink);padding:56px 0 40px}
+footer .wrap{display:grid;grid-template-columns:1fr 2.6fr;gap:72px}
+footer .brand{font-size:28px}
+footer .members{font-size:15px;line-height:1.7}
+footer .members span{white-space:nowrap}
+footer .members span::after{content:" · ";color:var(--signal)}
+footer .members span:last-child::after{content:""}
+footer .colophon{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:28px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  .hero .wrap,.figures .wrap,.timeline .wrap,.demands .wrap,.sign .wrap,footer .wrap{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:68px}.count{font-size:120px}.demands h2{font-size:64px}.sign h2{font-size:48px}
+  header.top nav{display:none}
+  ol.dates li{grid-template-columns:1fr}ol.dates .st{text-align:left}
+  form.comment{grid-template-columns:1fr}
+  .bignum-panel{position:static}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Estuary Climate Coalition<span>.</span></a>
+    <nav aria-label="Primary">
+      <a href="#figures">The numbers</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#demands">Demands</a>
+      <a href="#sign">Comment</a>
+    </nav>
+    <span class="deadline">Comment period closes 12 Dec, 17:00</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <p class="label">Campaign 07 · Bayline LNG Export Terminal · Docket CP26-118</p>
+        <h1 id="h1">No permit<br>for <em>Bayline.</em></h1>
+        <p class="lead">A gas company wants to dredge 4.1 km of the Harrow Estuary and build a liquefied gas export terminal on the last unbuilt salt marsh between the river mouth and the city. If the state approves it on <b>18 December</b>, it locks in <b>9.6 million tonnes</b> of CO₂e every year until 2066. Forty-one community, fishing and faith groups are asking one thing: refuse the permit.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#sign">File a public comment →</a>
+          <a class="btn btn-ghost" href="#figures">Read the dossier</a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="Countdown">
+        <div class="count">40</div>
+        <p class="count-cap">days until the state permit vote</p>
+        <ul class="facts">
+          <li><span>Comments filed</span><span>18,412</span></li>
+          <li><span>Needed to force a hearing</span><span>25,000</span></li>
+          <li><span>Marsh at stake</span><span>212 ha</span></li>
+          <li><span>Permanent jobs claimed</span><span>64</span></li>
+          <li><span>Commercial fishing jobs at risk</span><span>1,130</span></li>
+          <li><span>Undecided commissioners</span><span>2 of 5</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="figures" id="figures" aria-labelledby="fig-h">
+    <div class="wrap">
+      <div>
+        <p class="label">01 — The case in figures</p>
+        <h2 id="fig-h">The terminal does not add up.</h2>
+      </div>
+      <div>
+      <table class="ledger">
+        <thead><tr><th>What</th><th>Figure</th><th style="text-align:right">Source</th></tr></thead>
+        <tbody>
+          <tr class="hot"><td>Lifecycle emissions per year, including upstream methane leakage at 2.3%</td><td class="fig">9.6 Mt</td><td class="src">DEIS §4.12</td></tr>
+          <tr><td>Equivalent passenger cars added to the road, permanently</td><td class="fig">2.1 M</td><td class="src">EPA calc.</td></tr>
+          <tr><td>Operating life the company is asking to lock in</td><td class="fig">40 yrs</td><td class="src">Application p.3</td></tr>
+          <tr class="hot"><td>Salt marsh removed or filled for the jetty and storage tanks</td><td class="fig">212 ha</td><td class="src">Wetland survey</td></tr>
+          <tr><td>Carbon stored in that marsh soil, released when dredged</td><td class="fig">1.4 Mt</td><td class="src">Harrow Univ. 2024</td></tr>
+          <tr><td>Estuary dredged to 15 m for tankers</td><td class="fig">4.1 km</td><td class="src">Army Corps notice</td></tr>
+          <tr><td>Tanker transits per year through the oyster beds</td><td class="fig">180</td><td class="src">Application p.11</td></tr>
+          <tr><td>Commercial fishing and shellfish jobs in the affected reach</td><td class="fig">1,130</td><td class="src">State labor data</td></tr>
+          <tr><td>Permanent jobs the terminal promises</td><td class="fig">64</td><td class="src">Application p.27</td></tr>
+          <tr><td>Homes inside the hazard exclusion zone</td><td class="fig">2,870</td><td class="src">DEIS fig. 6-3</td></tr>
+          <tr class="hot"><td>Share of the state's 2035 climate budget used by this one site</td><td class="fig">11%</td><td class="src">Climate Council</td></tr>
+          <tr><td>Public subsidy requested as a property-tax abatement</td><td class="fig">$310 M</td><td class="src">County agenda</td></tr>
+          <tr><td>Freshwater drawn daily for liquefaction cooling</td><td class="fig">38 ML</td><td class="src">Water permit app.</td></tr>
+          <tr class="hot"><td>Years before the terminal's export contracts outrun the state's net-zero date</td><td class="fig">21 yrs</td><td class="src">Climate Council</td></tr>
+        </tbody>
+      </table>
+      <p class="thesis">Every figure comes from the company's own filings, the state environmental review, or peer-reviewed estuary surveys. Page and section references are in the full dossier.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline" id="timeline" aria-labelledby="tl-h">
+    <div class="wrap">
+      <div>
+        <p class="label">02 — Timeline to the vote</p>
+        <h2 id="tl-h">Six dates decide the next forty years.</h2>
+        <ol class="dates">
+          <li><time datetime="2026-03-04">04 Mar 2026</time><div><strong>Application filed</strong><p>Bayline Energy files for a state coastal permit and a federal export authorisation in the same week.</p></div><span class="st done">Done</span></li>
+          <li><time datetime="2026-07-22">22 Jul 2026</time><div><strong>Draft environmental review published</strong><p>The draft review omits methane leakage from the supply basin and counts only on-site combustion.</p></div><span class="st done">Done</span></li>
+          <li><time datetime="2026-09-30">30 Sep 2026</time><div><strong>Coalition files technical objection</strong><p>212 pages, co-signed by 14 scientists and the Harrow Shellfish Growers' Association.</p></div><span class="st done">Done</span></li>
+          <li><time datetime="2026-12-12">12 Dec 2026</time><div><strong>Public comment period closes, 17:00</strong><p>At 25,000 substantive comments the agency must hold an evidentiary hearing before it votes.</p></div><span class="st next">Next</span></li>
+          <li><time datetime="2026-12-18">18 Dec 2026</time><div><strong>State permit vote</strong><p>Five commissioners. Two have said they are undecided. Their offices are listed in the action kit.</p></div><span class="st">Pending</span></li>
+          <li><time datetime="2027-02-01">Feb 2027</time><div><strong>Federal export decision</strong><p>Cannot proceed without the state coastal permit. A refusal in December ends the project.</p></div><span class="st">Pending</span></li>
+        </ol>
+      </div>
+      <aside class="bignum-panel" aria-label="Annual emissions">
+        <p class="label">The one number</p>
+        <div class="bignum">9.6<small> Mt</small></div>
+        <h3>CO₂e every year, once the terminal runs at capacity</h3>
+        <ul class="deriv">
+          <li><span>Combustion of exported gas</span><span>7.1 Mt</span></li>
+          <li><span>Upstream methane, 2.3% leak</span><span>1.8 Mt</span></li>
+          <li><span>Liquefaction power</span><span>0.5 Mt</span></li>
+          <li><span>Shipping</span><span>0.2 Mt</span></li>
+          <li><span>Total</span><span>9.6 Mt</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="demands" id="demands" aria-labelledby="dm-h">
+    <div class="wrap">
+      <div>
+        <p class="label">03 — What we are asking for</p>
+        <h2 id="dm-h">Four<br>demands.</h2>
+        <p class="side-note">Agreed by all 41 member groups at the October assembly. None of them require new law.</p>
+      </div>
+      <ol class="asks">
+        <li><div><h3>Refuse the coastal permit on 18 December.</h3><p>The commission already has the authority: the application fails the state's own wetland-loss test and its 2035 emissions cap. A refusal is not a delay tactic, it is the legally correct outcome of the review it commissioned.</p><span class="who">To: State Coastal Commission, 5 commissioners</span></div></li>
+        <li><div><h3>Count the methane.</h3><p>Redo the climate chapter of the environmental review with upstream leakage included, as the 2025 state guidance requires. Leaving it out understates the terminal's footprint by roughly a fifth.</p><span class="who">To: Department of Environmental Quality</span></div></li>
+        <li><div><h3>Withdraw the $310 million tax abatement.</h3><p>Public money should not underwrite a fossil asset that the state's own plan says must be retired before its loan is paid off. Put the abatement to a recorded county vote.</p><span class="who">To: Harrow County Board of Supervisors</span></div></li>
+        <li><div><h3>Protect the marsh in perpetuity.</h3><p>Designate the 212 hectares as a tidal reserve, so the site cannot be offered to the next applicant. The shellfish growers, the tribe and the county parks office have already agreed to co-manage it.</p><span class="who">To: State Lands Board</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sign" id="sign" aria-labelledby="sg-h">
+    <div class="wrap">
+      <div>
+        <p class="label">04 — The one action</p>
+        <h2 id="sg-h">File a comment that counts.</h2>
+        <p class="intro">The agency only counts comments that name a specific concern in the review. We have drafted one for you; edit it, add a sentence about why the estuary matters to you, and it goes straight into docket CP26-118 under your name. It takes about three minutes.</p>
+        <form class="comment" onsubmit="event.preventDefault();this.querySelector('.row p').textContent='Thank you. Your comment is queued for the docket and you will get a filing receipt by email.';">
+          <div><label for="nm">Full name</label><input id="nm" name="name" autocomplete="name" required></div>
+          <div><label for="em">Email, for your filing receipt</label><input id="em" name="email" type="email" autocomplete="email" required></div>
+          <div><label for="zp">Postcode</label><input id="zp" name="postcode" autocomplete="postal-code"></div>
+          <div><label for="tie">Your tie to the estuary (optional)</label><input id="tie" name="tie" placeholder="e.g. I fish the lower reach"></div>
+          <div class="full"><label for="tx">Your comment</label><textarea id="tx" name="comment">I object to the Bayline LNG coastal permit (CP26-118). The draft environmental review omits upstream methane leakage, understating annual emissions by about 1.8 million tonnes, and the project would remove 212 hectares of salt marsh. I ask the Commission to refuse the permit.</textarea></div>
+          <div class="full row"><p>We never sell or share your details. Comments become public record with your name and town only.</p><button class="btn btn-primary" type="submit">Submit to the docket →</button></div>
+        </form>
+        <p class="tally"><b>18,412</b> filed · 6,588 to go before 12 Dec · last comment 4 minutes ago from Port Ellery</p>
+      </div>
+      <aside class="money" aria-labelledby="mn-h">
+        <p class="label">Where a donation goes</p>
+        <h3 id="mn-h">2026 campaign budget, $486,000</h3>
+        <dl>
+          <div><dt>Expert witnesses for the hearing</dt><dd>$142,000</dd></div>
+          <div><dt>Legal counsel, permit appeal reserve</dt><dd>$118,000</dd></div>
+          <div><dt>Organisers in four towns</dt><dd>$96,000</dd></div>
+          <div><dt>Estuary carbon survey</dt><dd>$61,000</dd></div>
+          <div><dt>Childcare &amp; travel for hearings</dt><dd>$38,000</dd></div>
+          <div><dt>Printing, translation (ES, VI)</dt><dd>$31,000</dd></div>
+        </dl>
+        <p class="note">Raised so far: $311,240 from 4,906 people. Median gift $25. No fossil-fuel or utility money accepted.</p>
+        <div class="actions"><a class="btn btn-ghost" href="#">Give to the campaign</a></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#">Estuary Climate Coalition<span>.</span></a>
+      <p class="mono" style="margin-top:12px;color:var(--muted)">A fiscally sponsored project of the Harrow Commons Fund, a 501(c)(3). EIN 84-2219034.</p>
+    </div>
+    <div>
+      <p class="label" style="margin-bottom:12px">The 41 member groups</p>
+      <p class="members"><span>Harrow Shellfish Growers' Association</span> <span>Port Ellery Tenants Union</span> <span>Lower Reach Fishers</span> <span>Harrow Valley Interfaith Climate</span> <span>Sunrise Harrow</span> <span>Marsh Birders Club</span> <span>Coastal Nurses for Clean Air</span> <span>St. Brendan's Parish</span> <span>Harrow Univ. Climate Law Clinic</span> <span>Estuary Kayak Collective</span> <span>Riverside Mosque Green Team</span> <span>Ellery Parents for Safe Schools</span> <span>Building Trades Climate Caucus</span> <span>Harrow Audubon</span> <span>Vietnamese Fishers Mutual Aid</span> <span>Old Town Neighbourhood Assoc.</span> <span>Grandparents for the Future</span> <span>Cedar Point Residents</span> <span>Tidewater Land Trust</span> <span>Youth Climate Strike Harrow</span> <span>Harrow Tribal Fisheries Office</span> <span>Port Ellery Food Bank</span> <span>Salt Marsh Restoration Network</span> <span>Teachers for Climate Harrow</span> <span>Ellery Cycling Club</span> <span>Lower Reach Oyster Co-op</span> <span>Harrow Physicians for Climate</span> <span>Bayview Community Garden</span> <span>and 13 more</span></p>
+      <div class="colophon"><a href="#">Full dossier (PDF, 212 pp.)</a><a href="#">Press kit</a><a href="#">Volunteer</a><a href="#">Privacy</a><span>Updated 08 Nov 2026</span></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

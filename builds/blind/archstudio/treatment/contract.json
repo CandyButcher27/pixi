@@ -1,0 +1,208 @@
+{
+  "identity": {
+    "references": {
+      "near": {
+        "id": "live:designed.space",
+        "grammar": {
+          "hero_alignment": "left",
+          "hero_weight_split": 0.247,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 28,
+          "card_reliance": "low",
+          "largest_card_row": 2,
+          "geometry": "pill",
+          "max_radius": 9999,
+          "display_dominance": 1.0,
+          "display_weight": 300,
+          "generic_display_font": false,
+          "imagery": "dominant",
+          "imagery_ratio": 0.94,
+          "density": "low",
+          "text_density": "low",
+          "gradients": 0,
+          "glass_panels": 0,
+          "palette_size": 4,
+          "sections": 4,
+          "page_height": 15792
+        }
+      },
+      "contrast": {
+        "id": "live:www.pelizzari.com",
+        "grammar": {
+          "hero_alignment": "centered",
+          "hero_weight_split": 0.473,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 8,
+          "card_reliance": "none",
+          "largest_card_row": 0,
+          "geometry": "pill",
+          "max_radius": 64,
+          "display_dominance": 13.36,
+          "display_weight": 500,
+          "generic_display_font": false,
+          "imagery": "present",
+          "imagery_ratio": 0.083,
+          "density": "low",
+          "text_density": "low",
+          "gradients": 0,
+          "glass_panels": 0,
+          "palette_size": 3,
+          "sections": 2,
+          "page_height": 8780
+        }
+      },
+      "outlier": {
+        "id": "live:www.hyperframe.com",
+        "grammar": {
+          "hero_alignment": "unknown",
+          "hero_weight_split": null,
+          "section_rhythm": "alternating",
+          "full_bleed_sections": 24,
+          "card_reliance": "none",
+          "largest_card_row": 0,
+          "geometry": "soft",
+          "max_radius": 15,
+          "display_dominance": 16.25,
+          "display_weight": 300,
+          "generic_display_font": true,
+          "imagery": "dominant",
+          "imagery_ratio": 2.011,
+          "density": "high",
+          "text_density": "high",
+          "gradients": 6,
+          "glass_panels": 0,
+          "palette_size": 4,
+          "sections": 10,
+          "page_height": 900
+        }
+      }
+    },
+    "direction": "low-density, typography-dominant, dominant imagery, soft geometry, uniform section rhythm",
+    "design_intent": [
+      "Information is expressed as sequences and spatial hierarchy \u2014 lists, tables, ruled rows, running text \u2014 not as a catalogue of equal cards.",
+      "The visual anchor moves through the page rather than sitting in one column, and the side it leaves should carry weight of its own, not empty margin.",
+      "Typography carries the hierarchy. Size, weight and spacing do the work that borders, shadows and container chrome would otherwise do.",
+      "The page is sparse and deliberate. Few elements, each given room, with restraint doing the work that decoration would."
+    ]
+  },
+  "inherited": {
+    "required": [
+      {
+        "rule": "full_bleed_sections",
+        "op": ">=",
+        "value": 1,
+        "source": "contrast:live:www.pelizzari.com",
+        "why": "at least one section breaks the page container"
+      },
+      {
+        "rule": "centroid_flips",
+        "op": ">=",
+        "value": 2,
+        "source": "outlier:live:www.hyperframe.com",
+        "why": "visual anchor alternates sides between major sections"
+      },
+      {
+        "rule": "display_dominance",
+        "op": ">=",
+        "value": 6.0,
+        "source": "outlier:live:www.hyperframe.com",
+        "why": "display typography carries the hierarchy instead of card chrome"
+      },
+      {
+        "rule": "largest_card_row",
+        "op": "<=",
+        "value": 2,
+        "source": "near:live:designed.space+contrast:live:www.pelizzari.com+outlier:live:www.hyperframe.com",
+        "why": "information is a sequence, not a row of equal boxes"
+      },
+      {
+        "rule": "display_dominance",
+        "op": "<=",
+        "value": 18.7,
+        "source": "median of triple",
+        "why": "display scale stays inside the reference range"
+      },
+      {
+        "rule": "hero_weight_split",
+        "op": "<=",
+        "value": 0.42,
+        "source": "near:live:designed.space",
+        "why": "hero_alignment is left in the references"
+      },
+      {
+        "rule": "imagery_ratio",
+        "op": ">=",
+        "value": 0.3,
+        "source": "near:live:designed.space+outlier:live:www.hyperframe.com",
+        "why": "imagery is dominant in the references"
+      },
+      {
+        "rule": "elements_per_1k",
+        "op": "<",
+        "value": 28,
+        "source": "near:live:designed.space+contrast:live:www.pelizzari.com",
+        "why": "density is low in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": ">=",
+        "value": 6,
+        "source": "outlier:live:www.hyperframe.com",
+        "why": "geometry is soft in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": "<=",
+        "value": 19,
+        "source": "outlier:live:www.hyperframe.com",
+        "why": "geometry is soft in the references"
+      }
+    ],
+    "forbidden": [
+      {
+        "rule": "gradients",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "gradient backdrops are the loudest AI tell"
+      },
+      {
+        "rule": "pill_controls",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "fully rounded pill CTAs"
+      },
+      {
+        "rule": "glass_panels",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "glassmorphism panels"
+      },
+      {
+        "rule": "generic_display_font",
+        "op": "==",
+        "value": false,
+        "source": "slop_law",
+        "why": "Inter / system-ui defaults on the display face"
+      },
+      {
+        "rule": "hero_asymmetry",
+        "op": ">=",
+        "value": 0.08,
+        "source": "slop_law",
+        "why": "centred hero column is the default AI composition"
+      }
+    ]
+  },
+  "agent_owns": [
+    "product message, section order, and copy",
+    "the exact display and body typefaces (must not be a generic default)",
+    "the palette, within the direction above",
+    "how each composition mandate is realised structurally"
+  ],
+  "rule": "You may add constraints. You may not weaken or drop an inherited one.",
+  "brief": "architecture studio in Copenhagen",
+  "frozen_at": "2026-11-08T18:12:04+00:00"
+}

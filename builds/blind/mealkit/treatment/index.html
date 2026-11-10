@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Furrow — vegan meal kits from named farms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Public+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oat:#f1e9d8;--ink:#2b1226;--chili:#c8401b;--leaf:#2f5a36;--bone:#fbf7ee;
+  --rule:rgba(43,18,38,.22);--mute:#6b5563;
+  --serif:"Young Serif",Georgia,serif;--sans:"Public Sans",sans-serif;--mono:"JetBrains Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--oat);color:var(--ink);font:16px/1.55 var(--sans)}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.kicker{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--chili)}
+
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--serif);font-size:26px;text-decoration:none}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px}
+nav ul a{text-decoration:none}
+nav .meta{font-family:var(--mono);font-size:12px;color:var(--mute)}
+
+.btn{display:inline-flex;align-items:center;height:50px;padding:0 22px;border-radius:10px;border:1.5px solid var(--ink);font:700 15px var(--sans);text-decoration:none;cursor:pointer;background:transparent;color:var(--ink)}
+.btn.primary{background:var(--chili);border-color:var(--chili);color:var(--bone)}
+.btn:hover{transform:translateY(-1px)}
+
+section{padding:96px 0}
+.split{display:grid;gap:56px;align-items:start}
+
+/* 1 hero */
+.hero .split{grid-template-columns:1.9fr 1fr}
+.hero h1{font:400 168px/.86 var(--serif);letter-spacing:-.035em;margin:18px 0 32px}
+.hero h1 em{font-style:normal;color:var(--chili)}
+.lede{font-size:20px;max-width:620px;margin-bottom:28px}
+.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.actions .mono{color:var(--mute);margin-left:8px}
+.receipt{background:var(--bone);border-radius:28px;padding:28px 28px 22px;margin-top:40px;border:1px solid var(--rule)}
+.receipt h2{font:400 26px/1.1 var(--serif);margin:6px 0 16px}
+.receipt ol{list-style:none}
+.receipt li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px dashed var(--rule);font-size:14px}
+.receipt li span:last-child{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+.receipt .total{display:flex;justify-content:space-between;border-top:2px solid var(--ink);margin-top:8px;padding-top:12px;font-family:var(--mono);font-size:14px;font-weight:600}
+
+/* 2 menu */
+.menu .split{grid-template-columns:1.3fr 1.6fr}
+.big{font:400 128px/.85 var(--serif);letter-spacing:-.03em}
+.side p{font-size:14px;color:var(--mute);margin-top:14px;max-width:260px}
+.side .mono{display:block;margin-top:18px}
+.menu h2,.farms h2,.plans h2{font:400 56px/1 var(--serif);letter-spacing:-.02em;margin:8px 0 28px}
+table{width:100%;border-collapse:collapse}
+th{font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.1em;text-align:left;color:var(--mute);padding:0 10px 10px 0;border-bottom:2px solid var(--ink)}
+td{padding:13px 10px 13px 0;border-bottom:1px solid var(--rule);font-size:15px;vertical-align:baseline}
+td.n{font-family:var(--mono);font-size:13px;white-space:nowrap}
+td b{font-weight:700}
+td small{display:block;color:var(--mute);font-size:13px}
+.tag{font:600 11px var(--mono);padding:2px 6px;border:1px solid var(--rule);border-radius:4px;margin-right:4px}
+.tag.new{border-color:var(--chili);color:var(--chili)}
+
+/* 3 how - full bleed */
+.how{background:var(--leaf);color:var(--bone)}
+.how .kicker{color:#f2b38f}
+.how .split{grid-template-columns:1.7fr 1fr}
+.how h2{font:400 88px/.92 var(--serif);letter-spacing:-.025em;margin:10px 0 40px}
+.steps{list-style:none;counter-reset:s}
+.steps li{display:grid;grid-template-columns:72px 1fr 110px;gap:16px;padding:22px 0;border-top:1px solid rgba(251,247,238,.28);counter-increment:s}
+.steps li::before{content:"0" counter(s);font:400 40px/1 var(--serif);color:#f2b38f}
+.steps h3{font:700 19px var(--sans);margin-bottom:4px}
+.steps p{font-size:15px;opacity:.85}
+.steps .mono{text-align:right;opacity:.8}
+.sched{background:var(--bone);color:var(--ink);border-radius:28px;padding:30px;margin-top:150px}
+.sched h3{font:400 28px var(--serif);margin-bottom:14px}
+.sched dl{display:grid;grid-template-columns:auto 1fr;gap:0 16px}
+.sched dt,.sched dd{padding:9px 0;border-top:1px solid var(--rule);font-size:14px}
+.sched dt{font-family:var(--mono);font-size:12px;color:var(--chili);font-weight:600}
+
+/* 4 farms */
+.farms .split{grid-template-columns:1fr 1.6fr}
+.farmlist{list-style:none}
+.farmlist li{display:grid;grid-template-columns:1.4fr 1.6fr .8fr 70px;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.farmlist b{font:400 22px var(--serif)}
+.farmlist span{font-size:14px}
+.farmlist .mono{text-align:right}
+
+/* 5 plans */
+.plans .split{grid-template-columns:1.8fr 1fr}
+.calc{display:flex;gap:28px;flex-wrap:wrap;align-items:end;margin:6px 0 28px;padding:22px 26px;background:var(--bone);border-radius:28px;border:1px solid var(--rule)}
+.calc label{display:block;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute);margin-bottom:6px}
+.calc select{font:500 16px var(--sans);height:44px;padding:0 12px;border-radius:10px;border:1.5px solid var(--ink);background:var(--oat);color:var(--ink)}
+.calc output{font:400 52px/1 var(--serif);color:var(--chili)}
+.calc .per{font-family:var(--mono);font-size:13px;color:var(--mute);display:block;margin-top:6px}
+.plans td.on{background:rgba(200,64,27,.1);font-weight:600}
+.faq h3{font:400 28px var(--serif);margin:42px 0 8px}
+.faq details{border-top:1px solid var(--rule);padding:14px 0}
+.faq summary{font-weight:700;cursor:pointer;font-size:15px}
+.faq details p{font-size:14px;color:var(--mute);margin-top:8px}
+
+footer{border-top:2px solid var(--ink);padding:40px 0 56px}
+footer .wrap{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;font-size:14px}
+footer .logo{font-size:40px}
+footer ul{list-style:none}
+footer li{padding:3px 0}
+
+@media (max-width:900px){
+  .hero .split,.menu .split,.how .split,.farms .split,.plans .split{grid-template-columns:1fr}
+  .hero h1{font-size:88px}.big{font-size:88px}.how h2{font-size:56px}
+  .sched{margin-top:0}nav ul{display:none}
+  .farmlist li{grid-template-columns:1fr 1fr}
+  .wrap{padding:0 20px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">Furrow</a>
+    <ul><li><a href="#menu">Week 46 menu</a></li><li><a href="#how">How it works</a></li><li><a href="#farms">Farms</a></li><li><a href="#plans">Plans</a></li></ul>
+    <span class="meta">Order by Sun 23:59 for Tue/Thu delivery</span>
+  </div>
+</nav>
+<main>
+  <section class="hero">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Vegan meal kits &middot; 12 recipes a week &middot; 7 named farms</p>
+        <h1>Plants,<br><em>portioned</em><br>to the gram.</h1>
+        <p class="lede">Every Furrow box is measured out for the recipe card in it: 140&nbsp;g of Puy lentils, not a bag; two stems of Thai basil, not a bunch. Nothing in it came from an animal, and nothing in it is left over by Friday.</p>
+        <div class="actions">
+          <a class="btn primary" href="#plans">Build this week's box</a>
+          <a class="btn" href="#menu">Read the menu</a>
+          <span class="mono">from $8.90 / plate &middot; skip any week</span>
+        </div>
+      </div>
+      <aside class="receipt">
+        <p class="kicker">Box 46-B &middot; 2 people &middot; 3 meals</p>
+        <h2>What arrives on Tuesday</h2>
+        <ol>
+          <li><span>Smoked tofu, miso beans</span><span>25 min</span></li>
+          <li><span>Kabocha laksa</span><span>35 min</span></li>
+          <li><span>Seitan shawarma</span><span>30 min</span></li>
+          <li><span>21 ingredients</span><span>4.2 kg</span></li>
+          <li><span>Packaging</span><span>0 plastic</span></li>
+        </ol>
+        <div class="total"><span>6 plates</span><span>$59.40</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap split">
+      <div class="side">
+        <p class="kicker">Week 46 &middot; 11&ndash;17 Nov</p>
+        <div class="big">12</div>
+        <p>recipes. 4 new, 3 under 20 min, all over 22&nbsp;g protein.</p>
+        <span class="mono">Menu locks Sun 23:59 &middot; swaps free until then</span>
+      </div>
+      <div>
+        <h2>This week's menu, in full</h2>
+        <table>
+          <thead><tr><th>Recipe</th><th>Time</th><th>kcal</th><th>Protein</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><b>Smoked tofu, charred leek, miso butter beans</b><small>Hollowtree Farm leeks</small></td><td class="n">25 min</td><td class="n">612</td><td class="n">34 g</td><td><span class="tag">soy</span></td></tr>
+            <tr><td><b>Kabocha &amp; chickpea laksa</b><small>rice noodles, lime leaf, crispy shallot</small></td><td class="n">35 min</td><td class="n">688</td><td class="n">24 g</td><td><span class="tag new">new</span><span class="tag">soy</span></td></tr>
+            <tr><td><b>Seitan shawarma, pickled onion, toum</b><small>flatbread baked Monday</small></td><td class="n">30 min</td><td class="n">731</td><td class="n">41 g</td><td><span class="tag">wheat</span></td></tr>
+            <tr><td><b>Black lentil dal, burnt garlic tadka</b><small>Puy lentils, coconut yoghurt</small></td><td class="n">40 min</td><td class="n">594</td><td class="n">27 g</td><td></td></tr>
+            <tr><td><b>Gochujang tempeh, sesame greens, rice</b><small>tempeh fermented in Oakland</small></td><td class="n">20 min</td><td class="n">640</td><td class="n">36 g</td><td><span class="tag">soy</span><span class="tag">sesame</span></td></tr>
+            <tr><td><b>White bean cassoulet, mushroom &ldquo;lardons&rdquo;</b><small>Ridgeback chanterelles</small></td><td class="n">45 min</td><td class="n">702</td><td class="n">29 g</td><td><span class="tag new">new</span></td></tr>
+            <tr><td><b>Crispy oyster mushroom tacos, chipotle crema</b><small>cashew crema, charred corn</small></td><td class="n">25 min</td><td class="n">618</td><td class="n">22 g</td><td><span class="tag">nuts</span></td></tr>
+            <tr><td><b>Peanut tofu satay, cucumber relish</b><small>jasmine rice</small></td><td class="n">18 min</td><td class="n">655</td><td class="n">33 g</td><td><span class="tag">peanut</span><span class="tag">soy</span></td></tr>
+            <tr><td><b>Beetroot farrotto, horseradish, walnuts</b><small>Low Meadow beets</small></td><td class="n">35 min</td><td class="n">579</td><td class="n">23 g</td><td><span class="tag new">new</span><span class="tag">wheat</span></td></tr>
+            <tr><td><b>Harissa cauliflower, freekeh, tahini</b><small>preserved lemon</small></td><td class="n">30 min</td><td class="n">604</td><td class="n">25 g</td><td><span class="tag">sesame</span></td></tr>
+            <tr><td><b>Mapo tofu, Sichuan pepper, bok choy</b><small>hand-ground peppercorns</small></td><td class="n">19 min</td><td class="n">566</td><td class="n">31 g</td><td><span class="tag">soy</span></td></tr>
+            <tr><td><b>Smoky split-pea soup, rye croutons</b><small>freezes for 3 months</small></td><td class="n">50 min</td><td class="n">521</td><td class="n">28 g</td><td><span class="tag new">new</span><span class="tag">wheat</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">How it works</p>
+        <h2>Sunday you pick.<br>Tuesday you cook.</h2>
+        <ol class="steps">
+          <li><div><h3>Choose 2&ndash;5 recipes</h3><p>From the twelve above. Swap, skip or pause until Sunday 23:59; after that the farms start harvesting for you.</p></div><span class="mono">~3 min</span></li>
+          <li><div><h3>Farms pick to order</h3><p>Monday morning, our seven farms harvest only what has been ordered. Average field-to-box time is 31 hours.</p></div><span class="mono">31 h</span></li>
+          <li><div><h3>We portion every gram</h3><p>Spices are weighed to 0.1&nbsp;g, sauces sealed in compostable sachets, each recipe bagged separately and labelled.</p></div><span class="mono">0.1 g</span></li>
+          <li><div><h3>It arrives cold, you cook</h3><p>Paper-insulated box keeps under 5&nbsp;&deg;C for 48 hours. Recipe cards list prep, cook and wash-up times separately.</p></div><span class="mono">&lt; 5 &deg;C</span></li>
+        </ol>
+      </div>
+      <aside class="sched">
+        <p class="kicker">Delivery windows</p>
+        <h3>When the van comes</h3>
+        <dl>
+          <dt>TUE</dt><dd>07:00&ndash;13:00 &middot; Bay Area, Sacramento</dd>
+          <dt>TUE</dt><dd>13:00&ndash;20:00 &middot; Central Coast</dd>
+          <dt>THU</dt><dd>07:00&ndash;13:00 &middot; Portland, Eugene</dd>
+          <dt>THU</dt><dd>13:00&ndash;20:00 &middot; Seattle, Tacoma</dd>
+          <dt>SUN</dt><dd>23:59 &middot; order cutoff, all regions</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="farms" id="farms">
+    <div class="wrap split">
+      <div class="side">
+        <p class="kicker">Average distance</p>
+        <div class="big">94<span style="font-size:48px"> mi</span></div>
+        <p>field to kitchen. Paid before harvest.</p>
+        <span class="mono">Supplier list audited Oct 2026</span>
+      </div>
+      <div>
+        <h2>Seven farms, named</h2>
+        <ul class="farmlist">
+          <li><b>Hollowtree</b><span>leeks, kale, chard</span><span>Sonoma Co.</span><span class="mono">22 mi</span></li>
+          <li><b>Low Meadow</b><span>beets, carrots, shallots</span><span>Yolo Co.</span><span class="mono">61 mi</span></li>
+          <li><b>Ridgeback Fungi</b><span>oyster, chanterelle, lion's mane</span><span>Marin Co.</span><span class="mono">18 mi</span></li>
+          <li><b>Sixth Row Grains</b><span>farro, freekeh, rye</span><span>Solano Co.</span><span class="mono">74 mi</span></li>
+          <li><b>Calder Beans</b><span>butter, white, black beans</span><span>San Joaquin Co.</span><span class="mono">103 mi</span></li>
+          <li><b>Ochre Hill</b><span>kabocha, cauliflower, herbs</span><span>Monterey Co.</span><span class="mono">142 mi</span></li>
+          <li><b>Westwind Soy</b><span>tofu, tempeh, miso</span><span>Alameda Co.</span><span class="mono">38 mi</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans" id="plans">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Plans &middot; no contract</p>
+        <h2>Price per plate drops as the box grows</h2>
+        <div class="calc">
+          <div><label for="ppl">People</label><select id="ppl"><option value="2" selected>2 people</option><option value="4">4 people</option></select></div>
+          <div><label for="meals">Recipes / week</label><select id="meals"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>
+          <div><output id="total">$59.40</output><span class="per" id="per">$9.90 / plate &middot; 6 plates &middot; shipping free</span></div>
+        </div>
+        <table id="prices">
+          <thead><tr><th>Per plate</th><th>2 recipes</th><th>3 recipes</th><th>4 recipes</th><th>5 recipes</th></tr></thead>
+          <tbody>
+            <tr><td><b>2 people</b><small>4&ndash;10 plates a week</small></td><td class="n">$11.40</td><td class="n">$9.90</td><td class="n">$9.40</td><td class="n">$9.10</td></tr>
+            <tr><td><b>4 people</b><small>8&ndash;20 plates a week</small></td><td class="n">$9.90</td><td class="n">$9.40</td><td class="n">$9.10</td><td class="n">$8.90</td></tr>
+          </tbody>
+        </table>
+        <div class="actions" style="margin-top:28px"><a class="btn primary" href="#">Start with week 46</a><span class="mono">first box 40% off &middot; cancel in two clicks</span></div>
+      </div>
+      <aside class="faq">
+        <h3>Before you order</h3>
+        <details open><summary>Can I skip a week?</summary><p>Yes, any week, up to Sunday 23:59. Skipped weeks cost nothing.</p></details>
+        <details><summary>Is it fully vegan?</summary><p>Every ingredient, including sauces, wine in the cassoulet and the sugar in the pickles. Certified by Vegan Action.</p></details>
+        <details><summary>What about nut allergies?</summary><p>Tree nuts and peanuts are packed on a separate line; recipes are tagged in the menu.</p></details>
+        <details><summary>What do I do with the box?</summary><p>Paper box and ice pack go in recycling; liners and sachets in compost.</p></details>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <div><a class="logo" href="#">Furrow</a><p class="mono">Petaluma, CA &middot; packing kitchen open to visitors Saturdays</p></div>
+    <ul><li><a href="#menu">Menu</a></li><li><a href="#farms">Farms</a></li><li><a href="#plans">Plans</a></li></ul>
+    <ul><li>hello@furrow.example</li><li>(707) 555-0146</li><li>&copy; 2026 Furrow Kitchens</li></ul>
+  </div>
+</footer>
+<script>
+const price={2:{2:11.4,3:9.9,4:9.4,5:9.1},4:{2:9.9,3:9.4,4:9.1,5:8.9}};
+const ppl=document.getElementById('ppl'),meals=document.getElementById('meals');
+function update(){
+  const p=+ppl.value,m=+meals.value,each=price[p][m],plates=p*m;
+  document.getElementById('total').textContent='$'+(each*plates).toFixed(2);
+  document.getElementById('per').textContent='$'+each.toFixed(2)+' / plate · '+plates+' plates · shipping free';
+  document.querySelectorAll('#prices tbody tr').forEach((tr,i)=>tr.querySelectorAll('td').forEach((td,j)=>td.classList.toggle('on',i===(p===2?0:1)&&j===m-1)));
+}
+ppl.onchange=meals.onchange=update;update();
+</script>
+</body>
+</html>

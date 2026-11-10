@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fallow — Clothes from what was already here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,500;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9df;--paper2:#e4dccd;--ink:#1f1d1a;--muted:#6b645a;--rust:#a4472a;--moss:#4f5a3a;--line:#1f1d1a33;
+  --serif:"Newsreader",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px}
+hr{border:0;border-top:1px solid var(--line)}
+
+header{display:flex;justify-content:space-between;align-items:baseline;padding:22px 32px;border-bottom:1px solid var(--ink)}
+.logo{font-size:28px;font-weight:500;letter-spacing:-.02em;text-decoration:none}
+.logo i{color:var(--rust);font-weight:300}
+nav{display:flex;gap:28px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--rust)}
+
+.hero{display:grid;grid-template-columns:7fr 5fr;min-height:82vh;border-bottom:1px solid var(--ink)}
+.hero-text{padding:72px 48px 48px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--ink)}
+.hero h1{font-weight:300;font-size:clamp(56px,8.4vw,132px);line-height:.9;letter-spacing:-.035em}
+.hero h1 em{color:var(--rust)}
+.hero-foot{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-top:48px}
+.hero-foot p{max-width:30ch;font-size:21px}
+.btn{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:16px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.hero-art{position:relative;background:var(--moss);overflow:hidden;display:grid;place-items:center}
+.weave{position:absolute;inset:0;opacity:.35;background:
+  repeating-linear-gradient(0deg,#0000 0 6px,#ffffff22 6px 7px),
+  repeating-linear-gradient(90deg,#0000 0 6px,#00000033 6px 7px)}
+.tag{position:relative;width:min(300px,70%);background:var(--paper);padding:28px 24px 24px;transform:rotate(-4deg);box-shadow:0 30px 60px -20px #0006}
+.tag:before{content:"";position:absolute;top:14px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--moss);box-shadow:inset 0 0 0 3px var(--paper2)}
+.tag h3{font-weight:500;font-size:26px;margin:22px 0 14px;line-height:1.1}
+.tag dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-family:var(--mono);font-size:12px}
+.tag dt{color:var(--muted)}
+.tag .stamp{margin-top:18px;padding-top:12px;border-top:1px dashed var(--ink);display:flex;justify-content:space-between}
+
+.ticker{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink)}
+.ticker div{padding:28px 32px;border-right:1px solid var(--line)}
+.ticker div:last-child{border-right:0}
+.ticker b{display:block;font-weight:300;font-size:56px;letter-spacing:-.03em;line-height:1}
+.ticker span{color:var(--muted)}
+
+section{padding:120px 0}
+.sec-head{display:grid;grid-template-columns:1fr 2fr;gap:32px;margin-bottom:64px;align-items:start}
+.sec-head h2{font-weight:300;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.025em}
+.sec-head p{max-width:52ch;color:var(--muted);padding-top:8px}
+
+.ledger{width:100%;border-collapse:collapse}
+.ledger th{text-align:left;font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 12px 14px 0;border-bottom:1px solid var(--ink)}
+.ledger td{padding:22px 12px 22px 0;border-bottom:1px solid var(--line);vertical-align:middle}
+.ledger td:first-child{font-size:28px;font-weight:300}
+.ledger tr:hover td{background:var(--paper2)}
+.bar{height:6px;background:var(--paper2);position:relative;min-width:140px}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--rust)}
+.ledger .mono{white-space:nowrap}
+
+.collection{background:var(--ink);color:var(--paper)}
+.collection .sec-head p{color:#c9c1b4}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.piece{text-decoration:none;display:block}
+.piece:nth-child(1){grid-column:span 5}
+.piece:nth-child(2){grid-column:span 4;margin-top:120px}
+.piece:nth-child(3){grid-column:span 3;margin-top:40px}
+.piece:nth-child(4){grid-column:2 / span 4}
+.piece:nth-child(5){grid-column:span 6;margin-top:-80px}
+.swatch{aspect-ratio:3/4;position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.piece:nth-child(5) .swatch{aspect-ratio:4/3}
+.piece:hover .swatch{transform:scale(.97)}
+.swatch:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,#0000 0 3px,#ffffff10 3px 4px),repeating-linear-gradient(-45deg,#0000 0 3px,#00000018 3px 4px)}
+.s1{background:#b9a888}.s2{background:#5c4a3b}.s3{background:#8a3b25}.s4{background:#d8d2c4}.s5{background:linear-gradient(90deg,#3d4a35 0 33%,#6f7a58 33% 66%,#a3a184 66%)}
+.piece .meta{display:flex;justify-content:space-between;margin-top:14px;font-size:20px}
+.piece .meta .mono{color:#c9c1b4}
+
+.repair{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center}
+.steps{list-style:none;counter-reset:s;border-top:1px solid var(--ink)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:72px 1fr;padding:26px 0;border-bottom:1px solid var(--line)}
+.steps li:before{content:"0" counter(s);font-family:var(--mono);font-size:13px;color:var(--rust);padding-top:8px}
+.steps h4{font-weight:500;font-size:26px;line-height:1.2}
+.steps p{color:var(--muted);margin-top:4px}
+.quote{font-size:clamp(30px,3.4vw,46px);font-weight:300;font-style:italic;line-height:1.15;letter-spacing:-.015em}
+.quote cite{display:block;margin-top:24px;font-style:normal}
+
+.join{border-top:1px solid var(--ink);padding:96px 0}
+.join .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end}
+.join h2{font-weight:300;font-size:clamp(44px,6vw,96px);line-height:.95;letter-spacing:-.03em}
+form{display:flex;border-bottom:1px solid var(--ink)}
+form input{flex:1;border:0;background:transparent;font:inherit;font-size:24px;padding:14px 0;color:var(--ink);outline:none}
+form input::placeholder{color:var(--muted)}
+form button{border:0;background:none;cursor:pointer;color:var(--rust)}
+.ok{margin-top:12px;color:var(--moss);min-height:1.5em}
+
+footer{background:var(--paper2);padding:40px 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--muted)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  header{padding:18px 20px}
+  nav a:not(:last-child){display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-text{border-right:0;border-bottom:1px solid var(--ink);padding:48px 20px 32px}
+  .hero-foot{flex-direction:column;align-items:start}
+  .hero-art{min-height:420px}
+  .ticker{grid-template-columns:1fr 1fr}
+  .ticker div{padding:20px}
+  .ticker div:nth-child(2){border-right:0}
+  .ticker div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  section{padding:72px 0}
+  .sec-head,.repair,.join .wrap{grid-template-columns:1fr}
+  .ledger th:nth-child(3),.ledger td:nth-child(3){display:none}
+  .grid{grid-template-columns:1fr 1fr}
+  .piece:nth-child(n){grid-column:span 1;margin-top:0}
+  .piece:nth-child(5){grid-column:1 / -1}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">Fallow<i>.</i></a>
+  <nav class="mono">
+    <a href="#materials">Materials</a>
+    <a href="#collection">AW26</a>
+    <a href="#repair">Repair</a>
+    <a href="#join">Join</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" style="padding:0">
+  <div class="hero-text">
+    <p class="mono">Autumn / Winter 2026 &mdash; 212 pieces, no reprints</p>
+    <h1>Clothes cut from what was <em>already</em> here.</h1>
+    <div class="hero-foot">
+      <p>We buy the bolts mills couldn't sell, undyed wool farmers couldn't place, and sew them in Porto. When a cloth runs out, so does the garment.</p>
+      <a class="btn" href="#collection">See the collection</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="weave"></div>
+    <div class="tag">
+      <p class="mono">No. 0417 / 0212</p>
+      <h3>Field coat in deadstock melton</h3>
+      <dl>
+        <dt>Cloth</dt><dd>Melton, 80% wool</dd>
+        <dt>From</dt><dd>Biella mill, 2019 overrun</dd>
+        <dt>Sewn</dt><dd>Atelier Bonfim, Porto</dd>
+        <dt>Hours</dt><dd>11.5</dd>
+        <dt>Dye</dt><dd>None added</dd>
+      </dl>
+      <div class="stamp mono"><span>Repair for life</span><span>&#9675;</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div><b>94%</b><span>of our cloth is deadstock or reclaimed</span></div>
+  <div><b>0</b><span>new dye baths this season</span></div>
+  <div><b>1,380</b><span>garments mended since 2021</span></div>
+  <div><b>3</b><span>workshops, all within 40 km</span></div>
+</div>
+
+<section id="materials">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>The cloth ledger</h2>
+      <p>Every fabric we sew, where it came from, and how much of it is left. When a row hits zero we don't reorder &mdash; the pattern retires with it.</p>
+    </div>
+    <table class="ledger reveal">
+      <thead><tr><th>Cloth</th><th>Origin</th><th>Notes</th><th>Remaining</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>Melton wool</td><td class="mono">Biella, IT</td><td>2019 mill overrun, natural oat</td><td><div class="bar"><i style="width:38%"></i></div></td><td class="mono">142 m</td></tr>
+        <tr><td>Selvedge denim</td><td class="mono">Okayama, JP</td><td>Ends of rolls, unwashed</td><td><div class="bar"><i style="width:12%"></i></div></td><td class="mono">40 m</td></tr>
+        <tr><td>Undyed Jacob wool</td><td class="mono">Wales, UK</td><td>Fleece from four smallholdings</td><td><div class="bar"><i style="width:71%"></i></div></td><td class="mono">310 kg</td></tr>
+        <tr><td>Linen canvas</td><td class="mono">Flanders, BE</td><td>Reclaimed upholstery stock</td><td><div class="bar"><i style="width:54%"></i></div></td><td class="mono">208 m</td></tr>
+        <tr><td>Cotton poplin</td><td class="mono">Guimar&atilde;es, PT</td><td>Shirting seconds, minor flaws</td><td><div class="bar"><i style="width:4%"></i></div></td><td class="mono">9 m</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="collection" id="collection">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>AW26, in five cloths</h2>
+      <p>Small runs, numbered by hand. Sizes are cut until the bolt is gone, so if yours is missing, it isn't coming back.</p>
+    </div>
+    <div class="grid">
+      <a class="piece reveal" href="#"><div class="swatch s1"></div><div class="meta"><span>Field coat</span><span class="mono">&euro;540 &middot; 18 left</span></div></a>
+      <a class="piece reveal" href="#"><div class="swatch s2"></div><div class="meta"><span>Workshirt</span><span class="mono">&euro;160 &middot; 42 left</span></div></a>
+      <a class="piece reveal" href="#"><div class="swatch s3"></div><div class="meta"><span>Wrap skirt</span><span class="mono">&euro;190 &middot; 7 left</span></div></a>
+      <a class="piece reveal" href="#"><div class="swatch s4"></div><div class="meta"><span>Jacob crew</span><span class="mono">&euro;220 &middot; 60 left</span></div></a>
+      <a class="piece reveal" href="#"><div class="swatch s5"></div><div class="meta"><span>Patchwork trouser, three linens</span><span class="mono">&euro;210 &middot; 25 left</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section id="repair">
+  <div class="wrap repair">
+    <blockquote class="quote reveal">
+      &ldquo;The most sustainable coat is the one you already own. Our job is to keep it that way.&rdquo;
+      <cite class="mono">&mdash; In&ecirc;s Calado, founder</cite>
+    </blockquote>
+    <div class="reveal">
+      <ol class="steps">
+        <li><div><h4>Send it back, any year</h4><p>Prepaid label inside every garment. No receipt needed.</p></div></li>
+        <li><div><h4>We mend it with its own cloth</h4><p>Offcuts from each bolt are kept for patches and new cuffs.</p></div></li>
+        <li><div><h4>Or we take it apart</h4><p>Outgrown pieces are credited and recut into smaller goods.</p></div></li>
+      </ol>
+      <p style="margin-top:32px"><a class="btn ghost" href="#join">Start a repair</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <h2>Hear when a cloth arrives.</h2>
+    <div>
+      <p style="color:var(--muted);margin-bottom:20px">One letter a season. What we found, what we'll make, how much there is.</p>
+      <form id="f">
+        <label for="email" class="mono" style="position:absolute;left:-9999px">Email</label>
+        <input id="email" type="email" required placeholder="your@email">
+        <button class="mono" type="submit">Subscribe &rarr;</button>
+      </form>
+      <p class="ok mono" id="ok" role="status"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="mono">
+  <span>Fallow Studio &middot; Rua do Bonfim 88, Porto</span>
+  <span>Ledger updated weekly</span>
+  <span>&copy; 2026</span>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').textContent='Noted. First letter arrives with the next bolt.';e.target.reset()});
+</script>
+</body>
+</html>

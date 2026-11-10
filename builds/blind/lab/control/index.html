@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halvorsen Lab — Computational Ecology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f1ea;--ink:#1b1a17;--mute:#6b665c;--rule:#cfc8b8;--accent:#b4381f;--max:1180px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:18px/1.55 "Newsreader",Georgia,serif}
+a{color:inherit}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.02em;text-transform:uppercase}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+header nav{display:flex;gap:28px}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--accent)}
+.hero{display:grid;grid-template-columns:2fr 1fr;border-bottom:1px solid var(--ink)}
+.hero h1{font-weight:400;font-size:clamp(48px,8vw,112px);line-height:.95;letter-spacing:-.03em;padding:72px 48px 56px 0;border-right:1px solid var(--ink)}
+.hero h1 em{color:var(--accent)}
+.hero aside{padding:72px 0 56px 40px;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.hero aside p{font-size:20px}
+.fig{border:1px solid var(--ink);aspect-ratio:4/3;position:relative;background:#fbf9f4}
+.fig canvas{width:100%;height:100%;display:block}
+.fig .cap{position:absolute;left:10px;bottom:8px;color:var(--mute)}
+.ticker{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink)}
+.ticker div{padding:28px 24px;border-right:1px solid var(--rule)}
+.ticker div:last-child{border-right:0}
+.ticker b{display:block;font-size:44px;font-weight:400;line-height:1}
+.ticker span{color:var(--mute)}
+section{padding:96px 0;border-bottom:1px solid var(--ink)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-bottom:56px}
+.sec-head h2{font-weight:400;font-size:44px;line-height:1.05;letter-spacing:-.02em;max-width:18ch}
+.themes{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.themes ol{list-style:none;border-top:1px solid var(--ink)}
+.themes li{display:grid;grid-template-columns:60px 1fr 1.3fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--rule);cursor:default;transition:background .2s}
+.themes li:hover{background:#ebe6da}
+.themes li h3{font-weight:600;font-size:24px;line-height:1.2}
+.themes li p{color:var(--mute)}
+.pubs{display:grid;grid-template-columns:200px 1fr;gap:40px}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.filter button{font:inherit;background:none;border:1px solid var(--ink);padding:6px 12px;cursor:pointer}
+.filter button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.pub{display:grid;grid-template-columns:70px 1fr auto;gap:24px;padding:20px 0;border-top:1px solid var(--rule)}
+.pub i{color:var(--mute)}
+.pub a{color:var(--accent);text-decoration:none;white-space:nowrap}
+.people{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.person{border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:20px}
+.avatar{aspect-ratio:1;background:repeating-linear-gradient(135deg,#e2dccd 0 6px,#ece7db 6px 12px);margin-bottom:16px;display:grid;place-items:center;font-size:48px;color:var(--mute)}
+.person h4{font-weight:600;font-size:20px}
+.person p{color:var(--mute);font-size:16px}
+.join{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
+.join h2{font-weight:400;font-size:clamp(40px,6vw,80px);line-height:1;letter-spacing:-.03em}
+.join ul{list-style:none}
+.join li{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--rule)}
+.join li:first-child{border-top:1px solid var(--ink)}
+footer{padding:40px 0}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--mute)}
+@media(max-width:860px){
+.wrap{padding:0 16px}
+header nav{display:none}
+.hero,.join{grid-template-columns:1fr}
+.hero h1{border-right:0;border-bottom:1px solid var(--ink);padding:48px 0 32px}
+.hero aside{padding:32px 0 48px}
+.ticker{grid-template-columns:1fr 1fr}
+.ticker div:nth-child(2){border-right:0}
+.ticker div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+.sec-head,.themes,.pubs{grid-template-columns:1fr;gap:16px}
+.themes li{grid-template-columns:40px 1fr}
+.themes li p{grid-column:2}
+.pub{grid-template-columns:50px 1fr}
+.pub a{grid-column:2}
+.people{grid-template-columns:1fr 1fr}
+section{padding:64px 0}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a href="#" class="mono" style="text-decoration:none"><b>Halvorsen Lab</b> / Dept. of Biology</a>
+<nav class="mono"><a href="#research">Research</a><a href="#publications">Papers</a><a href="#people">People</a><a href="#join">Join</a></nav>
+</div></header>
+
+<div class="wrap hero">
+<h1>How do forests <em>remember</em> drought?</h1>
+<aside>
+<p>We build models of how ecosystems carry the memory of past stress — from root networks to satellite canopies — and test them in 40 field plots across three continents.</p>
+<div class="fig"><canvas id="plot" aria-label="Animated canopy water-stress time series"></canvas><span class="cap mono">Fig. 1 — canopy stress index, plot 17</span></div>
+</aside>
+</div>
+
+<div class="wrap ticker mono">
+<div><b>40</b><span>field plots</span></div>
+<div><b>14</b><span>researchers</span></div>
+<div><b>62</b><span>papers since 2016</span></div>
+<div><b>3.1 PB</b><span>open data</span></div>
+</div>
+
+<section id="research"><div class="wrap themes">
+<span class="mono">§1 Research</span>
+<ol>
+<li><span class="mono">01</span><h3>Hydraulic legacy</h3><p>Measuring how xylem damage from one dry summer shapes growth for the next decade.</p></li>
+<li><span class="mono">02</span><h3>Mycorrhizal signalling</h3><p>Tracing carbon and stress cues through fungal networks with isotope labelling.</p></li>
+<li><span class="mono">03</span><h3>Canopy from orbit</h3><p>Fusing Sentinel-2 and lidar to detect stress weeks before visible dieback.</p></li>
+<li><span class="mono">04</span><h3>Forecasting mortality</h3><p>Probabilistic models that turn plot data into regional risk maps for forest managers.</p></li>
+</ol>
+</div></section>
+
+<section id="publications"><div class="wrap pubs">
+<span class="mono">§2 Selected papers</span>
+<div>
+<div class="filter mono" role="group" aria-label="Filter by year">
+<button aria-pressed="true" data-y="all">All</button><button aria-pressed="false" data-y="2026">2026</button><button aria-pressed="false" data-y="2025">2025</button><button aria-pressed="false" data-y="2024">2024</button>
+</div>
+<div id="publist">
+<div class="pub" data-y="2026"><span class="mono">2026</span><div>Drought legacy decays non-linearly in temperate beech. <i>Nature Ecology &amp; Evolution</i></div><a class="mono" href="#">PDF ↗</a></div>
+<div class="pub" data-y="2026"><span class="mono">2026</span><div>A shared stress clock across mycorrhizal partners. <i>New Phytologist</i></div><a class="mono" href="#">PDF ↗</a></div>
+<div class="pub" data-y="2025"><span class="mono">2025</span><div>Early-warning canopy indices from multispectral time series. <i>Remote Sensing of Environment</i></div><a class="mono" href="#">PDF ↗</a></div>
+<div class="pub" data-y="2025"><span class="mono">2025</span><div>Open plot network protocol, v3. <i>Ecological Applications</i></div><a class="mono" href="#">Data ↗</a></div>
+<div class="pub" data-y="2024"><span class="mono">2024</span><div>Hydraulic memory and the limits of recovery. <i>PNAS</i></div><a class="mono" href="#">PDF ↗</a></div>
+</div>
+</div>
+</div></section>
+
+<section id="people"><div class="wrap">
+<div class="sec-head"><span class="mono">§3 People</span><h2>Ecologists, physicists and one very patient field technician.</h2></div>
+<div class="people">
+<div class="person"><div class="avatar">IH</div><h4>Ingrid Halvorsen</h4><p>Principal Investigator</p></div>
+<div class="person"><div class="avatar">TO</div><h4>Tomás Okafor</h4><p>Postdoc, remote sensing</p></div>
+<div class="person"><div class="avatar">ML</div><h4>Mei Lin</h4><p>PhD, mycorrhizal networks</p></div>
+<div class="person"><div class="avatar">RB</div><h4>Rafael Bauer</h4><p>Field &amp; lab manager</p></div>
+</div>
+</div></section>
+
+<section id="join"><div class="wrap join">
+<h2>We're hiring two PhD students for autumn 2027.</h2>
+<ul class="mono">
+<li><span>PhD — Forecasting mortality</span><a href="#">Apply ↗</a></li>
+<li><span>PhD — Fungal signalling</span><a href="#">Apply ↗</a></li>
+<li><span>Summer field interns</span><a href="#">Apply ↗</a></li>
+<li><span>Contact</span><a href="mailto:lab@example.edu">lab@example.edu</a></li>
+</ul>
+</div></section>
+
+<footer><div class="wrap mono">
+<span>Halvorsen Lab, Room 3.14, Life Sciences Building</span>
+<span>Funded by ERC &amp; national research council</span>
+</div></footer>
+
+<script>
+document.querySelectorAll('.filter button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.filter button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  document.querySelectorAll('.pub').forEach(p=>p.hidden=b.dataset.y!=='all'&&p.dataset.y!==b.dataset.y);
+});
+const c=document.getElementById('plot'),g=c.getContext('2d');
+let t=0;
+function draw(){
+  const w=c.width=c.clientWidth*devicePixelRatio,h=c.height=c.clientHeight*devicePixelRatio;
+  g.strokeStyle='#cfc8b8';g.lineWidth=1;
+  for(let i=1;i<6;i++){g.beginPath();g.moveTo(0,h*i/6);g.lineTo(w,h*i/6);g.stroke()}
+  g.strokeStyle='#1b1a17';g.lineWidth=1.5*devicePixelRatio;g.beginPath();
+  for(let x=0;x<=w;x+=2){const u=x/w*12+t;const y=h*(.5+.18*Math.sin(u)+.08*Math.sin(u*2.7)-.12*Math.exp(-((u%12)-7)**2));x?g.lineTo(x,y):g.moveTo(x,y)}
+  g.stroke();
+  g.fillStyle='#b4381f';const px=w*.7,u=.7*12+t;
+  g.beginPath();g.arc(px,h*(.5+.18*Math.sin(u)+.08*Math.sin(u*2.7)-.12*Math.exp(-((u%12)-7)**2)),4*devicePixelRatio,0,7);g.fill();
+}
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function loop(){draw();if(!still){t+=.01;requestAnimationFrame(loop)}})();
+addEventListener('resize',draw);
+</script>
+</body>
+</html>

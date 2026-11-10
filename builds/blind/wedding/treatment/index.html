@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mara Ilves — Wedding Photographs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9de; --paper2:#e4dccd; --ink:#1c1915; --ink2:#4a443b; --ox:#7b2d21; --rule:#c9bfae;
+  --serif:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans:"Hanken Grotesk", "Gill Sans", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+  --r:28px; --gut:48px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em;text-transform:uppercase}
+.frame{background:var(--paper2);border-radius:var(--r);overflow:hidden}
+em{font-style:italic;color:var(--ox)}
+
+header{display:flex;align-items:baseline;gap:32px;padding:20px var(--gut);border-bottom:1px solid var(--rule)}
+header .name{font-family:var(--serif);font-size:26px;line-height:1}
+header nav{display:flex;gap:24px;margin-left:auto}
+header nav a{text-decoration:none;font-size:14px}
+header nav a:hover{color:var(--ox)}
+header .book{font-size:14px;font-weight:600;color:var(--ox)}
+
+/* 1 hero */
+.hero{display:grid;grid-template-columns:7fr 5fr;gap:var(--gut);padding:40px var(--gut) 64px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,9.6vw,144px);line-height:.88;letter-spacing:-.02em;margin:28px 0 36px}
+.hero .lede{display:grid;grid-template-columns:3fr 2fr;gap:32px;max-width:820px}
+.hero .lede p{font-size:17px;line-height:1.6}
+.hero .lede p+p{font-size:14px;color:var(--ink2)}
+.stats{display:flex;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);margin-top:40px;max-width:820px}
+.stats div{flex:1 1 auto;padding:14px 18px 14px 0}
+.stats div+div{padding-left:18px}
+.stats b{display:block;font-family:var(--serif);font-weight:400;font-size:46px;line-height:1}
+.stats span{font-size:12px;color:var(--ink2)}
+.cta-row{display:flex;gap:16px;align-items:center;margin-top:32px}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;padding:15px 24px;border-radius:6px;font-weight:600;font-size:14px;border:0;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--ox)}
+.cta-row .note{font-size:13px;color:var(--ink2)}
+.hero .shot{display:flex;flex-direction:column;gap:10px}
+.hero .shot .frame{height:780px}
+.hero .shot figcaption{display:flex;justify-content:space-between;color:var(--ink2)}
+
+/* 2 band */
+.band{position:relative;width:100%;height:700px;background:var(--ink)}
+.band img{position:absolute;inset:0}
+.band .cap{position:absolute;right:var(--gut);bottom:48px;width:400px;background:var(--paper);border-radius:var(--r);padding:28px 30px}
+.band .cap p{font-family:var(--serif);font-size:30px;line-height:1.12}
+.band .cap .mono{display:flex;justify-content:space-between;margin-top:18px;color:var(--ink2)}
+
+/* 3 timeline */
+.day{display:grid;grid-template-columns:8fr 4fr;gap:var(--gut);padding:96px var(--gut)}
+.kicker{display:flex;gap:14px;color:var(--ox);margin-bottom:18px}
+h2{font-family:var(--serif);font-weight:400;font-size:84px;line-height:.95;letter-spacing:-.015em;margin-bottom:22px}
+.day .intro{max-width:600px;font-size:16px;margin-bottom:36px}
+.log{border-top:1px solid var(--ink)}
+.log li{list-style:none;display:grid;grid-template-columns:90px 1fr 120px;gap:20px;padding:14px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.log li .t{font-family:var(--mono);font-size:13px;color:var(--ox)}
+.log li strong{font-weight:600;display:block}
+.log li span.d{font-size:14px;color:var(--ink2)}
+.log li .f{font-family:var(--mono);font-size:12px;text-align:right;color:var(--ink2)}
+.day aside{display:flex;flex-direction:column;gap:12px;position:sticky;top:24px;align-self:start}
+.day aside .frame{height:620px}
+.day aside .frame.sm{height:300px}
+.day aside p{font-size:13px;color:var(--ink2)}
+
+/* 4 index */
+.index{display:grid;grid-template-columns:4fr 8fr;gap:var(--gut);margin:0 16px;padding:88px calc(var(--gut) - 16px);background:var(--ink);color:var(--paper);border-radius:var(--r)}
+.index .pics{display:flex;flex-direction:column;gap:14px}
+.index .pics .frame{background:#2b2620}
+.index .pics .a{height:520px}
+.index .pics .b{height:340px}
+.index .pics p{font-size:13px;color:#b9ae9c}
+.index h2{color:var(--paper)}
+.index .kicker{color:#d98b6e}
+.index .intro{color:#cfc5b4;max-width:640px;margin-bottom:32px;font-size:16px}
+table{width:100%;border-collapse:collapse}
+th{font-family:var(--mono);font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:.04em;text-align:left;color:#a39883;padding:0 12px 10px 0;border-bottom:1px solid var(--paper)}
+td{padding:13px 12px 13px 0;border-bottom:1px solid #3d372f;vertical-align:baseline;font-size:14px}
+td:first-child{font-family:var(--mono);font-size:12px;color:#d98b6e;white-space:nowrap}
+td.n{font-family:var(--mono);font-size:12px;text-align:right}
+th.n{text-align:right}
+td .couple{font-family:var(--serif);font-size:22px;line-height:1.1}
+td small{display:block;color:#a39883;font-size:12px}
+.index .foot{display:flex;justify-content:space-between;margin-top:18px;color:#a39883}
+
+/* 5 collections */
+.coll{display:grid;grid-template-columns:8fr 4fr;gap:var(--gut);padding:104px var(--gut) 88px}
+.coll .intro{max-width:620px;font-size:16px;margin-bottom:36px}
+.tier{display:grid;grid-template-columns:200px 1fr 150px;gap:28px;padding:28px 0;border-top:1px solid var(--ink)}
+.tier:last-of-type{border-bottom:1px solid var(--ink)}
+.tier h3{font-family:var(--serif);font-weight:400;font-size:44px;line-height:1}
+.tier h3 + .mono{color:var(--ink2);margin-top:8px}
+.tier p{font-size:15px;margin-bottom:12px}
+.tier ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.tier ul li{font-size:13.5px;padding-left:16px;position:relative;color:var(--ink2)}
+.tier ul li::before{content:"—";position:absolute;left:0;color:var(--ox)}
+.tier .price{text-align:right}
+.tier .price b{display:block;font-family:var(--serif);font-weight:400;font-size:40px;line-height:1}
+.tier .price span{font-size:12px;color:var(--ink2)}
+.coll .addons{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px;font-size:13.5px;color:var(--ink2)}
+.coll .addons b{color:var(--ink);font-weight:600}
+.coll aside{display:flex;flex-direction:column;gap:12px}
+.coll aside .frame{height:760px}
+.coll aside p{font-size:13px;color:var(--ink2)}
+
+/* 6 questions */
+.ask{display:grid;grid-template-columns:4fr 8fr;gap:var(--gut);padding:40px var(--gut) 96px}
+.ask .pics{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:440px 300px 360px;gap:12px}
+.ask .pics .frame:nth-child(1){grid-column:1 / 3}
+.ask .pics .frame:nth-child(4){grid-column:1 / 3}
+.ask .cols{display:grid;grid-template-columns:7fr 5fr;gap:40px}
+.faq{border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--rule);padding:15px 0}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--ox)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:8px;font-size:14px;color:var(--ink2)}
+form{background:var(--paper2);border-radius:var(--r);padding:30px;display:flex;flex-direction:column;gap:14px;align-self:start}
+form h3{font-family:var(--serif);font-weight:400;font-size:38px;line-height:1}
+form p.s{font-size:13px;color:var(--ink2)}
+label{display:flex;flex-direction:column;gap:5px;font-size:12px;font-family:var(--mono);text-transform:uppercase;color:var(--ink2)}
+input,select,textarea{font:15px var(--sans);color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:11px 12px}
+textarea{min-height:90px;resize:vertical}
+.pair{display:grid;grid-template-columns:3fr 2fr;gap:12px}
+form .ok{font-size:13px;color:var(--ox);min-height:20px}
+
+/* 7 strip */
+.strip{display:flex;gap:12px;padding:0 var(--gut) 72px}
+.strip .frame{height:380px}
+.strip .frame:nth-child(1){flex:5}
+.strip .frame:nth-child(2){flex:3}
+.strip .frame:nth-child(3){flex:4.2}
+.strip .frame:nth-child(4){flex:2.4}
+
+footer{display:grid;grid-template-columns:5fr 2fr 2fr 3fr;gap:var(--gut);padding:40px var(--gut) 48px;border-top:1px solid var(--ink);font-size:13.5px}
+footer .big{font-family:var(--serif);font-size:44px;line-height:1}
+footer h4{font-family:var(--mono);font-size:11px;font-weight:400;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
+footer ul{list-style:none}
+footer p{color:var(--ink2)}
+
+@media (max-width:900px){
+  :root{--gut:16px;--r:20px}
+  header{flex-wrap:wrap;gap:12px}
+  header nav{margin-left:0;flex-wrap:wrap;gap:14px}
+  .hero,.day,.index,.coll,.ask,.ask .cols,footer{grid-template-columns:1fr}
+  .hero .lede{grid-template-columns:1fr}
+  .hero .shot .frame{height:520px}
+  .stats{flex-wrap:wrap}
+  .stats b{font-size:34px}
+  h2{font-size:52px}
+  .band{height:560px}
+  .band .cap{left:16px;right:16px;width:auto;bottom:16px}
+  .band .cap p{font-size:22px}
+  .day aside{position:static}
+  .day aside .frame{height:420px}
+  .log li{grid-template-columns:70px 1fr}
+  .log li .f{grid-column:2;text-align:left}
+  .index{margin:0;border-radius:0;padding:64px 16px}
+  .index table{display:block;overflow-x:auto}
+  .tier{grid-template-columns:1fr;gap:12px}
+  .tier .price{text-align:left}
+  .tier ul{grid-template-columns:1fr}
+  .coll aside .frame{height:460px}
+  .strip{flex-wrap:wrap}
+  .strip .frame{flex:1 1 40% !important;height:220px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="name">Mara Ilves</span>
+  <span class="mono">Wedding photographs · Tallinn &amp; anywhere by train</span>
+  <nav>
+    <a href="#day">The day</a>
+    <a href="#index">Index</a>
+    <a href="#collections">Collections</a>
+    <a href="#ask">Questions</a>
+    <a href="#ask" class="book">2027 dates — 9 left</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div>
+    <div class="kicker mono"><span>Nº 214</span><span>Documentary coverage, since 2013</span></div>
+    <h1>The whole day, <em>as it went.</em></h1>
+    <div class="lede">
+      <p>I photograph weddings from the first coffee to the last taxi, without staging the in‑between. You get the speech your uncle shouldn't have given, the grandmother who left early, the four minutes of rain — sequenced, edited, and delivered as a book you'll actually open.</p>
+      <p>No posed "getting ready" shots, no drone, no confetti cannons. One shooter on film and digital, a second for weddings over 90 guests. Around 110 frames delivered per hour of coverage.</p>
+    </div>
+    <div class="stats">
+      <div><b>214</b><span>weddings filed since 2013</span></div>
+      <div><b>6 wk</b><span>to the full gallery</span></div>
+      <div><b>~900</b><span>frames per 8‑hour day</span></div>
+      <div><b>18</b><span>countries, mostly by rail</span></div>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="#ask">Check your date</a>
+      <span class="note">Reply within two working days. €600 holds the date.</span>
+    </div>
+  </div>
+  <figure class="shot">
+    <div class="frame"><img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=1200&q=72" alt="Black and white photograph of a couple kissing as wind lifts the veil"></div>
+    <figcaption class="mono"><span>Frame 0412</span><span>Pärnu, 16:52</span></figcaption>
+  </figure>
+</section>
+
+<section class="band" aria-label="Featured photograph">
+  <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=2400&q=72" alt="A couple walking across a hill at dusk, small against the landscape">
+  <div class="cap">
+    <p>"We'd forgotten we walked off for ten minutes. She hadn't — she was a hill away with a long lens."</p>
+    <div class="mono"><span>Liis &amp; Tomas</span><span>Frame 0731 · 20:14</span></div>
+  </div>
+</section>
+
+<section class="day" id="day">
+  <div>
+    <div class="kicker mono"><span>01</span><span>How a day is covered</span></div>
+    <h2>Ten hours, <em>logged.</em></h2>
+    <p class="intro">Every wedding is filed as a timeline. This is a real one — 112 guests, a church ceremony and a barn dinner forty minutes away — with the frames that made the final edit beside each hour.</p>
+    <ol class="log">
+      <li><span class="t">10:30</span><div><strong>Arrival, no announcement</strong><span class="d">I walk in with the hairdresser. Kitchen, coffee, siblings arguing about shoes.</span></div><span class="f">46 frames</span></li>
+      <li><span class="t">11:45</span><div><strong>Details, only the real ones</strong><span class="d">The rings stay where they're left. Letters get photographed if they're read.</span></div><span class="f">22 frames</span></li>
+      <li><span class="t">13:00</span><div><strong>Leaving the house</strong><span class="d">Neighbours at windows, father checking the car twice.</span></div><span class="f">38 frames</span></li>
+      <li><span class="t">14:00</span><div><strong>Ceremony</strong><span class="d">Silent shutter, back third of the room, one move during the readings.</span></div><span class="f">124 frames</span></li>
+      <li><span class="t">14:50</span><div><strong>Receiving line &amp; confetti</strong><span class="d">The second shooter takes the doorway; I stay with the parents.</span></div><span class="f">97 frames</span></li>
+      <li><span class="t">15:40</span><div><strong>Family groups — 20 minutes, a list</strong><span class="d">You send me eight groupings in advance. I call names; it's done before the drinks warm.</span></div><span class="f">31 frames</span></li>
+      <li><span class="t">16:30</span><div><strong>Walk with the two of you</strong><span class="d">Fifteen minutes, wherever's nearest. I mostly stay out of earshot.</span></div><span class="f">58 frames</span></li>
+      <li><span class="t">17:30</span><div><strong>Dinner &amp; speeches</strong><span class="d">Wide and long lenses on the listeners, not the speaker.</span></div><span class="f">142 frames</span></li>
+      <li><span class="t">20:15</span><div><strong>First dance, then everyone</strong><span class="d">One off‑camera flash, bounced. No video lights in people's eyes.</span></div><span class="f">168 frames</span></li>
+      <li><span class="t">22:30</span><div><strong>Last frames</strong><span class="d">The coats, the shoes in hand, whoever stayed to stack chairs.</span></div><span class="f">41 frames</span></li>
+    </ol>
+  </div>
+  <aside>
+    <div class="frame"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=72" alt="A couple kissing under falling petals, bridesmaids laughing beside them"></div>
+    <div class="frame sm"><img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=900&q=72" alt="Close photograph of joined hands and a bouquet of peach roses"></div>
+    <p class="mono">Frames 0388 &amp; 0102 · 767 delivered from 2,940 taken</p>
+  </aside>
+</section>
+
+<section class="index" id="index">
+  <div class="pics">
+    <div class="frame a"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=900&q=72" alt="A couple on a pebble beach, her long veil blowing toward the sea"></div>
+    <div class="frame b"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=900&q=72" alt="Two hands reaching for each other, their shadows on the grass"></div>
+    <p class="mono">Hiiumaa, Sept 2025 · Frame 0544</p>
+  </div>
+  <div>
+    <div class="kicker mono"><span>02</span><span>Index of recent weddings</span></div>
+    <h2>The last <em>twelve.</em></h2>
+    <p class="intro">Every wedding I've shot in the past year, in order, including the small ones. Full galleries are shared with the couple's permission — ask and I'll send three that resemble yours.</p>
+    <table>
+      <colgroup><col style="width:13%"><col style="width:33%"><col style="width:26%"><col style="width:10%"><col style="width:9%"><col style="width:9%"></colgroup>
+      <thead><tr><th>Date</th><th>Couple</th><th>Venue</th><th class="n">Guests</th><th class="n">Hours</th><th class="n">Frames</th></tr></thead>
+      <tbody>
+        <tr><td>2026.10.17</td><td><span class="couple">Anu &amp; Rasmus</span><small>Rain from 15:00 — we used it</small></td><td>Kadriorg, Tallinn</td><td class="n">64</td><td class="n">7</td><td class="n">702</td></tr>
+        <tr><td>2026.09.26</td><td><span class="couple">Helena &amp; Joon</span><small>Two languages, three speeches</small></td><td>Sagadi Manor</td><td class="n">138</td><td class="n">10</td><td class="n">1,104</td></tr>
+        <tr><td>2026.09.05</td><td><span class="couple">Kristel &amp; Marco</span><small>Ferry ceremony, island dinner</small></td><td>Muhu</td><td class="n">52</td><td class="n">8</td><td class="n">781</td></tr>
+        <tr><td>2026.08.22</td><td><span class="couple">Liis &amp; Tomas</span><small>The hill walk, above</small></td><td>Otepää</td><td class="n">112</td><td class="n">10</td><td class="n">967</td></tr>
+        <tr><td>2026.08.08</td><td><span class="couple">Sofia &amp; Aleks</span><small>Courthouse, then lunch for 14</small></td><td>Riga Old Town</td><td class="n">14</td><td class="n">3</td><td class="n">318</td></tr>
+        <tr><td>2026.07.25</td><td><span class="couple">Maarja &amp; Ott</span><small>Midsummer barn, dancing till 2</small></td><td>Viljandi</td><td class="n">96</td><td class="n">10</td><td class="n">1,012</td></tr>
+        <tr><td>2026.07.11</td><td><span class="couple">Elina &amp; Sam</span><small>Elopement, sunrise, two witnesses</small></td><td>Lahemaa bog</td><td class="n">4</td><td class="n">3</td><td class="n">240</td></tr>
+        <tr><td>2026.06.27</td><td><span class="couple">Grete &amp; Pavel</span><small>Orthodox ceremony, 90 min</small></td><td>Narva</td><td class="n">120</td><td class="n">9</td><td class="n">944</td></tr>
+        <tr><td>2026.06.13</td><td><span class="couple">Kadi &amp; Jonas</span><small>Second wedding, kids as witnesses</small></td><td>Pärnu beach</td><td class="n">40</td><td class="n">6</td><td class="n">611</td></tr>
+        <tr><td>2026.05.30</td><td><span class="couple">Triin &amp; Mihkel</span><small>Lilacs, a brass band, a goat</small></td><td>Haapsalu</td><td class="n">88</td><td class="n">8</td><td class="n">836</td></tr>
+        <tr><td>2026.05.16</td><td><span class="couple">Laura &amp; Ben</span><small>Destination, by sleeper train</small></td><td>Kraków</td><td class="n">71</td><td class="n">9</td><td class="n">893</td></tr>
+        <tr><td>2026.04.25</td><td><span class="couple">Eva &amp; Indrek</span><small>Snow in April, nobody minded</small></td><td>Tartu</td><td class="n">58</td><td class="n">6</td><td class="n">590</td></tr>
+      </tbody>
+    </table>
+    <div class="foot mono"><span>12 weddings · 857 guests · 9,008 frames delivered</span><span>Median delivery: 5.4 weeks</span></div>
+  </div>
+</section>
+
+<section class="coll" id="collections">
+  <div>
+    <div class="kicker mono"><span>03</span><span>Collections, 2027</span></div>
+    <h2>Priced by the hour, <em>not the package.</em></h2>
+    <p class="intro">Three ways to book. All include the online gallery, full-resolution files, print rights, and a pre-wedding call to walk through your timeline. Travel inside Estonia is included; elsewhere I invoice train or flight at cost.</p>
+    <div class="tier">
+      <div><h3>Small</h3><div class="mono">Up to 30 guests</div></div>
+      <div>
+        <p>For courthouse ceremonies, elopements and long lunches. One shooter, one place, nothing missed.</p>
+        <ul><li>3 hours, one location</li><li>~300 edited frames</li><li>Gallery in 3 weeks</li><li>20 film frames (Portra 400)</li></ul>
+      </div>
+      <div class="price"><b>€1,450</b><span>€600 deposit</span></div>
+    </div>
+    <div class="tier">
+      <div><h3>Day</h3><div class="mono">Most couples book this</div></div>
+      <div>
+        <p>Preparations through first dance. The coverage in the timeline above, minus the last hour.</p>
+        <ul><li>8 hours, two locations</li><li>~850 edited frames</li><li>Gallery in 6 weeks</li><li>Second shooter over 90 guests</li><li>36 film frames</li><li>Family group list run on the day</li></ul>
+      </div>
+      <div class="price"><b>€3,200</b><span>€600 deposit</span></div>
+    </div>
+    <div class="tier">
+      <div><h3>Whole</h3><div class="mono">Two days, or one very long one</div></div>
+      <div>
+        <p>For weddings that start the evening before — welcome dinner, sauna, the morning after.</p>
+        <ul><li>12 hours over 2 days</li><li>~1,300 edited frames</li><li>Gallery in 7 weeks</li><li>Second shooter included</li><li>72 film frames</li><li>30×30 cm linen book, 60 pages</li></ul>
+      </div>
+      <div class="price"><b>€4,900</b><span>€1,000 deposit</span></div>
+    </div>
+    <div class="addons"><span><b>+ €280</b> per extra hour</span><span><b>+ €420</b> linen book, 40 pages</span><span><b>+ €350</b> second shooter (under 90 guests)</span><span><b>+ €190</b> 48‑hour preview of 60 frames</span></div>
+  </div>
+  <aside>
+    <div class="frame"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=900&q=72" alt="A couple by a lake in autumn light, she holding a bouquet"></div>
+    <p class="mono">Day collection · Frame 0619 · 17:08</p>
+  </aside>
+</section>
+
+<section class="ask" id="ask">
+  <div class="pics">
+    <div class="frame"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=72" alt="Backlit photograph of a couple holding a dark bouquet"></div>
+    <div class="frame"><img src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?w=700&q=72" alt="A bride holding a bouquet of peach and white roses"></div>
+    <div class="frame"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=72" alt="Two wedding rings resting on pale roses"></div>
+    <div class="frame"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=900&q=72" alt="A couple raising their hands by a pool with balloons above"></div>
+  </div>
+  <div>
+    <div class="kicker mono"><span>04</span><span>Questions, then your date</span></div>
+    <h2>What couples <em>ask first.</em></h2>
+    <div class="cols">
+      <div class="faq">
+        <details open><summary>Will you tell us where to stand?</summary><p>Twice: for family groups, and for about two minutes on your walk if the light asks for it. The rest of the day I follow, I don't direct.</p></details>
+        <details><summary>How many photographs do we get?</summary><p>Roughly 110 per hour of coverage, every one edited by me. I cut duplicates and closed eyes; I don't cut the uncle.</p></details>
+        <details><summary>Why six weeks?</summary><p>I edit every gallery myself, in order, one wedding at a time. Six weeks is the median over the last 40; you get 60 previews in 48 hours if you add them.</p></details>
+        <details><summary>Do you shoot film?</summary><p>A few rolls of Portra 400 and HP5 at every wedding, mixed into the gallery. Developed and scanned in Riga.</p></details>
+        <details><summary>Can we have the raw files?</summary><p>No — the edit is the work. You do get full‑resolution JPEGs and permission to print them anywhere.</p></details>
+        <details><summary>Do you travel?</summary><p>Yes, mostly by train. 18 countries so far. Travel is invoiced at cost; no day rate for travel days under six hours.</p></details>
+        <details><summary>What if it rains?</summary><p>Then the photographs have rain in them. Three of my favourite weddings did. I bring two clear umbrellas.</p></details>
+        <details><summary>How do we hold a date?</summary><p>A short call, a one‑page contract, and a €600 deposit. The balance is due two weeks before the wedding.</p></details>
+      </div>
+      <form id="enquiry">
+        <h3>Check a date</h3>
+        <p class="s">Nine Saturdays left in 2027. Fridays and Sundays from €2,600.</p>
+        <label>Your names<input name="names" required autocomplete="name" placeholder="Anu & Rasmus"></label>
+        <div class="pair">
+          <label>Email<input name="email" type="email" required autocomplete="email"></label>
+          <label>Date<input name="date" type="date" required></label>
+        </div>
+        <div class="pair">
+          <label>Venue or town<input name="venue"></label>
+          <label>Guests<input name="guests" type="number" min="1" max="400"></label>
+        </div>
+        <label>Collection<select name="coll"><option>Day — €3,200</option><option>Small — €1,450</option><option>Whole — €4,900</option><option>Not sure yet</option></select></label>
+        <label>Anything I should know<textarea name="note" placeholder="Two languages, a dog as ring bearer, a grandmother who hates cameras…"></textarea></label>
+        <button class="btn" type="submit">Send enquiry</button>
+        <p class="ok" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="strip" aria-label="More photographs">
+  <div class="frame"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1000&q=72" alt="Two white chairs on a lawn decorated with flowers"></div>
+  <div class="frame"><img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=700&q=72" alt="A bouquet held out against a pale sky"></div>
+  <div class="frame"><img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=900&q=72" alt="An aisle lined with roses leading to a white canopy"></div>
+  <div class="frame"><img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=600&q=72" alt="A wooden Mr & Mrs sign among branches"></div>
+</section>
+
+</main>
+
+<footer>
+  <div><div class="big">Mara Ilves</div><p>Wedding photographs, filed like a contact sheet. Tallinn, Estonia.</p></div>
+  <div><h4>Contact</h4><ul><li>hello@marailves.ee</li><li>+372 5512 0847</li></ul></div>
+  <div><h4>Elsewhere</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Journal</a></li></ul></div>
+  <div><h4>Booking</h4><p>2027: 9 Saturdays open. 2028 opens 1 March 2027.</p></div>
+</footer>
+
+<script>
+document.getElementById('enquiry').addEventListener('submit', e => {
+  e.preventDefault();
+  e.target.querySelector('.ok').textContent = 'Thank you — I’ll reply within two working days.';
+  e.target.reset();
+});
+</script>
+</body>
+</html>

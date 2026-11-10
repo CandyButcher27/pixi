@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SALTMARROW — a pixel-art sailing roguelite. Out 14 March 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Silkscreen&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abyss:#0e1719; --brine:#2a4a4e; --bone:#efe6d2; --flare:#ff5b2e; --kelp:#5d8a63; --fog:#9fb3ad;
+  --disp:'Big Shoulders Display', Impact, sans-serif;
+  --body:'Atkinson Hyperlegible', Georgia, serif;
+  --pix:'Silkscreen', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--abyss);color:var(--bone);font:16px/1.55 var(--body)}
+a{color:inherit}
+canvas{display:block;image-rendering:pixelated;image-rendering:crisp-edges;border-radius:12px;background:var(--brine)}
+.pix{font-family:var(--pix);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fog)}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+
+nav{position:sticky;top:0;z-index:5;background:var(--abyss);border-bottom:1px solid var(--brine)}
+nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.mark{font:900 26px/1 var(--disp);letter-spacing:.04em;text-decoration:none;margin-right:auto}
+.mark span{color:var(--flare)}
+nav a.l{font-family:var(--pix);font-size:11px;text-decoration:none;color:var(--fog)}
+nav a.l:hover{color:var(--bone)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:8px;font:700 15px/1 var(--body);text-decoration:none;border:2px solid var(--flare);background:var(--flare);color:var(--abyss)}
+.btn.ghost{background:transparent;color:var(--bone);border-color:var(--bone)}
+.btn small{font-family:var(--pix);font-size:10px;opacity:.75}
+nav .btn{height:38px}
+
+.split{display:grid;gap:56px;align-items:center;padding:88px 0}
+.split.tl{grid-template-columns:1fr 1.05fr}
+.split.tr{grid-template-columns:1.05fr 1fr}
+
+/* hero */
+.hero{padding-top:56px}
+.hero h1{font:800 112px/.86 var(--disp);letter-spacing:-.01em;text-transform:uppercase;margin:18px 0 22px}
+.hero h1 em{font-style:normal;color:var(--flare)}
+.lede{font-size:19px;line-height:1.5;max-width:34em}
+.facts{display:grid;grid-template-columns:repeat(4,auto);gap:4px 28px;margin:28px 0;padding:16px 0;border-top:1px solid var(--brine);border-bottom:1px solid var(--brine)}
+.facts b{display:block;font:800 30px/1 var(--disp)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.plats{margin-top:18px;display:flex;gap:14px;flex-wrap:wrap}
+.plats span{border-bottom:1px dashed var(--brine)}
+.cap{display:flex;justify-content:space-between;margin-top:10px}
+.hud{display:flex;gap:18px;margin-top:8px}.hud i{display:inline-block;width:8px;height:8px;margin-right:2px;background:var(--flare)}.hud i.o{background:var(--brine)}
+.chips{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:22px}.chips span:nth-child(3n){color:var(--flare)}
+ol.mech .pix{grid-column:2}
+.log{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 28px;padding-top:24px;border-top:1px solid var(--brine)}.log b{color:var(--bone);font-weight:700;margin-right:6px}
+
+h2{font:800 72px/.9 var(--disp);text-transform:uppercase;margin:12px 0 20px}
+h2 em{font-style:normal;color:var(--flare)}
+h3{font:700 26px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.02em}
+p+p{margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 24px;margin-top:28px}
+.stats div{border-top:2px solid var(--kelp);padding-top:10px}
+.stats b{display:block;font:800 44px/1 var(--disp);color:var(--bone)}
+.stats span{font-size:14px;color:var(--fog)}
+
+ol.mech{list-style:none;counter-reset:m;margin-top:24px}
+ol.mech li{counter-increment:m;display:grid;grid-template-columns:56px 1fr;gap:4px 16px;padding:16px 0;border-top:1px solid var(--brine)}
+ol.mech li::before{content:counter(m,decimal-leading-zero);font:800 34px/1 var(--disp);color:var(--flare);grid-row:span 2}
+ol.mech p{font-size:15px;color:var(--fog);margin:0}
+
+/* full-bleed band */
+.band{background:var(--bone);color:var(--abyss)}
+.band .pix{color:var(--brine)}
+.band canvas{background:#d9cdb1}
+.road{margin-top:20px;border-collapse:collapse;width:100%;font-size:15px}
+.road th{font-family:var(--pix);font-size:10px;font-weight:400;text-align:left;color:var(--brine);padding:0 12px 8px 0}
+.road td{padding:11px 12px 11px 0;border-top:1px solid #cbbd9c;vertical-align:top}
+.road td:first-child{font:800 22px/1 var(--disp);white-space:nowrap}
+.tag{font-family:var(--pix);font-size:10px;padding:3px 7px;border-radius:6px;background:var(--abyss);color:var(--bone);white-space:nowrap}
+.tag.k{background:var(--kelp)}
+
+/* specs */
+.req{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}
+.req th{font-family:var(--pix);font-size:10px;font-weight:400;color:var(--fog);text-align:left;padding:0 10px 8px 0}
+.req td{padding:9px 10px 9px 0;border-top:1px solid var(--brine)}
+.req td:first-child{color:var(--fog)}
+.press{display:grid;grid-template-columns:1fr 1fr;gap:22px 32px;margin-top:34px}
+.press blockquote{font-size:17px;line-height:1.4}
+.press cite{display:block;margin-top:6px;font-style:normal}
+.press b{font:800 40px/1 var(--disp);color:var(--flare);display:block}
+
+footer{border-top:1px solid var(--brine);padding:48px 0 40px;font-size:13px;color:var(--fog)}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+footer h4{font-family:var(--pix);font-size:11px;font-weight:400;color:var(--bone);margin-bottom:10px}
+footer li{list-style:none;margin:4px 0}
+footer .big{font:900 48px/1 var(--disp);color:var(--bone);margin-bottom:10px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="mark" href="#">SALT<span>MARROW</span></a>
+    <a class="l" href="#sea">The sea</a>
+    <a class="l" href="#systems">Systems</a>
+    <a class="l" href="#roadmap">Roadmap</a>
+    <a class="l" href="#specs">Specs</a>
+    <a class="l" href="#press">Press kit</a>
+    <a class="btn" href="#wishlist">Wishlist on Steam</a>
+  </div>
+</nav>
+
+<main>
+  <section class="wrap split tl hero" id="top">
+    <div>
+      <div class="pix">Low Tide Works · Bergen · Launch build 1.0.0</div>
+      <h1>The sea<br>keeps what<br>you <em>lose.</em></h1>
+      <p class="lede">A pixel-art sailing roguelite. Chart a procedurally drowned archipelago in a boat you rebuild plank by plank, fish 61 species that remember your bait, and get home before the lantern oil runs out. When you don't, the wreck stays on the map for your next captain.</p>
+      <div class="facts">
+        <div><span class="pix">Release</span><b>14.03.27</b></div>
+        <div><span class="pix">Price</span><b>$18.99</b></div>
+        <div><span class="pix">Run length</span><b>40–90 min</b></div>
+        <div><span class="pix">Demo</span><b>Free now</b></div>
+      </div>
+      <div class="ctas">
+        <a class="btn" href="#wishlist" id="wishlist">Wishlist on Steam <small>41,280 so far</small></a>
+        <a class="btn ghost" href="#demo">Play the 3-island demo</a>
+      </div>
+      <div class="plats pix"><span>Steam / Deck verified</span><span>Nintendo Switch</span><span>PS5</span><span>Linux native</span></div>
+    </div>
+    <div>
+      <canvas id="cv-hero" width="200" height="190" style="width:100%;height:640px"></canvas>
+      <div class="cap pix"><span>In-engine · seed 0x5A17 · 60 fps</span><span>Night 3 of 7</span></div>
+      <div class="hud pix"><span>Oil <i></i><i></i><i></i><i class="o"></i><i class="o"></i></span><span>Hull <i></i><i></i><i></i><i></i><i class="o"></i></span><span>Hold <i></i><i></i><i class="o"></i><i class="o"></i><i class="o"></i></span></div>
+    </div>
+  </section>
+
+  <section class="wrap split tr" id="sea">
+    <div>
+      <canvas id="cv-sea" width="180" height="200" style="width:100%;height:700px"></canvas>
+      <div class="cap pix"><span>The Shelf, depth 0–40 fathoms</span><span>Biome 2 / 5</span></div>
+    </div>
+    <div>
+      <div class="pix">01 — The sea</div>
+      <h2>An archipelago that <em>drowns</em> a little more each run.</h2>
+      <p>Every voyage generates a new chain of islands from a single 32-bit seed, then floods it: the tide line rises one tile per in-game day, so the harbour you mapped on day one is a reef by day five. Five biomes stack from the warm Shelf down to the Black Trench, each with its own weather table, fish, and things that are not fish.</p>
+      <p>Share a seed with a friend and you sail the same sea — same wrecks, same storms, same lighthouse with one keeper who will lie to you about the currents.</p>
+      <div class="stats">
+        <div><b>4.29B</b><span>possible seeds, all hand-tuned generator rules</span></div>
+        <div><b>61</b><span>fish species, 14 of them only at night</span></div>
+        <div><b>5</b><span>biomes from the Shelf to the Black Trench</span></div>
+        <div><b>212</b><span>hand-drawn island tiles at 16×16 px</span></div>
+        <div><b>23</b><span>keepers, traders and drowned folk to meet</span></div>
+        <div><b>3</b><span>endings, one of them under the water</span></div>
+      </div>
+      <div class="pix" style="margin-top:26px">Catchable in the free demo</div>
+      <div class="chips pix"><span>Pewter cod</span><span>Lamp eel</span><span>Widow herring</span><span>Saltjaw</span><span>Bell skate</span><span>Ghost mackerel</span><span>Kelp monk</span><span>Tallow ray</span><span>Brass pike</span><span>Moon gar</span><span>Drowned carp</span><span>Trench lantern</span></div>
+    </div>
+  </section>
+
+  <section class="wrap split tl" id="systems">
+    <div>
+      <div class="pix">02 — Systems</div>
+      <h2>Your boat is the <em>character sheet.</em></h2>
+      <p>No skill trees. Every upgrade is a physical part bolted into a 9×5 hull grid — and every part has weight, so a bigger net sinks your waterline and slows you into the next squall.</p>
+      <ol class="mech">
+        <li><h3>Plank-by-plank hull</h3><p>48 parts across sails, keels, nets, lanterns and stoves. Breaks are local: a holed bow floods the bow.</p><span class="pix">Slots 1–45 · 48 parts</span></li>
+        <li><h3>Fish with memory</h3><p>Each species learns your last three lures. Use the same spinner all run and the Shelf goes quiet.</p><span class="pix">61 species · 3-lure memory</span></li>
+        <li><h3>Lantern oil as a clock</h3><p>Oil is light, heat and score. Burn it to see the reef or sell it to buy rope — never both.</p><span class="pix">1 tank · 6 burn rates</span></li>
+        <li><h3>Wrecks persist</h3><p>Your sunk boat stays on that seed with its cargo. The next captain can salvage it, or the gulls will.</p><span class="pix">Per-seed · salvageable</span></li>
+        <li><h3>Weather you can read</h3><p>Barometer, cloud shape and gull behaviour telegraph storms 90 seconds ahead. Learn the sky, not a UI bar.</p><span class="pix">90 s warning · 7 storm types</span></li>
+      </ol>
+    </div>
+    <div>
+      <canvas id="cv-boat" width="150" height="220" style="width:100%;height:880px"></canvas>
+      <div class="cap pix"><span>Hull grid · 9×5 · 31/45 slots</span><span>Waterline +2</span></div>
+    </div>
+  </section>
+
+  <section class="band" id="roadmap">
+    <div class="wrap split tr">
+      <div>
+        <canvas id="cv-beast" width="170" height="180" style="width:100%;height:620px"></canvas>
+        <div class="cap pix"><span>Bestiary page 4 · Trench dwellers</span><span>12 / 61 caught</span></div>
+      </div>
+      <div>
+        <div class="pix">03 — Launch &amp; after</div>
+        <h2>Two people. <em>Four years.</em> One free update every quarter.</h2>
+        <p>Saltmarrow is made by Ingrid Aasen (art, sea) and Tomas Reiersen (code, fish). No microtransactions, no season pass. The full game is one purchase; every update below ships free to everyone who owns it.</p>
+        <table class="road">
+          <thead><tr><th>When</th><th>What ships</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Now</td><td>3-island demo, 11 species, first biome, seed sharing</td><td><span class="tag k">Live</span></td></tr>
+            <tr><td>14 Mar 27</td><td>1.0 — all 5 biomes, 61 species, 3 endings, Steam Deck verified</td><td><span class="tag">Launch</span></td></tr>
+            <tr><td>Jun 27</td><td>"Fog Season" — co-op for 2 boats on one seed, split or online</td><td><span class="tag">Free</span></td></tr>
+            <tr><td>Sep 27</td><td>Daily seed leaderboard, photo mode, 9 new hull parts</td><td><span class="tag">Free</span></td></tr>
+            <tr><td>Dec 27</td><td>"Ice Shelf" — a sixth biome that freezes instead of floods</td><td><span class="tag">Free</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap split tl" id="specs">
+    <div>
+      <div class="pix">04 — Specs &amp; press</div>
+      <h2>Runs on a <em>toaster.</em> Built that way.</h2>
+      <p>Custom engine in C and Lua. 480×270 internal resolution, integer-scaled to any screen. Full controller and keyboard remapping, one-handed mode, colourblind palettes for all 61 fish.</p>
+      <table class="req">
+        <thead><tr><th></th><th>Minimum</th><th>Recommended</th></tr></thead>
+        <tbody>
+          <tr><td>OS</td><td>Windows 10, Ubuntu 20.04, macOS 12</td><td>Any of those, 64-bit</td></tr>
+          <tr><td>CPU</td><td>Dual-core 1.8 GHz</td><td>Quad-core 2.5 GHz</td></tr>
+          <tr><td>Memory</td><td>2 GB RAM</td><td>4 GB RAM</td></tr>
+          <tr><td>GPU</td><td>OpenGL 3.3, 512 MB</td><td>Any GPU from the last 8 years</td></tr>
+          <tr><td>Controller</td><td>Xbox, DualSense, Switch Pro, Deck</td><td>Full remap, gyro aim for the harpoon</td></tr>
+          <tr><td>Accessibility</td><td>One-handed mode, 3 colourblind sets</td><td>Storm-flash reduction, slow tide</td></tr>
+          <tr><td>Saves</td><td>Cloud on Steam &amp; PS5</td><td>Cross-save via seed code</td></tr>
+          <tr><td>Storage</td><td>380 MB</td><td>380 MB</td></tr>
+          <tr><td>Languages</td><td colspan="2">English, Norsk, Deutsch, Français, Español, 日本語, Português (BR) — full text</td></tr>
+        </tbody>
+      </table>
+      <div class="press" id="press">
+        <blockquote><b>9/10</b>"The first roguelite where losing feels like weather instead of punishment."<cite class="pix">— Tidepool Weekly, demo preview</cite></blockquote>
+        <blockquote><b>94%</b>positive across 3,812 demo reviews on Steam since Next Fest.<cite class="pix">— Steam, Oct 2026</cite></blockquote>
+      </div>
+    </div>
+    <div>
+      <canvas id="cv-map" width="160" height="200" style="width:100%;height:760px"></canvas>
+      <div class="cap pix"><span>Chart · seed 0x5A17 · day 4</span><span>Tide +4 tiles</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="big">14.03.27</div>
+      <p>SALTMARROW © 2027 Low Tide Works AS, Bergen, Norway. Org. nr. 931 204 117. Made with support from Norsk filminstitutt's game development fund. All fish are fictional; the lighthouse keeper is based on a real one.</p>
+    </div>
+    <div><h4>Play</h4><ul><li><a href="#demo">Free demo</a></li><li><a href="#wishlist">Steam</a></li><li><a href="#">Nintendo eShop</a></li><li><a href="#">PlayStation Store</a></li></ul></div>
+    <div><h4>Studio</h4><ul><li><a href="#">Devlog (112 posts)</a></li><li><a href="#">Discord · 9.4k</a></li><li><a href="#">Newsletter</a></li><li><a href="#">Jobs: none, we're two</a></li></ul></div>
+    <div><h4>Press</h4><ul><li><a href="#press">Press kit (zip, 84 MB)</a></li><li><a href="#">Keys: press@lowtide.works</a></li><li><a href="#">Streamer policy: yes</a></li><li><a href="#">Fact sheet</a></li></ul></div>
+    <div class="log"><span class="pix">Demo patch log</span><span><b>0.9.4</b>harpoon recoil -12%</span><span><b>0.9.3</b>Trench fog density fixed on Deck</span><span><b>0.9.2</b>bait memory now 3 lures, was 5</span><span><b>0.9.1</b>Norsk text pass</span><span><b>0.9.0</b>Black Trench biome in beta</span><span><b>0.8.7</b>sail tearing in squalls</span><span><b>0.8.6</b>seed codes shortened to 4 hex</span></div>
+  </div>
+</footer>
+
+<script>
+const P={abyss:'#0e1719',deep:'#15282b',brine:'#2a4a4e',sea:'#3c6b6a',foam:'#9fb3ad',bone:'#efe6d2',flare:'#ff5b2e',kelp:'#5d8a63',sand:'#c9a96e',wood:'#7a4b2e',dark:'#3a2418',ink:'#1b1210'};
+function rng(s){return()=>(s=Math.imul(s^s>>>15,1|s)+0x6D2B79F5|0,((s^s>>>14)>>>0)/4294967296)}
+function px(c,col,x,y,w=1,h=1){c.fillStyle=col;c.fillRect(x|0,y|0,w,h)}
+function ctx(id){const e=document.getElementById(id);return [e.getContext('2d'),e.width,e.height]}
+
+function boat(c,x,y){
+  px(c,P.dark,x,y,26,4);px(c,P.wood,x+2,y+4,22,3);px(c,P.dark,x+5,y+7,16,2);
+  px(c,P.ink,x+12,y-30,2,30);
+  for(let i=0;i<22;i++)px(c,P.bone,x+14,y-28+i,Math.min(i,13),1);
+  for(let i=0;i<12;i++)px(c,P.bone,x+11-Math.min(i,8),y-20+i,Math.min(i,8),1);
+  px(c,P.flare,x+20,y-3,3,3);px(c,'#ffd27a',x+21,y-2,1,1);
+}
+
+function hero(t){
+  const [c,w,h]=ctx('cv-hero');const r=rng(7);
+  px(c,P.abyss,0,0,w,h);
+  for(let i=0;i<70;i++)px(c,r()<.2?P.bone:P.foam,r()*w,r()*95);
+  px(c,P.bone,150,22,14,14);px(c,P.abyss,155,20,12,12);
+  px(c,P.deep,0,95,w,h-95);
+  px(c,P.brine,12,78,40,17);px(c,P.kelp,18,72,28,8);px(c,P.brine,30,40,6,38);
+  px(c,P.bone,29,34,8,6);px(c,P.flare,31,35,4,4);
+  const beam=(Math.sin(t/900)+1)/2;
+  for(let i=0;i<40;i++)px(c,'rgba(255,210,122,.18)',37+i*3,34+i*beam*1.2-i*.4,3,2+i*.15);
+  for(let y=96;y<h;y+=4)for(let x=0;x<w;x+=6){
+    const o=Math.sin(x/9+y/7+t/500)*2;
+    if((x*7+y*3)%11<3)px(c,y<130?P.sea:P.brine,x+o,y,4,1);
+  }
+  const bob=Math.round(Math.sin(t/400)*1.5);
+  boat(c,100,104+bob);
+  px(c,'rgba(255,91,46,.25)',112,114+bob,10,40);
+  for(let i=0;i<5;i++)px(c,P.foam,90+i*9,113+bob,4,1);
+}
+
+function sea(){
+  const [c,w,h]=ctx('cv-sea');const r=rng(19);
+  const bands=[P.sea,P.brine,P.deep,'#0f1f22',P.abyss];
+  bands.forEach((col,i)=>px(c,col,0,20+i*36,w,36));
+  px(c,P.foam,0,0,w,20);px(c,P.bone,0,18,w,2);
+  boat(c,70,14);
+  for(let i=0;i<60;i++){const x=r()*w,y=40+r()*150;px(c,P.kelp,x,y,1,6+r()*14)}
+  const fish=[[P.flare,4],[P.sand,3],[P.bone,2],[P.foam,3]];
+  for(let i=0;i<34;i++){const [col,s]=fish[i%4];const x=r()*(w-10),y=36+r()*150;px(c,col,x,y,s*2,s);px(c,col,x-s,y-1,s,s+2);px(c,P.ink,x+s*2-2,y,1,1)}
+  px(c,P.ink,40,170,90,14);px(c,P.dark,50,166,60,6);px(c,P.ink,62,152,2,14);
+  for(let i=0;i<8;i++)px(c,P.foam,46+i*10,186-r()*30,1,1);
+  px(c,P.flare,125,190,30,4);px(c,P.flare,138,178,4,12);
+}
+
+function hull(){
+  const [c,w,h]=ctx('cv-boat');const r=rng(5);
+  px(c,P.deep,0,0,w,h);
+  for(let x=0;x<w;x+=10)px(c,P.brine,x,0,1,h);
+  for(let y=0;y<h;y+=10)px(c,P.brine,0,y,w,1);
+  px(c,P.ink,72,8,4,60);
+  for(let i=0;i<44;i++)px(c,P.bone,76,12+i,Math.min(i,40)*.9,1);
+  const ox=12,oy=80,cw=14,ch=22;
+  const parts=[P.wood,P.dark,P.kelp,P.flare,P.sand,P.foam,P.brine];
+  for(let j=0;j<5;j++)for(let i=0;i<9;i++){
+    const inset=Math.abs(j-2)>1&&(i<1||i>7)?1:0;
+    if(inset&&j>3)continue;
+    px(c,P.ink,ox+i*cw,oy+j*ch,cw-1,ch-1);
+    if(r()<.7){const col=parts[(r()*parts.length)|0];px(c,col,ox+i*cw+2,oy+j*ch+2,cw-5,ch-5);px(c,P.bone,ox+i*cw+3,oy+j*ch+3,2,2)}
+  }
+  px(c,P.dark,6,oy-4,138,4);px(c,P.dark,8,oy+5*ch,134,6);
+  px(c,P.sea,0,oy+2*ch+6,w,2);
+  for(let i=0;i<w;i+=7)px(c,P.foam,i,oy+2*ch+4+(i%3),3,1);
+  for(let y=oy+5*ch+10;y<h;y+=3)px(c,y%6?P.abyss:P.brine,0,y,w,3);
+  px(c,P.flare,20,h-20,40,4);px(c,P.bone,20,h-12,70,2);px(c,P.bone,20,h-8,50,2);
+}
+
+function beasts(){
+  const [c,w,h]=ctx('cv-beast');const r=rng(11);
+  px(c,'#d9cdb1',0,0,w,h);
+  for(let y=0;y<h;y+=6)px(c,'#cfc1a0',0,y,w,1);
+  const cells=[[10,12],[90,12],[10,96],[90,96]];
+  cells.forEach(([x,y],k)=>{
+    px(c,P.ink,x,y,70,74);px(c,'#e8dcc0',x+2,y+2,66,70);
+    const col=[P.flare,P.kelp,P.brine,P.wood][k];
+    const bw=24+k*5;
+    px(c,col,x+35-bw/2,y+28,bw,14);px(c,col,x+35-bw/2-6,y+24,6,22);
+    px(c,P.ink,x+35+bw/2-5,y+32,2,2);
+    for(let i=0;i<5;i++)px(c,P.ink,x+35-bw/2+4+i*4,y+42,1,3+(i%2)*2);
+    if(k===2)for(let i=0;i<6;i++)px(c,P.flare,x+12+i*9,y+16-r()*6,2,2);
+    px(c,P.ink,x+6,y+58,40,2);px(c,P.ink,x+6,y+63,26,2);
+  });
+  px(c,P.flare,0,h-6,w,6);
+}
+
+function chart(){
+  const [c,w,h]=ctx('cv-map');const r=rng(0x5A17);
+  px(c,P.deep,0,0,w,h);
+  for(let y=0;y<h;y+=4)for(let x=0;x<w;x+=4){
+    const n=Math.sin(x*.07)*Math.cos(y*.05)+Math.sin((x+y)*.031)+r()*.5;
+    if(n>1.05)px(c,P.sand,x,y,4,4);
+    else if(n>.85)px(c,P.kelp,x,y,4,4);
+    else if(n>.7)px(c,P.sea,x,y,4,4);
+  }
+  for(let x=0;x<w;x+=20)px(c,P.brine,x,0,1,h);
+  for(let y=0;y<h;y+=20)px(c,P.brine,0,y,w,1);
+  let x=20,y=180;
+  for(let i=0;i<48;i++){x+=r()*5-1.2;y-=r()*4;if(i%2)px(c,P.flare,x,y,2,2)}
+  px(c,P.bone,x-3,y-3,7,7);px(c,P.flare,x-1,y-1,3,3);
+  for(let i=0;i<4;i++){const a=r()*w,b=r()*h;px(c,P.bone,a,b,5,1);px(c,P.bone,a+2,b-2,1,5)}
+}
+
+sea();hull();beasts();chart();
+(function loop(t){hero(t||0);requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>

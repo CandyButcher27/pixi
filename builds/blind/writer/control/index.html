@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marginalia — a second reader for everything you write</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe6;
+  --paper-2:#ebe4d6;
+  --ink:#1d1a16;
+  --ink-2:#5a5248;
+  --rule:#cfc5b3;
+  --red:#b8321f;
+  --serif:"Newsreader",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:19px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:baseline;justify-content:space-between;padding-top:22px;padding-bottom:16px;gap:24px}
+.logo{font-size:26px;font-style:italic;font-weight:500;text-decoration:none;letter-spacing:-.01em}
+.logo span{color:var(--red)}
+nav{display:flex;gap:28px;align-items:baseline}
+nav a{text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+nav a:hover{color:var(--ink)}
+nav .cta{color:var(--paper);background:var(--ink);padding:9px 14px}
+nav .cta:hover{color:var(--paper);background:var(--red)}
+
+.hero{display:grid;grid-template-columns:7fr 5fr;border-bottom:1px solid var(--ink)}
+.hero-copy{padding:88px 56px 72px 0;border-right:1px solid var(--rule)}
+.hero h1{font-size:clamp(52px,7.4vw,104px);line-height:.94;font-weight:400;letter-spacing:-.035em}
+.hero h1 em{color:var(--red);font-weight:300}
+.hero p.lede{margin-top:36px;max-width:30ch;font-size:23px;line-height:1.45;color:var(--ink-2)}
+.hero .actions{margin-top:44px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:16px 22px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);transition:background .2s}
+.btn:hover{background:var(--red);border-color:var(--red)}
+.link{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;text-underline-offset:5px}
+.hero-side{padding:88px 0 72px 40px;display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.hero-side blockquote{font-size:21px;font-style:italic;line-height:1.4}
+.hero-side cite{display:block;margin-top:14px;font-style:normal}
+.stat{border-top:1px solid var(--rule);padding-top:18px}
+.stat b{display:block;font-size:64px;font-weight:300;line-height:1;letter-spacing:-.03em}
+
+.demo{padding:96px 0;border-bottom:1px solid var(--ink)}
+.demo-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:40px}
+.demo-head h2{font-size:44px;font-weight:400;letter-spacing:-.02em;line-height:1.05;max-width:16ch}
+.tabs{display:flex;border:1px solid var(--ink)}
+.tabs button{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:none;border:0;border-right:1px solid var(--ink);padding:11px 16px;cursor:pointer;color:var(--ink)}
+.tabs button:last-child{border-right:0}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.sheet{display:grid;grid-template-columns:1fr 280px;background:#fbf8f2;border:1px solid var(--rule);box-shadow:0 1px 0 var(--rule),0 24px 40px -28px rgba(29,26,22,.35)}
+.sheet-body{padding:56px 64px;font-size:22px;line-height:1.7;min-height:340px}
+.sheet-body del{color:var(--red);text-decoration-thickness:1.5px}
+.sheet-body ins{text-decoration:none;background:linear-gradient(transparent 62%,rgba(184,50,31,.18) 62%)}
+.margin{border-left:1px solid var(--rule);padding:56px 28px;display:flex;flex-direction:column;gap:22px}
+.note{font-size:16px;line-height:1.45;color:var(--ink-2);position:relative;padding-left:16px;border-left:2px solid var(--red);opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.note.on{opacity:1;transform:none}
+.note .mono{display:block;color:var(--red);margin-bottom:4px;font-size:11px}
+
+.how{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--ink)}
+.how article{padding:64px 40px 72px;border-right:1px solid var(--rule)}
+.how article:first-child{padding-left:0}
+.how article:last-child{border-right:0;padding-right:0}
+.how .num{font-size:120px;font-weight:200;line-height:.8;color:var(--red);font-style:italic;letter-spacing:-.04em}
+.how h3{font-size:28px;font-weight:500;margin:28px 0 12px;letter-spacing:-.01em}
+.how p{color:var(--ink-2);font-size:18px}
+
+.principles{padding:110px 0;border-bottom:1px solid var(--ink);display:grid;grid-template-columns:4fr 8fr;gap:56px}
+.principles h2{font-size:44px;font-weight:400;line-height:1.05;letter-spacing:-.02em;position:sticky;top:40px;align-self:start}
+.principles ol{list-style:none;counter-reset:p}
+.principles li{counter-increment:p;display:grid;grid-template-columns:72px 1fr;gap:12px;padding:28px 0;border-top:1px solid var(--rule)}
+.principles li:last-child{border-bottom:1px solid var(--rule)}
+.principles li::before{content:"§" counter(p);font-family:var(--mono);font-size:13px;color:var(--red);padding-top:8px}
+.principles li strong{display:block;font-size:26px;font-weight:500;letter-spacing:-.01em;margin-bottom:6px}
+.principles li span{color:var(--ink-2)}
+
+.pricing{padding:110px 0;border-bottom:1px solid var(--ink)}
+.pricing h2{font-size:44px;font-weight:400;letter-spacing:-.02em;margin-bottom:48px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.plan{padding:36px 32px 40px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:16px}
+.plan:first-child{padding-left:0}
+.plan:last-child{border-right:0}
+.plan.feat{background:var(--ink);color:var(--paper);padding-left:32px}
+.plan.feat .ink2{color:#b9ae9c}
+.plan .price{font-size:60px;font-weight:300;letter-spacing:-.03em;line-height:1}
+.plan .price small{font-size:18px;font-style:italic}
+.plan ul{list-style:none;font-size:17px;flex:1}
+.plan li{padding:9px 0;border-top:1px solid currentColor;border-color:rgba(127,117,100,.35)}
+.plan .btn{text-align:center}
+.plan.feat .btn{background:var(--red);border-color:var(--red)}
+.plan.feat .btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.ink2{color:var(--ink-2)}
+
+.closer{padding:130px 0 120px;text-align:center}
+.closer h2{font-size:clamp(44px,6.5vw,92px);font-weight:400;line-height:1;letter-spacing:-.035em;max-width:14ch;margin:0 auto}
+.closer h2 em{color:var(--red);font-weight:300}
+.closer form{margin:48px auto 0;display:flex;max-width:520px;border:1px solid var(--ink)}
+.closer input{flex:1;min-width:0;background:transparent;border:0;padding:16px 18px;font:inherit;font-size:18px;color:var(--ink)}
+.closer input:focus{outline:2px solid var(--red);outline-offset:-2px}
+.closer button{border:0;cursor:pointer}
+.closer .msg{margin-top:16px;min-height:1.4em;color:var(--ink-2)}
+
+footer{border-top:1px solid var(--ink);background:var(--paper-2)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;padding-top:28px;padding-bottom:28px;flex-wrap:wrap;color:var(--ink-2)}
+
+@media (max-width:900px){
+  body{font-size:17px}
+  .wrap{padding:0 20px}
+  nav a:not(.cta){display:none}
+  .hero,.principles{grid-template-columns:1fr}
+  .hero-copy{padding:56px 0 40px;border-right:0;border-bottom:1px solid var(--rule)}
+  .hero-side{padding:40px 0 56px}
+  .demo-head{flex-direction:column;align-items:start}
+  .sheet{grid-template-columns:1fr}
+  .sheet-body{padding:32px 24px;font-size:19px}
+  .margin{border-left:0;border-top:1px solid var(--rule);padding:24px}
+  .how,.plans{grid-template-columns:1fr}
+  .how article,.how article:first-child,.how article:last-child{padding:44px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .plan,.plan:first-child{padding:32px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .plan.feat{padding:32px 20px}
+  .principles h2{position:static}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Marginalia<span>.</span></a>
+    <nav>
+      <a href="#demo">See it edit</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a class="cta" href="#start">Try it free</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="mono ink2" style="margin-bottom:28px">An AI writing assistant · Est. 2026</p>
+        <h1>It edits like a person <em>who has read your work.</em></h1>
+        <p class="lede">Marginalia learns your voice from what you've already written, then leaves notes in the margin instead of rewriting you into beige.</p>
+        <div class="actions">
+          <a class="btn" href="#start">Start writing — free</a>
+          <a class="link" href="#demo">Watch a paragraph get better</a>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div>
+          <blockquote>"The first tool that made my drafts sound more like me, not less."</blockquote>
+          <cite class="mono ink2">— Ines Varga, essayist</cite>
+        </div>
+        <div class="stat">
+          <b>41%</b>
+          <span class="ink2">fewer revision rounds reported by teams in the first month</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-head">
+        <h2>One paragraph, three kinds of help.</h2>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-mode="tighten">Tighten</button>
+          <button role="tab" aria-selected="false" data-mode="clarify">Clarify</button>
+          <button role="tab" aria-selected="false" data-mode="voice">Match voice</button>
+        </div>
+      </div>
+      <div class="sheet">
+        <div class="sheet-body" id="sheet" aria-live="polite"></div>
+        <div class="margin" id="margin"></div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <article>
+        <div class="num">i</div>
+        <h3>Feed it your past work</h3>
+        <p>Point it at a folder of essays, a newsletter archive, or a Google Doc. It builds a private model of your rhythm, diction and habits.</p>
+      </article>
+      <article>
+        <div class="num">ii</div>
+        <h3>Write where you write</h3>
+        <p>Works inside Docs, Notion, Gmail and plain text. No new editor to learn, no copy-paste into a chat box.</p>
+      </article>
+      <article>
+        <div class="num">iii</div>
+        <h3>Accept, reject, argue</h3>
+        <p>Every suggestion explains itself. Reject one and it learns why. Push back and it will make its case — or concede.</p>
+      </article>
+    </section>
+
+    <section class="principles">
+      <h2>House rules we wrote for the machine.</h2>
+      <ol>
+        <li><div><strong>Never invent a fact.</strong><span>If a claim needs a source, it flags the sentence. It does not fabricate one.</span></div></li>
+        <li><div><strong>Your sentences stay yours.</strong><span>Suggestions are capped at the clause level unless you ask for a full rewrite.</span></div></li>
+        <li><div><strong>Plain beats impressive.</strong><span>It will cut "leverage" before it adds "delve".</span></div></li>
+        <li><div><strong>Your drafts are not training data.</strong><span>Your voice model is encrypted, yours, and deleted when you leave.</span></div></li>
+      </ol>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Priced per writer, not per word.</h2>
+      <div class="plans">
+        <div class="plan">
+          <p class="mono ink2">Notebook</p>
+          <div class="price">$0</div>
+          <ul><li>20 margin notes a day</li><li>Tighten &amp; clarify</li><li>One integration</li></ul>
+          <a class="btn" href="#start">Start free</a>
+        </div>
+        <div class="plan feat">
+          <p class="mono ink2">Author</p>
+          <div class="price">$12<small> /month</small></div>
+          <ul><li>Unlimited notes</li><li>Personal voice model</li><li>All integrations</li><li>Argue mode</li></ul>
+          <a class="btn" href="#start">Try 14 days free</a>
+        </div>
+        <div class="plan">
+          <p class="mono ink2">Masthead</p>
+          <div class="price">$9<small> /seat</small></div>
+          <ul><li>Shared style guide</li><li>House voice + personal voice</li><li>Admin &amp; SSO</li></ul>
+          <a class="btn" href="#start">Talk to us</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="closer" id="start">
+      <h2>Write the draft. <em>We'll take the margins.</em></h2>
+      <form id="signup" novalidate>
+        <input type="email" id="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn" type="submit">Get early access</button>
+      </form>
+      <p class="msg" id="msg" role="status"></p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© 2026 Marginalia Press</span>
+    <span class="mono">Privacy · Terms · Colophon</span>
+  </div>
+</footer>
+
+<script>
+const modes = {
+  tighten: {
+    text: 'In order to <del>really </del>make sure that the launch goes smoothly, <del>it is important that </del>we <ins>should</ins> finalize the copy <del>at some point </del>before Friday<del>, if at all possible</del>.',
+    notes: [['Filler', '"Really" adds no weight here.'], ['Passive scaffolding', 'Cut the throat-clearing; lead with who acts.'], ['Hedge', 'You set a deadline. Let it stand.']]
+  },
+  clarify: {
+    text: 'We should finalize the copy before <del>Friday</del><ins>Friday at noon, so design has the afternoon</ins>. <del>It</del><ins>The landing page</ins> is the first thing <del>they</del><ins>new customers</ins> will see.',
+    notes: [['Vague time', '"Friday" leaves design guessing. Give them the handoff.'], ['Unclear "it"', 'Two possible antecedents. Name the thing.'], ['Who is "they"?', 'Readers outside the team won\'t know.']]
+  },
+  voice: {
+    text: '<del>We should finalize the copy before Friday.</del><ins>Copy locks Friday, noon.</ins> <del>The landing page is extremely important.</del><ins>It\'s the front door — let\'s not leave it half-painted.</ins>',
+    notes: [['Your rhythm', 'You open with short declaratives in 74% of your memos.'], ['Your imagery', 'You reach for house metaphors often. Kept it in range.']]
+  }
+};
+const sheet = document.getElementById('sheet');
+const margin = document.getElementById('margin');
+function show(mode) {
+  const m = modes[mode];
+  sheet.innerHTML = m.text;
+  margin.innerHTML = m.notes.map(([t, d]) => `<p class="note"><span class="mono">${t}</span>${d}</p>`).join('');
+  margin.querySelectorAll('.note').forEach((n, i) => setTimeout(() => n.classList.add('on'), 150 + i * 220));
+}
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.tabs button').forEach(x => x.setAttribute('aria-selected', x === b));
+  show(b.dataset.mode);
+}));
+show('tighten');
+
+document.getElementById('signup').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('email');
+  const msg = document.getElementById('msg');
+  msg.textContent = email.checkValidity() ? 'Noted. We\'ll write — briefly.' : 'That address doesn\'t look right.';
+});
+</script>
+</body>
+</html>

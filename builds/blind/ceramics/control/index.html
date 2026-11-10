@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maren Okafor — Ceramics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=IBM+Plex+Mono:wght@400&family=Karla:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#efe7da;--slip:#e4d8c5;--clay:#b5603a;--iron:#5b3a29;--ash:#8a8174;--kiln:#1f1914;
+  --serif:"Fraunces",Georgia,serif;--sans:"Karla",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--kiln);font:400 17px/1.6 var(--sans)}
+a{color:inherit}
+img,svg{display:block}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.label{font:400 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ash)}
+
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bone) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--slip)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.mark{font:500 20px var(--serif);text-decoration:none;letter-spacing:-.01em}
+nav{display:flex;gap:28px}
+nav a{text-decoration:none;font-size:15px}
+nav a:hover{color:var(--clay)}
+
+.hero{display:grid;grid-template-columns:5fr 7fr;min-height:calc(100vh - 64px);border-bottom:1px solid var(--slip)}
+.hero-text{padding:72px 48px 48px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--slip)}
+.hero h1{font:300 clamp(56px,8vw,128px)/.9 var(--serif);letter-spacing:-.03em;margin:24px 0}
+.hero h1 em{font-style:italic;color:var(--clay)}
+.hero p{max-width:34ch;font-size:19px;color:var(--iron)}
+.hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;padding-top:24px;border-top:1px solid var(--slip)}
+.hero-meta div{font-size:15px}
+.hero-art{background:var(--iron);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.hero-art svg{width:78%;max-width:620px;height:auto}
+.hero-art .caption{position:absolute;top:28px;left:28px;color:var(--slip)}
+.hero-art .caption span{display:block;color:#c9b59c;margin-top:8px}
+
+section{padding:120px 0;border-bottom:1px solid var(--slip)}
+.head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:56px;gap:24px;flex-wrap:wrap}
+.head h2{font:300 clamp(36px,5vw,64px)/1 var(--serif);letter-spacing:-.02em}
+
+.works{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.work{display:flex;flex-direction:column;gap:12px}
+.work .plate{background:var(--slip);aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;transition:background .4s}
+.work:hover .plate{background:#dccbb2}
+.work .plate svg{width:62%;height:auto;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.work:hover .plate svg{transform:translateY(-6px) rotate(-1.5deg)}
+.work .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.work h3{font:400 20px var(--serif)}
+.w1{grid-column:1/6}.w2{grid-column:7/13;margin-top:140px}.w3{grid-column:2/6}.w4{grid-column:7/10}.w5{grid-column:10/13;margin-top:-80px}
+.w2 .plate{aspect-ratio:5/4}.w4 .plate,.w5 .plate{aspect-ratio:3/4}
+
+.process{background:var(--kiln);color:var(--bone);border:0}
+.process .label{color:#a89a88}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #3a3029}
+.step{padding:32px 24px 0 0}
+.step + .step{padding-left:24px;border-left:1px solid #3a3029}
+.step .n{font:300 64px/1 var(--serif);color:var(--clay)}
+.step h3{font:500 18px var(--sans);margin:24px 0 8px}
+.step p{color:#c8bcab;font-size:15px}
+.quote{font:300 italic clamp(28px,3.4vw,44px)/1.2 var(--serif);max-width:22ch;margin:0 0 72px;letter-spacing:-.01em}
+
+.split{display:grid;grid-template-columns:4fr 8fr;gap:48px}
+.shows{list-style:none}
+.shows li{display:grid;grid-template-columns:80px 1fr auto;gap:24px;padding:20px 0;border-top:1px solid var(--slip);align-items:baseline}
+.shows li:last-child{border-bottom:1px solid var(--slip)}
+.shows strong{font:400 22px var(--serif)}
+.shows .yr{font:400 14px var(--mono);color:var(--clay)}
+
+.contact{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:end}
+.contact h2{font:300 clamp(48px,7vw,104px)/.95 var(--serif);letter-spacing:-.03em}
+.contact h2 a{text-decoration:none;color:var(--clay);border-bottom:2px solid currentColor}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:12px 24px;font-size:15px}
+.contact dt{font:400 12px/1.9 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ash)}
+footer{padding:32px 0;font-size:13px;color:var(--ash)}
+footer .wrap{display:flex;justify-content:space-between}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:860px){
+  .wrap{padding:0 16px}
+  nav{gap:16px}nav a:nth-child(n+3){display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-text{padding:48px 16px;border-right:0}
+  .hero-art{min-height:70vw}
+  section{padding:72px 0}
+  .works{grid-template-columns:1fr 1fr;gap:16px}
+  .work{grid-column:auto!important;margin-top:0!important}
+  .w1,.w2{grid-column:1/-1!important}
+  .steps{grid-template-columns:1fr 1fr}
+  .step,.step + .step{padding:24px 12px 24px 0;border-left:0}
+  .split,.contact{grid-template-columns:1fr}
+  .shows li{grid-template-columns:56px 1fr}
+  .shows li .label{grid-column:2}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Maren Okafor</a>
+    <nav><a href="#work">Work</a><a href="#process">Process</a><a href="#shows">Exhibitions</a><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="hero-text">
+    <div>
+      <div class="label">Stoneware &amp; porcelain — Est. 2011</div>
+      <h1>Vessels for <em>slow</em> rooms.</h1>
+      <p>Wheel-thrown and coil-built forms, fired for thirty hours in a wood kiln on the Cornish coast. Each piece carries the mark of the flame that finished it.</p>
+    </div>
+    <div class="hero-meta">
+      <div><div class="label">Studio</div>St Just, Cornwall</div>
+      <div><div class="label">Now showing</div>Ash Season, until 14 Dec</div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="caption label">Plate 01<span>Tall jar, natural ash glaze, 2026</span></div>
+    <svg viewBox="0 0 400 460" aria-label="Illustration of a tall ceramic jar">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#7a4a33"/><stop offset=".45" stop-color="#c47a52"/><stop offset="1" stop-color="#5e3826"/></linearGradient>
+        <linearGradient id="ash" y1="0" y2="1" x1="0" x2="0"><stop offset="0" stop-color="#9ea27a" stop-opacity=".9"/><stop offset="1" stop-color="#9ea27a" stop-opacity="0"/></linearGradient>
+      </defs>
+      <ellipse cx="200" cy="452" rx="150" ry="8" fill="#000" opacity=".25"/>
+      <path d="M150 40 h100 v14 c0 10 -6 16 -6 28 c0 40 96 70 96 190 c0 100 -50 170 -76 180 h-128 c-26 -10 -76 -80 -76 -180 c0 -120 96 -150 96 -190 c0 -12 -6 -18 -6 -28z" fill="url(#g1)"/>
+      <path d="M150 40 h100 v14 c0 10 -6 16 -6 28 c0 40 96 70 96 190 c-40 -40 -80 10 -140 -20 c-60 -30 -80 30 -136 20 c0 -120 96 -150 96 -190 c0 -12 -6 -18 -6 -28z" fill="url(#ash)"/>
+      <ellipse cx="200" cy="40" rx="50" ry="7" fill="#3a2418"/>
+    </svg>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="head reveal"><h2>Selected work</h2><span class="label">2023 — 2026 · 5 of 48</span></div>
+    <div class="works">
+      <article class="work w1 reveal">
+        <div class="plate"><svg viewBox="0 0 200 220"><path d="M30 60 c0-20 140-20 140 0 c10 60 -10 140 -70 150 c-60-10 -80-90 -70-150z" fill="#8c5a3f"/><ellipse cx="100" cy="60" rx="70" ry="12" fill="#5b3a29"/><path d="M34 90 c40 14 92 14 132 0" stroke="#d9c9a8" stroke-width="3" fill="none"/></svg></div>
+        <div class="row"><h3>Tide Bowl</h3><span class="label">Stoneware · 2026</span></div>
+      </article>
+      <article class="work w2 reveal">
+        <div class="plate"><svg viewBox="0 0 260 200"><path d="M20 150 c0-60 40-80 110-80 s110 20 110 80 z" fill="#c8b89a"/><path d="M20 150 h220 c-6 20 -40 30 -110 30 s-104-10-110-30z" fill="#a8977a"/><circle cx="130" cy="70" r="4" fill="#5b3a29"/></svg></div>
+        <div class="row"><h3>Low Moon Form</h3><span class="label">Porcelain · 2025</span></div>
+      </article>
+      <article class="work w3 reveal">
+        <div class="plate"><svg viewBox="0 0 200 240"><path d="M80 20 h40 v20 c30 10 50 60 50 110 c0 50 -30 80 -70 80 s-70-30-70-80 c0-50 20-100 50-110z" fill="#3e4a44"/><path d="M58 120 c20 30 64 30 84 0" stroke="#b5603a" stroke-width="2" fill="none"/></svg></div>
+        <div class="row"><h3>Tenmoku Bottle</h3><span class="label">Iron glaze · 2025</span></div>
+      </article>
+      <article class="work w4 reveal">
+        <div class="plate"><svg viewBox="0 0 160 220"><rect x="30" y="40" width="100" height="160" rx="10" fill="#b5603a"/><rect x="30" y="40" width="100" height="56" rx="10" fill="#e4d8c5" opacity=".55"/><rect x="50" y="26" width="60" height="18" rx="4" fill="#8c4a2c"/></svg></div>
+        <div class="row"><h3>Lidded Jar</h3><span class="label">Shino · 2024</span></div>
+      </article>
+      <article class="work w5 reveal">
+        <div class="plate"><svg viewBox="0 0 160 220"><path d="M50 30 h60 l-6 40 c30 20 30 120 -24 140 c-54-20 -54-120 -24-140z" fill="#d9cbb3" stroke="#8a8174" stroke-width="2"/></svg></div>
+        <div class="row"><h3>Bud Vase III</h3><span class="label">Unglazed · 2023</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="process">
+  <div class="wrap">
+    <p class="quote reveal">"I make the shape. The kiln decides what it means."</p>
+    <div class="head reveal"><h2>From quarry to kiln</h2><span class="label">Seven months per firing cycle</span></div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><h3>Dig</h3><p>Local clay from a disused china-clay pit, blended with a bought stoneware body for strength.</p></div>
+      <div class="step reveal"><div class="n">02</div><h3>Throw</h3><p>Forms start on a kick wheel, then are trimmed, coiled or faceted at leather-hard.</p></div>
+      <div class="step reveal"><div class="n">03</div><h3>Rest</h3><p>Weeks of slow drying under cloth in the cold room. Rushing it cracks the foot.</p></div>
+      <div class="step reveal"><div class="n">04</div><h3>Fire</h3><p>Thirty hours of stoking to 1300°C. Ash settles and melts into glaze where the flame passes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="shows">
+  <div class="wrap split">
+    <div class="reveal">
+      <h2 class="head" style="display:block;font:300 clamp(36px,5vw,64px)/1 var(--serif);letter-spacing:-.02em">Exhibitions</h2>
+      <p style="color:var(--iron);max-width:32ch">Work is held in the collections of the V&amp;A, Mingei International and private homes in eleven countries.</p>
+    </div>
+    <ul class="shows reveal">
+      <li><span class="yr">2026</span><strong>Ash Season</strong><span class="label">Contemporary Ceramics Centre, London</span></li>
+      <li><span class="yr">2025</span><strong>Fired Ground</strong><span class="label">Collect, Somerset House</span></li>
+      <li><span class="yr">2024</span><strong>Quiet Vessels</strong><span class="label">Galerie Terre, Lyon</span></li>
+      <li><span class="yr">2023</span><strong>Salt &amp; Smoke</strong><span class="label">Leach Pottery, St Ives</span></li>
+      <li><span class="yr">2021</span><strong>First Firing</strong><span class="label">Newlyn Art Gallery</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" style="border:0">
+  <div class="wrap contact">
+    <h2 class="reveal">Commissions open<br>for spring. <a href="mailto:studio@marenokafor.com">Write to me</a></h2>
+    <dl class="reveal">
+      <dt>Studio visits</dt><dd>First Saturday of each month, by appointment</dd>
+      <dt>Email</dt><dd>studio@marenokafor.com</dd>
+      <dt>Instagram</dt><dd>@maren.clay</dd>
+      <dt>Stockists</dt><dd>Contemporary Ceramics Centre, Galerie Terre</dd>
+    </dl>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Maren Okafor Ceramics</span><span>St Just, Cornwall</span></div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

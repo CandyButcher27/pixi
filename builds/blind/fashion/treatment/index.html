@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fallow — fewer clothes, worn longer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --linen:#ECE5D6;--ink:#1E1C17;--muted:#5E584C;--rule:#C9BFAA;
+  --madder:#9E3B24;--indigo:#1F2A33;--indigo-rule:#3A4954;--linen-dim:#B9B2A3;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--linen);color:var(--ink);font:400 16px/1.6 "Work Sans",sans-serif}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.display{font-family:"Gloock",serif;font-weight:400;line-height:.98;letter-spacing:-.02em}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.btn{display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:20px;background:var(--madder);color:var(--linen);text-decoration:none;font-weight:600;border:0;font-size:16px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--ink)}
+.link{color:var(--madder);font-weight:600;text-underline-offset:4px}
+
+header{padding:28px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:baseline}
+.mark{font-family:"Gloock",serif;font-size:28px;text-decoration:none}
+header nav{display:flex;gap:32px;font-size:15px}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--madder)}
+
+.hero{padding:72px 0 120px}
+.hero .wrap{display:grid;grid-template-columns:2fr 1fr;gap:64px;align-items:end}
+.hero h1{font-size:clamp(56px,7.8vw,112px);margin:20px 0 32px}
+.hero h1 em{font-style:normal;color:var(--madder)}
+.hero p.lede{font-size:20px;max-width:34ch;color:var(--muted);margin-bottom:36px}
+.facts{list-style:none;border-top:1px solid var(--ink)}
+.facts li{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--rule)}
+.facts b{font-family:"Gloock",serif;font-weight:400;font-size:34px;color:var(--madder)}
+.facts span{font-size:14px;color:var(--muted)}
+
+.season{padding:120px 0;border-top:1px solid var(--rule)}
+.season .wrap{display:grid;grid-template-columns:.8fr 2fr;gap:80px}
+.season h2{font-size:96px;line-height:.9;position:sticky;top:40px}
+.season .intro{font-size:19px;max-width:52ch;margin:12px 0 36px}
+.pieces{list-style:none;border-top:1px solid var(--ink)}
+.pieces li{display:grid;grid-template-columns:2.2fr 2fr 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.pieces strong{font-weight:600;font-size:18px}
+.pieces small{display:block;color:var(--muted);font-size:14px}
+.pieces .price{text-align:right;font-family:"Gloock",serif;font-size:22px}
+.season .more{margin-top:28px}
+
+.ledger{background:var(--indigo);color:var(--linen);padding:128px 0}
+.ledger .wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:80px;align-items:start}
+.ledger .eyebrow{color:var(--linen-dim)}
+.ledger h2{font-size:64px;margin:16px 0 28px}
+.ledger p{color:var(--linen-dim);max-width:52ch;margin-bottom:20px}
+.costs{list-style:none;margin-top:40px;border-top:1px solid var(--linen)}
+.costs li{display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid var(--indigo-rule)}
+.costs li span:first-child small{display:block;color:var(--linen-dim);font-size:14px}
+.costs li span:last-child{font-family:"Gloock",serif;font-size:22px;white-space:nowrap}
+.total{background:var(--linen);color:var(--ink);border-radius:24px;padding:48px 44px;position:sticky;top:40px}
+.total .eyebrow{color:var(--muted)}
+.total .figure{font-size:96px;margin:20px 0 8px}
+.total p{color:var(--muted);margin:0}
+.total .split{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:32px 0 14px}
+.total .split i{display:block}
+.total .key{font-size:13px;color:var(--muted)}
+
+.repair{padding:136px 0}
+.repair .wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:96px}
+.repair h2{font-size:80px;margin-top:16px}
+.repair .body > p{font-size:19px;margin-bottom:40px;max-width:46ch}
+.steps{list-style:none;counter-reset:s;border-top:1px solid var(--ink)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:64px 1fr;padding:24px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:"0" counter(s);font-family:"Gloock",serif;font-size:28px;color:var(--madder);line-height:1}
+.steps h3{font-size:18px;font-weight:600;margin-bottom:4px}
+.steps p{color:var(--muted)}
+
+footer{border-top:1px solid var(--ink);padding:96px 0 48px}
+footer .wrap{display:grid;grid-template-columns:1.6fr 1fr;gap:80px}
+footer h2{font-size:48px;margin-bottom:16px}
+footer .sub{color:var(--muted);max-width:48ch;margin-bottom:32px}
+form{display:flex;gap:12px;max-width:520px}
+input[type=email]{flex:1;height:54px;border-radius:20px;border:1px solid var(--ink);background:transparent;padding:0 20px;font:inherit;color:var(--ink)}
+input[type=email]:focus{outline:2px solid var(--madder);outline-offset:2px}
+#thanks{margin-top:16px;color:var(--madder);font-weight:600;min-height:26px}
+.addr{font-size:14px;color:var(--muted)}
+.addr p{margin-bottom:12px}
+.small{grid-column:1/-1;display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding-top:32px;border-top:1px solid var(--rule)}
+
+@media (max-width:860px){
+  .wrap{padding:0 20px}
+  header nav{gap:16px;font-size:14px}
+  .hero .wrap,.season .wrap,.ledger .wrap,.repair .wrap,footer .wrap{grid-template-columns:1fr;gap:48px}
+  .season h2,.repair h2{font-size:52px}
+  .ledger h2{font-size:44px}
+  .total .figure{font-size:64px}
+  .pieces li{grid-template-columns:1fr auto}
+  .pieces li > span:nth-child(2){grid-column:1/-1;order:3}
+  form{flex-direction:column}
+  .small{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Fallow</a>
+    <nav aria-label="Primary">
+      <a href="#season">Season 07</a>
+      <a href="#ledger">The ledger</a>
+      <a href="#repair">Repair</a>
+      <a href="#letter">Letter</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">One season a year · made in Portugal &amp; Lithuania</p>
+      <h1 class="display">Fewer clothes, <em>worn longer.</em></h1>
+      <p class="lede">We make one small collection a year, from fibres we can trace to the field, then we stop. The rest of the year we mend.</p>
+      <a class="btn" href="#season">See Season 07</a>
+    </div>
+    <ul class="facts" aria-label="Season 07 at a glance">
+      <li><span>Pieces this year</span><b>14</b></li>
+      <li><span>Fibres used</span><b>3</b></li>
+      <li><span>Virgin synthetics</span><b>0</b></li>
+      <li><span>Years of free repair</span><b>∞</b></li>
+    </ul>
+  </div>
+</section>
+
+<section class="season" id="season">
+  <div class="wrap">
+    <aside>
+      <h2 class="display">Season 07</h2>
+    </aside>
+    <div>
+      <p class="eyebrow">Autumn 2026 · six of fourteen</p>
+      <p class="intro">Linen, organic wool and undyed hemp, cut once in the quantities we expect to sell. There is no end-of-season sale, because there is no end of season.</p>
+      <ul class="pieces">
+        <li><span><strong>Field jacket</strong><small>Waxed hemp canvas, horn buttons</small></span><span><small>Fibre: hemp, Normandy</small><small>Mill: Tessitura Bassetti</small></span><span class="price">€140</span></li>
+        <li><span><strong>Wide trouser</strong><small>Heavy linen twill, side buckles</small></span><span><small>Fibre: flax, Flanders</small><small>Mill: Siulas, Lithuania</small></span><span class="price">€118</span></li>
+        <li><span><strong>Rib crew</strong><small>Organic merino, undyed oat</small></span><span><small>Fibre: wool, Patagonia</small><small>Mill: Lanificio Zegna</small></span><span class="price">€132</span></li>
+        <li><span><strong>Work shirt</strong><small>Linen poplin, two chest pockets</small></span><span><small>Fibre: flax, Normandy</small><small>Mill: Siulas, Lithuania</small></span><span class="price">€96</span></li>
+        <li><span><strong>Smock dress</strong><small>Washed hemp, madder-dyed</small></span><span><small>Fibre: hemp, Romania</small><small>Mill: Tessitura Bassetti</small></span><span class="price">€154</span></li>
+        <li><span><strong>Overcoat</strong><small>Boiled wool, unlined</small></span><span><small>Fibre: wool, Patagonia</small><small>Mill: Lanificio Zegna</small></span><span class="price">€260</span></li>
+      </ul>
+      <p class="more"><a class="link" href="#">All fourteen pieces, with full fibre records →</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="ledger" id="ledger">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">The ledger</p>
+      <h2 class="display">Where the money in one jacket goes.</h2>
+      <p>Every Fallow piece ships with its own ledger: who grew the fibre, who wove it, who sewed it, and what each of them was paid. This is the field jacket, line by line.</p>
+      <p>Our margin is the smallest line we can keep the lights on with. There is no line for discounting, because there is no discounting.</p>
+      <ul class="costs">
+        <li><span>Fibre<small>Hemp grown without irrigation, Normandy</small></span><span>€14</span></li>
+        <li><span>Weaving &amp; waxing<small>Tessitura Bassetti, Como</small></span><span>€26</span></li>
+        <li><span>Cut &amp; sew<small>Atelier Riba, Porto, 3.5 hours at living wage</small></span><span>€38</span></li>
+        <li><span>Trims &amp; transport<small>Horn buttons, rail freight, plastic-free packing</small></span><span>€12</span></li>
+        <li><span>Repair fund<small>Set aside for this jacket's lifetime of mending</small></span><span>€10</span></li>
+        <li><span>Fallow<small>Rent, salaries, and next season's samples</small></span><span>€40</span></li>
+      </ul>
+    </div>
+    <div class="total">
+      <p class="eyebrow">Field jacket · total</p>
+      <p class="display figure">€140</p>
+      <p>Price you pay, and the price everyone else in the chain was paid first.</p>
+      <div class="split" aria-hidden="true">
+        <i style="width:10%;background:#6F7B5A"></i><i style="width:18.6%;background:#1F2A33"></i><i style="width:27.1%;background:#9E3B24"></i><i style="width:8.6%;background:#B9B2A3"></i><i style="width:7.1%;background:#D79A6B"></i><i style="width:28.6%;background:#1E1C17"></i>
+      </div>
+      <p class="key">57% goes to the people who grow, weave and sew it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="repair" id="repair">
+  <div class="wrap">
+    <h2 class="display">Bring it back.</h2>
+    <div class="body">
+      <p>A torn hem, a lost button, an elbow worn through: send it to us and we mend it, free, for as long as the piece exists. When you are finished with it, we take it back and it becomes next year's stuffing, rags or yarn.</p>
+      <ol class="steps">
+        <li><div><h3>Request a label</h3><p>Tell us what's wrong. We email a prepaid label, no box needed.</p></div></li>
+        <li><div><h3>We mend it in Porto</h3><p>Our repair bench is in the same atelier that sewed it, so the thread matches.</p></div></li>
+        <li><div><h3>It comes home</h3><p>Usually inside three weeks, with a note of what was done added to its ledger.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="letter">
+  <div class="wrap">
+    <div>
+      <h2 class="display">One letter a year.</h2>
+      <p class="sub">We write when the new season is ready, and not otherwise. No drops, no countdowns, no "last chance".</p>
+      <form id="signup">
+        <label for="email" class="eyebrow" style="position:absolute;left:-9999px">Email address</label>
+        <input type="email" id="email" required placeholder="you@example.com">
+        <button class="btn" type="submit">Send me the letter</button>
+      </form>
+      <p id="thanks" role="status"></p>
+    </div>
+    <div class="addr">
+      <p><strong>Fallow Clothing</strong><br>Rua das Flores 112<br>4050-265 Porto, Portugal</p>
+      <p>Studio open Thursdays, 11–6, for fittings and repairs.</p>
+      <p><a href="#">Fibre records</a> · <a href="#">Repair request</a> · <a href="#">Care guide</a></p>
+    </div>
+    <div class="small"><span>© 2026 Fallow. Made in small numbers.</span><span>B Corp pending · Fair Wear member</span></div>
+  </div>
+</footer>
+<script>
+document.getElementById('signup').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('thanks').textContent = 'Thank you. See you next autumn.';
+  e.target.reset();
+});
+</script>
+</body>
+</html>

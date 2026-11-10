@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinder &amp; Brass Records</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#efe6d4;--ink:#16130f;--rust:#c2481d;--teal:#1f4d4a;--mute:#6d6354;--rule:#16130f33}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:400 15px/1.55 "IBM Plex Mono",monospace;overflow-x:hidden}
+a{color:inherit}
+.serif{font-family:Fraunces,serif}
+header{display:flex;justify-content:space-between;align-items:baseline;padding:18px 4vw;border-bottom:1px solid var(--ink);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+header nav{display:flex;gap:28px}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--rust)}
+.logo{font:900 20px Fraunces,serif;letter-spacing:0;text-transform:none}
+.hero{display:grid;grid-template-columns:1fr 38vw;min-height:88vh;border-bottom:1px solid var(--ink)}
+.hero-text{padding:6vw 4vw 4vw;display:flex;flex-direction:column;justify-content:space-between}
+.hero h1{font:300 clamp(64px,11vw,190px)/.86 Fraunces,serif;letter-spacing:-.04em}
+.hero h1 em{font-style:italic;color:var(--rust)}
+.hero h1 b{font-weight:900;display:block}
+.hero-meta{display:flex;gap:6vw;margin-top:48px;max-width:640px}
+.hero-meta p{flex:1}
+.hero-meta small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.hero-art{background:var(--ink);position:relative;overflow:hidden;display:grid;place-items:center}
+.disc{width:min(30vw,440px);aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#222 0 1px,#0c0b09 1px 4px);position:relative;animation:spin 6s linear infinite;animation-play-state:paused}
+.disc.on{animation-play-state:running}
+.disc::after{content:"";position:absolute;inset:34%;border-radius:50%;background:var(--rust) radial-gradient(circle,var(--paper) 0 6%,transparent 6.5%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.play{position:absolute;bottom:28px;left:28px;right:28px;display:flex;justify-content:space-between;align-items:center;color:var(--paper);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.play button{background:none;border:1px solid var(--paper);color:var(--paper);font:inherit;padding:10px 18px;cursor:pointer}
+.play button:hover{background:var(--paper);color:var(--ink)}
+.ticker{border-bottom:1px solid var(--ink);padding:14px 0;white-space:nowrap;overflow:hidden;font:italic 300 28px Fraunces,serif}
+.ticker span{display:inline-block;animation:tick 40s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+section{padding:96px 4vw}
+.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:48px;gap:24px;flex-wrap:wrap}
+.head h2{font:700 clamp(40px,5vw,72px)/1 Fraunces,serif;letter-spacing:-.03em}
+.head p{max-width:360px;color:var(--mute)}
+.covers{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--ink);border:2px solid var(--ink)}
+.cover{aspect-ratio:1;position:relative;overflow:hidden;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:var(--paper);cursor:pointer}
+.cover h3{font:900 clamp(26px,2.6vw,40px)/.9 Fraunces,serif;letter-spacing:-.02em;position:relative;z-index:1}
+.cover .cat{font-size:11px;letter-spacing:.14em;position:relative;z-index:1}
+.cover .shape{position:absolute;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.cover:hover .shape{transform:translate(8%,-8%) rotate(-6deg)}
+.c1{background:var(--teal)}.c1 .shape{width:70%;height:70%;border-radius:50%;background:var(--rust);right:-12%;bottom:-12%}
+.c2{background:var(--rust)}.c2 .shape{inset:30% 0 30% 0;background:repeating-linear-gradient(90deg,var(--ink) 0 10px,transparent 10px 22px)}
+.c3{background:var(--paper);color:var(--ink)}.c3 .shape{width:46%;height:120%;background:var(--ink);right:12%;top:-10%;transform-origin:center}
+.c4{background:var(--ink)}.c4 .shape{width:120%;aspect-ratio:1;border-radius:50%;border:24px solid var(--paper);left:-60%;top:20%}
+.c5{background:#d9a441;color:var(--ink)}.c5 .shape{width:60%;height:60%;background:var(--teal);left:20%;top:20%;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.c6{background:var(--teal)}.c6 .shape{inset:auto 0 0 0;height:45%;background:repeating-linear-gradient(0deg,var(--paper) 0 3px,transparent 3px 12px)}
+.c7{background:var(--ink)}.c7 .shape{width:40%;height:40%;background:var(--rust);left:10%;bottom:10%;box-shadow:140px -90px 0 var(--paper)}
+.c8{background:#8e2f1b}.c8 .shape{width:90%;height:90%;border-radius:50%;background:radial-gradient(circle,transparent 30%,var(--ink) 31% 33%,transparent 34% 52%,var(--ink) 53% 55%,transparent 56%);left:5%;top:5%}
+.catalog{border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:90px 1.4fr 1fr 80px 120px;gap:16px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.row .t{font:400 24px Fraunces,serif}
+.row:hover{background:#16130f0d}
+.row .buy{justify-self:end;font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid}
+.row .buy:hover{color:var(--rust)}
+.filters{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filters button{font:inherit;font-size:12px;background:none;border:1px solid var(--ink);padding:6px 14px;cursor:pointer;letter-spacing:.08em;text-transform:uppercase}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:6vw;background:var(--ink);color:var(--paper)}
+.about blockquote{font:300 clamp(30px,3.6vw,54px)/1.12 Fraunces,serif;letter-spacing:-.02em}
+.about blockquote em{color:#d9a441}
+.about .cols{display:grid;gap:28px;align-content:end}
+.about .cols div{border-top:1px solid #efe6d455;padding-top:14px}
+.about .cols strong{font:700 44px Fraunces,serif;display:block}
+.shows{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink)}
+.show{padding:28px 24px 28px 0;border-right:1px solid var(--rule)}
+.show+.show{padding-left:24px}
+.show:last-child{border:0}
+.show .d{font:900 64px/1 Fraunces,serif;color:var(--rust)}
+.show h4{font:400 22px Fraunces,serif;margin:12px 0 6px}
+footer{border-top:1px solid var(--ink);padding:64px 4vw 28px}
+footer form{display:flex;border-bottom:2px solid var(--ink);max-width:720px;margin:24px 0 64px}
+footer input{flex:1;border:0;background:none;font:300 clamp(24px,3vw,40px) Fraunces,serif;padding:10px 0;color:var(--ink);outline:none;min-width:0}
+footer form button{border:0;background:none;font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+footer .base{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);flex-wrap:wrap;gap:12px}
+.big{font:900 clamp(56px,14vw,240px)/.8 Fraunces,serif;letter-spacing:-.05em}
+@media(max-width:860px){
+.hero{grid-template-columns:1fr}.hero-art{min-height:70vw}.disc{width:60vw}
+header nav{display:none}
+.covers{grid-template-columns:repeat(2,1fr)}
+.row{grid-template-columns:60px 1fr 70px}.row .a,.row .buy{display:none}
+.about,.shows{grid-template-columns:1fr}.show,.show+.show{padding:24px 0;border-right:0;border-bottom:1px solid var(--rule)}
+.hero-meta{flex-direction:column;gap:20px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">Cinder &amp; Brass</span>
+  <nav><a href="#releases">Releases</a><a href="#catalog">Catalogue</a><a href="#label">The Label</a><a href="#live">Live</a></nav>
+  <span>Est. 1961 &middot; Detroit</span>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="hero-text">
+    <h1>Records <em>cut</em><b>to tape.</b></h1>
+    <div class="hero-meta">
+      <p><small>What we do</small>Small-batch jazz pressings, recorded live in one room, mixed by ear, pressed on 180g vinyl.</p>
+      <p><small>Now spinning</small>CB-114 &mdash; Odessa Vane Quartet, <i>Low Light Hours</i>. Out Friday.</p>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="disc" id="disc"></div>
+    <div class="play"><span id="state">Side A &middot; paused</span><button id="toggle" aria-pressed="false">Drop the needle</button></div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><span>Hard bop &bull; Modal &bull; Spiritual &bull; Third stream &bull; Free &bull; Soul jazz &bull; Ballads at 2am &bull; Hard bop &bull; Modal &bull; Spiritual &bull; Third stream &bull; Free &bull; Soul jazz &bull; Ballads at 2am &bull;&nbsp;</span></div>
+
+<section id="releases">
+  <div class="head"><h2 class="serif">New on the shelf</h2><p>Eight records this season. Every sleeve hand-set in metal type, every master cut at half speed.</p></div>
+  <div class="covers">
+    <div class="cover c1"><span class="shape"></span><span class="cat">CB-114</span><h3>Low Light Hours</h3></div>
+    <div class="cover c2"><span class="shape"></span><span class="cat">CB-113</span><h3>Brass Weather</h3></div>
+    <div class="cover c3"><span class="shape"></span><span class="cat">CB-112</span><h3>One Room, No Clock</h3></div>
+    <div class="cover c4"><span class="shape"></span><span class="cat">CB-111</span><h3>Halo Over Grand River</h3></div>
+    <div class="cover c5"><span class="shape"></span><span class="cat">CB-110</span><h3>Triangle Suite</h3></div>
+    <div class="cover c6"><span class="shape"></span><span class="cat">CB-109</span><h3>Static &amp; Strings</h3></div>
+    <div class="cover c7"><span class="shape"></span><span class="cat">CB-108</span><h3>Second Set</h3></div>
+    <div class="cover c8"><span class="shape"></span><span class="cat">CB-107</span><h3>Groove Memory</h3></div>
+  </div>
+</section>
+
+<section id="catalog" style="padding-top:0">
+  <div class="head"><h2 class="serif">The catalogue</h2><p>Sixty-three years of sessions, most still in print.</p></div>
+  <div class="filters" role="group" aria-label="Filter by era">
+    <button aria-pressed="true" data-f="all">All</button><button aria-pressed="false" data-f="60s">60s</button><button aria-pressed="false" data-f="70s">70s</button><button aria-pressed="false" data-f="now">Now</button>
+  </div>
+  <div class="catalog" id="rows"></div>
+</section>
+
+<section class="about" id="label">
+  <blockquote>&ldquo;We never fixed a solo. If the take had a <em>wrong note</em> that felt right, it went on the record.&rdquo;<br><small style="font:12px 'IBM Plex Mono';letter-spacing:.12em;text-transform:uppercase">&mdash; Ray Calder, founder</small></blockquote>
+  <div class="cols">
+    <div><strong>412</strong>Albums released since 1961</div>
+    <div><strong>1</strong>Room. Studio B, Woodward Ave. Same since day one.</div>
+    <div><strong>0</strong>Overdubs on any record in the catalogue</div>
+  </div>
+</section>
+
+<section id="live">
+  <div class="head"><h2 class="serif">Live at the label</h2><p>Friday nights in Studio B. Forty seats, no phones, one bottle of rye.</p></div>
+  <div class="shows">
+    <div class="show"><div class="d">14.11</div><h4>Odessa Vane Quartet</h4><p>Release night &middot; Low Light Hours</p></div>
+    <div class="show"><div class="d">21.11</div><h4>Marcus Hale Trio</h4><p>Standards, played slow</p></div>
+    <div class="show"><div class="d">28.11</div><h4>The Grand River Big Band</h4><p>Seventeen players, one room</p></div>
+  </div>
+</section>
+
+<footer>
+  <p style="font-size:12px;letter-spacing:.14em;text-transform:uppercase">Liner notes, monthly</p>
+  <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed';">
+    <input type="email" required placeholder="your@email" aria-label="Email address"><button>Sign up &rarr;</button>
+  </form>
+  <div class="big">C&amp;B</div>
+  <div class="base"><span>Cinder &amp; Brass Records &middot; 2210 Woodward Ave, Detroit</span><span>&copy; 1961&ndash;2026</span></div>
+</footer>
+
+<script>
+const rows=[["CB-001","Kettle Black","Ray Calder Sextet","1961","60s"],["CB-027","Midnight Assembly Line","Lou Bennett","1964","60s"],["CB-058","A Modal Sunday","June Okafor","1968","60s"],["CB-071","Rye & Rhodes","Teddy Marsh","1972","70s"],["CB-090","Cosmic Grand River","Sun Collective","1976","70s"],["CB-112","One Room, No Clock","Imani Rhee","2024","now"],["CB-114","Low Light Hours","Odessa Vane Quartet","2026","now"]];
+const box=document.getElementById("rows");
+const render=f=>box.innerHTML=rows.filter(r=>f==="all"||r[4]===f).map(r=>`<div class="row"><span>${r[0]}</span><span class="t">${r[1]}</span><span class="a">${r[2]}</span><span>${r[3]}</span><a class="buy" href="#">LP &middot; $32</a></div>`).join("");
+render("all");
+document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b));render(b.dataset.f)});
+const t=document.getElementById("toggle"),d=document.getElementById("disc"),s=document.getElementById("state");
+t.onclick=()=>{const on=d.classList.toggle("on");t.setAttribute("aria-pressed",on);t.textContent=on?"Lift the needle":"Drop the needle";s.textContent=on?"Side A · 33⅓ rpm":"Side A · paused"};
+</script>
+</body>
+</html>

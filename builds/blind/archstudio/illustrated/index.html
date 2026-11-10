@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Havnegade Tegnestue — Architects, Copenhagen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9dc;--paper2:#e6dfcf;--ink:#1e2422;--ink2:#5b605b;--brick:#b0503a;--sea:#3e6966;--ochre:#d29a3c;
+  --serif:"Fraunces",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--sans:"Inter Tight",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+svg{display:block;width:100%;height:auto}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px}
+
+header{display:flex;justify-content:space-between;align-items:baseline;padding:22px 32px;border-bottom:1px solid var(--ink);gap:24px;flex-wrap:wrap}
+.logo{font-family:var(--serif);font-size:22px;font-weight:500;text-decoration:none;letter-spacing:-.01em}
+.logo span{color:var(--brick)}
+nav{display:flex;gap:28px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--brick)}
+
+.hero{position:relative;border-bottom:1px solid var(--ink)}
+.hero-text{display:grid;grid-template-columns:1.35fr 1fr;gap:40px;padding:56px 32px 0;align-items:end}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(46px,7.4vw,118px);line-height:.95;letter-spacing:-.035em}
+.hero h1 em{font-style:italic;color:var(--brick);padding-right:.12em}
+.hero-side{padding-bottom:12px;max-width:380px}
+.hero-side p{color:var(--ink2);margin-top:14px}
+.coord{display:flex;justify-content:space-between;padding:10px 32px;border-top:1px solid var(--ink)}
+
+.house{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.boat{animation:bob 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes bob{50%{transform:translateY(3px) rotate(1deg)}}
+.cloud{animation:drift 60s linear infinite}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(1320px)}}
+
+section{border-bottom:1px solid var(--ink)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:72px 32px 40px}
+.sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,4.2vw,60px);line-height:1.02;letter-spacing:-.025em;max-width:16ch}
+
+.project{display:grid;grid-template-columns:repeat(12,1fr);border-top:1px solid var(--ink)}
+.project .fig{background:var(--paper2);padding:28px;border-right:1px solid var(--ink)}
+.project .txt{padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.project h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,42px);line-height:1.05;letter-spacing:-.02em}
+.project dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14px}
+.project dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding-top:3px}
+.p1 .fig{grid-column:1/9}.p1 .txt{grid-column:9/13}
+.p2 .txt{grid-column:1/5;order:-1;border-right:1px solid var(--ink)}.p2 .fig{grid-column:5/13;border-right:0}
+.p3 .fig{grid-column:1/7}.p3 .txt{grid-column:7/13}
+.p3 .txt p.big{font-family:var(--serif);font-size:22px;line-height:1.35;font-weight:300}
+
+.method{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
+.step{padding:28px 28px 36px;border-right:1px solid var(--ink)}
+.step:last-child{border-right:0}
+.step svg{margin:18px 0 22px;aspect-ratio:1/1}
+.step h4{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:8px}
+.step p{font-size:15px;color:var(--ink2)}
+
+.studio{display:grid;grid-template-columns:1fr 1.3fr}
+.studio .txt{padding:72px 32px;border-right:1px solid var(--ink);display:flex;flex-direction:column;gap:28px}
+.studio .txt h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,4.2vw,60px);line-height:1.02;letter-spacing:-.025em}
+.studio .map{background:var(--paper2);padding:28px}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;font-size:15px}
+.people b{font-weight:500;display:block}
+.people span{color:var(--ink2);font-size:13px}
+.cta{display:inline-flex;align-items:center;gap:14px;font-family:var(--serif);font-size:26px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px;align-self:flex-start}
+.cta:hover{color:var(--brick);border-color:var(--brick)}
+
+footer{display:flex;justify-content:space-between;padding:22px 32px;flex-wrap:wrap;gap:12px}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  header{padding:18px 16px}nav{gap:16px}
+  .hero-text{grid-template-columns:1fr;padding:40px 16px 0}
+  .coord{padding:10px 16px}
+  .sec-head{grid-template-columns:1fr;gap:12px;padding:56px 16px 28px}
+  .project .fig,.project .txt{grid-column:1/-1 !important;border-right:0 !important}
+  .project .txt{padding:24px 16px;order:0 !important}
+  .project .fig{padding:16px;border-bottom:1px solid var(--ink)}
+  .method{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:0}.step{border-bottom:1px solid var(--ink);padding:20px 16px}
+  .studio{grid-template-columns:1fr}.studio .txt{border-right:0;border-bottom:1px solid var(--ink);padding:56px 16px}
+  .studio .map{padding:16px}
+  footer{padding:20px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}.house,.draw,.reveal{opacity:1;transform:none;stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">Havnegade<span>/</span>Tegnestue</a>
+  <nav class="mono"><a href="#work">Work</a><a href="#method">Method</a><a href="#studio">Studio</a></nav>
+</header>
+
+<div class="hero">
+  <div class="hero-text">
+    <h1>Buildings that<br>know where the<br><em>water</em> is.</h1>
+    <div class="hero-side">
+      <div class="mono">Architects &amp; harbour planners — est. 2009</div>
+      <p>A studio of fourteen on Christianshavn. We draw housing, schools and public waterfronts in brick, timber and patience — mostly for Copenhagen, sometimes for cities that want to feel like it.</p>
+    </div>
+  </div>
+  <svg id="skyline" viewBox="0 0 1320 560" aria-label="Line drawing of a Copenhagen harbour front with gabled houses, a spiral church spire and boats">
+    <defs>
+      <clipPath id="water"><rect x="0" y="392" width="1320" height="200"/></clipPath>
+      <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#1e2422" stroke-width=".7"/></pattern>
+    </defs>
+    <circle cx="1010" cy="150" r="64" fill="#b0503a" opacity=".9"/>
+    <g class="cloud" stroke="#1e2422" stroke-width="1" fill="#efe9dc">
+      <path d="M0 110 q14 -22 36 -10 q12 -20 34 -6 q22 -4 22 16 z"/>
+    </g>
+    <g id="spire"></g>
+    <g id="houses"></g>
+    <line x1="0" y1="392" x2="1320" y2="392" stroke="#1e2422" stroke-width="1.5"/>
+    <rect x="0" y="392" width="1320" height="8" fill="url(#hatch)"/>
+    <g id="reflect" clip-path="url(#water)" opacity=".28"></g>
+    <g id="waves" stroke="#efe9dc" stroke-width="3"></g>
+    <g id="ripples" stroke="#1e2422" stroke-width=".8" fill="none"></g>
+    <g class="boat" stroke="#1e2422" stroke-width="1.3" fill="#efe9dc">
+      <path d="M180 432 h150 l-18 22 h-118 z" fill="#3e6966"/>
+      <rect x="215" y="414" width="60" height="18"/>
+      <line x1="245" y1="414" x2="245" y2="346"/><path d="M245 350 l38 50 h-38z" fill="#efe9dc"/>
+      <circle cx="232" cy="423" r="3"/><circle cx="258" cy="423" r="3"/>
+    </g>
+    <g class="boat" style="animation-delay:-2s" stroke="#1e2422" stroke-width="1.3">
+      <path d="M840 470 h96 l-12 14 h-74 z" fill="#d29a3c"/>
+      <line x1="870" y1="470" x2="870" y2="452"/><circle cx="870" cy="448" r="5" fill="#efe9dc"/>
+    </g>
+  </svg>
+  <div class="coord mono"><span>55.6726° N, 12.5913° E</span><span>Sheet 01 / Harbour elevation 1:500</span></div>
+</div>
+
+<section id="work">
+  <div class="sec-head reveal">
+    <div class="mono">01 — Selected work</div>
+    <h2>Three projects, each drawn before it was rendered.</h2>
+  </div>
+
+  <article class="project p1 reveal">
+    <div class="fig"><svg id="axo" viewBox="0 0 800 520" aria-label="Axonometric drawing of a stepped courtyard housing block"></svg></div>
+    <div class="txt">
+      <div>
+        <div class="mono" style="color:var(--brick)">Housing — completed 2024</div>
+        <h3 style="margin-top:10px">Sydhavn Stepped Courtyard</h3>
+        <p style="margin-top:14px;color:var(--ink2)">142 homes stepping down from seven floors to two, so every flat sees the harbour and the courtyard gets four hours more sun in March.</p>
+      </div>
+      <dl><dt>Client</dt><dd>AAB Boligselskab</dd><dt>Area</dt><dd>14,800 m²</dd><dt>Material</dt><dd>Recycled yellow brick, CLT decks</dd></dl>
+    </div>
+  </article>
+
+  <article class="project p2 reveal">
+    <div class="fig"><svg viewBox="0 0 800 420" aria-label="Section drawing of a timber school with sawtooth roof">
+      <g stroke="#1e2422" fill="none" stroke-width="1.4">
+        <path d="M0 340 H800" stroke-width="2"/>
+        <rect x="0" y="340" width="800" height="80" fill="url(#hatch)" stroke="none"/>
+        <path d="M80 340 V150 L180 90 V150 L280 90 V150 L380 90 V150 L480 90 V150 L580 90 V150 L680 90 V340" fill="#e9dfc6"/>
+        <path d="M180 90 V150 M280 90 V150 M380 90 V150 M480 90 V150 M580 90 V150 M680 90 V150" stroke="#3e6966" stroke-width="5"/>
+        <path d="M80 245 H680" stroke-width="3"/>
+        <g stroke-width=".8" stroke="#5b605b">
+          <path d="M100 150 V245 M140 150 V245 M220 150 V245 M260 150 V245 M320 150 V245 M360 150 V245 M420 150 V245 M460 150 V245 M520 150 V245 M560 150 V245 M620 150 V245 M660 150 V245"/>
+        </g>
+        <path d="M80 150 H680" stroke-width="2"/>
+        <g stroke="#d29a3c" stroke-width="1.2" stroke-dasharray="4 5">
+          <path d="M760 10 L180 120"/><path d="M780 30 L380 120"/><path d="M800 50 L580 120"/>
+        </g>
+        <circle cx="760" cy="40" r="18" fill="#d29a3c" stroke="none"/>
+        <path d="M680 340 h60 v-20 h-60" />
+        <g fill="#1e2422" stroke="none" id="figs"></g>
+        <path d="M720 340 c-10 -40 -40 -60 -20 -110 c18 -30 50 -10 40 30 c-6 30 -16 50 -20 80" fill="#5f8c6a" stroke="#1e2422"/>
+        <path d="M40 340 c-8 -30 -30 -50 -14 -86 c14 -22 38 -8 30 22 c-4 24 -12 40 -16 64" fill="#5f8c6a"/>
+      </g>
+      <g font-family="IBM Plex Mono,monospace" font-size="11" fill="#1e2422">
+        <text x="200" y="80">north light, 6 bays</text>
+        <text x="96" y="236">studio floor +4.2</text>
+        <text x="96" y="332">ground floor ±0.0</text>
+      </g>
+    </svg></div>
+    <div class="txt">
+      <div>
+        <div class="mono" style="color:var(--brick)">Education — on site</div>
+        <h3 style="margin-top:10px">Valby Timber School</h3>
+        <p style="margin-top:14px;color:var(--ink2)">Six north-facing sawtooth bays bring even daylight to every classroom. The frame is spruce glulam; nothing in the building is glued that could be screwed.</p>
+      </div>
+      <dl><dt>Pupils</dt><dd>620, ages 6–15</dd><dt>Area</dt><dd>9,200 m²</dd><dt>Carbon</dt><dd>4.1 kg CO₂e/m²/yr</dd></dl>
+    </div>
+  </article>
+
+  <article class="project p3 reveal">
+    <div class="fig"><svg viewBox="0 0 600 520" aria-label="Plan drawing of a floating harbour bath with a diving tower">
+      <rect width="600" height="520" fill="#3e6966" opacity=".16"/>
+      <g id="planwaves" stroke="#3e6966" stroke-width="1" fill="none" opacity=".6"></g>
+      <g stroke="#1e2422" stroke-width="1.4" fill="#efe9dc">
+        <path d="M0 40 H600 V90 H0 Z" fill="#e6dfcf"/>
+        <path d="M0 90 H600" stroke-width="2.5"/>
+        <path d="M260 90 V150 H120 V420 H480 V150 H340 V90"/>
+        <rect x="150" y="180" width="140" height="210" fill="#9ac0bc"/>
+        <rect x="310" y="180" width="140" height="100" fill="#9ac0bc"/>
+        <rect x="310" y="300" width="140" height="90" fill="#7aa9a4"/>
+        <g stroke-width=".7" stroke="#3e6966">
+          <path d="M150 220 H290 M150 260 H290 M150 300 H290 M150 340 H290"/>
+        </g>
+        <rect x="360" y="320" width="40" height="40" fill="#b0503a"/>
+        <path d="M360 320 L400 360 M400 320 L360 360" stroke="#efe9dc"/>
+        <path d="M480 260 h70 v40 h-70" />
+        <circle cx="200" cy="472" r="6" fill="#d29a3c"/>
+        <path d="M200 472 c30 -10 60 10 90 0" fill="none" stroke-dasharray="3 4"/>
+      </g>
+      <g font-family="IBM Plex Mono,monospace" font-size="11" fill="#1e2422">
+        <text x="12" y="70">Islands Brygge quay</text>
+        <text x="160" y="200">lap pool 25 m</text>
+        <text x="318" y="200">children</text>
+        <text x="318" y="312">dive 5 m</text>
+        <text x="488" y="252">sauna</text>
+      </g>
+      <g transform="translate(540 470)" stroke="#1e2422" fill="none">
+        <circle r="22"/><path d="M0 -18 L6 6 L0 2 L-6 6 Z" fill="#1e2422"/>
+        <text y="-28" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" fill="#1e2422" stroke="none">N</text>
+      </g>
+    </svg></div>
+    <div class="txt">
+      <div>
+        <div class="mono" style="color:var(--brick)">Public waterfront — competition win, 2025</div>
+        <h3 style="margin-top:10px">Brygge Floating Bath</h3>
+        <p class="big" style="margin-top:18px">"The harbour was an industrial drain thirty years ago. Now it is the city's largest public room. We just add furniture."</p>
+      </div>
+      <dl><dt>Partner</dt><dd>Københavns Kommune</dd><dt>Capacity</dt><dd>900 bathers</dd><dt>Open</dt><dd>June 2027</dd></dl>
+    </div>
+  </article>
+</section>
+
+<section id="method">
+  <div class="sec-head reveal">
+    <div class="mono">02 — Method</div>
+    <h2>We start with a pencil and end with a site visit.</h2>
+  </div>
+  <div class="method reveal">
+    <div class="step">
+      <div class="mono">i. Walk</div>
+      <svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#1e2422" fill="none" stroke-width="1.4">
+        <path d="M20 160 C60 120 80 170 120 120 S170 60 180 40" stroke-dasharray="5 6"/>
+        <circle cx="20" cy="160" r="5" fill="#b0503a"/><circle cx="180" cy="40" r="5" fill="#b0503a"/>
+        <rect x="40" y="40" width="40" height="40"/><rect x="120" y="140" width="50" height="30"/><rect x="100" y="70" width="24" height="24" fill="url(#hatch)"/>
+      </g></svg>
+      <h4>Walk the site</h4><p>Every project begins with a day on foot: light, wind, where people already sit.</p>
+    </div>
+    <div class="step">
+      <div class="mono">ii. Section</div>
+      <svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#1e2422" fill="none" stroke-width="1.4">
+        <path d="M10 160 H190"/><path d="M40 160 V70 L100 30 L160 70 V160"/><path d="M40 115 H160 M100 30 V160" stroke-width=".8"/>
+        <path d="M190 20 L120 70" stroke="#d29a3c" stroke-dasharray="4 4"/><circle cx="190" cy="20" r="8" fill="#d29a3c" stroke="none"/>
+      </g></svg>
+      <h4>Draw the section</h4><p>We fix the cut through the building first. Plans follow from where light can reach.</p>
+    </div>
+    <div class="step">
+      <div class="mono">iii. Model</div>
+      <svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#1e2422" stroke-width="1.4">
+        <path d="M100 40 L160 72 L100 104 L40 72 Z" fill="#efe9dc"/><path d="M40 72 V140 L100 172 V104 Z" fill="#d29a3c"/><path d="M160 72 V140 L100 172 V104 Z" fill="#b0503a"/>
+        <path d="M60 70 L100 50 L140 70" fill="none" stroke-width=".8"/>
+      </g></svg>
+      <h4>Build it in card</h4><p>Hand-cut models at 1:200, photographed in real daylight on the studio roof.</p>
+    </div>
+    <div class="step">
+      <div class="mono">iv. Return</div>
+      <svg viewBox="0 0 200 200" aria-hidden="true"><g stroke="#1e2422" fill="none" stroke-width="1.4">
+        <path d="M20 170 H180"/><path d="M50 170 V80 H150 V170"/><path d="M50 80 L100 45 L150 80"/>
+        <rect x="70" y="100" width="20" height="26"/><rect x="110" y="100" width="20" height="26"/><path d="M90 170 V140 H110 V170"/>
+        <circle cx="166" cy="150" r="5" fill="#1e2422"/><path d="M166 155 V172 M158 162 H174"/>
+      </g></svg>
+      <h4>Go back after a year</h4><p>We revisit every building after its first winter and publish what we got wrong.</p>
+    </div>
+  </div>
+</section>
+
+<section id="studio" class="studio">
+  <div class="txt reveal">
+    <div class="mono">03 — Studio</div>
+    <h2>Fourteen people in an old rope warehouse on the canal.</h2>
+    <p style="color:var(--ink2)">Open for visits on Thursdays. Bring a project, a site or a question. We usually have coffee and almost always have cake.</p>
+    <div class="people">
+      <div><b>Mette Lindqvist</b><span>Founding partner</span></div>
+      <div><b>Jonas Aagaard</b><span>Partner, waterfronts</span></div>
+      <div><b>Freja Holm</b><span>Associate, timber</span></div>
+      <div><b>Kasper Nørby</b><span>Associate, housing</span></div>
+    </div>
+    <a class="cta" href="mailto:studio@havnegade.example">Write to the studio <span aria-hidden="true">→</span></a>
+    <div class="mono" style="color:var(--ink2)">Overgaden Neden Vandet 41, 1414 København K</div>
+  </div>
+  <div class="map reveal">
+    <svg viewBox="0 0 700 600" aria-label="Hand-drawn map of the Christianshavn canals with the studio marked">
+      <rect width="700" height="600" fill="#e6dfcf"/>
+      <path d="M0 120 C160 140 260 60 420 90 S640 200 700 180 V0 H0 Z" fill="#9ac0bc" stroke="#1e2422" stroke-width="1.4"/>
+      <path d="M260 600 C280 480 300 400 360 300 S470 150 520 0" fill="none" stroke="#9ac0bc" stroke-width="34"/>
+      <path d="M260 600 C280 480 300 400 360 300 S470 150 520 0" fill="none" stroke="#1e2422" stroke-width="36" stroke-opacity=".9" style="mix-blend-mode:multiply" opacity=".12"/>
+      <path d="M90 600 C120 520 200 470 330 360" fill="none" stroke="#9ac0bc" stroke-width="22"/>
+      <g id="blocks" stroke="#1e2422" stroke-width="1" fill="#efe9dc"></g>
+      <g stroke="#b0503a" stroke-width="2" fill="none"><path d="M420 600 V500 H520 V430" stroke-dasharray="6 6"/></g>
+      <g transform="translate(372 286)">
+        <circle r="30" fill="#b0503a" opacity=".2"><animate attributeName="r" values="14;34;14" dur="3s" repeatCount="indefinite"/></circle>
+        <circle r="10" fill="#b0503a" stroke="#1e2422"/>
+      </g>
+      <g font-family="IBM Plex Mono,monospace" font-size="12" fill="#1e2422">
+        <text x="400" y="290">HAVNEGADE TEGNESTUE</text>
+        <text x="40" y="50">INDERHAVNEN</text>
+        <text x="436" y="590">metro: Christianshavn</text>
+        <text x="300" y="560" transform="rotate(-74 300 560)">Christianshavns Kanal</text>
+      </g>
+      <g id="spireMini" transform="translate(560 380)" stroke="#1e2422" stroke-width="1.2" fill="#efe9dc"></g>
+    </svg>
+  </div>
+</section>
+
+<footer class="mono"><span>© Havnegade Tegnestue ApS</span><span>CVR 31 44 20 18</span><span>Instagram · LinkedIn</span></footer>
+
+<script>
+const NS="http://www.w3.org/2000/svg";
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+let seed=7;const rnd=()=>((seed=(seed*16807)%2147483647)-1)/2147483646;
+const fills=["#d29a3c","#b0503a","#5f8c84","#d8a99a","#e9dcc0","#c9b48a","#8a9b7a","#e2c26b"];
+
+function drawHouses(){
+  const g=document.getElementById("houses"),r=document.getElementById("reflect");
+  let x=-10,i=0;
+  while(x<1340){
+    const w=48+Math.floor(rnd()*36),h=120+Math.floor(rnd()*110),base=392,top=base-h;
+    if(x>560&&x<660){x+=8;continue}
+    const hg=el("g",{class:"house",style:`animation-delay:${i*45}ms`},g);
+    const fill=fills[Math.floor(rnd()*fills.length)];
+    const type=rnd();
+    let roof;
+    if(type<.45)roof=`M${x} ${top} L${x+w/2} ${top-w*.55} L${x+w} ${top}`;
+    else if(type<.8){const s=w/5;roof=`M${x} ${top} v-12 h${s} v-12 h${s} v-14 h${s} v14 h${s} v12 h${s} v12`}
+    else roof=`M${x} ${top} h${w}`;
+    el("path",{d:`M${x} ${base} V${top} ${roof.replace(/^M\S+ \S+/,"")} V${base} Z`,fill,stroke:"#1e2422","stroke-width":1.3},hg);
+    const cols=Math.max(2,Math.floor(w/18)),rows=Math.floor((h-40)/32);
+    for(let c=0;c<cols;c++)for(let rr=0;rr<rows;rr++){
+      const wx=x+(w/(cols))*(c+.5)-5,wy=top+18+rr*32;
+      el("rect",{x:wx,y:wy,width:10,height:16,fill:rnd()<.18?"#f3d98a":"#efe9dc",stroke:"#1e2422","stroke-width":.9},hg);
+    }
+    if(type<.45)el("circle",{cx:x+w/2,cy:top-w*.22,r:5,fill:"none",stroke:"#1e2422","stroke-width":.9},hg);
+    el("rect",{x:x+w/2-6,y:base-26,width:12,height:26,fill:"#1e2422"},hg);
+    x+=w;i++;
+  }
+  r.appendChild(g.cloneNode(true));
+  r.lastChild.setAttribute("transform","translate(0 784) scale(1 -1)");
+  r.lastChild.removeAttribute("id");
+  r.querySelectorAll(".house").forEach(h=>h.style.animationDelay="1.2s");
+}
+function drawSpire(target,s,ox,oy){
+  const g=el("g",{transform:`translate(${ox} ${oy}) scale(${s})`},target);
+  el("rect",{x:-28,y:-170,width:56,height:170,fill:"#c9a77a",stroke:"#1e2422","stroke-width":1.3},g);
+  el("rect",{x:-14,y:-140,width:28,height:40,fill:"#efe9dc",stroke:"#1e2422"},g);
+  el("path",{d:"M-24 -170 L0 -190 L24 -170Z",fill:"#3e6966",stroke:"#1e2422"},g);
+  let d="",y=-190,hw=20;
+  el("path",{d:"M-20 -190 L0 -330 L20 -190Z",fill:"#2f4f4c",stroke:"#1e2422","stroke-width":1.2},g);
+  for(let k=0;k<9;k++){const ny=y-14,nhw=hw-2.1;d+=`M${-hw} ${y} L${nhw} ${ny} `;y=ny;hw=nhw}
+  el("path",{d,stroke:"#d29a3c","stroke-width":2.4,fill:"none",class:"draw",pathLength:1},g);
+  el("path",{d:"M0 -330 V-360",stroke:"#1e2422","stroke-width":1.4},g);
+  el("circle",{cx:0,cy:-364,r:4,fill:"#d29a3c",stroke:"#1e2422"},g);
+}
+function drawWater(){
+  const w=document.getElementById("waves"),rp=document.getElementById("ripples");
+  for(let y=404;y<560;y+=9){
+    let d="";for(let x=0;x<1320;x+=40+rnd()*60){const l=20+rnd()*80;d+=`M${x} ${y} h${l} `}
+    el("path",{d},w);
+  }
+  for(let y=410;y<560;y+=18){
+    let d="";for(let x=rnd()*80;x<1320;x+=120+rnd()*140){d+=`M${x} ${y} q8 -4 16 0 q8 4 16 0 `}
+    el("path",{d},rp);
+  }
+}
+function drawAxo(){
+  const svg=document.getElementById("axo"),S=10,cx=400,cy=150;
+  const P=(x,y,z)=>`${cx+(x-y)*S*.866},${cy+(x+y)*S*.5-z*S}`;
+  const poly=(pts,fill,sw=1.2)=>el("polygon",{points:pts.map(p=>P(...p)).join(" "),fill,stroke:"#1e2422","stroke-width":sw},svg);
+  poly([[-6,-6,0],[34,-6,0],[34,34,0],[-6,34,0]],"#d8cfb9",1);
+  for(let k=-4;k<34;k+=4)el("line",{x1:P(k,-6,0).split(",")[0],y1:P(k,-6,0).split(",")[1],x2:P(k,34,0).split(",")[0],y2:P(k,34,0).split(",")[1],stroke:"#5b605b","stroke-width":.4},svg);
+  const boxes=[];
+  for(let i=0;i<7;i++)boxes.push([0,i*4,4,4,(7-i)*3+1]);
+  for(let i=1;i<7;i++)boxes.push([i*4,0,4,4,(7-i)*3+1]);
+  boxes.push([24,24,6,6,2]);
+  boxes.sort((a,b)=>(a[0]+a[1])-(b[0]+b[1]));
+  boxes.forEach(([x,y,w,d,h])=>{
+    poly([[x,y+d,0],[x+w,y+d,0],[x+w,y+d,h],[x,y+d,h]],"#d29a3c");
+    poly([[x+w,y,0],[x+w,y+d,0],[x+w,y+d,h],[x+w,y,h]],"#b0503a");
+    poly([[x,y,h],[x+w,y,h],[x+w,y+d,h],[x,y+d,h]],"#efe9dc");
+    for(let z=1;z<h;z+=3){
+      for(let u=.6;u<w;u+=1.4){const a=P(x+u,y+d,z).split(","),b=P(x+u+.7,y+d,z+1.6).split(",");el("rect",{x:a[0],y:b[1],width:b[0]-a[0],height:a[1]-b[1],fill:"#1e2422",opacity:.55},svg)}
+      el("polyline",{points:[P(x+w,y,z),P(x+w,y+d,z)].join(" "),stroke:"#efe9dc","stroke-width":.8,fill:"none"},svg);
+    }
+    if(h>2)el("circle",{cx:P(x+w/2,y+d/2,h).split(",")[0],cy:+P(x+w/2,y+d/2,h).split(",")[1]-6,r:5,fill:"#5f8c6a",stroke:"#1e2422","stroke-width":.8},svg);
+  });
+  [[14,14],[18,10],[10,20],[20,20],[16,24]].forEach(([x,y])=>{const p=P(x,y,0).split(",");el("line",{x1:p[0],y1:p[1],x2:p[0],y2:p[1]-22,stroke:"#1e2422"},svg);el("circle",{cx:p[0],cy:p[1]-30,r:11,fill:"#8a9b7a",stroke:"#1e2422"},svg)});
+  const t=el("text",{x:24,y:495,"font-family":"IBM Plex Mono,monospace","font-size":11,fill:"#1e2422"},svg);t.textContent="AXONOMETRIC — 7 to 2 floors, courtyard open to the southwest";
+}
+function drawFigures(){
+  const g=document.getElementById("figs");
+  [[130,340],[170,340],[300,340],[340,340],[460,340],[520,340],[150,245],[250,245],[410,245],[600,245],[630,245]].forEach(([x,y],i)=>{
+    const h=i%3?26:34;el("circle",{cx:x,cy:y-h-4,r:4},g);el("rect",{x:x-3,y:y-h,width:6,height:h,rx:2},g);
+  });
+}
+function drawPlanWaves(){
+  const g=document.getElementById("planwaves");
+  for(let y=100;y<520;y+=14){let d=`M0 ${y}`;for(let x=0;x<600;x+=30)d+=` q7.5 -4 15 0 t15 0`;el("path",{d},g)}
+}
+function drawBlocks(){
+  const g=document.getElementById("blocks");
+  seed=31;
+  for(let i=0;i<70;i++){
+    const x=rnd()*680,y=130+rnd()*460,w=24+rnd()*50,h=16+rnd()*40;
+    const dx=x+w/2,dy=y+h/2;
+    const cx=dy>300?300+(600-dy)*.1:360+(300-dy)*.55;
+    if(Math.abs(dx-cx)<60)continue;
+    if(dy>420&&dx<330&&dx>60&&Math.abs(dy-(600-(dx-90)*1))<40)continue;
+    el("rect",{x,y,width:w,height:h,transform:`rotate(${(rnd()-.5)*12} ${dx} ${dy})`,fill:rnd()<.15?"#d29a3c":"#efe9dc"},g);
+  }
+}
+drawSpire(document.getElementById("spire"),1,610,392);
+drawHouses();
+drawWater();
+drawAxo();
+drawFigures();
+drawPlanWaves();
+drawBlocks();
+drawSpire(document.getElementById("spireMini"),.35,0,60);
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(n=>io.observe(n));
+</script>
+</body>
+</html>

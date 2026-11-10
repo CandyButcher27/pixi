@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spanwise — the slow path, ranked</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EFE7;--ink:#15171A;--graphite:#5B5E63;--rule:#CFCABD;--oxide:#C2410C;--ok:#3F6B3A;
+  --display:"Bricolage Grotesque",Georgia,serif;
+  --body:"IBM Plex Sans",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.mono{font-family:var(--mono)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.oxide{color:var(--oxide)}
+
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;gap:32px;height:64px}
+.logo{font:700 22px/1 var(--display);letter-spacing:-.02em;text-decoration:none}
+.logo span{color:var(--oxide)}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px}
+nav ul a{text-decoration:none;color:var(--graphite)}
+nav ul a:hover{color:var(--ink)}
+nav .right{margin-left:auto;display:flex;gap:20px;align-items:center;font-size:14px}
+
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px;border-radius:12px;font:600 15px/1 var(--body);text-decoration:none;border:1.5px solid var(--ink);cursor:pointer}
+.btn.primary{background:var(--oxide);border-color:var(--oxide);color:#fff}
+.btn.primary:hover{background:#9A3412;border-color:#9A3412}
+.btn.ghost{background:transparent}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn.small{height:40px;padding:0 16px;font-size:14px}
+
+section{padding:112px 0}
+.split{display:grid;gap:64px;align-items:start}
+
+/* hero */
+.hero{padding:88px 0 96px}
+.hero .split{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:end}
+.hero h1{font:700 112px/.92 var(--display);letter-spacing:-.045em;margin:20px 0 32px}
+.hero h1 em{font-style:normal;color:var(--oxide)}
+.lede{font-size:20px;line-height:1.5;max-width:34ch;color:#2A2D31}
+.actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;align-items:center}
+.install{font:400 13px/1 var(--mono);color:var(--graphite);margin-left:6px}
+.readout{background:var(--ink);color:#E9E5DA;border-radius:28px;padding:26px 26px 22px;font:400 12px/1.4 var(--mono)}
+.readout .hd{display:flex;justify-content:space-between;color:#8D9096;margin-bottom:14px}
+.span{display:grid;grid-template-columns:96px 1fr 52px;gap:10px;align-items:center;padding:6px 0;border-top:1px solid #2B2E33}
+.bar{height:8px;background:#3A3E44;position:relative}
+.bar i{position:absolute;top:0;bottom:0;background:#9A9A8E}
+.bar i.hot{background:var(--oxide)}
+.span b{font-weight:500;text-align:right}
+.readout .ft{margin-top:14px;color:#8D9096}
+
+/* ranked table */
+.ranked .split{grid-template-columns:minmax(0,1.6fr) minmax(0,.62fr)}
+.ranked .side{order:2;padding-top:40px}
+.ranked .intro{font-size:17px;color:#3A3D42;max-width:60ch;margin-bottom:28px}
+.big{font:700 96px/.9 var(--display);letter-spacing:-.04em}
+.side h2{font:700 44px/1.02 var(--display);letter-spacing:-.025em;margin:18px 0 18px}
+.side p{color:var(--graphite);max-width:30ch}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);text-align:left;padding:0 10px 12px;border-bottom:1.5px solid var(--ink)}
+td{padding:13px 10px;border-bottom:1px solid var(--rule);vertical-align:middle}
+td.n,th.n{text-align:right;font-family:var(--mono)}
+td.route{font-family:var(--mono);font-size:13px}
+td.route small{display:block;color:var(--graphite);font-family:var(--body);font-size:12px;margin-top:2px}
+.delta.up{color:var(--oxide);font-weight:500}
+.delta.dn{color:var(--ok)}
+svg.spark{width:84px;height:22px;display:block}
+.tabs{display:flex;gap:18px;margin-bottom:20px;font:500 13px/1 var(--mono)}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:0 0 8px;font:inherit;color:var(--graphite);cursor:pointer}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--oxide)}
+
+/* method */
+.ranked{border-top:1px solid var(--rule)}
+.method .split{grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr)}
+.method .pull{order:-1}
+.method h2{font:700 64px/.96 var(--display);letter-spacing:-.035em;max-width:14ch;margin:18px 0 44px}
+ol.steps{list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:72px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--rule)}
+ol.steps li::before{content:"0" counter(s);font:500 14px/1.6 var(--mono);color:var(--oxide)}
+ol.steps h3{font:600 19px/1.3 var(--body);margin-bottom:6px}
+ol.steps p{color:#3A3D42;max-width:62ch}
+pre{margin-top:28px;background:#E7E2D5;border-radius:20px;padding:22px 24px;font:400 13px/1.7 var(--mono);overflow-x:auto}
+pre .k{color:var(--oxide)}pre .c{color:#7A7C7F}pre .s{color:var(--ok)}
+.pull{position:sticky;top:40px;padding-top:12px}
+.pull .big{font-size:104px}
+.pull p{font:500 22px/1.35 var(--display);margin-top:18px;letter-spacing:-.01em}
+.pull cite{display:block;font:400 13px/1.5 var(--mono);color:var(--graphite);margin-top:18px;font-style:normal}
+
+/* full-bleed band */
+.band{background:var(--ink);color:#E9E5DA}
+.band .split{grid-template-columns:minmax(0,.75fr) minmax(0,1.6fr)}
+.band h2{font:700 72px/.94 var(--display);letter-spacing:-.04em;color:#F2EFE7}
+.band .eyebrow{color:#8D9096}
+.band .side p{color:#A9ABAE;margin-top:22px;max-width:28ch}
+dl.signals{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 110px}
+dl.signals div{display:contents}
+dl.signals dt,dl.signals dd{padding:15px 12px 15px 0;border-top:1px solid #2F3237}
+dl.signals dt{font:500 14px/1.4 var(--mono);color:#F2EFE7}
+dl.signals dd{font-size:15px;color:#B9BBBD}
+dl.signals dd.u{font:400 13px/1.4 var(--mono);color:#E8774A;text-align:right;padding-right:0}
+
+/* pricing */
+.pricing .split{grid-template-columns:minmax(0,2fr) minmax(0,.62fr)}
+.pricing td:first-child{width:38%}
+.pricing h2{font:700 64px/.96 var(--display);letter-spacing:-.035em;margin:18px 0 40px}
+.pricing table td:first-child{color:#3A3D42}
+.pricing th.plan{font:700 22px/1.1 var(--display);letter-spacing:-.01em;text-transform:none;color:var(--ink)}
+.pricing th.plan small{display:block;font:400 12px/1.4 var(--mono);color:var(--graphite);margin-top:6px}
+.pricing td.c{font-family:var(--mono)}
+.pricing tfoot td{border-bottom:0;padding-top:22px}
+.note{padding-top:96px}
+.note h3{font:700 32px/1.05 var(--display);letter-spacing:-.02em;margin:18px 0 10px}
+.note .big{color:var(--oxide)}
+ul.terms{list-style:none;font:400 13px/1.5 var(--mono);margin-top:36px;display:flex;flex-wrap:wrap;gap:8px 32px;color:var(--graphite)}
+.note p{color:var(--graphite);margin-bottom:14px}
+
+footer{border-top:1.5px solid var(--ink);padding:72px 0 48px}
+footer .grid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px}
+footer .cta{font:700 40px/1 var(--display);letter-spacing:-.03em;margin-bottom:20px}
+footer h4{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite);margin-bottom:14px}
+footer ul{list-style:none;font-size:14px;line-height:2}
+footer ul a{text-decoration:none}
+footer ul a:hover{color:var(--oxide)}
+footer .legal{display:flex;justify-content:space-between;margin-top:56px;font:400 12px/1 var(--mono);color:var(--graphite)}
+
+:focus-visible{outline:2px solid var(--oxide);outline-offset:3px}
+
+@media (max-width:960px){
+  .wrap{padding:0 20px}
+  nav ul{display:none}
+  .split,.hero .split,.ranked .split,.method .split,.band .split,.pricing .split{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:64px}
+  .big,.pull .big{font-size:64px}
+  .method h2,.pricing h2,.band h2{font-size:44px}
+  section{padding:72px 0}
+  .note{padding-top:0}
+  .pull{position:static}
+  .table-scroll{overflow-x:auto}
+  footer .grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">span<span>/</span>wise</a>
+    <ul>
+      <li><a href="#method">Attribution</a></li>
+      <li><a href="#ranked">Ranked paths</a></li>
+      <li><a href="#signals">Signals</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#">Docs</a></li>
+    </ul>
+    <div class="right">
+      <a href="#">Sign in</a>
+      <a class="btn ghost small" href="#">Start tracing</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Latency analytics for backend services</p>
+        <h1>Find the query that <em>woke</em> you up.</h1>
+        <p class="lede">Spanwise ranks every endpoint by the time it actually costs you, then names the query, lock, or downstream call responsible. No dashboards to build first.</p>
+        <div class="actions">
+          <a class="btn primary" href="#">Trace your first service</a>
+          <a class="btn ghost" href="#ranked">See a ranked report</a>
+          <span class="install">pip install spanwise</span>
+        </div>
+      </div>
+      <aside class="readout" aria-label="Example trace">
+        <div class="hd"><span>POST /v2/orders</span><span>412 ms</span></div>
+        <div class="span"><span>handler</span><div class="bar"><i style="left:0;width:100%"></i></div><b>412</b></div>
+        <div class="span"><span>auth.verify</span><div class="bar"><i style="left:0;width:6%"></i></div><b>24</b></div>
+        <div class="span"><span>pg.select</span><div class="bar"><i class="hot" style="left:7%;width:61%"></i></div><b>251</b></div>
+        <div class="span"><span>redis.get</span><div class="bar"><i style="left:69%;width:2%"></i></div><b>8</b></div>
+        <div class="span"><span>stripe.post</span><div class="bar"><i style="left:72%;width:21%"></i></div><b>88</b></div>
+        <div class="span"><span>serialize</span><div class="bar"><i style="left:94%;width:5%"></i></div><b>21</b></div>
+        <div class="ft">61% in one seq scan on orders.customer_id</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="method" id="method">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">How attribution works</p>
+        <h2>Read the query, not the dashboard.</h2>
+        <ol class="steps">
+          <li><div><h3>Instrument once, at the driver</h3><p>The agent wraps your database driver, HTTP client and queue consumer. Every span carries the normalized statement and its bind shape, never the bound values.</p></div></li>
+          <li><div><h3>Group by fingerprint, not by URL</h3><p>Two routes that run the same unindexed join are one problem. Spanwise collapses them so a fix shows up once, with its total cost across services.</p></div></li>
+          <li><div><h3>Rank by time lost</h3><p>Calls multiplied by excess latency over the route's own baseline. A rare 9-second report job ranks below a 40 ms query that runs two million times a day.</p></div></li>
+          <li><div><h3>Explain against the deploy</h3><p>Each regression links to the commit range, the plan change Postgres reported, and the rows-examined ratio before and after.</p></div></li>
+        </ol>
+<pre><span class="c"># settings.py — the whole setup</span>
+<span class="k">import</span> spanwise
+
+spanwise.init(
+    service=<span class="s">"checkout-api"</span>,
+    drivers=[<span class="s">"psycopg"</span>, <span class="s">"httpx"</span>, <span class="s">"celery"</span>],
+    sample=<span class="s">"tail:p95"</span>,   <span class="c"># keep every slow trace, 2% of the rest</span>
+)</pre>
+      </div>
+      <div class="pull">
+        <div class="big">11<span class="oxide">h</span></div>
+        <p>of p99 time per day traced to a single missing index on orders.customer_id.</p>
+        <cite>Platform team, 140-service fleet, first week on Spanwise</cite>
+      </div>
+    </div>
+  </section>
+
+  <section class="ranked" id="ranked">
+    <div class="wrap split">
+      <div class="side">
+        <p class="eyebrow">This week, checkout-api</p>
+        <div class="big oxide">+38%</div>
+        <h2>The slow path, ranked.</h2>
+        <p>p99 on order creation, since Tuesday's deploy.</p>
+      </div>
+      <div class="table-scroll">
+        <p class="intro">Every route in checkout-api, sorted by total engineer-visible time lost per day, not by alert volume. The top row is where the next fix pays the most.</p>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-sort="lost">Time lost</button>
+          <button role="tab" aria-selected="false" data-sort="p99">p99</button>
+          <button role="tab" aria-selected="false" data-sort="calls">Calls</button>
+        </div>
+        <table id="routes">
+          <thead><tr><th>Route</th><th class="n">p50</th><th class="n">p99</th><th class="n">Calls / day</th><th class="n">Lost / day</th><th>7 days</th><th class="n">Δ p99</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="signals">
+    <div class="wrap split">
+      <div class="side">
+        <p class="eyebrow">What it watches</p>
+        <h2 style="margin-top:18px">Signals, with units.</h2>
+        <p>Everything is a distribution with a baseline. Nothing is a vanity counter.</p>
+      </div>
+      <dl class="signals">
+        <div><dt>query.fingerprint</dt><dd>Normalized SQL with literals stripped, grouped across services</dd><dd class="u">ms · p50/p99</dd></div>
+        <div><dt>rows.examined_ratio</dt><dd>Rows scanned per row returned, from the planner's own report</dd><dd class="u">ratio</dd></div>
+        <div><dt>lock.wait</dt><dd>Time blocked on row and advisory locks, with the holder's statement</dd><dd class="u">ms</dd></div>
+        <div><dt>pool.saturation</dt><dd>Connection pool checkout wait, per worker</dd><dd class="u">ms · %</dd></div>
+        <div><dt>downstream.call</dt><dd>Outbound HTTP and gRPC spans, keyed by host and method</dd><dd class="u">ms · status</dd></div>
+        <div><dt>queue.lag</dt><dd>Enqueue-to-start delay for Celery, Sidekiq, SQS and Kafka consumers</dd><dd class="u">s</dd></div>
+        <div><dt>gc.pause</dt><dd>Runtime pauses overlapping a request, so you stop blaming the database</dd><dd class="u">ms</dd></div>
+        <div><dt>n_plus_one</dt><dd>Repeated identical fingerprints inside one span tree</dd><dd class="u">count</dd></div>
+        <div><dt>deploy.marker</dt><dd>Commit SHA and range, pulled from your CI on release</dd><dd class="u">sha</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="wrap split">
+      <div class="table-scroll">
+        <p class="eyebrow">Pricing</p>
+        <h2>Priced by spans kept, not seats.</h2>
+        <table>
+          <thead><tr><th></th><th class="plan">Solo<small>$0 / month</small></th><th class="plan">Team<small>$0.30 / M spans</small></th><th class="plan">Fleet<small>annual, volume</small></th></tr></thead>
+          <tbody>
+            <tr><td>Spans retained</td><td class="c">10 M / mo</td><td class="c">metered</td><td class="c">committed</td></tr>
+            <tr><td>Retention</td><td class="c">7 days</td><td class="c">30 days</td><td class="c">13 months</td></tr>
+            <tr><td>Services</td><td class="c">3</td><td class="c">unlimited</td><td class="c">unlimited</td></tr>
+            <tr><td>Ranked regressions by deploy</td><td class="c">yes</td><td class="c">yes</td><td class="c">yes</td></tr>
+            <tr><td>Query plan capture</td><td class="c">—</td><td class="c">yes</td><td class="c">yes</td></tr>
+            <tr><td>Self-hosted collector</td><td class="c">—</td><td class="c">yes</td><td class="c">yes</td></tr>
+            <tr><td>SSO and audit log</td><td class="c">—</td><td class="c">—</td><td class="c">yes</td></tr>
+          </tbody>
+          <tfoot><tr><td></td><td class="c"><a class="btn ghost small" href="#">Start free</a></td><td class="c"><a class="btn primary small" href="#">Start trial</a></td><td class="c"><a class="btn ghost small" href="#">Talk to us</a></td></tr></tfoot>
+        </table>
+        <ul class="terms">
+          <li>No per-seat pricing on any plan</li>
+          <li>Sampling decided at the tail, so you only pay for slow traces</li>
+          <li>Export raw spans as OTLP at any time, on every plan</li>
+        </ul>
+      </div>
+      <div class="note">
+        <div class="big">$0</div>
+        <h3>Free stays free.</h3>
+        <p>Solo never expires.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="cta">Your p99 has a name.</p>
+        <a class="btn primary" href="#">Trace your first service</a>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="#">Ranked paths</a></li><li><a href="#">Query plans</a></li><li><a href="#">Deploy diff</a></li><li><a href="#">Changelog</a></li></ul></div>
+      <div><h4>Agents</h4><ul><li><a href="#">Python</a></li><li><a href="#">Go</a></li><li><a href="#">Node</a></li><li><a href="#">JVM</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">Docs</a></li><li><a href="#">Security</a></li><li><a href="#">Status</a></li><li><a href="#">Contact</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Spanwise</span><span>SOC 2 Type II · data stays in-region</span></div>
+  </div>
+</footer>
+
+<script>
+const routes = [
+  ["POST /v2/orders","pg.select orders by customer_id",38,412,182000,"+38%",[3,3,4,3,4,9,10]],
+  ["GET /v2/cart","n+1 on line_items",22,236,940000,"+12%",[5,5,6,5,6,7,7]],
+  ["POST /v2/payments","stripe.post, retry storm",140,1820,41000,"+4%",[6,7,6,7,6,7,7]],
+  ["GET /v2/products/:id","redis miss to pg",9,88,2100000,"−6%",[6,6,5,5,5,4,4]],
+  ["POST /v2/webhooks/stripe","lock.wait on payments",31,640,58000,"+21%",[2,2,3,3,5,6,6]],
+  ["GET /v2/orders/:id","serializer, 14 joins",44,310,320000,"+2%",[5,5,5,6,5,5,6]],
+  ["GET /internal/report","seq scan, nightly",2900,9100,40,"−1%",[7,7,7,6,7,7,7]],
+  ["PUT /v2/addresses","pool.saturation",18,205,76000,"+9%",[3,4,4,4,5,5,5]]
+];
+const lost = r => r[4] * Math.max(r[3] - r[2], 0) / 3.6e6;
+const spark = v => {
+  const pts = v.map((y, i) => `${i * 14},${22 - y * 2}`).join(" ");
+  return `<svg class="spark" viewBox="0 0 84 22" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
+};
+const body = document.querySelector("#routes tbody");
+const render = key => {
+  const sorted = [...routes].sort((a, b) => key === "p99" ? b[3] - a[3] : key === "calls" ? b[4] - a[4] : lost(b) - lost(a));
+  body.innerHTML = sorted.map(r => `<tr><td class="route">${r[0]}<small>${r[1]}</small></td><td class="n">${r[2]} ms</td><td class="n">${r[3].toLocaleString()} ms</td><td class="n">${r[4].toLocaleString()}</td><td class="n">${lost(r).toFixed(1)} h</td><td class="${r[5].startsWith("+") ? "oxide" : ""}">${spark(r[6])}</td><td class="n delta ${r[5].startsWith("+") ? "up" : "dn"}">${r[5]}</td></tr>`).join("");
+};
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+  render(b.dataset.sort);
+}));
+render("lost");
+</script>
+</body>
+</html>

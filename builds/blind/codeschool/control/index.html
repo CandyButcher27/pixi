@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loop &amp; Lark — Coding School for Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe3;--ink:#1c1a17;--grid:#e2dac7;
+  --tomato:#e8553d;--mustard:#f2b632;--teal:#1f8a7a;--violet:#6b4fd8;--sky:#9fd3e6;
+  --radius:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:18px;line-height:1.5;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+a{color:inherit}
+.mono{font-family:"Space Mono",monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:2px solid var(--ink)}
+.logo{font-weight:800;font-size:24px;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:22px;height:22px;background:var(--tomato);border:2px solid var(--ink);display:inline-block;transform:rotate(12deg)}
+nav ul{display:flex;gap:28px;list-style:none;font-family:"Space Mono",monospace;font-size:14px}
+nav ul a{text-decoration:none}
+nav ul a:hover{text-decoration:underline wavy var(--tomato)}
+.btn{display:inline-block;font-family:"Space Mono",monospace;font-weight:700;font-size:15px;text-decoration:none;
+  padding:12px 20px;border:2px solid var(--ink);background:var(--mustard);box-shadow:4px 4px 0 var(--ink);
+  transition:transform .12s,box-shadow .12s;cursor:pointer;color:var(--ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn.dark{background:var(--ink);color:var(--paper);box-shadow:4px 4px 0 var(--tomato)}
+
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;padding:72px 0 88px;align-items:center}
+.tag{font-family:"Space Mono",monospace;font-size:13px;text-transform:uppercase;letter-spacing:.08em;background:var(--ink);color:var(--paper);padding:4px 10px;display:inline-block}
+h1{font-size:clamp(48px,7.4vw,104px);line-height:.92;letter-spacing:-.045em;font-weight:800;margin:22px 0 26px}
+h1 .u{background:linear-gradient(transparent 62%,var(--sky) 62%)}
+h1 .b{color:var(--tomato)}
+.hero p.lead{font-size:21px;max-width:30ch;margin-bottom:34px}
+.hero .ctas{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.hero .note{font-family:"Space Mono",monospace;font-size:13px}
+
+.playground{background:#fffdf7;border:2px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:20px}
+.pg-head{display:flex;justify-content:space-between;font-family:"Space Mono",monospace;font-size:12px;margin-bottom:14px}
+.pg-body{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.blocks{display:flex;flex-direction:column;gap:6px}
+.blk{font-family:"Space Mono",monospace;font-size:13px;font-weight:700;color:#fff;padding:9px 12px;border-radius:var(--radius);
+  border:2px solid var(--ink);position:relative;user-select:none}
+.blk::after{content:"";position:absolute;left:16px;bottom:-8px;width:16px;height:8px;background:inherit;border:2px solid var(--ink);border-top:0;border-radius:0 0 4px 4px;z-index:1}
+.blk.start{background:var(--mustard);color:var(--ink);border-radius:18px 18px var(--radius) var(--radius)}
+.blk.move{background:var(--violet)}
+.blk.turn{background:var(--teal)}
+.blk.loop{background:var(--tomato)}
+.blk.in{margin-left:22px}
+.blk.on{outline:3px solid var(--mustard);outline-offset:2px}
+.stage{position:relative;aspect-ratio:1;border:2px solid var(--ink);background:
+  linear-gradient(#cfe7ee 1px,transparent 1px) 0 0/20% 20%,linear-gradient(90deg,#cfe7ee 1px,transparent 1px) 0 0/20% 20%,#f3fbfd}
+.bot{position:absolute;width:20%;height:20%;display:grid;place-items:center;transition:left .35s,top .35s,transform .35s;left:0;top:80%}
+.bot svg{width:70%}
+.star{position:absolute;width:20%;height:20%;display:grid;place-items:center;font-size:26px;left:80%;top:0}
+.pg-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px}
+.pg-foot .btn{padding:8px 16px;font-size:13px}
+#msg{font-family:"Space Mono",monospace;font-size:12px}
+
+.strip{background:var(--ink);color:var(--paper);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.strip div.s{padding:26px 20px;border-left:1px dashed #555}
+.strip div.s:first-child{border-left:0}
+.strip b{display:block;font-size:40px;letter-spacing:-.03em;line-height:1}
+.strip span{font-family:"Space Mono",monospace;font-size:12px;opacity:.75}
+
+section{padding:96px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:48px}
+h2{font-size:clamp(36px,5vw,64px);line-height:.98;letter-spacing:-.035em;font-weight:800;max-width:14ch}
+.sec-head p{max-width:38ch}
+
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);background:#fffdf7}
+.track{padding:30px 28px 34px;border-left:2px solid var(--ink);display:flex;flex-direction:column}
+.track:first-child{border-left:0}
+.age{font-family:"Space Mono",monospace;font-size:13px;font-weight:700;display:inline-block;padding:3px 8px;border:2px solid var(--ink);align-self:flex-start}
+.track h3{font-size:32px;letter-spacing:-.03em;margin:18px 0 8px;line-height:1}
+.track ul{list-style:none;margin:18px 0 26px;font-size:16px}
+.track li{padding:8px 0;border-top:1px dashed #b9b09b}
+.track li::before{content:"› ";font-family:"Space Mono",monospace;color:var(--tomato);font-weight:700}
+.track .tool{margin-top:auto;font-family:"Space Mono",monospace;font-size:13px}
+.track:nth-child(1) .age{background:var(--mustard)}
+.track:nth-child(2) .age{background:var(--sky)}
+.track:nth-child(3) .age{background:var(--tomato);color:#fff}
+
+.week{display:grid;grid-template-columns:280px 1fr;gap:56px}
+.week aside{position:sticky;top:30px;align-self:start}
+.steps{counter-reset:s}
+.step{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:26px 0;border-top:2px solid var(--ink)}
+.step:last-child{border-bottom:2px solid var(--ink)}
+.step .t{font-family:"Space Mono",monospace;font-size:14px;font-weight:700}
+.step h4{font-size:26px;letter-spacing:-.02em;margin-bottom:6px}
+.code{font-family:"Space Mono",monospace;font-size:13px;background:var(--ink);color:#e8e2d0;padding:12px 14px;margin-top:12px;display:inline-block;border-radius:var(--radius)}
+.code .k{color:var(--mustard)}.code .s{color:var(--sky)}
+
+.made{background:var(--teal);color:#fff;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.made h2{color:#fff}
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:18px}
+.proj{background:#fffdf7;color:var(--ink);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:16px;display:flex;flex-direction:column;gap:12px}
+.proj .art{aspect-ratio:4/3;border:2px solid var(--ink);display:grid;place-items:center;font-size:48px}
+.proj:first-child{grid-row:span 2}
+.proj:first-child .art{aspect-ratio:auto;flex:1;min-height:260px}
+.proj .by{font-family:"Space Mono",monospace;font-size:12px}
+.proj h5{font-size:20px;letter-spacing:-.02em}
+
+.quotes{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start}
+blockquote{font-size:clamp(26px,3vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:600}
+blockquote footer{font-family:"Space Mono",monospace;font-size:14px;font-weight:400;margin-top:18px}
+.minis{display:flex;flex-direction:column;gap:18px}
+.mini{border:2px solid var(--ink);background:#fffdf7;padding:18px;font-size:16px}
+.mini:nth-child(2){transform:rotate(-1.2deg);background:#fff4d6}
+.mini cite{display:block;font-style:normal;font-family:"Space Mono",monospace;font-size:12px;margin-top:8px}
+
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.plan{border:2px solid var(--ink);background:#fffdf7;padding:28px;display:flex;flex-direction:column}
+.plan.hot{background:var(--mustard);transform:translateY(-12px);box-shadow:8px 8px 0 var(--ink)}
+.plan .price{font-size:54px;font-weight:800;letter-spacing:-.04em;line-height:1;margin:16px 0 4px}
+.plan .price small{font-size:16px;font-weight:400;letter-spacing:0}
+.plan ul{list-style:none;margin:20px 0 28px;font-size:16px}
+.plan li{padding:6px 0}
+.plan li::before{content:"✓ ";font-weight:800}
+.plan .btn{margin-top:auto;text-align:center}
+
+.faq{display:grid;grid-template-columns:1fr 1.4fr;gap:56px}
+details{border-top:2px solid var(--ink);padding:20px 0}
+details:last-child{border-bottom:2px solid var(--ink)}
+summary{font-size:22px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:"Space Mono",monospace}
+details[open] summary::after{content:"−"}
+details p{margin-top:12px;max-width:56ch}
+
+.signup{background:var(--tomato);border-top:2px solid var(--ink)}
+.signup .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.signup h2{color:var(--ink)}
+form{background:#fffdf7;border:2px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:28px;display:grid;gap:16px}
+label{font-family:"Space Mono",monospace;font-size:13px;font-weight:700;display:grid;gap:6px}
+input,select{font:inherit;font-family:"Bricolage Grotesque",sans-serif;font-size:17px;padding:12px;border:2px solid var(--ink);background:var(--paper);border-radius:0}
+input:focus,select:focus{outline:3px solid var(--violet);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#done{font-family:"Space Mono",monospace;font-size:14px;display:none}
+
+footer.site{padding:40px 0;font-family:"Space Mono",monospace;font-size:13px}
+footer.site .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  nav ul{display:none}
+  .hero,.week,.quotes,.faq,.signup .wrap{grid-template-columns:1fr}
+  .tracks,.plans{grid-template-columns:1fr}
+  .track{border-left:0;border-top:2px solid var(--ink)}
+  .track:first-child{border-top:0}
+  .plan.hot{transform:none}
+  .strip .wrap{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:1fr 1fr}
+  .proj:first-child{grid-column:span 2;grid-row:auto}
+  .sec-head{flex-direction:column;align-items:start}
+  .week aside{position:static}
+  section{padding:68px 0}
+}
+@media (max-width:520px){.pg-body{grid-template-columns:1fr}.row{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.proj:first-child{grid-column:auto}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <nav>
+    <a href="#" class="logo"><i></i>Loop &amp; Lark</a>
+    <ul>
+      <li><a href="#tracks">Courses</a></li>
+      <li><a href="#week">A week here</a></li>
+      <li><a href="#made">Kid-made</a></li>
+      <li><a href="#plans">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#signup" class="btn">Free trial class</a>
+  </nav>
+</header>
+
+<main>
+<section class="wrap hero" style="padding-top:72px">
+  <div>
+    <span class="tag">After-school &amp; weekends · ages 6–14</span>
+    <h1>Kids who <span class="u">build</span> games, not just <span class="b">play</span> them.</h1>
+    <p class="lead">Small classes, real projects, and teachers who still get excited when a sprite finally jumps. Your kid leaves every term with something they made.</p>
+    <div class="ctas">
+      <a href="#signup" class="btn dark">Book a free trial →</a>
+      <span class="note">No laptop? We lend one.</span>
+    </div>
+  </div>
+
+  <div class="playground" aria-label="Try a tiny program">
+    <div class="pg-head"><span>my_first_program.blocks</span><span>try it ↓</span></div>
+    <div class="pg-body">
+      <div class="blocks" id="blocks">
+        <div class="blk start">when ▶ clicked</div>
+        <div class="blk loop" data-i="0">repeat 4</div>
+        <div class="blk move in" data-i="1">move up 1</div>
+        <div class="blk move in" data-i="2">move right 1</div>
+        <div class="blk turn" data-i="3">do a spin</div>
+      </div>
+      <div class="stage">
+        <div class="star" aria-hidden="true">★</div>
+        <div class="bot" id="bot">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="10" width="28" height="24" rx="4" fill="#6b4fd8" stroke="#1c1a17" stroke-width="2.5"/><circle cx="15" cy="21" r="3.5" fill="#fff"/><circle cx="25" cy="21" r="3.5" fill="#fff"/><circle cx="15" cy="21" r="1.5" fill="#1c1a17"/><circle cx="25" cy="21" r="1.5" fill="#1c1a17"/><path d="M20 10V4" stroke="#1c1a17" stroke-width="2.5"/><circle cx="20" cy="4" r="2.5" fill="#e8553d" stroke="#1c1a17" stroke-width="2"/><path d="M15 28h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="pg-foot">
+      <span id="msg">Help the robot reach the star.</span>
+      <button class="btn" id="run" type="button">▶ Run</button>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="s"><b>6:1</b><span>kids per teacher, max</span></div>
+    <div class="s"><b>2,400+</b><span>projects shipped by students</span></div>
+    <div class="s"><b>11</b><span>studios across the city</span></div>
+    <div class="s"><b>94%</b><span>re-enrol the next term</span></div>
+  </div>
+</div>
+
+<section id="tracks" class="wrap">
+  <div class="sec-head">
+    <h2>Three tracks. One for every stage.</h2>
+    <p>Kids move up when they're ready, not when the calendar says so. A placement chat in the trial class sorts out where they start.</p>
+  </div>
+  <div class="tracks">
+    <article class="track">
+      <span class="age">AGES 6–8</span>
+      <h3>Sprouts</h3>
+      <p>Drag-and-drop blocks, stories and tiny animations. Reading not required.</p>
+      <ul><li>Sequences &amp; loops</li><li>Animate your own character</li><li>Make a talking card for grandma</li></ul>
+      <span class="tool">Tools: ScratchJr, Bee-Bots</span>
+    </article>
+    <article class="track">
+      <span class="age">AGES 9–11</span>
+      <h3>Tinkerers</h3>
+      <p>Full games with scoring, levels and sound. First taste of microcontrollers.</p>
+      <ul><li>Variables, events &amp; logic</li><li>Build a platformer from scratch</li><li>Wire up a micro:bit pet</li></ul>
+      <span class="tool">Tools: Scratch, micro:bit, MakeCode</span>
+    </article>
+    <article class="track">
+      <span class="age">AGES 12–14</span>
+      <h3>Builders</h3>
+      <p>Real text code. Real websites. A demo day where they present to parents.</p>
+      <ul><li>Python fundamentals</li><li>HTML, CSS &amp; a first website</li><li>Team project + demo day</li></ul>
+      <span class="tool">Tools: Python, VS Code, Git</span>
+    </article>
+  </div>
+</section>
+
+<section id="week" class="wrap">
+  <div class="week">
+    <aside>
+      <h2>What a session looks like</h2>
+      <p style="margin-top:18px">90 minutes, once or twice a week. Snacks included, screens off for the last ten.</p>
+    </aside>
+    <div class="steps">
+      <div class="step"><span class="t">0:00</span><div><h4>Warm-up puzzle</h4><p>An unplugged logic game to get brains moving. Usually involves cups, string or a very confused teacher-robot.</p></div></div>
+      <div class="step"><span class="t">0:15</span><div><h4>One new idea</h4><p>Ten minutes, never more. Today: what a loop actually is.</p><span class="code"><span class="k">for</span> step <span class="k">in</span> range(4):<br>&nbsp;&nbsp;robot.move(<span class="s">"up"</span>)</span></div></div>
+      <div class="step"><span class="t">0:25</span><div><h4>Build time</h4><p>Kids work on their own project with the new idea. Teachers roam, ask questions, and resist the urge to grab the mouse.</p></div></div>
+      <div class="step"><span class="t">1:20</span><div><h4>Show &amp; tell</h4><p>Everyone shows one thing that works and one bug they squashed. Bugs get applause too.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="made" class="made">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Made by students this term</h2>
+      <p>Every project is on the class showcase page. Parents get a link, grandparents get bragging rights.</p>
+    </div>
+    <div class="gallery">
+      <div class="proj"><div class="art" style="background:var(--sky)">🐙</div><h5>Octo-Dash: an underwater runner with 6 levels</h5><span class="by">Maya, 10 · Tinkerers · Scratch</span></div>
+      <div class="proj"><div class="art" style="background:var(--mustard)">🌦️</div><h5>Weather station</h5><span class="by">Theo, 13 · Python + micro:bit</span></div>
+      <div class="proj"><div class="art" style="background:#f6c6bc">🐶</div><h5>Dog walk tracker</h5><span class="by">Ines, 12 · HTML/CSS</span></div>
+      <div class="proj"><div class="art" style="background:#d9cff8">🎵</div><h5>Beat-box keyboard</h5><span class="by">Kofi, 9 · MakeCode</span></div>
+      <div class="proj"><div class="art" style="background:#cfe9d9">🦕</div><h5>Dino story</h5><span class="by">Ava, 7 · ScratchJr</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="quotes">
+    <blockquote>"He used to ask for more screen time. Now he asks if he can stay late to fix a bug."
+      <footer>— Priya R., parent of a Tinkerer</footer>
+    </blockquote>
+    <div class="minis">
+      <div class="mini">The teachers actually know their stuff and they're patient with a very chatty seven-year-old.<cite>— Daniel M.</cite></div>
+      <div class="mini">My daughter presented her website at demo day. I cried a bit. She did not.<cite>— Hana K.</cite></div>
+      <div class="mini">I made a game where a cat eats tacos and my brother plays it every day.<cite>— Leo, 8</cite></div>
+    </div>
+  </div>
+</section>
+
+<section id="plans" class="wrap">
+  <div class="sec-head">
+    <h2>Simple, termly pricing</h2>
+    <p>12-week terms. Sibling discount of 15%. Need-based scholarships for one in five seats.</p>
+  </div>
+  <div class="plans">
+    <div class="plan"><span class="mono">ONCE A WEEK</span><div class="price">$290<small> / term</small></div><p>Great for trying it out alongside other activities.</p><ul><li>12 × 90-min sessions</li><li>Project showcase page</li><li>Loaner laptop</li></ul><a href="#signup" class="btn">Start here</a></div>
+    <div class="plan hot"><span class="mono">TWICE A WEEK · MOST PICKED</span><div class="price">$520<small> / term</small></div><p>Enough time to finish big projects and actually get good.</p><ul><li>24 × 90-min sessions</li><li>Demo day spot</li><li>Monthly parent update</li></ul><a href="#signup" class="btn dark">Pick this one</a></div>
+    <div class="plan"><span class="mono">HOLIDAY CAMP</span><div class="price">$340<small> / week</small></div><p>Five full days, one big project, lots of running around at lunch.</p><ul><li>9am–3pm, Mon–Fri</li><li>Lunch &amp; snacks</li><li>Take-home kit</li></ul><a href="#signup" class="btn">See dates</a></div>
+  </div>
+</section>
+
+<section id="faq" class="wrap">
+  <div class="faq">
+    <h2>Questions parents ask</h2>
+    <div>
+      <details><summary>My kid has never coded. Is that okay?</summary><p>Most of our students start from zero. The trial class includes a quick, no-pressure chat so we can place them in the right group.</p></details>
+      <details><summary>Do they need their own computer?</summary><p>No. Every studio has laptops and kits. If you'd like them to keep building at home, we'll tell you exactly what's worth buying (usually nothing).</p></details>
+      <details><summary>Who are the teachers?</summary><p>Working developers, engineering students and trained educators. All are background-checked and complete our teaching course before leading a class.</p></details>
+      <details><summary>What if they miss a session?</summary><p>Book a make-up at any studio within the same term, or watch the short recap video and catch up with a teacher at the next class.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="signup" class="signup">
+  <div class="wrap">
+    <div>
+      <h2>Come try a class. It's free.</h2>
+      <p style="margin-top:18px;max-width:36ch">Pick a time, bring your kid, stay for the show &amp; tell at the end. No card needed.</p>
+    </div>
+    <form id="form">
+      <label>Your name<input name="parent" required autocomplete="name"></label>
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <div class="row">
+        <label>Child's age<input type="number" name="age" min="6" max="14" required></label>
+        <label>Preferred day<select name="day"><option>Saturday</option><option>Sunday</option><option>Weekday afternoon</option></select></label>
+      </div>
+      <button class="btn dark" type="submit">Book my free trial</button>
+      <p id="done" role="status">✓ Booked! Check your inbox for the studio address.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Loop &amp; Lark Coding School</span>
+    <span>hello@loopandlark.school · (555) 014-2230</span>
+  </div>
+</footer>
+
+<script>
+const bot=document.getElementById('bot'),msg=document.getElementById('msg'),run=document.getElementById('run');
+const blk=[...document.querySelectorAll('.blk[data-i]')];
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let x=0,y=4,busy=false;
+function place(){bot.style.left=x*20+'%';bot.style.top=y*20+'%'}
+function hi(i){blk.forEach(b=>b.classList.toggle('on',+b.dataset.i===i))}
+run.onclick=async()=>{
+  if(busy)return;busy=true;x=0;y=4;bot.style.transform='';place();await wait(300);
+  for(let r=0;r<4;r++){
+    hi(0);await wait(200);
+    hi(1);y--;place();await wait(380);
+    hi(2);x++;place();await wait(380);
+  }
+  hi(3);bot.style.transform='rotate(360deg)';msg.textContent='You did it! That was a loop.';await wait(450);
+  hi(-1);busy=false;
+};
+document.getElementById('form').onsubmit=e=>{e.preventDefault();document.getElementById('done').style.display='block';e.target.querySelector('button').disabled=true};
+</script>
+</body>
+</html>

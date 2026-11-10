@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loot — money that grows up with you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3efe4;
+  --ink:#141210;
+  --lime:#c8f34a;
+  --tomato:#ff5a36;
+  --sky:#8fc7ff;
+  --mute:#6b655b;
+  --line:2px solid var(--ink);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:18px;line-height:1.5;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",monospace;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+
+nav{border-bottom:var(--line);position:sticky;top:0;background:var(--paper);z-index:10}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:800;font-size:1.6rem;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo i{width:22px;height:22px;background:var(--lime);border:var(--line);border-radius:50%;display:inline-block}
+nav ul{display:flex;gap:28px;list-style:none}
+nav ul a{text-decoration:none}
+nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
+.btn{display:inline-block;border:var(--line);background:var(--ink);color:var(--paper);padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;box-shadow:4px 4px 0 var(--tomato);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--tomato)}
+.btn.alt{background:var(--lime);color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+
+.hero{display:grid;grid-template-columns:1.25fr .75fr;border-bottom:var(--line)}
+.hero-copy{padding:72px 48px 64px 0;border-right:var(--line)}
+.hero h1{font-size:clamp(3.2rem,8.5vw,8rem);line-height:.88;letter-spacing:-.055em;font-weight:800}
+.hero h1 .strike{position:relative;color:var(--mute)}
+.hero h1 .strike::after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:.12em;background:var(--tomato);transform:rotate(-3deg)}
+.hero h1 mark{background:var(--lime);padding:0 .08em;border-radius:.12em}
+.hero p.lede{max-width:34ch;font-size:1.25rem;margin:32px 0 36px}
+.hero .ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .note{margin-top:28px;color:var(--mute)}
+.hero-side{background:var(--sky);display:flex;align-items:center;justify-content:center;padding:48px 24px;position:relative;overflow:hidden}
+.sticker{position:absolute;font-family:"JetBrains Mono",monospace;font-weight:600;font-size:.75rem;border:var(--line);background:var(--paper);padding:8px 12px;border-radius:6px}
+.sticker.a{top:36px;left:20px;transform:rotate(-8deg);background:var(--lime)}
+.sticker.b{bottom:48px;right:16px;transform:rotate(6deg);background:var(--tomato);color:var(--paper)}
+
+.phone{width:260px;border:var(--line);border-radius:36px;background:var(--ink);padding:10px;box-shadow:10px 10px 0 var(--ink)}
+.screen{background:var(--paper);border-radius:28px;padding:22px 18px;min-height:480px}
+.screen .hi{display:flex;justify-content:space-between;align-items:center}
+.screen .bal{font-size:2.6rem;font-weight:800;letter-spacing:-.04em;margin:14px 0 2px}
+.jar{border:var(--line);border-radius:14px;padding:12px;margin-top:14px}
+.jar .row{display:flex;justify-content:space-between;font-weight:600;font-size:.95rem}
+.bar{height:12px;border:var(--line);border-radius:999px;margin-top:8px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--lime);width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.jar:nth-child(odd) .bar span{background:var(--tomato)}
+.tx{margin-top:16px;font-size:.85rem}
+.tx div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--mute)}
+
+.ticker{border-bottom:var(--line);background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap}
+.ticker div{display:inline-block;padding:14px 0;animation:roll 30s linear infinite}
+.ticker span{margin:0 28px}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+section{border-bottom:var(--line)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:72px 0 40px}
+.sec-head h2{font-size:clamp(2.2rem,5vw,4rem);line-height:.95;letter-spacing:-.04em;font-weight:800;max-width:18ch}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:var(--line)}
+.step{padding:36px 28px 48px;border-right:var(--line)}
+.step:last-child{border-right:0}
+.step b{display:block;font-size:5rem;line-height:1;font-weight:800;letter-spacing:-.05em;-webkit-text-stroke:2px var(--ink);color:transparent;margin-bottom:20px}
+.step h3{font-size:1.5rem;letter-spacing:-.02em;margin-bottom:8px}
+.step p{color:var(--mute)}
+
+.features{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;padding-bottom:72px}
+.card{border:var(--line);border-radius:18px;padding:28px;background:var(--paper)}
+.card h3{font-size:1.6rem;letter-spacing:-.03em;margin:14px 0 8px;line-height:1.1}
+.card.w4{grid-column:span 4;background:var(--lime)}
+.card.w2{grid-column:span 2}
+.card.w3{grid-column:span 3}
+.card.dark{background:var(--ink);color:var(--paper)}
+.card.dark .mono{color:var(--lime)}
+
+.round-up{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.round-up span{border:var(--line);border-radius:999px;padding:6px 14px;font-weight:600;background:var(--paper)}
+.round-up span.up{background:var(--ink);color:var(--lime)}
+
+.calc{display:grid;grid-template-columns:1fr 1fr;border-top:var(--line)}
+.calc>div{padding:48px 32px}
+.calc>div:first-child{border-right:var(--line)}
+.calc label{display:block;margin:22px 0 8px;font-weight:600}
+.calc input[type=range]{width:100%;accent-color:var(--tomato)}
+.out{font-size:clamp(3rem,8vw,6.5rem);font-weight:800;letter-spacing:-.05em;line-height:1}
+.out-sub{color:var(--mute);margin-top:12px;max-width:36ch}
+
+.parents{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;padding:72px 0}
+.parents ul{list-style:none;border-top:var(--line)}
+.parents li{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:var(--line);font-size:1.1rem}
+.parents li em{font-style:normal;color:var(--mute);text-align:right}
+
+details{border-bottom:var(--line);padding:22px 0}
+details summary{cursor:pointer;font-size:1.3rem;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+details summary::after{content:"+";font-family:"JetBrains Mono",monospace}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;max-width:62ch;color:var(--mute)}
+.faq{padding-bottom:72px}
+
+.final{background:var(--tomato);color:var(--ink);text-align:left}
+.final .wrap{padding-top:96px;padding-bottom:96px}
+.final h2{font-size:clamp(3rem,10vw,9rem);line-height:.85;letter-spacing:-.06em;font-weight:800}
+.final form{display:flex;gap:12px;margin-top:40px;max-width:560px;flex-wrap:wrap}
+.final input{flex:1;min-width:200px;border:var(--line);border-radius:999px;padding:14px 20px;font:inherit;background:var(--paper)}
+.final .msg{margin-top:16px;min-height:1.5em}
+
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:32px;padding-bottom:40px;color:var(--mute)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  nav ul{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-copy{border-right:0;border-bottom:var(--line);padding:48px 0}
+  .sec-head{grid-template-columns:1fr;padding:56px 0 28px}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:var(--line)}
+  .features{grid-template-columns:1fr}
+  .card.w4,.card.w2,.card.w3{grid-column:auto}
+  .calc,.parents{grid-template-columns:1fr}
+  .calc>div:first-child{border-right:0;border-bottom:var(--line)}
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker div{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#"><i></i>loot</a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#parents">For parents</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn" href="#join">Get the card</a>
+  </div>
+</nav>
+
+<header class="wrap">
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="mono">For ages 13–19 &middot; Free forever</p>
+      <h1 style="margin-top:20px">Your money.<br><span class="strike">Their rules.</span><br><mark>Your rules.</mark></h1>
+      <p class="lede">A debit card and app that lets you get paid, save for the thing, and actually understand where it all went.</p>
+      <div class="ctas">
+        <a class="btn alt" href="#join">Join the waitlist</a>
+        <a href="#how">See how it works &rarr;</a>
+      </div>
+      <p class="note mono">No fees. No overdrafts. No credit score games.</p>
+    </div>
+    <div class="hero-side">
+      <span class="sticker a">+$12 from lawn job</span>
+      <span class="sticker b">concert fund 84%</span>
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="hi"><span class="mono">hey maya</span><span class="mono">&#9679;&#9679;&#9679;</span></div>
+          <div class="bal">$347.20</div>
+          <div class="mono" style="color:var(--mute)">spendable</div>
+          <div class="jar"><div class="row"><span>Concert tix</span><span>$168/200</span></div><div class="bar"><span data-w="84"></span></div></div>
+          <div class="jar"><div class="row"><span>First car</span><span>$910/4k</span></div><div class="bar"><span data-w="23"></span></div></div>
+          <div class="jar"><div class="row"><span>Rainy day</span><span>$60/100</span></div><div class="bar"><span data-w="60"></span></div></div>
+          <div class="tx">
+            <div><span>Boba Bros</span><span>&minus;$6.40</span></div>
+            <div><span>Round-up &rarr; car</span><span>+$0.60</span></div>
+            <div><span>Babysitting</span><span>+$40.00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="mono"><span>Get paid in seconds</span><span>&#9733;</span><span>Round up every swipe</span><span>&#9733;</span><span>Savings jars</span><span>&#9733;</span><span>Learn as you spend</span><span>&#9733;</span><span>FDIC-insured partner bank</span><span>&#9733;</span><span>Get paid in seconds</span><span>&#9733;</span><span>Round up every swipe</span><span>&#9733;</span><span>Savings jars</span><span>&#9733;</span><span>Learn as you spend</span><span>&#9733;</span><span>FDIC-insured partner bank</span><span>&#9733;</span></div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="mono">01 / How it works</p>
+      <h2>Three minutes from sign-up to first swipe.</h2>
+    </div>
+  </div>
+  <div class="steps">
+    <div class="step reveal"><b>1</b><h3>Download &amp; verify</h3><p>Sign up with a parent or guardian. They approve once, then mostly stay out of your way.</p></div>
+    <div class="step reveal"><b>2</b><h3>Get your card</h3><p>Pick a color, put it in Apple or Google Wallet today. Physical card shows up in a week.</p></div>
+    <div class="step reveal"><b>3</b><h3>Make it stack</h3><p>Set up jars, turn on round-ups, and get paid by anyone with a link or a tag.</p></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="mono">02 / Features</p>
+      <h2>Built for first jobs, not first mortgages.</h2>
+    </div>
+    <div class="features">
+      <div class="card w4 reveal">
+        <p class="mono">Round-ups</p>
+        <h3>Every swipe saves a little. You won't feel it. Your jar will.</h3>
+        <div class="round-up"><span>$3.40</span><span class="up">&rarr; $4.00</span><span>+$0.60 saved</span></div>
+      </div>
+      <div class="card w2 dark reveal">
+        <p class="mono">Get paid</p>
+        <h3>Share your @loottag and get paid by anyone.</h3>
+      </div>
+      <div class="card w3 reveal">
+        <p class="mono">Jars</p>
+        <h3>Name it, set a goal, lock it if you don't trust future you.</h3>
+      </div>
+      <div class="card w3 reveal">
+        <p class="mono">Money brain</p>
+        <h3>Two-minute lessons triggered by what you actually do with money.</h3>
+      </div>
+    </div>
+  </div>
+  <div class="calc">
+    <div>
+      <p class="mono">Try it</p>
+      <h2 style="font-size:2.4rem;letter-spacing:-.03em;line-height:1">What could round-ups stack up to?</h2>
+      <label for="swipes">Swipes per week: <span id="swipesV">10</span></label>
+      <input id="swipes" type="range" min="1" max="40" value="10">
+      <label for="weeks">Weeks: <span id="weeksV">26</span></label>
+      <input id="weeks" type="range" min="4" max="104" value="26">
+    </div>
+    <div>
+      <div class="out" id="out">$0</div>
+      <p class="out-sub">Estimated at an average round-up of $0.48 per swipe. Spare change, not a promise.</p>
+    </div>
+  </div>
+</section>
+
+<section id="parents">
+  <div class="wrap parents">
+    <div class="reveal">
+      <p class="mono">03 / For parents</p>
+      <h2 style="font-size:clamp(2.2rem,5vw,4rem);line-height:.95;letter-spacing:-.04em;margin:16px 0">Guardrails, not a leash.</h2>
+      <p style="color:var(--mute);max-width:40ch">You see the big picture and set the limits that matter. They get room to make small mistakes while the stakes are small.</p>
+    </div>
+    <ul class="reveal">
+      <li>Instant spend notifications<em>optional</em></li>
+      <li>Weekly and per-purchase limits<em>you set them</em></li>
+      <li>Block categories like gambling<em>on by default</em></li>
+      <li>Freeze the card in one tap<em>either of you</em></li>
+      <li>Automatic allowance<em>weekly or monthly</em></li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq">
+    <div class="sec-head reveal">
+      <p class="mono">04 / FAQ</p>
+      <h2>Stuff people ask.</h2>
+    </div>
+    <details><summary>Is it actually free?</summary><p>Yes. No monthly fee, no ATM fees in-network, no overdraft fees because you can't overdraft.</p></details>
+    <details><summary>Is my money safe?</summary><p>Funds are held at an FDIC-insured partner bank. Loot is a financial technology company, not a bank.</p></details>
+    <details><summary>Do my parents see everything?</summary><p>They see balances and can set limits. You choose whether they get a ping for every purchase.</p></details>
+    <details><summary>What happens when I turn 18?</summary><p>Your account graduates with you. Same card, your own name on everything, no parent required.</p></details>
+  </div>
+</section>
+
+<section class="final" id="join">
+  <div class="wrap">
+    <p class="mono">Launching this spring</p>
+    <h2>Start stacking.</h2>
+    <form id="f">
+      <input type="email" required placeholder="you@email.com" aria-label="Email address">
+      <button class="btn" type="submit">Get early access</button>
+    </form>
+    <p class="msg mono" id="msg" aria-live="polite"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap mono">
+    <span>&copy; 2026 Loot Financial. Banking services by partner bank, Member FDIC.</span>
+    <span>Privacy &middot; Terms &middot; Help</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll('.bar span').forEach(b=>b.style.width=b.dataset.w+'%'),300);
+const s=document.getElementById('swipes'),w=document.getElementById('weeks'),o=document.getElementById('out');
+function calc(){document.getElementById('swipesV').textContent=s.value;document.getElementById('weeksV').textContent=w.value;o.textContent='$'+(s.value*w.value*0.48).toFixed(2)}
+s.oninput=w.oninput=calc;calc();
+document.getElementById('f').onsubmit=e=>{e.preventDefault();e.target.reset();document.getElementById('msg').textContent="You're on the list. We'll text your inbox soon.";};
+</script>
+</body>
+</html>

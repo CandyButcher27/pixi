@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarry: the open source database</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f3efe6;--ink:#1b1a17;--mute:#6b665c;--rule:#d6cfbf;--accent:#c2410c;--term:#141310}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.mono{font-family:"JetBrains Mono",monospace}
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-family:"JetBrains Mono",monospace;font-weight:600;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:28px;font-size:14px}
+nav a{text-decoration:none;color:var(--mute)}
+nav a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:7fr 5fr;border-bottom:1px solid var(--ink)}
+.hero-l{padding:88px 48px 72px 0;border-right:1px solid var(--ink)}
+.tag{font-family:"JetBrains Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(44px,6.4vw,88px);line-height:.98;letter-spacing:-.03em;margin:20px 0 28px}
+h1 em{font-style:italic;color:var(--accent)}
+.lede{max-width:520px;color:var(--mute);font-size:18px}
+.cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+.install{font-family:"JetBrains Mono",monospace;font-size:14px;background:var(--term);color:#e9e4d8;padding:14px 18px;display:flex;gap:14px;align-items:center;cursor:pointer;border:0}
+.install b{color:var(--accent);font-weight:400}
+.install small{color:#8a8476}
+.btn{font-size:14px;padding:14px 20px;border:1px solid var(--ink);text-decoration:none;font-weight:500}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.hero-r{padding:48px 0 48px 40px;display:flex;flex-direction:column;justify-content:flex-end}
+.term{background:var(--term);color:#e9e4d8;font-family:"JetBrains Mono",monospace;font-size:13px;padding:22px;min-height:300px;white-space:pre;overflow:hidden}
+.term .p{color:var(--accent)}.term .d{color:#8a8476}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink)}
+.stats div{padding:28px 24px;border-right:1px solid var(--rule)}
+.stats div:last-child{border-right:0}
+.stats strong{display:block;font-family:Fraunces,serif;font-size:40px;font-weight:400;line-height:1}
+.stats span{font-size:13px;color:var(--mute)}
+section{padding:96px 0;border-bottom:1px solid var(--ink)}
+h2{font-family:Fraunces,serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:1.05;letter-spacing:-.02em;max-width:720px}
+.schema{margin-top:56px;border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:80px 1fr 2fr 120px;gap:24px;padding:26px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.row .n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mute)}
+.row h3{font-family:Fraunces,serif;font-weight:600;font-size:22px}
+.row p{color:var(--mute)}
+.row .t{font-family:"JetBrains Mono",monospace;font-size:12px;text-align:right;color:var(--accent)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.bench{margin-top:32px}
+.bar{display:grid;grid-template-columns:120px 1fr 70px;gap:16px;align-items:center;font-size:14px;padding:10px 0}
+.bar i{display:block;height:14px;background:var(--rule)}
+.bar.us i{background:var(--accent)}
+.bar b{font-family:"JetBrains Mono",monospace;font-weight:400;text-align:right}
+.note{font-size:12px;color:var(--mute);margin-top:12px}
+pre.code{background:var(--term);color:#e9e4d8;font:13px/1.7 "JetBrains Mono",monospace;padding:24px;overflow-x:auto}
+pre.code .k{color:#f59e6b}pre.code .c{color:#8a8476}
+.oss{background:var(--ink);color:var(--paper)}
+.oss h2{max-width:none}
+.oss-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;margin-top:48px;border-top:1px solid #3a3832}
+.oss-grid div{padding:24px 24px 0 0}
+.oss-grid strong{font-family:"JetBrains Mono",monospace;display:block;font-size:13px;color:var(--accent);margin-bottom:8px}
+.oss-grid p{color:#b6b0a2;font-size:14px}
+footer{padding:40px 0;font-size:13px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+@media (max-width:860px){
+  nav{display:none}
+  .hero,.split{grid-template-columns:1fr}
+  .hero-l{border-right:0;padding:56px 0 32px}
+  .hero-r{padding:0 0 48px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats div:nth-child(2){border-right:0}
+  .row{grid-template-columns:40px 1fr;gap:8px 16px}
+  .row p{grid-column:2}.row .t{grid-column:2;text-align:left}
+  .oss-grid{grid-template-columns:1fr}
+  section{padding:64px 0}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="logo">quarry<span>_</span>db</div>
+  <nav><a href="#engine">Engine</a><a href="#perf">Performance</a><a href="#oss">Community</a><a href="#">Docs</a><a href="#">GitHub</a></nav>
+</div></header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-l">
+      <div class="tag">v4.2 &middot; Apache-2.0 &middot; written in Rust</div>
+      <h1>Your data, <em>set in stone.</em> Your license, too.</h1>
+      <p class="lede">Quarry is a transactional, columnar-on-demand SQL database you can run on a laptop or across a hundred nodes. No open-core bait, no license rug-pull. Every line on GitHub.</p>
+      <div class="cta">
+        <button class="install" id="copy"><b>$</b> curl -sSf get.quarrydb.org | sh <small id="cs">copy</small></button>
+        <a class="btn" href="#">Read the docs</a>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="term" id="term"></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div><strong>38k</strong><span>GitHub stars</span></div>
+    <div><strong>1,240</strong><span>contributors</span></div>
+    <div><strong>0.9 ms</strong><span>p99 point read</span></div>
+    <div><strong>100%</strong><span>open source, forever</span></div>
+  </div>
+</div>
+
+<section id="engine"><div class="wrap">
+  <div class="tag">CREATE TABLE features</div>
+  <h2 style="margin-top:16px">One engine. Rows when you write, columns when you ask.</h2>
+  <div class="schema">
+    <div class="row"><span class="n">01</span><h3>Serializable by default</h3><p>MVCC with strict serializable isolation. No anomaly tables to memorise, no surprise write skew.</p><span class="t">ACID</span></div>
+    <div class="row"><span class="n">02</span><h3>Adaptive storage</h3><p>Hot rows live in a B-tree; cold partitions compact into compressed columnar segments automatically.</p><span class="t">HTAP</span></div>
+    <div class="row"><span class="n">03</span><h3>Postgres wire protocol</h3><p>Point psql, your ORM, or any driver you already use. Most apps migrate by changing a connection string.</p><span class="t">COMPAT</span></div>
+    <div class="row"><span class="n">04</span><h3>Raft replication</h3><p>Add a node, Quarry rebalances. Lose a zone, it keeps serving. Consensus is built in, not bolted on.</p><span class="t">HA</span></div>
+    <div class="row"><span class="n">05</span><h3>Vectors and JSON, natively</h3><p>Index embeddings and documents next to relational data. One query planner, one transaction.</p><span class="t">TYPES</span></div>
+  </div>
+</div></section>
+
+<section id="perf"><div class="wrap split">
+  <div>
+    <div class="tag">EXPLAIN ANALYZE</div>
+    <h2 style="margin-top:16px">Fast because it's boring underneath.</h2>
+    <div class="bench">
+      <div class="bar us"><span>Quarry 4.2</span><i style="width:100%"></i><b>412k</b></div>
+      <div class="bar"><span>Engine B</span><i style="width:63%"></i><b>259k</b></div>
+      <div class="bar"><span>Engine C</span><i style="width:47%"></i><b>194k</b></div>
+      <div class="bar"><span>Engine D</span><i style="width:31%"></i><b>128k</b></div>
+    </div>
+    <p class="note">TPC-C style tx/min, 8 vCPU, 3 nodes. Harness and raw numbers in /bench, reproducible.</p>
+  </div>
+  <pre class="code"><span class="c">-- one transaction, three shapes of data</span>
+<span class="k">BEGIN</span>;
+<span class="k">INSERT INTO</span> orders (id, customer, meta)
+  <span class="k">VALUES</span> (gen_id(), 4821, '{"channel":"web"}');
+
+<span class="k">SELECT</span> sku, <span class="k">sum</span>(qty)
+  <span class="k">FROM</span> line_items
+ <span class="k">WHERE</span> placed_at &gt; now() - '30 days'
+ <span class="k">GROUP BY</span> sku;            <span class="c">-- columnar scan</span>
+
+<span class="k">SELECT</span> id <span class="k">FROM</span> products
+ <span class="k">ORDER BY</span> embedding &lt;-&gt; $1
+ <span class="k">LIMIT</span> 10;                <span class="c">-- vector index</span>
+<span class="k">COMMIT</span>;</pre>
+</div></section>
+
+<section id="oss" class="oss"><div class="wrap">
+  <div class="tag">GRANT ALL TO public</div>
+  <h2 style="margin-top:16px">Governed by a foundation, not a funding round.</h2>
+  <div class="oss-grid">
+    <div><p style="font-size:18px;color:var(--paper);max-width:420px">Quarry is stewarded by an independent foundation with an elected technical council. The license is Apache-2.0 and the charter forbids changing it.</p></div>
+    <div><strong>/ contribute</strong><p>Good-first-issues triaged weekly, mentors on every RFC.</p></div>
+    <div><strong>/ discuss</strong><p>Open design meetings every Thursday, recordings public.</p></div>
+    <div><strong>/ support</strong><p>Commercial support from multiple independent vendors.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="mono">quarry_db &middot; Apache-2.0</span>
+  <span>Docs &middot; GitHub &middot; Forum &middot; Security</span>
+</div></footer>
+
+<script>
+const lines=[
+  ['p','quarry> '],['','SELECT count(*) FROM events;\n'],['d',' count\n───────────\n 1,204,889,312\n(1 row, 41 ms)\n\n'],
+  ['p','quarry> '],['','\\cluster status\n'],['d',' node   zone      role     lag\n n1     eu-west   leader   0ms\n n2     eu-central follower 2ms\n n3     us-east   follower 9ms\n']
+];
+const t=document.getElementById('term');
+let i=0,j=0;
+(function tick(){
+  if(i>=lines.length)return;
+  const [c,s]=lines[i];
+  let span=t.lastElementChild;
+  if(j===0){span=document.createElement('span');span.className=c;t.appendChild(span)}
+  const step=c===''?1:s.length;
+  span.textContent+=s.slice(j,j+step);j+=step;
+  if(j>=s.length){i++;j=0}
+  setTimeout(tick,c===''?45:300);
+})();
+document.getElementById('copy').onclick=()=>{
+  navigator.clipboard?.writeText('curl -sSf get.quarrydb.org | sh').then(()=>{document.getElementById('cs').textContent='copied'});
+};
+</script>
+</body>
+</html>
