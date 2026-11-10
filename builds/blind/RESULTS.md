@@ -98,3 +98,26 @@ and ≈15 actions vs ≈70k and 2–5).
 Found while building: `measure.py` does not count inline `<svg>` as imagery, so 9 of the 10
 illustrated pages measure `imagery_ratio` 0.00. Imagery numbers in contracts and in the
 catalogue understate SVG art.
+
+## Fourth arm: illustration prompt + a screenshot reference (2026-11-10)
+
+Five briefs rebuilt from the illustration prompt plus one screenshot of a live award-gallery
+site chosen to sit outside the recurring style (references in `references.json`; screenshots
+stay local). Rated blind against the illustration-prompt pages
+(`ratings_illustrated_referenced.jsonl`). House-style score = count of seven recurring traits
+(`blind.py style`).
+
+| brief | reference | house style: prompt → +reference | preferred |
+|---|---|---|---|
+| bakery | ju.st | 5 → 2 | reference |
+| jazz | superlocaldesign.com | 4 → 2 | reference |
+| writer | thursday.studio | 6 → 3 | reference |
+| cyber | oxide.computer | 6 → 4 | reference |
+| yoga | howmanyplants.com | 4 → 4 | prompt only |
+
+Reference arm preferred 4–1 (two-sided p = 0.38; five pairs is too few for significance).
+Mean house-style score 5.0 → 3.0. The one loss is the one pair whose score did not move: its
+reference already used a paper background and mono labels.
+
+Two references were rejected before building because their screenshots showed an age gate
+or PHP warnings; picking references needs a visual check.
