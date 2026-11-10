@@ -17,7 +17,7 @@ from designmcp import catalogue, measure, verify as verify_mod  # noqa: E402
 
 CONTROL = Path(r"C:\Users\sriva\AppData\Local\Temp\claude\C--Users-sriva-Desktop-frontend"
                r"\c1729627-4ab5-4c11-8c92-2a5444a4a649\scratchpad\control")
-TREATMENT = ROOT / "builds" / "exp"
+TREATMENT = ROOT / "builds" / (sys.argv[1] if len(sys.argv) > 1 else "exp")
 SLUGS = ["analytics", "roaster", "festival"]
 
 FIELDS = ["hero_alignment", "section_rhythm", "full_bleed_sections", "card_reliance",

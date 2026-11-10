@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mosca Torrefação — single-drum coffee roaster, Cais do Sodré, Lisbon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cal:#f2ede3; --ink:#1c1a16; --cobalt:#1d3c8f; --telha:#b4532c; --cork:#d9c7a5; --mute:#5b554a;
+  --display:"Young Serif", Georgia, serif;
+  --body:"Newsreader", Georgia, serif;
+  --mono:"IBM Plex Mono", monospace;
+  --tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23f2ede3'/%3E%3Cpath d='M40 6 L74 40 L40 74 L6 40Z' fill='none' stroke='%231d3c8f' stroke-width='3'/%3E%3Cpath d='M40 20 L60 40 L40 60 L20 40Z' fill='none' stroke='%231d3c8f' stroke-width='1.5'/%3E%3Ccircle cx='40' cy='40' r='9' fill='%231d3c8f'/%3E%3Ccircle cx='40' cy='40' r='3.5' fill='%23f2ede3'/%3E%3Ccircle cx='0' cy='0' r='15' fill='%231d3c8f'/%3E%3Ccircle cx='80' cy='0' r='15' fill='%231d3c8f'/%3E%3Ccircle cx='0' cy='80' r='15' fill='%231d3c8f'/%3E%3Ccircle cx='80' cy='80' r='15' fill='%231d3c8f'/%3E%3C/svg%3E");
+  --tile-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%231d3c8f'/%3E%3Cpath d='M60 10 L110 60 L60 110 L10 60Z' fill='none' stroke='%23f2ede3' stroke-opacity='.35' stroke-width='2'/%3E%3Ccircle cx='60' cy='60' r='14' fill='none' stroke='%23f2ede3' stroke-opacity='.35' stroke-width='2'/%3E%3Ccircle cx='0' cy='0' r='22' fill='none' stroke='%23f2ede3' stroke-opacity='.35' stroke-width='2'/%3E%3Ccircle cx='120' cy='0' r='22' fill='none' stroke='%23f2ede3' stroke-opacity='.35' stroke-width='2'/%3E%3Ccircle cx='0' cy='120' r='22' fill='none' stroke='%23f2ede3' stroke-opacity='.35' stroke-width='2'/%3E%3Ccircle cx='120' cy='120' r='22' fill='none' stroke='%23f2ede3' stroke-opacity='.35' stroke-width='2'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--cal)}
+body{background:var(--cal);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.mono{font:500 13px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.mute{color:var(--mute)}
+
+header{border-bottom:1.5px solid var(--ink)}
+header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding-top:18px;padding-bottom:14px}
+.mark{font:400 26px/1 var(--display);text-decoration:none}
+header nav{display:flex;gap:28px;flex-wrap:wrap}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--telha)}
+
+section{padding:96px 0}
+.split{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px;align-items:start}
+
+/* 1 hero */
+.hero{padding:56px 0 72px}
+.hero .copy{grid-column:1 / span 7}
+.hero .panel{grid-column:8 / span 5;align-self:stretch;min-height:560px;background:var(--tile);background-size:80px;border:1.5px solid var(--ink);position:relative}
+.stamp{position:absolute;left:-1.5px;bottom:-1.5px;background:var(--telha);color:var(--cal);padding:14px 18px;border:1.5px solid var(--ink)}
+.stamp b{display:block;font:400 34px/1 var(--display);letter-spacing:0;text-transform:none;margin-top:4px}
+h1{font:400 clamp(4.6rem,10.6vw,9.6rem)/.86 var(--display);letter-spacing:-.035em;margin:28px 0 32px}
+h1 em{font-style:normal;color:var(--cobalt)}
+.lede{font-size:21px;line-height:1.5;max-width:36em}
+.lede + p{margin-top:16px;max-width:38em}
+.status{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:32px;padding-top:14px;border-top:1.5px solid var(--ink)}
+.status span b{color:var(--telha);font-weight:500}
+.btn{display:inline-block;margin-top:28px;margin-right:12px;padding:14px 22px;border:1.5px solid var(--ink);border-radius:0;background:var(--ink);color:var(--cal);text-decoration:none;font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.btn.line{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--telha);border-color:var(--telha);color:var(--cal)}
+
+/* 2 lots */
+h2{font:400 clamp(2.6rem,5vw,4.4rem)/.95 var(--display);letter-spacing:-.025em;margin:10px 0 22px}
+.lots .side{grid-column:1 / span 4}
+.lots .side .tilecol{height:640px;background:var(--tile);background-size:60px;border:1.5px solid var(--ink);margin-bottom:18px}
+.lots .main{grid-column:5 / span 8}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:0 12px 10px 0;border-bottom:1.5px solid var(--ink);color:var(--mute)}
+td{padding:16px 12px 16px 0;border-bottom:1px solid var(--cork);vertical-align:top}
+td.n{font:400 30px/1 var(--display)}
+td .o{font-weight:600}
+td .note{display:block;font-style:italic;color:var(--mute);font-size:15.5px}
+td.p{font:500 14px/1.4 var(--mono);white-space:nowrap}
+.foot{margin-top:18px;max-width:46em}
+
+/* 3 full bleed */
+.band{background:var(--cobalt);background-image:var(--tile-dark);background-size:120px;color:var(--cal);padding:110px 0;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.band .say{grid-column:1 / span 8;background:var(--cobalt);padding:44px 44px 40px 0;margin-left:-44px;padding-left:44px}
+.band blockquote{font:400 clamp(2.4rem,4.6vw,4.2rem)/1.02 var(--display);letter-spacing:-.02em}
+.band cite{display:block;margin-top:22px;font-style:normal}
+.figs{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;margin-top:34px;padding-top:20px;border-top:1px solid rgba(242,237,227,.4)}
+.figs dt{font:400 30px/1.1 var(--display);color:var(--cork)}
+.figs dd{align-self:center}
+
+/* 4 process */
+.proc .chart{grid-column:1 / span 5;position:sticky;top:24px}
+.proc .chart img{width:100%;height:auto;border:1.5px solid var(--ink);background:var(--cal)}
+.proc .chart p{margin-top:12px}
+.proc .steps{grid-column:6 / span 7}
+ol.seq{list-style:none;counter-reset:s}
+ol.seq li{counter-increment:s;display:grid;grid-template-columns:72px 1fr auto;gap:0 20px;padding:20px 0;border-top:1px solid var(--cork)}
+ol.seq li:last-child{border-bottom:1.5px solid var(--ink)}
+ol.seq li::before{content:counter(s,decimal-leading-zero);font:400 34px/1 var(--display);color:var(--telha)}
+ol.seq h3{font:600 19px/1.3 var(--body);margin-bottom:4px}
+ol.seq .t{font:500 13px/1.5 var(--mono);text-align:right;white-space:nowrap}
+
+/* 5 visit */
+.visit{border-top:1.5px solid var(--ink)}
+.visit .copy{grid-column:1 / span 6}
+.visit .map{grid-column:8 / span 5}
+.visit .map img{width:100%;height:auto;border:1.5px solid var(--ink)}
+.hours{margin-top:26px;width:100%}
+.hours td{padding:9px 12px 9px 0}
+.hours td:last-child{font:500 14px/1.4 var(--mono);text-align:right}
+.bar{columns:2;column-gap:32px;margin-top:26px;list-style:none}
+.bar li{break-inside:avoid;padding:8px 0;border-bottom:1px solid var(--cork);display:flex;justify-content:space-between;gap:12px}
+.bar li span:last-child{font:500 14px/1.6 var(--mono)}
+
+/* 6 subscribe */
+.sub{background:var(--cork);border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.sub .big{grid-column:1 / span 4;font:400 clamp(6rem,12vw,11rem)/.8 var(--display);letter-spacing:-.05em;color:var(--telha)}
+.sub .big small{display:block;font:500 13px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-top:18px}
+.sub .rules{grid-column:6 / span 7}
+.sub dl{display:grid;grid-template-columns:180px 1fr;margin:8px 0 28px}
+.sub dt,.sub dd{padding:12px 0;border-top:1px solid var(--ink)}
+.sub dt{font:500 13px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+form{display:flex;flex-wrap:wrap;gap:0}
+form input,form select{font:400 17px/1 var(--body);padding:14px 14px;border:1.5px solid var(--ink);border-radius:2px;background:var(--cal);color:var(--ink);flex:1 1 220px;min-width:0}
+form select{flex:0 1 200px;border-left:0}
+form button{padding:14px 24px;border:1.5px solid var(--ink);border-left:0;border-radius:0;background:var(--ink);color:var(--cal);font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+form button:hover{background:var(--telha)}
+.ok{margin-top:12px;min-height:1.5em}
+
+footer{padding:48px 0 60px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px}
+
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  section{padding:64px 0}
+  .split{gap:28px}
+  .split > *{grid-column:1 / -1 !important}
+  .hero .panel{min-height:300px}
+  .proc .chart{position:static}
+  .band .say{margin-left:-16px;padding:28px 16px}
+  .bar{columns:1}
+  .sub dl{grid-template-columns:1fr}
+  .sub dd{border-top:0;padding-top:0}
+  table,thead,tbody,tr,td,th{display:block}
+  thead{display:none}
+  tr{border-bottom:1px solid var(--cork);padding:14px 0}
+  td{border:0;padding:2px 0}
+  ol.seq li{grid-template-columns:52px 1fr}
+  ol.seq .t{grid-column:2;text-align:left}
+  form select,form button{border-left:1.5px solid var(--ink);flex:1 1 100%}
+  header nav{gap:16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Mosca</a>
+    <nav class="mono">
+      <a href="#lotes">Lots</a>
+      <a href="#torra">Roasting</a>
+      <a href="#balcao">Counter</a>
+      <a href="#assinatura">Subscription</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="mono mute">Torrefação · Rua da Boavista 84 · Cais do Sodré, Lisboa · since 2017</p>
+      <h1>Roasted <em>slow</em>, a street from the river.</h1>
+      <p class="lede">Mosca is one 15&nbsp;kg drum, two roasters and a six-stool counter. We buy from eleven farms by name, roast lighter than Lisbon is used to and darker than Copenhagen would like, and sell every lot within fourteen days of the drop.</p>
+      <p>No blends named after moods. Each bag carries the farm, the altitude, the roast date and the batch number from the log, so you can tell us exactly which one you liked.</p>
+      <div class="status mono">
+        <span>Next roast <b id="next">Thursday 07:00</b></span>
+        <span>Last drop <b>Lot 41 · 205.4&nbsp;°C</b></span>
+        <span>Counter <b id="open">open</b></span>
+      </div>
+      <a class="btn" href="#lotes">See this week's lots</a>
+      <a class="btn line" href="#assinatura">Subscribe from €13.50</a>
+    </div>
+    <div class="panel" role="img" aria-label="Blue and white azulejo tile pattern, as on the facade of the roastery">
+      <div class="stamp mono">Batch on the cooling tray<b>Lot 41 · Huila</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="lots" id="lotes">
+  <div class="wrap split">
+    <div class="side">
+      <div class="tilecol" role="img" aria-label="Tile column"></div>
+      <p class="mono mute">Wk 45</p>
+    </div>
+    <div class="main">
+      <p class="mono mute">This week · roasted 3–6 Nov</p>
+      <h2>Five lots, one shelf.</h2>
+      <p style="margin-bottom:24px;max-width:44em">When a lot sells out it does not come back until the next harvest; the batch numbers keep counting.</p>
+      <table>
+        <thead><tr><th>Lot</th><th>Origin &amp; process</th><th>Alt.</th><th>Roasted</th><th>250&nbsp;g</th></tr></thead>
+        <tbody>
+          <tr><td class="n">41</td><td><span class="o">Huila, Colombia — Finca El Mirador, Caturra</span><span class="note">Washed. Red grape, panela, a clean malic finish. Our filter house coffee.</span></td><td class="p">1 850&nbsp;m</td><td class="p">06 Nov</td><td class="p">€14.00</td></tr>
+          <tr><td class="n">40</td><td><span class="o">Sidama, Ethiopia — Bombe washing station</span><span class="note">Washed heirloom. Bergamot, white peach, black tea.</span></td><td class="p">2 100&nbsp;m</td><td class="p">05 Nov</td><td class="p">€16.50</td></tr>
+          <tr><td class="n">39</td><td><span class="o">Minas Gerais, Brazil — Sítio São José, Yellow Bourbon</span><span class="note">Natural. Hazelnut, cacao nib, fig. The espresso on the bar.</span></td><td class="p">1 150&nbsp;m</td><td class="p">04 Nov</td><td class="p">€12.00</td></tr>
+          <tr><td class="n">38</td><td><span class="o">Kirinyaga, Kenya — Kii factory, SL28 / SL34</span><span class="note">Washed. Blackcurrant, tomato leaf, grapefruit. Loud; we like it that way.</span></td><td class="p">1 800&nbsp;m</td><td class="p">04 Nov</td><td class="p">€18.00</td></tr>
+          <tr><td class="n">37</td><td><span class="o">São Tomé — Monte Café, Arabica Typica</span><span class="note">Washed. Brown sugar, orange peel, low acidity. 60 kg a year reach us.</span></td><td class="p">700&nbsp;m</td><td class="p">03 Nov</td><td class="p">€19.50</td></tr>
+        </tbody>
+      </table>
+      <p class="foot mute">Prices are for whole bean. We grind to order for V60, AeroPress, moka or espresso at no charge; ground coffee ships the same day it is ground. Shipping in mainland Portugal is €3.90, free over €40.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div class="say">
+      <blockquote>“We drop when the beans sound right, not when the clock says. The log just proves it afterwards.”</blockquote>
+      <cite class="mono">Inês Carvalho, head roaster</cite>
+      <dl class="figs">
+        <dt>41</dt><dd>lots roasted since the drum arrived in March 2017</dd>
+        <dt>3 820&nbsp;kg</dt><dd>green coffee through the drum in 2025, all of it logged by batch</dd>
+        <dt>14</dt><dd>days, at most, between a lot's roast and its last bag sold</dd>
+        <dt>11</dt><dd>farms bought from directly, four of them for six harvests running</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="proc" id="torra">
+  <div class="wrap split">
+    <div class="chart">
+      <img id="curve" width="600" height="440" alt="Roast curve for lot 41: bean temperature rising from 88 °C at the turning point to 205.4 °C at drop, 10 minutes 30 seconds">
+      <p class="mono mute">Lot 41, batch 0712 · 12.0 kg charge</p>
+    </div>
+    <div class="steps">
+      <p class="mono mute">How a lot is roasted</p>
+      <h2>Six steps, every batch logged.</h2>
+      <ol class="seq">
+        <li><div><h3>Sample roast and cupping</h3><p>Three 100&nbsp;g samples at three development times. We cup them blind on Tuesday with whoever is at the counter, then pick one profile.</p></div><span class="t">Tue · 3 × 100 g</span></li>
+        <li><div><h3>Charge</h3><p>12&nbsp;kg of green into a drum preheated to 210&nbsp;°C. Lighter Ethiopians go in at 200&nbsp;°C so the first minutes do not scorch them.</p></div><span class="t">0:00 · 210 °C</span></li>
+        <li><div><h3>Turning point and drying</h3><p>The beans bottom out around 88&nbsp;°C, then climb. Full gas until they lose their grassy smell and go straw-yellow.</p></div><span class="t">1:20 → 4:50</span></li>
+        <li><div><h3>Maillard</h3><p>Gas comes down in two steps so the rate of rise falls steadily. This is where sweetness is made or lost.</p></div><span class="t">4:50 → 8:40</span></li>
+        <li><div><h3>First crack and development</h3><p>Between 1:40 and 2:10 of development, by ear first and by probe second. Filter lots drop earlier, espresso later.</p></div><span class="t">8:40 · 196 °C</span></li>
+        <li><div><h3>Drop, cool, rest</h3><p>Out onto the tray and cooled under four minutes, bagged with a valve, rested 5 days for filter and 9 for espresso before we brew it.</p></div><span class="t">10:30 · 205 °C</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="balcao">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="mono mute">The counter</p>
+      <h2>Six stools, the drum behind them.</h2>
+      <p>Come in through the tiled doorway on Rua da Boavista, two minutes up from Cais do Sodré station and the 15E tram. The roaster runs Thursday and Friday mornings; it is loud, it smells of bread, and you are welcome to watch.</p>
+      <table class="hours">
+        <tr><td>Monday – Friday</td><td>08:00 – 17:00</td></tr>
+        <tr><td>Saturday</td><td>09:00 – 18:00</td></tr>
+        <tr><td>Sunday</td><td>closed (we cup)</td></tr>
+        <tr><td>Public cupping</td><td>1st Sat · 11:00 · free</td></tr>
+      </table>
+      <ul class="bar">
+        <li><span>Bica, lot 39</span><span>€1.20</span></li>
+        <li><span>Pingado</span><span>€1.40</span></li>
+        <li><span>Galão</span><span>€2.20</span></li>
+        <li><span>V60, any lot</span><span>€3.50</span></li>
+        <li><span>Pastel de nata, Manteigaria</span><span>€1.30</span></li>
+        <li><span>Bag + free filter</span><span>−€1.00</span></li>
+      </ul>
+    </div>
+    <div class="map">
+      <img id="map" width="520" height="620" alt="Street plan: Rua da Boavista 84, two blocks north of Cais do Sodré station and the Tejo">
+      <p class="mono mute" style="margin-top:12px">38.7085° N, 9.1478° W</p>
+    </div>
+  </div>
+</section>
+
+<section class="sub" id="assinatura">
+  <div class="wrap split">
+    <div class="big">14<small>days from roast to your door, or the bag is free</small></div>
+    <div class="rules">
+      <p class="mono">Subscription</p>
+      <h2>The roaster's choice, every other Friday.</h2>
+      <dl>
+        <dt>What</dt><dd>One 250&nbsp;g bag of whatever we are most excited about that fortnight, with the roast log printed on the back.</dd>
+        <dt>When</dt><dd>Roasted Thursday, posted Friday by CTT, in your letterbox Monday or Tuesday anywhere on the mainland.</dd>
+        <dt>Cost</dt><dd>€13.50 a bag including shipping; €24 for two. Pause or cancel from the email, no account needed.</dd>
+        <dt>Grind</dt><dd>Whole bean by default. Tell us your brewer and we grind for it.</dd>
+      </dl>
+      <form id="f">
+        <input type="email" name="email" placeholder="you@example.pt" required aria-label="Email">
+        <select name="bags" aria-label="Bags per delivery"><option>1 bag · €13.50</option><option>2 bags · €24.00</option></select>
+        <button type="submit">Start</button>
+      </form>
+      <p class="ok mono" id="ok" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap mono mute">
+    <span>Mosca Torrefação Lda · Rua da Boavista 84, 1200-066 Lisboa</span>
+    <span>NIF 514 000 000 · ola@mosca.pt · +351 213 000 000</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<script>
+const svg = s => 'data:image/svg+xml,' + encodeURIComponent(s);
+const C = {ink:'#1c1a16', cob:'#1d3c8f', tel:'#b4532c', cork:'#d9c7a5', cal:'#f2ede3'};
+
+const x = t => 60 + t / 660 * 500, y = c => 390 - (c - 60) / 160 * 340;
+const bt = [[0,210],[30,150],[60,105],[80,88],[120,96],[180,118],[240,136],[290,150],[360,166],[440,182],[520,196],[580,201],[630,205.4]];
+const path = bt.map(([t, c], i) => (i ? 'L' : 'M') + x(t).toFixed(1) + ' ' + y(c).toFixed(1)).join(' ');
+const grid = [80,120,160,200].map(c => `<line x1="60" x2="560" y1="${y(c)}" y2="${y(c)}" stroke="${C.cork}"/><text x="52" y="${y(c)+4}" text-anchor="end">${c}°</text>`).join('')
+  + [0,120,240,360,480,600].map(t => `<text x="${x(t)}" y="412" text-anchor="middle">${t/60}:00</text>`).join('');
+const mark = (t, c, label) => `<circle cx="${x(t)}" cy="${y(c)}" r="5" fill="${C.tel}"/><text x="${x(t)+10}" y="${y(c)+18}">${label}</text>`;
+document.getElementById('curve').src = svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" font-family="monospace" font-size="12" fill="${C.ink}">
+<rect width="600" height="440" fill="${C.cal}"/>
+<rect x="${x(290)}" y="30" width="${x(520)-x(290)}" height="360" fill="${C.cork}" opacity=".45"/>
+<text x="${x(300)}" y="48">MAILLARD</text>
+<rect x="${x(520)}" y="30" width="${x(630)-x(520)}" height="360" fill="${C.tel}" opacity=".18"/>
+<text x="${x(524)}" y="48">DEV</text>
+${grid}
+<line x1="60" x2="560" y1="390" y2="390" stroke="${C.ink}" stroke-width="1.5"/>
+<path d="${path}" fill="none" stroke="${C.cob}" stroke-width="4"/>
+${mark(80,88,'turning 88°')}${mark(290,150,'yellow 4:50')}${mark(520,196,'1st crack 8:40')}${mark(630,205.4,'')}
+<text x="${x(630)-8}" y="${y(205.4)-12}" text-anchor="end">drop 10:30 · 205.4°</text>
+</svg>`);
+
+const streets = [
+  'M0 120 L520 90','M0 250 L520 230','M40 0 L90 470','M200 0 L230 470','M360 0 L380 470','M470 0 L470 470','M0 360 L520 350',
+  'M120 0 L150 470','M290 0 L300 470'
+].map(d => `<path d="${d}" stroke="${C.ink}" stroke-width="1.2" fill="none"/>`).join('');
+document.getElementById('map').src = svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" font-family="monospace" font-size="12" fill="${C.ink}">
+<rect width="520" height="620" fill="${C.cal}"/>
+<rect x="0" y="470" width="520" height="150" fill="${C.cob}"/>
+<text x="24" y="560" fill="${C.cal}" font-size="22" font-family="Georgia,serif">Rio Tejo</text>
+${streets}
+<path d="M0 250 L520 230" stroke="${C.ink}" stroke-width="5"/>
+<text x="30" y="242" transform="rotate(-2 30 242)">RUA DA BOAVISTA</text>
+<path d="M0 440 L520 440" stroke="${C.ink}" stroke-width="3" stroke-dasharray="10 6"/>
+<text x="24" y="432">15E TRAM · AV. 24 DE JULHO</text>
+<rect x="250" y="400" width="120" height="30" fill="${C.ink}"/>
+<text x="258" y="420" fill="${C.cal}">CAIS DO SODRÉ</text>
+<circle cx="262" cy="238" r="16" fill="${C.tel}" stroke="${C.ink}" stroke-width="2"/>
+<text x="284" y="214">MOSCA · Nº 84</text>
+<text x="24" y="40">N ↑</text>
+<text x="24" y="70">100 m</text><line x1="24" x2="104" y1="80" y2="80" stroke="${C.ink}" stroke-width="2"/>
+</svg>`);
+
+const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Europe/Lisbon'}));
+const d = now.getDay(), h = now.getHours();
+const open = d >= 1 && d <= 5 ? h >= 8 && h < 17 : d === 6 ? h >= 9 && h < 18 : false;
+document.getElementById('open').textContent = open ? 'open now' : 'closed now';
+
+document.getElementById('f').addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('ok').textContent = 'Noted. First bag roasts this Thursday; we will email the lot.';
+  e.target.reset();
+});
+</script>
+</body>
+</html>

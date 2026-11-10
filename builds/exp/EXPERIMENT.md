@@ -89,3 +89,36 @@ The next work is not another verifier rule. It is the two causes above:
   five rule types every time, so two different triples produce two different contracts.
 - Widen corpus grammar coverage so the contrast and outlier slots are not drawn from the same
   three entries — the dataset task, now with a measurement attached to it.
+
+## Rerun after adding live gallery sites (2026-11-08, `builds/exp2/`)
+
+Same three briefs, three fresh treatment agents, same protocol. The only change is the
+reference pool: 461 measured live award-gallery sites joined the 85 catalogue entries, and the
+outlier is now picked by brief relevance among the rarest fifth. Control was not rebuilt
+(its pages are gone); its recorded 0.565 stands.
+
+| brief | near | contrast | outlier | verify |
+|---|---|---|---|---|
+| analytics | posthog-nemotron-ultra | vercel | live:peppasauce.love | 10/10 |
+| roaster | agenticos | live:coffeesupreme.com | live:peppasauce.love | 10/10 |
+| festival | live:midlife.engineering | live:easound.no | live:superlocaldesign.com | 9/9 |
+
+    within-arm mean pairwise distance
+    control (recorded)   0.565
+    treatment, exp       0.221   (remeasured with the current probe: unchanged)
+    treatment, exp2      0.276
+
+Pairs: analytics–roaster 0.200 -> 0.258, analytics–festival 0.241 -> 0.396,
+roaster–festival 0.222 -> 0.173.
+
+**Convergence eased slightly but did not go away.** All three exp2 pages are left hero,
+card-free, sharp geometry (radius 2–3px), medium density. Last run they were all soft; now
+they are all sharp. Imagery and rhythm moved (two pages now carry imagery; festival is
+uniform), which accounts for most of the gain.
+
+Reading: a wider reference pool changes what the triples say, but the contract still emits the
+same five mandate types (`full_bleed_sections`, `centroid_flips`, `display_dominance`,
+`largest_card_row`, `max_radius`) with almost the same values. The agents fill every dimension
+the contract leaves free with the same house style: ruled tables in place of cards, a 2px
+radius, a left-anchored oversized headline. The corpus bottleneck is relieved; the mandate
+vocabulary is now the binding constraint.
