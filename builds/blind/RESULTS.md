@@ -74,3 +74,27 @@ rater starred the ones that stood out. Picks in `standouts.json`.
 Measurement caveat this exposed: the control jazz page has a grid of eight CSS-drawn album
 covers yet measures `imagery_ratio` 0.00, because `measure.py` counts img/canvas/svg/video area,
 not CSS-drawn shapes. "Control pages have no imagery" partly reflects what the probe can see.
+
+## Third arm: plain request + one illustration line (2026-11-10)
+
+On the 10 briefs where the treatment contract required imagery (wedding and lab left out), a
+third version was built from the plain request plus: "Include substantial original
+illustration as a primary part of the page: draw it yourself in SVG or canvas." Rated blind
+against treatment by the same rater (`ratings_treatment_illustrated.jsonl`).
+
+| | treatment | illustration prompt | tie |
+|---|---|---|---|
+| vs plain prompt (round 1, these 10 briefs) | 8 | 0 | 2 |
+| vs illustration prompt (this round) | 6 | 4 | 0 |
+
+Treatment won archstudio, cyber, dental, hotel, indiegame, jazz; the one-line version won
+bakery, ceramics, writer, yoga. 6–4 is two-sided p = 0.75: indistinguishable from even.
+
+**Reading:** on these briefs one sentence of prompt closes most of the gap the tool opened
+against the plain prompt (8–0 becomes 6–4). Whatever the tool adds beyond "draw
+illustrations" is too small to detect at 10 pairs. The tool costs more per page (≈85k tokens
+and ≈15 actions vs ≈70k and 2–5).
+
+Found while building: `measure.py` does not count inline `<svg>` as imagery, so 9 of the 10
+illustrated pages measure `imagery_ratio` 0.00. Imagery numbers in contracts and in the
+catalogue understate SVG art.
