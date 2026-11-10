@@ -34,18 +34,34 @@ uv run playwright install chromium
 The MCP server is registered in `.mcp.json` and needs no API key: composition grammar is
 measured from the render, not inferred by a model.
 
-## Using it
+## Using it: `/pixi`
 
-The `design-build` skill drives the protocol. In short:
+The `pixi` skill (`.claude/skills/pixi/`) builds a frontend for whatever project it runs in:
 
-1. `search_designs(brief)` — near / contrast / outlier references. Deliberately not the
-   nearest three; three adjacent references push the build back toward the middle.
+1. Reads the project and writes a one-line brief.
+2. `scripts/pick_reference.py "<brief>"` returns screenshots of real sites outside the
+   recurring Claude house style, from a local gallery harvest or fetched fresh via the
+   scrappy scraping agent (search only, robots.txt obeyed). The agent looks at each and
+   rejects broken ones (age gates, cookie walls, error pages).
+3. Builds one self-contained page that borrows the reference's visual language, with
+   original SVG/canvas illustration as a primary surface and none of the default AI look.
+4. `scripts/pixi_check.py page.html` screenshots it and scores the house style.
+
+Why this setup: four blind human rating rounds in `builds/blind/RESULTS.md`. The full
+catalogue protocol below did not beat a plain prompt; one illustration line matched it; a
+screenshot reference on top won 4–1 and cut the house-style score from 5.0 to 3.0 of 7.
+
+Install globally (so `/pixi` works in any project): copy `.claude/skills/pixi` to
+`~/.claude/skills/pixi`. The scripts use absolute paths to this checkout. The reference
+harvest under `research/` stays local and is not in this repo.
+
+## The catalogue protocol (optional)
+
+1. `search_designs(brief)` — near / contrast / outlier references.
 2. `get_design_contract(brief)` — inherited composition mandates plus prohibitions.
-3. Write `DESIGN_CONTRACT.md`, adding the brief-specific decisions. Inherited
-   constraints may be added to, never weakened.
+3. Write `DESIGN_CONTRACT.md`; inherited constraints may be added to, never weakened.
 4. Build the page.
-5. `verify_build(page, brief)` — renders it and checks the mandates. A page that only
-   avoids the prohibitions fails.
+5. `verify_build(page, brief)` — renders it and checks the mandates.
 
 ## Pipeline (optional VLM layer)
 
