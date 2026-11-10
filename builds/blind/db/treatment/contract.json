@@ -1,0 +1,200 @@
+{
+  "identity": {
+    "references": {
+      "near": {
+        "id": "supabase",
+        "grammar": {
+          "hero_alignment": "centered",
+          "hero_weight_split": 0.468,
+          "section_rhythm": "alternating",
+          "full_bleed_sections": 8,
+          "card_reliance": "high",
+          "largest_card_row": 4,
+          "geometry": "soft",
+          "max_radius": 12,
+          "display_dominance": 4.0,
+          "display_weight": 500,
+          "generic_display_font": true,
+          "imagery": "absent",
+          "imagery_ratio": 0,
+          "density": "high",
+          "text_density": "high",
+          "gradients": 0,
+          "glass_panels": 1,
+          "palette_size": 4,
+          "sections": 9,
+          "page_height": 4622
+        }
+      },
+      "contrast": {
+        "id": "clickhouse",
+        "grammar": {
+          "hero_alignment": "left",
+          "hero_weight_split": 0.368,
+          "section_rhythm": "uniform",
+          "full_bleed_sections": 4,
+          "card_reliance": "high",
+          "largest_card_row": 3,
+          "geometry": "soft",
+          "max_radius": 12,
+          "display_dominance": 4.5,
+          "display_weight": 700,
+          "generic_display_font": true,
+          "imagery": "absent",
+          "imagery_ratio": 0,
+          "density": "medium",
+          "text_density": "medium",
+          "gradients": 0,
+          "glass_panels": 0,
+          "palette_size": 4,
+          "sections": 9,
+          "page_height": 5562
+        }
+      },
+      "outlier": {
+        "id": "live:www.peppasauce.love",
+        "grammar": {
+          "hero_alignment": "unknown",
+          "hero_weight_split": null,
+          "section_rhythm": "alternating",
+          "full_bleed_sections": 21,
+          "card_reliance": "none",
+          "largest_card_row": 0,
+          "geometry": "rounded",
+          "max_radius": 72,
+          "display_dominance": 41.14,
+          "display_weight": 400,
+          "generic_display_font": false,
+          "imagery": "present",
+          "imagery_ratio": 0.156,
+          "density": "high",
+          "text_density": "medium",
+          "gradients": 0,
+          "glass_panels": 0,
+          "palette_size": 1,
+          "sections": 24,
+          "page_height": 7358
+        }
+      }
+    },
+    "direction": "high-density, typography-dominant, absent imagery, soft geometry, uniform section rhythm",
+    "design_intent": [
+      "The visual anchor moves through the page rather than sitting in one column, and the side it leaves should carry weight of its own, not empty margin.",
+      "Typography carries the hierarchy. Size, weight and spacing do the work that borders, shadows and container chrome would otherwise do.",
+      "Read as one system, the references are supabase for fit, clickhouse for contrast, live:www.peppasauce.love for the unusual grammar. Build in the space they bound \u2014 not a copy of any one of them."
+    ]
+  },
+  "inherited": {
+    "required": [
+      {
+        "rule": "full_bleed_sections",
+        "op": ">=",
+        "value": 1,
+        "source": "contrast:clickhouse",
+        "why": "at least one section breaks the page container"
+      },
+      {
+        "rule": "centroid_flips",
+        "op": ">=",
+        "value": 2,
+        "source": "outlier:live:www.peppasauce.love",
+        "why": "visual anchor alternates sides between major sections"
+      },
+      {
+        "rule": "display_dominance",
+        "op": ">=",
+        "value": 6.0,
+        "source": "outlier:live:www.peppasauce.love",
+        "why": "display typography carries the hierarchy instead of card chrome"
+      },
+      {
+        "rule": "display_dominance",
+        "op": "<=",
+        "value": 8.0,
+        "source": "median of triple",
+        "why": "display scale stays inside the reference range"
+      },
+      {
+        "rule": "hero_weight_split",
+        "op": "<=",
+        "value": 0.42,
+        "source": "contrast:clickhouse",
+        "why": "hero_alignment is left in the references"
+      },
+      {
+        "rule": "imagery_ratio",
+        "op": "<",
+        "value": 0.06,
+        "source": "near:supabase+contrast:clickhouse",
+        "why": "imagery is absent in the references"
+      },
+      {
+        "rule": "elements_per_1k",
+        "op": ">=",
+        "value": 55,
+        "source": "near:supabase+outlier:live:www.peppasauce.love",
+        "why": "density is high in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": ">=",
+        "value": 6,
+        "source": "near:supabase+contrast:clickhouse",
+        "why": "geometry is soft in the references"
+      },
+      {
+        "rule": "max_radius",
+        "op": "<=",
+        "value": 19,
+        "source": "near:supabase+contrast:clickhouse",
+        "why": "geometry is soft in the references"
+      }
+    ],
+    "forbidden": [
+      {
+        "rule": "gradients",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "gradient backdrops are the loudest AI tell"
+      },
+      {
+        "rule": "pill_controls",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "fully rounded pill CTAs"
+      },
+      {
+        "rule": "glass_panels",
+        "op": "<=",
+        "value": 0,
+        "source": "slop_law",
+        "why": "glassmorphism panels"
+      },
+      {
+        "rule": "generic_display_font",
+        "op": "==",
+        "value": false,
+        "source": "slop_law",
+        "why": "Inter / system-ui defaults on the display face"
+      },
+      {
+        "rule": "hero_asymmetry",
+        "op": ">=",
+        "value": 0.08,
+        "source": "slop_law",
+        "why": "centred hero column is the default AI composition"
+      }
+    ]
+  },
+  "agent_owns": [
+    "product message, section order, and copy",
+    "the exact display and body typefaces (must not be a generic default)",
+    "the palette, within the direction above",
+    "how each composition mandate is realised structurally"
+  ],
+  "rule": "You may add constraints. You may not weaken or drop an inherited one.",
+  "brief": "open source database",
+  "frozen_at": "2026-11-08T18:11:53+00:00"
+}

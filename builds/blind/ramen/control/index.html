@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menya Yodogawa — Ramen Counter, Osaka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;800&family=IBM+Plex+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --soy:#1a110b;
+  --broth:#2a1a10;
+  --paper:#ece2cf;
+  --paper-2:#e2d5bc;
+  --ink:#1a110b;
+  --shu:#c7361f;
+  --egg:#e8a93a;
+  --scallion:#6f7d3c;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --mincho:"Shippori Mincho B1",serif;
+  --serif:"Instrument Serif",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:15px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+img{display:block;max-width:100%}
+
+/* top strip */
+.strip{display:flex;justify-content:space-between;gap:16px;padding:10px 24px;background:var(--soy);color:var(--paper);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.strip b{color:var(--egg);font-weight:600}
+.strip .open-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--scallion);margin-right:8px;vertical-align:middle}
+.strip .open-dot.closed{background:var(--shu)}
+
+/* hero */
+.hero{position:relative;background:var(--soy);color:var(--paper);min-height:92vh;display:grid;grid-template-columns:1fr minmax(120px,22vw);overflow:hidden}
+.hero-main{padding:56px 24px 40px 6vw;display:flex;flex-direction:column;justify-content:space-between;gap:48px;position:relative;z-index:2}
+.hero-kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--egg)}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10.5vw,176px);line-height:.88;letter-spacing:-.02em}
+.hero h1 em{color:var(--shu);font-style:italic}
+.hero-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid #4a3426;padding-top:20px;max-width:780px}
+.hero-foot dt{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a48b72}
+.hero-foot dd{font-family:var(--mincho);font-size:20px;margin-top:4px}
+.noren{background:var(--shu);display:flex;justify-content:center;gap:0;position:relative}
+.noren span{flex:1;border-right:2px solid var(--soy);display:flex;justify-content:center;padding-top:8vh;transform-origin:top center;animation:sway 6s ease-in-out infinite}
+.noren span:last-child{border-right:0}
+.noren span:nth-child(2){animation-delay:.4s}
+.noren span:nth-child(3){animation-delay:.8s}
+.noren i{font-style:normal;writing-mode:vertical-rl;font-family:var(--mincho);font-weight:800;font-size:clamp(40px,6vw,96px);color:var(--paper);line-height:1}
+@keyframes sway{0%,100%{transform:skewX(0)}50%{transform:skewX(1.4deg)}}
+.steam{position:absolute;left:46%;bottom:0;width:220px;height:70%;pointer-events:none;z-index:1}
+.steam path{fill:none;stroke:#ece2cf;stroke-width:2;opacity:.12;stroke-dasharray:6 10;animation:rise 9s linear infinite}
+.steam path:nth-child(2){animation-duration:12s;opacity:.08}
+@keyframes rise{to{stroke-dashoffset:-320}}
+
+/* manifesto */
+.manifesto{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:6vw;padding:96px 6vw;border-bottom:2px solid var(--ink)}
+.manifesto .num{font-family:var(--serif);font-size:clamp(120px,18vw,260px);line-height:.8;color:var(--shu)}
+.manifesto .num small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-top:16px}
+.manifesto p{font-family:var(--mincho);font-size:clamp(22px,2.4vw,34px);line-height:1.35;font-weight:500}
+.manifesto p + p{font-family:var(--mono);font-size:15px;line-height:1.7;margin-top:28px;max-width:560px}
+
+/* ticket machine */
+.machine-wrap{background:var(--paper-2);padding:96px 6vw;border-bottom:2px solid var(--ink)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,88px);line-height:.95}
+.sec-head p{max-width:380px;font-size:13px}
+.machine{background:#d8d2c4;border:2px solid var(--ink);padding:20px;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;box-shadow:10px 10px 0 var(--ink)}
+.buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tk{appearance:none;border:2px solid var(--ink);background:var(--paper);text-align:left;font:inherit;padding:14px 12px 12px;cursor:pointer;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;position:relative;transition:transform .08s}
+.tk:active{transform:translateY(2px)}
+.tk:focus-visible{outline:3px solid var(--shu);outline-offset:2px}
+.tk .jp{font-family:var(--mincho);font-weight:800;font-size:22px;line-height:1.1}
+.tk .en{font-size:12px;color:#5a4636}
+.tk .yen{font-weight:600;font-size:14px}
+.tk.hot{background:var(--shu);color:var(--paper)}
+.tk.hot .en{color:#f4d3c8}
+.tk.side{background:#f3ecdc;min-height:90px}
+.tk.sold{opacity:.45;cursor:not-allowed}
+.tk.sold::after{content:"売切";position:absolute;top:8px;right:8px;font-family:var(--mincho);font-size:12px;border:1px solid currentColor;padding:1px 4px}
+.slot{background:var(--soy);color:var(--paper);padding:16px;display:flex;flex-direction:column;gap:12px}
+.slot h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--egg);font-weight:600}
+.slot ul{list-style:none;flex:1;font-size:13px;display:flex;flex-direction:column;gap:6px;min-height:120px}
+.slot li{display:flex;justify-content:space-between;border-bottom:1px dashed #4a3426;padding-bottom:4px}
+.slot .empty{color:#8a7462}
+.slot .total{font-family:var(--serif);font-size:44px;line-height:1}
+.slot button{font:inherit;font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:none;color:var(--paper);border:1px solid #6a5040;padding:8px;cursor:pointer}
+
+/* broth */
+.broth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:2px solid var(--ink)}
+.broth article{padding:56px 32px 48px;border-right:2px solid var(--ink);display:flex;flex-direction:column;gap:16px}
+.broth article:last-child{border-right:0}
+.broth .hrs{font-family:var(--serif);font-size:72px;line-height:1}
+.broth .hrs sup{font-size:20px;vertical-align:top;margin-left:4px}
+.broth h3{font-family:var(--mincho);font-size:24px;font-weight:800}
+.bowl{width:100%;max-width:220px;aspect-ratio:1;margin-top:auto}
+
+/* counter */
+.counter{background:var(--soy);color:var(--paper);padding:96px 6vw}
+.counter .sec-head p{color:#c2ac93}
+.seats{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;align-items:end;margin-top:24px}
+.seat{border:1px solid #6a5040;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:12px;cursor:pointer;background:none;color:var(--paper);font-family:var(--mono)}
+.seat.taken{background:#4a3426;color:#8a7462;cursor:default}
+.seat[aria-pressed="true"]{background:var(--egg);color:var(--soy);border-color:var(--egg)}
+.bar{height:22px;background:#4a3426;margin-top:10px;border-top:3px solid var(--shu)}
+.kitchen{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8a7462;margin-top:10px;text-align:center}
+.seat-note{margin-top:28px;font-family:var(--mincho);font-size:22px}
+
+/* visit */
+.visit{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);border-bottom:2px solid var(--ink)}
+.visit .map{border-right:2px solid var(--ink);min-height:420px;background:var(--paper-2);position:relative;overflow:hidden}
+.visit .map svg{position:absolute;inset:0;width:100%;height:100%}
+.visit .info{padding:56px 32px;display:flex;flex-direction:column;gap:28px}
+.visit h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,72px);line-height:.95}
+.visit table{border-collapse:collapse;width:100%;font-size:14px}
+.visit td{padding:8px 0;border-bottom:1px solid #bfae90}
+.visit td:last-child{text-align:right}
+.visit tr.today td{color:var(--shu);font-weight:600}
+
+footer{padding:40px 6vw;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:12px;letter-spacing:.06em}
+footer .big{font-family:var(--mincho);font-weight:800;font-size:clamp(48px,9vw,140px);line-height:1;width:100%;color:var(--shu)}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr 88px;min-height:auto}
+  .hero-foot{grid-template-columns:1fr 1fr}
+  .manifesto,.visit{grid-template-columns:1fr}
+  .machine{grid-template-columns:1fr}
+  .buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .broth{grid-template-columns:1fr}
+  .broth article{border-right:0;border-bottom:2px solid var(--ink)}
+  .broth article:last-child{border-bottom:0}
+  .visit .map{border-right:0;border-bottom:2px solid var(--ink);min-height:300px}
+  .seats{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .strip{padding:10px 16px;flex-wrap:wrap}
+  .hero-main,.manifesto,.machine-wrap,.counter,footer{padding-left:16px;padding-right:16px}
+  .noren i{font-size:36px}
+  .noren span:nth-child(3){display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="strip">
+  <span><span class="open-dot" id="dot"></span><span id="status">Checking the pot…</span></span>
+  <span>Fukushima-ku, Osaka · <b>8 seats</b> · cash &amp; IC card</span>
+</div>
+
+<header class="hero">
+  <svg class="steam" viewBox="0 0 220 600" aria-hidden="true">
+    <path d="M60 600 C20 500 100 420 60 320 S100 140 60 0"/>
+    <path d="M150 600 C110 480 190 400 150 300 S190 120 150 0"/>
+  </svg>
+  <div class="hero-main">
+    <p class="hero-kicker">麺屋 淀川 · Menya Yodogawa · since 2011</p>
+    <h1>Eighteen hours<br>of pork bone,<br><em>four minutes</em><br>of noodle.</h1>
+    <dl class="hero-foot">
+      <div><dt>Open</dt><dd>18:00 – 03:00</dd></div>
+      <div><dt>Station</dt><dd>JR Fukushima, 2 min</dd></div>
+      <div><dt>Wait</dt><dd id="wait">~15 min</dd></div>
+    </dl>
+  </div>
+  <div class="noren" aria-hidden="true">
+    <span><i>麺屋</i></span><span><i>淀川</i></span><span><i>拉麺</i></span>
+  </div>
+</header>
+
+<section class="manifesto">
+  <div class="num">8<small>Seats at one cedar counter</small></div>
+  <div>
+    <p>No tables, no reservations, no menu to read aloud. You buy a ticket at the machine, hand it over the counter, and Tetsu-san starts your bowl.</p>
+    <p>We cook one tonkotsu-gyokai broth in a 120-litre stockpot that hasn't been fully emptied since the shop opened. Noodles are cut every afternoon from Hokkaido flour, 22% hydration, thick and slightly wavy so they carry the soup. When the pot runs dry, we close — sometimes at 1am, sometimes at 3.</p>
+  </div>
+</section>
+
+<section class="machine-wrap" id="menu">
+  <div class="sec-head">
+    <h2>The ticket<br>machine</h2>
+    <p>This is the menu. Press a button the way you would at the door — the machine tallies it up. Toppings are separate tickets.</p>
+  </div>
+  <div class="machine">
+    <div class="buttons" id="buttons">
+      <button class="tk hot" data-n="Tokusei Ramen" data-p="1350"><span class="jp">特製らーめん</span><span class="en">Everything bowl: chashu ×3, egg, nori, menma</span><span class="yen">¥1,350</span></button>
+      <button class="tk" data-n="Ramen" data-p="950"><span class="jp">らーめん</span><span class="en">Broth, noodles, chashu ×1, scallion</span><span class="yen">¥950</span></button>
+      <button class="tk" data-n="Karashi Ramen" data-p="1050"><span class="jp">辛味らーめん</span><span class="en">With house chili-sansho oil</span><span class="yen">¥1,050</span></button>
+      <button class="tk" data-n="Tsukemen" data-p="1100"><span class="jp">つけ麺</span><span class="en">Cold noodles, reduced dipping broth</span><span class="yen">¥1,100</span></button>
+      <button class="tk side" data-n="Ajitama" data-p="150"><span class="jp">味玉</span><span class="yen">¥150</span></button>
+      <button class="tk side" data-n="Chashu ×2" data-p="300"><span class="jp">チャーシュー</span><span class="yen">¥300</span></button>
+      <button class="tk side" data-n="Kaedama" data-p="150"><span class="jp">替玉</span><span class="en">Extra noodles</span><span class="yen">¥150</span></button>
+      <button class="tk side sold" data-n="Gyoza" data-p="400" aria-disabled="true"><span class="jp">餃子</span><span class="en">6 pcs</span><span class="yen">¥400</span></button>
+      <button class="tk side" data-n="Rice" data-p="150"><span class="jp">ライス</span><span class="yen">¥150</span></button>
+      <button class="tk side" data-n="Asahi" data-p="550"><span class="jp">瓶ビール</span><span class="en">Bottle, 500ml</span><span class="yen">¥550</span></button>
+      <button class="tk side" data-n="Oolong" data-p="200"><span class="jp">烏龍茶</span><span class="yen">¥200</span></button>
+      <button class="tk side" data-n="Highball" data-p="450"><span class="jp">ハイボール</span><span class="yen">¥450</span></button>
+    </div>
+    <div class="slot" aria-live="polite">
+      <h3>Tickets issued</h3>
+      <ul id="tickets"><li class="empty">Nothing yet.</li></ul>
+      <div><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#a48b72">Total</span><div class="total" id="total">¥0</div></div>
+      <button id="clear">Return coins</button>
+    </div>
+  </div>
+</section>
+
+<section class="broth">
+  <article>
+    <div class="hrs">18<sup>hrs</sup></div>
+    <h3>豚骨 Pork bone</h3>
+    <p>Femur and trotter at a hard boil until the collagen turns the stock opaque and the colour of milky tea.</p>
+    <svg class="bowl" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#1a110b" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="#e8d6b4"/><circle cx="50" cy="50" r="38" fill="none" stroke="#1a110b" stroke-dasharray="2 4"/></svg>
+  </article>
+  <article>
+    <div class="hrs">6<sup>hrs</sup></div>
+    <h3>魚介 Seafood</h3>
+    <p>Niboshi sardine, Rishiri kombu and katsuobushi, steeped below a simmer and added to each bowl to order.</p>
+    <svg class="bowl" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#1a110b" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="#c99a55"/><path d="M28 50 Q50 34 72 50 Q50 66 28 50Z" fill="none" stroke="#1a110b" stroke-width="1.5"/></svg>
+  </article>
+  <article>
+    <div class="hrs">3<sup>days</sup></div>
+    <h3>タレ Tare</h3>
+    <p>Usukuchi soy from Tatsuno, mirin and rendered chashu fat, aged three days before it meets the broth.</p>
+    <svg class="bowl" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#1a110b" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="#7a4a24"/><circle cx="62" cy="40" r="9" fill="#e8a93a"/><circle cx="62" cy="40" r="4" fill="#c7361f"/><rect x="26" y="52" width="26" height="14" rx="3" fill="#e8d6b4"/></svg>
+  </article>
+</section>
+
+<section class="counter" id="counter">
+  <div class="sec-head">
+    <h2>Right now<br>at the counter</h2>
+    <p>Seats fill and empty every twelve minutes or so. Tap a free stool to see where you'd sit — it's not a booking, we don't take those.</p>
+  </div>
+  <div class="seats" id="seats"></div>
+  <div class="bar"></div>
+  <p class="kitchen">— kitchen · stockpot · Tetsu-san —</p>
+  <p class="seat-note" id="seatnote">Pick a stool.</p>
+</section>
+
+<section class="visit">
+  <div class="map" aria-label="Map: shop is under the JR Osaka Loop Line tracks, two minutes north of Fukushima Station">
+    <svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice">
+      <rect width="600" height="420" fill="#e2d5bc"/>
+      <path d="M0 300 L600 240" stroke="#1a110b" stroke-width="10"/>
+      <path d="M0 300 L600 240" stroke="#e2d5bc" stroke-width="4" stroke-dasharray="14 10"/>
+      <path d="M180 0 L240 420" stroke="#bfae90" stroke-width="22"/>
+      <path d="M420 0 L400 420" stroke="#bfae90" stroke-width="14"/>
+      <path d="M0 120 L600 150" stroke="#bfae90" stroke-width="14"/>
+      <rect x="250" y="262" width="90" height="26" fill="#1a110b" transform="rotate(-5 295 275)"/>
+      <text x="262" y="280" fill="#ece2cf" font-family="IBM Plex Mono" font-size="12" transform="rotate(-5 295 275)">JR 福島</text>
+      <circle cx="318" cy="186" r="14" fill="#c7361f"/>
+      <text x="340" y="182" font-family="Shippori Mincho B1" font-weight="800" font-size="22" fill="#1a110b">麺屋 淀川</text>
+      <text x="340" y="202" font-family="IBM Plex Mono" font-size="11" fill="#1a110b">look for the red noren</text>
+      <path d="M300 262 L316 202" stroke="#c7361f" stroke-width="2" stroke-dasharray="4 4"/>
+      <text x="20" y="30" font-family="IBM Plex Mono" font-size="11" fill="#5a4636">FUKUSHIMA-KU · OSAKA</text>
+    </svg>
+  </div>
+  <div class="info">
+    <h2>Find the<br>red curtain</h2>
+    <p>5-12-8 Fukushima, Fukushima-ku, Osaka 553-0003. North exit of JR Fukushima, turn right along the tracks. If the noren is down, the broth is gone.</p>
+    <table id="hours">
+      <tr data-d="1"><td>Monday</td><td>18:00 – 03:00</td></tr>
+      <tr data-d="2"><td>Tuesday</td><td>18:00 – 03:00</td></tr>
+      <tr data-d="3"><td>Wednesday</td><td>Closed</td></tr>
+      <tr data-d="4"><td>Thursday</td><td>18:00 – 03:00</td></tr>
+      <tr data-d="5"><td>Friday</td><td>18:00 – 03:00</td></tr>
+      <tr data-d="6"><td>Saturday</td><td>17:00 – 03:00</td></tr>
+      <tr data-d="0"><td>Sunday</td><td>17:00 – 23:00</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="big">ごちそうさま。</div>
+  <span>Menya Yodogawa · 麺屋 淀川 · Osaka</span>
+  <span>Leave the bowl on the counter ledge. Wipe your spot. Come back hungry.</span>
+</footer>
+
+<script>
+const list=document.getElementById('tickets'),totalEl=document.getElementById('total');
+let tickets=[];
+const yen=n=>'¥'+n.toLocaleString('en-US');
+function render(){
+  list.innerHTML=tickets.length?tickets.map(t=>`<li><span>${t.n}</span><span>${yen(t.p)}</span></li>`).join(''):'<li class="empty">Nothing yet.</li>';
+  totalEl.textContent=yen(tickets.reduce((s,t)=>s+t.p,0));
+}
+document.getElementById('buttons').addEventListener('click',e=>{
+  const b=e.target.closest('.tk');
+  if(!b||b.classList.contains('sold'))return;
+  tickets.push({n:b.dataset.n,p:+b.dataset.p});
+  render();
+});
+document.getElementById('clear').onclick=()=>{tickets=[];render()};
+
+const now=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+const day=now.getDay(),h=now.getHours();
+const opens={0:17,1:18,2:18,3:null,4:18,5:18,6:17},closes={0:23,1:27,2:27,4:27,5:27,6:27};
+const prev=(day+6)%7;
+const lateOpen=h<3&&opens[prev]!=null&&closes[prev]>24;
+const evOpen=opens[day]!=null&&h>=opens[day]&&h<Math.min(closes[day],24);
+const open=lateOpen||evOpen;
+document.getElementById('status').textContent=open?'Noren is up — Osaka time '+now.toTimeString().slice(0,5):'Noren is down — Osaka time '+now.toTimeString().slice(0,5);
+if(!open)document.getElementById('dot').classList.add('closed');
+document.querySelector(`#hours tr[data-d="${day}"]`).classList.add('today');
+
+const seats=document.getElementById('seats'),note=document.getElementById('seatnote');
+const taken=new Set([0,2,3,6]);
+for(let i=0;i<9;i++){
+  if(i===4){const g=document.createElement('div');g.setAttribute('aria-hidden','true');seats.appendChild(g);continue}
+  const n=i<4?i+1:i;
+  const s=document.createElement('button');
+  s.className='seat'+(taken.has(i)?' taken':'');
+  s.textContent=n;
+  s.setAttribute('aria-label','Seat '+n+(taken.has(i)?', taken':', free'));
+  if(taken.has(i))s.disabled=true;else s.setAttribute('aria-pressed','false');
+  s.onclick=()=>{
+    seats.querySelectorAll('[aria-pressed]').forEach(x=>x.setAttribute('aria-pressed','false'));
+    s.setAttribute('aria-pressed','true');
+    note.textContent=n<=2?`Seat ${n}: right by the stockpot. Warm, loud, best view of the noodle drop.`:n>=7?`Seat ${n}: by the door. Quick in, quick out, a draught in winter.`:`Seat ${n}: middle of the counter, elbow to elbow with regulars.`;
+  };
+  seats.appendChild(s);
+}
+document.getElementById('wait').textContent=open?'~'+(taken.size*4)+' min':'—';
+</script>
+</body>
+</html>

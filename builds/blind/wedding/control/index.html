@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hollis & Vane — Wedding Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f3ede3;--ink:#1f1b16;--muted:#7a6f60;--line:#d6cbb9;--rust:#9a4a2c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Cormorant Garamond",serif;font-size:20px;line-height:1.5}
+a{color:inherit}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+header{display:flex;justify-content:space-between;align-items:baseline;padding:24px 4vw;border-bottom:1px solid var(--line)}
+header nav a{margin-left:28px;text-decoration:none}
+.logo{font-size:22px;font-style:italic}
+.hero{display:grid;grid-template-columns:5fr 7fr;min-height:88vh;border-bottom:1px solid var(--line)}
+.hero-text{padding:8vh 4vw;display:flex;flex-direction:column;justify-content:space-between}
+.hero h1{font-weight:300;font-size:clamp(56px,8vw,128px);line-height:.92;letter-spacing:-.02em}
+.hero h1 em{color:var(--rust)}
+.hero p{max-width:30ch;font-size:22px}
+.photo{position:relative;overflow:hidden;background:#b8a58a}
+.photo::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+.photo figcaption{position:absolute;left:16px;bottom:14px;z-index:1;color:#f3ede3}
+.p1{background:radial-gradient(ellipse at 60% 35%,#e9d9c0 0,#b39272 40%,#4a3a2c 100%)}
+.p2{background:linear-gradient(170deg,#c9c3b4,#6e6a5e 70%,#2c2a25)}
+.p3{background:radial-gradient(circle at 30% 70%,#e2b48c,#8a5a3c 55%,#2d1d14)}
+.p4{background:linear-gradient(200deg,#dfe0d8,#a4a89a 50%,#535748)}
+.p5{background:radial-gradient(ellipse at 50% 20%,#f4e6d0,#c19a6e 50%,#5b3d26)}
+.p6{background:linear-gradient(160deg,#2a2621,#5d544a 60%,#b9a68d)}
+section{padding:14vh 4vw;border-bottom:1px solid var(--line)}
+.intro{display:grid;grid-template-columns:1fr 2fr;gap:4vw}
+.intro h2{font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.1;font-style:italic}
+.intro .cols{columns:2;column-gap:3vw}
+.intro .cols p{margin-bottom:1em}
+.work{padding:0;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:9vw;gap:6px}
+.work .photo:nth-child(1){grid-column:1/8;grid-row:span 5}
+.work .photo:nth-child(2){grid-column:8/13;grid-row:span 3}
+.work .photo:nth-child(3){grid-column:8/13;grid-row:span 4}
+.work .photo:nth-child(4){grid-column:1/5;grid-row:span 4}
+.work .photo:nth-child(5){grid-column:5/8;grid-row:span 2}
+.work .photo:nth-child(6){grid-column:5/8;grid-row:span 2}
+.process ol{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:48px}
+.process li{padding:24px 24px 0 0}
+.process li h3{font-weight:500;font-size:28px;margin:12px 0 8px}
+.quote{text-align:center}
+.quote blockquote{font-size:clamp(30px,4vw,54px);font-weight:300;font-style:italic;line-height:1.2;max-width:22ch;margin:24px auto}
+.rates table{width:100%;border-collapse:collapse;margin-top:48px}
+.rates td{padding:28px 0;border-top:1px solid var(--line);vertical-align:top}
+.rates td:first-child{font-size:34px;width:30%}
+.rates td:last-child{text-align:right;font-size:28px;white-space:nowrap}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:4vw}
+.contact h2{font-weight:300;font-size:clamp(48px,6vw,96px);line-height:1}
+form{display:grid;gap:22px}
+label{display:grid;gap:6px}
+input,textarea{font:inherit;background:transparent;border:0;border-bottom:1px solid var(--ink);padding:6px 0;color:var(--ink)}
+input:focus,textarea:focus{outline:none;border-color:var(--rust)}
+button{justify-self:start;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;padding:16px 28px;cursor:pointer}
+button:hover{background:var(--rust)}
+footer{display:flex;justify-content:space-between;padding:24px 4vw}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:800px){
+  header nav{display:none}
+  .hero,.intro,.contact{grid-template-columns:1fr}
+  .hero .photo{min-height:60vh}
+  .intro .cols{columns:1}
+  .work{grid-auto-rows:28vw}
+  .work .photo:nth-child(n){grid-column:auto/span 12;grid-row:span 3}
+  .process ol{grid-template-columns:1fr 1fr}
+  .rates td:first-child{font-size:26px}
+}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">Hollis &amp; Vane</span>
+  <nav class="mono"><a href="#work">Work</a><a href="#process">Process</a><a href="#rates">Rates</a><a href="#contact">Enquire</a></nav>
+</header>
+
+<div class="hero">
+  <div class="hero-text">
+    <span class="mono">Wedding photography — on 35mm &amp; digital — est. 2014</span>
+    <h1>The day,<br>as it <em>felt.</em></h1>
+    <p>Quiet, unposed photographs for couples who would rather remember the room than the camera.</p>
+  </div>
+  <figure class="photo p1"><figcaption class="mono">Amelia &amp; Ruth — Cotswolds, June</figcaption></figure>
+</div>
+
+<section class="intro">
+  <span class="mono">01 — Approach</span>
+  <div>
+    <h2>We stand at the edge of the room and wait for the moments nobody planned.</h2>
+    <div class="cols" style="margin-top:40px">
+      <p>Most of your wedding happens between the scheduled parts: a father fixing a cufflink, a friend laughing too hard at the wrong speech, the five minutes you finally get alone. That is where we work.</p>
+      <p>We shoot a mix of medium-format film and digital, take on twenty weddings a year, and deliver every gallery by hand — edited, sequenced and printed, not dumped into a folder.</p>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <figure class="photo p2 reveal"><figcaption class="mono">Lake Como</figcaption></figure>
+  <figure class="photo p3 reveal"><figcaption class="mono">Last light, Marfa</figcaption></figure>
+  <figure class="photo p4 reveal"><figcaption class="mono">Registry, Edinburgh</figcaption></figure>
+  <figure class="photo p5 reveal"><figcaption class="mono">First look</figcaption></figure>
+  <figure class="photo p6 reveal"><figcaption class="mono">After midnight</figcaption></figure>
+  <figure class="photo p1 reveal"><figcaption class="mono">Vows</figcaption></figure>
+</section>
+
+<section class="process" id="process">
+  <span class="mono">02 — How it goes</span>
+  <ol>
+    <li class="reveal"><span class="mono">I</span><h3>A conversation</h3><p>An hour on a call or over coffee. We want to know who is in the room.</p></li>
+    <li class="reveal"><span class="mono">II</span><h3>The plan</h3><p>Light, timings, the people who matter. You get one page, not a questionnaire.</p></li>
+    <li class="reveal"><span class="mono">III</span><h3>The day</h3><p>Two of us, from getting ready to the last dance. Barely noticed.</p></li>
+    <li class="reveal"><span class="mono">IV</span><h3>The book</h3><p>Gallery in six weeks; a linen-bound album, sequenced like a story.</p></li>
+  </ol>
+</section>
+
+<section class="quote">
+  <span class="mono">Kind words</span>
+  <blockquote>"We don't remember seeing them once. Then the photos arrived and we cried for an hour."</blockquote>
+  <span class="mono">— Priya &amp; Tom, married at Babington House</span>
+</section>
+
+<section class="rates" id="rates">
+  <span class="mono">03 — Rates for 2027</span>
+  <table>
+    <tr><td>Elopement</td><td>Up to four hours, one photographer, film and digital, online gallery.</td><td>£1,900</td></tr>
+    <tr><td>Full day</td><td>Two photographers, ten hours, full gallery, set of 30 fine-art prints.</td><td>£4,200</td></tr>
+    <tr><td>Weekend</td><td>Welcome dinner to farewell brunch, plus a 40-page linen album.</td><td>£6,800</td></tr>
+  </table>
+</section>
+
+<section class="contact" id="contact">
+  <div>
+    <span class="mono">04 — Enquire</span>
+    <h2 style="margin-top:24px">Tell us<br>about it.</h2>
+    <p style="margin-top:24px;max-width:32ch">We reply within two days. 2027 has eight dates left.</p>
+    <p class="mono" style="margin-top:24px">hello@hollisvane.co</p>
+  </div>
+  <form onsubmit="event.preventDefault();this.innerHTML='<p style=&quot;font-size:28px;font-style:italic&quot;>Thank you — we will write back soon.</p>'">
+    <label><span class="mono">Your names</span><input required></label>
+    <label><span class="mono">Email</span><input type="email" required></label>
+    <label><span class="mono">Date &amp; place</span><input></label>
+    <label><span class="mono">Tell us a little</span><textarea rows="4"></textarea></label>
+    <button>Send enquiry</button>
+  </form>
+</section>
+
+<footer class="mono"><span>© Hollis &amp; Vane</span><span>London — travelling worldwide</span></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&(e.target.classList.add('in'),io.unobserve(e.target))),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

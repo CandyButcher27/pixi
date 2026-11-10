@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spreadhouse — spot and perps for people who read the book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2efe6;--ink:#15140f;--rule:#d6d0bf;--muted:#6b665a;
+  --signal:#e8501c;--up:#0b7a4b;--down:#b8321f;
+  --ink-rule:#38352c;--ink-muted:#a39d8c;--up-d:#4fc28d;--down-d:#f07a62;
+  --display:"Bricolage Grotesque",Georgia,serif;
+  --sans:"IBM Plex Sans",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--sans)}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.up{color:var(--up)}.down{color:var(--down)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:10px;border:1.5px solid var(--ink);font:600 15px/1 var(--sans);text-decoration:none;cursor:pointer;background:transparent;color:var(--ink)}
+.btn.primary{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h2{font:800 64px/.98 var(--display);letter-spacing:-.03em;margin:12px 0 20px}
+h3{font:700 22px/1.2 var(--display);margin:0 0 8px}
+p{margin:0 0 14px}
+table{border-collapse:collapse;width:100%}
+th{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;padding:10px 8px;border-bottom:1px solid var(--rule)}
+td{padding:9px 8px;text-align:right;border-bottom:1px solid var(--rule);font-size:14px}
+th:first-child,td:first-child{text-align:left}
+
+/* nav */
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.logo{font:800 24px/1 var(--display);letter-spacing:-.03em;text-decoration:none}
+.logo span{color:var(--signal)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:14px}
+nav ul a{text-decoration:none}
+.nav-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.nav-right .btn{height:40px;font-size:14px}
+.status{font:500 12px/1 var(--mono);color:var(--muted);display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--up);display:inline-block}
+
+/* tape */
+.tape{border-bottom:1px solid var(--rule);overflow:hidden;white-space:nowrap;font:400 13px/1 var(--mono);padding:11px 0}
+.tape .wrap{display:flex;gap:30px}
+.tape b{font-weight:500}
+
+/* hero */
+.hero{padding:56px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:48px;align-items:start}
+.hero h1{font:800 112px/.9 var(--display);letter-spacing:-.045em;margin:18px 0 28px}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.lede{font-size:19px;line-height:1.5;max-width:46ch}
+.hero-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:26px}
+.hero-cols p{font-size:15px;color:#3b382f}
+.cta-row{display:flex;gap:12px;align-items:center;margin:26px 0 34px;flex-wrap:wrap}
+.cta-row small{font:400 13px/1.4 var(--mono);color:var(--muted)}
+.figs{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;border-top:2px solid var(--ink)}
+.figs div{padding:14px 16px 0 0}
+.figs strong{display:block;font:700 34px/1 var(--display);letter-spacing:-.02em}
+.figs span{font-size:13px;color:var(--muted)}
+.book{border:1.5px solid var(--ink);border-radius:24px;padding:20px 20px 16px;background:#faf8f2}
+.book header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.book header b{font:700 18px/1 var(--display)}
+.book td,.book th{padding:4px 2px;font-size:12.5px;border:0}
+.book th{padding-bottom:8px}
+.book .mid{font:500 20px/1 var(--mono);padding:10px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:6px 0;display:flex;justify-content:space-between}
+.book .mid small{font-size:12px;color:var(--muted)}
+.bar{position:relative}
+.bar i{position:absolute;right:0;top:2px;bottom:2px;opacity:.14;border-radius:3px}
+.ask i{background:var(--down)}.bid i{background:var(--up)}
+.book footer{font:400 12px/1.5 var(--mono);color:var(--muted);margin-top:10px}
+
+/* markets: full bleed */
+.markets{background:var(--ink);color:var(--paper);padding:72px 0}
+.markets .wrap{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:48px}
+.markets .eyebrow{color:var(--ink-muted)}
+.markets th{color:var(--ink-muted);border-color:var(--ink-rule)}
+.markets td{border-color:var(--ink-rule)}
+.markets .up{color:var(--up-d)}.markets .down{color:var(--down-d)}
+.side dl{margin:22px 0 0;font-size:13px}
+.side dt{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-top:16px}
+.side dd{margin:5px 0 0;font:500 17px/1.2 var(--mono)}
+.side p{font-size:13px;color:var(--ink-muted)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.filters button{height:32px;padding:0 11px;border-radius:8px;border:1px solid var(--ink-rule);background:transparent;color:var(--paper);font:500 12px/1 var(--mono);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+.mk-head{display:flex;justify-content:space-between;align-items:end;gap:24px}
+.mk-head h2{margin:10px 0 0}
+.mk-head p{max-width:34ch;font-size:14px;color:var(--ink-muted);text-align:right;margin:0}
+.markets table{margin-top:28px}
+.pair b{font-weight:600}.pair small{color:var(--ink-muted);margin-left:6px;font-size:12px}
+.mk-foot{font-size:13px;color:var(--ink-muted);text-align:right;margin:14px 0 0}
+svg.spark{width:96px;height:24px;vertical-align:middle}
+
+/* fees */
+.fees{padding:84px 0 72px}
+.fees .wrap{display:grid;grid-template-columns:minmax(0,8.5fr) minmax(0,3.5fr);gap:56px}
+.fees table td:first-child{font-weight:500}
+.fees .tier-on td{background:#e9e4d6}
+.worked{border:1.5px solid var(--ink);border-radius:24px;padding:22px;font-size:14px;align-self:start}
+.worked .row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--rule);font-family:var(--mono);font-size:13px}
+.worked .row:last-of-type{border-bottom:0;font-weight:500;font-size:15px}
+.fee-notes{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:26px;font-size:14px;color:#3b382f}
+
+/* custody */
+.custody{padding:72px 0;border-top:1px solid var(--rule)}
+.custody .wrap{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:56px}
+.custody .notes{order:2}
+.notes ol{margin:18px 0 0;padding-left:20px;font-size:14px;color:#3b382f}
+.notes li{margin-bottom:12px}
+.ledger{border-radius:24px;background:#e9e4d6;padding:28px 28px 18px}
+.ledger h2{margin-top:6px}
+.ledger td,.ledger th{border-color:#cfc8b4}
+.ratio{display:flex;gap:28px;margin:6px 0 18px;flex-wrap:wrap}
+.ratio div strong{display:block;font:700 40px/1 var(--display);letter-spacing:-.02em}
+.ratio div span{font-size:13px;color:var(--muted)}
+
+/* api */
+.api{padding:84px 0;border-top:1px solid var(--rule)}
+.api .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px}
+.api pre{order:-1}
+.api td code{font-family:var(--mono);font-size:13px}
+.verb{font:500 11px/1 var(--mono);padding:3px 6px;border-radius:4px;border:1px solid var(--ink);margin-right:8px}
+pre{margin:0;background:var(--ink);color:var(--paper);border-radius:24px;padding:24px;font:400 13px/1.65 var(--mono);overflow:auto;align-self:start}
+pre .k{color:var(--signal)}pre .c{color:var(--ink-muted)}
+
+/* footer */
+footer.site{border-top:2px solid var(--ink);padding:48px 0 32px;font-size:14px}
+.fcols{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:32px}
+.fcols ul{list-style:none;margin:10px 0 0;padding:0}
+.fcols li{margin:6px 0}
+.fcols li a{text-decoration:none;color:#3b382f}
+.legal{margin-top:36px;font-size:12px;color:var(--muted);max-width:110ch}
+
+@media (max-width:900px){
+  .hero .wrap,.markets .wrap,.fees .wrap,.custody .wrap,.api .wrap,.hero-cols,.fee-notes{grid-template-columns:1fr}
+  .hero h1{font-size:64px}
+  h2{font-size:44px}
+  nav ul,.status{display:none}
+  .figs{grid-template-columns:1fr 1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .markets table{display:block;overflow-x:auto}
+  .mk-head{display:block}.mk-head p{text-align:left;margin-top:10px}
+}
+</style>
+</head>
+<body>
+<nav aria-label="Primary">
+  <div class="wrap">
+    <a class="logo" href="#">Spread<span>house</span></a>
+    <ul>
+      <li><a href="#markets">Markets</a></li>
+      <li><a href="#fees">Fees</a></li>
+      <li><a href="#custody">Custody</a></li>
+      <li><a href="#api">API</a></li>
+      <li><a href="#">Status</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="status"><i class="dot"></i>Matching 0.41 ms p50</span>
+      <a class="btn" href="#">Log in</a>
+      <a class="btn primary" href="#">Open account</a>
+    </div>
+  </div>
+</nav>
+
+<div class="tape" aria-label="Ticker">
+  <div class="wrap num" id="tape"></div>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Spot · Perpetuals · 214 pairs · Licensed in 9 jurisdictions</p>
+        <h1>Trade the spread, <em>not</em> the&nbsp;story.</h1>
+        <p class="lede">Spreadhouse publishes the numbers other exchanges bury: live depth at ±1%, maker rebates by tier, reserve ratios signed every 24 hours, and the exact rate limit on every endpoint. If it costs you money, it is on this page.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#">Open an account — 6 minutes</a>
+          <a class="btn" href="#markets">See the live book</a>
+          <small>KYC tier 1 deposits up to $25,000/day.<br>No deposit fees on SEPA, ACH, Faster Payments.</small>
+        </div>
+        <div class="figs">
+          <div><strong class="num">$4.81B</strong><span>24h matched volume across spot and perps</span></div>
+          <div><strong class="num">1.2 bps</strong><span>median BTC-USD spread, last 30 days</span></div>
+          <div><strong class="num">−0.5 bps</strong><span>maker rebate from tier 5</span></div>
+          <div><strong class="num">104.6%</strong><span>reserves vs. liabilities</span></div>
+        </div>
+        <div class="hero-cols">
+          <p><b>Price-time priority, no internalisation.</b> Every order hits the same public book. We do not run a market-making desk against our own clients, and our liquidity programme terms are published in full.</p>
+          <p><b>Liquidations are partial first.</b> Perp positions are reduced in 10% slices at the mark price before any full close, with the insurance fund balance ($61.3M) updated every block.</p>
+        </div>
+      </div>
+      <aside class="book" aria-label="BTC-USD order book">
+        <header><b>BTC-USD</b><span class="eyebrow">Live book · 0.1 USD ticks</span></header>
+        <table>
+          <thead><tr><th>Price</th><th>Size BTC</th><th>Total</th></tr></thead>
+          <tbody id="asks"></tbody>
+        </table>
+        <div class="mid"><span id="mid" class="num">67,412.6</span><small>spread <span id="spr">0.4</span> · 0.6 bps</small></div>
+        <table>
+          <tbody id="bids"></tbody>
+        </table>
+        <footer>Depth ±1%: 412.8 BTC bid / 398.1 BTC ask<br>Last trade 0.0312 BTC @ 67,412.5 · 14 ms ago</footer>
+      </aside>
+    </div>
+  </section>
+
+  <section class="markets" id="markets">
+    <div class="wrap">
+      <div class="side">
+        <p class="eyebrow">Session · UTC</p>
+        <div class="filters" role="group" aria-label="Filter markets">
+          <button aria-pressed="true" data-f="all">All</button>
+          <button aria-pressed="false" data-f="L1">Layer 1</button>
+          <button aria-pressed="false" data-f="L2">Layer 2</button>
+          <button aria-pressed="false" data-f="DeFi">DeFi</button>
+        </div>
+        <dl>
+          <dt>Spot volume 24h</dt><dd>$2.97B</dd>
+          <dt>Perp open interest</dt><dd>$1.38B</dd>
+          <dt>Funding (BTC-PERP, 8h)</dt><dd>+0.0081%</dd>
+          <dt>Orders matched / sec, peak</dt><dd>184,220</dd>
+          <dt>Uptime, trailing 365 days</dt><dd>99.994%</dd>
+        </dl>
+      </div>
+      <div>
+        <div class="mk-head">
+          <div><p class="eyebrow">Markets</p><h2>Twelve books, read&nbsp;straight.</h2></div>
+          <p>Sorted by 24h volume. Any pair with depth under $2M at ±1% is flagged and its maker rebate is doubled until it recovers.</p>
+        </div>
+        <table>
+          <thead><tr><th>Pair</th><th>Last</th><th>24h</th><th>High</th><th>Low</th><th>Volume</th><th>Spread</th><th>Depth ±1%</th><th>7d</th></tr></thead>
+          <tbody id="mk"></tbody>
+        </table>
+        <p class="mk-foot">Prices are last trade. Spread is the 30-day median at top of book, in basis points. Depth is resting size within 1% of mid. ⚑ marks books under $2M depth.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fees" id="fees">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Fees · effective 1 Nov 2026</p>
+        <h2>One schedule. No “VIP desk” off the&nbsp;page.</h2>
+        <table>
+          <thead><tr><th>Tier</th><th>30-day volume</th><th>Maker</th><th>Taker</th><th>Perp maker</th><th>Perp taker</th><th>Withdrawal limit</th></tr></thead>
+          <tbody class="num">
+            <tr><td>1</td><td>&lt; $50K</td><td>0.10%</td><td>0.20%</td><td>0.02%</td><td>0.050%</td><td>$100K/day</td></tr>
+            <tr><td>2</td><td>$50K – $1M</td><td>0.06%</td><td>0.14%</td><td>0.01%</td><td>0.045%</td><td>$500K/day</td></tr>
+            <tr class="tier-on"><td>3</td><td>$1M – $10M</td><td>0.02%</td><td>0.09%</td><td>0.00%</td><td>0.040%</td><td>$2M/day</td></tr>
+            <tr><td>4</td><td>$10M – $100M</td><td>0.00%</td><td>0.06%</td><td>−0.002%</td><td>0.035%</td><td>$10M/day</td></tr>
+            <tr><td>5</td><td>$100M – $1B</td><td>−0.005%</td><td>0.04%</td><td>−0.005%</td><td>0.030%</td><td>$50M/day</td></tr>
+            <tr><td>6</td><td>&gt; $1B</td><td>−0.010%</td><td>0.03%</td><td>−0.008%</td><td>0.025%</td><td>Custom</td></tr>
+          </tbody>
+        </table>
+        <div class="fee-notes">
+          <p><b>Network fees at cost.</b> BTC withdrawals are batched every 10 minutes; you pay your share of the actual on-chain fee, shown before you confirm. Lightning withdrawals are free up to 0.05 BTC.</p>
+          <p><b>No spread markup on convert.</b> “Instant buy” routes to the same book with a 0.25% fee shown as a line item, not hidden in the quote. Card deposits cost 1.9%, the processor’s rate.</p>
+          <p><b>Against a retail schedule.</b> The worked trade opposite costs $151.39 at tier 3. At a typical 0.40% maker / 0.60% taker retail schedule the same two orders cost $1,354.25, nine times as much.</p>
+          <p><b>Tier is recalculated hourly</b> on a rolling 30-day window, so a large week lifts your rate the same day rather than at month end. Perp and spot volume count together.</p>
+        </div>
+      </div>
+      <aside class="worked" aria-label="Worked fee example">
+        <h3>What tier 3 actually pays</h3>
+        <p style="color:var(--muted);font-size:13px">Buy 2.0 BTC at 67,412.6 with a resting limit order, then sell it at 68,100.0 with a market order.</p>
+        <div class="row"><span>Buy notional</span><span>$134,825.20</span></div>
+        <div class="row"><span>Maker fee 0.02%</span><span>$26.97</span></div>
+        <div class="row"><span>Sell notional</span><span>$136,200.00</span></div>
+        <div class="row"><span>Taker fee 0.09%</span><span>$122.58</span></div>
+        <div class="row"><span>Withdrawal (batched)</span><span>$1.84</span></div>
+        <div class="row"><span>Net P&amp;L after fees</span><span class="up">$1,223.41</span></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="custody" id="custody">
+    <div class="wrap">
+      <div class="notes">
+        <p class="eyebrow">Custody</p>
+        <h3>How the ratio is produced</h3>
+        <ol>
+          <li>At 00:00 UTC we snapshot every client balance into a Merkle tree. Your leaf hash is in Account → Proofs.</li>
+          <li>Wallet addresses sign a message containing that root. Anyone can verify the signatures against the chain.</li>
+          <li>An independent auditor checks liabilities monthly; the last report (Oct 2026) is linked unredacted.</li>
+          <li>96% of assets sit in 3-of-5 multisig cold storage across three countries. Hot wallets are capped at 4% and topped up manually.</li>
+        </ol>
+      </div>
+      <div class="ledger">
+        <p class="eyebrow">Proof of reserves · snapshot 10 Nov 2026 00:00 UTC</p>
+        <h2>Every coin, every&nbsp;night.</h2>
+        <div class="ratio">
+          <div><strong class="num">104.6%</strong><span>total reserves / liabilities</span></div>
+          <div><strong class="num">0x9f3a…c17e</strong><span>Merkle root</span></div>
+          <div><strong class="num">2,184,903</strong><span>accounts in tree</span></div>
+        </div>
+        <table class="num">
+          <thead><tr><th>Asset</th><th>Client liabilities</th><th>On-chain reserves</th><th>Ratio</th><th>Cold share</th><th>Addresses</th></tr></thead>
+          <tbody>
+            <tr><td>BTC</td><td>48,211.07</td><td>50,904.33</td><td>105.6%</td><td>97.1%</td><td>14</td></tr>
+            <tr><td>ETH</td><td>612,880.4</td><td>638,107.9</td><td>104.1%</td><td>96.4%</td><td>22</td></tr>
+            <tr><td>USDC</td><td>1,402.6M</td><td>1,451.9M</td><td>103.5%</td><td>92.0%</td><td>9</td></tr>
+            <tr><td>SOL</td><td>3.914M</td><td>4.102M</td><td>104.8%</td><td>95.8%</td><td>11</td></tr>
+            <tr><td>USDT</td><td>881.3M</td><td>918.7M</td><td>104.2%</td><td>93.6%</td><td>7</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="api" id="api">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">API · REST + WebSocket + FIX 4.4</p>
+        <h2>Rate limits you can plan&nbsp;around.</h2>
+        <p style="max-width:58ch">Limits are per API key, counted in a sliding 10-second window, and returned in every response header. Co-location in AWS ap-northeast-1 and eu-west-2 is available from tier 4 with no setup fee.</p>
+        <table>
+          <thead><tr><th>Endpoint</th><th>Limit / 10s</th><th>p50</th><th>p99</th></tr></thead>
+          <tbody class="num">
+            <tr><td><span class="verb">POST</span><code>/v2/orders</code></td><td>300</td><td>0.9 ms</td><td>4.1 ms</td></tr>
+            <tr><td><span class="verb">DEL</span><code>/v2/orders/{id}</code></td><td>600</td><td>0.7 ms</td><td>3.3 ms</td></tr>
+            <tr><td><span class="verb">POST</span><code>/v2/orders/batch</code> (≤ 20)</td><td>60</td><td>1.8 ms</td><td>7.9 ms</td></tr>
+            <tr><td><span class="verb">GET</span><code>/v2/book/{pair}?depth=500</code></td><td>120</td><td>2.2 ms</td><td>9.0 ms</td></tr>
+            <tr><td><span class="verb">WS</span><code>book.l2 / trades / fills</code></td><td>50 subs</td><td>0.4 ms</td><td>2.6 ms</td></tr>
+            <tr><td><span class="verb">FIX</span><code>NewOrderSingle (35=D)</code></td><td>1,000</td><td>0.3 ms</td><td>1.9 ms</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre aria-label="Example order request"><span class="c"># place a post-only limit, cancel if not filled in 30s</span>
+<span class="k">curl</span> -X POST https://api.spreadhouse.example/v2/orders \
+  -H "SH-KEY: $KEY" -H "SH-SIGN: $SIG" \
+  -d '{
+    "pair": "BTC-USD",
+    "side": "buy",
+    "type": "limit",
+    "price": "67412.5",
+    "size": "0.250",
+    "post_only": true,
+    "expire_after_ms": 30000
+  }'
+
+<span class="c"># 201 Created · SH-RateLimit-Remaining: 297</span>
+{ "id": "o_7Hc2…", "status": "resting",
+  "queue_position": 3, "fee_tier": 3 }</pre>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fcols">
+      <div>
+        <a class="logo" href="#">Spread<span>house</span></a>
+        <p style="margin-top:12px;color:#3b382f;max-width:36ch">Spot and perpetuals exchange. Registered VASP in the EU (MiCA), FCA crypto-asset registration, FinCEN MSB.</p>
+      </div>
+      <div><b>Trade</b><ul><li><a href="#">Spot</a></li><li><a href="#">Perpetuals</a></li><li><a href="#">Convert</a></li><li><a href="#">OTC over $250K</a></li></ul></div>
+      <div><b>Data</b><ul><li><a href="#">Market data API</a></li><li><a href="#">Historical trades</a></li><li><a href="#">Status page</a></li><li><a href="#">Incident log</a></li></ul></div>
+      <div><b>Trust</b><ul><li><a href="#">Proof of reserves</a></li><li><a href="#">Audit reports</a></li><li><a href="#">Bug bounty — $1M cap</a></li><li><a href="#">Insurance fund</a></li></ul></div>
+      <div><b>Company</b><ul><li><a href="#">Licences</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Support · 24/7 humans</a></li></ul></div>
+    </div>
+    <p class="legal">Crypto-assets are volatile and you can lose all of the money you put in. Perpetual futures are leveraged products and are not available to residents of the United States, the United Kingdom or Canada. Figures on this page are illustrative for a demonstration build and are not live market data.</p>
+  </div>
+</footer>
+
+<script>
+const fmt=(n,d=1)=>n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const markets=[
+  ['BTC','USD','L1',67412.6,1.84,'$1.21B',1.2,'$84.1M'],
+  ['ETH','USD','L1',3521.42,-0.92,'$642M',1.6,'$41.7M'],
+  ['SOL','USD','L1',182.37,4.11,'$318M',2.4,'$18.2M'],
+  ['XRP','USD','L1',0.6241,-1.37,'$151M',3.1,'$9.8M'],
+  ['ARB','USD','L2',1.142,6.02,'$88.4M',4.0,'$5.1M'],
+  ['LINK','USD','DeFi',18.94,2.27,'$76.0M',3.4,'$6.3M'],
+  ['AVAX','USD','L1',41.08,-2.51,'$61.3M',3.8,'$4.7M'],
+  ['OP','USD','L2',2.611,0.44,'$47.9M',4.6,'$3.9M'],
+  ['UNI','USD','DeFi',11.37,-0.63,'$39.2M',5.2,'$3.1M'],
+  ['DOT','USD','L1',7.214,1.09,'$33.5M',5.0,'$2.8M'],
+  ['AAVE','USD','DeFi',164.2,3.38,'$28.7M',5.9,'$2.2M'],
+  ['STRK','USD','L2',0.982,-4.12,'$19.4M',8.7,'$1.6M'],
+];
+const dec=p=>p<2?4:p<100?2:1;
+function spark(seed,ch){
+  let y=12,pts=[];
+  for(let i=0;i<14;i++){y+=Math.sin(seed*7+i*1.7)*3-ch*0.25;y=Math.max(2,Math.min(22,y));pts.push((i*7)+','+y.toFixed(1));}
+  return `<svg class="spark" viewBox="0 0 96 24" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="1.5" points="${pts.join(' ')}"/></svg>`;
+}
+const mk=document.getElementById('mk');
+mk.innerHTML=markets.map((m,i)=>{
+  const [b,q,cat,p,c,v,s,d]=m,dd=dec(p),cls=c>=0?'up':'down';
+  const thin=parseFloat(d.slice(1))<2?' ⚑':'';
+  return `<tr data-cat="${cat}"><td class="pair"><b>${b}</b><small>/${q}</small></td><td class="num" data-p="${p}">${fmt(p,dd)}</td><td class="num ${cls}">${c>0?'+':''}${c.toFixed(2)}%</td><td class="num">${fmt(p*1.031,dd)}</td><td class="num">${fmt(p*0.974,dd)}</td><td class="num">${v}</td><td class="num">${s.toFixed(1)}</td><td class="num">${d}${thin}</td><td class="${cls}">${spark(i+1,c)}</td></tr>`;
+}).join('');
+document.getElementById('tape').innerHTML=markets.map(m=>`<span><b>${m[0]}</b> ${fmt(m[3],dec(m[3]))} <span class="${m[4]>=0?'up':'down'}">${m[4]>0?'+':''}${m[4].toFixed(2)}%</span></span>`).join('');
+document.querySelectorAll('.filters button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(b=>b.setAttribute('aria-pressed',b===btn));
+  mk.querySelectorAll('tr').forEach(r=>r.hidden=btn.dataset.f!=='all'&&r.dataset.cat!==btn.dataset.f);
+}));
+let mid=67412.6;
+function book(){
+  const rows=(side,sign)=>{let tot=0,out=[];for(let i=1;i<=8;i++){const sz=+(Math.abs(Math.sin(mid*i*sign))*2.4+0.05).toFixed(4);tot+=sz;out.push([mid+sign*(0.2+i*0.5),sz,tot]);}return out;};
+  const max=12;
+  const render=(r,cls)=>r.map(([p,s,t])=>`<tr class="bar ${cls}"><td class="num ${cls==='ask'?'down':'up'}">${fmt(p)}</td><td class="num">${s.toFixed(4)}</td><td class="num" style="position:relative">${t.toFixed(3)}<i style="width:${Math.min(100,t/max*100)}%"></i></td></tr>`).join('');
+  document.getElementById('asks').innerHTML=render(rows('a',1).reverse(),'ask');
+  document.getElementById('bids').innerHTML=render(rows('b',-1),'bid');
+  document.getElementById('mid').textContent=fmt(mid);
+}
+book();
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  setInterval(()=>{mid=+(mid+(Math.round(Math.random()*6)-3)*0.1).toFixed(1);book();},1400);
+}
+</script>
+</body>
+</html>

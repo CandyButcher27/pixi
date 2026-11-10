@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halvard &amp; Rook — Adversarial Security Consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#ECE6DA; --bone-2:#E2DACB; --ink:#17140F; --ink-2:#2A251E; --signal:#D9481C;
+  --moss:#1F3328; --moss-2:#2B4537; --muted:#6B6457; --rule:rgba(23,20,15,.18); --rule-l:rgba(236,230,218,.2);
+  --display:'Bricolage Grotesque',serif; --read:'Newsreader',serif; --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--ink);font-family:var(--read);font-size:16px;line-height:1.5}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.035em;line-height:.9}
+h2{font-size:68px}
+h3{font-size:24px;letter-spacing:-.02em;line-height:1.05}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:2px 7px;border:1px solid currentColor;border-radius:6px;margin:0 4px 4px 0}
+.sig{color:var(--signal)}
+.fig{background:var(--ink);border-radius:28px;overflow:hidden;position:relative}
+.fig canvas{display:block;width:100%;height:100%}
+.fig figcaption{position:absolute;left:22px;bottom:18px;right:22px;display:flex;justify-content:space-between;color:var(--bone);opacity:.75}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:14px;background:var(--signal);color:var(--bone);font-family:var(--display);font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.kicker{display:flex;gap:14px;align-items:baseline;margin-bottom:22px;color:var(--muted)}
+.kicker b{color:var(--signal);font-weight:600}
+
+/* nav */
+header{border-bottom:1px solid var(--rule)}
+header .wrap{display:flex;align-items:center;height:68px;gap:28px}
+.logo{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.03em;text-decoration:none}
+.logo span{color:var(--signal)}
+header nav{display:flex;gap:22px;margin-left:auto;font-size:15px}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--signal)}
+.hotline{font-family:var(--mono);font-size:12px;padding-left:22px;border-left:1px solid var(--rule)}
+.hotline b{color:var(--signal)}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding-top:56px;padding-bottom:72px}
+.hero h1{font-size:132px;margin:8px 0 30px}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.lede{font-size:21px;line-height:1.42;max-width:640px}
+.lede + p{margin-top:14px;max-width:640px;color:var(--ink-2)}
+.cta-row{display:flex;gap:14px;margin:30px 0 34px;align-items:center}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--ink)}
+.facts div{padding:12px 16px 12px 0;border-bottom:1px solid var(--rule)}
+.facts dt{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase}
+.facts dd{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.hero .fig{height:760px}
+.hero aside{display:flex;flex-direction:column;gap:12px}
+.alert{display:flex;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);border-top:1px solid var(--rule);padding-top:10px}
+.alert b{color:var(--signal)}
+
+/* band */
+.band{background:var(--moss);color:var(--bone)}
+.band .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;padding-top:88px;padding-bottom:88px}
+.band .fig{height:100%;min-height:680px;background:var(--ink)}
+.band .kicker{color:rgba(236,230,218,.6)}
+.band h2{font-size:64px;margin-bottom:22px}
+.band p{color:rgba(236,230,218,.82);max-width:560px}
+.nums{margin-top:30px;border-top:1px solid var(--bone)}
+.nums li{list-style:none;display:grid;grid-template-columns:150px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid var(--rule-l);align-items:baseline}
+.nums strong{font-family:var(--display);font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.nums span{font-size:15px;color:rgba(236,230,218,.85)}
+.nums small{display:block;font-family:var(--mono);font-size:11px;color:rgba(236,230,218,.55);margin-top:2px}
+
+/* services */
+.svc .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:52px;padding-top:100px;padding-bottom:100px}
+.svc h2{margin-bottom:18px;max-width:780px}
+.svc .intro{max-width:700px;font-size:18px;margin-bottom:34px}
+.svc table{width:100%;border-collapse:collapse}
+.svc tr{border-top:1px solid var(--rule)}
+.svc tr:last-child{border-bottom:1px solid var(--ink)}
+.svc thead tr{border-top:1px solid var(--ink)}
+.svc th{font-family:var(--mono);font-weight:400;font-size:11px;text-align:left;color:var(--muted);text-transform:uppercase;padding:10px 12px 10px 0}
+.svc td{vertical-align:top;padding:20px 14px 20px 0;font-size:15px}
+.svc td.n{font-family:var(--mono);color:var(--signal);width:44px;padding-top:24px}
+.svc td h3{margin-bottom:6px}
+.svc td.d{width:96px;font-family:var(--mono);font-size:12px}
+.svc .side{display:flex;flex-direction:column;gap:14px}
+.svc .fig{flex:1;min-height:880px}
+
+/* case */
+.case{border-top:1px solid var(--ink)}
+.case .wrap{display:grid;grid-template-columns:1.1fr 1.15fr;gap:56px;padding-top:100px;padding-bottom:100px}
+.case .fig{height:1040px}
+.case h2{margin-bottom:18px}
+.case .sum{font-size:18px;margin-bottom:24px}
+.case dl.meta{display:grid;grid-template-columns:repeat(4,auto);gap:4px 26px;margin-bottom:28px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:12px 0}
+.case dl.meta dt{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase}
+.case dl.meta dd{font-family:var(--display);font-weight:700;font-size:18px}
+.log{width:100%;border-collapse:collapse}
+.log td{vertical-align:top;padding:11px 12px 11px 0;border-top:1px solid var(--rule);font-size:15px}
+.log td:first-child{font-family:var(--mono);font-size:12px;width:92px;color:var(--signal);padding-top:13px}
+.log td:nth-child(2){font-family:var(--mono);font-size:11px;width:120px;color:var(--muted);padding-top:13px}
+.log tr.hot td{background:var(--bone-2)}
+.quote{margin-top:30px;padding-left:22px;border-left:3px solid var(--signal);font-size:21px;font-style:italic;line-height:1.4}
+.quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:10px}
+
+/* method */
+.method{background:var(--bone-2)}
+.method .wrap{display:grid;grid-template-columns:1.15fr 1.05fr;gap:56px;padding-top:96px;padding-bottom:96px}
+.method .fig{height:820px}
+.method h2{margin-bottom:28px}
+.phase{display:grid;grid-template-columns:64px 1fr 150px;gap:18px;padding:22px 0;border-top:1px solid var(--rule)}
+.phase:last-of-type{border-bottom:1px solid var(--ink)}
+.phase .pn{font-family:var(--display);font-weight:800;font-size:48px;letter-spacing:-.05em;line-height:.9;color:var(--signal)}
+.phase p{font-size:15px;margin-top:6px}
+.phase ul{list-style:none;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.phase ul li{padding:2px 0;border-bottom:1px dotted var(--rule)}
+
+/* engage */
+.engage .wrap{display:grid;grid-template-columns:1.05fr 1.2fr;gap:56px;padding-top:100px;padding-bottom:100px}
+.engage .fig{height:980px}
+.engage h2{margin-bottom:18px}
+.models{width:100%;border-collapse:collapse;margin:24px 0 36px}
+.models th{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--muted);text-align:left;text-transform:uppercase;padding:8px 10px 8px 0;border-bottom:1px solid var(--ink)}
+.models td{padding:14px 10px 14px 0;border-bottom:1px solid var(--rule);vertical-align:top;font-size:15px}
+.models td b{font-family:var(--display);font-size:20px;letter-spacing:-.02em;display:block}
+.models td.p{font-family:var(--mono);font-size:13px;white-space:nowrap}
+form{background:var(--ink);color:var(--bone);border-radius:28px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form h3{grid-column:1/-1;font-size:30px}
+form p.note{grid-column:1/-1;font-size:14px;color:rgba(236,230,218,.7)}
+form label{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:11px;text-transform:uppercase;color:rgba(236,230,218,.65)}
+form input,form select,form textarea{font:15px var(--read);color:var(--bone);background:var(--ink-2);border:1px solid rgba(236,230,218,.25);border-radius:10px;padding:12px 14px}
+form textarea{min-height:96px;resize:vertical}
+form .full{grid-column:1/-1}
+form .row{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px}
+form .row span{font-family:var(--mono);font-size:11px;color:rgba(236,230,218,.6)}
+
+/* figures fill their column */
+.case .wrap>div:first-child,.method .wrap>div:last-child,.engage .wrap>div:first-child{display:flex}
+.case .fig,.method .fig,.engage .fig{height:auto;min-height:820px;flex:1}
+.hero aside .fig{flex:1;height:auto;min-height:700px}
+/* advisories */
+.adv{background:var(--ink);color:var(--bone)}
+.adv .wrap{display:grid;grid-template-columns:220px 1fr;gap:40px;padding-top:34px;padding-bottom:34px}
+.adv h4{font-family:var(--display);font-size:26px;letter-spacing:-.02em;line-height:1}
+.adv h4 small{display:block;font-family:var(--mono);font-size:11px;font-weight:400;color:rgba(236,230,218,.55);margin-top:8px;letter-spacing:0}
+.adv table{width:100%;border-collapse:collapse;font-size:14px}
+.adv .spark{height:170px;border-radius:20px;background:var(--ink-2);margin-top:16px}
+.adv td{padding:8px 14px 8px 0;border-top:1px solid var(--rule-l)}
+.adv td.id{font-family:var(--mono);font-size:12px;color:var(--signal);white-space:nowrap}
+.adv td.sv{font-family:var(--mono);font-size:11px;white-space:nowrap}
+.adv td.sv i{display:inline-block;width:8px;height:8px;margin-right:2px;background:rgba(236,230,218,.25);font-style:normal}
+.adv td.sv i.on{background:var(--signal)}
+/* footer */
+footer{background:var(--ink);color:var(--bone)}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.2fr;gap:32px;padding-top:64px;padding-bottom:40px}
+footer .big{font-family:var(--display);font-weight:800;font-size:44px;letter-spacing:-.04em;line-height:.95}
+footer .big span{color:var(--signal)}
+footer h4{font-family:var(--mono);font-weight:400;font-size:11px;text-transform:uppercase;color:rgba(236,230,218,.55);margin-bottom:10px}
+footer ul{list-style:none;font-size:15px}
+footer li{padding:3px 0}
+footer a{text-decoration:none}
+footer a:hover{color:var(--signal)}
+.legal{grid-column:1/-1;display:flex;justify-content:space-between;border-top:1px solid var(--rule-l);padding-top:18px;font-family:var(--mono);font-size:11px;color:rgba(236,230,218,.55)}
+
+@media (max-width:980px){
+  .hero .wrap,.band .wrap,.svc .wrap,.case .wrap,.method .wrap,.engage .wrap{grid-template-columns:1fr}
+  .hero h1{font-size:72px} h2,.band h2{font-size:44px}
+  .hero .fig,.band .fig,.svc .fig,.case .fig,.method .fig,.engage .fig{height:480px}
+  header nav{display:none} footer .wrap{grid-template-columns:1fr 1fr}
+  .svc .side{position:static}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Halvard <span>&amp;</span> Rook</a>
+    <nav>
+      <a href="#practice">Practice</a>
+      <a href="#case">Case file</a>
+      <a href="#method">Method</a>
+      <a href="#engage">Engage</a>
+      <a href="#">Advisories</a>
+    </nav>
+    <span class="hotline">Breach line <b>+44 20 3966 0417</b> · 24/7</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kicker mono"><b>●</b> Adversarial security consultancy · Leeds · Rotterdam · Toronto · est. 2014</div>
+      <h1>We break in <em>first.</em></h1>
+      <p class="lede">Halvard &amp; Rook is a 41-person team of red-teamers, incident responders and control-systems engineers. We attack your estate the way the groups targeting your sector actually do, then stay to rebuild what we got through.</p>
+      <p>No scanner reports re-badged as findings. Every engagement ends with a written attack narrative, the detections that should have fired, and a fix list your engineers can close in sprints — signed by the person who did the work.</p>
+      <div class="cta-row">
+        <a class="btn" href="#engage">Scope an engagement →</a>
+        <a class="btn ghost" href="#case">Read a case file</a>
+      </div>
+      <dl class="facts">
+        <div><dt>Median time to domain admin</dt><dd>4 h 12 m</dd></div>
+        <div><dt>Retainer response, P1</dt><dd>≤ 38 minutes</dd></div>
+        <div><dt>Engagements since 2014</dt><dd>1,180+</dd></div>
+        <div><dt>Findings fixed within 90 days</dt><dd>87.4 %</dd></div>
+        <div><dt>CREST · CHECK · CBEST accredited</dt><dd>Since 2017</dd></div>
+        <div><dt>Disclosed CVEs, last 24 months</dt><dd>23</dd></div>
+      </dl>
+    </div>
+    <aside>
+      <figure class="fig"><canvas data-draw="graph"></canvas><figcaption class="mono"><span>FIG.1 attack path, engagement 24-117</span><span>6 hops → AD tier 0</span></figcaption></figure>
+      <div class="alert"><b>LIVE</b><span>Advisory HR-2026-031: authentication bypass in a widely deployed SSL-VPN appliance. Patch notes and detection rules for retainer clients.</span></div>
+    </aside>
+  </div>
+</section>
+
+<section class="adv">
+  <div class="wrap">
+    <div><h4>Field advisories<small>written by the responders who saw it first · RSS · PGP-signed</small></h4><figure class="fig spark"><canvas data-draw="spark"></canvas></figure></div>
+    <table><tr><td class="id">HR-2026-031</td><td>SSL-VPN appliance — pre-auth authentication bypass, exploited in the wild</td><td class="sv"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></td><td class="mono">edge</td><td class="mono">Nov 04</td></tr><tr><td class="id">HR-2026-030</td><td>Help-desk social engineering wave against Entra ID self-service reset</td><td class="sv"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></td><td class="mono">identity</td><td class="mono">Oct 28</td></tr><tr><td class="id">HR-2026-029</td><td>Default credentials on a common water-sector RTU web interface (CVE-2026-41187)</td><td class="sv"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></td><td class="mono">OT</td><td class="mono">Oct 19</td></tr><tr><td class="id">HR-2026-028</td><td>Malicious OAuth app consent campaign targeting finance mailboxes</td><td class="sv"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></td><td class="mono">cloud</td><td class="mono">Oct 11</td></tr><tr><td class="id">HR-2026-027</td><td>Backup software agent allows unauthenticated job deletion (CVE-2026-39902)</td><td class="sv"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></td><td class="mono">infra</td><td class="mono">Sep 30</td></tr><tr><td class="id">HR-2026-026</td><td>Typosquatted npm packages exfiltrating CI secrets from build runners</td><td class="sv"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></td><td class="mono">supply chain</td><td class="mono">Sep 22</td></tr></table>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <figure class="fig"><canvas data-draw="map"></canvas><figcaption class="mono"><span>FIG.2 engagements by site, 2025</span><span>n = 212</span></figcaption></figure>
+    <div>
+      <div class="kicker mono"><b>02</b> The year in numbers</div>
+      <h2>212 engagements. 9 sectors. 0 clean reports.</h2>
+      <p>We have never finished a full-scope red team without reaching the objective. That is not a boast about us; it is the baseline you should plan for. The numbers below are from our 2025 engagement ledger, audited by our own QA lead.</p>
+      <ul class="nums">
+        <li><strong>71%</strong><span>initial access through identity, not exploits — MFA fatigue, help-desk resets, token theft<small>151 of 212 engagements</small></span></li>
+        <li><strong>3.1 d</strong><span>median dwell before the client SOC raised an alert on our activity<small>where an alert fired at all: 64% of cases</small></span></li>
+        <li><strong>19</strong><span>OT sites assessed across water, rail and food production — 14 had a flat path from corporate IT<small>Purdue level 3 → level 1</small></span></li>
+        <li><strong>£2.4m</strong><span>average loss avoided per incident contained by our retainer team, by client-reported estimate<small>27 incidents, ransomware and BEC</small></span></li>
+        <li><strong>11 h</strong><span>median time from our phone pick-up to a contained, isolated estate during a live ransomware event<small>retainer clients, 2025</small></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="svc" id="practice">
+  <div class="wrap">
+    <div>
+      <div class="kicker mono"><b>03</b> Practice areas</div>
+      <h2>Six practices, one adversary model.</h2>
+      <p class="intro">Each practice is led by a principal who still does fieldwork. Engagements are scoped against a named threat profile — the actors, tooling and initial-access patterns hitting your sector this quarter — so the testing measures what will actually be tried.</p>
+      <table>
+        <thead><tr><th></th><th>Practice</th><th>What you get</th><th>Typical length</th></tr></thead>
+        <tbody>
+          <tr><td class="n">01</td><td><h3>Red teaming</h3><span class="tag">CBEST</span><span class="tag">TIBER-EU</span><span class="tag">STAR-FS</span></td><td>Objective-led intrusion from zero knowledge: phishing, physical, cloud and identity. Purple-team replay with your SOC afterwards, technique by technique.</td><td class="d">6–12 wks</td></tr>
+          <tr><td class="n">02</td><td><h3>Incident response</h3><span class="tag">retainer</span><span class="tag">DFIR</span></td><td>Containment, forensics, threat-actor negotiation support and regulator reporting. Two responders on site within 24 hours anywhere in the UK and Benelux.</td><td class="d">on call</td></tr>
+          <tr><td class="n">03</td><td><h3>OT &amp; ICS security</h3><span class="tag">IEC 62443</span><span class="tag">NIS2</span></td><td>Passive asset discovery, segmentation review and safe-state testing on PLC and SCADA networks. We bring engineers who have run plants, not just pentesters.</td><td class="d">3–8 wks</td></tr>
+          <tr><td class="n">04</td><td><h3>Cloud &amp; identity</h3><span class="tag">Entra ID</span><span class="tag">AWS</span><span class="tag">GCP</span></td><td>Attack-path analysis over your tenant: conditional access gaps, federated trust abuse, over-privileged service principals, CI/CD secrets.</td><td class="d">2–5 wks</td></tr>
+          <tr><td class="n">05</td><td><h3>Application security</h3><span class="tag">source review</span><span class="tag">API</span></td><td>Manual code review and testing of web, mobile and API surfaces, with reproducible proofs and fix PRs on request. Researchers here have 23 published CVEs.</td><td class="d">1–4 wks</td></tr>
+          <tr><td class="n">06</td><td><h3>Security leadership</h3><span class="tag">vCISO</span><span class="tag">board</span><span class="tag">DORA</span></td><td>Fractional CISO, tabletop exercises for executive teams, and a twelve-month remediation roadmap written against the findings — not a maturity framework.</td><td class="d">retained</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="side">
+      <figure class="fig"><canvas data-draw="matrix"></canvas><figcaption class="mono"><span>FIG.3 ATT&amp;CK coverage tested, 2025</span><span>■ exercised</span></figcaption></figure>
+      <p class="mono" style="color:var(--muted)">Each cell is an ATT&amp;CK technique; brightness is how often we exercised it across 2025 engagements. Tactics run left to right from reconnaissance to impact.</p>
+    </div>
+  </div>
+</section>
+
+<section class="case" id="case">
+  <div class="wrap">
+    <div>
+      <figure class="fig"><canvas data-draw="timeline"></canvas><figcaption class="mono"><span>FIG.4 attacker vs. responder activity, 72 h</span><span>events / 15 min</span></figcaption></figure>
+    </div>
+    <div>
+      <div class="kicker mono"><b>04</b> Case file HR-IR-25-044 · published with client consent</div>
+      <h2>A regional water utility, a Friday night, a ransom note.</h2>
+      <p class="sum">At 22:47 on a Friday the client's on-call engineer found encrypted file shares and a note naming a known affiliate group. Telemetry pumps were still running. Our retainer team took the call six minutes later. Below is the log, lightly redacted.</p>
+      <dl class="meta">
+        <dt>Sector</dt><dt>Estate</dt><dt>Ransom demand</dt><dt>Paid</dt>
+        <dd>Water &amp; wastewater</dd><dd>2,900 endpoints</dd><dd>$3.8m</dd><dd class="sig">Nothing</dd>
+      </dl>
+      <table class="log">
+        <tr><td>T+00:06</td><td>call answered</td><td>Incident lead on the bridge. First instruction: do not power down hosts, disconnect the WAN uplinks at the two sites with OT connectivity.</td></tr>
+        <tr><td>T+00:38</td><td>containment</td><td>Corporate-to-OT firewall rules cut to an explicit deny. SCADA historian moved to manual export. Plant control unaffected.</td></tr>
+        <tr class="hot"><td>T+02:15</td><td>scoping</td><td>Initial access traced to a contractor VPN account without MFA, last used legitimately 214 days earlier.</td></tr>
+        <tr><td>T+05:40</td><td>eradication</td><td>Two persistence mechanisms found: a scheduled task on a backup server and a rogue service principal in the cloud tenant.</td></tr>
+        <tr><td>T+11:02</td><td>contained</td><td>All 41 compromised hosts isolated. Immutable backups verified clean against hashes taken 9 days earlier.</td></tr>
+        <tr><td>T+31:30</td><td>recovery</td><td>Billing and customer systems restored from backup. Regulator notification filed with 41 hours to spare.</td></tr>
+        <tr><td>T+72:00</td><td>handover</td><td>Root-cause report, 34 detection rules for the client SOC, and a 90-day fix plan. Re-test booked for week 12.</td></tr>
+      </table>
+      <blockquote class="quote">"They spent the first half hour telling us what not to touch. That is the half hour that saved the plant."<cite>— Head of Operational Technology, client utility</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="method">
+  <div class="wrap">
+    <div>
+      <div class="kicker mono"><b>05</b> How an engagement runs</div>
+      <h2>Scoped like an operation. Reported like a post-mortem.</h2>
+      <div class="phase"><div class="pn">01</div><div><h3>Threat profile</h3><p>We name the three to five groups most likely to target you and pull their last 18 months of tradecraft. Rules of engagement, safe words and out-of-bounds systems are agreed in writing.</p></div><ul><li>week 0–1</li><li>RoE signed</li><li>legal sign-off</li></ul></div>
+      <div class="phase"><div class="pn">02</div><div><h3>Operate</h3><p>Testers work in live hours under an operator log your control group can read daily. Every action is timestamped, so detections can be matched minute by minute later.</p></div><ul><li>weeks 2–8</li><li>daily log</li><li>stop-on-request</li></ul></div>
+      <div class="phase"><div class="pn">03</div><div><h3>Replay</h3><p>We sit with your SOC and replay the intrusion. For each technique: did it log, did it alert, did anyone act. Gaps become detection rules written with your team, not for them.</p></div><ul><li>2–3 days</li><li>purple team</li><li>Sigma / KQL</li></ul></div>
+      <div class="phase"><div class="pn">04</div><div><h3>Fix &amp; re-test</h3><p>Findings land as tickets ranked by attack-path impact. We re-test the critical paths at day 90 at no extra cost and publish the delta to your board.</p></div><ul><li>day 90</li><li>re-test included</li><li>board summary</li></ul></div>
+    </div>
+    <div>
+      <figure class="fig"><canvas data-draw="phases"></canvas><figcaption class="mono"><span>FIG.5 effort by phase, 8-week red team</span><span>person-days</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="engage" id="engage">
+  <div class="wrap">
+    <div>
+      <figure class="fig"><canvas data-draw="histogram"></canvas><figcaption class="mono"><span>FIG.6 retainer response time, P1 calls 2025</span><span>n = 96</span></figcaption></figure>
+    </div>
+    <div>
+      <div class="kicker mono"><b>06</b> Engage us</div>
+      <h2>Three ways in. Fixed prices, written scopes.</h2>
+      <p>We publish starting prices because procurement should not need three calls to learn whether we fit. Every quote is a fixed fee with a named lead and a written scope.</p>
+      <table class="models">
+        <thead><tr><th>Model</th><th>Includes</th><th>From</th></tr></thead>
+        <tbody>
+          <tr><td><b>Assessment</b><span class="mono">single scope</span></td><td>One practice, one target, attack narrative and fix list, day-90 re-test.</td><td class="p">£18,500</td></tr>
+          <tr><td><b>Red team</b><span class="mono">objective-led</span></td><td>Full-scope intrusion, operator log, purple-team replay, detection rules, board readout.</td><td class="p">£96,000</td></tr>
+          <tr><td><b>IR retainer</b><span class="mono">annual</span></td><td>24/7 breach line, 38-minute P1 response, 80 pre-paid hours usable for tabletop or testing.</td><td class="p">£42,000 / yr</td></tr>
+        </tbody>
+      </table>
+      <form onsubmit="event.preventDefault();this.querySelector('.row span').textContent='Received. A principal will reply within one working day.'">
+        <h3>Start a scoping call</h3>
+        <p class="note">Under active attack? Do not use this form — call the breach line on +44 20 3966 0417.</p>
+        <label>Name<input required autocomplete="name"></label>
+        <label>Work email<input type="email" required autocomplete="email"></label>
+        <label>Organisation<input autocomplete="organization"></label>
+        <label>Interested in<select><option>Red team</option><option>Incident response retainer</option><option>OT &amp; ICS assessment</option><option>Cloud &amp; identity</option><option>Application security</option><option>Security leadership</option></select></label>
+        <label class="full">What prompted this?<textarea placeholder="A regulator deadline, a near miss, a new board member asking questions…"></textarea></label>
+        <div class="row"><span>PGP key and NDA available on request.</span><button class="btn" type="submit">Send securely →</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Assume breach.<br>Prove <span>otherwise.</span></div>
+    <div><h4>Practice</h4><ul><li><a href="#">Red teaming</a></li><li><a href="#">Incident response</a></li><li><a href="#">OT &amp; ICS</a></li><li><a href="#">Cloud &amp; identity</a></li><li><a href="#">AppSec</a></li><li><a href="#">vCISO</a></li></ul></div>
+    <div><h4>Research</h4><ul><li><a href="#">Advisories</a></li><li><a href="#">CVE disclosures</a></li><li><a href="#">Annual ledger 2025</a></li><li><a href="#">Detection rules</a></li></ul></div>
+    <div><h4>Firm</h4><ul><li><a href="#">Team</a></li><li><a href="#">Careers (6 open)</a></li><li><a href="#">Accreditations</a></li><li><a href="#">security.txt</a></li></ul></div>
+    <div><h4>Offices</h4><ul><li>Leeds — 14 Park Row</li><li>Rotterdam — Wijnhaven 3</li><li>Toronto — 200 Bay St</li><li class="mono">breach line 24/7</li></ul></div>
+    <div class="legal"><span>© 2026 Halvard &amp; Rook Ltd · Registered in England 09118472</span><span>ISO 27001 · CREST · CHECK · CBEST · Cyber Essentials Plus</span></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const BONE = '#ECE6DA', SIG = '#D9481C', DIM = 'rgba(236,230,218,.22)', MID = 'rgba(236,230,218,.55)';
+  let seed = 117;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const mono = px => `${px}px "JetBrains Mono", monospace`;
+
+  const draw = {
+    graph(c, w, h) {
+      const n = [];
+      for (let i = 0; i < 46; i++) n.push({x: 40 + rnd() * (w - 80), y: 40 + rnd() * (h - 120), r: 2 + rnd() * 3});
+      c.strokeStyle = DIM; c.lineWidth = 1;
+      n.forEach((a, i) => n.slice(i + 1).forEach(b => {
+        if (Math.hypot(a.x - b.x, a.y - b.y) < 130) { c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); }
+      }));
+      const path = [[0.12, 0.86], [0.3, 0.7], [0.26, 0.48], [0.52, 0.42], [0.66, 0.24], [0.84, 0.14]].map(([x, y]) => ({x: x * w, y: y * h}));
+      const labels = ['phish · contractor', 'workstation', 'cached creds', 'jump host', 'svc_backup', 'DC01 · tier 0'];
+      c.strokeStyle = SIG; c.lineWidth = 2.5; c.beginPath();
+      path.forEach((p, i) => i ? c.lineTo(p.x, p.y) : c.moveTo(p.x, p.y)); c.stroke();
+      n.forEach(p => { c.fillStyle = MID; c.beginPath(); c.arc(p.x, p.y, p.r, 0, 7); c.fill(); });
+      path.forEach((p, i) => {
+        c.fillStyle = SIG; c.beginPath(); c.arc(p.x, p.y, i === 5 ? 11 : 7, 0, 7); c.fill();
+        c.fillStyle = BONE; c.font = mono(11); const t = `${i + 1} ${labels[i]}`; c.fillText(t, p.x > w * .7 ? p.x - 16 - c.measureText(t).width : p.x + 14, p.y + 4);
+      });
+    },
+    map(c, w, h) {
+      for (let y = 30; y < h - 60; y += 14) for (let x = 30; x < w - 30; x += 14) {
+        const nx = x / w, ny = y / h;
+        const land = Math.sin(nx * 9 + ny * 3) + Math.cos(ny * 11 - nx * 4) + Math.sin(nx * 23) * .4 > .35;
+        c.fillStyle = land ? 'rgba(236,230,218,.32)' : 'rgba(236,230,218,.06)';
+        c.fillRect(x, y, 3, 3);
+      }
+      for (let i = 0; i < 38; i++) {
+        const x = 50 + rnd() * (w - 100), y = 50 + rnd() * (h - 140), r = 3 + rnd() * 14;
+        c.strokeStyle = SIG; c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, r, 0, 7); c.stroke();
+        c.fillStyle = SIG; c.beginPath(); c.arc(x, y, 2, 0, 7); c.fill();
+      }
+      c.fillStyle = MID; c.font = mono(11);
+      [['LEEDS', .38, .3], ['ROTTERDAM', .52, .34], ['TORONTO', .14, .4]].forEach(([t, x, y]) => c.fillText(t, x * w, y * h));
+    },
+    matrix(c, w, h) {
+      const cols = 14, rows = 22, gx = (w - 60) / cols, gy = (h - 120) / rows;
+      for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+        if (j > 8 + ((i * 7) % 13)) continue;
+        const v = rnd() ** 1.6;
+        c.fillStyle = v > .72 ? SIG : `rgba(236,230,218,${.08 + v * .6})`;
+        c.fillRect(30 + i * gx, 40 + j * gy, gx - 4, gy - 4);
+      }
+      c.fillStyle = MID; c.font = mono(10);
+      'RC RD IA EX PE PR DE CA DI LM CO CC EF IM'.split(' ').forEach((t, i) => c.fillText(t, 30 + i * gx, 28));
+    },
+    timeline(c, w, h) {
+      const top = 50, bot = h - 80, mid = w / 2, steps = 96, sy = (bot - top) / steps;
+      c.strokeStyle = DIM; c.beginPath(); c.moveTo(mid, top); c.lineTo(mid, bot); c.stroke();
+      for (let i = 0; i < steps; i++) {
+        const y = top + i * sy;
+        const atk = Math.max(0, (i < 40 ? 0.5 + rnd() : 1.6 - i / 30) * 120 * (0.4 + rnd()));
+        const ir = i < 3 ? 0 : Math.max(0, (i < 50 ? i / 40 : 2.2 - i / 60) * 110 * (0.5 + rnd() * .7));
+        c.fillStyle = SIG; c.fillRect(mid - atk - 2, y, atk, sy - 1.5);
+        c.fillStyle = 'rgba(236,230,218,.6)'; c.fillRect(mid + 2, y, ir, sy - 1.5);
+        if (i % 12 === 0) { c.fillStyle = MID; c.font = mono(10); c.fillText(`T+${String(i / 4 * 3 | 0).padStart(2, '0')}h`, 14, y + 8); }
+      }
+      c.font = mono(11); c.fillStyle = SIG; c.fillText('ATTACKER', mid - 90, 32); c.fillStyle = BONE; c.fillText('RESPONDERS', mid + 12, 32);
+    },
+    phases(c, w, h) {
+      const data = [['threat profile', 6], ['recon', 9], ['initial access', 14], ['lateral movement', 18], ['objective', 8], ['replay', 6], ['report', 7], ['re-test', 4]];
+      const bh = (h - 140) / data.length, max = 18;
+      data.forEach(([t, v], i) => {
+        const y = 50 + i * bh, len = (w - 80) * v / max;
+        c.fillStyle = 'rgba(236,230,218,.1)'; c.fillRect(30, y, w - 60, bh - 14);
+        c.fillStyle = i === 3 ? SIG : 'rgba(236,230,218,.7)'; c.fillRect(30, y, len, bh - 14);
+        c.fillStyle = i === 3 ? BONE : '#17140F'; c.font = mono(11); c.fillText(`${t} · ${v}d`, 40, y + (bh - 14) / 2 + 4);
+      });
+    },
+    spark(c, w, h) {
+      const v = [2, 3, 2, 4, 3, 5, 3, 4, 6, 4, 3, 2], bw = (w - 32) / v.length;
+      v.forEach((n, i) => { c.fillStyle = i === 9 ? SIG : 'rgba(236,230,218,.45)'; c.fillRect(16 + i * bw, h - 34 - n * 17, bw - 4, n * 17); });
+      c.fillStyle = MID; c.font = mono(10); c.fillText('advisories / month, 2026', 16, h - 14);
+    },
+    histogram(c, w, h) {
+      const bins = [2, 5, 9, 14, 17, 15, 11, 8, 6, 4, 3, 1, 1], bw = (w - 60) / bins.length, base = h - 90, sc = (h - 200) / 17;
+      bins.forEach((v, i) => {
+        c.fillStyle = i * 5 + 5 > 38 ? 'rgba(236,230,218,.35)' : SIG;
+        c.fillRect(30 + i * bw, base - v * sc, bw - 6, v * sc);
+        c.fillStyle = MID; c.font = mono(10); c.fillText(`${i * 5}`, 30 + i * bw, base + 16);
+      });
+      const x38 = 30 + (38 / 5) * bw;
+      c.strokeStyle = BONE; c.setLineDash([4, 4]); c.beginPath(); c.moveTo(x38, 60); c.lineTo(x38, base); c.stroke(); c.setLineDash([]);
+      c.fillStyle = BONE; c.font = mono(11); c.fillText('38-min SLA', x38 + 8, 74); c.fillText('minutes to responder on bridge', 30, base + 36);
+    }
+  };
+
+  const render = () => document.querySelectorAll('canvas[data-draw]').forEach(cv => {
+    const r = cv.getBoundingClientRect(), d = devicePixelRatio || 1;
+    cv.width = r.width * d; cv.height = r.height * d;
+    const c = cv.getContext('2d'); c.scale(d, d); seed = 117;
+    draw[cv.dataset.draw](c, r.width, r.height);
+  });
+  document.fonts.ready.then(render);
+  addEventListener('resize', render);
+})();
+</script>
+</body>
+</html>

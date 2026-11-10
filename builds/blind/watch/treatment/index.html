@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vauclair — Seconds, made slowly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans+Condensed:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#ECE6DA;--ink:#15140F;--brass:#8C6B2E;--loden:#1C2621;--mute:#5d594f}
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0}
+html{scroll-behavior:smooth}
+body{background:var(--bone);color:var(--ink);font:300 16px/1.6 "IBM Plex Sans Condensed",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+.d{font-family:"Bodoni Moda",serif;font-weight:400;letter-spacing:-.02em;line-height:.95}
+.m{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+nav{display:flex;justify-content:space-between;align-items:baseline;padding:28px 64px;max-width:1280px;margin:0 auto}
+nav b{font:500 22px "Bodoni Moda",serif;letter-spacing:.32em}
+nav a{color:inherit;text-decoration:none;margin-left:36px}
+a{color:inherit}
+section{padding:140px 0}
+.g{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:end}
+.g.l{grid-template-columns:2fr 1fr}
+.rule{border-top:1px solid var(--brass);padding-top:20px}
+#hero{padding:120px 0 160px}
+#hero h1{font-size:112px}
+#hero h1 i{color:var(--brass)}
+#hero p.lede{font-size:21px;max-width:560px;margin:40px 0 48px auto}
+.r{text-align:right}
+.spec dt{margin-top:22px}
+.spec dd{font:400 26px "Bodoni Moda",serif}
+#clock{font:400 44px "IBM Plex Mono",monospace;letter-spacing:.04em;color:var(--brass);margin-top:44px}
+.btn{display:inline-block;border:1px solid var(--ink);padding:18px 34px;font:400 12px "IBM Plex Mono",monospace;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s}
+.btn:hover{background:var(--ink);color:var(--bone)}
+#atelier{background:var(--loden);color:var(--bone)}
+#atelier .m{color:#a99a7c}
+#atelier h2{font-size:84px}
+#atelier p{font-size:19px;max-width:620px;margin-top:40px;color:#cfc8b8}
+ol{list-style:none;counter-reset:s}
+ol li{counter-increment:s;padding:18px 0;border-top:1px solid #3c4a42}
+ol li::before{content:counter(s,decimal-leading-zero);font:400 12px "IBM Plex Mono",monospace;color:#a99a7c;margin-right:18px}
+.ref{display:grid;grid-template-columns:1.3fr 1fr auto;gap:32px;align-items:baseline;padding:36px 0;border-top:1px solid var(--brass)}
+.ref h3{font:400 60px/1 "Bodoni Moda",serif;letter-spacing:-.02em}
+.ref p{font-size:15px}
+.ref span{font:400 20px "Bodoni Moda",serif}
+.rail dd{font:400 56px/1 "Bodoni Moda",serif;color:var(--brass);margin:6px 0 34px}
+blockquote{font:italic 400 48px/1.15 "Bodoni Moda",serif;letter-spacing:-.01em}
+cite{display:block;margin-top:32px;font-style:normal}
+.small p{font-size:15px;margin-top:14px}
+#visit h2{font-size:84px;margin-bottom:36px}
+#visit p{font-size:19px;max-width:560px;margin:0 0 44px auto}
+#provenance .g.l{grid-template-columns:3fr 1fr}
+.addr p{margin-top:18px;font-size:15px}
+footer{padding:36px 64px 48px;max-width:1280px;margin:0 auto;display:flex;justify-content:space-between}
+@media (max-width:900px){
+.r{text-align:left}#provenance .g.l{grid-template-columns:1fr}
+.wrap,nav,footer{padding-left:20px;padding-right:20px}
+.g,.g.l,.ref{grid-template-columns:1fr;gap:36px}
+#hero h1{font-size:64px}#atelier h2,#visit h2{font-size:52px}blockquote{font-size:32px}.ref h3{font-size:44px}
+nav a:not(:last-child){display:none}
+}
+</style>
+</head>
+<body>
+<nav><b>VAUCLAIR</b><div class="m"><a href="#atelier">Atelier</a><a href="#collection">References</a><a href="#visit">Appointment</a></div></nav>
+<main>
+<section id="hero"><div class="wrap g">
+  <dl class="spec m">
+    <dt>Calibre</dt><dd>V-31 manual</dd>
+    <dt>Reserve</dt><dd>72 hours</dd>
+    <dt>Beat</dt><dd>21,600 vph</dd>
+    <div id="clock" aria-label="Current time">--:--:--</div>
+  </dl>
+  <div class="r">
+    <p class="m">Le Brassus, since 1891</p>
+    <h1 class="d">Seconds,<br><i>made slowly.</i></h1>
+    <p class="lede">Forty-two watches leave our workshop each year. Every one is finished by the same pair of hands that assembled it, and every one is signed inside the caseback by the person who did the work.</p>
+    <a class="btn" href="#visit">Request a viewing</a>
+  </div>
+</div></section>
+
+<section id="atelier"><div class="wrap g l">
+  <div>
+    <p class="m">The atelier</p>
+    <h2 class="d">Eleven people.<br>Fourteen months.<br>One movement.</h2>
+    <p>We do not run a production line. A Vauclair calibre is cut, bevelled, polished and regulated in a single room above the river, at the pace the steel allows.</p>
+  </div>
+  <ol class="m">
+    <li>Plates cut from German silver</li>
+    <li>Anglage by hand, 74 inner angles</li>
+    <li>Côtes de Genève, one stroke per bridge</li>
+    <li>Hairspring set in six positions</li>
+    <li>Forty days on the regulation bench</li>
+  </ol>
+</div></section>
+
+<section id="collection"><div class="wrap g">
+  <dl class="rail m">
+    <dt>Pièce Unique</dt><dd>1</dd>
+    <dt>Édition</dt><dd>12</dd>
+    <dt>Collection</dt><dd>29</dd>
+  </dl>
+  <div>
+    <p class="m" style="margin-bottom:28px">Three references, 2026</p>
+    <div class="ref"><h3>Lac Noir</h3><p>38 mm white gold, grand feu enamel dial, small seconds at six.</p><span>CHF 64,000</span></div>
+    <div class="ref"><h3>Risoux</h3><p>40 mm steel, guilloché by hand, power-reserve indicator.</p><span>CHF 38,500</span></div>
+    <div class="ref"><h3>Orbe</h3><p>36 mm rose gold, single pusher chronograph, one of one.</p><span>On request</span></div>
+  </div>
+</div></section>
+
+<section id="provenance"><div class="wrap g l">
+  <div>
+    <blockquote>“A watch should outlast the person who ordered it, and the one who inherits it. Anything less is a fashion accessory.”</blockquote>
+    <cite class="m">Hélène Vauclair, fourth generation</cite>
+  </div>
+  <div class="small rule">
+    <p class="m">Our guarantees</p>
+    <p>Lifetime servicing.</p>
+    <p>Every part archived.</p>
+    <p>Transferable provenance.</p>
+  </div>
+</div></section>
+
+<section id="visit"><div class="wrap g">
+  <div class="addr m">
+    <p>Le Brassus<br>Route de France 14</p>
+    <p>Genève<br>Rue du Rhône 41</p>
+    <p>London<br>Burlington Arcade 9</p>
+  </div>
+  <div class="r">
+    <p class="m">By appointment</p>
+    <h2 class="d">Hold one before<br>you decide.</h2>
+    <p>Visits are private and last as long as you need. We will have the references you ask about on the bench, open, so you can see the movement beat.</p>
+    <a class="btn" href="mailto:salon@vauclair.ch">Book a private visit</a>
+  </div>
+</div></section>
+</main>
+<footer class="m"><span>Vauclair SA, Le Brassus</span><span>© 2026</span></footer>
+<script>
+const c=document.getElementById('clock');
+const tick=()=>{c.textContent=new Date().toLocaleTimeString('en-GB',{hour12:false})};
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>

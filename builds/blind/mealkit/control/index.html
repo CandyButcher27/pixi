@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprout &amp; Ledger — Plant-based meal kits, delivered weekly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Mono:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3ede1;
+  --paper-2:#e9e0cd;
+  --ink:#1d2b1f;
+  --leaf:#2f5d3a;
+  --tomato:#d2452b;
+  --squash:#e8a33d;
+  --rule:#1d2b1f;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Work Sans",system-ui,sans-serif;
+  --mono:"DM Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+hr.rule{border:0;border-top:2px solid var(--rule)}
+hr.thin{border:0;border-top:1px solid var(--rule)}
+
+/* top strip */
+.strip{background:var(--ink);color:var(--paper);padding:8px 0}
+.strip .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* masthead */
+header.mast{padding:22px 0 0}
+.mast-row{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.logo{font-family:var(--serif);font-weight:900;font-size:34px;letter-spacing:-.02em;text-decoration:none}
+.logo em{font-style:italic;font-weight:400;color:var(--tomato)}
+nav.main{display:flex;gap:28px;align-items:center}
+nav.main a{text-decoration:none;font-weight:500}
+nav.main a:hover{text-decoration:underline;text-underline-offset:4px}
+.btn{display:inline-block;font-family:var(--mono);font-size:14px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:14px 22px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--tomato)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.mast hr.rule{margin-top:18px}
+.edition{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--rule)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:0;border-bottom:2px solid var(--rule)}
+.hero-copy{padding:56px 48px 56px 0;border-right:1px solid var(--rule)}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(52px,8.4vw,124px);line-height:.9;letter-spacing:-.035em}
+.hero h1 em{font-weight:400;font-style:italic;color:var(--leaf)}
+.hero h1 .strike{position:relative;display:inline-block}
+.hero h1 .strike::after{content:"";position:absolute;left:-4%;right:-4%;top:52%;height:.09em;background:var(--tomato);transform:rotate(-3deg)}
+.hero p.lede{font-size:21px;max-width:34ch;margin:28px 0 32px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-side{padding:40px 0 40px 40px;display:flex;flex-direction:column;gap:22px}
+
+.ticket{background:#fffaf0;border:2px solid var(--ink);padding:24px;position:relative;transform:rotate(1.2deg);box-shadow:8px 8px 0 var(--leaf)}
+.ticket::before,.ticket::after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);top:50%;transform:translateY(-50%)}
+.ticket::before{left:-13px;clip-path:inset(0 0 0 50%)}
+.ticket::after{right:-13px;clip-path:inset(0 50% 0 0)}
+.ticket h3{font-family:var(--serif);font-size:26px;margin:6px 0 14px}
+.ticket ol{list-style:none;counter-reset:d}
+.ticket li{counter-increment:d;display:grid;grid-template-columns:34px 1fr auto;gap:8px;padding:10px 0;border-top:1px dashed var(--ink);align-items:baseline}
+.ticket li::before{content:"0" counter(d);font-family:var(--mono);font-size:13px;color:var(--tomato)}
+.ticket li span.t{font-family:var(--mono);font-size:12px;opacity:.7}
+.ticket .total{display:flex;justify-content:space-between;border-top:2px solid var(--ink);padding-top:12px;margin-top:4px;font-family:var(--mono)}
+
+.stamp{align-self:flex-start;border:2px solid var(--tomato);color:var(--tomato);padding:10px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-4deg);line-height:1.4}
+
+/* numbers band */
+.figures{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--rule)}
+.figures div{padding:28px 20px;border-right:1px solid var(--rule)}
+.figures div:last-child{border-right:0}
+.figures b{display:block;font-family:var(--serif);font-size:54px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.figures b sup{font-size:.4em;vertical-align:top;margin-left:2px;color:var(--tomato)}
+
+/* section heads */
+section{padding:96px 0}
+.sec-head{display:grid;grid-template-columns:140px 1fr;gap:24px;margin-bottom:48px;align-items:start}
+.sec-head .num{font-family:var(--serif);font-style:italic;font-size:64px;line-height:.9;color:var(--tomato)}
+.sec-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-.025em;max-width:16ch}
+.sec-head p{margin-top:14px;max-width:52ch;font-size:18px}
+
+/* how it works: asymmetric */
+.how{background:var(--leaf);color:var(--paper)}
+.how .sec-head .num{color:var(--squash)}
+.steps{display:grid;grid-template-columns:repeat(12,1fr);gap:0;border-top:1px solid var(--paper)}
+.step{padding:32px 28px 36px 0;border-right:1px solid rgba(243,237,225,.4)}
+.step:nth-child(1){grid-column:span 5}
+.step:nth-child(2){grid-column:span 4;padding-left:28px}
+.step:nth-child(3){grid-column:span 3;padding-left:28px;border-right:0}
+.step h3{font-family:var(--serif);font-size:30px;font-weight:400;font-style:italic;margin:14px 0 10px}
+.step .big{font-family:var(--serif);font-weight:900;font-size:120px;line-height:.8;color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+
+/* menu */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.filters button{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em;background:transparent;border:1.5px solid var(--ink);padding:9px 14px;cursor:pointer;color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--rule);border-left:1px solid var(--rule)}
+.dish{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:22px;display:flex;flex-direction:column;gap:12px;background:var(--paper);transition:background .2s}
+.dish:hover{background:#fffaf0}
+.dish.hide{display:none}
+.plate{aspect-ratio:4/3;border-radius:0;display:grid;place-items:center;overflow:hidden}
+.plate svg{width:72%;height:auto}
+.dish h3{font-family:var(--serif);font-size:24px;line-height:1.1}
+.dish .meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;text-transform:uppercase;padding:3px 7px;border:1px solid var(--ink);margin-right:4px}
+.menu .dish.feature{grid-column:span 2;flex-direction:row;align-items:stretch}
+.menu .dish.feature .plate{flex:1.2;aspect-ratio:auto;min-height:280px}
+.menu .dish.feature .txt{flex:1;display:flex;flex-direction:column;gap:12px;justify-content:flex-end}
+.menu .dish.feature h3{font-size:38px}
+
+/* sourcing pull quote */
+.pull{background:var(--paper-2);padding:0}
+.pull-grid{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--rule);border-bottom:2px solid var(--rule)}
+.pull blockquote{font-family:var(--serif);font-size:clamp(30px,3.6vw,50px);line-height:1.1;padding:72px 48px 72px 0;border-right:1px solid var(--rule);letter-spacing:-.015em}
+.pull blockquote::before{content:"\201C";color:var(--tomato);font-size:1.6em;line-height:0;vertical-align:-.35em;margin-right:4px}
+.pull cite{display:block;margin-top:26px;font-style:normal}
+.farms{padding:56px 0 56px 48px}
+.farms ul{list-style:none}
+.farms li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:18px}
+.farms li span:last-child{font-family:var(--mono);font-size:13px}
+
+/* plans */
+.toggle{display:inline-flex;border:2px solid var(--ink);margin-bottom:36px}
+.toggle button{font-family:var(--mono);font-size:13px;text-transform:uppercase;padding:12px 18px;border:0;background:transparent;cursor:pointer;color:var(--ink)}
+.toggle button[aria-pressed="true"]{background:var(--tomato);color:#fff}
+.plans{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:24px;align-items:end}
+.plan{border:2px solid var(--ink);padding:30px;background:#fffaf0}
+.plan.pop{background:var(--ink);color:var(--paper);padding:42px 30px;position:relative}
+.plan.pop .flag{position:absolute;top:-16px;left:30px;background:var(--squash);color:var(--ink);padding:5px 10px}
+.plan h3{font-family:var(--serif);font-size:30px;font-weight:700}
+.plan .price{font-family:var(--serif);font-size:68px;font-weight:900;line-height:1;margin:18px 0 4px;letter-spacing:-.03em}
+.plan .price small{font-family:var(--mono);font-size:13px;font-weight:400;letter-spacing:.04em}
+.plan ul{list-style:none;margin:22px 0 28px}
+.plan li{padding:9px 0;border-top:1px solid currentColor;opacity:.92}
+.plan li::before{content:"+ ";font-family:var(--mono);color:var(--tomato)}
+.plan.pop .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.plan .btn{width:100%;text-align:center}
+
+/* reviews */
+.reviews{border-top:2px solid var(--rule)}
+.rev-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;border-top:1px solid var(--rule)}
+.rev{padding:30px 28px 10px 0;border-right:1px solid var(--rule)}
+.rev+.rev{padding-left:28px}
+.rev:last-child{border-right:0}
+.rev p{font-family:var(--serif);font-size:20px;line-height:1.35}
+.rev:first-child p{font-size:32px;font-style:italic;line-height:1.2}
+.rev .who{margin-top:18px}
+.stars{color:var(--tomato);letter-spacing:3px}
+
+/* faq */
+.faq-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:64px}
+details{border-top:1px solid var(--rule);padding:20px 0}
+details:last-child{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-family:var(--serif);font-size:23px;font-weight:700}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);font-weight:400;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:12px;max-width:60ch}
+
+/* final cta */
+.final{background:var(--tomato);color:#fff;padding:0}
+.final .wrap{display:grid;grid-template-columns:1.4fr 1fr;align-items:center;gap:40px;padding-top:80px;padding-bottom:80px}
+.final h2{font-family:var(--serif);font-weight:900;font-size:clamp(48px,7vw,104px);line-height:.9;letter-spacing:-.035em}
+.final form{display:flex;flex-direction:column;gap:12px}
+.final label{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.final input{font:inherit;font-size:18px;padding:16px;border:2px solid var(--ink);background:#fffaf0;color:var(--ink)}
+.final .btn{background:var(--ink);border-color:var(--ink)}
+.final .btn:hover{box-shadow:3px 3px 0 var(--paper)}
+.final .msg{font-family:var(--mono);font-size:13px;min-height:1.4em}
+
+footer{background:var(--ink);color:var(--paper);padding:56px 0 28px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+.foot .logo{font-size:44px}
+.foot h4{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;opacity:.7;font-weight:400}
+.foot ul{list-style:none}
+.foot li{padding:4px 0}
+.foot a{text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.legal{display:flex;justify-content:space-between;border-top:1px solid rgba(243,237,225,.3);margin-top:44px;padding-top:18px;flex-wrap:wrap;gap:12px}
+
+:focus-visible{outline:3px solid var(--squash);outline-offset:2px}
+
+@media (max-width:960px){
+  nav.main a:not(.btn){display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-copy{padding:40px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .hero-side{padding:40px 8px}
+  .figures{grid-template-columns:repeat(2,1fr)}
+  .figures div:nth-child(2){border-right:0}
+  .figures div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .sec-head{grid-template-columns:1fr;gap:8px}
+  .steps{grid-template-columns:1fr}
+  .step,.step:nth-child(n){grid-column:auto;padding:28px 0;border-right:0;border-bottom:1px solid rgba(243,237,225,.4)}
+  .menu{grid-template-columns:1fr 1fr}
+  .pull-grid,.faq-wrap,.final .wrap{grid-template-columns:1fr}
+  .pull blockquote{border-right:0;border-bottom:1px solid var(--rule);padding:48px 0}
+  .farms{padding:40px 0}
+  .plans{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .rev,.rev+.rev{padding:26px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .foot{grid-template-columns:1fr 1fr}
+  .faq-wrap{gap:24px}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  section{padding:64px 0}
+  .menu{grid-template-columns:1fr}
+  .menu .dish.feature{grid-column:auto;flex-direction:column}
+  .menu .dish.feature .plate{min-height:220px}
+  .edition span:nth-child(2){display:none}
+  .strip .wrap span:last-child{display:none}
+  .foot{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="strip mono"><div class="wrap"><span>Now delivering to 41 cities</span><span>Order by Thursday 11:59pm for Monday</span></div></div>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="mast-row">
+      <a href="#" class="logo">Sprout <em>&amp;</em> Ledger</a>
+      <nav class="main" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#menu">This week</a>
+        <a href="#plans">Plans</a>
+        <a href="#faq">FAQ</a>
+        <a href="#start" class="btn">Get your first box</a>
+      </nav>
+    </div>
+    <hr class="rule">
+    <div class="edition mono"><span>Vol. 06 &mdash; No. 45</span><span>The plant-forward weekly</span><span>Week of Nov 9</span></div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-copy">
+      <h1>Dinner, <span class="strike">figured out</span> <em>grown</em> out.</h1>
+      <p class="lede">Chef-built vegan recipes and farm-fresh ingredients, pre-portioned and on your doorstep every week. Thirty minutes from box to bowl.</p>
+      <div class="hero-cta">
+        <a href="#plans" class="btn">See plans &rarr;</a>
+        <a href="#menu" class="btn ghost">Read the menu</a>
+      </div>
+    </div>
+    <aside class="hero-side" aria-label="Sample order">
+      <div class="ticket">
+        <div class="mono">Order #4419 &middot; 2 people</div>
+        <h3>Your Monday box</h3>
+        <ol>
+          <li><span>Smoky black bean tlayudas</span><span class="t">25 min</span></li>
+          <li><span>Miso-butter squash udon</span><span class="t">30 min</span></li>
+          <li><span>Harissa chickpea traybake</span><span class="t">35 min</span></li>
+        </ol>
+        <div class="total"><span>6 servings</span><span>$10.49 / plate</span></div>
+      </div>
+      <div class="stamp">100% plant-based<br>Packed in compostables</div>
+    </aside>
+  </div>
+
+  <div class="figures">
+    <div><b>32<sup>+</sup></b><span class="mono">Recipes / week</span></div>
+    <div><b>30<sup>min</sup></b><span class="mono">Average cook time</span></div>
+    <div><b>18</b><span class="mono">Partner farms</span></div>
+    <div><b>0<sup>g</sup></b><span class="mono">Animal products. Ever.</span></div>
+  </div>
+</div>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">i.</div>
+      <div>
+        <h2>Three steps. No grocery list.</h2>
+        <p>Pick, unpack, cook. Skip a week or pause any time from the app &mdash; no phone calls, no guilt trips.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="big">1</div>
+        <h3>Choose your recipes</h3>
+        <p>Browse 32+ new dishes every Friday. Filter by high-protein, gluten-free, nut-free or under 25 minutes.</p>
+      </div>
+      <div class="step">
+        <div class="big">2</div>
+        <h3>We pack it cold</h3>
+        <p>Ingredients are portioned to the gram and shipped in insulated, home-compostable liners.</p>
+      </div>
+      <div class="step">
+        <div class="big">3</div>
+        <h3>You cook &amp; eat</h3>
+        <p>Illustrated recipe cards walk you through it. Seconds encouraged.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">ii.</div>
+      <div>
+        <h2>On the menu this week</h2>
+        <p>A taste of what's coming out of the test kitchen. Rotates every Friday.</p>
+      </div>
+    </div>
+    <div class="filters" role="group" aria-label="Filter recipes">
+      <button aria-pressed="true" data-f="all">All</button>
+      <button aria-pressed="false" data-f="protein">High protein</button>
+      <button aria-pressed="false" data-f="quick">Under 25 min</button>
+      <button aria-pressed="false" data-f="gf">Gluten-free</button>
+    </div>
+    <div class="menu">
+      <article class="dish feature" data-tags="protein gf">
+        <div class="plate" style="background:var(--squash)">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" fill="#fffaf0" stroke="#1d2b1f" stroke-width="3"/><circle cx="100" cy="100" r="62" fill="#d2452b"/><circle cx="78" cy="86" r="12" fill="#2f5d3a"/><circle cx="118" cy="80" r="9" fill="#2f5d3a"/><circle cx="108" cy="120" r="14" fill="#e8a33d"/><circle cx="80" cy="120" r="7" fill="#fffaf0"/><path d="M60 100 q40 -30 80 0" stroke="#fffaf0" stroke-width="4" fill="none"/></svg>
+        </div>
+        <div class="txt">
+          <span class="mono" style="color:var(--tomato)">Chef's pick</span>
+          <h3>Harissa chickpea traybake with charred lemon &amp; herbed tahini</h3>
+          <p>One tray, minimal washing up. Crispy chickpeas, sweet potato and red onion roasted in a smoky North African paste.</p>
+          <div><span class="tag">High protein</span><span class="tag">Gluten-free</span></div>
+          <div class="meta"><span>35 min</span><span>24g protein</span></div>
+        </div>
+      </article>
+      <article class="dish" data-tags="quick">
+        <div class="plate" style="background:var(--leaf)">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="110" rx="86" ry="60" fill="#fffaf0" stroke="#1d2b1f" stroke-width="3"/><path d="M40 105 q30 -20 60 0 t60 0" stroke="#e8a33d" stroke-width="6" fill="none"/><path d="M45 120 q30 -20 60 0 t55 0" stroke="#e8a33d" stroke-width="6" fill="none"/><circle cx="130" cy="96" r="10" fill="#d2452b"/><circle cx="70" cy="132" r="6" fill="#2f5d3a"/></svg>
+        </div>
+        <h3>Miso-butter squash udon</h3>
+        <div><span class="tag">Under 25 min</span></div>
+        <div class="meta"><span>22 min</span><span>14g protein</span></div>
+      </article>
+      <article class="dish" data-tags="protein quick">
+        <div class="plate" style="background:var(--tomato)">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M30 140 L100 40 L170 140 Z" fill="#fffaf0" stroke="#1d2b1f" stroke-width="3"/><circle cx="90" cy="110" r="10" fill="#1d2b1f"/><circle cx="115" cy="95" r="8" fill="#2f5d3a"/><circle cx="110" cy="125" r="7" fill="#e8a33d"/></svg>
+        </div>
+        <h3>Smoky black bean tlayudas</h3>
+        <div><span class="tag">High protein</span><span class="tag">Under 25 min</span></div>
+        <div class="meta"><span>25 min</span><span>21g protein</span></div>
+      </article>
+      <article class="dish" data-tags="gf">
+        <div class="plate" style="background:var(--paper-2)">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="80" fill="#fffaf0" stroke="#1d2b1f" stroke-width="3"/><circle cx="100" cy="100" r="50" fill="#e8a33d"/><path d="M70 90 h60 M75 108 h50" stroke="#2f5d3a" stroke-width="5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Coconut red lentil dal with quick pickles</h3>
+        <div><span class="tag">Gluten-free</span></div>
+        <div class="meta"><span>30 min</span><span>18g protein</span></div>
+      </article>
+      <article class="dish" data-tags="protein">
+        <div class="plate" style="background:var(--ink)">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><rect x="30" y="50" width="140" height="100" fill="#fffaf0" stroke="#1d2b1f" stroke-width="3"/><rect x="50" y="70" width="40" height="28" fill="#d2452b"/><rect x="100" y="70" width="50" height="28" fill="#2f5d3a"/><rect x="50" y="108" width="100" height="22" fill="#e8a33d"/></svg>
+        </div>
+        <h3>Gochujang glazed tofu bibimbap</h3>
+        <div><span class="tag">High protein</span></div>
+        <div class="meta"><span>32 min</span><span>27g protein</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pull">
+  <div class="wrap">
+    <div class="pull-grid">
+      <blockquote>We buy whole harvests, ugly carrots included, so the farm gets paid for everything it grows.
+        <cite class="mono">&mdash; Ines Okafor, Head of Sourcing</cite>
+      </blockquote>
+      <div class="farms">
+        <div class="mono" style="margin-bottom:10px">Where this week's box comes from</div>
+        <ul>
+          <li><span>Kale, chard, leeks</span><span>Two Creeks Farm, OR</span></li>
+          <li><span>Butternut squash</span><span>Little Field Co-op, WA</span></li>
+          <li><span>Chickpeas &amp; lentils</span><span>Palouse Pulse, ID</span></li>
+          <li><span>Organic tofu</span><span>Hearth Soy Works, CA</span></li>
+          <li><span>Citrus</span><span>Mesa Grove, AZ</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plans">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">iii.</div>
+      <div>
+        <h2>Pick a plan. Change it whenever.</h2>
+        <p>Free delivery on every box over $60. Cancel in two taps.</p>
+      </div>
+    </div>
+    <div class="toggle" role="group" aria-label="Household size">
+      <button aria-pressed="true" data-people="2">2 people</button>
+      <button aria-pressed="false" data-people="4">4 people</button>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <span class="mono">Taster</span>
+        <h3>2 recipes / week</h3>
+        <div class="price" data-p2="11.99" data-p4="10.49">$11.99<small> / serving</small></div>
+        <span class="mono total-line" data-n="2">$47.96 weekly</span>
+        <ul><li>Swap any recipe</li><li>Skip weeks freely</li><li>Recipe card archive</li></ul>
+        <a href="#start" class="btn ghost">Start Taster</a>
+      </div>
+      <div class="plan pop">
+        <span class="flag mono">Most chosen</span>
+        <span class="mono">Regular</span>
+        <h3>3 recipes / week</h3>
+        <div class="price" data-p2="10.49" data-p4="9.29">$10.49<small> / serving</small></div>
+        <span class="mono total-line" data-n="3">$62.94 weekly</span>
+        <ul><li>Everything in Taster</li><li>Free delivery</li><li>Add-on pantry &amp; desserts</li></ul>
+        <a href="#start" class="btn">Start Regular</a>
+      </div>
+      <div class="plan">
+        <span class="mono">Household</span>
+        <h3>5 recipes / week</h3>
+        <div class="price" data-p2="9.49" data-p4="8.49">$9.49<small> / serving</small></div>
+        <span class="mono total-line" data-n="5">$94.90 weekly</span>
+        <ul><li>Everything in Regular</li><li>Priority delivery slots</li><li>Monthly chef masterclass</li></ul>
+        <a href="#start" class="btn ghost">Start Household</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="num">iv.</div>
+      <div><h2>Letters to the editor</h2></div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>My partner is a lifelong meat eater and asked for the tlayudas three weeks running. I've stopped explaining that it's vegan.</p>
+        <div class="who mono">Priya R. &middot; Portland</div>
+      </div>
+      <div class="rev">
+        <div class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Portions are real. I'm not hungry an hour later, which was my problem with every other kit.</p>
+        <div class="who mono">Marcus T. &middot; Denver</div>
+      </div>
+      <div class="rev">
+        <div class="stars" aria-label="4 stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        <p>Packaging all goes in my compost bin. Wish there were more nut-free options, but it's improving.</p>
+        <div class="who mono">Hana L. &middot; Seattle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-wrap">
+    <div class="sec-head" style="grid-template-columns:1fr;margin:0">
+      <div class="num">v.</div>
+      <div><h2>Questions, answered</h2><p>Still stuck? Write to <a href="mailto:hello@example.com">hello@example.com</a>.</p></div>
+    </div>
+    <div>
+      <details open><summary>Is everything 100% vegan?</summary><p>Yes. Every ingredient, sauce and garnish is plant-based, and our kitchen handles no animal products at all.</p></details>
+      <details><summary>Can I skip a week or cancel?</summary><p>Skip, pause or cancel from your account any time before Thursday 11:59pm for the following Monday's delivery.</p></details>
+      <details><summary>How do you handle allergies?</summary><p>Each recipe lists the 14 major allergens. You can set allergen filters so those recipes never appear in your picks.</p></details>
+      <details><summary>What happens to the packaging?</summary><p>Liners and ice packs are home-compostable; boxes are recyclable cardboard. Return any box with your next delivery and we'll reuse it.</p></details>
+      <details><summary>Do you deliver to my area?</summary><p>We currently deliver to 41 cities across the western and central US. Enter your zip at checkout to confirm.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="start">
+  <div class="wrap">
+    <h2>First box, 40% off.</h2>
+    <form id="signup" novalidate>
+      <label for="email">Email address</label>
+      <input id="email" type="email" required placeholder="you@kitchen.com" autocomplete="email">
+      <label for="zip">Zip code</label>
+      <input id="zip" inputmode="numeric" pattern="[0-9]{5}" required placeholder="97214" autocomplete="postal-code">
+      <button class="btn" type="submit">Claim my discount</button>
+      <div class="msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a href="#" class="logo">Sprout <em>&amp;</em> Ledger</a><p style="margin-top:12px;max-width:30ch;opacity:.8">Plant-based meal kits from the farm to your table, every week.</p></div>
+      <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Farms</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="#">Delivery areas</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">Newsletter</a></li></ul></div>
+    </div>
+    <div class="legal mono"><span>&copy; 2026 Sprout &amp; Ledger</span><span>Printed on screens, grown in soil</span></div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll('.dish').forEach(d=>d.classList.toggle('hide',f!=='all'&&!d.dataset.tags.split(' ').includes(f)));
+}));
+document.querySelectorAll('.toggle button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const n=+b.dataset.people;
+  document.querySelectorAll('.plan').forEach(p=>{
+    const per=+p.querySelector('.price').dataset['p'+n];
+    p.querySelector('.price').innerHTML='$'+per.toFixed(2)+'<small> / serving</small>';
+    const t=p.querySelector('.total-line');
+    t.textContent='$'+(per*n*+t.dataset.n).toFixed(2)+' weekly';
+  });
+}));
+document.getElementById('signup').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target,m=f.querySelector('.msg');
+  m.textContent=f.checkValidity()?'Thanks! Check your inbox for your code.':'Please enter a valid email and 5-digit zip.';
+});
+</script>
+</body>
+</html>

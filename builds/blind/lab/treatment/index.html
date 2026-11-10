@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Okafor Lab — Active Matter, Northfield University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2efe7;--ink:#15140f;--rule:#cbc5b6;--muted:#6b675c;--accent:#c43d1a;
+  --display:"Fraunces",Georgia,serif;--body:"Source Serif 4",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+  --gutter:clamp(20px,4vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--accent)}
+.mono{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+.muted{color:var(--muted)}
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--gutter)}
+canvas{display:block;width:100%}
+figcaption{margin-top:12px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);max-width:46ch}
+figcaption b{color:var(--accent);font-weight:500}
+
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding-top:20px;padding-bottom:16px}
+header .mark{font-family:var(--display);font-size:22px;font-weight:600;text-decoration:none}
+header nav{display:flex;gap:28px}
+header nav a{text-decoration:none}
+header nav a.on{color:var(--accent)}
+
+.hero .wrap{display:grid;grid-template-columns:7fr 5fr;gap:56px;padding-top:72px;padding-bottom:96px;align-items:end}
+.hero h1{font-family:var(--display);font-weight:300;font-size:128px;line-height:.92;letter-spacing:-.035em;font-variation-settings:"opsz" 144}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .kicker{margin-bottom:36px}
+.hero .thesis{margin-top:40px;font-size:21px;line-height:1.5;max-width:34ch}
+.hero .meta{margin-top:36px;display:flex;gap:32px;flex-wrap:wrap}
+.hero canvas{height:620px}
+
+.questions .wrap{display:grid;grid-template-columns:4fr 7fr;gap:80px;padding-top:40px;padding-bottom:120px;border-top:1px solid var(--rule)}
+.questions figure{padding-top:48px}
+.questions canvas{height:540px}
+h2{font-family:var(--display);font-weight:400;font-size:56px;line-height:1;letter-spacing:-.02em;margin:48px 0 40px}
+ol.q{list-style:none;border-top:1px solid var(--ink)}
+ol.q li{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:26px 0;border-bottom:1px solid var(--rule)}
+ol.q li .n{font-family:var(--display);font-size:34px;line-height:1;color:var(--accent)}
+ol.q h3{font-family:var(--display);font-weight:400;font-size:27px;line-height:1.2;margin-bottom:8px}
+ol.q p{color:var(--muted);max-width:58ch}
+
+.band{background:var(--ink);color:var(--paper)}
+.band .wrap{display:grid;grid-template-columns:5fr 7fr;gap:72px;padding-top:110px;padding-bottom:110px;align-items:center}
+.band h2{margin-top:20px;color:var(--paper)}
+.band p.lead{font-size:19px;max-width:42ch;color:#d9d4c6}
+.band dl{margin-top:44px;border-top:1px solid #4a473d}
+.band dl div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #4a473d;align-items:baseline}
+.band dt{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a29d8f}
+.band dd{font-family:var(--display);font-size:24px}
+.band canvas{height:440px}
+.band figcaption{color:#a29d8f}
+
+.papers .wrap{display:grid;grid-template-columns:3fr 8fr;gap:150px;padding-top:120px;padding-bottom:120px}
+.papers aside{position:sticky;top:32px;align-self:start}
+.papers aside h2{margin-top:0;font-size:48px}
+.rows{border-top:1px solid var(--ink)}
+.row{display:grid;grid-template-columns:70px 1fr 190px;gap:28px;padding:22px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.row .t{font-family:var(--display);font-size:22px;line-height:1.3}
+.row .a{display:block;margin-top:6px;font-size:15px;color:var(--muted)}
+.row .v{text-align:right}
+
+.people .wrap{display:grid;grid-template-columns:6fr 5fr;gap:110px;padding-top:40px;padding-bottom:120px;border-top:1px solid var(--rule)}
+.roster{border-top:1px solid var(--ink)}
+.person{display:grid;grid-template-columns:200px 120px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.person .nm{font-family:var(--display);font-size:22px}
+.person .w{color:var(--muted);font-size:15.5px}
+.people figure{padding-top:150px}
+.people canvas{height:460px}
+
+.join .wrap{display:grid;grid-template-columns:5fr 7fr;gap:80px;padding-top:110px;padding-bottom:130px;border-top:1px solid var(--ink)}
+.join .big{font-family:var(--display);font-weight:300;font-size:104px;line-height:.9;letter-spacing:-.03em}
+.join canvas{height:210px;margin-top:44px;max-width:360px}
+.join h3{font-family:var(--display);font-weight:400;font-size:28px;margin:0 0 8px}
+.opening{padding:24px 0;border-bottom:1px solid var(--rule)}
+.opening:first-of-type{border-top:1px solid var(--ink)}
+.opening p{max-width:60ch}
+.join .write{margin-top:40px;font-size:20px;max-width:46ch}
+.join .write a{color:var(--accent)}
+
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:22px;padding-bottom:28px;border-top:1px solid var(--rule)}
+
+@media (max-width:980px){
+  .hero .wrap,.questions .wrap,.band .wrap,.papers .wrap,.people .wrap,.join .wrap{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:72px}.join .big{font-size:64px}
+  .hero canvas{height:380px}.questions canvas,.band canvas,.people canvas{height:320px}
+  .people figure,.questions figure{padding-top:0}
+  .papers aside{position:static}
+  .row{grid-template-columns:56px 1fr}.row .v{grid-column:2;text-align:left}
+  .person{grid-template-columns:1fr}
+  header nav{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Okafor Lab</a>
+    <nav class="mono">
+      <a class="on" href="#questions">Research</a>
+      <a href="#instrument">Instrument</a>
+      <a href="#papers">Papers</a>
+      <a href="#people">People</a>
+      <a href="#join">Join</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker mono muted">Department of Physics &middot; Northfield University &middot; Room 214, Hale Building</p>
+      <h1>Matter that <em>moves</em> itself.</h1>
+      <p class="thesis">We study active fluids — suspensions of swimming cells, motor proteins and self-propelled colloids — and ask how order appears in materials that are never at rest.</p>
+      <div class="meta mono muted"><span>Est. 2017</span><span>11 members</span><span>NSF DMR-2241907</span></div>
+    </div>
+    <figure>
+      <canvas id="fig1" aria-label="Streamlines of a bacterial turbulence field"></canvas>
+      <figcaption><b>Fig. 1</b> Velocity streamlines in a dense <i>B. subtilis</i> suspension, 40 s window. Vortices are ~30 &micro;m across.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="questions" id="questions">
+  <div class="wrap">
+    <figure>
+      <canvas id="fig2" aria-label="Particle tracks of self-propelled colloids"></canvas>
+      <figcaption><b>Fig. 2</b> Tracks of 400 Janus colloids under blue light. Each line is 12 s of motion.</figcaption>
+    </figure>
+    <div>
+      <p class="mono muted" style="margin-top:48px">Research &mdash; four open questions</p>
+      <h2>What we are trying to find out</h2>
+      <ol class="q">
+        <li><span class="n">01</span><div><h3>When does collective swimming become turbulence?</h3><p>Dense bacteria form vortices with a preferred size. We map the transition as density and confinement change, and test which continuum models survive.</p></div></li>
+        <li><span class="n">02</span><div><h3>Can a boundary steer an active flow?</h3><p>Patterned walls and soft obstacles rectify chaotic flow into net transport. We design the geometry and measure the pumping.</p></div></li>
+        <li><span class="n">03</span><div><h3>How do defects carry information?</h3><p>Topological defects in active nematics are born, travel and annihilate. We track them in microtubule gels and ask what their motion encodes.</p></div></li>
+        <li><span class="n">04</span><div><h3>What does it cost to stay organised?</h3><p>Order in a living material is paid for in energy. We estimate dissipation from fluctuations alone, without touching the sample.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="instrument">
+  <div class="wrap">
+    <div>
+      <p class="mono" style="color:#a29d8f">Instrument</p>
+      <h2>The 4D tracking rig</h2>
+      <p class="lead">A light-sheet microscope we built in 2022 to follow every particle in a millimetre-sized drop, in three dimensions, for hours. Most of our data comes from it. Its designs are open.</p>
+      <dl>
+        <div><dt>Volume rate</dt><dd>48 volumes / s</dd></div>
+        <div><dt>Tracked at once</dt><dd>~120,000 particles</dd></div>
+        <div><dt>Resolution</dt><dd>0.6 &micro;m lateral, 1.4 &micro;m axial</dd></div>
+      </dl>
+    </div>
+    <figure>
+      <canvas id="fig3" aria-label="Kymograph of defect positions over time"></canvas>
+      <figcaption><b>Fig. 3</b> Kymograph: defect positions along one line through a microtubule gel, 0&ndash;600 s top to bottom.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="papers" id="papers">
+  <div class="wrap">
+    <aside>
+      <p class="mono muted">Publications</p>
+      <h2 style="margin-top:20px">Selected papers</h2>
+      <p class="muted">2021&ndash;2026. <a href="#">Full list &rarr;</a></p>
+    </aside>
+    <div class="rows">
+      <div class="row"><span class="mono muted">2026</span><div><span class="t">Wall curvature selects vortex chirality in confined bacterial turbulence</span><span class="a">Mensah, R.; Liu, J.; Okafor, A.</span></div><span class="v mono muted">Phys. Rev. Lett.</span></div>
+      <div class="row"><span class="mono muted">2025</span><div><span class="t">Dissipation bounds from passive tracer fluctuations in active gels</span><span class="a">Varga, D.; Okafor, A.</span></div><span class="v mono muted">Nature Physics</span></div>
+      <div class="row"><span class="mono muted">2025</span><div><span class="t">An open light-sheet design for volumetric tracking of dense suspensions</span><span class="a">Liu, J.; Ahmed, S.; Brandt, K.; Okafor, A.</span></div><span class="v mono muted">Rev. Sci. Instrum.</span></div>
+      <div class="row"><span class="mono muted">2024</span><div><span class="t">Defect braiding in three-dimensional active nematics</span><span class="a">Ahmed, S.; Okafor, A.</span></div><span class="v mono muted">PNAS</span></div>
+      <div class="row"><span class="mono muted">2023</span><div><span class="t">Ratchet geometries that pump chaotic active flow</span><span class="a">Mensah, R.; Torres, E.; Okafor, A.</span></div><span class="v mono muted">Soft Matter</span></div>
+      <div class="row"><span class="mono muted">2022</span><div><span class="t">Length selection in bacterial turbulence is set by swimmer aspect ratio</span><span class="a">Okafor, A.; Brandt, K.</span></div><span class="v mono muted">J. Fluid Mech.</span></div>
+      <div class="row"><span class="mono muted">2021</span><div><span class="t">Light-switchable Janus colloids as a tunable active bath</span><span class="a">Torres, E.; Okafor, A.</span></div><span class="v mono muted">Langmuir</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="people" id="people">
+  <div class="wrap">
+    <div>
+      <p class="mono muted" style="margin-top:48px">People</p>
+      <h2>Who works here</h2>
+      <div class="roster">
+        <div class="person"><span class="nm">Adaeze Okafor</span><span class="mono muted">PI</span><span class="w">Active turbulence, theory meets experiment</span></div>
+        <div class="person"><span class="nm">Jun Liu</span><span class="mono muted">Postdoc</span><span class="w">Light-sheet optics and 3D tracking</span></div>
+        <div class="person"><span class="nm">Dóra Varga</span><span class="mono muted">Postdoc</span><span class="w">Stochastic thermodynamics of gels</span></div>
+        <div class="person"><span class="nm">Richard Mensah</span><span class="mono muted">PhD, yr 5</span><span class="w">Confined bacterial flows</span></div>
+        <div class="person"><span class="nm">Samira Ahmed</span><span class="mono muted">PhD, yr 4</span><span class="w">Defects in 3D active nematics</span></div>
+        <div class="person"><span class="nm">Elena Torres</span><span class="mono muted">PhD, yr 3</span><span class="w">Photoactive colloid synthesis</span></div>
+        <div class="person"><span class="nm">Kai Brandt</span><span class="mono muted">Lab engineer</span><span class="w">Microfluidics, the rig, everything else</span></div>
+      </div>
+    </div>
+    <figure>
+      <canvas id="fig4" aria-label="Floor plan of room 214"></canvas>
+      <figcaption><b>Fig. 4</b> Room 214. Rig on the vibration table (A), cell culture (B), wet bench (C), desks by the window.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <div>
+      <p class="mono muted" style="margin-bottom:24px">Join</p>
+      <p class="big">Come work on unruly matter.</p>
+      <canvas id="fig5" aria-label="Single droplet trajectory"></canvas>
+    </div>
+    <div>
+      <div class="opening"><p class="mono muted">Open &middot; start Sept 2027</p><h3>PhD students, two places</h3><p>Through the Physics or Applied Mathematics programmes. Background in fluids, optics or soft matter helps; curiosity about messy data helps more.</p></div>
+      <div class="opening"><p class="mono muted">Open &middot; 2 years, renewable</p><h3>Postdoctoral researcher, active nematics</h3><p>Experimental. You will run the rig on microtubule–kinesin gels and work closely with Samira and Dóra on defect statistics.</p></div>
+      <div class="opening"><p class="mono muted">Rolling</p><h3>Undergraduate summer projects</h3><p>Ten weeks, paid, usually three students. Projects are posted in February.</p></div>
+      <p class="write">Write to Adaeze at <a href="mailto:okafor@physics.northfield.edu">okafor@physics.northfield.edu</a> with a CV and a paragraph on a question you would like to answer. We reply to everyone.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap mono muted">
+    <span>Okafor Lab &middot; Hale Building 214 &middot; 1 University Ave, Northfield</span>
+    <span>Data and rig designs: <a href="#">github.com/okafor-lab</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const INK='#15140f', PAPER='#f2efe7', ACC='#c43d1a', RULE='#cbc5b6';
+  function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function setup(id){
+    const c=document.getElementById(id), d=window.devicePixelRatio||1, w=c.clientWidth, h=c.clientHeight;
+    c.width=w*d; c.height=h*d; const x=c.getContext('2d'); x.scale(d,d); return [x,w,h];
+  }
+  function vortexField(r,n,w,h){
+    const v=[]; for(let i=0;i<n;i++) v.push([r()*w,r()*h,(r()<.5?-1:1)*(0.6+r()),40+r()*60]);
+    return (px,py)=>{let u=0,vv=0;for(const [cx,cy,s,R] of v){const dx=px-cx,dy=py-cy,d2=dx*dx+dy*dy,k=s*Math.exp(-d2/(2*R*R));u+=-dy*k;vv+=dx*k}return [u,vv]};
+  }
+  function streamlines(id,seed,bg,fg,acc){
+    const [x,w,h]=setup(id), r=rng(seed), f=vortexField(r,Math.round(w*h/9000),w,h);
+    x.fillStyle=bg; x.fillRect(0,0,w,h);
+    for(let s=0;s<900;s++){
+      let px=r()*w,py=r()*h; x.beginPath(); x.moveTo(px,py);
+      const hot=r()<.04; x.strokeStyle=hot?acc:fg; x.lineWidth=hot?1.4:.6; x.globalAlpha=hot?.95:.55;
+      for(let k=0;k<60;k++){const [u,v]=f(px,py),m=Math.hypot(u,v)||1;px+=u/m*2.2;py+=v/m*2.2;if(px<0||py<0||px>w||py>h)break;x.lineTo(px,py)}
+      x.stroke();
+    }
+    x.globalAlpha=1;
+  }
+  function tracks(){
+    const [x,w,h]=setup('fig2'), r=rng(7);
+    x.fillStyle=PAPER; x.fillRect(0,0,w,h);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(.5,.5,w-1,h-1);
+    for(let i=0;i<400;i++){
+      let px=r()*w,py=r()*h,a=r()*6.283; const hot=i%37===0;
+      x.beginPath(); x.moveTo(px,py); x.strokeStyle=hot?ACC:INK; x.globalAlpha=hot?1:.45; x.lineWidth=hot?1.5:.7;
+      for(let k=0;k<40;k++){a+=(r()-.5)*.6;px+=Math.cos(a)*1.8;py+=Math.sin(a)*1.8;x.lineTo(px,py)}
+      x.stroke(); x.beginPath(); x.arc(px,py,hot?2.2:1.2,0,6.283); x.fillStyle=hot?ACC:INK; x.fill();
+    }
+    x.globalAlpha=1; x.fillStyle=INK; x.fillRect(16,h-24,60,3); x.font='11px "IBM Plex Mono", monospace'; x.fillText('50 µm',16,h-30);
+  }
+  function kymo(){
+    const [x,w,h]=setup('fig3'), r=rng(23);
+    x.fillStyle='#1e1d17'; x.fillRect(0,0,w,h);
+    const lanes=[]; for(let i=0;i<26;i++) lanes.push({p:r()*w,v:(r()-.5)*1.6,alive:true,hot:i%6===0});
+    for(let y=0;y<h;y+=2){
+      for(const l of lanes){ if(!l.alive) continue; l.v+=(r()-.5)*.12; l.p+=l.v;
+        if(l.p<0||l.p>w){l.v=-l.v;l.p=Math.max(0,Math.min(w,l.p))}
+        x.fillStyle=l.hot?ACC:'#e9e4d6'; x.globalAlpha=l.hot?.95:.7; x.fillRect(l.p,y,l.hot?2:1.3,2); }
+      for(let i=0;i<lanes.length;i++)for(let j=i+1;j<lanes.length;j++){const a=lanes[i],b=lanes[j];
+        if(a.alive&&b.alive&&Math.abs(a.p-b.p)<1.2&&r()<.5){a.alive=b.alive=false;x.globalAlpha=1;x.fillStyle=ACC;x.fillRect(a.p-3,y-1,6,3);lanes.push({p:r()*w,v:(r()-.5)*1.6,alive:true,hot:false},{p:r()*w,v:(r()-.5)*1.6,alive:true,hot:false})}}
+    }
+    x.globalAlpha=1;
+  }
+  function plan(){
+    const [x,w,h]=setup('fig4');
+    x.fillStyle=PAPER; x.fillRect(0,0,w,h); x.strokeStyle=INK; x.lineWidth=2;
+    const m=14; x.strokeRect(m,m,w-2*m,h-2*m);
+    x.lineWidth=1; x.beginPath(); x.moveTo(w*.55,m); x.lineTo(w*.55,h*.45); x.moveTo(m,h*.62); x.lineTo(w*.4,h*.62); x.stroke();
+    x.clearRect(w-m-2,h*.3,4,h*.4); x.fillStyle=PAPER; x.fillRect(w-m-2,h*.3,4,h*.4);
+    x.strokeStyle=RULE; for(let i=0;i<5;i++){x.beginPath();x.moveTo(w-m-3,h*.32+i*h*.08);x.lineTo(w-m+3,h*.32+i*h*.08);x.stroke()}
+    x.fillStyle=ACC; x.fillRect(w*.08,h*.1,w*.36,h*.22);
+    x.strokeStyle=INK; x.strokeRect(w*.62,h*.08,w*.28,h*.14); x.strokeRect(w*.08,h*.7,w*.5,h*.1);
+    for(let i=0;i<4;i++){x.strokeRect(w*.66,h*.5+i*h*.1,w*.18,h*.06)}
+    x.beginPath(); x.arc(m+2,h*.45,40,-Math.PI/2,0); x.stroke();
+    x.font='500 13px "IBM Plex Mono", monospace'; x.fillStyle=PAPER; x.fillText('A',w*.08+10,h*.1+20);
+    x.fillStyle=INK; x.fillText('B',w*.62+10,h*.08+20); x.fillText('C',w*.08+10,h*.7+20);
+    x.font='11px "IBM Plex Mono", monospace'; x.fillStyle='#6b675c'; x.fillText('WINDOW',w-m-70,h*.28); x.fillText('N ↑',w-m-34,m+20);
+  }
+  function droplet(){
+    const [x,w,h]=setup('fig5'), r=rng(91);
+    x.fillStyle=PAPER; x.fillRect(0,0,w,h); x.strokeStyle=RULE; x.strokeRect(.5,.5,w-1,h-1);
+    let px=w*.1,py=h*.6,a=0; x.beginPath(); x.moveTo(px,py); x.strokeStyle=INK; x.lineWidth=1;
+    for(let k=0;k<420;k++){a+=(r()-.5)*.5;px+=Math.cos(a)*1.2+.6;py+=Math.sin(a)*1.2;px=Math.min(w-12,px);py=Math.max(10,Math.min(h-10,py));x.lineTo(px,py)}
+    x.stroke(); x.beginPath(); x.arc(px,py,5,0,6.283); x.fillStyle=ACC; x.fill();
+  }
+  function draw(){ streamlines('fig1',3,PAPER,INK,ACC); tracks(); kymo(); plan(); droplet(); }
+  draw();
+  if(document.fonts) document.fonts.ready.then(draw);
+  let t; window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(draw,150)});
+})();
+</script>
+</body>
+</html>

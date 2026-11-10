@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ostkai — Museum of Modern Art</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f1eee6;--ink:#121212;--red:#e2400f;--rule:#b9b4a8;--disp:'Archivo',sans-serif;--mono:'IBM Plex Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.5 'Newsreader',Georgia,serif;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.disp{font-family:var(--disp);font-stretch:70%;font-weight:800;line-height:.92;letter-spacing:-.01em;text-transform:uppercase}
+.wrap{padding:0 40px}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 40px;border-bottom:1.5px solid var(--ink)}
+header .logo{font-family:var(--disp);font-stretch:62%;font-weight:900;font-size:28px;letter-spacing:.02em}
+header nav ul{display:flex;gap:28px;list-style:none}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--red)}
+.btn{display:inline-block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:10px 16px;border:1.5px solid var(--ink);text-decoration:none;background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover,.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--red);border-color:var(--red)}
+section{border-bottom:1.5px solid var(--ink)}
+.rule{border-top:1px solid var(--rule)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:320px 1fr;min-height:640px}
+.today{border-right:1.5px solid var(--ink);padding:32px 40px 32px 40px;display:flex;flex-direction:column;gap:18px}
+.status{display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;background:var(--red)}
+.today dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.today dt{font-family:var(--mono);font-size:11px;color:#5a574f;text-transform:uppercase;padding-top:2px}
+.today dd{font-size:14px}
+.hero-main{padding:48px 40px 40px 56px;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.hero h1{font-size:84px;text-align:right;max-width:980px;margin-left:auto}
+.hero-main>.mono{text-align:right}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero-cols{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:end}
+.hero-cols p{font-size:19px;line-height:1.45}
+.hero-cols .ctas{display:flex;gap:12px;flex-wrap:wrap;order:-1}
+
+/* now showing */
+.showing{display:grid;grid-template-columns:3fr 2fr}
+.ledger{padding:40px;border-right:1.5px solid var(--ink)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
+.sec-head h2{font-size:52px}
+table{width:100%;border-collapse:collapse}
+th{font-family:var(--mono);font-weight:500;font-size:11px;text-transform:uppercase;text-align:left;padding:8px 10px 8px 0;border-bottom:1.5px solid var(--ink)}
+td{padding:11px 10px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top;font-size:15px}
+td.t{font-family:var(--disp);font-stretch:80%;font-weight:700;font-size:20px;line-height:1.1;text-transform:uppercase}
+td.m{font-family:var(--mono);font-size:12px;white-space:nowrap}
+tr:hover td.t{color:var(--red)}
+.plan{padding:40px;display:flex;flex-direction:column;gap:16px}
+.floors{display:flex;flex-direction:column;gap:10px;flex:1}
+.floor{display:grid;grid-template-columns:44px 1fr;gap:10px;flex:1}
+.floor .lv{font-family:var(--mono);font-size:11px;padding-top:4px}
+.rooms{display:grid;gap:4px;min-height:76px}
+.room{border:1.5px solid var(--ink);font-family:var(--mono);font-size:10px;padding:4px 6px;display:flex;flex-direction:column;justify-content:space-between}
+.room.on{background:var(--red);border-color:var(--red);color:var(--paper)}
+.room.ink{background:var(--ink);color:var(--paper)}
+.legend{display:flex;gap:18px}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border:1.5px solid var(--ink)}
+
+/* numbers, full bleed */
+.numbers{background:var(--ink);color:var(--paper);display:grid;grid-template-columns:200px 1fr;border-bottom:0}
+.numbers .bar{background:var(--red);padding:40px 20px;display:flex;align-items:flex-end}
+.numbers .bar span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+.nums-in{padding:48px 40px 48px 0;display:grid;grid-template-columns:1fr 2.2fr;gap:0}
+.nums-in .gap{border-right:1px solid #3a3a3a}
+.grid-n{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #3a3a3a}
+.grid-n div{padding:20px 24px;border-bottom:1px solid #3a3a3a;border-left:1px solid #3a3a3a}
+.grid-n b{display:block;font-family:var(--disp);font-stretch:70%;font-weight:800;font-size:56px;line-height:1}
+.grid-n small{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;color:#a9a59b;margin-top:6px}
+.grid-n p{font-size:14px;margin-top:8px;color:#d8d4ca}
+.nums-head{grid-column:2;padding:0 24px 24px;display:flex;justify-content:space-between;align-items:end;gap:40px}
+.nums-head h2{font-size:56px}
+.nums-head p{max-width:420px;color:#d8d4ca}
+.acq{grid-column:2;padding:20px 24px 0}
+.acq li{display:grid;grid-template-columns:70px 1fr 140px;gap:16px;padding:8px 0;border-bottom:1px solid #3a3a3a;font-size:14px;list-style:none}
+.acq li span:first-child,.acq li span:last-child{font-family:var(--mono);font-size:12px;color:#a9a59b}
+
+/* programme */
+.prog{display:grid;grid-template-columns:2.4fr 1fr}
+.cal{padding:40px;border-right:1.5px solid var(--ink)}
+.filters{display:flex;gap:8px;margin-bottom:18px}
+.filters button.on{background:var(--ink);color:var(--paper)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);border-left:1px solid var(--rule)}
+.day{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-height:220px}
+.day h3{font-family:var(--mono);font-weight:500;font-size:11px;text-transform:uppercase;padding:8px;border-bottom:1.5px solid var(--ink)}
+.ev{padding:8px;border-bottom:1px dotted var(--rule);font-size:13px;line-height:1.3}
+.ev i{display:block;font-style:normal;font-family:var(--mono);font-size:10px;color:var(--red);text-transform:uppercase;margin-bottom:2px}
+.ev.hide{display:none}
+.member{background:var(--red);color:var(--paper);padding:40px 32px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.member h2{font-size:44px}
+.member ul{list-style:none}
+.member li{border-top:1px solid rgba(241,238,230,.5);padding:8px 0;font-size:14px;display:flex;justify-content:space-between}
+.member .btn{border-color:var(--paper);color:var(--paper)}
+.member .btn:hover{background:var(--paper);color:var(--red)}
+
+/* visit */
+.visit{display:grid;grid-template-columns:1fr 2fr}
+.visit-l{padding:40px;border-right:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:space-between}
+.visit-l h2{font-size:56px}
+.visit-r{padding:40px 40px 40px 56px;display:grid;grid-template-columns:1fr 1fr;gap:32px 48px}
+.visit-r h3{font-family:var(--mono);font-weight:500;font-size:12px;text-transform:uppercase;border-bottom:1.5px solid var(--ink);padding-bottom:6px;margin-bottom:6px}
+.visit-r dl{display:grid;grid-template-columns:1fr auto;font-size:15px}
+.visit-r dt,.visit-r dd{padding:6px 0;border-bottom:1px solid var(--rule)}
+.visit-r dd{font-family:var(--mono);font-size:13px;text-align:right}
+.visit-r p{font-size:15px;margin-bottom:8px}
+footer{padding:20px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer ul{display:flex;gap:20px;list-style:none}
+
+@media (max-width:900px){
+  .hero h1,.hero-main>.mono{text-align:left}
+  header nav{display:none}
+  .hero,.showing,.prog,.visit,.numbers,.nums-in,.hero-cols,.visit-r{grid-template-columns:1fr}
+  .today,.ledger,.cal,.visit-l{border-right:0;border-bottom:1.5px solid var(--ink)}
+  .hero h1{font-size:52px}
+  .numbers .bar{padding:12px 20px}.numbers .bar span{writing-mode:horizontal-tb;transform:none}
+  .nums-in{padding:32px 20px}.nums-head,.acq{grid-column:1}.nums-in .gap{display:none}
+  .grid-n{grid-template-columns:1fr 1fr}
+  .days{grid-template-columns:1fr 1fr}
+  .wrap,.ledger,.plan,.cal,.visit-l,.visit-r,.hero-main,.today{padding-left:16px;padding-right:16px}
+  .ledger{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#" style="text-decoration:none">OSTKAI</a>
+  <nav aria-label="Main"><ul class="mono">
+    <li><a href="#showing">Exhibitions</a></li>
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#programme">Programme</a></li>
+    <li><a href="#visit">Visit</a></li>
+    <li><a href="#programme">Membership</a></li>
+  </ul></nav>
+  <a class="btn solid" href="#visit">Tickets — €18</a>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="h1">
+  <aside class="today">
+    <div class="status mono"><span class="dot"></span><span id="open">Open today 10:00–18:00</span></div>
+    <dl>
+      <dt>Date</dt><dd id="today">Sunday 8 November</dd>
+      <dt>Late</dt><dd>Thu until 22:00</dd>
+      <dt>Rooms</dt><dd>14 of 16 open</dd>
+    </dl>
+    <p class="mono rule" style="padding-top:14px">Kade 12 &middot; Tram 7, 21</p>
+  </aside>
+  <div class="hero-main">
+    <p class="mono">Museum of modern &amp; contemporary art &middot; founded 1931 &middot; in the grain silos since 2009</p>
+    <h1 class="disp" id="h1">Everything in this building was once called <em>not art.</em></h1>
+    <div class="hero-cols">
+      <p>Ostkai holds 6,412 works made after 1905, from the first abstract paintings shown in this city to video work acquired last spring. Four floors of silo, one rule: hang the argument, not the masterpiece.</p>
+      <div class="ctas"><a class="btn solid" href="#visit">Plan a visit</a><a class="btn" href="#showing">What&rsquo;s on</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="showing" id="showing" aria-labelledby="h-show">
+  <div class="ledger">
+    <div class="sec-head"><h2 class="disp" id="h-show">Now showing</h2><span class="mono">7 exhibitions &middot; autumn 2026</span></div>
+    <table>
+      <thead><tr><th>Room</th><th>Exhibition</th><th>Artists</th><th>Until</th></tr></thead>
+      <tbody>
+        <tr><td class="m">L3 / 11–13</td><td class="t">The Unfinished Grid</td><td>Agnes Martin, Jan Schoonhoven, Nasreen Mohamedi, 31 others</td><td class="m">17 Jan 27</td></tr>
+        <tr><td class="m">L2 / 6–8</td><td class="t">Soft Machines: Bodies After 1968</td><td>Eva Hesse, Senga Nengudi, Lygia Clark</td><td class="m">28 Feb 27</td></tr>
+        <tr><td class="m">L1 / 2</td><td class="t">Noise Floor</td><td>Christian Marclay, Tarek Atoui; sound room, timed entry</td><td class="m">6 Dec 26</td></tr>
+        <tr><td class="m">L2 / 5</td><td class="t">Paper Revolutions</td><td>Soviet and Dutch posters, 1919–1934, 212 sheets</td><td class="m">31 Mar 27</td></tr>
+        <tr><td class="m">L0 / Kade Hall</td><td class="t">Ruth Asawa: Lines in Space</td><td>Hanging wire sculpture, 41 works, first Benelux survey</td><td class="m">14 Mar 27</td></tr>
+        <tr><td class="m">L4 / Silo top</td><td class="t">Quay Commission 2026</td><td>Femke Bakker, a 24-metre wall drawing made in public</td><td class="m">Ongoing</td></tr>
+        <tr><td class="m">L1 / 3–4</td><td class="t">The Collection, Rehung</td><td>1905–1960, 180 works, re-ordered by year of acquisition</td><td class="m">Permanent</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="plan" aria-label="Floor plan">
+    <div class="sec-head" style="margin-bottom:0"><span class="mono">Floor plan &middot; 4 levels</span><span class="mono">North &uarr;</span></div>
+    <div class="floors">
+      <div class="floor"><span class="lv">L4</span><div class="rooms" style="grid-template-columns:1fr 2fr"><div class="room ink"><span>Roof</span><span>Terrace</span></div><div class="room on"><span>Silo top</span><span>Commission</span></div></div></div>
+      <div class="floor"><span class="lv">L3</span><div class="rooms" style="grid-template-columns:1fr 1fr 1fr 1.4fr"><div class="room on"><span>11</span><span>Grid</span></div><div class="room on"><span>12</span><span>Grid</span></div><div class="room on"><span>13</span><span>Grid</span></div><div class="room"><span>Café</span><span>Silo 4</span></div></div></div>
+      <div class="floor"><span class="lv">L2</span><div class="rooms" style="grid-template-columns:1.2fr 1fr 1fr 1fr 1fr"><div class="room on"><span>5</span><span>Paper</span></div><div class="room on"><span>6</span><span>Soft</span></div><div class="room on"><span>7</span><span>Soft</span></div><div class="room on"><span>8</span><span>Soft</span></div><div class="room"><span>9</span><span>Closed</span></div></div></div>
+      <div class="floor"><span class="lv">L1</span><div class="rooms" style="grid-template-columns:1fr 1fr 1fr 1fr"><div class="room"><span>1</span><span>Study</span></div><div class="room on"><span>2</span><span>Noise</span></div><div class="room on"><span>3</span><span>Coll.</span></div><div class="room on"><span>4</span><span>Coll.</span></div></div></div>
+      <div class="floor"><span class="lv">L0</span><div class="rooms" style="grid-template-columns:2.6fr 1fr 1fr"><div class="room on"><span>Kade Hall</span><span>Asawa</span></div><div class="room ink"><span>Shop</span><span>Books</span></div><div class="room ink"><span>Entry</span><span>Quay</span></div></div></div>
+    </div>
+    <div class="legend mono"><span><i class="sw" style="background:var(--red);border-color:var(--red)"></i>On view</span><span><i class="sw"></i>Other</span><span><i class="sw" style="background:var(--ink)"></i>Services</span></div>
+  </div>
+</section>
+
+<section class="numbers" id="collection" aria-labelledby="h-coll">
+  <div class="bar"><span>The collection &middot; 1905 to now</span></div>
+  <div class="nums-in">
+    <div class="gap"></div>
+    <div>
+      <div class="nums-head"><h2 class="disp" id="h-coll">The collection in numbers</h2><p>We publish the holdings every year, including what we do not show. 91% of the collection is in storage; any work can be requested for the study room with 10 days&rsquo; notice.</p></div>
+      <div class="grid-n">
+        <div><b>6,412</b><small>Works held</small><p>Paintings, sculpture, film, works on paper, performance scores.</p></div>
+        <div><b>1,388</b><small>Artists</small><p>From 61 countries; 37% women, up from 19% in 2010.</p></div>
+        <div><b>9%</b><small>On view</small><p>578 works across 14 rooms this season.</p></div>
+        <div><b>€2.1m</b><small>Acquisitions 2026</small><p>23 works bought, 41 gifted, 3 returned to source communities.</p></div>
+        <div><b>312</b><small>Loans out</small><p>To 74 museums; the most travelled work is a 1922 Mondrian.</p></div>
+        <div><b>1931</b><small>Founded</small><p>As a city print room with 400 sheets and one curator.</p></div>
+      </div>
+      <ul class="acq" aria-label="Recent acquisitions">
+        <li><span>2026</span><span>Otobong Nkanga, <em>Unearthed — Midnight</em>, tapestry</span><span>Purchase</span></li>
+        <li><span>2026</span><span>Zarina Hashmi, 36 woodcuts from <em>Home Is a Foreign Place</em></span><span>Gift, estate</span></li>
+        <li><span>2025</span><span>Charlotte Posenenske, <em>Square Tubes Series D</em>, six elements</span><span>Purchase</span></li>
+        <li><span>2025</span><span>Bas Jan Ader, film archive, 11 reels</span><span>Long-term loan</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="prog" id="programme" aria-labelledby="h-prog">
+  <div class="cal">
+    <div class="sec-head"><h2 class="disp" id="h-prog">This week</h2><span class="mono">9–15 November</span></div>
+    <div class="filters" role="group" aria-label="Filter events">
+      <button class="btn on" data-f="all">All</button><button class="btn" data-f="talk">Talks</button><button class="btn" data-f="film">Film</button><button class="btn" data-f="make">Workshops</button>
+    </div>
+    <div class="days">
+      <div class="day"><h3>Mon 9</h3><div class="ev" data-k="make"><i>10:30 Workshop</i>Wire drawing for under-8s, Kade Hall</div><p class="ev" style="color:#5a574f">Rooms open, no events</p></div>
+      <div class="day"><h3>Tue 10</h3><div class="ev" data-k="talk"><i>12:30 Talk</i>Lunch on the grid: 20 min with curator Iris Vos</div><div class="ev" data-k="film"><i>19:00 Film</i>Shirley Clarke, <em>Portrait of Jason</em>, 105 min</div></div>
+      <div class="day"><h3>Wed 11</h3><div class="ev" data-k="make"><i>14:00 Workshop</i>Screenprint a 1920s poster, 12 places</div><div class="ev" data-k="talk"><i>18:00 Talk</i>Conservators on cleaning soft sculpture</div></div>
+      <div class="day"><h3>Thu 12</h3><div class="ev" data-k="talk"><i>18:30 Late</i>Free entry, bar on L3, DJ Kasia Wroń</div><div class="ev" data-k="film"><i>20:00 Film</i>Marclay, <em>The Clock</em>, 3-hour excerpt</div><div class="ev" data-k="talk"><i>21:00 Talk</i>Tarek Atoui in conversation</div></div>
+      <div class="day"><h3>Fri 13</h3><div class="ev" data-k="make"><i>11:00 Workshop</i>Drawing in the silo, materials provided</div><div class="ev" data-k="film"><i>19:30 Film</i>Chantal Akerman shorts, 74 min</div></div>
+      <div class="day"><h3>Sat 14</h3><div class="ev" data-k="talk"><i>11:00 Tour</i>The rehung collection, 60 min, Dutch</div><div class="ev" data-k="talk"><i>14:00 Tour</i>Same tour in English</div><div class="ev" data-k="make"><i>15:00 Workshop</i>Family weaving, all ages</div></div>
+      <div class="day"><h3>Sun 15</h3><div class="ev" data-k="talk"><i>13:00 Talk</i>Femke Bakker at the wall, open drop-in</div><div class="ev" data-k="film"><i>16:00 Film</i>Lygia Clark documentary, 52 min</div></div>
+    </div>
+  </div>
+  <aside class="member">
+    <div>
+      <p class="mono" style="margin-bottom:14px">Membership</p>
+      <h2 class="disp">€65 a year. Come back every week.</h2>
+    </div>
+    <ul>
+      <li><span>Unlimited entry, plus a guest on Thursdays</span></li>
+      <li><span>Previews the evening before each opening</span></li>
+      <li><span>Study room requests in 3 days, not 10</span></li>
+      <li><span>Under 26</span><span class="mono">€25</span></li>
+    </ul>
+    <a class="btn" href="#visit">Join Ostkai</a>
+  </aside>
+</section>
+
+<section class="visit" id="visit" aria-labelledby="h-visit">
+  <div class="visit-l">
+    <h2 class="disp" id="h-visit">Visit</h2>
+    <p class="mono">Tickets are timed only for Noise Floor. Everything else: walk in.</p>
+  </div>
+  <div class="visit-r">
+    <div><h3>Hours</h3><dl>
+      <dt>Tuesday – Sunday</dt><dd>10:00–18:00</dd>
+      <dt>Thursday</dt><dd>10:00–22:00</dd>
+      <dt>Monday</dt><dd>10:00–18:00, L0–L1</dd>
+      <dt>24, 25, 31 Dec, 1 Jan</dt><dd>Closed</dd>
+    </dl></div>
+    <div><h3>Admission</h3><dl>
+      <dt>Adult</dt><dd>€18</dd>
+      <dt>Student, Under 26</dt><dd>€9</dd>
+      <dt>Under 18, members, Museumkaart</dt><dd>Free</dd>
+      <dt>Thursday after 18:00</dt><dd>Free</dd>
+    </dl></div>
+    <div><h3>Access</h3>
+      <p>Step-free from the Quay entrance; lifts to all four levels. Wheelchairs and folding stools at the desk.</p>
+      <p>Quiet hours Sunday 10:00–12:00: Noise Floor muted, lights at half.</p>
+    </div>
+    <div><h3>Getting here</h3>
+      <p>Kade 12, 3011 Ostkai. Tram 7 or 21 to Graanpakhuis, 3 min walk. Bike racks for 400 at the quay.</p>
+      <p>No visitor parking; nearest garage Veemarkt, 600 m.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="mono">
+  <span>Ostkai Museum of Modern Art &middot; Kade 12</span>
+  <ul><li><a href="#">Newsletter</a></li><li><a href="#">Press</a></li><li><a href="#">Jobs</a></li><li><a href="#">Collection online</a></li></ul>
+  <span>&copy; 2026</span>
+</footer>
+
+<script>
+const now = new Date();
+document.getElementById('today').textContent = now.toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long'});
+const h = now.getHours(), close = now.getDay() === 4 ? 22 : 18;
+document.getElementById('open').textContent = h >= 10 && h < close ? `Open now until ${close}:00` : 'Closed now · opens 10:00';
+document.querySelectorAll('.filters button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.filters button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.ev[data-k]').forEach(e => e.classList.toggle('hide', b.dataset.f !== 'all' && e.dataset.k !== b.dataset.f));
+}));
+</script>
+</body>
+</html>

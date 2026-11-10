@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domestique — Cycling Apparel for the Long Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe9dd;
+  --ink:#1b1a17;
+  --oxblood:#7a1f1a;
+  --moss:#2f3d2a;
+  --chalk:#faf7f0;
+  --rule:#1b1a1733;
+  --display:"Big Shoulders Display",Impact,sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+header{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--ink);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:14px 28px}
+.logo{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:.02em;text-transform:uppercase;text-decoration:none}
+.logo span{color:var(--oxblood)}
+nav{display:flex;gap:28px;justify-content:center}
+nav a{text-decoration:none}
+nav a:hover{color:var(--oxblood)}
+.bag{border:1px solid var(--ink);padding:8px 14px;text-decoration:none}
+
+.hero{display:grid;grid-template-columns:7fr 5fr;border-bottom:1px solid var(--ink);min-height:calc(100vh - 58px)}
+.hero-left{padding:48px 28px 32px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--ink)}
+.hero h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(72px,13vw,210px);line-height:.82;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--oxblood);display:block}
+.hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px;align-items:end}
+.hero-meta p{max-width:34ch;font-size:20px}
+.cta{display:inline-flex;gap:14px;align-items:center;background:var(--ink);color:var(--chalk);padding:18px 24px;text-decoration:none;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;justify-self:start}
+.cta:hover{background:var(--oxblood)}
+.hero-right{background:var(--moss);color:var(--chalk);display:flex;flex-direction:column;justify-content:space-between;padding:28px;position:relative;overflow:hidden}
+.jersey{width:78%;margin:24px auto 0}
+.hero-right .stage{display:flex;justify-content:space-between;border-top:1px solid #faf7f055;padding-top:14px}
+
+.profile{border-bottom:1px solid var(--ink);padding:40px 28px 24px;background:var(--chalk)}
+.profile-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.profile-head h2{font-family:var(--display);font-weight:800;font-size:34px;text-transform:uppercase}
+#elev path.line{fill:none;stroke:var(--oxblood);stroke-width:2.5;stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+#elev path.fill{fill:var(--oxblood);opacity:.08}
+#elev text{font-family:var(--mono);font-size:11px;fill:var(--ink)}
+#elev line{stroke:var(--rule)}
+
+.section-label{display:flex;justify-content:space-between;padding:14px 28px;border-bottom:1px solid var(--ink)}
+.collection{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink)}
+.item{border-right:1px solid var(--ink);padding:20px;display:flex;flex-direction:column;gap:14px;text-decoration:none}
+.item:last-child{border-right:0}
+.swatch{aspect-ratio:4/5;display:grid;place-items:center;transition:transform .4s}
+.item:hover .swatch{transform:translateY(-6px)}
+.item h3{font-family:var(--display);font-weight:800;font-size:28px;text-transform:uppercase;line-height:1}
+.item .row{display:flex;justify-content:space-between}
+
+.system{display:grid;grid-template-columns:5fr 7fr;border-bottom:1px solid var(--ink)}
+.system-intro{padding:56px 28px;border-right:1px solid var(--ink)}
+.system-intro h2{font-family:var(--display);font-weight:900;font-size:clamp(48px,6vw,92px);line-height:.9;text-transform:uppercase;margin-bottom:24px}
+.system-intro p{max-width:40ch}
+.layers{list-style:none}
+.layers li{display:grid;grid-template-columns:90px 1fr 120px;gap:20px;padding:26px 28px;border-bottom:1px solid var(--rule);align-items:baseline;cursor:default;transition:background .25s}
+.layers li:last-child{border-bottom:0}
+.layers li:hover{background:var(--ink);color:var(--chalk)}
+.layers .n{font-family:var(--display);font-weight:900;font-size:56px;line-height:.8;color:var(--oxblood)}
+.layers h4{font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase}
+.layers .temp{text-align:right}
+
+.quote{background:var(--oxblood);color:var(--chalk);padding:96px 28px;border-bottom:1px solid var(--ink)}
+.quote blockquote{font-size:clamp(28px,4vw,54px);line-height:1.15;font-style:italic;max-width:24ch;margin-left:calc(100%/12*3)}
+.quote cite{display:block;margin-top:28px;margin-left:calc(100%/12*3);font-style:normal}
+
+.journal{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--ink)}
+.journal article{padding:28px;border-right:1px solid var(--ink)}
+.journal article:last-child{border-right:0}
+.journal h3{font-size:26px;font-weight:500;line-height:1.2;margin:14px 0 10px}
+.journal p{color:#1b1a17cc}
+
+.repair{display:grid;grid-template-columns:repeat(3,1fr);background:var(--ink);color:var(--chalk)}
+.repair div{padding:40px 28px;border-right:1px solid #faf7f033}
+.repair div:last-child{border-right:0}
+.repair strong{display:block;font-family:var(--display);font-weight:900;font-size:72px;line-height:1;color:#e9b8a6}
+
+footer{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px;padding:56px 28px 28px}
+footer h2{font-family:var(--display);font-weight:900;font-size:clamp(40px,5vw,72px);text-transform:uppercase;line-height:.9}
+form{display:flex;margin-top:24px;max-width:460px;border:1px solid var(--ink)}
+input{flex:1;background:transparent;border:0;padding:14px;font:inherit;font-size:16px;min-width:0}
+input:focus{outline:2px solid var(--oxblood);outline-offset:-2px}
+button{background:var(--ink);color:var(--chalk);border:0;padding:0 20px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+footer ul{list-style:none;display:grid;gap:8px}
+footer ul a{text-decoration:none}
+.fine{grid-column:1/-1;display:flex;justify-content:space-between;border-top:1px solid var(--ink);padding-top:16px;margin-top:24px}
+
+@media (max-width:900px){
+  header{grid-template-columns:1fr auto;padding:14px 16px}
+  nav{display:none}
+  .hero,.system{grid-template-columns:1fr}
+  .hero-left,.system-intro{border-right:0;border-bottom:1px solid var(--ink);padding-left:16px;padding-right:16px}
+  .hero-meta{grid-template-columns:1fr}
+  .collection{grid-template-columns:1fr 1fr}
+  .item:nth-child(2){border-right:0}
+  .item:nth-child(-n+2){border-bottom:1px solid var(--ink)}
+  .journal,.repair{grid-template-columns:1fr}
+  .journal article,.repair div{border-right:0;border-bottom:1px solid var(--rule)}
+  .layers li{grid-template-columns:60px 1fr;padding:22px 16px}
+  .layers .temp{grid-column:2;text-align:left}
+  .quote blockquote,.quote cite{margin-left:0}
+  footer{grid-template-columns:1fr 1fr;padding:40px 16px 20px}
+  footer>div:first-child{grid-column:1/-1}
+  .profile,.section-label,.quote{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">Domes<span>/</span>tique</a>
+  <nav class="mono">
+    <a href="#kit">Kit</a><a href="#system">Layering</a><a href="#journal">Journal</a><a href="#repair">Repairs</a>
+  </nav>
+  <a class="bag mono" href="#">Bag (0)</a>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="mono">Autumn / Winter 26 — The Long Day Collection</div>
+    <h1>Built for<br>hour<em>seven.</em></h1>
+    <div class="hero-meta">
+      <p>Merino-blend jerseys and bibs made for the riders who fetch the bottles, close the gaps and still ride home. Nothing here is designed to be noticed in a café.</p>
+      <a class="cta" href="#kit">Shop the collection <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="mono">No. 04 — Thermal Jersey, Moss</div>
+    <svg class="jersey" viewBox="0 0 300 320" aria-label="Thermal jersey illustration">
+      <path d="M95 20 L60 32 L10 90 L42 140 L70 118 L70 300 L230 300 L230 118 L258 140 L290 90 L240 32 L205 20 Q150 58 95 20Z" fill="#faf7f0"/>
+      <path d="M95 20 Q150 58 205 20 L198 16 Q150 46 102 16Z" fill="#7a1f1a"/>
+      <rect x="70" y="170" width="160" height="14" fill="#7a1f1a"/>
+      <rect x="70" y="190" width="160" height="4" fill="#1b1a17"/>
+      <line x1="150" y1="40" x2="150" y2="300" stroke="#1b1a17" stroke-width="1.5" stroke-dasharray="3 4"/>
+      <rect x="82" y="258" width="40" height="30" fill="none" stroke="#1b1a17" stroke-width="1.5"/>
+      <rect x="130" y="258" width="40" height="30" fill="none" stroke="#1b1a17" stroke-width="1.5"/>
+      <rect x="178" y="258" width="40" height="30" fill="none" stroke="#1b1a17" stroke-width="1.5"/>
+    </svg>
+    <div class="stage mono"><span>240 g/m² merino</span><span>4–12 °C</span><span>€185</span></div>
+  </div>
+</section>
+
+<section class="profile" aria-label="Test route elevation">
+  <div class="profile-head">
+    <h2>Tested on the Col de la Croix de Fer</h2>
+    <span class="mono">29.5 km · 1,522 m gain · avg 5.2%</span>
+  </div>
+  <svg id="elev" viewBox="0 0 1200 220" preserveAspectRatio="none" style="width:100%;height:220px"></svg>
+</section>
+
+<div class="section-label mono" id="kit"><span>01 — The kit</span><span>4 pieces, 11 colourways</span></div>
+<section class="collection">
+  <a class="item" href="#">
+    <div class="swatch" style="background:#2f3d2a"><span class="mono" style="color:#faf7f0">Jersey</span></div>
+    <h3>Thermal Long Sleeve</h3>
+    <div class="row mono"><span>Moss / Bone</span><span>€185</span></div>
+  </a>
+  <a class="item" href="#">
+    <div class="swatch" style="background:#1b1a17"><span class="mono" style="color:#faf7f0">Bib</span></div>
+    <h3>Gran Fondo Bib Tight</h3>
+    <div class="row mono"><span>Carbon</span><span>€220</span></div>
+  </a>
+  <a class="item" href="#">
+    <div class="swatch" style="background:#7a1f1a"><span class="mono" style="color:#faf7f0">Shell</span></div>
+    <h3>Descent Wind Gilet</h3>
+    <div class="row mono"><span>Oxblood</span><span>€140</span></div>
+  </a>
+  <a class="item" href="#">
+    <div class="swatch" style="background:#c9bda6"><span class="mono">Base</span></div>
+    <h3>Merino Base Layer</h3>
+    <div class="row mono"><span>Undyed</span><span>€75</span></div>
+  </a>
+</section>
+
+<section class="system" id="system">
+  <div class="system-intro">
+    <div class="mono" style="margin-bottom:20px">02 — Layering system</div>
+    <h2>Dress for the descent, not the start.</h2>
+    <p>Every piece is cut to sit under or over the others without bunching. Pick your layers by the coldest point of the ride, and stuff the rest in a rear pocket.</p>
+  </div>
+  <ol class="layers">
+    <li><span class="n">1</span><div><h4>Base</h4><p>Undyed merino, flat seams. Wicks on the climb, stays warm when wet.</p></div><span class="temp mono">Always</span></li>
+    <li><span class="n">2</span><div><h4>Jersey</h4><p>Brushed thermal back, three pockets plus a zipped valuables sleeve.</p></div><span class="temp mono">Below 14 °C</span></li>
+    <li><span class="n">3</span><div><h4>Gilet</h4><p>Windproof front, mesh back. Packs to the size of an energy bar.</p></div><span class="temp mono">Below 9 °C</span></li>
+    <li><span class="n">4</span><div><h4>Bib</h4><p>Italian chamois rated for six hours plus. Roubaix fleece lining.</p></div><span class="temp mono">Below 10 °C</span></li>
+  </ol>
+</section>
+
+<section class="quote">
+  <blockquote>"By the third col the team kit was soaked through. I was the only one still warm enough to go back to the car for jackets."</blockquote>
+  <cite class="mono">— Léa Martin, amateur domestique, Haute Route Alpes</cite>
+</section>
+
+<div class="section-label mono" id="journal"><span>03 — Journal</span><a href="#">All stories &rarr;</a></div>
+<section class="journal">
+  <article>
+    <span class="mono">Route · 8 min</span>
+    <h3>Four cols in November and what we changed afterwards</h3>
+    <p>The gilet zip moved two centimetres. Here is why.</p>
+  </article>
+  <article>
+    <span class="mono">Materials · 5 min</span>
+    <h3>Why we stopped dyeing our base layers</h3>
+    <p>Undyed merino uses 60% less water and feels the same at 4 °C.</p>
+  </article>
+  <article>
+    <span class="mono">People · 11 min</span>
+    <h3>The rider who never wins</h3>
+    <p>A day in the team car with a professional domestique.</p>
+  </article>
+</section>
+
+<section class="repair" id="repair">
+  <div><strong>5 yrs</strong><span class="mono">Free crash repair on every jersey</span></div>
+  <div><strong>2,340</strong><span class="mono">Garments mended in 2025</span></div>
+  <div><strong>€0</strong><span class="mono">Return postage, any reason</span></div>
+</section>
+
+<footer>
+  <div>
+    <h2>Ride notes, once a month.</h2>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed';">
+      <label for="email" class="mono" style="position:absolute;left:-9999px">Email</label>
+      <input id="email" type="email" required placeholder="you@example.com">
+      <button type="submit">Join</button>
+    </form>
+  </div>
+  <ul class="mono"><li><a href="#">Size guide</a></li><li><a href="#">Repairs</a></li><li><a href="#">Shipping</a></li><li><a href="#">Stockists</a></li></ul>
+  <ul class="mono"><li><a href="#">Instagram</a></li><li><a href="#">Strava club</a></li><li><a href="#">Contact</a></li></ul>
+  <div class="fine mono"><span>© 2026 Domestique Cycling Co.</span><span>Made in Biella, Italy</span></div>
+</footer>
+
+<script>
+(() => {
+  const svg = document.getElementById('elev');
+  const W = 1200, H = 220, pad = 30;
+  const pts = [0,40,55,48,90,130,160,150,210,260,300,290,340,400,450,470,520,580,640,700,690,760,820,880,950,1010,1090,1180,1300,1522];
+  const max = 1600, step = W / (pts.length - 1);
+  const xy = pts.map((v, i) => [i * step, H - pad - (v / max) * (H - pad * 2)]);
+  const d = xy.map(([x, y], i) => (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1)).join(' ');
+  const ns = 'http://www.w3.org/2000/svg';
+  const add = (tag, attrs) => { const el = document.createElementNS(ns, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); svg.appendChild(el); return el; };
+  [500, 1000, 1500].forEach(m => {
+    const y = H - pad - (m / max) * (H - pad * 2);
+    add('line', { x1: 0, x2: W, y1: y, y2: y });
+    add('text', { x: 4, y: y - 4 }).textContent = m + ' m';
+  });
+  add('path', { class: 'fill', d: d + ` L${W} ${H - pad} L0 ${H - pad} Z` });
+  const line = add('path', { class: 'line', d, 'vector-effect': 'non-scaling-stroke' });
+  add('text', { x: W - 4, y: xy.at(-1)[1] - 8, 'text-anchor': 'end' }).textContent = 'Summit 2,067 m';
+  const len = line.getTotalLength();
+  line.style.setProperty('--len', len);
+  const io = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    line.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 2200, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+    io.disconnect();
+  }, { threshold: .4 });
+  io.observe(svg);
+})();
+</script>
+</body>
+</html>

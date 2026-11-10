@@ -1,0 +1,405 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marginalia — the editor that writes in the margin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=JetBrains+Mono:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f1ebdd;--paper2:#e8e0cd;--ink:#1c1a16;--ink2:#4a453b;--red:#c2391b;--blue:#23466b;--blue2:#1a3552;--rule:#cfc5b0;
+  --display:'Gloock',serif;--body:'Literata',serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{font:16px/1.6 var(--body);color:var(--ink);background:var(--paper)}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 56px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.red{color:var(--red)}
+
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--display);font-size:26px;text-decoration:none}
+.logo span{color:var(--red)}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px}
+nav ul a{text-decoration:none;border-bottom:1px solid transparent}
+nav ul a:hover{border-color:var(--ink)}
+.btn{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.03em;text-decoration:none;padding:14px 20px;border-radius:6px;border:1.5px solid var(--ink);background:var(--ink);color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--red);border-color:var(--red);color:var(--paper)}
+nav .btn{padding:9px 14px}
+
+section{padding:80px 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:stretch}
+.split.wide-left{grid-template-columns:1.05fr .95fr}
+figure.plate{position:relative;min-height:620px;background:var(--paper2);border-radius:28px;overflow:hidden;border:1px solid var(--rule)}
+figure.plate img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.galley{padding:0;background:var(--ink);border-block:1px solid var(--ink)}
+.galley img{display:block;width:100%;height:400px}
+.ex{font-family:var(--mono);font-size:12px!important;color:var(--ink2)}
+.ex s{color:var(--red)}
+.ex ins{text-decoration:none;background:#f6d7cc;padding:0 3px;color:var(--ink)}
+.works{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:18px;list-style:none;color:var(--ink2)}
+
+.hero{padding:72px 0 88px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:124px;line-height:.92;letter-spacing:-.025em;margin:18px 0 30px}
+.hero h1 em{font-style:normal;color:var(--red)}
+.lede{font-size:19px;line-height:1.55;max-width:34em;color:var(--ink2)}
+.cta{display:flex;gap:12px;margin:34px 0 30px}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;border-top:1px solid var(--ink);padding-top:16px;font-size:14px}
+.specs dt{font-family:var(--mono);font-size:12px;color:var(--red);padding-top:2px}
+
+h2{font-family:var(--display);font-weight:400;font-size:64px;line-height:1;letter-spacing:-.015em;margin:14px 0 22px}
+.intro{color:var(--ink2);max-width:36em;margin-bottom:30px}
+
+ol.passes{list-style:none;counter-reset:p;border-top:1px solid var(--ink)}
+ol.passes li{counter-increment:p;display:grid;grid-template-columns:44px 1fr auto;gap:4px 16px;padding:14px 0;border-bottom:1px solid var(--rule)}
+ol.passes li::before{content:counter(p,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--red);padding-top:5px}
+ol.passes b{font-weight:600;font-size:17px}
+ol.passes p{grid-column:2;font-size:14px;color:var(--ink2)}
+ol.passes small{grid-row:1;grid-column:3;font-family:var(--mono);font-size:11px;color:var(--ink2);padding-top:5px}
+
+.band{background:var(--blue);color:var(--paper)}
+.band h2{color:var(--paper)}
+.band .intro{color:#c9d3dc}
+.band figure.plate{background:var(--blue2);border-color:#3b5d80}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-family:var(--mono);font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid currentColor}
+td{padding:11px 10px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.band td{border-color:#3b5d80}
+td.n{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.band td.n b{color:#f3a58f;font-weight:600}
+.foot{font-family:var(--mono);font-size:11px;margin-top:16px;color:#9fb1c3}
+
+.rules td:first-child{font-family:var(--mono);font-size:12px;color:var(--red);width:110px}
+.rules s{color:var(--ink2)}
+.rules ins{text-decoration:none;background:#f6d7cc;padding:0 3px}
+
+.price tr td{padding:20px 12px 20px 0}
+.price .tier{font-family:var(--display);font-size:30px;line-height:1}
+.price .amt{font-family:var(--display);font-size:30px;white-space:nowrap}
+.price .amt small{font-family:var(--mono);font-size:11px;color:var(--ink2)}
+.price ul{list-style:none;font-size:14px;color:var(--ink2)}
+.price ul li::before{content:"¶ ";color:var(--red)}
+.price .btn{padding:10px 14px;font-size:12px}
+
+.quote{margin-top:44px;padding-top:22px;border-top:1px solid var(--ink)}
+.quote p{font-family:var(--display);font-size:28px;line-height:1.2}
+.quote cite{display:block;margin-top:12px;font-style:normal}
+
+footer{border-top:1px solid var(--ink);padding:44px 0 56px;font-size:14px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+footer h4{font-family:var(--mono);font-size:11px;font-weight:400;text-transform:uppercase;letter-spacing:.05em;color:var(--red);margin-bottom:10px}
+footer ul{list-style:none}
+footer li{margin:4px 0}
+footer a{text-decoration:none}
+
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  .split,.split.wide-left{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:68px}
+  h2{font-size:42px}
+  nav ul{display:none}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  .flip figure{order:2}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">Marginalia<span>.</span></a>
+    <ul>
+      <li><a href="#passes">How it reads</a></li>
+      <li><a href="#numbers">Numbers</a></li>
+      <li><a href="#voice">House style</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a class="btn" href="#pricing">Open a draft</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="wrap split wide-left">
+    <div>
+      <p class="mono red">Writing assistant · v4.2 · for people who already write</p>
+      <h1>Notes in the margin, <em>never</em> over your words.</h1>
+      <p class="lede">Marginalia reads your draft the way a good editor does: it leaves a note beside the sentence, says why, and waits. You accept, reject or argue. Nothing in your text changes until you say so — and every change is a line you can trace.</p>
+      <div class="cta">
+        <a class="btn" href="#pricing">Paste a draft — free</a>
+        <a class="btn ghost" href="#passes">See the seven passes</a>
+      </div>
+      <dl class="specs">
+        <dt>Reads</dt><dd>.docx, Google Docs, Markdown, LaTeX, plain text up to 180,000 words</dd>
+        <dt>Writes</dt><dd>Suggestions only. 0 silent rewrites, by design.</dd>
+        <dt>Learns</dt><dd>Your house style from 3 past pieces, in about 40 seconds</dd>
+      </dl>
+      <ul class="works mono"><li>Works in:</li><li>Word</li><li>Google Docs</li><li>Obsidian</li><li>Ulysses</li><li>iA Writer</li><li>Overleaf</li><li>VS Code</li></ul>
+    </div>
+    <figure class="plate"><img data-art="hero" width="600" height="760" alt="A manuscript page with red handwritten-style margin notes linked to underlined sentences"></figure>
+  </div>
+</section>
+
+<section class="galley" aria-label="A 4,000-word essay read end to end"><img data-art="galley" alt="A 4,000-word essay laid out as one long galley proof, with 23 margin notes placed along it and coloured by pass"></section>
+
+<section id="passes" class="flip">
+  <div class="wrap split">
+    <figure class="plate"><img data-art="passes" width="560" height="700" alt="A page showing seven numbered annotation layers stacked down the margin"></figure>
+    <div>
+      <p class="mono red">01 — How it reads</p>
+      <h2>Seven passes, in the order an editor makes them.</h2>
+      <p class="intro">Structure first, commas last. Each pass runs on its own and only surfaces notes above your confidence threshold, so a 4,000-word essay averages 23 notes, not 230.</p>
+      <ol class="passes">
+        <li><b>Argument</b><small>~1.2 s</small><p>Does each section earn its place? Flags claims made twice and claims never supported.</p><p class="ex"><s>As noted above, remote work raises output.</s> <ins>Claim repeated from ¶2 — cut or add evidence</ins></p></li>
+        <li><b>Order</b><small>~0.9 s</small><p>Suggests moving paragraphs, with the reason: "this answers a question you have not asked yet".</p><p class="ex"><ins>Move ¶6 before ¶4</ins> — it defines "slack" first</p></li>
+        <li><b>Evidence</b><small>~2.4 s</small><p>Marks numbers, dates and quotes that need a source, and links the ones it can verify.</p><p class="ex">"up 47% since 2019" <ins>source? BLS table 3 matches 41%</ins></p></li>
+        <li><b>Rhythm</b><small>~0.6 s</small><p>Spots runs of same-length sentences and paragraphs that all open the same way.</p><p class="ex"><ins>5 sentences of 11–13 words in a row</ins></p></li>
+        <li><b>Diction</b><small>~0.7 s</small><p>Hedges, filler and words your house style bans. Shows the count, not just the instance.</p><p class="ex"><s>very unique</s> <ins>unique</ins> · "basically" ×6</p></li>
+        <li><b>Clarity</b><small>~0.8 s</small><p>Sentences over 38 words, buried verbs, pronouns with two possible owners.</p><p class="ex"><s>it</s> <ins>the council</ins> — two possible owners</p></li>
+        <li><b>Mechanics</b><small>~0.3 s</small><p>Spelling, punctuation, agreement. Last, because fixing commas in a paragraph you will cut is wasted work.</p><p class="ex"><s>its</s> <ins>it's</ins> · <s>alot</s> <ins>a lot</ins></p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="numbers" class="band">
+  <div class="wrap split wide-left">
+    <div>
+      <p class="mono" style="color:#f3a58f">02 — Numbers</p>
+      <h2>Measured on 1,140 real drafts.</h2>
+      <p class="intro">We gave the same unedited drafts to professional editors and to four assistants, then asked the authors which notes they kept. Blind, two rounds, March–June 2026.</p>
+      <table>
+        <thead><tr><th>Measure</th><th>Marginalia</th><th>Typical assistant</th><th>Human editor</th></tr></thead>
+        <tbody>
+          <tr><td>Notes the author accepted</td><td class="n"><b>71%</b></td><td class="n">34%</td><td class="n">78%</td></tr>
+          <tr><td>Words changed per 1,000</td><td class="n"><b>42</b></td><td class="n">186</td><td class="n">55</td></tr>
+          <tr><td>Author's voice preserved (rated 1–5)</td><td class="n"><b>4.6</b></td><td class="n">2.9</td><td class="n">4.7</td></tr>
+          <tr><td>Notes with a stated reason</td><td class="n"><b>100%</b></td><td class="n">12%</td><td class="n">61%</td></tr>
+          <tr><td>Time to first note, 4,000 words</td><td class="n"><b>2.1 s</b></td><td class="n">6.8 s</td><td class="n">2 days</td></tr>
+          <tr><td>False positives per 1,000 words</td><td class="n"><b>0.8</b></td><td class="n">4.1</td><td class="n">0.3</td></tr>
+          <tr><td>Paragraph moves suggested, kept</td><td class="n"><b>58%</b></td><td class="n">—</td><td class="n">64%</td></tr>
+          <tr><td>Cost per 4,000-word draft</td><td class="n"><b>$0.22</b></td><td class="n">$0.10</td><td class="n">$180</td></tr>
+          <tr><td>Factual claims flagged for source</td><td class="n"><b>93%</b></td><td class="n">40%</td><td class="n">88%</td></tr>
+        </tbody>
+      </table>
+      <table style="margin-top:28px">
+        <thead><tr><th>Accepted, by genre</th><th>Drafts</th><th>Kept</th><th>Most kept pass</th></tr></thead>
+        <tbody>
+          <tr><td>Feature journalism</td><td class="n">312</td><td class="n"><b>76%</b></td><td>Order</td></tr>
+          <tr><td>Grant proposals</td><td class="n">201</td><td class="n"><b>73%</b></td><td>Evidence</td></tr>
+          <tr><td>Academic papers</td><td class="n">244</td><td class="n"><b>69%</b></td><td>Clarity</td></tr>
+          <tr><td>Fiction</td><td class="n">139</td><td class="n"><b>58%</b></td><td>Rhythm</td></tr>
+          <tr><td>Technical docs</td><td class="n">244</td><td class="n"><b>72%</b></td><td>Diction</td></tr>
+        </tbody>
+      </table>
+      <p class="foot">n = 1,140 drafts · 312 authors · method and raw data published under CC-BY</p>
+    </div>
+    <figure class="plate"><img data-art="diff" width="560" height="620" alt="A redline comparison: a short edit trail against a heavily rewritten paragraph"></figure>
+  </div>
+</section>
+
+<section id="voice" class="flip">
+  <div class="wrap split">
+    <figure class="plate"><img data-art="style" width="560" height="700" alt="A house style sheet with ruled entries and a red correction column"></figure>
+    <div>
+      <p class="mono red">03 — House style</p>
+      <h2>It learns your voice, not a template's.</h2>
+      <p class="intro">Feed it three pieces you are proud of. It writes down the rules it found — as a style sheet you can read and edit — and checks new drafts against those, not against an average of the internet.</p>
+      <table class="rules">
+        <thead><tr><th>Rule</th><th>Learned from your writing</th><th>Applied</th></tr></thead>
+        <tbody>
+          <tr><td>Serial comma</td><td>Always; 214 of 214 lists</td><td>red, white<ins>,</ins> and blue</td></tr>
+          <tr><td>Numbers</td><td>Words to nine, digits from 10</td><td><s>7</s> <ins>seven</ins> editors</td></tr>
+          <tr><td>Openers</td><td>Never "In today's world"</td><td><s>In today's world,</s> <ins>Now</ins> most</td></tr>
+          <tr><td>Length</td><td>Median sentence 17 words</td><td>flags past 38</td></tr>
+          <tr><td>Hedging</td><td>"Perhaps" at most once per page</td><td><s>perhaps</s> — 3rd use</td></tr>
+          <tr><td>Spelling</td><td>British, -ise</td><td><s>organize</s> <ins>organise</ins></td></tr>
+          <tr><td>Quotes</td><td>Double, punctuation inside</td><td>“word<ins>,</ins>” he said</td></tr>
+          <tr><td>Headings</td><td>Sentence case, no colons</td><td><s>The Big Picture:</s> <ins>The big picture</ins></td></tr>
+          <tr><td>Dashes</td><td>Spaced en dash – not em</td><td>auto-noted, never auto-fixed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap split wide-left">
+    <div>
+      <p class="mono red">04 — Pricing</p>
+      <h2>Priced by the word you keep.</h2>
+      <p class="intro">Billing counts words in finished drafts, not words it suggested. Delete a draft within 30 days and the words come back.</p>
+      <table class="price">
+        <tbody>
+          <tr><td class="tier">Notebook</td><td><ul><li>20,000 words a month</li><li>All seven passes</li><li>One house style</li><li>Notes kept 90 days</li></ul></td><td class="amt">$0</td><td><a class="btn ghost" href="#">Start</a></td></tr>
+          <tr><td class="tier">Desk</td><td><ul><li>250,000 words a month</li><li>Source checking with links</li><li>Five house styles, Word &amp; Docs add-ins</li><li>Version history, forever</li></ul></td><td class="amt">$14 <small>/mo</small></td><td><a class="btn" href="#">Try 14 days</a></td></tr>
+          <tr><td class="tier">Masthead</td><td><ul><li>Unlimited words, shared style sheets</li><li>Editor-in-chief review queue</li><li>On-premise model, no training on your text</li><li>SSO, audit log, 99.9% SLA</li></ul></td><td class="amt">$9 <small>/seat</small></td><td><a class="btn ghost" href="#">Talk to us</a></td></tr>
+        </tbody>
+      </table>
+      <div class="quote">
+        <p>"It is the first tool that argues with me instead of finishing my sentences. I accept about two thirds of what it says and I can always tell why."</p>
+        <cite class="mono red">Ruth Okafor — features editor, 22 years</cite>
+      </div>
+    </div>
+    <figure class="plate"><img data-art="desk" width="560" height="760" alt="A stack of marked-up proofs with an accepted-changes tally"></figure>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#">Marginalia<span>.</span></a>
+      <p style="margin-top:10px;color:var(--ink2);max-width:28em">Set in Gloock, Literata and JetBrains Mono. Your drafts are encrypted at rest and never used to train shared models.</p>
+    </div>
+    <div><h4>Product</h4><ul><li><a href="#passes">Seven passes</a></li><li><a href="#voice">House style</a></li><li><a href="#">Add-ins</a></li><li><a href="#">Changelog</a></li><li><a href="#">API</a></li></ul></div>
+    <div><h4>Proof</h4><ul><li><a href="#numbers">Study method</a></li><li><a href="#">Raw data</a></li><li><a href="#">Security</a></li><li><a href="#">Accessibility</a></li><li><a href="#">Status</a></li></ul></div>
+    <div><h4>Desk</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const C = {paper:'#f1ebdd', paper2:'#e8e0cd', ink:'#1c1a16', grey:'#b9ae97', red:'#c2391b', blue:'#23466b', blue2:'#1a3552', pale:'#f6d7cc'};
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+  function page(x, y, w, h, opts = {}) {
+    const lh = opts.lh || 15, ink = opts.ink || C.grey;
+    let s = `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${opts.bg || '#fbf8f0'}" stroke="${C.grey}" stroke-width="1"/>`;
+    let yy = y + 34;
+    if (opts.title) { s += `<text x="${x + 28}" y="${yy}" font-family="Georgia,serif" font-size="22" fill="${C.ink}">${opts.title}</text>`; yy += 26; }
+    const marks = [];
+    while (yy < y + h - 24) {
+      if (rnd() < 0.1) { yy += lh * 0.8; continue; }
+      const lw = (w - 56 - (opts.margin || 0)) * (0.55 + rnd() * 0.45);
+      s += `<rect x="${x + 28}" y="${yy}" width="${lw}" height="4" rx="2" fill="${ink}"/>`;
+      if (opts.marks && rnd() < opts.marks) {
+        const mx = x + 28 + lw * rnd() * 0.5, mw = 30 + rnd() * 60;
+        const kind = rnd();
+        if (kind < 0.4) s += `<rect x="${mx}" y="${yy - 4}" width="${mw}" height="12" fill="${C.pale}" opacity=".9"/><rect x="${mx}" y="${yy}" width="${mw}" height="4" fill="${C.red}" opacity=".7"/>`;
+        else if (kind < 0.75) s += `<line x1="${mx}" y1="${yy + 2}" x2="${mx + mw}" y2="${yy + 2}" stroke="${C.red}" stroke-width="2"/>`;
+        else s += `<path d="M${mx} ${yy + 8} q${mw / 4} 5 ${mw / 2} 0 t${mw / 2} 0" fill="none" stroke="${C.red}" stroke-width="1.6"/>`;
+        marks.push([mx + mw, yy + 2]);
+      }
+      yy += lh;
+    }
+    return {svg: s, marks};
+  }
+
+  function notes(marks, nx, nw, max) {
+    let s = '', last = -99;
+    marks.slice(0, max).forEach(([mx, my], i) => {
+      const ny = Math.max(my - 6, last + 46);
+      s += `<path d="M${mx + 4} ${my} C ${nx - 30} ${my}, ${nx - 40} ${ny + 8}, ${nx - 4} ${ny + 8}" fill="none" stroke="${C.red}" stroke-width="1.2" opacity=".8"/>`;
+      s += `<circle cx="${mx + 4}" cy="${my}" r="2.5" fill="${C.red}"/>`;
+      s += `<text x="${nx}" y="${ny + 4}" font-family="Courier New,monospace" font-size="10" fill="${C.red}">${String(i + 1).padStart(2, '0')}</text>`;
+      for (let k = 0; k < 3; k++) s += `<rect x="${nx + (k ? 0 : 22)}" y="${ny + 8 + k * 9}" width="${(nw - (k ? 0 : 22)) * (k === 2 ? 0.6 : 1)}" height="3" rx="1.5" fill="${C.red}" opacity=".55"/>`;
+      last = ny;
+    });
+    return s;
+  }
+
+  const art = {
+    hero(w, h) {
+      seed = 11;
+      let s = `<rect width="${w}" height="${h}" fill="${C.paper2}"/>`;
+      s += `<g transform="rotate(-3 ${w / 2} ${h / 2})">${page(70, 60, 380, 600, {bg: '#efe8d8'}).svg}</g>`;
+      const p = page(40, 80, 360, 620, {title: 'On keeping a notebook', marks: 0.22});
+      s += p.svg + notes(p.marks, 420, 150, 9);
+      s += `<rect x="40" y="${h - 40}" width="${w - 80}" height="1" fill="${C.ink}"/><text x="40" y="${h - 18}" font-family="Courier New,monospace" font-size="11" fill="${C.ink}">DRAFT 3 · 2,418 WORDS · 9 NOTES · 0 CHANGES MADE</text>`;
+      return s;
+    },
+    passes(w, h) {
+      seed = 29;
+      let s = `<rect width="${w}" height="${h}" fill="${C.paper2}"/>`;
+      const p = page(36, 36, 330, h - 72, {marks: 0.3});
+      s += p.svg;
+      const names = ['ARGUMENT', 'ORDER', 'EVIDENCE', 'RHYTHM', 'DICTION', 'CLARITY', 'MECHANICS'];
+      names.forEach((n, i) => {
+        const y = 60 + i * ((h - 120) / 7);
+        s += `<rect x="388" y="${y}" width="${w - 424}" height="${(h - 160) / 7}" fill="${i % 2 ? '#fbf8f0' : C.pale}" stroke="${C.grey}"/>`;
+        s += `<text x="400" y="${y + 22}" font-family="Courier New,monospace" font-size="11" fill="${C.red}">${String(i + 1).padStart(2, '0')} ${n}</text>`;
+        for (let k = 0; k < 3; k++) s += `<rect x="400" y="${y + 34 + k * 9}" width="${(w - 450) * (0.5 + rnd() * 0.5)}" height="3" fill="${C.grey}"/>`;
+        const m = p.marks[i] || [200, y];
+        s += `<line x1="${m[0]}" y1="${m[1]}" x2="388" y2="${y + 18}" stroke="${C.red}" stroke-width="1" opacity=".6"/>`;
+      });
+      return s;
+    },
+    diff(w, h) {
+      seed = 41;
+      let s = `<rect width="${w}" height="${h}" fill="${C.blue2}"/>`;
+      const cols = [[36, 'MARGINALIA · 42 WORDS CHANGED', 0.18, '#c9d3dc'], [w / 2 + 8, 'TYPICAL · 186 WORDS CHANGED', 0.75, '#6d86a0']];
+      cols.forEach(([x, label, rate, ink]) => {
+        s += `<text x="${x}" y="48" font-family="Courier New,monospace" font-size="11" fill="#f3a58f">${label}</text>`;
+        for (let y = 74; y < h - 50; y += 16) {
+          const lw = (w / 2 - 50) * (0.6 + rnd() * 0.4);
+          s += `<rect x="${x}" y="${y}" width="${lw}" height="4" rx="2" fill="${ink}" opacity=".7"/>`;
+          if (rnd() < rate) { const a = x + rnd() * lw * 0.6, b = 20 + rnd() * lw * 0.4; s += `<rect x="${a}" y="${y - 3}" width="${b}" height="10" fill="${C.red}" opacity=".85"/>`; }
+        }
+      });
+      s += `<line x1="${w / 2}" y1="30" x2="${w / 2}" y2="${h - 30}" stroke="#3b5d80"/>`;
+      return s;
+    },
+    style(w, h) {
+      seed = 53;
+      let s = `<rect width="${w}" height="${h}" fill="${C.paper2}"/><rect x="40" y="40" width="${w - 80}" height="${h - 80}" fill="#fbf8f0" stroke="${C.grey}"/>`;
+      s += `<text x="68" y="86" font-family="Georgia,serif" font-size="24" fill="${C.ink}">House style — R. Okafor</text><rect x="68" y="102" width="${w - 136}" height="2" fill="${C.ink}"/>`;
+      for (let i = 0, y = 132; y < h - 80; i++, y += 38) {
+        s += `<rect x="68" y="${y}" width="80" height="5" fill="${C.red}" opacity=".7"/>`;
+        s += `<rect x="170" y="${y}" width="${(w - 360) * (0.5 + rnd() * 0.5)}" height="5" fill="${C.grey}"/>`;
+        s += `<rect x="170" y="${y + 12}" width="${(w - 360) * (0.3 + rnd() * 0.4)}" height="5" fill="${C.grey}" opacity=".6"/>`;
+        s += rnd() < 0.5 ? `<path d="M${w - 150} ${y + 4} l8 8 l16 -16" fill="none" stroke="${C.red}" stroke-width="2"/>` : `<line x1="${w - 150}" y1="${y + 6}" x2="${w - 100}" y2="${y + 6}" stroke="${C.red}" stroke-width="2"/>`;
+        s += `<rect x="68" y="${y + 26}" width="${w - 136}" height="1" fill="${C.grey}"/>`;
+      }
+      return s;
+    },
+    desk(w, h) {
+      seed = 67;
+      let s = `<rect width="${w}" height="${h}" fill="${C.paper2}"/>`;
+      [[-6, 60, 90], [4, 90, 70], [-1, 70, 120]].forEach(([r, x, y], i) => {
+        const p = page(x, y, w - 160, h - 260, {marks: 0.15 + i * 0.08, title: i === 2 ? 'Proof 4 — final' : ''});
+        s += `<g transform="rotate(${r} ${w / 2} ${h / 2})">${p.svg}</g>`;
+      });
+      s += `<g font-family="Courier New,monospace" font-size="12" fill="${C.ink}"><rect x="40" y="${h - 110}" width="${w - 80}" height="70" fill="#fbf8f0" stroke="${C.ink}"/>`;
+      s += `<text x="58" y="${h - 82}">ACCEPTED  142   REJECTED  61   ARGUED  17</text><text x="58" y="${h - 60}" fill="${C.red}">KEEP RATE 70.0% · WORDS BILLED 31,880</text></g>`;
+      return s;
+    }
+  };
+
+  art.galley = (w, h) => {
+    seed = 83;
+    const passes = ['#c2391b', '#e08a3c', '#f1ebdd', '#7fa3c4', '#b9ae97', '#f3a58f', '#6d86a0'];
+    let s = `<rect width="${w}" height="${h}" fill="${C.ink}"/>`;
+    const cols = Math.floor((w - 80) / 150);
+    for (let c = 0; c < cols; c++) {
+      const x = 40 + c * 150;
+      s += `<rect x="${x}" y="70" width="132" height="${h - 140}" fill="#fbf8f0" opacity=".96"/>`;
+      for (let y = 92; y < h - 84; y += 9) s += `<rect x="${x + 12}" y="${y}" width="${108 * (0.55 + rnd() * 0.45)}" height="3" fill="${C.grey}"/>`;
+      s += `<text x="${x}" y="58" font-family="Courier New,monospace" font-size="10" fill="#b9ae97">${String(c * 4000 / cols | 0).padStart(4, '0')} w</text>`;
+    }
+    for (let i = 0; i < 23; i++) {
+      const x = 40 + rnd() * (cols * 150 - 30), y = 96 + rnd() * (h - 200), p = passes[(rnd() * 7) | 0];
+      s += `<circle cx="${x}" cy="${y}" r="5" fill="${p}" stroke="${C.ink}"/><line x1="${x}" y1="${y}" x2="${x}" y2="${h - 50}" stroke="${p}" stroke-width="1" opacity=".5"/>`;
+    }
+    s += `<text x="40" y="${h - 24}" font-family="Courier New,monospace" font-size="12" fill="#f1ebdd">ONE ESSAY · 4,000 WORDS · 23 NOTES ACROSS 7 PASSES · READ IN 7.4 S</text>`;
+    return s;
+  };
+
+  const render = () => document.querySelectorAll('img[data-art]').forEach(img => {
+    const w = Math.round(img.clientWidth), h = Math.round(img.clientHeight);
+    if (!w || !h) return;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">${art[img.dataset.art](w, h)}</svg>`;
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  });
+  render();
+  document.fonts.ready.then(render);
+  addEventListener('resize', render);
+})();
+</script>
+</body>
+</html>

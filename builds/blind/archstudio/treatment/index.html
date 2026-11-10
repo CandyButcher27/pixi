@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ravn &amp; Søgaard Tegnestue, Copenhagen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #ece6da;
+  --paper-2: #e2dacb;
+  --ink: #1d2320;
+  --ink-soft: #5b605a;
+  --brick: #a2472c;
+  --harbour: #34504f;
+  --line: rgba(29, 35, 32, .22);
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --sans: "Archivo", "Franklin Gothic Book", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--sans); }
+a { color: inherit; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 32px; }
+.label { font: 500 12px/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.serif { font-family: var(--serif); font-weight: 400; }
+canvas { display: block; width: 100%; background: var(--paper-2); border-radius: 12px; }
+
+header { display: flex; justify-content: space-between; align-items: baseline; padding: 28px 48px; max-width: 1320px; margin: 0 auto; }
+header strong { font: 400 26px/1 var(--serif); }
+header nav a { margin-left: 32px; text-decoration: none; font-size: 14px; }
+header nav a:hover { color: var(--brick); }
+
+.hero { padding: 56px 0 120px; }
+.hero .grid { align-items: end; }
+.hero-text { grid-column: 1 / 6; }
+.hero h1 { font: 400 148px/.9 var(--serif); letter-spacing: -.02em; margin: 28px 0 40px; }
+.hero h1 em { color: var(--brick); }
+.hero p { max-width: 400px; font-size: 18px; color: var(--ink-soft); }
+.hero canvas { grid-column: 6 / 13; height: 780px; }
+
+.practice { padding: 120px 0; }
+.practice canvas { grid-column: 1 / 6; height: 680px; }
+.practice-text { grid-column: 7 / 13; align-self: center; }
+.practice-text h2 { font: 400 60px/1.04 var(--serif); margin: 24px 0 36px; }
+.practice-text p { max-width: 520px; margin-bottom: 18px; }
+
+.works { padding: 120px 0; border-top: 1px solid var(--line); }
+.works-list { grid-column: 1 / 7; list-style: none; margin-top: 28px; }
+.works-list li { display: grid; grid-template-columns: 1fr auto; gap: 4px 24px; padding: 26px 0; border-bottom: 1px solid var(--line); cursor: pointer; outline: none; }
+.works-list li span:first-child { font: 400 40px/1.1 var(--serif); transition: color .2s, transform .3s; }
+.works-list li span:last-child { grid-column: 1 / 3; color: var(--ink-soft); font-size: 14px; }
+.works-list li.on span:first-child { color: var(--brick); transform: translateX(14px); }
+.works canvas { grid-column: 8 / 13; height: 620px; position: sticky; top: 40px; }
+
+.bleed { background: var(--harbour); color: var(--paper); position: relative; }
+.bleed canvas { height: 820px; border-radius: 0; background: var(--harbour); }
+.bleed blockquote { position: absolute; right: 64px; top: 96px; width: 520px; }
+.bleed blockquote p { font: 400 54px/1.05 var(--serif); }
+.bleed blockquote cite { display: block; margin-top: 24px; font: 500 12px/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; font-style: normal; opacity: .75; }
+
+.method { padding: 140px 0 120px; }
+.method-text { grid-column: 1 / 7; }
+.method ol { list-style: none; counter-reset: step; margin-top: 36px; }
+.method li { counter-increment: step; padding: 22px 0 22px 88px; border-top: 1px solid var(--line); position: relative; }
+.method li::before { content: "0" counter(step); position: absolute; left: 0; top: 14px; font: 400 44px/1 var(--serif); color: var(--brick); }
+.method li b { display: block; font-weight: 600; margin-bottom: 4px; }
+.method canvas { grid-column: 8 / 13; height: 640px; align-self: center; }
+
+.contact { padding: 40px 0 120px; }
+.contact canvas { grid-column: 1 / 7; height: 520px; }
+.contact-text { grid-column: 8 / 13; align-self: end; }
+.contact-text h2 { font: 400 72px/1 var(--serif); margin: 20px 0 32px; }
+.contact-text p { margin-bottom: 20px; }
+.btn { display: inline-block; padding: 16px 26px; background: var(--ink); color: var(--paper); text-decoration: none; border-radius: 8px; font-weight: 500; }
+.btn:hover { background: var(--brick); }
+
+footer { max-width: 1320px; margin: 0 auto; padding: 28px 48px 40px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-soft); }
+
+@media (max-width: 900px) {
+  .wrap, header, footer { padding-left: 20px; padding-right: 20px; }
+  .grid > * { grid-column: 1 / -1 !important; }
+  .hero h1 { font-size: 84px; }
+  .hero canvas, .practice canvas, .method canvas, .contact canvas { height: 420px; margin-top: 40px; }
+  .works canvas { display: none; }
+  .bleed canvas { height: 520px; }
+  .bleed blockquote { position: static; width: auto; padding: 40px 20px; }
+  .bleed blockquote p { font-size: 38px; }
+  header nav { display: none; }
+}
+</style>
+</head>
+<body>
+<header>
+  <strong>Ravn &amp; Søgaard</strong>
+  <nav><a href="#works">Værker</a><a href="#method">Metode</a><a href="#contact">Kontakt</a></nav>
+</header>
+<main>
+  <section class="hero wrap">
+    <div class="grid">
+      <div class="hero-text">
+        <div class="label">Tegnestue · Christianshavn · est. 2009</div>
+        <h1>Rooms for a <em>low</em> northern light.</h1>
+        <p>We are eleven architects drawing housing, schools and harbour structures for Copenhagen, in brick, timber and lime, built to outlast the people who commissioned them.</p>
+      </div>
+      <canvas data-draw="facade" aria-label="Elevation drawing of a brick housing block in Sydhavn"></canvas>
+    </div>
+  </section>
+
+  <section class="practice wrap">
+    <div class="grid">
+      <canvas data-draw="plan" aria-label="Floor plan of a courtyard apartment"></canvas>
+      <div class="practice-text">
+        <div class="label">The practice</div>
+        <h2>A city of courtyards does not need another object. It needs good rooms.</h2>
+        <p>Copenhagen is built from the block: a ring of homes around a shared yard, the brick taking the weather so the courtyard can take the sun. Our work starts there, with the thickness of a wall and the depth of a window reveal.</p>
+        <p>We draw by hand before we model, and we stay on site until the last joint is pointed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="works wrap" id="works">
+    <div class="grid">
+      <div style="grid-column:1/7">
+        <div class="label">Selected work, 2014 to 2026</div>
+        <ol class="works-list">
+          <li tabindex="0" class="on" data-kind="facade"><span>Sluseholmen Gård</span><span>Sydhavn · 148 homes · brick and oak · 2025</span></li>
+          <li tabindex="0" data-kind="bath"><span>Refshaleøen Havnebad</span><span>Harbour bath · larch decks over open water · 2023</span></li>
+          <li tabindex="0" data-kind="section"><span>Nørrebro Skole</span><span>School for 600 pupils · cross-laminated timber · 2021</span></li>
+          <li tabindex="0" data-kind="plan"><span>Amager Bibliotek</span><span>Library extension · lime render · 2018</span></li>
+        </ol>
+      </div>
+      <canvas id="works-canvas" data-draw="facade" aria-label="Drawing of the selected project"></canvas>
+    </div>
+  </section>
+
+  <section class="bleed">
+    <canvas data-draw="bath" data-ink="#ece6da" data-ground="#34504f" aria-label="Harbour bath at Refshaleøen, elevation over water"></canvas>
+    <blockquote>
+      <p>Build for the grey days. The bright ones look after themselves.</p>
+      <cite>Signe Søgaard, founding partner</cite>
+    </blockquote>
+  </section>
+
+  <section class="method wrap" id="method">
+    <div class="grid">
+      <div class="method-text">
+        <div class="label">How a building happens here</div>
+        <ol>
+          <li><b>Walk the site</b>A week on the plot, at every hour, before a single line is drawn.</li>
+          <li><b>Draw the section first</b>Light, height and the ground decide the plan, not the other way round.</li>
+          <li><b>Choose one material</b>Each building gets one dominant material, used honestly and repaired easily.</li>
+          <li><b>Stay until handover</b>The architect who drew the detail is the one who checks it on site.</li>
+        </ol>
+      </div>
+      <canvas data-draw="section" aria-label="Section through a timber school"></canvas>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="grid">
+      <canvas data-draw="site" aria-label="Site plan of Christianshavn canals"></canvas>
+      <div class="contact-text">
+        <div class="label">Studio</div>
+        <h2>Come by the drawing room.</h2>
+        <p>Overgaden Neden Vandet 41, 1414 København K. Open Tuesday to Friday; coffee is on the long table.</p>
+        <a class="btn" href="mailto:tegnestue@ravnsogaard.dk">tegnestue@ravnsogaard.dk</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><span>Ravn &amp; Søgaard Tegnestue ApS · CVR 31 42 77 09</span><span>Member of Danske Arkitektvirksomheder</span></footer>
+
+<script>
+const rnd = (s => () => (s = (s * 16807) % 2147483647) / 2147483647)(7);
+
+const drawings = {
+  facade(c, w, h, ink, accent) {
+    const x0 = w * .1, x1 = w * .9, top = h * .16, base = h * .88;
+    c.strokeStyle = ink; c.globalAlpha = .12;
+    for (let y = top; y < base; y += 7) { c.beginPath(); c.moveTo(x0, y); c.lineTo(x1, y); c.stroke(); }
+    c.globalAlpha = 1; c.lineWidth = 1.4;
+    c.strokeRect(x0, top, x1 - x0, base - top);
+    const cols = 5, rows = 6, cw = (x1 - x0) / cols, rh = (base - top - 70) / rows;
+    for (let r = 0; r < rows; r++) for (let k = 0; k < cols; k++) {
+      const ww = cw * (k % 2 ? .38 : .52), x = x0 + k * cw + (cw - ww) / 2, y = top + 24 + r * rh;
+      c.fillStyle = (r + k) % 7 === 3 ? accent : ink; c.globalAlpha = (r + k) % 7 === 3 ? .85 : .9;
+      c.fillRect(x, y, ww, rh * .62); c.globalAlpha = 1;
+    }
+    c.fillStyle = ink;
+    for (let k = 0; k < cols; k++) {
+      const cx = x0 + k * cw + cw / 2;
+      c.beginPath(); c.moveTo(cx - cw * .3, base); c.lineTo(cx - cw * .3, base - 34); c.arc(cx, base - 34, cw * .3, Math.PI, 0); c.lineTo(cx + cw * .3, base); c.fill();
+    }
+    c.beginPath(); c.moveTo(x0 - 20, top); c.lineTo(w / 2, h * .07); c.lineTo(x1 + 20, top); c.stroke();
+    c.beginPath(); c.moveTo(w * .04, base); c.lineTo(w * .96, base); c.lineWidth = 2.4; c.stroke();
+  },
+  plan(c, w, h, ink, accent) {
+    const pad = w * .1, W = w - pad * 2, H = h - pad * 2;
+    c.lineWidth = 9; c.strokeStyle = ink; c.strokeRect(pad, pad, W, H);
+    c.lineWidth = 5;
+    const walls = [[.42, 0, .42, .38], [.42, .52, .42, 1], [0, .3, .3, .3], [.42, .62, 1, .62], [.72, .62, .72, 1], [.6, 0, .6, .22]];
+    for (const [a, b, d, e] of walls) { c.beginPath(); c.moveTo(pad + a * W, pad + b * H); c.lineTo(pad + d * W, pad + e * H); c.stroke(); }
+    c.lineWidth = 1; c.globalAlpha = .6;
+    for (const [x, y, r, s] of [[.42, .38, .14, 0], [.3, .3, .1, 1], [.72, .62, .1, 2]]) {
+      c.beginPath(); c.arc(pad + x * W, pad + y * H, r * W, s * Math.PI / 2, s * Math.PI / 2 + Math.PI / 2); c.stroke();
+    }
+    c.globalAlpha = 1; c.fillStyle = accent; c.globalAlpha = .18;
+    c.fillRect(pad + .46 * W, pad + .04 * H, .5 * W, .54 * H); c.globalAlpha = 1;
+    c.font = "13px Archivo, sans-serif"; c.fillStyle = ink;
+    for (const [t, x, y] of [["STUE 28 m²", .62, .32], ["KØKKEN", .1, .16], ["SOVE", .12, .7], ["BAD", .5, .8], ["ALTAN", .8, .82]]) c.fillText(t, pad + x * W, pad + y * H);
+    c.setLineDash([4, 6]); c.globalAlpha = .4;
+    for (let i = 1; i < 4; i++) { c.beginPath(); c.moveTo(pad + i * W / 4, pad * .4); c.lineTo(pad + i * W / 4, h - pad * .4); c.stroke(); }
+    c.setLineDash([]); c.globalAlpha = 1;
+  },
+  section(c, w, h, ink, accent) {
+    const g = h * .82, x0 = w * .1, x1 = w * .9;
+    c.strokeStyle = ink; c.lineWidth = 1.2;
+    c.fillStyle = ink; c.globalAlpha = .1; c.fillRect(0, g, w, h - g); c.globalAlpha = 1;
+    const floors = [g, g - h * .17, g - h * .34, g - h * .5];
+    for (let i = 0; i < floors.length; i++) {
+      const inset = i * w * .06;
+      c.fillRect(x0 + inset, floors[i] - 6, x1 - x0 - inset, 6);
+      if (i) { c.beginPath(); c.moveTo(x0 + inset, floors[i]); c.lineTo(x0 + inset, floors[i - 1]); c.stroke(); }
+      for (let x = x0 + inset + 30; x < x1 - 20; x += 46) { c.beginPath(); c.moveTo(x, floors[i] - 6); c.lineTo(x, floors[i] - 30); c.globalAlpha = .3; c.stroke(); c.globalAlpha = 1; }
+    }
+    c.beginPath(); c.moveTo(x0 + w * .18, floors[3]); c.lineTo(x1, g - h * .66); c.lineTo(x1, g); c.lineWidth = 2.4; c.stroke();
+    c.strokeStyle = accent; c.setLineDash([6, 6]); c.lineWidth = 1.6;
+    c.beginPath(); c.moveTo(w * .02, h * .08); c.lineTo(x0 + w * .3, g - h * .2); c.stroke(); c.setLineDash([]);
+    c.fillStyle = accent; c.beginPath(); c.arc(w * .06, h * .1, 16, 0, Math.PI * 2); c.fill();
+  },
+  bath(c, w, h, ink, accent) {
+    const water = h * .6;
+    c.strokeStyle = ink; c.lineWidth = 1;
+    for (let y = water + 14; y < h; y += 14) {
+      c.globalAlpha = .18 + (y - water) / h * .4; c.beginPath();
+      for (let x = 0; x <= w; x += 24) c.lineTo(x, y + Math.sin(x / 40 + y) * 2.5);
+      c.stroke();
+    }
+    c.globalAlpha = 1; c.fillStyle = ink;
+    const decks = [[.06, .3], [.36, .2], [.62, .12]];
+    for (const [a, b] of decks) {
+      c.fillRect(a * w, water - 8, b * w, 8);
+      for (let x = a * w + 10; x < (a + b) * w; x += 34) c.fillRect(x, water, 3, h * .2);
+    }
+    const tx = w * .5; c.lineWidth = 2;
+    c.strokeRect(tx, water - h * .44, w * .07, h * .44);
+    for (let y = water - h * .44; y < water; y += h * .055) { c.beginPath(); c.moveTo(tx, y); c.lineTo(tx + w * .07, y + h * .055); c.stroke(); }
+    c.fillRect(tx - w * .04, water - h * .44, w * .11, 6);
+    c.fillStyle = accent; c.beginPath(); c.arc(w * .24, h * .2, Math.min(w, h) * .06, 0, Math.PI * 2); c.fill();
+    c.globalAlpha = .5; c.fillStyle = ink;
+    for (let i = 0; i < 18; i++) { const x = rnd() * w * .7; c.fillRect(x, water - 8 - 22, 2, 22); }
+    c.globalAlpha = 1;
+  },
+  site(c, w, h, ink, accent) {
+    c.fillStyle = accent; c.globalAlpha = .22;
+    c.beginPath(); c.moveTo(w * .55, 0); c.bezierCurveTo(w * .5, h * .4, w * .62, h * .6, w * .58, h); c.lineTo(w * .66, h); c.bezierCurveTo(w * .7, h * .6, w * .58, h * .4, w * .63, 0); c.fill();
+    c.globalAlpha = 1; c.strokeStyle = ink; c.fillStyle = ink;
+    for (let i = 0; i < 26; i++) {
+      const bx = (i % 6) * w * .16 + w * .03, by = Math.floor(i / 6) * h * .21 + h * .05;
+      if (bx > w * .46 && bx < w * .66) continue;
+      c.globalAlpha = .75; c.fillRect(bx, by, w * .12, h * .04); c.fillRect(bx, by, w * .025, h * .16);
+      c.fillRect(bx + w * .095, by, w * .025, h * .16); c.fillRect(bx, by + h * .12, w * .12, h * .04);
+    }
+    c.globalAlpha = 1; c.fillStyle = accent;
+    c.beginPath(); c.arc(w * .49, h * .43, 9, 0, Math.PI * 2); c.fill();
+    c.font = "13px Archivo, sans-serif"; c.fillStyle = ink; c.fillText("TEGNESTUEN", w * .49 + 16, h * .43 + 4);
+  },
+};
+
+function paint(el, kind) {
+  const r = el.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  el.width = r.width * dpr; el.height = r.height * dpr;
+  const c = el.getContext("2d"); c.scale(dpr, dpr);
+  drawings[kind || el.dataset.draw](c, r.width, r.height, el.dataset.ink || "#1d2320", "#a2472c");
+}
+const paintAll = () => document.querySelectorAll("canvas[data-draw]").forEach(el => paint(el));
+paintAll();
+document.fonts && document.fonts.ready.then(paintAll);
+addEventListener("resize", paintAll);
+
+const works = document.getElementById("works-canvas");
+document.querySelectorAll(".works-list li").forEach(li => {
+  const pick = () => {
+    document.querySelectorAll(".works-list li").forEach(o => o.classList.toggle("on", o === li));
+    works.dataset.draw = li.dataset.kind; paint(works);
+  };
+  li.addEventListener("mouseenter", pick); li.addEventListener("focus", pick);
+});
+</script>
+</body>
+</html>

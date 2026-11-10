@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slow Hours — Yoga in the old print shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oat:#efe6d8; --paper:#f6f0e6; --ink:#1f1a14; --soft:#5b5147;
+  --clay:#b4532a; --ochre:#d9a441; --sage:#7d8a6a; --night:#2e2226;
+  --rule:#cbbfae;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--oat);color:var(--ink);font:400 17px/1.55 "Hanken Grotesk",sans-serif}
+img{display:block;width:100%;height:100%;object-fit:cover;border-radius:14px}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+.display{font-family:"Gloock",serif;font-weight:400;letter-spacing:-.02em;line-height:.92}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--clay)}
+
+header{padding:26px 0}
+header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:32px}
+.mark{font-family:"Gloock",serif;font-size:26px;text-decoration:none}
+header nav{display:flex;gap:30px;font-size:15px}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--clay)}
+
+.btn{display:inline-block;padding:15px 26px;border-radius:6px;background:var(--ink);color:var(--oat);text-decoration:none;font-weight:700;font-size:15px;letter-spacing:.02em}
+.btn:hover{background:var(--clay)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--oat)}
+
+.hero .wrap{display:grid;grid-template-columns:44fr 56fr;gap:64px;align-items:end;padding-top:24px;padding-bottom:96px}
+.hero-art{height:860px}
+.hero h1{font-size:132px;margin:22px 0 34px}
+.hero h1 em{font-style:normal;color:var(--clay)}
+.hero p.lede{font-size:21px;max-width:30em;color:var(--soft);margin-bottom:34px}
+.hero .actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.hero dl{display:flex;gap:44px;margin-top:56px;padding-top:22px;border-top:1px solid var(--rule)}
+.hero dt{font-size:13px;color:var(--soft)}
+.hero dd{font-family:"Gloock",serif;font-size:30px}
+
+section{padding:96px 0}
+.head{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:end;margin-bottom:48px}
+.head h2{font-size:84px}
+.head p{color:var(--soft);max-width:34em}
+
+.timetable{width:100%;border-collapse:collapse}
+.timetable th{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);text-align:left;padding:0 12px 14px 0;border-bottom:1.5px solid var(--ink)}
+.timetable td{padding:20px 12px 20px 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
+.timetable td.day{font-family:"Gloock",serif;font-size:28px;width:15%}
+.timetable td.time{font-variant-numeric:tabular-nums;font-weight:500;width:13%}
+.timetable td.cls{font-size:22px;font-weight:500}
+.timetable td.lvl{color:var(--soft);font-size:15px}
+.timetable td.book{text-align:right}
+.timetable td.book a{font-weight:700;font-size:15px}
+.timetable tr:hover td{background:var(--paper)}
+.timetable tr.full td{color:var(--soft)}
+.timetable tr.full td.book{font-size:15px}
+
+.dusk{background:var(--night);color:var(--oat);padding:0;position:relative}
+.dusk img,.room img{border-radius:0;height:740px}
+.room{padding:0;position:relative;background:var(--oat)}
+.room img{height:660px}
+.room figcaption{position:absolute;right:48px;bottom:36px;max-width:22em;text-align:right;color:var(--ink);font-size:15px}
+.room figcaption b{display:block;font-family:"Gloock",serif;font-weight:400;font-size:40px;line-height:1;margin-bottom:8px}
+.dusk .quote{position:absolute;left:0;right:0;bottom:64px}
+.dusk blockquote{font-size:76px;max-width:12em;margin-left:auto;text-align:right}
+.dusk cite{display:block;text-align:right;font-style:normal;font-size:15px;margin-top:18px;opacity:.8}
+
+.practices .wrap{display:grid;grid-template-columns:5fr 7fr;gap:72px}
+.practices .tall{height:900px;position:sticky;top:32px}
+.practices h2{font-size:84px;margin:14px 0 40px}
+.practices ol{list-style:none;counter-reset:p}
+.practices li{counter-increment:p;display:grid;grid-template-columns:70px 1fr auto;gap:20px;padding:30px 0;border-top:1px solid var(--rule)}
+.practices li:last-child{border-bottom:1px solid var(--rule)}
+.practices li::before{content:"0" counter(p);font-family:"Gloock",serif;font-size:22px;color:var(--clay)}
+.practices h3{font-family:"Gloock",serif;font-weight:400;font-size:42px;line-height:1;margin-bottom:10px}
+.practices li p{color:var(--soft);max-width:30em}
+.practices li span{font-size:14px;color:var(--soft);white-space:nowrap}
+
+.teachers{background:var(--paper)}
+.teacher{display:grid;grid-template-columns:150px 1.1fr 1.6fr auto;gap:36px;align-items:center;padding:26px 0;border-top:1px solid var(--rule)}
+.teacher:last-child{border-bottom:1px solid var(--rule)}
+.teacher .face{height:180px}
+.teacher h3{font-family:"Gloock",serif;font-weight:400;font-size:38px;line-height:1}
+.teacher .role{font-size:14px;color:var(--soft);margin-top:6px}
+.teacher p{color:var(--soft)}
+.teacher a{font-weight:700;font-size:15px;white-space:nowrap}
+
+.passes .wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:80px}
+.passes h2{font-size:84px;margin:14px 0 24px}
+.passes .note{color:var(--soft);max-width:26em}
+.price{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 0;border-top:1px solid var(--rule)}
+.price:last-child{border-bottom:1px solid var(--rule)}
+.price b{font-weight:500;font-size:22px}
+.price small{display:block;color:var(--soft);font-size:15px}
+.price strong{font-family:"Gloock",serif;font-weight:400;font-size:44px}
+
+.visit .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.visit .pic{height:720px}
+.passes .stack{height:440px;margin-top:44px}
+.offer{background:var(--clay);color:var(--oat);border-radius:14px;padding:52px}
+.offer h2{font-size:72px;margin-bottom:22px}
+.offer p{max-width:28em;margin-bottom:30px}
+.offer .btn{background:var(--oat);color:var(--ink)}
+.offer .btn:hover{background:var(--ink);color:var(--oat)}
+.visit address{font-style:normal;display:flex;gap:56px;margin-top:40px}
+.visit address b{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:6px}
+
+footer{padding:40px 0 56px;border-top:1px solid var(--rule)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;font-size:14px;color:var(--soft)}
+
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  header nav{display:none}
+  .hero .wrap,.head,.practices .wrap,.passes .wrap,.visit .wrap{grid-template-columns:1fr;gap:36px}
+  .hero-art{height:420px}
+  .hero h1{font-size:64px}
+  .head h2,.practices h2,.passes h2{font-size:52px}
+  .dusk blockquote{font-size:40px;padding:0 20px}
+  .practices .tall{height:420px;position:static}
+  .teacher{grid-template-columns:90px 1fr;gap:18px}
+  .teacher .face{height:110px}
+  .teacher p,.teacher a{grid-column:2}
+  .timetable td.lvl,.timetable th.lvl{display:none}
+  .offer{padding:32px}
+  .offer h2{font-size:44px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Slow Hours</a>
+    <nav>
+      <a href="#week">Timetable</a>
+      <a href="#practices">Practices</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#passes">Passes</a>
+      <a href="#visit">Visit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div class="hero-art">
+      <img alt="Illustration: a seated figure under an arched window at sunrise" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 780' preserveAspectRatio='xMidYMid slice'><rect width='600' height='780' fill='%23d9a441'/><path d='M90 780V330a210 210 0 0 1 420 0v450z' fill='%23b4532a'/><path d='M140 780V340a160 160 0 0 1 320 0v440z' fill='%23efe6d8'/><circle cx='300' cy='360' r='92' fill='%23d9a441'/><path d='M140 600q80-70 160-30t160-20v230H140z' fill='%237d8a6a'/><path d='M140 660q90-40 170-10t150-10v140H140z' fill='%23556049'/><circle cx='300' cy='548' r='30' fill='%231f1a14'/><path d='M300 584c-44 0-62 60-66 120h132c-4-60-22-120-66-120z' fill='%231f1a14'/><path d='M200 714c40-22 160-22 200 0v16H200z' fill='%231f1a14'/><g stroke='%23b4532a' stroke-width='3'><line x1='0' y1='60' x2='600' y2='60'/><line x1='0' y1='74' x2='600' y2='74'/></g></svg>">
+    </div>
+    <div>
+      <p class="kicker">Yoga in the old print shop · Since 2014</p>
+      <h1 class="display">Breathe at the speed of <em>the room.</em></h1>
+      <p class="lede">Twenty-eight classes a week under a north-light roof, with groups capped at fourteen mats. No mirrors, no music in the slow classes, and a teacher who learns your name by the second visit.</p>
+      <div class="actions">
+        <a class="btn" href="#visit">Take a first class for £8</a>
+        <a class="btn ghost" href="#week">See this week</a>
+      </div>
+      <dl>
+        <div><dt>Mats per class</dt><dd>14</dd></div>
+        <div><dt>Classes weekly</dt><dd>28</dd></div>
+        <div><dt>First class at</dt><dd>06:45</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="week">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">This week</h2>
+      <p>Set like the shop's old timetables: one line per class. Booking opens seven days ahead and closes an hour before; unclaimed mats go to the walk-in list at the door.</p>
+    </div>
+    <table class="timetable">
+      <thead><tr><th>Day</th><th>Time</th><th>Class</th><th>Teacher</th><th class="lvl">Level</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="day">Mon</td><td class="time">06:45</td><td class="cls">Sunrise Hatha</td><td>Ines Marlow</td><td class="lvl">All levels · 60 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+        <tr><td class="day">Mon</td><td class="time">18:30</td><td class="cls">Vinyasa, steady</td><td>Theo Adeyemi</td><td class="lvl">Some practice · 75 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+        <tr class="full"><td class="day">Tue</td><td class="time">12:15</td><td class="cls">Lunch Reset</td><td>Ines Marlow</td><td class="lvl">All levels · 45 min</td><td class="book">Waitlist</td></tr>
+        <tr><td class="day">Wed</td><td class="time">19:00</td><td class="cls">Yin and long holds</td><td>Mira Castell</td><td class="lvl">All levels · 90 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+        <tr><td class="day">Thu</td><td class="time">07:00</td><td class="cls">Ashtanga, led primary</td><td>Theo Adeyemi</td><td class="lvl">Regular practice · 90 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+        <tr><td class="day">Fri</td><td class="time">17:45</td><td class="cls">Restorative, bolsters out</td><td>Rana Okafor</td><td class="lvl">All levels · 75 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+        <tr><td class="day">Sat</td><td class="time">09:30</td><td class="cls">Beginners' four-week course</td><td>Mira Castell</td><td class="lvl">New · 60 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+        <tr><td class="day">Sun</td><td class="time">10:00</td><td class="cls">Slow flow and tea</td><td>Rana Okafor</td><td class="lvl">All levels · 90 min</td><td class="book"><a href="#visit">Book</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="dusk" aria-label="Studio at dusk">
+  <img alt="Illustration: the sun setting over hills, printed in flat bands" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 620' preserveAspectRatio='xMidYMid slice'><rect width='1440' height='620' fill='%232e2226'/><g fill='%233d2d31'><rect y='40' width='1440' height='18'/><rect y='92' width='1440' height='18'/><rect y='144' width='1440' height='18'/><rect y='196' width='1440' height='18'/></g><circle cx='360' cy='400' r='190' fill='%23b4532a'/><circle cx='360' cy='400' r='130' fill='%23d9a441'/><path d='M0 430q220-90 460-30t520-40 460 20v260H0z' fill='%237d8a6a'/><path d='M0 500q300-60 600-10t520-30 320 10v150H0z' fill='%23556049'/><path d='M0 560q360-40 760-5t680-15v80H0z' fill='%231f1a14'/></svg>">
+  <div class="quote wrap">
+    <blockquote class="display">“The class ends. Nobody hurries to the door.”</blockquote>
+    <cite>From the visitors' book, Sunday slow flow</cite>
+  </div>
+</section>
+
+<section class="practices" id="practices">
+  <div class="wrap">
+    <div class="tall">
+      <img alt="Illustration: rolled mats stacked beside a potted fig" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 900' preserveAspectRatio='xMidYMid slice'><rect width='500' height='900' fill='%23f6f0e6'/><rect x='0' y='620' width='500' height='280' fill='%23cbbfae'/><g><rect x='60' y='520' width='260' height='64' rx='32' fill='%23b4532a'/><rect x='80' y='456' width='240' height='64' rx='32' fill='%237d8a6a'/><rect x='50' y='392' width='250' height='64' rx='32' fill='%23d9a441'/><rect x='90' y='328' width='220' height='64' rx='32' fill='%232e2226'/><rect x='70' y='584' width='260' height='64' rx='32' fill='%23556049'/></g><rect x='350' y='560' width='100' height='88' fill='%23b4532a'/><path d='M400 560V300' stroke='%231f1a14' stroke-width='5'/><ellipse cx='360' cy='380' rx='42' ry='22' fill='%237d8a6a' transform='rotate(-30 360 380)'/><ellipse cx='440' cy='330' rx='46' ry='22' fill='%23556049' transform='rotate(25 440 330)'/><ellipse cx='370' cy='270' rx='40' ry='20' fill='%23556049' transform='rotate(-40 370 270)'/><ellipse cx='435' cy='440' rx='44' ry='21' fill='%237d8a6a' transform='rotate(20 435 440)'/><ellipse cx='400' cy='220' rx='34' ry='18' fill='%237d8a6a' transform='rotate(-80 400 220)'/></svg>">
+    </div>
+    <div>
+      <p class="kicker">Four practices</p>
+      <h2 class="display">What happens on the mat</h2>
+      <ol>
+        <li><div><h3>Hatha</h3><p>Held postures and plain breathing. The room for learning what your hips actually do, at 06:45 and noon.</p></div><span>9 classes</span></li>
+        <li><div><h3>Vinyasa</h3><p>Movement linked to breath, taught steady rather than fast. Sequences change monthly and are posted by the door.</p></div><span>8 classes</span></li>
+        <li><div><h3>Yin</h3><p>Long, quiet holds on the floor, three to five minutes each. Blankets are warmed on the radiator before class.</p></div><span>6 classes</span></li>
+        <li><div><h3>Restorative</h3><p>Bolsters, eye pillows, very little effort. Built for the end of a long week and for anyone coming back from injury.</p></div><span>5 classes</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<figure class="room">
+  <img alt="Illustration: the north-light room with mats laid in rows" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 560' preserveAspectRatio='xMidYMid slice'><rect width='1440' height='560' fill='%23b4532a'/><g fill='%23d9a441'><rect x='120' y='40' width='220' height='230'/><rect x='420' y='40' width='220' height='230'/><rect x='720' y='40' width='220' height='230'/><rect x='1020' y='40' width='220' height='230'/></g><g stroke='%23b4532a' stroke-width='10'><line x1='230' y1='40' x2='230' y2='270'/><line x1='530' y1='40' x2='530' y2='270'/><line x1='830' y1='40' x2='830' y2='270'/><line x1='1130' y1='40' x2='1130' y2='270'/></g><rect y='300' width='1440' height='260' fill='%23cbbfae'/><g fill='%237d8a6a'><rect x='90' y='340' width='90' height='200'/><rect x='260' y='340' width='90' height='200'/><rect x='430' y='340' width='90' height='200'/><rect x='600' y='340' width='90' height='200'/></g><g fill='%232e2226'><rect x='770' y='340' width='90' height='200'/><rect x='940' y='340' width='90' height='200'/></g><circle cx='985' cy='372' r='18' fill='%23efe6d8'/><path d='M960 400h50v100h-50z' fill='%23efe6d8'/></svg>">
+  <figcaption><b>The north-light room</b>Fourteen mats, fourteen feet between the windows, and a floor of reclaimed press-shop oak.</figcaption>
+</figure>
+
+<section class="teachers" id="teachers">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">Who teaches</h2>
+      <p>Four teachers, each with at least five hundred hours of training and a regular slot, so you can follow one voice through the week.</p>
+    </div>
+    <div class="teacher">
+      <div class="face"><img alt="Portrait illustration of Ines" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 180' preserveAspectRatio='xMidYMid slice'><rect width='150' height='180' fill='%23d9a441'/><circle cx='75' cy='72' r='30' fill='%231f1a14'/><path d='M25 180c0-50 22-70 50-70s50 20 50 70z' fill='%23b4532a'/></svg>"></div>
+      <div><h3>Ines Marlow</h3><p class="role">Hatha · founder</p></div>
+      <p>Opened the studio in the shop her grandfather ran. Teaches alignment by touch only when you ask for it.</p>
+      <a href="#week">Her classes</a>
+    </div>
+    <div class="teacher">
+      <div class="face"><img alt="Portrait illustration of Theo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 180' preserveAspectRatio='xMidYMid slice'><rect width='150' height='180' fill='%237d8a6a'/><circle cx='75' cy='72' r='30' fill='%232e2226'/><path d='M25 180c0-50 22-70 50-70s50 20 50 70z' fill='%23efe6d8'/></svg>"></div>
+      <div><h3>Theo Adeyemi</h3><p class="role">Vinyasa · Ashtanga</p></div>
+      <p>Former rower who teaches flow the way he trained: counted, unhurried, and very patient with the third repetition.</p>
+      <a href="#week">His classes</a>
+    </div>
+    <div class="teacher">
+      <div class="face"><img alt="Portrait illustration of Mira" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 180' preserveAspectRatio='xMidYMid slice'><rect width='150' height='180' fill='%23b4532a'/><circle cx='75' cy='72' r='30' fill='%231f1a14'/><path d='M25 180c0-50 22-70 50-70s50 20 50 70z' fill='%23d9a441'/></svg>"></div>
+      <div><h3>Mira Castell</h3><p class="role">Yin · beginners' course</p></div>
+      <p>Runs the four-week course for complete beginners and the Wednesday long holds. Keeps a stopwatch, never a playlist.</p>
+      <a href="#week">Her classes</a>
+    </div>
+    <div class="teacher">
+      <div class="face"><img alt="Portrait illustration of Rana" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 180' preserveAspectRatio='xMidYMid slice'><rect width='150' height='180' fill='%232e2226'/><circle cx='75' cy='72' r='30' fill='%23d9a441'/><path d='M25 180c0-50 22-70 50-70s50 20 50 70z' fill='%237d8a6a'/></svg>"></div>
+      <div><h3>Rana Okafor</h3><p class="role">Restorative · slow flow</p></div>
+      <p>Trained as a physiotherapist first. Her Friday class is where people recovering from injury are pointed by their doctors.</p>
+      <a href="#week">Her classes</a>
+    </div>
+  </div>
+</section>
+
+<section class="passes" id="passes">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Passes</p>
+      <h2 class="display">Pay for the weeks you come</h2>
+      <p class="note">No joining fee and no contracts. Passes pause for illness or travel, up to six weeks a year. Mats, blocks and blankets are always included.</p>
+      <div class="stack"><img alt="Illustration: folded blankets and cork blocks on a shelf" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 440' preserveAspectRatio='xMidYMid slice'><rect width='520' height='440' fill='%237d8a6a'/><rect x='40' y='300' width='440' height='14' fill='%231f1a14'/><rect x='40' y='150' width='440' height='14' fill='%231f1a14'/><rect x='70' y='250' width='170' height='50' fill='%23efe6d8'/><rect x='80' y='210' width='160' height='40' fill='%23b4532a'/><rect x='66' y='176' width='168' height='34' fill='%23d9a441'/><rect x='290' y='230' width='70' height='70' fill='%23c08a55'/><rect x='370' y='230' width='70' height='70' fill='%23c08a55'/><rect x='330' y='176' width='70' height='54' fill='%23a87444'/><rect x='80' y='100' width='120' height='50' fill='%232e2226'/><circle cx='360' cy='110' r='40' fill='%23b4532a'/><rect x='40' y='330' width='440' height='110' fill='%23556049'/></svg>"></div>
+    </div>
+    <div>
+      <div class="price"><div><b>First class</b><small>Any class, once</small></div><strong>£8</strong></div>
+      <div class="price"><div><b>Drop-in</b><small>One class, no expiry</small></div><strong>£16</strong></div>
+      <div class="price"><div><b>Ten classes</b><small>Valid six months, shareable</small></div><strong>£135</strong></div>
+      <div class="price"><div><b>Unlimited month</b><small>Every class on the timetable</small></div><strong>£98</strong></div>
+      <div class="price"><div><b>Beginners' course</b><small>Four Saturdays, mat to keep</small></div><strong>£60</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div>
+      <div class="pic"><img alt="Illustration: the studio's shopfront with an arched door" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 560' preserveAspectRatio='xMidYMid slice'><rect width='600' height='560' fill='%23efe6d8'/><rect x='60' y='60' width='480' height='500' fill='%237d8a6a'/><rect x='60' y='60' width='480' height='70' fill='%231f1a14'/><text x='300' y='108' font-family='Georgia,serif' font-size='34' fill='%23efe6d8' text-anchor='middle'>SLOW HOURS</text><path d='M230 560V330a70 70 0 0 1 140 0v230z' fill='%232e2226'/><rect x='100' y='190' width='100' height='150' fill='%23d9a441'/><rect x='400' y='190' width='100' height='150' fill='%23d9a441'/><rect x='0' y='530' width='600' height='30' fill='%23b4532a'/></svg>"></div>
+      <address>
+        <div><b>Studio</b>14 Foundry Lane<br>Bristol BS2 0QT</div>
+        <div><b>Desk hours</b>06:15 – 21:00<br>Every day</div>
+      </address>
+    </div>
+    <div class="offer">
+      <p class="kicker" style="color:var(--oat)">New here</p>
+      <h2 class="display">Your first class is £8.</h2>
+      <p>Pick any class on the timetable, arrive ten minutes early, and we'll lend you everything. If the first room isn't right, the second visit is on us.</p>
+      <a class="btn" href="#week">Choose a class</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Slow Hours Yoga · 14 Foundry Lane, Bristol</span>
+    <span>hello@slowhours.studio · 0117 496 0182</span>
+  </div>
+</footer>
+</body>
+</html>

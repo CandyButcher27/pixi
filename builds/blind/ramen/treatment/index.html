@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menya Kuroboshi — Ramen counter, Tenma, Osaka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=IBM+Plex+Mono:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f1e7d3; --paper:#e8dbc1; --ink:#1b1512; --red:#b8321e; --nori:#23302a; --amber:#c98a2b; --rule:#1b151233;
+  --display:'Dela Gothic One', sans-serif; --body:'Zen Kaku Gothic New', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.6 var(--body)}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:.95;letter-spacing:-.01em}
+h2{font-size:56px}
+h3{font-size:22px;line-height:1.15}
+p{margin:0 0 14px}
+
+header{border-bottom:2px solid var(--ink)}
+header .wrap{display:flex;align-items:center;gap:28px;height:64px}
+header .mark{font-family:var(--display);font-size:20px;text-decoration:none}
+header nav{display:flex;gap:22px;margin-left:auto}
+header nav a{text-decoration:none;font-size:14px;font-weight:500}
+header nav a:hover{color:var(--red)}
+.btn{display:inline-block;font:600 14px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:14px 18px;border-radius:6px;border:2px solid var(--ink);text-decoration:none;background:var(--ink);color:var(--cream)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--red);border-color:var(--red);color:var(--cream)}
+
+section{padding:88px 0}
+.split{display:grid;gap:56px;align-items:start}
+
+/* hero */
+.hero .split{grid-template-columns:1fr 300px;gap:80px}
+.hero h1{font-size:112px;color:var(--ink)}
+.hero h1 span{color:var(--red)}
+.hero .kanji{font-family:var(--display);font-size:28px;margin:22px 0 18px;color:var(--red)}
+.hero .lede{font-size:19px;line-height:1.55;max-width:760px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 26px;margin:22px 0 28px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.facts b{font-family:var(--mono);font-weight:600;color:var(--red)}
+.board{background:var(--ink);color:var(--cream);border-radius:24px;padding:28px}
+.board .mono{color:var(--amber)}
+.board dl{margin:16px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:14px}
+.board dt{font-family:var(--mono);color:#f1e7d399}
+.board dd{margin:0;text-align:right}
+.board .status{display:flex;align-items:baseline;gap:10px;margin-top:10px}
+.board .status strong{font-family:var(--display);font-size:44px;font-weight:400;color:var(--amber)}
+.board .bar{height:8px;background:#f1e7d322;border-radius:4px;margin:12px 0 4px;overflow:hidden}
+.board .bar i{display:block;height:100%;width:64%;background:var(--red)}
+.board .note{font-size:13px;color:#f1e7d3bb;margin:16px 0 0;border-top:1px solid #f1e7d333;padding-top:14px}
+
+/* menu */
+.menu .split{grid-template-columns:1fr 900px;gap:56px}
+.menu aside p{font-size:14px}
+.menu aside h2{margin:10px 0 18px;font-size:72px}
+.menunote{display:grid;grid-template-columns:1fr 1.4fr;gap:32px;margin-top:28px;font-size:14px;color:#1b1512cc}
+table{width:100%;border-collapse:collapse}
+.menu caption{text-align:left;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--red);padding:30px 0 8px}
+.menu caption:first-child{padding-top:0}
+.menu td{padding:14px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.menu tr:first-child td{border-top:2px solid var(--ink)}
+.menu td.no{font-family:var(--mono);font-size:13px;width:52px;color:#1b151299}
+.menu td.name h3{margin-bottom:4px}
+.menu td.name small{display:block;font-size:14px;color:#1b1512bb}
+.menu td.jp{font-family:var(--display);font-size:15px;width:130px;padding-right:16px;color:#1b151299}
+.menu td.price{font-family:var(--mono);font-weight:600;width:100px;font-size:16px;color:var(--red)}
+.tag{display:inline-block;font-family:var(--mono);font-size:11px;text-transform:uppercase;border:1px solid var(--red);color:var(--red);border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:3px}
+
+/* broth band */
+.broth{background:var(--nori);color:var(--cream)}
+.broth .split{grid-template-columns:1fr 320px}
+.broth h2{color:var(--cream);margin:12px 0 18px}
+.broth .mono{color:var(--amber)}
+.broth .lede{font-size:18px;max-width:720px;color:#f1e7d3dd}
+.timeline{list-style:none;margin:30px 0 0;padding:0;border-top:1px solid #f1e7d344}
+.timeline li{display:grid;grid-template-columns:90px 220px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid #f1e7d344}
+.timeline time{font-family:var(--mono);font-weight:600;color:var(--amber)}
+.timeline b{font-weight:700}
+.timeline span{color:#f1e7d3cc;font-size:15px}
+.stats{border-left:1px solid #f1e7d344;padding-left:32px}
+.stats div{padding:16px 0;border-bottom:1px solid #f1e7d344}
+.stats strong{display:block;font-family:var(--display);font-weight:400;font-size:40px;line-height:1.05;color:var(--amber)}
+.stats span{font-size:14px;color:#f1e7d3cc}
+
+/* counter */
+.counter .split{grid-template-columns:1fr 780px;gap:64px}
+.seatmap{background:var(--paper);border:2px solid var(--ink);border-radius:24px;padding:28px}
+.seatmap .bench{display:flex;gap:6px;margin:20px 0 10px}
+.seat{flex:1;height:44px;border:2px solid var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 12px var(--mono)}
+.seat.taken{background:var(--ink);color:var(--cream)}
+.seat.next{background:var(--red);border-color:var(--red);color:var(--cream)}
+.seatmap .bar-top{height:30px;background:var(--ink);border-radius:8px;color:var(--cream);font:12px/30px var(--mono);text-align:center;letter-spacing:.1em}
+.legend{display:flex;gap:16px;font-size:13px;margin-top:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border:2px solid var(--ink);border-radius:3px;margin-right:6px;vertical-align:-1px}
+.legend .t{background:var(--ink)} .legend .n{background:var(--red);border-color:var(--red)}
+.seatmap p{font-size:14px;margin:16px 0 0}
+.counter h2{margin:10px 0 22px}
+.rules{list-style:none;padding:0;margin:0;counter-reset:r}
+.rules li{counter-increment:r;display:grid;grid-template-columns:56px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--rule)}
+.rules li::before{content:counter(r,decimal-leading-zero);font-family:var(--display);font-size:26px;color:var(--red);line-height:1}
+.rules b{display:block;font-size:17px}
+.rules span{font-size:15px;color:#1b1512cc}
+
+/* visit */
+.visit .split{grid-template-columns:1fr 320px;gap:80px}
+.visit h2{margin:10px 0 22px}
+.hours td,.hours th{padding:11px 0;border-bottom:1px solid var(--rule);text-align:left;font-weight:400}
+.hours th{font-family:var(--mono);font-size:13px;text-transform:uppercase;width:150px}
+.hours td.closed{color:var(--red);font-weight:700}
+.route{margin:30px 0 0;padding:0;list-style:none}
+.route li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:10px 0;border-bottom:1px dashed var(--rule);font-size:15px}
+.route li b{font-family:var(--mono);font-size:13px;font-weight:600}
+.ticket{border:2px solid var(--ink);border-radius:24px;padding:28px;background:var(--cream)}
+.ticket h3{margin:8px 0 14px}
+.addr-line{margin:-6px 0 24px;color:var(--red)}
+.ticket ol{margin:0 0 20px;padding-left:20px;font-size:15px}
+.ticket ol li{margin-bottom:8px}
+.ticket .addr{font-family:var(--mono);font-size:14px;line-height:1.7;border-top:1px solid var(--rule);padding-top:16px;margin-bottom:20px}
+.ticket .row{display:flex;gap:10px;flex-wrap:wrap}
+
+footer{border-top:2px solid var(--ink);padding:36px 0 48px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer .mark{font-family:var(--display);font-size:28px}
+
+@media (max-width:1000px){
+  .hero .split,.menu .split,.broth .split,.counter .split,.visit .split{grid-template-columns:1fr}
+  .hero h1{font-size:68px}
+  h2{font-size:40px}
+  header nav{display:none}
+  .timeline li{grid-template-columns:70px 1fr}
+  .timeline span{grid-column:2}
+  .stats{border-left:0;padding-left:0}
+  .menu td.jp{display:none}
+  .wrap{padding:0 16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">黒星 Kuroboshi</a>
+    <span class="mono">Tenma · Kita-ku · Osaka</span>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#broth">Broth</a>
+      <a href="#counter">Counter</a>
+      <a href="#visit">Visit</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap split">
+      <div>
+        <p class="mono">Ramen counter · est. 2009 · 11 seats under the JR Loop Line</p>
+        <h1>Menya<br><span>Kuroboshi</span></h1>
+        <p class="kanji">麺屋 黒星 — 天満</p>
+        <p class="lede">A pork-bone and dried-sardine broth that simmers for eighteen hours, wheat noodles cut every morning at 9:40, and a counter so close to the kitchen you can hear the tare ladle hit the bowl. Trains pass overhead every four minutes. Nobody minds. Five bowls on the board, one stockpot that has not been empty since 2009, and a ticket machine by the door that takes cash and ICOCA — buy first, queue second, eat at the counter.</p>
+        <div class="facts">
+          <span><b>18h</b> broth simmer</span>
+          <span><b>¥980</b> from</span>
+          <span><b>11</b> counter seats</span>
+          <span><b>3 min</b> from JR Tenma</span>
+          <span><b>Cash</b> &amp; IC card at the ticket machine</span>
+        </div>
+        <a class="btn" href="#menu">Read the menu</a>
+        <a class="btn ghost" href="#visit">How to find us</a>
+      </div>
+      <aside class="board" aria-label="Tonight at the counter">
+        <span class="mono">Tonight · Sat 8 Nov</span>
+        <div class="status"><strong>Open</strong><span>until 23:30 or the broth runs out</span></div>
+        <div class="bar"><i></i></div>
+        <span class="mono" style="font-size:11px">Broth left · approx. 64 bowls</span>
+        <dl>
+          <dt>Queue</dt><dd>6 people · ~20 min</dd>
+          <dt>Seats free</dt><dd>2 of 11</dd>
+          <dt>Special</dt><dd>Yuzu-shio, 30 bowls</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap split">
+      <aside>
+        <p class="mono">品書き · The board</p>
+        <h2>Five bowls.</h2>
+        <p class="mono" style="color:var(--red)">Prices include tax</p>
+      </aside>
+      <div>
+        <table>
+          <caption>Ramen</caption>
+          <tr><td class="no">01</td><td class="jp">黒醤油</td><td class="price">¥980</td><td class="name"><h3>Kuro shoyu<span class="tag">house</span></h3><small>Dark Osaka shoyu tare, pork-bone and niboshi broth, two slices of rolled chashu, menma, negi, nori.</small></td></tr>
+          <tr><td class="no">02</td><td class="jp">塩</td><td class="price">¥980</td><td class="name"><h3>Shio</h3><small>Ako sea salt tare, chicken oil, clearer broth, thin straight noodle, white negi, mitsuba.</small></td></tr>
+          <tr><td class="no">03</td><td class="jp">煮干しつけ麺</td><td class="price">¥1,150</td><td class="name"><h3>Niboshi tsukemen</h3><small>Thick noodles served cold, dipping broth reduced by half, sudachi on the side. Ask for soup-wari at the end.</small></td></tr>
+          <tr><td class="no">04</td><td class="jp">辛痺</td><td class="price">¥1,100</td><td class="name"><h3>Karashibi<span class="tag">hot</span></h3><small>Shoyu base, house chili oil, Sichuan pepper, minced pork. Heat 1–3, ask at the counter.</small></td></tr>
+          <tr><td class="no">05</td><td class="jp">柚子塩</td><td class="price">¥1,300</td><td class="name"><h3>Yuzu-shio<span class="tag">Sat only</span></h3><small>Shio base with yuzu peel and duck breast. Thirty bowls, usually gone by 20:00.</small></td></tr>
+        </table>
+        <table>
+          <caption>Toppings &amp; sides</caption>
+          <tr><td class="no">10</td><td class="jp">味玉</td><td class="price">¥150</td><td class="name"><h3>Ajitama</h3><small>Soft egg marinated 36 hours.</small></td></tr>
+          <tr><td class="no">11</td><td class="jp">チャーシュー</td><td class="price">¥350</td><td class="name"><h3>Extra chashu</h3><small>Three more slices, torched to order.</small></td></tr>
+          <tr><td class="no">12</td><td class="jp">替え玉</td><td class="price">¥150</td><td class="name"><h3>Kaedama</h3><small>A second portion of noodles, into the broth you have left.</small></td></tr>
+          <tr><td class="no">13</td><td class="jp">餃子</td><td class="price">¥420</td><td class="name"><h3>Gyoza, 6 pieces</h3><small>Pan-fried, cabbage and pork, Osaka style with miso dipping sauce.</small></td></tr>
+          <tr><td class="no">14</td><td class="jp">チャーシュー丼</td><td class="price">¥380</td><td class="name"><h3>Chashu rice</h3><small>Rice, chopped chashu, tare, raw yolk.</small></td></tr>
+        </table>
+        <table>
+          <caption>Drinks</caption>
+          <tr><td class="no">20</td><td class="jp">生ビール</td><td class="price">¥500</td><td class="name"><h3>Asahi draft, small</h3><small>Brewed in Suita, twenty minutes up the line.</small></td></tr>
+          <tr><td class="no">21</td><td class="jp">ハイボール</td><td class="price">¥450</td><td class="name"><h3>Highball</h3><small>Suntory Kaku, soda, lemon peel.</small></td></tr>
+          <tr><td class="no">22</td><td class="jp">烏龍茶</td><td class="price">¥200</td><td class="name"><h3>Oolong tea</h3><small>Cold, refilled free.</small></td></tr>
+        </table>
+        <div class="menunote">
+          <p>Every bowl starts from the same broth. What changes is the tare, the oil and the cut of the noodle.</p>
+          <p>Noodle firmness: say <b>katame</b> (firm), <b>futsuu</b> (normal) or <b>yawame</b> (soft) when you hand over your ticket. Halal and vegetarian broths are not available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="broth" id="broth">
+    <div class="wrap split">
+      <div>
+        <p class="mono">Broth by the hour</p>
+        <h2>Eighteen hours, one pot.</h2>
+        <p class="lede">The 120-litre stockpot is never empty. Each day's broth is built on the bones of yesterday's, so the flavour you taste tonight started on Thursday. This is the schedule the kitchen keeps.</p>
+        <ol class="timeline">
+          <li><time>05:00</time><b>Bones in</b><span>32 kg of pork trotters and back bones, blanched and scrubbed, into the pot with yesterday's base.</span></li>
+          <li><time>07:30</time><b>Hard boil</b><span>Rolling boil to emulsify the fat. The kitchen fan goes to full; the neighbours know the smell.</span></li>
+          <li><time>09:40</time><b>Noodles cut</b><span>Hokkaido flour, 34% hydration, kansui from Mongolia. Rested in boxes until service.</span></li>
+          <li><time>11:00</time><b>Niboshi in</b><span>2.4 kg of Seto Inland Sea sardines, heads and guts removed by hand, steeped off the heat.</span></li>
+          <li><time>11:30</time><b>Lunch service</b><span>First bowls out. The broth is lighter at noon and thicker by evening — regulars choose their hour.</span></li>
+          <li><time>15:00</time><b>Break</b><span>Doors close, pot topped with fresh bones. Chashu rolled and tied for tomorrow.</span></li>
+          <li><time>17:30</time><b>Dinner service</b><span>Strongest broth of the day. Yuzu-shio on Saturdays only.</span></li>
+          <li><time>23:30</time><b>Strain &amp; rest</b><span>A third of the broth is kept back to start the next pot at 05:00.</span></li>
+        </ol>
+      </div>
+      <div class="stats">
+        <div><strong>120 L</strong><span>stockpot, running since March 2009</span></div>
+        <div><strong>32 kg</strong><span>pork bone per day</span></div>
+        <div><strong>~310</strong><span>bowls on a Saturday</span></div>
+        <div><strong>4 min</strong><span>between trains overhead</span></div>
+        <div><strong>0</strong><span>MSG packets, tare is made in-house</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="counter" id="counter">
+    <div class="wrap split">
+      <div class="seatmap">
+        <span class="mono">The counter · live at 19:42</span>
+        <div class="bench">
+          <div class="seat taken">1</div><div class="seat taken">2</div><div class="seat taken">3</div><div class="seat">4</div><div class="seat taken">5</div><div class="seat taken">6</div>
+        </div>
+        <div class="bar-top">KITCHEN · 厨房</div>
+        <div class="bench">
+          <div class="seat taken">7</div><div class="seat taken">8</div><div class="seat next">9</div><div class="seat">10</div><div class="seat taken">11</div>
+        </div>
+        <div class="legend"><span><i class="t"></i>Eating</span><span><i class="n"></i>Called next</span><span><i></i>Free</span></div>
+      </div>
+      <div>
+        <p class="mono">House rules · カウンターの約束</p>
+        <h2>How the counter works.</h2>
+        <ol class="rules">
+          <li><div><b>Buy a ticket before you queue.</b><span>The machine is left of the door, English buttons on the bottom row. Cash, ICOCA and Suica. No cards.</span></div></li>
+          <li><div><b>Hand the ticket over when you sit.</b><span>Tell us your noodle firmness and whether you want extra oil (abura mashi). That is the only choice you make.</span></div></li>
+          <li><div><b>Eat within twenty minutes, if you can.</b><span>Not a rule, a courtesy. There are people outside. Slurp freely — it cools the noodle.</span></div></li>
+          <li><div><b>Groups sit where seats open.</b><span>We cannot hold a row together. Parties of more than four, come before 18:00.</span></div></li>
+          <li><div><b>Return your bowl to the ledge.</b><span>Wipe the counter with the cloth in front of you. Say "gochisousama" if you like — the kitchen will answer.</span></div></li>
+          <li><div><b>No photos of the kitchen staff.</b><span>Bowls are fine. Flash is not.</span></div></li>
+          <li><div><b>Pick your seat if you get the choice.</b><span>Seats 1–6 face the stockpot. Seat 11 is by the door and gets the draft in winter. Prams fold under seat 10.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap split">
+      <div>
+        <p class="mono">Visit · アクセス</p>
+        <h2>Under the tracks, by the red pillar.</h2>
+        <p class="addr-line mono">1-11-4 Tenjinbashi, Kita-ku, Osaka 530-0041 · 06-6351-0209 · no reservations, no phone queueing</p>
+        <table class="hours">
+          <tr><th>Mon</th><td class="closed">Closed — bones day</td></tr>
+          <tr><th>Tue – Fri</th><td>11:30 – 15:00 · 17:30 – 23:30</td></tr>
+          <tr><th>Saturday</th><td>11:00 – 23:30, no break · yuzu-shio from 17:30</td></tr>
+          <tr><th>Sunday</th><td>11:00 – 20:00 or sold out</td></tr>
+          <tr><th>Holidays</th><td>Sunday hours. Closed 31 Dec – 3 Jan.</td></tr>
+        </table>
+        <ol class="route">
+          <li><b>JR Tenma</b><span>Take the north exit, turn right, walk along the Loop Line viaduct for 200 m. Third arch, red pillar.</span></li>
+          <li><b>Ogimachi</b><span>Sakaisuji Line exit 4. Head east through Tenjinbashi-suji arcade, left at the tofu shop. 5 minutes.</span></li>
+          <li><b>Tenjinbashisuji 6</b><span>Exit 8, walk south down the arcade, about 9 minutes. The longest shopping street in Japan, so eat after.</span></li>
+          <li><b>Bicycle</b><span>Racks on the station side only. The arch side is towed on weekdays.</span></li>
+        </ol>
+      </div>
+      <aside class="ticket">
+        <span class="mono">First time</span>
+        <h3>Ticket machine in four steps</h3>
+        <ol>
+          <li>Insert cash or tap ICOCA / Suica.</li>
+          <li>Press a ramen button — top row is the house bowl.</li>
+          <li>Add toppings from the yellow buttons.</li>
+          <li>Take your tickets and change, then join the queue.</li>
+        </ol>
+        <div class="row">
+          <a class="btn" href="https://maps.google.com/?q=Tenma+Station+Osaka">Open in Maps</a>
+          <a class="btn ghost" href="#menu">Menu</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <span class="mark">黒星</span>
+    <span>Menya Kuroboshi · Tenma, Osaka · since 2009</span>
+    <span class="mono">Broth status updates every 30 min at the counter</span>
+  </div>
+</footer>
+</body>
+</html>

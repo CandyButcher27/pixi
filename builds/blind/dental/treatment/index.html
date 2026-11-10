@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halden Street Dental — Leeds LS6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EDE3; --enamel:#FBF8F2; --ink:#16241F; --green:#1F4A3F; --film:#0E1513;
+  --coral:#E2583A; --rule:#CFC6B5; --mute:#5C6862;
+  --display:'Bricolage Grotesque', Georgia, serif;
+  --sans:'IBM Plex Sans', 'Trebuchet MS', sans-serif;
+  --mono:'IBM Plex Mono', 'Courier New', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{background:var(--paper);color:var(--ink);font:400 1rem/1.55 var(--sans)}
+a{color:inherit}
+img{display:block}
+.mono{font-family:var(--mono);font-size:.82rem;letter-spacing:.01em}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+
+header{border-bottom:1px solid var(--rule)}
+header .wrap{display:flex;align-items:center;gap:32px;height:72px}
+.mark{font:800 1.35rem/1 var(--display);letter-spacing:-.03em;text-decoration:none}
+.mark span{color:var(--coral)}
+header nav{display:flex;gap:26px;margin-left:auto}
+header nav a{text-decoration:none;font-weight:500;font-size:.95rem}
+header nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.tel{font-family:var(--mono);font-size:.9rem}
+
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:10px;
+  background:var(--coral);color:var(--enamel);font:600 1rem/1 var(--sans);text-decoration:none;border:0;cursor:pointer}
+.btn:hover{background:#C9472B}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--enamel)}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.045em;line-height:.88}
+h1{font-size:9rem}
+h2{font-size:4.25rem}
+h3{font:600 1.15rem/1.25 var(--sans)}
+.kicker{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mute);display:block;margin-bottom:22px}
+.lede{font-size:1.2rem;line-height:1.5;max-width:34em}
+
+.art{border-radius:28px;overflow:hidden;background:var(--enamel)}
+.art img{width:100%;height:100%;object-fit:cover}
+img[data-art=room],img[data-art=tooth]{object-fit:contain;object-position:50% 100%}
+img[data-art=tray],img[data-art=xray]{object-fit:contain!important}
+
+/* hero */
+.hero{padding:56px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:stretch}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero .lede{margin:34px 0 30px}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.slots{border-top:2px solid var(--ink)}
+.slots caption{caption-side:top;text-align:left;padding-bottom:10px}
+.slots table,.ruled{width:100%;border-collapse:collapse}
+.ruled td,.ruled th{padding:11px 0;border-bottom:1px solid var(--rule);text-align:left;vertical-align:baseline}
+.ruled th{font:500 .78rem/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute);padding:14px 0 10px}
+.ruled td.r,.ruled th.r{text-align:right}
+.dot{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--coral);margin-right:8px;vertical-align:1px}
+.hero .art{min-height:860px;background:#DCD3C3}
+.facts{display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:20px;margin-top:40px;padding-top:22px;border-top:1px solid var(--rule)}
+.facts b{display:block;font:800 2.6rem/1 var(--display);letter-spacing:-.04em}
+.facts span{font-size:.88rem;color:var(--mute)}
+
+/* x-ray band */
+.film{background:var(--film);color:var(--enamel)}
+.film .grid{display:grid;grid-template-columns:62% 1fr;align-items:stretch}
+.film .xray{height:740px;background:var(--film);border-radius:0 28px 28px 0;overflow:hidden}
+.film .xray img{width:100%;height:100%;object-fit:cover}
+.film .side{padding:72px 64px 64px 56px}
+.film .kicker{color:#8FA59C}
+.film h2{color:var(--enamel)}
+.film p{color:#C9D3CE;margin:24px 0 26px}
+.film .ruled td{border-color:#2C3B36}
+.film .ruled td:last-child{font-family:var(--mono);font-size:.82rem;color:#8FA59C;text-align:right}
+
+/* treatments */
+.treat{padding:88px 0 80px}
+.treat .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:72px}
+.treat .art{height:1240px;position:sticky;top:24px}
+.tlist{list-style:none;margin-top:36px;border-top:2px solid var(--ink)}
+.tlist li{display:grid;grid-template-columns:48px 1fr 92px 86px;gap:18px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.tlist .n{font-family:var(--mono);font-size:.8rem;color:var(--mute)}
+.tlist p{font-size:.93rem;color:var(--mute);margin-top:4px}
+.tlist .t,.tlist .p{font-family:var(--mono);font-size:.85rem;text-align:right}
+.tlist .p{font-weight:500}
+
+/* fees */
+.fees{padding:10px 0 88px}
+.fees .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px}
+.fees .art{min-height:940px;background:var(--green)}
+.fees .ruled td:nth-child(n+2){font-family:var(--mono);font-size:.88rem;text-align:right}
+.fees .ruled tr.group td{font:600 .95rem/1 var(--sans);padding-top:26px;border-bottom:2px solid var(--ink);text-align:left}
+.fees .note{font-size:.88rem;color:var(--mute);margin-top:22px;max-width:44em}
+.plan{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin-top:34px;padding:26px 28px;background:var(--enamel);border-radius:20px}
+.plan b{font:800 3.4rem/1 var(--display);letter-spacing:-.04em;color:var(--green)}
+.plan small{font-family:var(--mono);font-size:.8rem;color:var(--mute)}
+
+/* team */
+.team{padding:88px 0;background:var(--enamel);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.team .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:72px}
+.bio{padding:30px 0;border-bottom:1px solid var(--rule)}
+.bio:first-of-type{border-top:2px solid var(--ink);margin-top:36px}
+.bio h3{font:800 2rem/1.05 var(--display);letter-spacing:-.03em}
+.bio .meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin:8px 0 12px;color:var(--mute)}
+.bio p{max-width:40em}
+.portraits{position:relative;min-height:1120px}
+.portraits .art:nth-child(1){position:absolute;right:0;top:0;width:92%;height:720px}
+.portraits .art:nth-child(2){position:absolute;left:0;bottom:0;width:66%;height:540px;border:8px solid var(--enamel)}
+
+/* visit */
+.visit{padding:88px 0 96px}
+.visit .wrap{display:grid;grid-template-columns:.92fr 1.08fr;gap:72px}
+.visit .art{min-height:1000px}
+form{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;padding-top:26px;border-top:2px solid var(--ink)}
+label{display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:500}
+label.full{grid-column:1/-1}
+input,select{height:50px;border:1.5px solid var(--ink);border-radius:10px;background:var(--enamel);padding:0 14px;font:400 1rem var(--sans);color:var(--ink)}
+form .btn{grid-column:1/-1;justify-content:center}
+.visit .two{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:48px}
+.visit h3{margin-bottom:6px}
+.visit ul{list-style:none}
+.visit ul li{padding:9px 0;border-bottom:1px solid var(--rule);font-size:.93rem}
+
+footer{background:var(--ink);color:#C9D3CE;padding:56px 0 40px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+footer .mark{color:var(--enamel);font-size:2.4rem}
+footer h4{font:500 .75rem/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:#8FA59C;margin-bottom:14px}
+footer ul{list-style:none}
+footer li{padding:3px 0;font-size:.92rem}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .legal{grid-column:1/-1;border-top:1px solid #2C3B36;padding-top:20px;font-size:.8rem;display:flex;flex-wrap:wrap;gap:8px 28px}
+
+@media (max-width:980px){
+  h1{font-size:5.5rem} h2{font-size:3rem}
+  .hero .wrap,.treat .wrap,.fees .wrap,.team .wrap,.visit .wrap,.film .grid{grid-template-columns:1fr}
+  .hero .art,.treat .art,.fees .art,.visit .art{height:520px;position:static}
+  .film .xray{height:380px;border-radius:0}
+  .portraits{height:720px}
+  header nav{display:none}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  .tlist li{grid-template-columns:36px 1fr 80px}
+  .tlist .t{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Halden Street<span>.</span></a>
+    <nav aria-label="Main">
+      <a href="#treatments">Treatments</a><a href="#fees">Fees</a><a href="#clinicians">Clinicians</a><a href="#visit">Visit</a>
+    </nav>
+    <a class="tel" href="tel:+441132745510">0113 274 5510</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Independent practice · 41 Halden Street, Leeds LS6 · since 1994</span>
+      <h1>Teeth,<br><em>kept.</em></h1>
+      <p class="lede">Six chairs, four dentists, two hygienists, and a rule that nobody leaves with a treatment plan they haven't had explained in plain numbers. Check-ups are 30 minutes, not 10. Nervous patients get the first slot of the day, when the room is quiet.</p>
+      <div class="actions">
+        <a class="btn" href="#visit">Book a check-up — £58</a>
+        <a class="btn ghost" href="tel:+441132745510">Toothache today? Call us</a>
+      </div>
+      <table class="ruled slots">
+        <caption class="kicker">Next open appointments · updated 08:00</caption>
+        <thead><tr><th>When</th><th>With</th><th>Type</th><th class="r">Length</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dot"></span>Tue 10 Nov, 08:15</td><td>Dr Okafor</td><td>New patient exam</td><td class="r mono">45 min</td></tr>
+          <tr><td>Tue 10 Nov, 13:40</td><td>Freya Lund, RDH</td><td>Hygiene clean</td><td class="r mono">40 min</td></tr>
+          <tr><td>Wed 11 Nov, 17:30</td><td>Dr Haddad</td><td>Check-up</td><td class="r mono">30 min</td></tr>
+          <tr><td>Thu 12 Nov, 08:00</td><td>Dr Okafor</td><td>Nervous patient slot</td><td class="r mono">60 min</td></tr>
+          <tr><td>Sat 14 Nov, 09:20</td><td>Dr Brennan</td><td>Emergency hold</td><td class="r mono">20 min</td></tr>
+          <tr><td>Mon 16 Nov, 11:10</td><td>Tomasz Wiśniewski, RDH</td><td>Hygiene clean</td><td class="r mono">40 min</td></tr>
+          <tr><td>Mon 16 Nov, 16:45</td><td>Dr Haddad</td><td>Root canal consult</td><td class="r mono">30 min</td></tr>
+        </tbody>
+      </table>
+      <div class="facts">
+        <div><b>4.9</b><span>412 Google reviews</span></div>
+        <div><b>30′</b><span>minimum check-up</span></div>
+        <div><b>48h</b><span>emergency guarantee</span></div>
+        <div><b>0</b><span>steps to the door</span></div>
+      </div>
+    </div>
+    <div class="art"><img data-art="room" alt="Illustration of a treatment room at Halden Street: dental chair under a tall window, lamp overhead"></div>
+  </div>
+</section>
+
+<section class="film">
+  <div class="grid">
+    <div class="xray"><img data-art="xray" alt="Illustrated panoramic radiograph showing upper and lower teeth"></div>
+    <div class="side">
+      <span class="kicker">What a 30-minute check-up covers</span>
+      <h2>We look before we drill.</h2>
+      <p>Low-dose digital radiographs every two years for most adults — about the same radiation as a 40-minute flight. You see the image on the ceiling screen while we talk through it.</p>
+      <table class="ruled">
+        <tr><td>Pocket depth, 6 points per tooth</td><td>168 readings</td></tr>
+        <tr><td>Soft tissue and oral cancer screen</td><td>every visit</td></tr>
+        <tr><td>Bite-wing radiographs</td><td>0.005 mSv</td></tr>
+        <tr><td>Existing fillings &amp; crowns charted</td><td>photographed</td></tr>
+        <tr><td>Jaw joint and grinding wear</td><td>measured</td></tr>
+        <tr><td>Written summary emailed</td><td>same day</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="treat" id="treatments">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Treatments · chair time · from-price</span>
+      <h2>What happens,<br>how long, what it costs.</h2>
+      <ol class="tlist">
+        <li><span class="n">01</span><div><h3>Check-up &amp; scale</h3><p>Full charting, gum readings, cancer screen, a light scale and polish. X-rays if due.</p></div><span class="t">30 min</span><span class="p">£58</span></li>
+        <li><span class="n">02</span><div><h3>Hygiene clean</h3><p>Airflow stain removal and ultrasonic scaling with a hygienist. Numbing gel on request.</p></div><span class="t">40 min</span><span class="p">£72</span></li>
+        <li><span class="n">03</span><div><h3>White filling</h3><p>Composite matched to your shade under a rubber dam. One surface to four.</p></div><span class="t">30–60 min</span><span class="p">£115</span></li>
+        <li><span class="n">04</span><div><h3>Root canal, molar</h3><p>Microscope-guided, rotary files, done in one visit in most cases. Crown quoted separately.</p></div><span class="t">90 min</span><span class="p">£640</span></li>
+        <li><span class="n">05</span><div><h3>Porcelain crown</h3><p>Scanned digitally — no putty trays. Made by Kirkstall Dental Lab, fitted two weeks later.</p></div><span class="t">2 visits</span><span class="p">£595</span></li>
+        <li><span class="n">06</span><div><h3>Extraction</h3><p>Simple to surgical. Wisdom teeth assessed with a 3D scan before we quote.</p></div><span class="t">20–45 min</span><span class="p">£140</span></li>
+        <li><span class="n">07</span><div><h3>Single implant</h3><p>Straumann fixture, abutment and crown. Bone assessment and a 10-year fixture warranty.</p></div><span class="t">3 visits</span><span class="p">£2,450</span></li>
+        <li><span class="n">08</span><div><h3>Clear aligners</h3><p>Invisalign Lite for mild crowding. You see a simulated end result before paying anything.</p></div><span class="t">6–9 months</span><span class="p">£2,200</span></li>
+        <li><span class="n">09</span><div><h3>Whitening, home trays</h3><p>Custom trays and two weeks of 6% hydrogen peroxide. Reviewed at four weeks.</p></div><span class="t">2 visits</span><span class="p">£295</span></li>
+        <li><span class="n">10</span><div><h3>Emergency appointment</h3><p>Pain relief, temporary dressing, and a written plan. Held slots every weekday and Saturday.</p></div><span class="t">20 min</span><span class="p">£75</span></li>
+      </ol>
+    </div>
+    <div class="art"><img data-art="tooth" alt="Labelled cross-section diagram of a molar: enamel, dentine, pulp, root canal, gum and bone"></div>
+  </div>
+</section>
+
+<section class="fees" id="fees">
+  <div class="wrap">
+    <div class="art"><img data-art="tray" alt="Illustration of a dental instrument tray: mirror, probe, explorer, cotton rolls"></div>
+    <div>
+      <span class="kicker">Fees 2026 · every price on the wall, no 'from' surprises</span>
+      <h2>The full price list.</h2>
+      <table class="ruled">
+        <thead><tr><th>Item</th><th class="r">Private</th><th class="r">Plan member</th><th class="r">Children</th></tr></thead>
+        <tbody>
+          <tr class="group"><td colspan="4">Routine</td></tr>
+          <tr><td>New patient examination</td><td>£78</td><td>included</td><td>£0</td></tr>
+          <tr><td>Check-up</td><td>£58</td><td>included</td><td>£0</td></tr>
+          <tr><td>Hygienist, 40 min</td><td>£72</td><td>included ×2</td><td>£35</td></tr>
+          <tr><td>Bite-wing radiographs, pair</td><td>£24</td><td>included</td><td>£0</td></tr>
+          <tr><td>Fluoride varnish</td><td>£18</td><td>£0</td><td>£0</td></tr>
+          <tr class="group"><td colspan="4">Restorative</td></tr>
+          <tr><td>Composite filling, 1 surface</td><td>£115</td><td>£98</td><td>£40</td></tr>
+          <tr><td>Composite filling, 3+ surfaces</td><td>£185</td><td>£157</td><td>£60</td></tr>
+          <tr><td>Root canal, front / premolar / molar</td><td>£390 / £510 / £640</td><td>−15%</td><td>quoted</td></tr>
+          <tr><td>Porcelain crown (E.max)</td><td>£595</td><td>£505</td><td>—</td></tr>
+          <tr><td>Extraction, simple / surgical</td><td>£140 / £260</td><td>−15%</td><td>£40</td></tr>
+          <tr class="group"><td colspan="4">Replacement &amp; cosmetic</td></tr>
+          <tr><td>Single implant, all stages</td><td>£2,450</td><td>£2,280</td><td>—</td></tr>
+          <tr><td>Clear aligners, Lite / Full</td><td>£2,200 / £3,600</td><td>£2,050 / £3,350</td><td>—</td></tr>
+          <tr><td>Home whitening</td><td>£295</td><td>£250</td><td>—</td></tr>
+          <tr><td>Night guard</td><td>£210</td><td>£180</td><td>£120</td></tr>
+          <tr><td>Sports mouthguard, custom</td><td>£95</td><td>£80</td><td>£60</td></tr>
+          <tr><td>IV sedation, per session</td><td>£320</td><td>£290</td><td>—</td></tr>
+          <tr><td>Missed appointment, under 24h notice</td><td>£35</td><td>£35</td><td>£0</td></tr>
+        </tbody>
+      </table>
+      <div class="plan">
+        <b>£16.50</b>
+        <div><h3>a month, the Halden plan</h3><p>Two check-ups, two hygiene cleans, radiographs and 15% off everything else. Cancel with a month's notice. <small>Under-18s of members join free.</small></p></div>
+      </div>
+      <p class="note">Interest-free finance over 12 months on any treatment above £500, through Tabeo. A written estimate is given before any treatment over £100, and the estimate is the price.</p>
+    </div>
+  </div>
+</section>
+
+<section class="team" id="clinicians">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Clinicians · all GDC registered</span>
+      <h2>Who is in<br>the chair with you.</h2>
+      <div class="bio">
+        <h3>Dr Adaeze Okafor</h3>
+        <div class="meta mono"><span>BDS Leeds 2009</span><span>MJDF RCS</span><span>GDC 178244</span><span>Mon–Thu</span></div>
+        <p>Principal dentist. Runs the nervous-patient clinic and the early slots; uses the Wand computer-controlled anaesthetic so injections are slow and nearly painless. Will stop the moment you raise a hand.</p>
+      </div>
+      <div class="bio">
+        <h3>Dr Sami Haddad</h3>
+        <div class="meta mono"><span>BDS KCL 2012</span><span>MSc Endodontics</span><span>GDC 201913</span><span>Tue–Sat</span></div>
+        <p>Takes root canal referrals from four other Leeds practices. Works under a Zeiss microscope; most molar root canals are finished in a single 90-minute visit.</p>
+      </div>
+      <div class="bio">
+        <h3>Dr Ciara Brennan</h3>
+        <div class="meta mono"><span>BDentSc Dublin 2015</span><span>PGCert Implantology</span><span>GDC 262087</span><span>Wed–Sat</span></div>
+        <p>Implants and aligners. Plans every implant on a 3D scan before quoting, and shows you the simulated result before anything is paid for.</p>
+      </div>
+      <div class="bio">
+        <h3>Freya Lund &amp; Tomasz Wiśniewski</h3>
+        <div class="meta mono"><span>Dental hygienists</span><span>GDC 270115 · 284530</span><span>Mon–Sat</span></div>
+        <p>Forty-minute appointments, Airflow for stain, and honest notes about which bits you are missing with the brush.</p>
+      </div>
+    </div>
+    <div class="portraits">
+      <div class="art"><img data-art="p1" alt="Illustrated portrait of Dr Adaeze Okafor"></div>
+      <div class="art"><img data-art="p2" alt="Illustrated portrait of Dr Sami Haddad"></div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="art"><img data-art="map" alt="Street map showing Halden Street Dental between Headingley Lane and Woodhouse Moor"></div>
+    <div>
+      <span class="kicker">Visit &amp; book · step-free, ground floor</span>
+      <h2>Book a chair.</h2>
+      <form onsubmit="event.preventDefault();this.querySelector('.btn').textContent='Request sent — we call back within 2 working hours';">
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Phone<input name="tel" type="tel" autocomplete="tel" required></label>
+        <label>Appointment<select name="type"><option>Check-up — 30 min</option><option>New patient exam — 45 min</option><option>Hygiene clean — 40 min</option><option>Nervous patient slot — 60 min</option><option>Emergency — 20 min</option></select></label>
+        <label>Preferred day<input name="day" type="date"></label>
+        <label class="full">Anything we should know?<input name="note" placeholder="e.g. last visit was 6 years ago, left lower tooth aches with cold"></label>
+        <button class="btn" type="submit">Request appointment</button>
+      </form>
+      <div class="two">
+        <div>
+          <h3>Opening hours</h3>
+          <table class="ruled">
+            <tr><td>Monday</td><td class="r mono">08:00–18:00</td></tr>
+            <tr><td>Tuesday</td><td class="r mono">08:00–19:30</td></tr>
+            <tr><td>Wednesday</td><td class="r mono">08:00–19:30</td></tr>
+            <tr><td>Thursday</td><td class="r mono">08:00–18:00</td></tr>
+            <tr><td>Friday</td><td class="r mono">08:00–16:00</td></tr>
+            <tr><td>Saturday</td><td class="r mono">09:00–13:00</td></tr>
+            <tr><td>Sunday</td><td class="r mono">closed · 111</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>Getting here</h3>
+          <ul>
+            <li>Buses 1, 6 and 56 stop at Hyde Park Corner, 3 min walk</li>
+            <li>Burley Park station, 9 min walk</li>
+            <li>Two marked bays outside; free 1-hour street parking</li>
+            <li>Ramp, wide doors, accessible WC, hearing loop</li>
+            <li>Languages: Igbo, Arabic, Polish, Irish, Danish</li>
+            <li>Card, Apple Pay, finance via Tabeo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="mark" href="#">Halden Street<span>.</span></a>
+      <p style="margin-top:14px;max-width:28em">41 Halden Street, Headingley, Leeds LS6 2QB. Registered with the Care Quality Commission, provider ID 1-10298734.</p>
+    </div>
+    <div><h4>Practice</h4><ul><li><a href="#treatments">Treatments</a></li><li><a href="#fees">Fees</a></li><li><a href="#clinicians">Clinicians</a></li><li><a href="#visit">Book</a></li></ul></div>
+    <div><h4>Patients</h4><ul><li><a href="#">Halden plan</a></li><li><a href="#">Nervous patients</a></li><li><a href="#">Aftercare notes</a></li><li><a href="#">Complaints policy</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="tel:+441132745510">0113 274 5510</a></li><li><a href="mailto:desk@haldenstreet.dental">desk@haldenstreet.dental</a></li><li>Out of hours: NHS 111</li></ul></div>
+    <div class="legal mono"><span>© 2026 Halden Street Dental Ltd</span><span>Company 04912266</span><span>Privacy</span><span>GDC standards for the dental team</span></div>
+  </div>
+</footer>
+
+<script>
+const C={paper:'#F2EDE3',enamel:'#FBF8F2',ink:'#16241F',green:'#1F4A3F',film:'#0E1513',coral:'#E2583A',wall:'#DCD3C3',sage:'#9DB5A3',gum:'#E7B3A3',dent:'#EFE1C3'};
+const svg=(vb,body,par='xMidYMid slice')=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb}" preserveAspectRatio="${par}">${body}</svg>`;
+
+function teethRow(cx,cy,rx,ry,upper){
+  let s='';
+  for(let i=0;i<16;i++){
+    const a=Math.PI*(0.08+0.84*i/15);
+    const x=cx-Math.cos(a)*rx, y=cy+(upper?-1:1)*Math.sin(a)*ry*0.25;
+    const molar=i<5||i>10, w=molar?40:26, h=molar?70:84, d=upper?-1:1;
+    const root=`M${x-w/3} ${y} L${x-w/5} ${y+d*(h+70)} L${x} ${y+d*h} L${x+w/5} ${y+d*(h+70)} L${x+w/3} ${y}`;
+    s+=`<path d="${root}" fill="#3E504A" stroke="#7C8F88" stroke-width="2"/>`;
+    s+=`<rect x="${x-w/2}" y="${upper?y-6:y-h+6}" width="${w}" height="${h}" rx="${w/3}" fill="#B9C6C0" opacity=".85" transform="translate(0 ${upper?-h+6:h-6})"/>`;
+    if(i===3||i===12||i===20%16) s+=`<rect x="${x-w/4}" y="${upper?y-h*0.95:y+h*0.55}" width="${w/2}" height="${h*0.35}" rx="4" fill="#FBF8F2"/>`;
+  }
+  return s;
+}
+
+const ART={
+  room:svg('0 -560 700 1420',`
+    <rect y="-560" width="700" height="1420" fill="${C.wall}"/>
+    <rect x="70" y="-430" width="230" height="300" rx="4" fill="${C.enamel}" stroke="${C.ink}" stroke-width="6"/>
+    <path d="M185 -380 C140 -380 120 -330 130 -280 C140 -230 155 -190 170 -190 C180 -190 178 -240 185 -240 C192 -240 190 -190 200 -190 C215 -190 230 -230 240 -280 C250 -330 230 -380 185 -380 Z" fill="${C.wall}" stroke="${C.ink}" stroke-width="4"/>
+    <text x="90" y="-150" font-family="IBM Plex Mono, monospace" font-size="16" fill="${C.ink}">2 MIN · TWICE A DAY</text>
+    <rect x="380" y="-430" width="250" height="160" rx="4" fill="${C.green}"/>
+    <text x="400" y="-380" font-family="IBM Plex Mono, monospace" font-size="16" fill="${C.enamel}">NEXT PATIENT</text>
+    <text x="400" y="-320" font-family="Bricolage Grotesque, Georgia, serif" font-weight="800" font-size="44" fill="${C.enamel}">08:15</text>
+    <rect x="380" y="-230" width="250" height="10" fill="${C.ink}"/>
+    <path d="M560 -560v560" stroke="${C.ink}" stroke-width="8"/>
+    <rect x="70" y="70" width="330" height="460" rx="6" fill="${C.sage}"/>
+    <rect x="70" y="70" width="330" height="460" rx="6" fill="none" stroke="${C.enamel}" stroke-width="14"/>
+    <path d="M235 70v460M70 300h330" stroke="${C.enamel}" stroke-width="10"/>
+    <circle cx="150" cy="200" r="58" fill="#B8CBB9"/><circle cx="330" cy="420" r="80" fill="#88A391"/>
+    <rect y="640" width="700" height="220" fill="#C9BBA4"/>
+    <path d="M0 640h700" stroke="#B3A48B" stroke-width="4"/>
+    
+    <path d="M560 120 L480 210 L520 260" fill="none" stroke="${C.ink}" stroke-width="10" stroke-linecap="round"/>
+    <ellipse cx="520" cy="280" rx="70" ry="30" fill="${C.enamel}" stroke="${C.ink}" stroke-width="6"/>
+    <path d="M470 300 L380 520 L660 520 L570 300 Z" fill="${C.enamel}" opacity=".35"/>
+    <path d="M250 560 C250 510 300 480 360 490 L560 510 C610 515 640 540 640 570 L640 600 L260 600 Z" fill="${C.green}"/>
+    <path d="M200 470 C200 430 230 410 260 420 L300 520 L250 580 Z" fill="${C.green}"/>
+    <rect x="330" y="600" width="40" height="120" fill="${C.ink}"/>
+    <rect x="270" y="715" width="160" height="22" rx="8" fill="${C.ink}"/>
+    <path d="M590 570 L650 640 L640 650" stroke="${C.green}" stroke-width="22" stroke-linecap="round" fill="none"/>
+    <rect x="70" y="560" width="120" height="16" rx="4" fill="${C.ink}"/>
+    <path d="M130 576v120" stroke="${C.ink}" stroke-width="8"/>
+    <rect x="80" y="540" width="40" height="20" rx="4" fill="${C.enamel}"/><rect x="128" y="545" width="50" height="15" rx="4" fill="${C.coral}"/>
+    <rect x="590" y="430" width="60" height="70" rx="6" fill="${C.coral}"/>
+    <ellipse cx="620" cy="410" rx="20" ry="46" fill="#5E7F6B"/><ellipse cx="600" cy="400" rx="14" ry="38" fill="#4C6E5B" transform="rotate(-25 600 400)"/><ellipse cx="642" cy="398" rx="14" ry="40" fill="#6F907B" transform="rotate(22 642 398)"/>
+    <circle cx="470" cy="140" r="34" fill="${C.enamel}" stroke="${C.ink}" stroke-width="5"/><path d="M470 140v-20M470 140h16" stroke="${C.ink}" stroke-width="4" stroke-linecap="round"/>
+    <text x="60" y="800" font-family="IBM Plex Mono, monospace" font-size="20" fill="${C.ink}">ROOM 2 · NORTH LIGHT · 08:15</text>`,'xMidYMax meet'),
+  xray:svg('0 0 900 700',`
+    <rect width="900" height="700" fill="${C.film}"/>
+    <path d="M60 180 C200 40 700 40 840 180 L860 520 C700 690 200 690 40 520 Z" fill="#1B2925"/>
+    <path d="M120 340 C300 300 600 300 780 340" stroke="#24342F" stroke-width="40" fill="none"/>
+    ${teethRow(450,320,330,120,true)}
+    ${teethRow(450,370,320,120,false)}
+    <path d="M60 640h220" stroke="#4B5D57" stroke-width="2"/>
+    <text x="60" y="670" font-family="IBM Plex Mono, monospace" font-size="18" fill="#7C8F88">OPG · 2026-10-14 · 0.01 mSv · R</text>
+    <circle cx="700" cy="215" r="34" fill="none" stroke="${C.coral}" stroke-width="3"/>
+    <text x="742" y="190" font-family="IBM Plex Mono, monospace" font-size="16" fill="${C.coral}">26 · early caries</text>`,'xMidYMid meet'),
+  tooth:svg('0 -300 600 1280',`
+    <rect y="-300" width="600" height="1280" fill="${C.enamel}"/>
+    <g font-family="IBM Plex Mono, monospace" font-size="18" fill="#5C6862"><text x="64" y="-200">CARIES PROGRESSION, MONTHS</text>
+    <path d="M64 -170h470" stroke="#CFC6B5" stroke-width="2"/>
+    <rect x="64" y="-150" width="60" height="14" fill="#16241F"/><text x="140" y="-137">enamel only · 0–18</text>
+    <rect x="64" y="-110" width="130" height="14" fill="#E7B3A3"/><text x="210" y="-97">into dentine · 6–24</text>
+    <rect x="64" y="-70" width="230" height="14" fill="#E2583A"/><text x="310" y="-57">pulp · 3–12</text></g>
+    <rect y="470" width="600" height="510" fill="#E9DCC8"/>
+    <path d="M0 470 C120 430 180 440 210 470 L390 470 C420 440 480 430 600 470 L600 520 L0 520 Z" fill="${C.gum}"/>
+    <path d="M150 300 C150 170 210 120 260 150 C280 160 320 160 340 150 C390 120 450 170 450 300 L440 480 C430 620 400 760 370 860 C360 890 335 880 332 850 L310 640 C305 610 295 610 290 640 L268 850 C265 880 240 890 230 860 C200 760 170 620 160 480 Z" fill="${C.dent}" stroke="${C.ink}" stroke-width="5"/>
+    <path d="M150 300 C150 170 210 120 260 150 C280 160 320 160 340 150 C390 120 450 170 450 300 L445 400 C380 380 220 380 155 400 Z" fill="#FFFFFF" stroke="${C.ink}" stroke-width="5"/>
+    <path d="M230 330 C230 270 260 255 300 270 C340 255 370 270 370 330 L360 470 L340 820 L330 820 L310 540 L290 540 L270 820 L260 820 L240 470 Z" fill="${C.coral}" opacity=".85"/>
+    <g font-family="IBM Plex Mono, monospace" font-size="19" fill="${C.ink}">
+      <path d="M430 200 L480 140" stroke="${C.ink}" stroke-width="2"/><text x="400" y="128">ENAMEL</text><text x="400" y="150" font-size="14" fill="#5C6862">2.5 mm thick</text>
+      <path d="M180 430 L110 380" stroke="${C.ink}" stroke-width="2"/><text x="64" y="368">DENTINE</text>
+      <path d="M300 330 L480 330" stroke="${C.ink}" stroke-width="2"/><text x="410" y="320">PULP</text>
+      <path d="M330 700 L470 700" stroke="${C.ink}" stroke-width="2"/><text x="400" y="690">ROOT CANAL</text>
+      <path d="M90 495 L80 560" stroke="${C.ink}" stroke-width="2"/><text x="64" y="585">GUM</text>
+      <text x="64" y="940">BONE</text>
+      <text x="64" y="60" font-size="22">FIG. 1 — LOWER MOLAR, SECTION</text>
+    </g>`,'xMidYMax meet'),
+  tray:svg('0 -110 600 1180',`
+    <rect y="-110" width="600" height="1180" fill="${C.green}"/>
+    <text x="70" y="40" font-family="Bricolage Grotesque, Georgia, serif" font-weight="800" font-size="64" fill="#F2EDE3">Tray 3.</text>
+    <text x="70" y="950" font-family="IBM Plex Mono, monospace" font-size="16" fill="#B6CBC3">SINGLE-USE BIBS · NITRILE · LATEX-FREE</text>
+    <text x="70" y="990" font-family="IBM Plex Mono, monospace" font-size="16" fill="#B6CBC3">AUTOCLAVE LOG KEPT 2 YEARS · HTM 01-05</text>
+    <rect x="70" y="120" width="460" height="700" rx="26" fill="#2B5C50"/>
+    <rect x="90" y="140" width="420" height="660" rx="18" fill="none" stroke="#3D7062" stroke-width="3"/>
+    <g stroke-linecap="round">
+      <path d="M170 220 L170 700" stroke="#D9E2DE" stroke-width="14"/><circle cx="170" cy="200" r="38" fill="#CFDCD6" stroke="#F2EDE3" stroke-width="6"/>
+      <path d="M270 210 L270 700" stroke="#D9E2DE" stroke-width="12"/><path d="M270 210 Q270 170 300 160" stroke="#D9E2DE" stroke-width="5" fill="none"/>
+      <path d="M360 230 L360 700" stroke="#D9E2DE" stroke-width="12"/><path d="M360 230 Q350 180 385 170" stroke="#D9E2DE" stroke-width="5" fill="none"/>
+    </g>
+    <rect x="410" y="560" width="70" height="26" rx="12" fill="${C.enamel}"/><rect x="410" y="600" width="70" height="26" rx="12" fill="${C.enamel}"/><rect x="410" y="640" width="70" height="26" rx="12" fill="${C.enamel}"/>
+    <path d="M415 220 L475 220 L465 330 L425 330 Z" fill="${C.coral}"/>
+    <g font-family="IBM Plex Mono, monospace" font-size="16" fill="#B6CBC3">
+      <text x="140" y="760">MIRROR</text><text x="245" y="760">PROBE</text><text x="330" y="760">EXPLORER</text>
+      <text x="70" y="880">STERILISED · CYCLE 4471 · 134°C</text>
+    </g>`,'xMidYMid meet'),
+  p1:svg('0 0 400 500',`
+    <rect width="400" height="500" fill="#D9C7A6"/>
+    <rect x="0" y="0" width="140" height="500" fill="#CDB892"/>
+    <path d="M60 500 C70 380 130 340 200 340 C270 340 330 380 340 500 Z" fill="${C.enamel}"/>
+    <path d="M170 350 L200 420 L230 350" fill="#7A9C8B"/>
+    <rect x="175" y="290" width="50" height="60" fill="#6B4430"/>
+    <ellipse cx="200" cy="230" rx="78" ry="92" fill="#7B4E36"/>
+    <path d="M118 220 C110 120 180 100 220 110 C280 120 300 170 285 230 C270 170 220 150 160 170 Z" fill="${C.ink}"/>
+    <path d="M200 140 C160 90 230 60 250 110" fill="${C.ink}"/>
+    <path d="M178 280 Q200 296 222 280" stroke="#3A2318" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="172" cy="232" r="6" fill="#2A1A12"/><circle cx="230" cy="232" r="6" fill="#2A1A12"/>`),
+  p2:svg('0 0 400 500',`
+    <rect width="400" height="500" fill="#9DB5A3"/>
+    <circle cx="320" cy="90" r="60" fill="#B8CBB9"/>
+    <path d="M50 500 C60 380 130 340 200 340 C270 340 340 380 350 500 Z" fill="${C.green}"/>
+    <rect x="175" y="290" width="50" height="60" fill="#B98A68"/>
+    <ellipse cx="200" cy="230" rx="76" ry="90" fill="#C89874"/>
+    <path d="M124 210 C120 140 170 120 205 122 C255 124 285 150 278 215 C262 175 220 165 170 175 C150 180 135 195 124 210 Z" fill="#2E2520"/>
+    <path d="M140 270 C150 330 250 330 262 270 C250 300 150 300 140 270 Z" fill="#2E2520"/>
+    <rect x="148" y="218" width="44" height="30" rx="8" fill="none" stroke="${C.ink}" stroke-width="5"/><rect x="208" y="218" width="44" height="30" rx="8" fill="none" stroke="${C.ink}" stroke-width="5"/><path d="M192 230h16" stroke="${C.ink}" stroke-width="5"/>`),
+  map:svg('0 0 620 1000',`
+    <rect width="620" height="1000" fill="#E6DFD1"/>
+    <path d="M380 0 C340 220 470 360 420 560 C380 720 470 860 440 1000 L620 1000 L620 0 Z" fill="#B9CDB9"/>
+    <text x="430" y="300" font-family="IBM Plex Mono, monospace" font-size="16" fill="#4C6E5B">WOODHOUSE MOOR</text>
+    <g stroke="${C.enamel}" stroke-linecap="round" fill="none">
+      <path d="M-20 180 L640 420" stroke-width="34"/>
+      <path d="M120 -20 L260 1020" stroke-width="26"/>
+      <path d="M-20 640 L420 560" stroke-width="20"/>
+      <path d="M-20 820 L360 780 L600 900" stroke-width="16"/>
+      <path d="M40 330 L210 980" stroke-width="12"/>
+      <path d="M320 330 L360 1000" stroke-width="12"/>
+    </g>
+    <g font-family="IBM Plex Mono, monospace" font-size="15" fill="#5C6862">
+      <text x="56" y="160" transform="rotate(20 56 160)">HEADINGLEY LANE</text>
+      <text x="200" y="120" transform="rotate(82 200 120)">HYDE PARK RD</text>
+      <text x="56" y="625" transform="rotate(-10 56 625)">HALDEN STREET</text>
+      <text x="56" y="805">BURLEY RD</text>
+    </g>
+    <rect x="60" y="410" width="34" height="34" rx="6" fill="${C.ink}"/><text x="104" y="434" font-family="IBM Plex Mono, monospace" font-size="15" fill="${C.ink}">BUS 1 · 6 · 56</text>
+    <circle cx="232" cy="596" r="58" fill="${C.coral}" opacity=".18"/>
+    <circle cx="232" cy="596" r="20" fill="${C.coral}" stroke="${C.enamel}" stroke-width="6"/>
+    <text x="262" y="660" font-family="Bricolage Grotesque, Georgia, serif" font-weight="800" font-size="30" fill="${C.ink}">No. 41</text>
+    <text x="56" y="960" font-family="IBM Plex Mono, monospace" font-size="15" fill="#5C6862">N ↑ · 200 m</text>`)
+};
+document.querySelectorAll('img[data-art]').forEach(img=>{img.src='data:image/svg+xml,'+encodeURIComponent(ART[img.dataset.art]);});
+</script>
+</body>
+</html>

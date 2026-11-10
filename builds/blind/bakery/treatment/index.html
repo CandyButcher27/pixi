@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lamp Street Bakery — bread out of one oven, every morning at 6:40</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flour:#F2EBDD; --ink:#1D1915; --crust:#A3461D; --rye:#4E3221; --butter:#E4C063; --rule:#1D191533;
+  --display:"Young Serif", Georgia, serif; --body:"Newsreader", Georgia, serif; --mono:"IBM Plex Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{scroll-behavior:smooth}
+body{background:var(--flour);color:var(--ink);font:16px/1.5 var(--body)}
+a{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:baseline;gap:32px;height:64px}
+header .mark{font-family:var(--display);font-size:22px;margin-right:auto;text-decoration:none}
+header nav{display:flex;gap:24px}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--crust)}
+header .open{color:var(--crust)}
+
+.split{display:grid;gap:56px;padding:72px 0;align-items:start}
+.s75{grid-template-columns:7fr 5fr}
+.s57{grid-template-columns:5fr 7fr}
+.media{height:100%;min-height:560px;border:1px solid var(--ink)}
+
+.hero{grid-template-columns:7fr 5fr;padding:56px 0 88px;align-items:stretch}
+.hero h1{font-family:var(--display);font-weight:400;font-size:168px;line-height:.86;letter-spacing:-.03em;margin:28px 0 36px}
+.hero h1 em{font-style:normal;color:var(--crust)}
+.hero .lede{font-size:23px;line-height:1.38;max-width:34ch}
+.hero .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;margin-top:40px;border-top:1px solid var(--ink);padding-top:18px;max-width:560px}
+.hero .facts dt{font-family:var(--mono);font-size:13px;color:var(--crust)}
+.hero .facts dd{font-size:16px}
+.hero .media{min-height:720px}
+.btnrow{display:flex;gap:12px;margin-top:36px;align-items:center}
+.btn{display:inline-block;padding:15px 22px;background:var(--ink);color:var(--flour);text-decoration:none;font-family:var(--mono);font-size:14px;border:1px solid var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:var(--crust);border-color:var(--crust);color:var(--flour)}
+
+.band{position:relative;width:100%;height:860px;background:var(--rye);color:var(--flour);overflow:hidden}
+.band img{position:absolute;inset:0}
+.band .copy{position:absolute;right:40px;top:80px;width:520px;background:var(--rye);padding:36px 36px 32px}
+.band h2{font-family:var(--display);font-weight:400;font-size:64px;line-height:.95;margin:14px 0 20px}
+.band p{font-size:18px;line-height:1.45;margin-bottom:12px}
+.band .tally{display:grid;grid-template-columns:repeat(2,auto);gap:4px 28px;margin-top:22px;border-top:1px solid #F2EBDD55;padding-top:16px}
+.loads{list-style:none;margin-top:18px;border-top:1px solid #F2EBDD55;padding-top:12px;columns:3;column-gap:16px}.loads li{font-size:14px;display:flex;gap:8px;line-height:1.7}.loads li span:first-child{font-family:var(--mono);font-size:12px;color:var(--butter)}
+.band .tally b{font-family:var(--display);font-weight:400;font-size:30px;display:block}
+
+.kicker{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--crust)}
+h2.big{font-family:var(--display);font-weight:400;font-size:88px;line-height:.92;letter-spacing:-.02em;margin:14px 0 22px}
+.intro{font-size:20px;line-height:1.42;max-width:46ch;margin-bottom:34px}
+
+table{width:100%;border-collapse:collapse}
+th{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
+td.t{font-family:var(--mono);font-size:14px;color:var(--crust);width:80px}
+td.n{font-family:var(--display);font-size:21px}
+td.n small{display:block;font:italic 15px var(--body);color:#1D1915aa}
+td.m{font-family:var(--mono);font-size:13px;white-space:nowrap}
+tr.gone td{opacity:.42}
+tr.gone td.n::after{content:" — sold out by 10";font:italic 14px var(--body)}
+
+.menu-group{margin-bottom:30px}
+.menu-group h3{font-family:var(--display);font-weight:400;font-size:34px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:4px}
+.menu-group h3 span{font:13px var(--mono);color:var(--crust)}
+.row{display:grid;grid-template-columns:1fr 92px 130px 62px 60px;gap:14px;padding:9px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.row b{font-weight:600;font-size:18px}
+.row i{display:block;font-size:15px;color:#1D1915aa}
+.al{display:flex;gap:3px}.al abbr{font:500 11px var(--mono);text-decoration:none;border:1px solid var(--ink);width:19px;height:19px;display:grid;place-items:center}.al abbr.v{background:var(--ink);color:var(--flour)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:-14px 0 26px;font-size:14px}.legend span{display:flex;gap:6px;align-items:center}
+td.l{font-family:var(--mono);font-size:13px;text-align:right}td.l s{color:#1D191566}
+.row .p{font-family:var(--mono);font-size:15px;text-align:right}
+.stack{display:grid;grid-template-rows:2fr 1fr;gap:20px;height:100%}
+.stack .media{min-height:0}
+
+.notes{columns:2;column-gap:36px;font-size:18px;line-height:1.55}
+.notes p{margin-bottom:14px;break-inside:avoid-column}
+.notes p:first-child::first-letter{font-family:var(--display);float:left;font-size:84px;line-height:.8;padding:6px 10px 0 0;color:var(--crust)}
+.log{margin-top:30px;border-top:2px solid var(--ink)}
+.log li{list-style:none;display:grid;grid-template-columns:110px 1fr 90px;gap:18px;padding:10px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.log li span:first-child{font:13px var(--mono);color:var(--crust)}
+.log li span:last-child{font:13px var(--mono);text-align:right}
+
+.hours{display:grid;grid-template-columns:120px 1fr 1fr;border-top:2px solid var(--ink);margin:6px 0 30px}
+.hours div{padding:9px 0;border-bottom:1px solid var(--rule)}
+.hours .d{font-family:var(--display);font-size:20px}
+.hours .closed{color:var(--crust);font-style:italic}
+.addr{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:34px;font-size:17px}
+.addr h4{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--crust);margin-bottom:6px}
+form{border:1px solid var(--ink);padding:26px}
+form h3{font-family:var(--display);font-weight:400;font-size:34px;margin-bottom:6px}
+form p{margin-bottom:18px}
+.fields{display:grid;grid-template-columns:1.4fr 1fr 110px;gap:12px;margin-bottom:14px}
+label{display:block;font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+input,select{width:100%;font:17px var(--body);padding:11px 12px;border:1px solid var(--ink);background:var(--flour);color:var(--ink);border-radius:0;appearance:none}
+input:focus,select:focus{outline:2px solid var(--crust);outline-offset:1px}
+form .btn{cursor:pointer}
+form output{display:block;margin-top:12px;font-family:var(--mono);font-size:13px;color:var(--crust);min-height:20px}
+
+footer{background:var(--ink);color:var(--flour);padding:40px 0 34px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;align-items:end}
+footer .mark{font-family:var(--display);font-size:56px;line-height:.9}
+footer ul{list-style:none;font-size:15px;line-height:1.7}
+
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  header nav{display:none}
+  .split,.s75,.s57,.hero{grid-template-columns:1fr;gap:28px;padding:48px 0}
+  .hero h1{font-size:84px}
+  h2.big{font-size:52px}
+  .media,.hero .media{min-height:360px}
+  .band{height:auto}
+  .band img{position:relative;height:380px}
+  .band .copy{position:relative;right:auto;top:auto;width:auto}
+  .notes{columns:1}
+  .row{grid-template-columns:1fr 64px}
+  .row .f,.row .w,.row .al{display:none}
+  .fields,.addr{grid-template-columns:1fr}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="mark" href="#">Lamp Street Bakery</a>
+    <nav class="mono">
+      <a href="#bake">Today's bake</a>
+      <a href="#prices">Prices</a>
+      <a href="#notes">Notes</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <span class="mono open" id="openstate">Open today 6:40–14:00</span>
+  </div>
+</header>
+
+<main>
+  <section class="wrap split hero">
+    <div>
+      <p class="kicker">No. 112 Lamp Street · one deck oven · since 2014</p>
+      <h1>Bread at <em>6:40.</em></h1>
+      <p class="lede">We are a two-person bakery with a single stone-deck oven. Everything on the counter was flour and water at 21:00 the night before, and most of it is gone by noon.</p>
+      <dl class="facts">
+        <dt>06:40</dt><dd>Doors open, first sourdough out of the oven since 05:55</dd>
+        <dt>78%</dt><dd>Hydration of the house country loaf, fermented 18 hours cold</dd>
+        <dt>3 mills</dt><dd>All flour from within 90 km — Ashby, Fenn Valley, Holloway Rye</dd>
+        <dt>£0</dt><dd>Charge to hold a loaf for you until 13:00 if you order by 20:00</dd>
+      </dl>
+      <div class="btnrow">
+        <a class="btn" href="#visit">Hold a loaf for tomorrow</a>
+        <a class="btn ghost" href="#bake">See today's bake sheet</a>
+      </div>
+    </div>
+    <div class="media"><img data-art="oven" alt="Illustration of a stone deck oven with three loaves on a wooden peel"></div>
+  </section>
+
+  <section class="band">
+    <img data-art="racks" alt="Illustration of cooling racks full of loaves">
+    <div class="copy">
+      <p class="kicker" style="color:var(--butter)">Night shift, Tuesday to Sunday</p>
+      <h2>Two people, one oven, about 340 loaves a morning.</h2>
+      <p>Mixing starts at 21:00. Dough rests in the walk-in until 04:30, gets shaped by hand, and goes into the oven in nine loads of up to 40.</p>
+      <p>When a shelf is empty, it is empty. We would rather sell out than bake a second, worse batch.</p>
+      <div class="tally">
+        <div><b>340</b><span class="mono">loaves / morning</span></div>
+        <div><b>9</b><span class="mono">oven loads</span></div>
+        <div><b>18 h</b><span class="mono">cold ferment</span></div>
+        <div><b>250 °C</b><span class="mono">deck, falling to 210</span></div>
+      </div>
+      <ol class="loads"><li><span>L1 05:10</span><span>country</span></li><li><span>L2 05:55</span><span>seeded</span></li><li><span>L3 06:15</span><span>croissant</span></li><li><span>L4 06:40</span><span>pain choc</span></li><li><span>L5 06:50</span><span>rye tins</span></li><li><span>L6 07:35</span><span>baguette</span></li><li><span>L7 08:00</span><span>buns</span></li><li><span>L8 08:35</span><span>spelt</span></li><li><span>L9 09:20</span><span>focaccia</span></li></ol>
+    </div>
+  </section>
+
+  <section class="wrap split s75" id="bake">
+    <div>
+      <p class="kicker">Bake sheet · today</p>
+      <h2 class="big">What comes out, and when.</h2>
+      <p class="intro">The oven runs one load at a time, so the counter fills in order. If you want a rye, come after half seven; if you want a croissant, come before nine.</p>
+      <table>
+        <thead><tr><th>Out</th><th>Bake</th><th>Batch</th><th>Deck</th><th style="text-align:right">Left</th></tr></thead>
+        <tbody>
+          <tr><td class="t">05:55</td><td class="n">Country sourdough<small>wheat, 12% Fenn Valley wholemeal</small></td><td class="m">40 loaves</td><td class="m">250 °C · 42 min</td></tr>
+          <tr><td class="t">06:30</td><td class="n">Seeded sourdough<small>sunflower, linseed, pumpkin, black sesame</small></td><td class="m">32 loaves</td><td class="m">245 °C · 44 min</td></tr>
+          <tr class="gone"><td class="t">06:40</td><td class="n">Butter croissant<small>laminated Sunday, 27 layers</small></td><td class="m">60 pieces</td><td class="m">195 °C · 18 min</td></tr>
+          <tr><td class="t">07:05</td><td class="n">Pain au chocolat<small>two batons of 70% Valrhona</small></td><td class="m">36 pieces</td><td class="m">195 °C · 18 min</td></tr>
+          <tr><td class="t">07:35</td><td class="n">Holloway 100% rye<small>caraway optional, sliced on request</small></td><td class="m">20 tins</td><td class="m">230 °C · 70 min</td></tr>
+          <tr><td class="t">08:10</td><td class="n">Baguette tradition<small>poolish, 24 h</small></td><td class="m">48 sticks</td><td class="m">255 °C · 24 min</td></tr>
+          <tr class="gone"><td class="t">08:40</td><td class="n">Cardamom bun<small>Swedish knot, pearl sugar</small></td><td class="m">40 pieces</td><td class="m">190 °C · 16 min</td></tr>
+          <tr><td class="t">09:15</td><td class="n">Spelt &amp; honey tin<small>Ashby spelt, local heather honey</small></td><td class="m">18 tins</td><td class="m">215 °C · 40 min</td></tr>
+          <tr><td class="t">10:00</td><td class="n">Focaccia<small>rosemary, flaky salt, Puglian oil</small></td><td class="m">6 trays</td><td class="m">230 °C · 22 min</td></tr>
+          <tr><td class="t">11:30</td><td class="n">Afternoon country loaf<small>second shaping, for the late crowd</small></td><td class="m">24 loaves</td><td class="m">240 °C · 42 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="media"><img data-art="boule" alt="Illustration of a scored sourdough boule"></div>
+  </section>
+
+  <section class="wrap split s57" id="prices">
+    <div class="stack">
+      <div class="media"><img data-art="baguettes" alt="Illustration of baguettes standing in a wicker basket"></div>
+      <div class="media"><img data-art="wheat" alt="Illustration of wheat and rye stalks"></div>
+    </div>
+    <div>
+      <p class="kicker">Price list · updated 1 Nov 2026</p>
+      <h2 class="big">Prices, with the flour on the label.</h2>
+      <p class="intro">Every loaf lists its mill and its baked weight. Day-old bread goes in the basket by the door at half price after 13:00.</p>
+      <div class="legend mono"><span><span class="al"><abbr>G</abbr></span>gluten</span><span><span class="al"><abbr>D</abbr></span>dairy</span><span><span class="al"><abbr>E</abbr></span>egg</span><span><span class="al"><abbr>S</abbr></span>sesame</span><span><span class="al"><abbr class="v">V</abbr></span>vegan</span></div>
+      <div class="menu-group">
+        <h3>Loaves <span>baked weight</span></h3>
+        <div class="row"><div><b>Country sourdough</b><i>the one most people come for</i></div><span class="mono f">Fenn Valley T80</span><span class="mono w">950 g</span><span class="p">£5.40</span></div>
+        <div class="row"><div><b>Seeded sourdough</b><i>four seeds, soaked overnight</i></div><span class="mono f">Fenn Valley T80</span><span class="mono w">900 g</span><span class="p">£5.90</span></div>
+        <div class="row"><div><b>100% rye</b><i>keeps for a week, slice thin</i></div><span class="mono f">Holloway rye</span><span class="mono w">1.1 kg</span><span class="p">£6.20</span></div>
+        <div class="row"><div><b>Spelt &amp; honey tin</b><i>soft crumb, good for toast</i></div><span class="mono f">Ashby spelt</span><span class="mono w">800 g</span><span class="p">£5.60</span></div>
+        <div class="row"><div><b>Baguette tradition</b><i>best eaten by lunch</i></div><span class="mono f">Ashby T65</span><span class="mono w">280 g</span><span class="p">£2.30</span></div>
+        <div class="row"><div><b>Focaccia, quarter tray</b><i>rosemary and salt</i></div><span class="mono f">Ashby T65</span><span class="mono w">420 g</span><span class="p">£4.20</span></div>
+      </div>
+      <div class="menu-group">
+        <h3>Pastry <span>each</span></h3>
+        <div class="row"><div><b>Butter croissant</b><i>Normandy butter, 82% fat</i></div><span class="mono f">Ashby T45</span><span class="mono w">85 g</span><span class="p">£2.80</span></div>
+        <div class="row"><div><b>Pain au chocolat</b><i>two batons, not one</i></div><span class="mono f">Ashby T45</span><span class="mono w">95 g</span><span class="p">£3.20</span></div>
+        <div class="row"><div><b>Cardamom bun</b><i>freshly cracked pods</i></div><span class="mono f">Ashby T55</span><span class="mono w">110 g</span><span class="p">£3.10</span></div>
+        <div class="row"><div><b>Seasonal tart</b><i>November: Bramley apple &amp; brown butter</i></div><span class="mono f">Ashby T55</span><span class="mono w">slice</span><span class="p">£4.50</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap split s75" id="notes">
+    <div>
+      <p class="kicker">From the night shift · Mara &amp; Tom Ellery</p>
+      <h2 class="big">Notes from the bench.</h2>
+      <div class="notes">
+        <p>The starter is older than the shop. Mara brought it from her grandmother's kitchen in a jam jar in 2009, and it has been fed twice a day ever since — through a flood, a move, and one very bad August when the walk-in failed.</p>
+        <p>We buy flour from three mills we can drive to. That means the bread changes a little with each harvest: this year's Fenn Valley wheat is thirstier, so the country loaf went from 76% to 78% water in September.</p>
+        <p>We laminate croissants on Sundays and Wednesdays only, by hand, with a rolling pin and a cold marble slab. It is slower than a sheeter. It is also the reason they shatter the way they do.</p>
+        <p>Nothing on the counter is frozen and baked off. If you see a gap on the shelf at 11:00, that loaf is not coming back until tomorrow — ask, and we will hold one for you.</p>
+      </div>
+      <ul class="log">
+        <li><span>04 Nov 2026</span><span>Rye switched to new-crop Holloway grain; slightly darker crumb</span><span>rye</span></li>
+        <li><span>21 Oct 2026</span><span>Cardamom buns back for winter, Thursday to Sunday</span><span>pastry</span></li>
+        <li><span>30 Sep 2026</span><span>Country loaf hydration raised to 78% for the new harvest</span><span>sourdough</span></li>
+        <li><span>12 Sep 2026</span><span>Oven floor re-laid; first bake back 14 Sep</span><span>oven</span></li>
+      </ul>
+    </div>
+    <div class="media"><img data-art="lamination" alt="Illustration of laminated croissant dough layers and finished croissants"></div>
+  </section>
+
+  <section class="wrap split s57" id="visit">
+    <div class="media"><img data-art="shop" alt="Illustration of the Lamp Street Bakery shopfront at dawn"></div>
+    <div>
+      <p class="kicker">Visit · pre-order</p>
+      <h2 class="big">Come early, or tell us you're coming.</h2>
+      <div class="hours" id="hours"></div>
+      <div class="addr">
+        <div><h4>Where</h4>112 Lamp Street, Unit 4<br>Between the launderette and the tram stop. Bike rack outside, step-free door on the left.</div>
+        <div><h4>Contact</h4>bread@lampstreet.example<br>0161 555 0142 (after 07:00)<br>Wholesale: three cafés only, list full.</div>
+      </div>
+      <form id="hold">
+        <h3>Hold a loaf</h3>
+        <p>Order by 20:00 for the next morning. Pay at the counter; we keep it until 13:00.</p>
+        <div class="fields">
+          <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div>
+          <div><label for="loaf">Loaf</label>
+            <select id="loaf" name="loaf">
+              <option>Country sourdough · £5.40</option>
+              <option>Seeded sourdough · £5.90</option>
+              <option>100% rye · £6.20</option>
+              <option>Spelt &amp; honey tin · £5.60</option>
+              <option>Baguette tradition · £2.30</option>
+            </select></div>
+          <div><label for="qty">Qty</label><input id="qty" name="qty" type="number" min="1" max="6" value="1"></div>
+        </div>
+        <button class="btn" type="submit">Hold it for tomorrow</button>
+        <output id="holdmsg" for="name loaf qty"></output>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mark">Lamp Street<br>Bakery</div>
+    <ul><li>112 Lamp Street, Unit 4</li><li>Tue–Sun from 06:40</li><li>Closed Mondays</li></ul>
+    <ul><li><a href="#bake">Bake sheet</a></li><li><a href="#prices">Prices</a></li><li><a href="#notes">Notes</a></li></ul>
+    <ul class="mono"><li>Starter fed 2× daily since 2009</li><li>© 2026 Ellery &amp; Ellery</li></ul>
+  </div>
+</footer>
+
+<script>
+const C = {flour:"#F2EBDD", ink:"#1D1915", crust:"#A3461D", rye:"#4E3221", butter:"#E4C063", dough:"#E8D3A8", bake:"#C07A3A", dark:"#2A1E16"};
+const loaf = (x, y, s, fill) => `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="0" rx="60" ry="34" fill="${fill || C.bake}"/><path d="M-38 -6 Q0 -30 38 -6" stroke="${C.dough}" stroke-width="6" fill="none"/><path d="M-30 8 Q0 -10 30 8" stroke="${C.rye}" stroke-width="3" fill="none" opacity=".5"/></g>`;
+const art = {
+  oven: () => {
+    let s = `<rect width="600" height="900" fill="${C.rye}"/>`;
+    for (let r = 0; r < 18; r++) for (let c = 0; c < 8; c++) s += `<rect x="${c * 80 - (r % 2) * 40}" y="${r * 50}" width="76" height="46" fill="${(r + c) % 3 ? '#5A3B27' : '#4A2E1E'}"/>`;
+    s += `<path d="M90 560 L90 330 Q300 150 510 330 L510 560 Z" fill="${C.dark}"/>`;
+    s += `<path d="M120 560 L120 345 Q300 190 480 345 L480 560 Z" fill="${C.crust}"/>`;
+    s += `<path d="M150 560 L150 360 Q300 235 450 360 L450 560 Z" fill="${C.butter}" opacity=".9"/>`;
+    s += `<rect x="60" y="560" width="480" height="26" fill="${C.ink}"/>`;
+    s += `<rect x="250" y="520" width="380" height="18" fill="#B68A55"/><rect x="560" y="500" width="40" height="400" fill="#B68A55" transform="rotate(-8 580 520)"/>`;
+    s += loaf(320, 492, .8) + loaf(430, 495, .7) + loaf(220, 500, .75, '#B0682E');
+    s += `<rect x="0" y="586" width="600" height="314" fill="${C.ink}"/>`;
+    for (let i = 0; i < 6; i++) s += `<rect x="${40 + i * 92}" y="640" width="70" height="${120 + (i % 3) * 30}" fill="#2B231C"/>`;
+    s += `<text x="40" y="860" fill="${C.flour}" font-family="IBM Plex Mono" font-size="20">DECK 1 · 250°C · LOAD 1 OF 9</text>`;
+    return [600, 900, s];
+  },
+  racks: () => {
+    let s = `<rect width="1440" height="760" fill="${C.dark}"/>`;
+    for (let r = 0; r < 6; r++) {
+      const y = 70 + r * 120;
+      s += `<rect x="0" y="${y + 42}" width="1440" height="8" fill="#7A5A3E"/>`;
+      for (let c = 0; c < 16; c++) {
+        const x = 50 + c * 88 + (r % 2) * 40;
+        if ((c * 7 + r * 3) % 11 === 0) continue;
+        s += loaf(x, y + 18, .62, (c + r) % 4 === 0 ? '#9A5526' : (c + r) % 3 === 0 ? '#B0682E' : C.bake);
+      }
+    }
+    for (let i = 0; i < 9; i++) s += `<rect x="${i * 180}" y="0" width="10" height="760" fill="#3A2A1F"/>`;
+    return [1440, 760, s];
+  },
+  boule: () => {
+    let s = `<rect width="600" height="900" fill="${C.butter}"/>`;
+    for (let i = 0; i < 30; i++) s += `<circle cx="${(i * 137) % 600}" cy="${(i * 211) % 900}" r="${2 + (i % 4)}" fill="${C.flour}"/>`;
+    s += `<rect x="40" y="560" width="520" height="40" fill="#B68A55"/><rect x="40" y="600" width="520" height="300" fill="#9C7244"/>`;
+    s += `<path d="M110 560 Q100 300 300 280 Q500 300 490 560 Z" fill="${C.bake}"/>`;
+    s += `<path d="M130 560 Q125 330 300 310 Q470 330 470 560 Z" fill="#B06A31"/>`;
+    s += `<path d="M190 380 Q300 330 410 400" stroke="${C.dough}" stroke-width="22" fill="none"/>`;
+    s += `<path d="M190 380 Q300 345 410 400" stroke="${C.flour}" stroke-width="6" fill="none"/>`;
+    s += `<path d="M170 470 L230 430 M260 500 L320 455 M350 495 L410 450" stroke="${C.rye}" stroke-width="5"/>`;
+    s += `<text x="40" y="70" fill="${C.ink}" font-family="Young Serif" font-size="44">Country, 950 g</text>`;
+    s += `<text x="40" y="104" fill="${C.ink}" font-family="IBM Plex Mono" font-size="18">78% water · 2% salt · 18 h cold</text>`;
+    return [600, 900, s];
+  },
+  baguettes: () => {
+    let s = `<rect width="700" height="560" fill="${C.crust}"/>`;
+    for (let i = 0; i < 7; i++) {
+      const x = 170 + i * 58;
+      s += `<g transform="rotate(${-12 + i * 4} ${x} 520)"><rect x="${x - 18}" y="${60 + (i % 3) * 30}" width="36" height="460" fill="${i % 2 ? C.bake : '#B0682E'}"/>`;
+      for (let k = 0; k < 6; k++) s += `<path d="M${x - 12} ${110 + (i % 3) * 30 + k * 62} l24 -26" stroke="${C.dough}" stroke-width="6"/>`;
+      s += `</g>`;
+    }
+    s += `<path d="M110 380 L590 380 L550 560 L150 560 Z" fill="#C9A26A"/>`;
+    for (let r = 0; r < 5; r++) s += `<rect x="${120 + r * 6}" y="${395 + r * 34}" width="${460 - r * 12}" height="8" fill="#9C7244"/>`;
+    return [700, 560, s];
+  },
+  wheat: () => {
+    let s = `<rect width="700" height="280" fill="${C.ink}"/>`;
+    for (let i = 0; i < 14; i++) {
+      const x = 30 + i * 50;
+      s += `<path d="M${x} 280 Q${x + 10} 160 ${x + 20} 70" stroke="${C.butter}" stroke-width="3" fill="none"/>`;
+      for (let k = 0; k < 6; k++) s += `<ellipse cx="${x + 14 + k * 1.2}" cy="${80 + k * 16}" rx="5" ry="10" fill="${i % 3 ? C.butter : C.bake}" transform="rotate(${k % 2 ? 24 : -24} ${x + 14} ${80 + k * 16})"/>`;
+    }
+    return [700, 280, s];
+  },
+  lamination: () => {
+    let s = `<rect width="600" height="900" fill="${C.flour}"/>`;
+    s += `<rect x="0" y="0" width="600" height="420" fill="#D9D2C4"/>`;
+    for (let i = 0; i < 27; i++) s += `<rect x="60" y="${80 + i * 11}" width="480" height="6" fill="${i % 2 ? C.butter : C.dough}"/>`;
+    s += `<rect x="60" y="78" width="480" height="300" fill="none" stroke="${C.ink}" stroke-width="2"/>`;
+    s += `<text x="60" y="56" fill="${C.ink}" font-family="IBM Plex Mono" font-size="18">27 LAYERS · 3 FOLDS · 4 °C</text>`;
+    const cro = (x, y, sc) => {
+      let g = `<g transform="translate(${x} ${y}) scale(${sc})">`;
+      for (let k = 0; k < 5; k++) g += `<path d="M${-110 + k * 18} 0 Q0 ${-90 + k * 14} ${110 - k * 18} 0 Q0 ${-30 + k * 6} ${-110 + k * 18} 0 Z" fill="${k % 2 ? C.bake : '#B0682E'}"/>`;
+      return g + `</g>`;
+    };
+    s += cro(300, 600, 1.4) + cro(170, 780, .9) + cro(440, 800, 1);
+    return [600, 900, s];
+  },
+  shop: () => {
+    let s = `<rect width="600" height="900" fill="${C.butter}"/><circle cx="470" cy="150" r="70" fill="${C.flour}"/>`;
+    s += `<rect x="40" y="220" width="520" height="680" fill="${C.rye}"/>`;
+    s += `<rect x="40" y="220" width="520" height="80" fill="${C.ink}"/><text x="70" y="275" fill="${C.flour}" font-family="Young Serif" font-size="36">LAMP STREET BAKERY</text>`;
+    for (let i = 0; i < 8; i++) s += `<rect x="${40 + i * 65}" y="300" width="65" height="44" fill="${i % 2 ? C.crust : C.flour}"/>`;
+    s += `<rect x="80" y="390" width="280" height="300" fill="${C.butter}"/><rect x="400" y="390" width="120" height="510" fill="${C.ink}"/>`;
+    for (let r = 0; r < 3; r++) { s += `<rect x="80" y="${470 + r * 90}" width="280" height="6" fill="${C.rye}"/>`; for (let c = 0; c < 4; c++) s += loaf(115 + c * 70, 448 + r * 90, .42); }
+    s += `<rect x="480" y="640" width="16" height="16" fill="${C.butter}"/><rect x="0" y="860" width="600" height="40" fill="${C.ink}"/>`;
+    s += `<text x="80" y="740" fill="${C.flour}" font-family="IBM Plex Mono" font-size="18">OPEN 06:40 · TUE–SUN</text>`;
+    return [600, 900, s];
+  }
+};
+document.querySelectorAll('img[data-art]').forEach(img => {
+  const [w, h, body] = art[img.dataset.art]();
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">${body}</svg>`);
+});
+
+const allergens = {"Country sourdough": "G V", "Seeded sourdough": "G S V", "100% rye": "G V", "Spelt & honey tin": "G", "Baguette tradition": "G V", "Focaccia, quarter tray": "G V", "Butter croissant": "G D E", "Pain au chocolat": "G D E", "Cardamom bun": "G D E", "Seasonal tart": "G D E"};
+document.querySelectorAll('.row').forEach(r => {
+  const tags = (allergens[r.querySelector('b').textContent] || 'G').split(' ');
+  r.querySelector('.f').insertAdjacentHTML('beforebegin', `<span class="al">${tags.map(t => `<abbr class="${t === 'V' ? 'v' : ''}" title="${t}">${t}</abbr>`).join('')}</span>`);
+});
+const left = [12, 9, 0, 14, 20, 31, 0, 18, 6, 24];
+document.querySelectorAll('#bake tbody tr').forEach((tr, i) => {
+  const batch = parseInt(tr.querySelector('td.m').textContent, 10);
+  tr.insertAdjacentHTML('beforeend', `<td class="l">${left[i] ? `${left[i]}<s> / ${batch}</s>` : 'gone'}</td>`);
+});
+const hours = [["Mon", null, "closed — we sleep"], ["Tue", "06:40–14:00", "croissants until gone"], ["Wed", "06:40–14:00", "lamination day"], ["Thu", "06:40–14:00", "cardamom buns"], ["Fri", "06:40–15:00", "focaccia + extra rye"], ["Sat", "07:00–15:00", "queue from 06:45"], ["Sun", "08:00–13:00", "lamination day"]];
+const today = new Date().getDay();
+document.getElementById('hours').innerHTML = hours.map(([d, t, n], i) => {
+  const mark = (i + 1) % 7 === today ? ' style="color:var(--crust)"' : '';
+  return `<div class="d"${mark}>${d}</div><div class="mono${t ? '' : ' closed'}">${t || 'Closed'}</div><div>${n}</div>`;
+}).join('');
+const h = hours[(today + 6) % 7];
+document.getElementById('openstate').textContent = h[1] ? `Open today ${h[1]}` : 'Closed today — back tomorrow 06:40';
+
+document.getElementById('hold').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target;
+  document.getElementById('holdmsg').textContent = `Held: ${f.qty.value} × ${f.loaf.value.split(' · ')[0]} for ${f.name.value}, until 13:00 tomorrow.`;
+});
+</script>
+</body>
+</html>

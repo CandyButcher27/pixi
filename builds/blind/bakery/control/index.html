@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth &amp; Crumb — Neighbourhood Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flour:#f3ece0;
+  --paper:#ebe1cf;
+  --crust:#8a4b22;
+  --char:#231a14;
+  --rye:#5b4636;
+  --butter:#e9b949;
+  --line:#231a1433;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--flour);color:var(--char);font-family:"Fraunces",Georgia,serif;font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.mono{font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+header{border-bottom:1px solid var(--char)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-weight:900;font-size:1.35rem;letter-spacing:-.02em;text-decoration:none}
+.logo i{font-weight:400;color:var(--crust)}
+nav{display:flex;gap:28px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--crust)}
+.status{display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--rye)}
+.dot.on{background:#3f8f4a;box-shadow:0 0 0 4px #3f8f4a33}
+
+.hero{display:grid;grid-template-columns:7fr 5fr;border-bottom:1px solid var(--char);min-height:calc(100vh - 64px)}
+.hero-text{padding:72px 48px 48px 0;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--char)}
+.hero h1{font-size:clamp(3.4rem,9vw,8.4rem);line-height:.88;font-weight:900;letter-spacing:-.045em}
+.hero h1 em{font-weight:300;font-style:italic;color:var(--crust);letter-spacing:-.03em}
+.hero-foot{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-top:48px}
+.hero-foot p{max-width:34ch;font-size:1.15rem;color:var(--rye)}
+.btn{display:inline-block;background:var(--char);color:var(--flour);padding:16px 26px;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--crust)}
+.loaf{background:var(--crust);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.loaf svg{width:78%;max-width:440px;height:auto}
+.loaf .stamp{position:absolute;top:24px;left:24px;color:var(--flour)}
+.loaf .stamp-b{position:absolute;bottom:24px;right:24px;color:var(--flour);text-align:right}
+
+.ticker{background:var(--char);color:var(--butter);padding:14px 0;border-bottom:1px solid var(--char)}
+.ticker .wrap{display:flex;gap:40px;flex-wrap:wrap;justify-content:space-between}
+
+section{border-bottom:1px solid var(--char)}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:80px 0 40px}
+.sec-head h2{font-size:clamp(2.2rem,5vw,4rem);line-height:1;font-weight:600;letter-spacing:-.03em}
+
+.menu{display:grid;grid-template-columns:200px 1fr;gap:40px;padding-bottom:96px}
+.tabs{display:flex;flex-direction:column;gap:6px;align-self:start;position:sticky;top:24px}
+.tabs button{all:unset;cursor:pointer;padding:8px 0;border-bottom:1px solid transparent;font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rye)}
+.tabs button[aria-selected=true]{color:var(--char);border-color:var(--char)}
+.tabs button:focus-visible{outline:2px solid var(--crust);outline-offset:4px}
+.items{list-style:none;columns:2;column-gap:56px}
+.items li{break-inside:avoid;padding:18px 0;border-top:1px solid var(--line)}
+.row{display:flex;align-items:baseline;gap:10px}
+.row b{font-weight:600;font-size:1.25rem}
+.row .lead{flex:1;border-bottom:1px dotted var(--rye);transform:translateY(-5px)}
+.row span{font-family:"Space Mono",monospace}
+.items p{color:var(--rye);font-size:.95rem;margin-top:4px}
+.items .tag{color:var(--crust);margin-left:6px;font-size:.68rem}
+
+.clock{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--char)}
+.clock div{padding:28px 20px 40px;border-right:1px solid var(--char);min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
+.clock div:last-child{border-right:0}
+.clock .t{font-size:2.6rem;font-weight:300;letter-spacing:-.03em}
+.clock div.now{background:var(--butter)}
+
+.story{display:grid;grid-template-columns:5fr 7fr}
+.story .big{background:var(--paper);padding:80px 48px 80px 0;border-right:1px solid var(--char);position:relative}
+.story .big::before{content:"";position:absolute;inset:0 100% 0 -100vw;background:var(--paper)}
+.story blockquote{font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1.1;font-style:italic;font-weight:400;letter-spacing:-.02em}
+.story .txt{padding:80px 0 80px 56px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-content:start}
+.story .txt p{color:var(--rye)}
+.story .stat{border-top:1px solid var(--char);padding-top:14px}
+.story .stat strong{display:block;font-size:3.2rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+
+.visit{display:grid;grid-template-columns:1fr 1fr 1fr;padding:80px 0 96px;gap:40px}
+.visit h3{font-weight:600;font-size:1.5rem;margin:10px 0 12px}
+.visit table{border-collapse:collapse;width:100%}
+.visit td{padding:6px 0;border-bottom:1px solid var(--line)}
+.visit td:last-child{text-align:right;font-family:"Space Mono",monospace;font-size:.85rem}
+form{display:flex;flex-direction:column;gap:12px}
+input{font:inherit;padding:14px;border:1px solid var(--char);background:transparent;color:inherit}
+input:focus{outline:2px solid var(--crust);outline-offset:2px}
+form button{font:inherit;border:0;cursor:pointer}
+#ok{color:var(--crust);min-height:1.5em}
+
+footer{background:var(--char);color:var(--flour);padding:48px 0 28px}
+footer .huge{font-size:clamp(4rem,16vw,15rem);font-weight:900;letter-spacing:-.06em;line-height:.8;color:var(--crust)}
+footer .bot{display:flex;justify-content:space-between;margin-top:32px;flex-wrap:wrap;gap:16px;color:#f3ece099}
+
+@media (max-width:900px){
+  nav{display:none}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero-text{border-right:0;padding:48px 0;border-bottom:1px solid var(--char)}
+  .hero-foot{flex-direction:column;align-items:start}
+  .loaf{min-height:380px}
+  .sec-head,.menu{grid-template-columns:1fr;gap:20px}
+  .tabs{flex-direction:row;flex-wrap:wrap;gap:16px;position:static}
+  .items{columns:1}
+  .clock{grid-template-columns:repeat(2,1fr)}
+  .clock div:nth-child(2n){border-right:0}
+  .clock div{border-bottom:1px solid var(--char);min-height:160px}
+  .story{grid-template-columns:1fr}
+  .story .big{padding:56px 0;border-right:0;border-bottom:1px solid var(--char)}
+  .story .big::before{inset:0 -100vw}
+  .story .txt{padding:56px 0;grid-template-columns:1fr}
+  .visit{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .steam path{animation:rise 3.6s ease-in-out infinite}
+  .steam path:nth-child(2){animation-delay:1.2s}
+  .steam path:nth-child(3){animation-delay:2.4s}
+  @keyframes rise{0%{opacity:0;transform:translateY(12px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-22px)}}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Hearth <i>&amp;</i> Crumb</a>
+    <nav class="mono">
+      <a href="#bake">Today's bake</a>
+      <a href="#oven">Oven clock</a>
+      <a href="#story">Story</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="status mono"><span class="dot" id="dot"></span><span id="status">Checking…</span></div>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div class="hero-text">
+    <div>
+      <p class="mono" style="margin-bottom:28px">No. 14 Mill Lane · Since 2009</p>
+      <h1>Bread worth <em>waking up</em> for.</h1>
+    </div>
+    <div class="hero-foot">
+      <p>Slow sourdough, laminated pastry and one very stubborn wood-fired oven. Baked in the back, sold at the front, gone by two.</p>
+      <a class="btn mono" href="#visit">Reserve a loaf →</a>
+    </div>
+  </div>
+  <div class="loaf" aria-hidden="true">
+    <span class="stamp mono">Batch 0412</span>
+    <svg viewBox="0 0 400 320" fill="none">
+      <g class="steam" stroke="#f3ece0" stroke-width="5" stroke-linecap="round">
+        <path d="M150 90c-14-18 14-30 0-48"/>
+        <path d="M200 80c-14-18 14-30 0-48"/>
+        <path d="M250 90c-14-18 14-30 0-48"/>
+      </g>
+      <path d="M40 230c0-70 72-120 160-120s160 50 160 120c0 30-20 50-50 50H90c-30 0-50-20-50-50Z" fill="#e9b949"/>
+      <path d="M40 230c0-70 72-120 160-120s160 50 160 120c0 30-20 50-50 50H90c-30 0-50-20-50-50Z" stroke="#231a14" stroke-width="5"/>
+      <g stroke="#231a14" stroke-width="5" stroke-linecap="round">
+        <path d="M110 170l40 60"/>
+        <path d="M175 150l40 70"/>
+        <path d="M240 155l40 65"/>
+      </g>
+    </svg>
+    <span class="stamp-b mono">Country white<br>72h ferment</span>
+  </div>
+</div>
+
+<div class="ticker mono">
+  <div class="wrap">
+    <span>Fresh at 7:00</span><span>Croissants at 8:30</span><span>Focaccia at 11:00</span><span>Sold out ≈ 14:00</span>
+  </div>
+</div>
+
+<section id="bake">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="mono">01 / Today</p>
+      <h2>What's on the shelves this morning.</h2>
+    </div>
+    <div class="menu">
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-cat="bread">Bread</button>
+        <button role="tab" aria-selected="false" data-cat="pastry">Pastry</button>
+        <button role="tab" aria-selected="false" data-cat="cake">Cakes</button>
+        <button role="tab" aria-selected="false" data-cat="coffee">Coffee</button>
+      </div>
+      <ul class="items" id="items" role="tabpanel"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="oven">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="mono">02 / Oven clock</p>
+      <h2>Our day starts while yours hasn't.</h2>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="clock" id="clock">
+      <div data-h="3"><span class="t">03:00</span><span class="mono">Fire lit. Levain fed.</span></div>
+      <div data-h="5"><span class="t">05:00</span><span class="mono">Loaves shaped &amp; scored.</span></div>
+      <div data-h="7"><span class="t">07:00</span><span class="mono">Doors open. First bake out.</span></div>
+      <div data-h="9"><span class="t">08:30</span><span class="mono">Croissant tray two.</span></div>
+      <div data-h="11"><span class="t">11:00</span><span class="mono">Focaccia &amp; sandwiches.</span></div>
+      <div data-h="14"><span class="t">14:00</span><span class="mono">Usually sold out. Ovens rest.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap story">
+    <div class="big">
+      <p class="mono" style="margin-bottom:24px">03 / Story</p>
+      <blockquote>“We never made more than we could sell by lunch. That's the whole business plan.”</blockquote>
+      <p class="mono" style="margin-top:24px">— Ines Marlow, baker &amp; owner</p>
+    </div>
+    <div class="txt">
+      <p>Ines started baking from a borrowed kitchen on Mill Lane with one sack of local wheat and a starter she'd kept alive through three house moves. Fifteen years on, the starter is the same.</p>
+      <p>Our flour comes from Fallow Farm, eleven miles north, stone-milled weekly. Butter is cultured, eggs are free-range, and anything left at close goes to the shelter on Corn Street.</p>
+      <div class="stat"><strong>11 mi</strong><span class="mono">to our miller</span></div>
+      <div class="stat"><strong>0</strong><span class="mono">loaves binned last year</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap visit">
+    <div>
+      <p class="mono">04 / Find us</p>
+      <h3>14 Mill Lane, Old Town</h3>
+      <p style="color:var(--rye)">Two doors from the post office. Bench outside, dogs welcome, cards &amp; cash.</p>
+      <p style="margin-top:16px"><a href="tel:+15550144">(555) 0144</a></p>
+    </div>
+    <div>
+      <p class="mono">Hours</p>
+      <h3>Open early, close when empty</h3>
+      <table id="hours">
+        <tr data-d="2"><td>Tue – Fri</td><td>07:00 – 15:00</td></tr>
+        <tr data-d="6"><td>Saturday</td><td>07:00 – 14:00</td></tr>
+        <tr data-d="0"><td>Sunday</td><td>08:00 – 13:00</td></tr>
+        <tr data-d="1"><td>Monday</td><td>Closed</td></tr>
+      </table>
+    </div>
+    <div>
+      <p class="mono">Hold a loaf</p>
+      <h3>Reserve before 9 pm</h3>
+      <form id="hold">
+        <label class="mono" for="n">Name</label>
+        <input id="n" required autocomplete="name">
+        <label class="mono" for="l">Which loaf?</label>
+        <input id="l" required placeholder="e.g. 2 × country white">
+        <button class="btn mono" type="submit">Hold it for me</button>
+        <p id="ok" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="huge">Hearth&amp;Crumb</div>
+    <div class="bot mono"><span>© 2026 Hearth &amp; Crumb Bakery</span><span>Instagram · Newsletter</span></div>
+  </div>
+</footer>
+
+<script>
+const menu={
+  bread:[["Country white","Our 72-hour house sourdough.","7.50","Daily"],["Seeded rye","Dense, dark, 40% rye, sunflower & flax.","8.00",""],["Fallow wholemeal","100% stone-milled wholewheat.","7.00",""],["Olive & rosemary fougasse","Leaf-shaped, oily, best warm.","5.50","Sat"],["Baguette","Long-fermented, shattering crust.","3.50","Daily"],["Cinnamon brioche loaf","Swirled, sticky, slightly much.","9.00","Sun"]],
+  pastry:[["Butter croissant","Cultured butter, 27 layers.","3.80","Daily"],["Pain au chocolat","Two batons of dark chocolate.","4.20",""],["Cardamom knot","Swedish-style, pearl sugar.","4.00","Fan fav"],["Seasonal danish","Rhubarb & custard this week.","4.50",""],["Ham & gruyère","Folded, mustard, black pepper.","5.20",""]],
+  cake:[["Brown butter financier","Almond, hazelnut, crisp edges.","2.80",""],["Lemon drizzle slice","Sharp, soft, honest.","3.50",""],["Basque cheesecake","Whole cakes to order, 48h notice.","38.00","Order"],["Olive oil & orange cake","Dairy-free, by the slice.","4.00",""]],
+  coffee:[["Filter","Rotating single origin.","2.80",""],["Flat white","Oat milk at no extra cost.","3.40",""],["Hot chocolate","Made with the pain au chocolat chocolate.","3.60",""],["Fresh orange juice","Squeezed at the counter.","3.50",""]]
+};
+const list=document.getElementById("items");
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function show(cat){
+  list.innerHTML=menu[cat].map(([n,d,p,t])=>`<li><div class="row"><b>${esc(n)}</b>${t?`<span class="tag mono">${esc(t)}</span>`:""}<i class="lead"></i><span>£${p}</span></div><p>${esc(d)}</p></li>`).join("");
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.cat===cat));
+}
+document.querySelector(".tabs").addEventListener("click",e=>{if(e.target.dataset.cat)show(e.target.dataset.cat)});
+show("bread");
+
+const now=new Date(),h=now.getHours()+now.getMinutes()/60,d=now.getDay();
+const hrs={0:[8,13],1:null,2:[7,15],3:[7,15],4:[7,15],5:[7,15],6:[7,14]}[d];
+const open=hrs&&h>=hrs[0]&&h<hrs[1];
+document.getElementById("dot").classList.toggle("on",!!open);
+document.getElementById("status").textContent=open?"Open now":hrs&&h<hrs[0]?`Opens ${hrs[0]}:00`:"Closed";
+const row=document.querySelector(`#hours tr[data-d="${d>=2&&d<=5?2:d}"]`);
+if(row)row.style.fontWeight="600";
+const slots=[...document.querySelectorAll("#clock div")];
+const cur=slots.filter(s=>+s.dataset.h<=h).pop();
+if(cur)cur.classList.add("now");
+
+document.getElementById("hold").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("ok").textContent=`Thanks ${document.getElementById("n").value} — it'll be wrapped and waiting under your name.`;
+  e.target.reset();
+});
+</script>
+</body>
+</html>

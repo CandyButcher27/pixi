@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Undertow Audio — nine slow shows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEEAE1;--ink:#16140F;--muted:#6B665B;--rule:#C9C3B5;--signal:#D9441C;
+  --night-rule:#3A362D;--night-muted:#A39D8E;
+  --display:"Big Shoulders Display",Impact,sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --gutter:48px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--serif);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1344px;margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-block;font:500 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:16px 22px;border:1px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.signal{background:var(--signal);border-color:var(--signal);color:var(--paper)}
+.btn.signal:hover{background:var(--ink);border-color:var(--ink)}
+.live-dot{display:inline-block;width:8px;height:8px;background:var(--signal);margin-right:8px;vertical-align:1px;animation:blink 1.6s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+
+header{border-bottom:1px solid var(--ink)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font:800 26px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;text-decoration:none}
+header nav{display:flex;gap:32px}
+header nav a{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+header nav a:hover{color:var(--signal)}
+
+section{padding:120px 0}
+.h2{font:800 64px/.92 var(--display);text-transform:uppercase;letter-spacing:-.005em}
+
+/* 1 hero — anchor left */
+.hero{padding:96px 0 112px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);gap:72px;align-items:end}
+.hero h1{font:800 clamp(64px,9vw,128px)/.86 var(--display);text-transform:uppercase;letter-spacing:-.01em;margin:28px 0 40px}
+.hero h1 em{font-style:normal;color:var(--signal)}
+.hero .dek{font-size:22px;line-height:1.45;max-width:30em;margin-bottom:40px}
+.hero .actions{display:flex;gap:16px;flex-wrap:wrap}
+.onair{border-top:2px solid var(--ink)}
+.onair li{list-style:none;display:grid;grid-template-columns:52px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px;line-height:1.35}
+.onair li .mono{color:var(--muted);font-size:12px}
+.onair li.now .mono{color:var(--signal)}
+.onair .label{display:block;padding:12px 0 8px}
+
+/* 2 roster — full-bleed night band, anchor right */
+.roster{background:var(--ink);color:var(--paper)}
+.roster .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:72px}
+.roster .label{color:var(--night-muted)}
+.roster .side{display:flex;flex-direction:column;align-items:flex-start;gap:16px;border-top:1px solid var(--paper);padding-top:20px;align-self:start}
+.roster .count{font:800 112px/.85 var(--display);color:var(--signal)}
+.roster .head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:end;margin-bottom:56px}
+.roster .head p{color:var(--night-muted);font-size:16px}
+.roster table{width:100%;border-collapse:collapse}
+.roster th{text-align:left;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--night-muted);padding:0 12px 14px 0;border-bottom:1px solid var(--paper)}
+.roster td{padding:20px 12px 20px 0;border-bottom:1px solid var(--night-rule);vertical-align:baseline}
+.roster td.n{font:400 13px var(--mono);color:var(--night-muted);width:48px}
+.roster td.t{font:600 30px/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.roster td.h{font-size:15px;font-style:italic;color:#D6D0C2}
+.roster td.c,.roster td.e{font:400 13px var(--mono);color:var(--night-muted);white-space:nowrap}
+.roster td.e{text-align:right;padding-right:0}
+.roster tr:hover td.t{color:var(--signal)}
+
+/* 3 this week — anchor left */
+.week .wrap{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,1fr);gap:88px}
+.week .h2{margin:20px 0 48px}
+.ep{display:grid;grid-template-columns:56px minmax(0,1fr) 120px 64px 44px;gap:20px;align-items:center;padding:22px 0;border-top:1px solid var(--rule)}
+.ep:last-child{border-bottom:1px solid var(--rule)}
+.ep .no{font:400 13px var(--mono);color:var(--muted)}
+.ep h3{font:500 21px/1.25 var(--serif)}
+.ep .show{display:block;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.wave{display:flex;align-items:center;gap:3px;height:28px}
+.wave i{display:block;width:3px;background:var(--rule);height:var(--h)}
+.ep.playing .wave i{background:var(--signal);animation:bar .9s ease-in-out infinite alternate}
+.ep.playing .wave i:nth-child(2n){animation-delay:-.3s}
+.ep.playing .wave i:nth-child(3n){animation-delay:-.6s}
+@keyframes bar{to{height:6px}}
+.ep .dur{font:400 13px var(--mono);text-align:right}
+.play{width:44px;height:44px;border:1px solid var(--ink);border-radius:0;background:transparent;cursor:pointer;font:500 14px/1 var(--mono);color:var(--ink)}
+.play:hover,.ep.playing .play{background:var(--ink);color:var(--paper)}
+.note{align-self:start;margin-top:112px;border-top:2px solid var(--ink);padding-top:20px}
+.note p{font-size:17px;line-height:1.6;margin-top:16px}
+.note p.sig{font-style:italic;color:var(--muted);font-size:15px}
+.nowbar{margin-top:28px;font:400 12px/1.5 var(--mono);color:var(--muted)}
+.nowbar b{font-weight:500;color:var(--signal)}
+
+/* 4 method — anchor right */
+.method{border-top:1px solid var(--ink)}
+.method .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:88px}
+.method .num{font:800 64px/1 var(--display);color:var(--rule)}
+.method .h2{margin:20px 0 36px}
+.method .lede{font-size:24px;line-height:1.45;max-width:30em;margin-bottom:56px}
+.method ol{list-style:none;counter-reset:m}
+.method li{counter-increment:m;display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding:26px 0;border-top:1px solid var(--rule)}
+.method li::before{content:counter(m,decimal-leading-zero);font:400 13px var(--mono);color:var(--muted);padding-top:6px}
+.method li strong{font:600 26px/1.1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.method li p{font-size:16px;color:#3A362D}
+
+/* 5 pitch — anchor left */
+.pitch{border-top:1px solid var(--ink);padding-bottom:140px}
+.pitch .wrap{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:88px}
+.pitch .h2{margin:20px 0 48px;font-size:64px}
+.pitch .cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:48px}
+.pitch .cols h3{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.pitch .cols p{font-size:17px;line-height:1.6}
+.contacts{align-self:end;border-top:2px solid var(--ink)}
+.contacts div{padding:14px 0;border-bottom:1px solid var(--rule)}
+.contacts .label{display:block;margin-bottom:4px}
+.contacts a{font:400 14px var(--mono);text-decoration:none}
+.contacts a:hover{color:var(--signal)}
+
+footer{border-top:1px solid var(--ink)}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
+footer .mono{color:var(--muted)}
+
+@media (max-width:900px){
+  :root{--gutter:20px}
+  header nav{display:none}
+  section{padding:72px 0}
+  .hero .wrap,.roster .wrap,.week .wrap,.method .wrap,.pitch .wrap{grid-template-columns:1fr;gap:48px}
+  .h2,.pitch .h2{font-size:44px}
+  .roster .head{grid-template-columns:1fr;gap:20px}
+  .roster .count{font-size:72px}
+  .roster td.c,.roster th.c{display:none}
+  .roster td.t{font-size:22px}
+  .ep{grid-template-columns:40px minmax(0,1fr) 44px;gap:14px}
+  .ep .wave,.ep .dur{display:none}
+  .note{margin-top:0}
+  .method li{grid-template-columns:44px 1fr}
+  .method li p{grid-column:2}
+  .pitch .cols{grid-template-columns:1fr}
+  footer .wrap{flex-direction:column;justify-content:center;gap:6px;height:auto;padding:20px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#">Undertow</a>
+    <nav>
+      <a href="#roster">Shows</a>
+      <a href="#week">This week</a>
+      <a href="#method">Method</a>
+      <a href="#pitch">Pitch &amp; advertise</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="label"><span class="live-dot"></span>Independent audio since 2017 · Nine shows</span>
+        <h1>Slow radio<br>for <em>loud</em> times</h1>
+        <p class="dek">Undertow is a small network of reported podcasts that take months, not days. No hot takes, no daily feed. Nine shows, each one made by people who stayed with the story.</p>
+        <div class="actions">
+          <a class="btn signal" href="#week">Start listening</a>
+          <a class="btn" href="#roster">See the roster</a>
+        </div>
+      </div>
+      <aside>
+        <span class="label" style="display:block;padding-bottom:10px">Release log</span>
+        <ol class="onair">
+          <li class="now"><span class="mono">TODAY</span>Salt Line, ep. 14</li>
+          <li><span class="mono">TUE</span>The Night Desk</li>
+          <li><span class="mono">THU</span>Ground Truth</li>
+          <li><span class="mono">SAT</span>Low Tide Letters</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="roster" id="roster">
+    <div class="wrap">
+      <div class="side">
+        <span class="label">02 — The roster</span>
+        <span class="count">09</span>
+        <span class="label">shows · 1.9M monthly listens</span>
+      </div>
+      <div>
+      <div class="head">
+        <h2 class="h2">Nine shows,<br>one ear</h2>
+        <p>Every show on Undertow is independently owned by its makers. We handle the edit, the ads and the distribution; they keep the story.</p>
+      </div>
+      <table>
+        <thead><tr><th>Nº</th><th>Show</th><th>Hosted by</th><th class="c">Cadence</th><th style="text-align:right">Eps</th></tr></thead>
+        <tbody>
+          <tr><td class="n">01</td><td class="t">Salt Line</td><td class="h">Maren Ostby</td><td class="c">Fortnightly</td><td class="e">14</td></tr>
+          <tr><td class="n">02</td><td class="t">The Night Desk</td><td class="h">Theo Abara</td><td class="c">Weekly</td><td class="e">112</td></tr>
+          <tr><td class="n">03</td><td class="t">Ground Truth</td><td class="h">Priya Nandakumar</td><td class="c">Seasonal</td><td class="e">36</td></tr>
+          <tr><td class="n">04</td><td class="t">Low Tide Letters</td><td class="h">June &amp; Ada Holm</td><td class="c">Weekly</td><td class="e">208</td></tr>
+          <tr><td class="n">05</td><td class="t">Second Shift</td><td class="h">Ramón Esteve</td><td class="c">Monthly</td><td class="e">41</td></tr>
+          <tr><td class="n">06</td><td class="t">Dead Air</td><td class="h">Kit Lowell</td><td class="c">Seasonal</td><td class="e">24</td></tr>
+          <tr><td class="n">07</td><td class="t">The Long Field</td><td class="h">Ifeoma Chukwu</td><td class="c">Fortnightly</td><td class="e">58</td></tr>
+          <tr><td class="n">08</td><td class="t">Undertones</td><td class="h">Sasha Vidal</td><td class="c">Weekly</td><td class="e">97</td></tr>
+          <tr><td class="n">09</td><td class="t">Common Ground</td><td class="h">Ben Okafor</td><td class="c">Monthly</td><td class="e">19</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="week" id="week">
+    <div class="wrap">
+      <div>
+        <span class="label">03 — This week</span>
+        <h2 class="h2">What aired</h2>
+        <div class="list">
+          <div class="ep"><span class="no">S2·14</span><h3>The harbour that moved overnight<span class="show">Salt Line</span></h3><div class="wave"></div><span class="dur">48:12</span><button class="play" aria-label="Play">&#9654;</button></div>
+          <div class="ep"><span class="no">112</span><h3>Calls from the last open diner on Route 9<span class="show">The Night Desk</span></h3><div class="wave"></div><span class="dur">36:40</span><button class="play" aria-label="Play">&#9654;</button></div>
+          <div class="ep"><span class="no">S4·03</span><h3>Who counts the water table<span class="show">Ground Truth</span></h3><div class="wave"></div><span class="dur">52:05</span><button class="play" aria-label="Play">&#9654;</button></div>
+          <div class="ep"><span class="no">208</span><h3>A letter we were asked not to read<span class="show">Low Tide Letters</span></h3><div class="wave"></div><span class="dur">22:18</span><button class="play" aria-label="Play">&#9654;</button></div>
+          <div class="ep"><span class="no">58</span><h3>Harvest, in the dark, by hand<span class="show">The Long Field</span></h3><div class="wave"></div><span class="dur">44:51</span><button class="play" aria-label="Play">&#9654;</button></div>
+        </div>
+        <p class="nowbar" aria-live="polite">Nothing playing. Pick an episode.</p>
+      </div>
+      <aside class="note">
+        <span class="label">Editor's note</span>
+        <p>Five episodes this week, three of them a year in the making. Start with the harbour.</p>
+        <p class="sig">— L. Marsh, managing editor</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="method" id="method">
+    <div class="wrap">
+      <div><span class="num">04</span></div>
+      <div>
+        <span class="label">How a show gets made</span>
+        <h2 class="h2">Months, not minutes</h2>
+        <p class="lede">We publish less than any network our size, on purpose. Every episode passes through the same four rooms before it reaches your feed.</p>
+        <ol>
+          <li><strong>Reporting</strong><p>Hosts get a paid reporting window of up to twelve weeks before a single episode is scheduled.</p></li>
+          <li><strong>The edit room</strong><p>Two editors per episode, one who knows the story and one who has never heard of it.</p></li>
+          <li><strong>Fact check</strong><p>Every claim is sourced and every voice is called back before air.</p></li>
+          <li><strong>The mix</strong><p>Scored and mixed in-house, mastered for headphones and for the car.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pitch" id="pitch">
+    <div class="wrap">
+      <div>
+        <span class="label">05 — Work with us</span>
+        <h2 class="h2">Pitch a show.<br>Or sponsor one.</h2>
+        <div class="cols">
+          <div><h3>For makers</h3><p>We take on two new shows a year. Send a one-page treatment and ten minutes of tape. You keep ownership; we fund the reporting and the edit.</p></div>
+          <div><h3>For advertisers</h3><p>Host-read spots only, booked by season, on shows that match what you make. 1.9M monthly downloads across the network.</p></div>
+        </div>
+        <a class="btn signal" href="mailto:pitch@undertow.audio">Send a pitch</a>
+      </div>
+      <aside class="contacts">
+        <div><span class="label">Pitches</span><a href="mailto:pitch@undertow.audio">pitch@undertow.audio</a></div>
+        <div><span class="label">Advertising</span><a href="mailto:ads@undertow.audio">ads@undertow.audio</a></div>
+        <div><span class="label">Press</span><a href="mailto:press@undertow.audio">press@undertow.audio</a></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Undertow</span>
+    <span class="mono">© 2026 Undertow Audio · RSS · Apple · Spotify · Pocket Casts</span>
+  </div>
+</footer>
+
+<script>
+const heights = [12,24,16,28,10,20];
+document.querySelectorAll('.wave').forEach((w, i) => {
+  w.innerHTML = heights.map((h, j) => `<i style="--h:${heights[(j + i * 3) % heights.length]}px"></i>`).join('');
+});
+const bar = document.querySelector('.nowbar');
+document.querySelectorAll('.ep').forEach(ep => {
+  ep.querySelector('.play').addEventListener('click', () => {
+    const on = !ep.classList.contains('playing');
+    document.querySelectorAll('.ep.playing').forEach(e => {
+      e.classList.remove('playing');
+      e.querySelector('.play').innerHTML = '&#9654;';
+    });
+    if (on) {
+      ep.classList.add('playing');
+      ep.querySelector('.play').innerHTML = '&#10073;&#10073;';
+      bar.innerHTML = `<b>Now playing</b> ${ep.querySelector('.show').textContent} — ${ep.querySelector('h3').firstChild.textContent}`;
+    } else {
+      bar.textContent = 'Nothing playing. Pick an episode.';
+    }
+  });
+});
+</script>
+</body>
+</html>

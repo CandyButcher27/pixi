@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stillwater Yoga — Studio in the Old Mill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#f3ebdf; --paper:#faf6ef; --clay:#b4573a; --olive:#3d4a33; --ink:#1f1d1a; --muted:#6c655b; --line:#d9cdbb;
+  --serif:'Fraunces',Georgia,serif; --sans:'Manrope',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--sans)}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font:500 22px var(--serif);text-decoration:none;letter-spacing:-.01em}
+.logo i{color:var(--clay);font-style:italic;font-weight:300}
+nav ul{display:flex;gap:32px;list-style:none;font-size:15px}
+nav ul a{text-decoration:none}
+nav ul a:hover{color:var(--clay)}
+.btn{display:inline-block;padding:13px 24px;background:var(--olive);color:var(--paper);text-decoration:none;font-weight:500;font-size:15px;border:1px solid var(--olive);transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--olive)}
+.btn.ghost{background:transparent;color:var(--olive)}
+.btn.ghost:hover{background:var(--olive);color:var(--paper)}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:calc(100vh - 68px);border-bottom:1px solid var(--line)}
+.hero-text{padding:9vh 6vw 6vh 0;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font:300 clamp(54px,8.2vw,124px)/.95 var(--serif);letter-spacing:-.035em}
+.hero h1 em{color:var(--clay)}
+.hero p.lede{max-width:440px;font-size:19px;color:var(--muted)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-art{background:var(--olive);position:relative;overflow:hidden;margin-right:calc(-1 * max(28px,(100vw - 1240px)/2 + 28px))}
+.hero-art svg{position:absolute;inset:0;width:100%;height:100%}
+.today{position:absolute;left:32px;bottom:32px;right:32px;max-width:340px;background:var(--paper);padding:22px 24px}
+.today h3{font:500 13px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.today li{list-style:none;display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.today li b{font-weight:700}
+
+section{padding:120px 0}
+.sec-head{display:grid;grid-template-columns:1fr 2fr;gap:40px;margin-bottom:64px;align-items:end}
+.sec-head h2{font:300 clamp(38px,4.6vw,64px)/1 var(--serif);letter-spacing:-.025em}
+.sec-head p{color:var(--muted);max-width:520px;justify-self:end}
+
+.classes{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
+.class{padding:28px 24px 36px 0;border-right:1px solid var(--line);margin-right:24px}
+.class:last-child{border-right:0;margin-right:0}
+.class .n{font:300 15px var(--serif);color:var(--clay)}
+.class h3{font:500 28px/1.1 var(--serif);margin:56px 0 14px}
+.class p{font-size:15px;color:var(--muted)}
+.class .meta{margin-top:22px;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+
+.schedule{background:var(--sand)}
+.days{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
+.days button{font:500 14px var(--sans);padding:10px 18px;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer}
+.days button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+table{width:100%;border-collapse:collapse}
+td{padding:20px 0;border-top:1px solid var(--line);vertical-align:middle}
+td.t{font:300 30px var(--serif);width:150px}
+td.c{font-weight:700}
+td.c small{display:block;font-weight:400;color:var(--muted)}
+td.l{color:var(--muted);font-size:14px}
+td.r{text-align:right}
+td.r a{font-size:14px;font-weight:500;color:var(--clay)}
+
+.teachers{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.teacher .ph{aspect-ratio:4/5;margin-bottom:18px;position:relative;overflow:hidden}
+.teacher h3{font:500 24px var(--serif)}
+.teacher p{color:var(--muted);font-size:15px}
+
+.quote{background:var(--clay);color:var(--paper);padding:140px 0}
+.quote blockquote{font:300 italic clamp(30px,4vw,54px)/1.15 var(--serif);max-width:980px;letter-spacing:-.015em}
+.quote cite{display:block;margin-top:36px;font:500 14px var(--sans);font-style:normal;letter-spacing:.12em;text-transform:uppercase}
+
+.plans{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--ink)}
+.plan{padding:40px 32px;border-right:1px solid var(--ink);display:flex;flex-direction:column;gap:18px}
+.plan:last-child{border-right:0}
+.plan.hl{background:var(--olive);color:var(--paper)}
+.plan.hl .btn{background:var(--paper);color:var(--olive);border-color:var(--paper)}
+.plan h3{font:500 14px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.plan .price{font:300 64px/1 var(--serif)}
+.plan .price span{font:400 15px var(--sans);opacity:.7}
+.plan ul{list-style:none;font-size:15px;flex:1}
+.plan li{padding:8px 0;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:64px;border-top:1px solid var(--line)}
+.visit h2{font:300 clamp(38px,4.6vw,64px)/1 var(--serif);letter-spacing:-.025em;margin-bottom:28px}
+.visit dl{display:grid;grid-template-columns:120px 1fr;gap:14px 20px;font-size:16px}
+.visit dt{color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding-top:3px}
+form{display:flex;flex-direction:column;gap:14px}
+label{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+input,select{font:400 17px var(--sans);padding:14px 0;border:0;border-bottom:1px solid var(--ink);background:transparent;color:var(--ink);outline:none}
+input:focus,select:focus{border-color:var(--clay)}
+form .btn{align-self:flex-start;margin-top:12px;cursor:pointer}
+.ok{color:var(--olive);font-weight:500;min-height:1.6em}
+
+footer{background:var(--ink);color:var(--sand);padding:56px 0 40px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .big{font:300 clamp(48px,9vw,140px)/.9 var(--serif);letter-spacing:-.04em;width:100%;margin-bottom:40px;color:var(--paper)}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  nav ul{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-text{padding:56px 0}
+  .hero-art{min-height:520px;margin:0 -28px}
+  .sec-head,.visit{grid-template-columns:1fr}
+  .sec-head p{justify-self:start}
+  .classes{grid-template-columns:1fr 1fr}
+  .class:nth-child(2n){border-right:0;margin-right:0}
+  .teachers,.plans{grid-template-columns:1fr}
+  .plan{border-right:0;border-bottom:1px solid var(--ink)}
+  .plan:last-child{border-bottom:0}
+  td.t{width:90px;font-size:22px}
+  td.l{display:none}
+  section{padding:80px 0}
+}
+@media (max-width:520px){.classes{grid-template-columns:1fr}.class{border-right:0;margin-right:0}}
+</style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="#">Stillwater <i>yoga</i></a>
+    <ul>
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#teachers">Teachers</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <a class="btn" href="#visit">First class free</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-text">
+        <span class="eyebrow">Est. 2014 &middot; Second floor of the Old Mill</span>
+        <h1>Slow down.<br>Breathe <em>in</em>.<br>Stay a while.</h1>
+        <div>
+          <p class="lede">A small, sunlit studio for unhurried practice. Twelve mats per room, no mirrors, and teachers who learn your name on the first visit.</p>
+          <div class="hero-cta" style="margin-top:28px">
+            <a class="btn" href="#schedule">See this week</a>
+            <a class="btn ghost" href="#pricing">Memberships</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+          <rect width="600" height="800" fill="#3d4a33"/>
+          <circle cx="380" cy="250" r="150" fill="#b4573a"/>
+          <path d="M0 520 C120 460 220 500 320 470 S520 400 600 430 V800 H0Z" fill="#56664a"/>
+          <path d="M0 600 C140 560 260 610 380 580 S540 540 600 560 V800 H0Z" fill="#2c3625"/>
+          <g stroke="#f3ebdf" stroke-width="1" fill="none" opacity=".35">
+            <circle cx="380" cy="250" r="190"/><circle cx="380" cy="250" r="230"/><circle cx="380" cy="250" r="270"/>
+          </g>
+        </svg>
+        <div class="today">
+          <h3>Today at Stillwater</h3>
+          <ul id="today"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="classes">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Four ways<br>to practise</h2>
+        <p>Every class is 60 or 75 minutes, taught by a single teacher, with time to rest at the end. Props are provided. Come as you are.</p>
+      </div>
+      <div class="classes rv">
+        <article class="class"><span class="n">i.</span><h3>Slow Flow</h3><p>Vinyasa at half speed. Linked breath and movement, with room to feel each shape.</p><div class="meta">All levels &middot; 60 min</div></article>
+        <article class="class"><span class="n">ii.</span><h3>Yin &amp; Restore</h3><p>Long, supported holds on bolsters and blocks. The class people book for Sunday evening.</p><div class="meta">All levels &middot; 75 min</div></article>
+        <article class="class"><span class="n">iii.</span><h3>Strong Hatha</h3><p>Standing work, balances and inversions, built carefully over a six-week arc.</p><div class="meta">Intermediate &middot; 75 min</div></article>
+        <article class="class"><span class="n">iv.</span><h3>Breath &amp; Sit</h3><p>Pranayama and twenty quiet minutes of meditation. No experience needed.</p><div class="meta">All levels &middot; 45 min</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule" class="schedule">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>This week</h2>
+        <p>Book up to seven days ahead. Late cancellations within two hours count as a class, so someone on the waitlist can take your mat.</p>
+      </div>
+      <div class="days" role="tablist" id="days"></div>
+      <table><tbody id="slots"></tbody></table>
+    </div>
+  </section>
+
+  <section id="teachers">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>The teachers</h2>
+        <p>Between them, more than forty years of teaching. None of them will push you into a pose you don't want.</p>
+      </div>
+      <div class="teachers rv">
+        <div class="teacher"><div class="ph" style="background:#d6b89a"><svg viewBox="0 0 100 125" width="100%" height="100%"><circle cx="50" cy="44" r="18" fill="#b4573a"/><path d="M14 125 C18 86 82 86 86 125Z" fill="#3d4a33"/></svg></div><h3>Mira Okafor</h3><p>Founder. Slow Flow and Yin. Trained in Mysore and London.</p></div>
+        <div class="teacher"><div class="ph" style="background:#c9cdb5"><svg viewBox="0 0 100 125" width="100%" height="100%"><circle cx="50" cy="44" r="18" fill="#3d4a33"/><path d="M14 125 C18 86 82 86 86 125Z" fill="#b4573a"/></svg></div><h3>Tom Lindqvist</h3><p>Strong Hatha. Former climber who came to yoga for his shoulders.</p></div>
+        <div class="teacher"><div class="ph" style="background:#e6d3c0"><svg viewBox="0 0 100 125" width="100%" height="100%"><circle cx="50" cy="44" r="18" fill="#1f1d1a"/><path d="M14 125 C18 86 82 86 86 125Z" fill="#56664a"/></svg></div><h3>Anika Rao</h3><p>Breath &amp; Sit. Teaches meditation to nurses at the city hospital.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote">
+    <div class="wrap rv">
+      <blockquote>&ldquo;I came for my lower back and stayed for the quiet. It's the only hour of the week nobody can reach me.&rdquo;</blockquote>
+      <cite>Joanna, member since 2019</cite>
+    </div>
+  </div>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Memberships</h2>
+        <p>Your first class is free. After that, pick whatever fits your week. Pause any membership for up to a month a year.</p>
+      </div>
+      <div class="plans rv">
+        <div class="plan"><h3>Drop in</h3><div class="price">$22 <span>/ class</span></div><ul><li>Any class on the timetable</li><li>Mat and props included</li><li>Book seven days ahead</li></ul><a class="btn ghost" href="#visit">Book a class</a></div>
+        <div class="plan hl"><h3>Unlimited</h3><div class="price">$129 <span>/ month</span></div><ul><li>Every class, every day</li><li>Free mat storage</li><li>Two guest passes a month</li><li>Workshops at 20% off</li></ul><a class="btn" href="#visit">Start membership</a></div>
+        <div class="plan"><h3>Ten pack</h3><div class="price">$180 <span>/ 10</span></div><ul><li>Valid for six months</li><li>Shareable with one friend</li><li>No monthly commitment</li></ul><a class="btn ghost" href="#visit">Buy pack</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="wrap visit">
+    <div class="rv">
+      <h2>Come in for<br>your first class</h2>
+      <dl>
+        <dt>Address</dt><dd>14 Mill Lane, Second Floor<br>Riverside, OR 97201</dd>
+        <dt>Hours</dt><dd>Mon&ndash;Fri 6:30&ndash;21:00<br>Sat&ndash;Sun 8:00&ndash;18:00</dd>
+        <dt>Contact</dt><dd>hello@stillwater.yoga<br>(503) 555-0142</dd>
+        <dt>Arrive</dt><dd>Ten minutes early. Shoes off at the door, tea after class.</dd>
+      </dl>
+    </div>
+    <form class="rv" id="trial">
+      <label for="nm">Name</label><input id="nm" required autocomplete="name">
+      <label for="em">Email</label><input id="em" type="email" required autocomplete="email">
+      <label for="cl">Class you'd like to try</label>
+      <select id="cl"><option>Slow Flow</option><option>Yin &amp; Restore</option><option>Strong Hatha</option><option>Breath &amp; Sit</option></select>
+      <button class="btn" type="submit">Claim free class</button>
+      <p class="ok" id="ok" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Stillwater</div>
+    <span>&copy; 2026 Stillwater Yoga Studio</span>
+    <span>Instagram &middot; Newsletter &middot; Gift cards</span>
+  </div>
+</footer>
+
+<script>
+const week={
+  Mon:[["06:45","Slow Flow","Mira","Sun room"],["12:15","Breath & Sit","Anika","Small room"],["18:00","Strong Hatha","Tom","Sun room"],["19:30","Yin & Restore","Mira","Sun room"]],
+  Tue:[["07:00","Strong Hatha","Tom","Sun room"],["12:15","Slow Flow","Mira","Sun room"],["18:30","Slow Flow","Anika","Sun room"]],
+  Wed:[["06:45","Slow Flow","Mira","Sun room"],["17:30","Breath & Sit","Anika","Small room"],["19:00","Yin & Restore","Tom","Sun room"]],
+  Thu:[["07:00","Strong Hatha","Tom","Sun room"],["12:15","Breath & Sit","Anika","Small room"],["18:30","Slow Flow","Mira","Sun room"]],
+  Fri:[["06:45","Slow Flow","Anika","Sun room"],["18:00","Yin & Restore","Mira","Sun room"]],
+  Sat:[["09:00","Strong Hatha","Tom","Sun room"],["10:45","Slow Flow","Mira","Sun room"],["16:00","Breath & Sit","Anika","Small room"]],
+  Sun:[["10:00","Slow Flow","Tom","Sun room"],["17:00","Yin & Restore","Mira","Sun room"]]
+};
+const names=Object.keys(week), days=document.getElementById('days'), slots=document.getElementById('slots');
+const todayKey=names[(new Date().getDay()+6)%7];
+function show(d){
+  [...days.children].forEach(b=>b.setAttribute('aria-selected',b.textContent===d));
+  slots.innerHTML=week[d].map(([t,c,who,room])=>`<tr><td class="t">${t}</td><td class="c">${c}<small>with ${who}</small></td><td class="l">${room}</td><td class="r"><a href="#visit">Book &rarr;</a></td></tr>`).join('');
+}
+names.forEach(d=>{const b=document.createElement('button');b.textContent=d;b.setAttribute('role','tab');b.onclick=()=>show(d);days.appendChild(b)});
+show(todayKey);
+document.getElementById('today').innerHTML=week[todayKey].slice(0,3).map(([t,c])=>`<li><span>${c}</span><b>${t}</b></li>`).join('');
+document.getElementById('trial').addEventListener('submit',e=>{e.preventDefault();document.getElementById('ok').textContent=`Thanks, ${document.getElementById('nm').value.split(' ')[0]}. We'll email you a booking link.`;e.target.reset()});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

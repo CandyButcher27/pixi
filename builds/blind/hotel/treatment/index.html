@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dar Tilwa — an eleven-room riad in Mouassine, Marrakech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,500&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plaster:#EFE3CF; --terra:#B0502B; --rose:#C76A4A; --blue:#24358F;
+  --saffron:#D9A23A; --palm:#3E5B3A; --ink:#1F1712; --rule:rgba(31,23,18,.28);
+  --display:"Bodoni Moda", "Didot", serif;
+  --body:"Newsreader", "Georgia", serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+html{scroll-behavior:smooth}
+body{font:16px/1.55 var(--body);color:var(--ink);background:var(--plaster);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.k{font:500 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.mono{font-family:var(--mono);font-size:13px}
+
+header{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--plaster);display:grid;grid-template-columns:auto 1fr auto auto;gap:28px;align-items:center;padding:12px 32px;border-bottom:1px solid var(--terra)}
+header .mark{font:italic 500 22px/1 var(--display)}
+header nav{display:flex;gap:22px;justify-content:center}
+header nav a{text-decoration:none;font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+header nav a:hover{opacity:1;color:var(--saffron)}
+header .clock{font:12px/1 var(--mono);opacity:.7}
+.btn{display:inline-block;font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:13px 18px;background:var(--terra);color:var(--plaster);border:1px solid var(--terra)}
+.btn:hover{background:var(--plaster);color:var(--terra)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+
+.split{display:grid;grid-template-columns:1fr 1fr;width:100%;min-height:640px}
+.split .img{background-size:cover;background-position:center;min-height:420px}
+.split .txt{padding:56px 64px 60px}
+.split.flip .img{order:2}
+
+h1{font:italic 400 128px/.86 var(--display);letter-spacing:-.02em;margin:26px 0 22px}
+h2{font:400 64px/.95 var(--display);letter-spacing:-.015em;margin:14px 0 22px}
+h2 em{font-style:italic}
+h3{font:600 22px/1.15 var(--display);margin:0 0 6px}
+p{max-width:58ch}
+p+p{margin-top:12px}
+.lede{font-size:20px;line-height:1.45;max-width:46ch}
+
+dl.facts{display:grid;grid-template-columns:auto 1fr;margin:32px 0 30px;border-top:1px solid var(--rule)}
+dl.facts dt,dl.facts dd{padding:9px 0;border-bottom:1px solid var(--rule)}
+dl.facts dt{font:500 12px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding-right:28px}
+dl.facts dd{font-size:16px}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.ctas .note{font:12px/1.4 var(--mono);opacity:.75}
+
+ol.floors{list-style:none;margin-top:28px;border-top:1px solid var(--rule)}
+ol.floors li{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--rule)}
+ol.floors li b{font:500 12px/1.7 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+ol.floors li span{display:block;font-size:15px;opacity:.8}
+
+table{width:100%;border-collapse:collapse;margin-top:26px;font-size:15px}
+th{font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--ink)}
+td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.n{font-family:var(--mono);font-size:13px;white-space:nowrap}
+td.r,th.r{text-align:right;padding-right:0}
+td em{font-family:var(--display);font-style:italic;font-size:18px}
+ul.incl{list-style:none;display:flex;flex-wrap:wrap;gap:6px 0;margin-top:18px;font:12px/1.4 var(--mono)}
+ul.incl li{padding-right:14px;margin-right:14px;border-right:1px solid rgba(239,227,207,.35)}
+ul.incl li:last-child{border:0}
+.small{font-size:13px;opacity:.78;margin-top:14px;max-width:64ch}
+
+ol.day{list-style:none;margin-top:26px;border-top:1px solid var(--rule)}
+ol.day li{display:grid;grid-template-columns:72px 1fr;gap:18px;padding:9px 0;border-bottom:1px solid var(--rule)}
+ol.day .where{display:block;font:400 10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);opacity:.55;margin-top:2px}
+ol.day time{font:500 14px/1.5 var(--mono);color:var(--terra)}
+ol.day strong{font-weight:500}
+
+ul.menu{list-style:none;margin-top:22px}
+ul.menu li{display:grid;grid-template-columns:1fr auto;gap:16px;padding:11px 0;border-bottom:1px solid rgba(239,227,207,.25)}
+ul.menu li i{display:block;font-size:14px;opacity:.72}
+ul.menu li span{font:13px/1.6 var(--mono);color:var(--saffron)}
+.menu-h{margin-top:30px}
+
+.dark{background:var(--ink);color:var(--plaster)}
+.dark .k{color:var(--saffron)}
+.terra{background:var(--terra);color:var(--plaster)}
+.terra dl.facts dt,.terra dl.facts dd,.terra dl.facts{border-color:rgba(239,227,207,.35)}
+.blue{background:var(--blue);color:var(--plaster)}
+.blue td{border-color:rgba(239,227,207,.25)}
+.blue th{border-color:var(--plaster)}
+.blue .k{color:var(--saffron)}
+
+.band{height:200px;width:100%;background-size:auto 200px;background-repeat:repeat-x}
+
+footer{display:grid;grid-template-columns:1fr 1fr;min-height:420px;background:var(--ink);color:var(--plaster)}
+footer .img{background-size:cover;background-position:center}
+footer .txt{padding:64px 64px 40px}
+footer .cols{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;margin-top:22px;font-size:15px}
+footer .cols p{max-width:none}
+footer .policy{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 36px;margin-top:28px;font-size:14px}
+footer .policy li{padding:7px 0;border-bottom:1px solid rgba(239,227,207,.2)}
+footer .policy b{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--saffron);margin-right:8px}
+footer .legal{margin-top:40px;font:11px/1.6 var(--mono);opacity:.6;letter-spacing:.06em}
+
+.img-hero{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' preserveAspectRatio='xMidYMid slice'><defs><pattern id='z' width='40' height='40' patternUnits='userSpaceOnUse'><rect width='40' height='40' fill='%23EFE3CF'/><path d='M20 2L38 20L20 38L2 20Z' fill='%2324358F'/><path d='M20 12L28 20L20 28L12 20Z' fill='%23D9A23A'/></pattern></defs><rect width='800' height='1000' fill='%23E8C79B'/><rect y='240' width='800' height='600' fill='%23C76A4A'/><path d='M300 840V560a100 100 0 0 1 200 0V840Z' fill='%238A3A1E'/><path d='M330 840V575a70 70 0 0 1 140 0V840Z' fill='%2324358F'/><rect x='200' y='360' width='40' height='70' fill='%238A3A1E'/><rect x='560' y='360' width='40' height='70' fill='%238A3A1E'/><rect y='820' width='800' height='180' fill='url(%23z)'/><rect x='520' y='520' width='16' height='320' fill='%235A3A22'/><g fill='%233E5B3A'><ellipse cx='528' cy='500' rx='110' ry='26' transform='rotate(-24 528 500)'/><ellipse cx='528' cy='500' rx='110' ry='26' transform='rotate(24 528 500)'/><ellipse cx='528' cy='490' rx='26' ry='100' transform='rotate(-62 528 490)'/><ellipse cx='528' cy='490' rx='26' ry='100' transform='rotate(62 528 490)'/><ellipse cx='528' cy='480' rx='22' ry='80'/></g><ellipse cx='280' cy='880' rx='120' ry='26' fill='%2324358F'/><ellipse cx='280' cy='872' rx='100' ry='16' fill='%235E78C9'/><rect x='272' y='800' width='16' height='70' fill='%23EFE3CF'/><circle cx='280' cy='796' r='14' fill='%23EFE3CF'/><path d='M0 0H800V1000H0Z M130 1000V430a270 270 0 0 1 540 0V1000Z' fill='%23B0502B' fill-rule='evenodd'/><path d='M130 1000V430a270 270 0 0 1 540 0V1000H648V430a248 248 0 0 0 -496 0V1000Z' fill='%23D9A23A'/></svg>")}
+.img-door{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' preserveAspectRatio='xMidYMid slice'><rect width='800' height='1000' fill='%23C76A4A'/><rect y='900' width='800' height='100' fill='%238A3A1E'/><path d='M210 900V420a190 190 0 0 1 380 0V900Z' fill='%23EFE3CF'/><path d='M240 900V430a160 160 0 0 1 320 0V900Z' fill='%2324358F'/><rect x='397' y='300' width='6' height='600' fill='%23162266'/><g fill='%23D9A23A'><circle cx='290' cy='520' r='6'/><circle cx='340' cy='520' r='6'/><circle cx='460' cy='520' r='6'/><circle cx='510' cy='520' r='6'/><circle cx='290' cy='620' r='6'/><circle cx='340' cy='620' r='6'/><circle cx='460' cy='620' r='6'/><circle cx='510' cy='620' r='6'/><circle cx='290' cy='720' r='6'/><circle cx='340' cy='720' r='6'/><circle cx='460' cy='720' r='6'/><circle cx='510' cy='720' r='6'/><circle cx='290' cy='820' r='6'/><circle cx='340' cy='820' r='6'/><circle cx='460' cy='820' r='6'/><circle cx='510' cy='820' r='6'/><rect x='370' y='640' width='14' height='60'/><rect x='416' y='640' width='14' height='60'/></g><rect x='640' y='240' width='6' height='90' fill='%231F1712'/><path d='M610 330H676L664 430H622Z' fill='%23D9A23A'/><path d='M622 430H664L643 460Z' fill='%231F1712'/><g fill='%233E5B3A'><ellipse cx='120' cy='860' rx='60' ry='24'/><ellipse cx='100' cy='820' rx='22' ry='60' transform='rotate(-20 100 820)'/><ellipse cx='140' cy='815' rx='22' ry='64' transform='rotate(18 140 815)'/></g><rect x='70' y='860' width='100' height='40' fill='%23B0502B'/></svg>")}
+.img-zellige,.band{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 120 120'><rect width='120' height='120' fill='%231F2C78'/><g fill='%23EFE3CF'><rect x='30' y='30' width='60' height='60'/><rect x='30' y='30' width='60' height='60' transform='rotate(45 60 60)'/></g><g fill='%23B0502B'><rect x='42' y='42' width='36' height='36'/><rect x='42' y='42' width='36' height='36' transform='rotate(45 60 60)'/></g><circle cx='60' cy='60' r='9' fill='%23D9A23A'/><g fill='%233E5B3A'><path d='M0 0H18L0 18Z'/><path d='M120 0V18L102 0Z'/><path d='M0 120V102L18 120Z'/><path d='M120 120H102L120 102Z'/></g><g fill='%23D9A23A'><path d='M60 0L66 6L60 12L54 6Z'/><path d='M60 108L66 114L60 120L54 114Z'/><path d='M0 60L6 54L12 60L6 66Z'/><path d='M108 60L114 54L120 60L114 66Z'/></g></svg>");background-size:240px 240px;background-repeat:repeat}
+.img-roof{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' preserveAspectRatio='xMidYMid slice'><rect width='800' height='1000' fill='%23E8C79B'/><circle cx='560' cy='300' r='90' fill='%23D9A23A'/><path d='M0 520L120 400L210 470L330 330L430 440L520 380L640 470L720 410L800 460V620H0Z' fill='%23A58C9C'/><path d='M330 330L370 375L345 372L320 395L300 362Z M120 400L150 430L120 425L100 440Z' fill='%23EFE3CF'/><path d='M0 600L160 540L300 580L470 520L620 570L800 530V700H0Z' fill='%23C9A47C'/><rect x='600' y='420' width='60' height='300' fill='%23B0502B'/><rect x='612' y='380' width='36' height='40' fill='%23B0502B'/><rect x='622' y='350' width='16' height='30' fill='%23B0502B'/><circle cx='630' cy='344' r='7' fill='%23D9A23A'/><rect x='618' y='460' width='10' height='24' fill='%238A3A1E'/><rect x='634' y='460' width='10' height='24' fill='%238A3A1E'/><rect y='690' width='800' height='310' fill='%23C76A4A'/><g fill='%23C76A4A'><rect x='0' y='660' width='50' height='30'/><rect x='90' y='660' width='50' height='30'/><rect x='180' y='660' width='50' height='30'/><rect x='270' y='660' width='50' height='30'/><rect x='360' y='660' width='50' height='30'/><rect x='450' y='660' width='50' height='30'/><rect x='540' y='660' width='50' height='30'/><rect x='630' y='660' width='50' height='30'/><rect x='720' y='660' width='50' height='30'/></g><rect x='80' y='780' width='300' height='22' fill='%23EFE3CF'/><rect x='100' y='802' width='12' height='90' fill='%231F1712'/><rect x='348' y='802' width='12' height='90' fill='%231F1712'/><rect x='470' y='770' width='240' height='130' fill='%235E78C9'/><rect x='470' y='770' width='240' height='14' fill='%23EFE3CF'/><circle cx='230' cy='770' r='14' fill='%23D9A23A'/><rect x='196' y='760' width='14' height='20' fill='%233E5B3A'/><rect x='250' y='760' width='14' height='20' fill='%233E5B3A'/></svg>")}
+.img-table{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' preserveAspectRatio='xMidYMid slice'><rect width='800' height='1000' fill='%232A1E17'/><rect y='560' width='800' height='440' fill='%23EFE3CF'/><g fill='none' stroke='%23B0502B' stroke-width='3'><path d='M0 600H800M0 960H800'/></g><ellipse cx='320' cy='760' rx='200' ry='46' fill='%23B0502B'/><path d='M180 750Q320 430 460 750Z' fill='%23C76A4A'/><circle cx='320' cy='540' r='18' fill='%23C76A4A'/><path d='M200 740H440' stroke='%238A3A1E' stroke-width='6'/><ellipse cx='610' cy='820' rx='110' ry='30' fill='%2324358F'/><ellipse cx='610' cy='812' rx='86' ry='20' fill='%23D9A23A'/><g fill='%233E5B3A'><circle cx='586' cy='808' r='7'/><circle cx='622' cy='814' r='6'/><circle cx='640' cy='804' r='5'/></g><path d='M620 600L640 600L636 700L624 700Z' fill='%23EFE3CF' opacity='.8'/><path d='M622 640H638V698H624Z' fill='%23D9A23A'/><path d='M680 610L700 610L696 710L684 710Z' fill='%23EFE3CF' opacity='.8'/><path d='M682 650H698V708H684Z' fill='%23D9A23A'/><path d='M80 520L140 520L150 560H70Z' fill='%23D9A23A'/><path d='M100 470H120V520H100Z' fill='%23B0502B'/><path d='M110 380C140 420 100 440 110 470' stroke='%23EFE3CF' stroke-width='3' fill='none' opacity='.5'/><ellipse cx='150' cy='880' rx='90' ry='22' fill='%23D9A23A'/><ellipse cx='150' cy='874' rx='70' ry='14' fill='%23E8C79B'/></svg>")}
+.img-map{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000' preserveAspectRatio='xMidYMid slice'><rect width='800' height='1000' fill='%23E8D6B8'/><g fill='%23D8C09A'><path d='M60 80L240 60L260 220L90 250Z'/><path d='M300 70L520 90L500 260L290 240Z'/><path d='M560 100L760 80L740 300L570 280Z'/><path d='M80 300L280 290L300 500L60 520Z'/><path d='M560 330L760 350L740 560L580 540Z'/><path d='M70 580L300 560L290 800L90 820Z'/><path d='M340 620L540 600L560 860L330 880Z'/><path d='M590 600L760 620L740 900L600 880Z'/></g><path d='M330 300H530V540H330Z' fill='%23C9A47C'/><g fill='none' stroke='%231F1712' stroke-width='5' stroke-linecap='square'><path d='M0 270L280 265L330 300L540 290L800 320'/><path d='M280 0L285 265L300 560L320 1000'/><path d='M540 0L530 290L560 580L570 1000'/><path d='M0 545L330 540L560 580L800 590'/></g><g fill='none' stroke='%231F1712' stroke-width='2'><path d='M90 250L170 400L300 420'/><path d='M500 260L470 160L380 150'/><path d='M580 540L650 450L760 460'/><path d='M300 560L200 700L90 820'/><path d='M560 860L460 760L340 760'/></g><rect x='360' y='330' width='140' height='180' fill='none' stroke='%231F1712' stroke-width='2' stroke-dasharray='6 6'/><circle cx='210' cy='190' r='16' fill='%23B0502B'/><circle cx='210' cy='190' r='34' fill='none' stroke='%23B0502B' stroke-width='3'/><rect x='440' y='640' width='30' height='70' fill='%2324358F'/><path d='M0 1000V880L120 850L200 1000Z' fill='%233E5B3A'/></svg>")}
+.img-court-small{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' preserveAspectRatio='xMidYMid slice'><rect width='800' height='600' fill='%2324358F'/><g fill='%23EFE3CF' opacity='.95'><path d='M60 600V300a90 90 0 0 1 180 0V600Z'/><path d='M310 600V300a90 90 0 0 1 180 0V600Z'/><path d='M560 600V300a90 90 0 0 1 180 0V600Z'/></g><g fill='%23B0502B'><path d='M90 600V310a60 60 0 0 1 120 0V600Z'/><path d='M340 600V310a60 60 0 0 1 120 0V600Z'/><path d='M590 600V310a60 60 0 0 1 120 0V600Z'/></g><circle cx='400' cy='120' r='40' fill='%23D9A23A'/></svg>")}
+
+@media (max-width:900px){
+  header{grid-template-columns:1fr auto;padding:12px 16px}
+  header nav,header .clock{display:none}
+  .split,footer{grid-template-columns:1fr}
+  .split.flip .img{order:0}
+  .split .txt,footer .txt{padding:44px 16px 52px}
+  h1{font-size:76px}
+  h2{font-size:44px}
+  footer .cols{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <span class="mark">Dar Tilwa</span>
+  <nav aria-label="Sections">
+    <a href="#house">The house</a><a href="#rooms">Rooms</a><a href="#day">A day</a><a href="#kitchen">Kitchen</a><a href="#arrive">Getting here</a>
+  </nav>
+  <span class="clock">Marrakech <span id="clock">--:--</span> · 21°C</span>
+  <a class="btn" href="#book">Reserve</a>
+</header>
+
+<main>
+  <section class="split terra" id="top">
+    <div class="img img-hero" role="img" aria-label="The courtyard seen through a horseshoe arch: an orange tree, a fountain and a blue zellige floor"></div>
+    <div class="txt">
+      <p class="k">Riad · Mouassine quarter · built 1896, restored 2019</p>
+      <h1>Dar Tilwa</h1>
+      <p class="lede">Eleven rooms around one square courtyard, four bitter-orange trees and a fountain that has run since the house was built for a family of leather merchants. Seven minutes on foot from Jemaa el-Fna, and quiet enough to hear the Mouassine call to prayer before the swifts start.</p>
+      <dl class="facts">
+        <dt>Address</dt><dd>14 Derb Sidi Bouloukat, Mouassine, 40000 Marrakech</dd>
+        <dt>Rooms</dt><dd>11 — six on the first gallery, five on the second</dd>
+        <dt>Courtyard</dt><dd>9.4 × 9.4 m, open to the sky, tadelakt walls in terracotta</dd>
+        <dt>Roof</dt><dd>Terrace, 2.1 × 4 m plunge pool, view to the Koutoubia and the High Atlas</dd>
+        <dt>Rates</dt><dd>From 2,400 MAD per night, breakfast and hammam included</dd>
+        <dt>Airport</dt><dd>RAK Menara — 22 minutes by our driver, 280 MAD</dd>
+      </dl>
+      <div class="ctas">
+        <a class="btn" href="#book">Check dates</a>
+        <a class="btn ghost" href="#rooms">See the eleven rooms</a>
+        <span class="note">Reply within 4 hours, 08:00–22:00 GMT+1</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="split flip" id="house">
+    <div class="img img-door" role="img" aria-label="The cedar entrance door in Majorelle blue with brass studs, set in a rose-coloured wall"></div>
+    <div class="txt">
+      <p class="k">01 — The house</p>
+      <h2>Four floors, <em>one courtyard</em>, no corridors.</h2>
+      <p>A riad turns its back on the street. From Derb Sidi Bouloukat you see a blue cedar door and nothing else; inside, every room opens onto the courtyard galleries, and the light moves down the walls through the day. The 2019 restoration by Atelier Benjelloun kept the original carved plaster, re-laid 3,200 hand-cut zellige pieces from Fès and added nothing that needs a sign to explain it.</p>
+      <p>There is no lobby, no reception desk and no lift. Hassan or Meryem greets you at the door, and someone carries your bags up the stairs.</p>
+      <ol class="floors">
+        <li><b>Ground</b><div>Courtyard, fountain, salon with fireplace, hammam with gommage table<span>Hammam heated 10:00–21:00, private sessions of 50 minutes</span></div></li>
+        <li><b>First</b><div>Six rooms on the gallery, the cedar library (412 books, French and English)<span>Rooms 1–6, ceilings 4.6 m</span></div></li>
+        <li><b>Second</b><div>Five rooms, two with private terraces facing the Atlas<span>Rooms 7–11, morning light from the east</span></div></li>
+        <li><b>Roof</b><div>Terrace, plunge pool, shaded daybeds, the honesty bar<span>Pool kept at 26°C from November to March</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="band" role="img" aria-label="A strip of eight-pointed zellige star tiles"></div>
+
+  <section class="split blue" id="rooms">
+    <div class="img img-zellige" role="img" aria-label="Zellige pattern of eight-pointed stars in plaster, terracotta and saffron on deep blue"></div>
+    <div class="txt">
+      <p class="k">02 — Rooms</p>
+      <h2>Eleven rooms, <em>each named</em> for a spice.</h2>
+      <p>No two rooms share a floor plan. All have tadelakt bathrooms, linen from the cooperative in Tamesloht, cedar shutters onto the courtyard and air-conditioning that can be switched off. Rates are per night for two, breakfast and one hammam session included.</p>
+      <table>
+        <thead><tr><th>No.</th><th>Room</th><th>Floor</th><th>m²</th><th>Bed</th><th>Light</th><th>Bath</th><th class="r">From</th></tr></thead>
+        <tbody>
+          <tr><td class="n">01</td><td><em>Safran</em></td><td class="n">1</td><td class="n">22</td><td>Queen</td><td>Courtyard</td><td>Shower</td><td class="n r">2,400</td></tr>
+          <tr><td class="n">02</td><td><em>Cumin</em></td><td class="n">1</td><td class="n">24</td><td>Queen</td><td>Courtyard</td><td>Shower</td><td class="n r">2,400</td></tr>
+          <tr><td class="n">03</td><td><em>Kamoun</em></td><td class="n">1</td><td class="n">28</td><td>King</td><td>Courtyard</td><td>Tub</td><td class="n r">2,750</td></tr>
+          <tr><td class="n">04</td><td><em>Ras el Hanout</em></td><td class="n">1</td><td class="n">41</td><td>King + day bed</td><td>Courtyard, fireplace</td><td>Tub + shower</td><td class="n r">3,600</td></tr>
+          <tr><td class="n">05</td><td><em>Cannelle</em></td><td class="n">1</td><td class="n">26</td><td>Twin or king</td><td>Courtyard</td><td>Shower</td><td class="n r">2,600</td></tr>
+          <tr><td class="n">06</td><td><em>Gingembre</em></td><td class="n">1</td><td class="n">30</td><td>King</td><td>Courtyard, library side</td><td>Tub</td><td class="n r">2,900</td></tr>
+          <tr><td class="n">07</td><td><em>Anis</em></td><td class="n">2</td><td class="n">25</td><td>Queen</td><td>East window</td><td>Shower</td><td class="n r">2,650</td></tr>
+          <tr><td class="n">08</td><td><em>Paprika</em></td><td class="n">2</td><td class="n">27</td><td>King</td><td>East window</td><td>Shower</td><td class="n r">2,800</td></tr>
+          <tr><td class="n">09</td><td><em>Clou de girofle</em></td><td class="n">2</td><td class="n">33</td><td>King</td><td>Courtyard</td><td>Tub</td><td class="n r">3,100</td></tr>
+          <tr><td class="n">10</td><td><em>Nigelle</em></td><td class="n">2</td><td class="n">46</td><td>King</td><td>Private terrace, Atlas</td><td>Copper tub</td><td class="n r">4,200</td></tr>
+          <tr><td class="n">11</td><td><em>Menthe</em></td><td class="n">2</td><td class="n">58</td><td>King + twin</td><td>Private terrace, Atlas</td><td>Tub + shower</td><td class="n r">4,900</td></tr>
+        </tbody>
+      </table>
+      <ul class="incl">
+        <li>Breakfast</li><li>Hammam, 50 min</li><li>Mint tea at 16:30</li><li>Wi-Fi, 120 Mbps</li><li>Bab Laksour porter</li><li>Laundry by hand</li><li>Babouches</li><li>Djellaba to borrow</li>
+      </ul>
+      <p class="small">Rates in Moroccan dirham (MAD) including VAT; city tax of 30 MAD per adult per night is collected on departure. Children under 6 stay free in rooms 04, 05 and 11. Minimum two nights from 20 December to 4 January.</p>
+    </div>
+  </section>
+
+  <section class="split flip" id="day">
+    <div class="img img-roof" role="img" aria-label="The roof terrace at dusk: plunge pool, parapet, the Koutoubia minaret and the snow-capped High Atlas"></div>
+    <div class="txt">
+      <p class="k">03 — A day in the house</p>
+      <h2>The hours are <em>set by the medina</em>, not by us.</h2>
+      <p>Times are for early November; the house shifts by about an hour across the year with the light. Nothing is compulsory, and nobody will knock before eleven.</p>
+      <ol class="day">
+        <li><time>06:31<span class="where">your room</span></time><div><strong>Fajr from the Mouassine mosque</strong>, forty metres from the door. Earplugs are on every pillow, most guests stop using them by the second night.</div></li>
+        <li><time>07:30<span class="where">courtyard</span></time><div><strong>Breakfast in the courtyard</strong> until 11:00 — msemen, baghrir with argan honey, amlou, eggs with cumin, orange juice from the four trees in season.</div></li>
+        <li><time>09:00<span class="where">the door</span></time><div><strong>Walks with Youssef</strong>, three mornings a week: the dyers' souk, the Mouassine fountain and the funduqs on Rue Sidi el-Yamani. 2 hours, 350 MAD per person.</div></li>
+        <li><time>10:00<span class="where">ground floor</span></time><div><strong>Hammam opens</strong>. Black soap, kessa glove, rhassoul clay, 50-minute sessions booked at breakfast.</div></li>
+        <li><time>13:00<span class="where">anywhere</span></time><div><strong>Lunch on request</strong> — salads, a tagine of the day, served wherever the shade is.</div></li>
+        <li><time>16:30<span class="where">roof</span></time><div><strong>Mint tea on the roof</strong>, poured from height as it should be, with sesame and almond briouates.</div></li>
+        <li><time>17:41<span class="where">roof</span></time><div><strong>Sunset</strong> behind the Koutoubia. The Atlas turns pink for about nine minutes.</div></li>
+        <li><time>19:30<span class="where">courtyard</span></time><div><strong>Dinner</strong> at the long table or in your room. Three courses, 520 MAD, wine list of 24 Moroccan bottles.</div></li>
+        <li><time>23:00<span class="where">the door</span></time><div><strong>The door is locked</strong>; the night porter, Abdelkader, opens it for you until dawn.</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="split dark" id="kitchen">
+    <div class="img img-table" role="img" aria-label="The kitchen table: a terracotta tagine, a plate of couscous, two glasses of mint tea and a lantern"></div>
+    <div class="txt">
+      <p class="k">04 — Kitchen</p>
+      <h2>Khadija cooks <em>what the souk had</em> at nine.</h2>
+      <p>Khadija Ait Lhaj has run the kitchen since the house reopened. The menu below is this week's; it changes when the market does. Vegetarian and gluten-free versions of every dish, told to us by noon.</p>
+      <p class="k menu-h">Dinner, three courses — 520 MAD</p>
+      <ul class="menu">
+        <li><div>Zaalouk and taktouka, warm khobz from the neighbourhood oven<i>Smoked aubergine, peppers, tomato, preserved lemon</i></div><span>first</span></li>
+        <li><div>Harira with dates and chebakia<i>The Ramadan soup, kept on the menu all year by request</i></div><span>first</span></li>
+        <li><div>Lamb tagine with prunes and toasted almonds<i>Seven hours in the terracotta, finished with orange-blossom water</i></div><span>main</span></li>
+        <li><div>Chicken with preserved lemon and violet olives<i>Lemons cured in the house for six weeks</i></div><span>main</span></li>
+        <li><div>Seven-vegetable couscous, Friday only<i>Steamed three times over the bouillon, served from one dish</i></div><span>main</span></li>
+        <li><div>Orange slices with cinnamon, or pastilla au lait<i>Oranges from the courtyard trees, December to March</i></div><span>after</span></li>
+      </ul>
+      <p class="k menu-h">Also</p>
+      <ul class="menu">
+        <li><div>Cooking class in the kitchen, market visit included<i>Tuesdays and Saturdays, 4 hours, maximum four guests</i></div><span>900 MAD</span></li>
+        <li><div>Picnic for the Ourika valley or Agafay<i>Ordered the evening before</i></div><span>260 MAD</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="split flip" id="arrive">
+    <div class="img img-map" role="img" aria-label="A hand-drawn map of the Mouassine quarter with Dar Tilwa marked in terracotta"></div>
+    <div class="txt">
+      <p class="k">05 — Getting here</p>
+      <h2>Cars stop <em>at Bab Laksour</em>. We walk you the last 300 metres.</h2>
+      <p>The medina lanes are too narrow for cars. Our driver meets you in arrivals with your name on a card, drives to Bab Laksour, and a porter with a hand cart takes the luggage from there. Send us your flight number and we will track it.</p>
+      <table>
+        <thead><tr><th>From Dar Tilwa to</th><th>On foot</th><th>By car</th><th class="r">Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Bab Laksour (car drop-off)</td><td class="n">4 min</td><td class="n">—</td><td class="r">porter included</td></tr>
+          <tr><td>Mouassine fountain</td><td class="n">1 min</td><td class="n">—</td><td class="r">1570s, Saadian</td></tr>
+          <tr><td>Le Jardin Secret</td><td class="n">5 min</td><td class="n">—</td><td class="r">opens 09:30</td></tr>
+          <tr><td>Jemaa el-Fna</td><td class="n">7 min</td><td class="n">—</td><td class="r">busiest after 19:00</td></tr>
+          <tr><td>Koutoubia mosque</td><td class="n">11 min</td><td class="n">6 min</td><td class="r">exterior only</td></tr>
+          <tr><td>Ben Youssef madrasa</td><td class="n">12 min</td><td class="n">—</td><td class="r">tickets 50 MAD</td></tr>
+          <tr><td>Bahia palace</td><td class="n">22 min</td><td class="n">10 min</td><td class="r">go before 10:00</td></tr>
+          <tr><td>Jardin Majorelle</td><td class="n">30 min</td><td class="n">12 min</td><td class="r">book a slot online</td></tr>
+          <tr><td>RAK Menara airport</td><td class="n">—</td><td class="n">22 min</td><td class="r">280 MAD, day or night</td></tr>
+          <tr><td>Agafay desert</td><td class="n">—</td><td class="n">45 min</td><td class="r">half-day 1,400 MAD</td></tr>
+          <tr><td>Imlil, High Atlas</td><td class="n">—</td><td class="n">1 h 30</td><td class="r">day trip 1,900 MAD</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer id="book">
+  <div class="img img-court-small" role="img" aria-label="Three arches of the courtyard gallery"></div>
+  <div class="txt">
+    <p class="k" style="color:var(--saffron)">06 — Reserve</p>
+    <h2>Write to us, <em>a person answers</em>.</h2>
+    <div class="cols">
+      <div>
+        <p>reservations@dartilwa.ma<br>+212 524 38 61 14 (WhatsApp too)<br>14 Derb Sidi Bouloukat, Mouassine<br>40000 Marrakech, Morocco</p>
+        <p style="margin-top:20px"><a class="btn" href="mailto:reservations@dartilwa.ma">Ask for dates</a></p>
+      </div>
+      <div>
+        <p>30% deposit to confirm. Free cancellation until 14 days before arrival, then the deposit is kept. The whole house — eleven rooms, up to 26 guests — can be taken for weddings and gatherings from three nights.</p>
+      </div>
+    </div>
+    <ul class="policy">
+      <li><b>Check-in</b> 14:00, any hour with notice</li><li><b>Check-out</b> 12:00, luggage kept</li>
+      <li><b>Children</b> welcome, cots free</li><li><b>Pets</b> no — the house cat, Zitoun, objects</li>
+      <li><b>Payment</b> MAD, EUR, cards</li><li><b>Smoking</b> roof only</li>
+    </ul>
+    <p class="legal">Dar Tilwa SARL · Classified maison d'hôtes, Ministry of Tourism ref. MH-MRK-0418 · Closed 1–20 July for the summer clean</p>
+  </div>
+</footer>
+<script>
+const c=document.getElementById('clock');
+const tick=()=>c.textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Africa/Casablanca',hour:'2-digit',minute:'2-digit'});
+tick();setInterval(tick,30000);
+</script>
+</body>
+</html>

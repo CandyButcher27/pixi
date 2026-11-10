@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halvard & Rook — Security Consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#efece4;
+  --ink:#16181a;
+  --muted:#5d5f5c;
+  --rule:#c9c4b6;
+  --signal:#c2410c;
+  --deep:#0f1a17;
+  --deep-ink:#d9e2dc;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+header{border-bottom:1px solid var(--rule)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--serif);font-weight:600;font-size:21px;text-decoration:none}
+.logo span{color:var(--signal)}
+nav{display:flex;gap:28px;align-items:center}
+nav a{text-decoration:none;font-size:15px;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+nav .hotline{font-family:var(--mono);font-size:13px;color:var(--ink);border:1px solid var(--ink);padding:7px 12px}
+
+.hero{padding:88px 0 0}
+.hero-grid{display:grid;grid-template-columns:7fr 5fr;gap:64px;align-items:end}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,92px);line-height:1.02;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--signal)}
+.hero p.lede{font-size:19px;color:var(--muted);max-width:430px;margin-bottom:28px}
+.cta{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;padding:15px 22px;font-weight:500}
+.cta:hover{background:var(--signal)}
+.textlink{margin-left:18px;font-weight:500}
+
+.ledger{margin-top:80px;border-top:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr)}
+.ledger div{padding:22px 24px 26px 0;border-right:1px solid var(--rule)}
+.ledger div+div{padding-left:24px}
+.ledger div:last-child{border-right:0}
+.ledger b{display:block;font-family:var(--serif);font-weight:400;font-size:40px;line-height:1.1}
+.ledger span{color:var(--muted);font-size:14px}
+
+.incident{background:var(--deep);color:var(--deep-ink);margin-top:96px;padding:96px 0}
+.incident-grid{display:grid;grid-template-columns:4fr 8fr;gap:64px}
+.incident h2{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1.1;color:#fff}
+.incident p{color:#9fb0a8;margin-top:18px}
+.log{font-family:var(--mono);font-size:14px;line-height:1.9;border-left:1px solid #2c3d37;padding-left:28px}
+.log li{list-style:none;display:grid;grid-template-columns:92px 1fr;gap:16px;opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s}
+.log li.on{opacity:1;transform:none}
+.log time{color:#5f7a6f}
+.log .hot{color:#fb923c}
+
+section.services{padding:112px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:18px}
+.sec-head h2{font-family:var(--serif);font-weight:400;font-size:44px}
+.svc{display:grid;grid-template-columns:80px 1fr 1.3fr 140px;gap:32px;padding:34px 0;border-bottom:1px solid var(--rule);align-items:start}
+.svc .n{font-family:var(--mono);color:var(--signal);font-size:14px;padding-top:6px}
+.svc h3{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.2}
+.svc p{color:var(--muted)}
+.svc .dur{font-family:var(--mono);font-size:13px;text-align:right;padding-top:8px}
+
+.method{padding:0 0 112px}
+.method-grid{display:grid;grid-template-columns:5fr 7fr;gap:80px}
+.method blockquote{font-family:var(--serif);font-size:30px;line-height:1.3;font-style:italic}
+.method cite{display:block;margin-top:22px;font-style:normal}
+.steps{counter-reset:s}
+.steps li{list-style:none;counter-increment:s;padding:0 0 30px 56px;position:relative}
+.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:2px;font-family:var(--mono);font-size:13px;color:var(--signal)}
+.steps h4{font-weight:500;font-size:18px;margin-bottom:4px}
+.steps p{color:var(--muted)}
+
+.contact{border-top:1px solid var(--ink);padding:96px 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.5vw,60px);line-height:1.05}
+.contact h2 em{color:var(--signal)}
+form{display:grid;gap:18px}
+label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+input,select,textarea{font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--ink);padding:8px 0;border-radius:0}
+input:focus,select:focus,textarea:focus{outline:none;border-bottom-color:var(--signal)}
+textarea{resize:vertical;min-height:90px}
+form button{justify-self:start;border:0;cursor:pointer;font:500 16px var(--sans)}
+.note{font-size:14px;color:var(--signal);min-height:1.4em}
+
+footer{background:var(--ink);color:#8d8f8a;padding:36px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .wrap{padding:0 20px}
+  nav a:not(.hotline){display:none}
+  .hero{padding-top:56px}
+  .hero-grid,.incident-grid,.method-grid,.contact-grid{grid-template-columns:1fr;gap:36px}
+  .ledger{grid-template-columns:1fr 1fr}
+  .ledger div{border-bottom:1px solid var(--rule)}
+  .ledger div:nth-child(3){padding-left:0}
+  .ledger div:nth-child(2){border-right:0}
+  .svc{grid-template-columns:48px 1fr;gap:12px 20px}
+  .svc p,.svc .dur{grid-column:2;text-align:left;padding-top:0}
+  .log li{grid-template-columns:70px 1fr;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.log li{transition:none;opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Halvard <span>&amp;</span> Rook</a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#method">Method</a>
+      <a href="#contact">Contact</a>
+      <a class="hotline" href="tel:+442079460000">Breach line 24/7</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <h1>We break in <em>before</em> anyone else does.</h1>
+        <div>
+          <p class="lede">An independent security consultancy for firms that hold other people's money, health records and secrets. Offensive testing, incident response, and the unglamorous work of fixing what we find.</p>
+          <a class="cta" href="#contact">Book a scoping call</a><a class="textlink" href="#services">See services</a>
+        </div>
+      </div>
+      <div class="ledger">
+        <div><b>14 yrs</b><span>operating since 2012</span></div>
+        <div><b>620+</b><span>engagements delivered</span></div>
+        <div><b>38 min</b><span>median breach-line response</span></div>
+        <div><b>0</b><span>reports sold or shared, ever</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="incident">
+    <div class="wrap incident-grid">
+      <div>
+        <p class="mono" style="color:#fb923c">Field note / anonymised</p>
+        <h2>A Tuesday at a regional lender.</h2>
+        <p>One phished credential, one forgotten VPN appliance. This is how the first six hours looked from inside our response room.</p>
+      </div>
+      <ol class="log" id="log">
+        <li><time>02:14</time><span class="hot">Anomalous Kerberos ticket requests from FIN-WS-118</span></li>
+        <li><time>02:52</time><span>Breach line called. Responder on bridge in 11 minutes</span></li>
+        <li><time>03:30</time><span>Entry traced to unpatched edge VPN, CVE disclosed 9 days prior</span></li>
+        <li><time>04:05</time><span>Lateral movement contained: 3 hosts isolated, service accounts rotated</span></li>
+        <li><time>06:40</time><span>Exfiltration ruled out from egress logs; regulator notice drafted</span></li>
+        <li><time>08:20</time><span>Branches open on schedule. Hardening plan delivered by Friday</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head"><h2>What we do</h2><span class="mono">Four practices</span></div>
+      <div class="svc"><span class="n">01</span><h3>Penetration testing &amp; red teaming</h3><p>Web, cloud, internal network and physical. Scenario-led adversary simulation against the people and controls you actually rely on.</p><span class="dur">2–6 weeks</span></div>
+      <div class="svc"><span class="n">02</span><h3>Incident response</h3><p>Retainer or emergency. Containment, forensics, regulator and insurer liaison, and a plain-language account for your board.</p><span class="dur">On call</span></div>
+      <div class="svc"><span class="n">03</span><h3>Cloud &amp; identity review</h3><p>AWS, Azure, GCP and Entra ID configuration audits. We map who can reach what, then show the shortest path to your crown jewels.</p><span class="dur">1–3 weeks</span></div>
+      <div class="svc"><span class="n">04</span><h3>Fractional security leadership</h3><p>A named senior consultant as your part-time CISO: risk register, ISO 27001 and SOC 2 readiness, vendor due diligence.</p><span class="dur">Monthly</span></div>
+    </div>
+  </section>
+
+  <section class="method" id="method">
+    <div class="wrap method-grid">
+      <div>
+        <blockquote>"They found in four days what our last two audits missed in a year, then sat with our engineers until it was closed."</blockquote>
+        <cite class="mono">Head of Infrastructure, payments firm</cite>
+      </div>
+      <ol class="steps">
+        <li><h4>Scope in an hour</h4><p>One call with the people who own the systems. Fixed price and written rules of engagement within two days.</p></li>
+        <li><h4>Test like an attacker</h4><p>Senior testers only, no offshored juniors. Critical findings are phoned through the same day, not saved for the report.</p></li>
+        <li><h4>Report for two audiences</h4><p>A technical appendix your engineers can reproduce, and a four-page summary your board can read.</p></li>
+        <li><h4>Retest for free</h4><p>Fix it within 90 days and we verify the remediation at no extra cost.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Tell us what keeps you <em>up at night.</em></h2>
+        <p style="color:var(--muted);margin-top:20px;max-width:420px">Under active attack? Skip the form and call the breach line: <a href="tel:+442079460000" class="mono" style="font-size:14px">+44 20 7946 0000</a></p>
+      </div>
+      <form id="f" novalidate>
+        <label>Name<input name="name" required autocomplete="name"></label>
+        <label>Work email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Interested in
+          <select name="topic">
+            <option>Penetration testing</option>
+            <option>Incident response retainer</option>
+            <option>Cloud &amp; identity review</option>
+            <option>Fractional CISO</option>
+          </select>
+        </label>
+        <label>Context<textarea name="msg" placeholder="Size of estate, deadlines, compliance drivers"></textarea></label>
+        <button class="cta" type="submit">Send securely</button>
+        <p class="note" id="note" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Halvard &amp; Rook Ltd. CREST and CHECK accredited.</span>
+    <span>PGP key on request &middot; London &middot; Edinburgh</span>
+  </div>
+</footer>
+
+<script>
+const items=document.querySelectorAll('#log li');
+new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){items.forEach((li,i)=>setTimeout(()=>li.classList.add('on'),i*350));o.disconnect()}},{threshold:.3}).observe(document.getElementById('log'));
+document.getElementById('f').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target,note=document.getElementById('note');
+  if(!f.checkValidity()){note.textContent='Please add your name and a valid work email.';return}
+  note.textContent='Received. A senior consultant will reply within one business day.';
+  f.reset();
+});
+</script>
+</body>
+</html>
