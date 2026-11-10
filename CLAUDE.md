@@ -16,10 +16,10 @@ Some `websites/*/index.html` files are unregenerated placeholder stubs (generic 
 
 ## Building any UI in this repo
 
-Use the `design-build` skill. Its default is a prompt rule set (original illustration as a
-primary surface, none of the default AI landing page, specific copy, screenshot check),
-because blind human ratings in `builds/blind/RESULTS.md` found it level with the full
-catalogue protocol. The `design-catalogue` MCP server (`designmcp/`, registered in
+Use the `pixi` skill (`/pixi`). It builds from a prompt rule set (a screenshot reference from
+`scripts/pick_reference.py`, original illustration as a primary surface, none of the default
+AI landing page, specific copy, `scripts/pixi_check.py` screenshot check), because blind human
+ratings in `builds/blind/RESULTS.md` found this beat the full catalogue protocol. The `design-catalogue` MCP server (`designmcp/`, registered in
 `.mcp.json`) and its `search_designs` -> `get_design_contract` -> build -> `verify_build`
 protocol are optional, for reference-driven builds.
 
