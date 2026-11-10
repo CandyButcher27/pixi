@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soft Spine Yoga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Outfit:wght@300;400;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f8f5ef;
+  --card:#fffdf8;
+  --ink:#1d1c1a;
+  --mustard:#c3b23e;
+  --mustard-d:#a8972c;
+  --coral:#f2765c;
+  --blush:#f1c6b3;
+  --lilac:#e3cfee;
+  --blue:#2f63e0;
+  --leaf:#3f8a5c;
+  --plum:#7a2f4a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:Outfit,system-ui,sans-serif;font-weight:300;font-size:17px;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+.ribbon{border-bottom:1px solid var(--ink);text-align:center;padding:12px 16px;font-family:"Instrument Serif",serif;font-style:italic;font-size:19px}
+.ribbon a{text-decoration-thickness:1px;text-underline-offset:4px}
+nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px 5vw;border-bottom:1px solid var(--ink)}
+nav ul{display:flex;gap:34px;list-style:none;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+nav ul a{text-decoration:none;padding-bottom:6px}
+.u-wave{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='6'%3E%3Cpath d='M0 3q4-4 8 0t8 0' fill='none' stroke='%232f63e0' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x bottom}
+.u-blob{background:radial-gradient(ellipse at 50% 100%,var(--mustard) 0 46%,transparent 48%) no-repeat center bottom/100% 14px}
+.u-hl{background:linear-gradient(transparent 50%,var(--lilac) 50%)}
+.logo{font-family:Syne,sans-serif;font-weight:800;font-size:27px;letter-spacing:.14em;text-decoration:none;white-space:nowrap}
+.nav-r{display:flex;justify-content:flex-end;align-items:center;gap:28px}
+.ring{position:relative;white-space:nowrap;text-decoration:none;text-transform:uppercase;font-size:15px;letter-spacing:.04em;padding:14px 12px}
+.ring svg{position:absolute;inset:-6px -10px;width:calc(100% + 20px);height:calc(100% + 12px);overflow:visible}
+.ring:hover path{stroke-dashoffset:0}
+.ring path{stroke-dasharray:420;stroke-dashoffset:60;transition:stroke-dashoffset .5s}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:4vw;padding:64px 5vw 40px;align-items:center}
+.hero h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(40px,5.2vw,88px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase}
+.hero h1 em{font-family:"Instrument Serif",serif;font-weight:400;text-transform:none;letter-spacing:0;color:var(--mustard-d);font-size:.82em;display:block;margin:.08em 0 .02em .9em}
+.hero p{max-width:30em;margin-top:30px;font-size:19px}
+.btns{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;padding:16px 26px;border:1.5px solid var(--ink);border-radius:40px;transition:transform .2s,box-shadow .2s}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--mustard)}
+.scene{width:100%;height:auto;display:block}
+.breath{transform-origin:center;animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.035)}}
+.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.breath,.sway{animation:none}}
+
+.band{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;overflow:hidden;white-space:nowrap;background:var(--mustard)}
+.band span{font-family:Syne,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:15px;padding:14px 22px}
+.band span:nth-child(even){font-family:"Instrument Serif",serif;font-weight:400;text-transform:none;letter-spacing:0;font-size:20px;font-style:italic;padding-top:11px}
+
+section{padding:96px 5vw}
+.label{font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;color:var(--mustard-d)}
+h2{font-family:Syne,sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(34px,5vw,68px);line-height:.95;letter-spacing:.01em;margin:6px 0 40px}
+
+.styles{display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--mustard)}
+.style{border-right:2px solid var(--mustard);background:var(--card)}
+.style:last-child{border-right:0}
+.style .art{border-bottom:2px solid var(--mustard);aspect-ratio:1/1.05;display:block;width:100%}
+.style div{padding:22px 22px 28px}
+.style h3{font-family:Syne,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:19px}
+.style .lvl{font-family:"Instrument Serif",serif;font-style:italic;font-size:18px;color:var(--mustard-d)}
+.style p{margin-top:10px;font-size:16px}
+
+.sched{display:grid;grid-template-columns:260px 1fr;gap:5vw;align-items:start}
+.days{display:flex;flex-direction:column;gap:6px}
+.days button{all:unset;cursor:pointer;font-family:Syne,sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:15px;padding:10px 0;border-bottom:1px solid #d9d3c4;display:flex;justify-content:space-between}
+.days button[aria-selected=true]{font-weight:800}
+.days button[aria-selected=true]::after{content:"";width:46px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 12'%3E%3Cpath d='M2 7c8-6 14 4 22-1s14-3 20 1' fill='none' stroke='%23f2765c' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/contain;align-self:center}
+.days button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.rows{list-style:none;border-top:2px solid var(--ink)}
+.rows li{display:grid;grid-template-columns:90px 1fr auto auto;gap:24px;align-items:center;padding:18px 0;border-bottom:1px solid #d9d3c4}
+.rows .t{font-family:Syne,sans-serif;font-weight:800;font-size:20px}
+.rows b{font-weight:600;font-size:19px}
+.rows small{display:block;font-family:"Instrument Serif",serif;font-style:italic;font-size:17px;color:#6a655b}
+.rows .room{font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:5px 12px;border-radius:20px}
+.rows a{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+.teach{background:var(--card);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.teachers{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.teacher svg{width:100%;height:auto;display:block}
+.teacher h3{font-family:Syne,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:20px;margin-top:18px}
+.teacher p{font-size:16px;margin-top:6px}
+
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1.5px solid var(--ink)}
+.price{padding:36px 32px;border-right:1.5px solid var(--ink);position:relative}
+.price:last-child{border-right:0}
+.price.feat{background:var(--lilac)}
+.price h3{font-family:Syne,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:17px}
+.price .n{font-family:Syne,sans-serif;font-weight:800;font-size:64px;line-height:1;margin:18px 0 4px}
+.price .n sup{font-size:24px;vertical-align:top;margin-right:2px}
+.price ul{list-style:none;margin:20px 0 28px;font-size:16px}
+.price li{padding:8px 0;border-top:1px dashed #b9b2a2}
+.sticker{position:absolute;top:-28px;right:24px;width:92px;height:92px;transform:rotate(12deg)}
+
+footer{background:var(--ink);color:var(--paper)}
+footer svg{display:block;width:100%;height:auto;background:var(--paper)}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding:56px 5vw 40px}
+.foot .logo{font-size:34px}
+.foot p{margin-top:14px;max-width:26em;opacity:.8}
+.foot h4{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;font-size:21px;color:var(--mustard);margin-bottom:10px}
+.foot li{list-style:none;padding:3px 0}
+.foot form{display:flex;margin-top:22px;border-bottom:1px solid var(--paper);max-width:380px}
+.foot input{flex:1;background:none;border:0;color:var(--paper);font:inherit;padding:10px 0}
+.foot input::placeholder{color:#a9a49a}
+.foot button{background:none;border:0;color:var(--mustard);font:600 14px Outfit;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.legal{padding:18px 5vw 26px;font-size:13px;opacity:.6;border-top:1px solid #3a3833}
+
+@media (max-width:980px){
+  nav{grid-template-columns:1fr auto;gap:14px}
+  nav ul{display:none}
+  .logo{font-size:20px}
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:40px}
+  .styles{grid-template-columns:1fr 1fr}
+  .style:nth-child(2){border-right:0}
+  .style:nth-child(-n+2){border-bottom:2px solid var(--mustard)}
+  .sched{grid-template-columns:1fr}
+  .days{flex-direction:row;overflow-x:auto;gap:18px}
+  .days button{flex:none}
+  .days button[aria-selected=true]::after{display:none}
+  .days button[aria-selected=true]{border-bottom:3px solid var(--coral)}
+  .teachers,.prices,.foot{grid-template-columns:1fr}
+  .price{border-right:0;border-bottom:1.5px solid var(--ink)}
+  .price:last-child{border-bottom:0}
+}
+@media (max-width:560px){
+  section{padding:64px 16px}
+  .hero h1{font-size:11vw}
+  .logo{font-size:16px;letter-spacing:.1em}
+  .ring{font-size:13px}
+  .hero,nav{padding-left:16px;padding-right:16px}
+  .nav-r .search{display:none}
+  .styles{grid-template-columns:1fr}
+  .style{border-right:0!important;border-bottom:2px solid var(--mustard)}
+  .style:last-child{border-bottom:0}
+  .rows li{grid-template-columns:70px 1fr;gap:6px 14px}
+  .rows .room,.rows a{grid-column:2;justify-self:start}
+  .foot{padding:48px 16px 32px}
+  .legal{padding:18px 16px 26px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="tree">
+      <circle cx="100" cy="42" r="15"/>
+      <path fill="none" d="M100 62 V128 M100 74 L56 44 L94 2 M100 74 L144 44 L106 2 M100 128 V204 M100 128 L132 152 L103 168"/>
+    </g>
+    <g id="dog">
+      <circle cx="54" cy="168" r="14"/>
+      <path fill="none" d="M68 150 L112 92 M68 150 L40 196 M112 92 L178 196"/>
+    </g>
+    <g id="warrior">
+      <circle cx="100" cy="44" r="15"/>
+      <path fill="none" d="M100 64 V122 M36 76 H164 M100 122 L62 148 L56 200 M100 122 L162 200"/>
+    </g>
+    <g id="lotus">
+      <circle cx="100" cy="86" r="15"/>
+      <path fill="none" d="M100 106 V168 M100 116 L72 152 L64 178 M100 116 L128 152 L136 178 M54 184 Q100 160 146 184 Q100 200 54 184"/>
+    </g>
+    <g id="cobra">
+      <circle cx="58" cy="104" r="14"/>
+      <path fill="none" d="M66 122 Q74 160 116 184 L188 190 M66 130 L62 186"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="ribbon">A full moon is coming. Join our <a href="#schedule">candlelit yin night</a> on Friday the 28th.</div>
+
+<nav>
+  <ul>
+    <li><a href="#classes" class="u-wave">Classes</a></li>
+    <li><a href="#schedule" class="u-blob">Schedule</a></li>
+    <li><a href="#teachers" class="u-hl">Teachers</a></li>
+  </ul>
+  <a href="#" class="logo">SOFT SPINE</a>
+  <div class="nav-r">
+    <a href="#pricing" class="ring">First class free
+      <svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M30 8c40-10 130-6 160 10s0 34-60 36S6 50 6 30 40 6 112 6" fill="none" stroke="#f2765c" stroke-width="2.6" stroke-linecap="round"/></svg>
+    </a>
+    <a href="#schedule" class="search" style="font-size:15px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none">Book</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>Stretch <em>a little</em>slower</h1>
+    <p>A small, sunny yoga studio above the bakery on Larch Street. Unhurried classes for stiff office backs, new parents, runners, and anyone who has forgotten what their hamstrings feel like.</p>
+    <div class="btns">
+      <a href="#schedule" class="btn solid">See this week</a>
+      <a href="#classes" class="btn">Find your class</a>
+    </div>
+  </div>
+
+  <svg class="scene" viewBox="0 0 640 560" role="img" aria-label="Illustration of a sunlit studio: three people in tree, warrior and seated poses beneath an arched window with plants">
+    <rect x="8" y="8" width="624" height="544" fill="#fffdf8" stroke="#c3b23e" stroke-width="5"/>
+    <g fill="none" stroke="#c3b23e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M210 330 V150 a110 110 0 0 1 220 0 V330 Z"/>
+      <path d="M320 40 V330 M210 210 H430"/>
+      <path d="M8 420 H632"/>
+      <path d="M40 120 H150 M40 180 H150"/>
+      <path d="M560 60 v60 M540 120 h40 l-10 30 h-20 z"/>
+    </g>
+    <g class="breath"><circle cx="370" cy="118" r="42" fill="#f2765c"/></g>
+    <path d="M240 290 q30-40 70-20 q40-50 90-10 q20-6 30 10 v60 H210 z" fill="#f1c6b3" opacity=".7"/>
+    <g fill="#c3b23e">
+      <rect x="44" y="92" width="16" height="28"/><rect x="62" y="98" width="14" height="22"/><rect x="78" y="88" width="18" height="32"/>
+      <path d="M112 120 a20 20 0 0 1 30 -26 a18 18 0 0 1 -6 26 z"/>
+      <path d="M60 180 h50 l-8 -34 h-34 z"/>
+    </g>
+    <g class="sway" fill="#3f8a5c">
+      <path d="M85 146 C70 120 60 110 64 96 C80 104 88 120 85 146Z"/>
+      <path d="M87 146 C96 116 110 104 124 104 C120 124 104 136 87 146Z"/>
+      <path d="M86 146 C84 120 86 98 96 84 C102 104 96 126 86 146Z" fill="#2f6b47"/>
+    </g>
+    <g class="sway">
+      <path d="M560 150 C540 190 520 230 530 270" fill="none" stroke="#3f8a5c" stroke-width="3"/>
+      <path d="M560 150 C575 190 590 240 584 280" fill="none" stroke="#3f8a5c" stroke-width="3"/>
+      <g fill="#58a874"><ellipse cx="540" cy="190" rx="10" ry="6" transform="rotate(-30 540 190)"/><ellipse cx="528" cy="232" rx="10" ry="6" transform="rotate(30 528 232)"/><ellipse cx="532" cy="266" rx="9" ry="5"/><ellipse cx="580" cy="196" rx="10" ry="6" transform="rotate(30 580 196)"/><ellipse cx="590" cy="240" rx="10" ry="6" transform="rotate(-30 590 240)"/><ellipse cx="584" cy="276" rx="9" ry="5"/></g>
+    </g>
+    <g>
+      <path d="M470 420 c-6-60 0-120 10-170" stroke="#2f6b47" stroke-width="4" fill="none"/>
+      <path d="M478 270 c-40-30-60-10-70 10 c30 10 50 4 70-10z M482 300 c40-30 70-14 76 6 c-30 14-56 6-76-6z M476 340 c-36-20-56 0-60 18 c26 6 44 0 60-18z M480 250 c10-40 40-50 56-40 c-10 30-34 40-56 40z" fill="#3f8a5c"/>
+      <path d="M478 270 l-40 4 M482 300 l50 0" stroke="#fffdf8" stroke-width="1.5"/>
+      <path d="M440 420 h70 l-10 -66 h-50 z" fill="#e3cfee"/>
+      <path d="M452 372 h46 M455 392 h40" stroke="#7a2f4a" stroke-width="2"/>
+    </g>
+    <g fill="#c3b23e"><rect x="40" y="500" width="150" height="16" rx="8"/><rect x="250" y="500" width="150" height="16" rx="8"/><rect x="460" y="500" width="150" height="16" rx="8" opacity=".55"/></g>
+    <g fill="#c3b23e"><circle cx="560" cy="476" r="22"/><circle cx="590" cy="490" r="12"/></g>
+    <g stroke-width="17" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <use href="#tree" transform="translate(65 296) scale(1)" stroke="#2f63e0" fill="#2f63e0"/>
+      <use href="#warrior" transform="translate(230 300) scale(1)" stroke="#1d1c1a" fill="#1d1c1a"/>
+      <use href="#lotus" transform="translate(412 304) scale(1)" stroke="#7a2f4a" fill="#7a2f4a"/>
+    </g>
+    <g fill="none" stroke="#c3b23e" stroke-width="3" stroke-linecap="round">
+      <path d="M140 60 q6-14 12 0 t12 0"/><path d="M500 40 q6-14 12 0 t12 0"/>
+    </g>
+  </svg>
+</header>
+
+<div class="band" aria-hidden="true">
+  <span>Hatha</span><span>breathe in</span><span>Vinyasa</span><span>breathe out</span><span>Yin</span><span>stay a while</span><span>Restorative</span><span>bring a blanket</span><span>Prenatal</span><span>go gently</span><span>Hatha</span><span>breathe in</span><span>Vinyasa</span><span>breathe out</span>
+</div>
+
+<section id="classes">
+  <div class="label">four ways in</div>
+  <h2>Pick a pace</h2>
+  <div class="styles">
+    <article class="style">
+      <svg class="art" viewBox="0 0 220 230" aria-hidden="true">
+        <rect width="220" height="230" fill="#f1c6b3"/>
+        <circle cx="168" cy="54" r="28" fill="#f2765c"/>
+        <path d="M0 200 H220" stroke="#c3b23e" stroke-width="4"/>
+        <rect x="24" y="196" width="172" height="10" rx="5" fill="#c3b23e"/>
+        <use href="#dog" transform="translate(10 10)" stroke="#1d1c1a" fill="#1d1c1a" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div><span class="lvl">all levels</span><h3>Morning Flow</h3><p>A steady vinyasa that warms you up before coffee does. 60 minutes, lots of downward dog.</p></div>
+    </article>
+    <article class="style">
+      <svg class="art" viewBox="0 0 220 230" aria-hidden="true">
+        <rect width="220" height="230" fill="#e3cfee"/>
+        <path d="M30 40 a14 14 0 1 0 22 16 a18 18 0 1 1 -22 -16z" fill="#c3b23e"/>
+        <g fill="#fffdf8"><circle cx="170" cy="40" r="3"/><circle cx="140" cy="70" r="2"/><circle cx="190" cy="90" r="2.5"/></g>
+        <rect x="30" y="198" width="160" height="10" rx="5" fill="#c3b23e"/>
+        <use href="#lotus" transform="translate(10 14)" stroke="#7a2f4a" fill="#7a2f4a" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#f2765c"><path d="M40 196 v-20 M180 196 v-20" stroke="#fffdf8" stroke-width="8" stroke-linecap="round"/><ellipse cx="40" cy="170" rx="4" ry="7"/><ellipse cx="180" cy="170" rx="4" ry="7"/></g>
+      </svg>
+      <div><span class="lvl">slow &amp; deep</span><h3>Candlelit Yin</h3><p>Long, quiet holds on bolsters. Good for tight hips and loud brains. 75 minutes.</p></div>
+    </article>
+    <article class="style">
+      <svg class="art" viewBox="0 0 220 230" aria-hidden="true">
+        <rect width="220" height="230" fill="#cfe0d2"/>
+        <g fill="none" stroke="#c3b23e" stroke-width="4" stroke-linecap="round"><path d="M20 60 q10-18 20 0 t20 0 t20 0"/><path d="M140 40 q10-18 20 0 t20 0"/></g>
+        <rect x="20" y="198" width="180" height="10" rx="5" fill="#c3b23e"/>
+        <use href="#warrior" transform="translate(10 4)" stroke="#2f63e0" fill="#2f63e0" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div><span class="lvl">a bit sweaty</span><h3>Strong Hatha</h3><p>Standing poses, held longer than you'd like. Builds legs, balance and patience. 60 minutes.</p></div>
+    </article>
+    <article class="style">
+      <svg class="art" viewBox="0 0 220 230" aria-hidden="true">
+        <rect width="220" height="230" fill="#fbe7a8"/>
+        <g class="sway" fill="#3f8a5c"><path d="M180 196 c-4-40 0-70 6-90" stroke="#3f8a5c" stroke-width="3" fill="none"/><path d="M184 130 c-24-16-40-6-44 6 c18 6 30 2 44-6z M186 158 c24-16 34-4 34 4 c-14 8-24 4-34-4z"/></g>
+        <rect x="14" y="196" width="190" height="10" rx="5" fill="#c3b23e"/>
+        <use href="#cobra" transform="translate(-6 10)" stroke="#f2765c" fill="#f2765c" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div><span class="lvl">bump friendly</span><h3>Prenatal</h3><p>Gentle strength and breathwork for every trimester, with plenty of pillows and no judgement. 60 minutes.</p></div>
+    </article>
+  </div>
+</section>
+
+<section id="schedule" style="padding-top:0">
+  <div class="label">this week on the mat</div>
+  <h2>Schedule</h2>
+  <div class="sched">
+    <div class="days" role="tablist" aria-label="Day"></div>
+    <ul class="rows" id="rows" role="tabpanel"></ul>
+  </div>
+</section>
+
+<section id="teachers" class="teach">
+  <div class="label">the people counting your breaths</div>
+  <h2>Teachers</h2>
+  <div class="teachers">
+    <div class="teacher">
+      <svg viewBox="0 0 300 260" aria-hidden="true">
+        <rect x="3" y="3" width="294" height="254" fill="#f1c6b3" stroke="#c3b23e" stroke-width="5"/>
+        <circle cx="236" cy="62" r="26" fill="#f2765c"/>
+        <path d="M70 260 c0-60 40-86 80-86 s80 26 80 86z" fill="#2f63e0"/>
+        <path d="M150 50 c-46 0-60 40-56 80 c10 30 102 30 112 0 c4-40-10-80-56-80z" fill="#1d1c1a"/>
+        <ellipse cx="150" cy="118" rx="38" ry="44" fill="#c98b6b"/>
+        <path d="M112 100 c10-34 66-40 78 0 c-20-14-56-16-78 0z" fill="#1d1c1a"/>
+        <circle cx="150" cy="50" r="18" fill="#1d1c1a"/>
+        <path d="M134 120 q6-5 12 0 M156 120 q6-5 12 0 M140 140 q10 8 20 0" stroke="#1d1c1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M134 174 l16 18 l16 -18" fill="#c98b6b"/>
+      </svg>
+      <h3>Maya Okafor</h3><p><span class="serif">Morning flow &amp; hatha.</span> Former physio who will gently correct your shoulders and then tell you a bad joke.</p>
+    </div>
+    <div class="teacher">
+      <svg viewBox="0 0 300 260" aria-hidden="true">
+        <rect x="3" y="3" width="294" height="254" fill="#e3cfee" stroke="#c3b23e" stroke-width="5"/>
+        <g fill="#c3b23e"><path d="M40 40 a12 12 0 1 0 18 14 a15 15 0 1 1 -18 -14z"/></g>
+        <path d="M66 260 c0-60 40-88 84-88 s84 28 84 88z" fill="#7a2f4a"/>
+        <ellipse cx="150" cy="116" rx="40" ry="46" fill="#e8b996"/>
+        <path d="M108 104 c0-50 84-50 84 0 c-6-20-30-28-42-18 c-14-10-36-4-42 18z" fill="#b2662b"/>
+        <path d="M118 150 c10 34 54 34 64 0 c-4 30-18 44-32 44 s-28-14-32-44z" fill="#b2662b"/>
+        <path d="M132 118 h14 M154 118 h14" stroke="#1d1c1a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M142 142 q8 5 16 0" stroke="#1d1c1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="139" cy="118" r="13" fill="none" stroke="#1d1c1a" stroke-width="2.5"/><circle cx="161" cy="118" r="13" fill="none" stroke="#1d1c1a" stroke-width="2.5"/>
+      </svg>
+      <h3>Tomas Reyes</h3><p><span class="serif">Yin &amp; restorative.</span> Plays a singing bowl badly on purpose. Has never once rushed a pose.</p>
+    </div>
+    <div class="teacher">
+      <svg viewBox="0 0 300 260" aria-hidden="true">
+        <rect x="3" y="3" width="294" height="254" fill="#cfe0d2" stroke="#c3b23e" stroke-width="5"/>
+        <g class="sway" fill="#3f8a5c"><path d="M250 250 c-6-60 0-110 8-140" stroke="#2f6b47" stroke-width="3" fill="none"/><path d="M254 150 c-30-20-50-6-54 8 c22 8 38 2 54-8z M256 190 c30-20 40-6 40 4 c-18 10-30 4-40-4z"/></g>
+        <path d="M70 260 c0-60 40-86 80-86 s80 26 80 86z" fill="#f2765c"/>
+        <path d="M100 116 c-10 60 0 96 10 110 h80 c10-14 20-50 10-110z" fill="#5a3a26"/>
+        <ellipse cx="150" cy="114" rx="38" ry="44" fill="#8a5a3c"/>
+        <path d="M110 100 c4-50 76-50 80 0 c-26-6-50-20-60-30 c-4 14-10 24-20 30z" fill="#5a3a26"/>
+        <path d="M134 118 q6 4 12 0 M156 118 q6 4 12 0 M140 138 q10 8 20 0" stroke="#1d1c1a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="114" cy="128" r="4" fill="#c3b23e"/><circle cx="186" cy="128" r="4" fill="#c3b23e"/>
+      </svg>
+      <h3>Priya Nair</h3><p><span class="serif">Prenatal &amp; breathwork.</span> Doula, mother of two, keeper of the studio's enormous blanket pile.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="label">no contracts, no guilt</div>
+  <h2>Come as often as you like</h2>
+  <div class="prices">
+    <div class="price">
+      <h3>Drop in</h3><div class="n"><sup>$</sup>22</div><span class="serif">your first one is on us</span>
+      <ul><li>Any single class</li><li>Mat &amp; blocks included</li><li>Tea after, always</li></ul>
+      <a href="#schedule" class="btn">Book a class</a>
+    </div>
+    <div class="price feat">
+      <svg class="sticker" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 2l9 12 15-4 2 15 14 6-6 14 9 12-13 8 1 15-15 1-6 14-13-8-12 9-8-13-15 1 1-15-13-8 9-12-6-14 14-6 2-15 15 4z" fill="#c3b23e"/>
+        <text x="50" y="46" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="17" fill="#1d1c1a">most</text>
+        <text x="50" y="64" text-anchor="middle" font-family="Instrument Serif,serif" font-style="italic" font-size="17" fill="#1d1c1a">loved</text>
+      </svg>
+      <h3>Unlimited</h3><div class="n"><sup>$</sup>119</div><span class="serif">per month</span>
+      <ul><li>Every class, every day</li><li>Two guest passes</li><li>10% off workshops</li></ul>
+      <a href="#schedule" class="btn solid">Start this week</a>
+    </div>
+    <div class="price">
+      <h3>Ten pack</h3><div class="n"><sup>$</sup>180</div><span class="serif">valid for six months</span>
+      <ul><li>Ten classes, any style</li><li>Share with a friend</li><li>Pause anytime</li></ul>
+      <a href="#schedule" class="btn">Buy a pack</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg viewBox="0 0 1440 180" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0 180 V120 H1440 V180Z" fill="#1d1c1a"/>
+    <g fill="none" stroke="#c3b23e" stroke-width="4" stroke-linecap="round">
+      <path d="M80 120 V40 h60 v80 M160 120 V60 h40 v60"/>
+      <path d="M1260 120 c0-50 60-50 60 0"/>
+    </g>
+    <g fill="#c3b23e">
+      <rect x="240" y="92" width="200" height="28" rx="14"/><circle cx="440" cy="106" r="14" fill="#a8972c"/>
+      <rect x="470" y="70" width="160" height="22" rx="11" fill="#f2765c"/>
+      <rect x="470" y="96" width="180" height="24" rx="12" fill="#e3cfee"/>
+      <rect x="1000" y="80" width="90" height="40" rx="6" fill="#f1c6b3"/>
+      <path d="M1360 120 h50 l-6-40 h-38z"/>
+    </g>
+    <g class="sway" fill="#3f8a5c"><path d="M1384 80 c-20-30-40-30-50-20 c14 14 32 22 50 20z M1386 80 c10-40 30-50 44-44 c-6 24-24 40-44 44z"/></g>
+    <g stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#cobra" transform="translate(700 -76)" stroke="#2f63e0" fill="#2f63e0"/>
+      <use href="#dog" transform="translate(880 -76)" stroke="#7a2f4a" fill="#7a2f4a"/>
+    </g>
+  </svg>
+  <div class="foot">
+    <div>
+      <a href="#" class="logo">SOFT SPINE</a>
+      <p>214 Larch Street, upstairs. Ring the yellow bell, take your shoes off, and help yourself to tea.</p>
+      <form onsubmit="this.querySelector('button').textContent='Thanks!';return false">
+        <input type="email" required placeholder="Your email, for the monthly letter" aria-label="Email">
+        <button>Join</button>
+      </form>
+    </div>
+    <div><h4>Visit</h4><ul><li>Mon to Fri, 6:30 to 21:00</li><li>Weekends, 8:00 to 18:00</li><li>hello@softspine.studio</li></ul></div>
+    <div><h4>Elsewhere</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Workshops</a></li><li><a href="#">Gift cards</a></li></ul></div>
+  </div>
+  <div class="legal">Soft Spine Yoga. Please listen to your body before your teacher.</div>
+</footer>
+
+<script>
+const rooms={Sun:"#fbe7a8",Moon:"#e3cfee",Garden:"#cfe0d2"};
+const week={
+  Mon:[["07:00","Morning Flow","Maya","Sun"],["12:15","Lunch Stretch","Tomas","Garden"],["18:30","Strong Hatha","Maya","Sun"],["20:00","Candlelit Yin","Tomas","Moon"]],
+  Tue:[["07:00","Morning Flow","Maya","Sun"],["10:00","Prenatal","Priya","Garden"],["19:00","Restorative","Tomas","Moon"]],
+  Wed:[["06:45","Sunrise Hatha","Maya","Sun"],["12:15","Lunch Stretch","Priya","Garden"],["18:30","Morning Flow, at night","Maya","Sun"],["20:00","Breathwork","Priya","Moon"]],
+  Thu:[["07:00","Morning Flow","Maya","Sun"],["10:00","Prenatal","Priya","Garden"],["19:00","Candlelit Yin","Tomas","Moon"]],
+  Fri:[["07:00","Morning Flow","Maya","Sun"],["17:30","Strong Hatha","Maya","Sun"],["19:30","Full Moon Yin","Tomas","Moon"]],
+  Sat:[["09:00","Strong Hatha","Maya","Sun"],["11:00","Prenatal","Priya","Garden"],["14:00","Beginners Workshop","Tomas","Moon"]],
+  Sun:[["09:30","Slow Flow","Priya","Sun"],["17:00","Restorative","Tomas","Moon"]]
+};
+const days=document.querySelector(".days"),rows=document.getElementById("rows");
+function show(d){
+  days.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",b.dataset.d===d));
+  rows.innerHTML=week[d].map(([t,n,who,r])=>`<li><span class="t">${t}</span><span><b>${n}</b><small>with ${who}</small></span><span class="room" style="background:${rooms[r]}">${r} room</span><a href="#pricing">Book</a></li>`).join("");
+}
+Object.keys(week).forEach(d=>{
+  const b=document.createElement("button");
+  b.role="tab";b.dataset.d=d;b.innerHTML=`<span>${d}</span>`;
+  b.onclick=()=>show(d);days.append(b);
+});
+show(Object.keys(week)[(new Date().getDay()+6)%7]);
+</script>
+</body>
+</html>

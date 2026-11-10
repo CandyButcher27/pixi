@@ -1,5 +1,6 @@
 import json
 import random
+import re
 import sys
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -118,6 +119,24 @@ def tally(rows: list[dict]) -> dict[str, int]:
     return out
 
 
+HOUSE_TRAITS = {
+    "uppercase eyebrow": r"text-transform:\s*uppercase",
+    "ruled rows": r"border-(top|bottom):\s*1px",
+    "mono labels": r"Mono\b|Courier",
+    "numbered sections": r">\s*0[1-6]\s*[<·—/.]",
+    "italic word in headline": r"<h1[^>]*>[^<]*<(em|i)\b",
+    "fraunces": r"Fraunces",
+}
+
+
+def house_style(html: str, body_bg: str) -> list[str]:
+    hits = [name for name, rx in HOUSE_TRAITS.items() if re.search(rx, html, re.I)]
+    rgb = [float(x) for x in re.findall(r"[\d.]+", body_bg)[:3]]
+    if len(rgb) == 3 and rgb[0] >= rgb[1] >= rgb[2] and sum(rgb) / 3 > 215 and rgb[0] - rgb[2] >= 6:
+        hits.append("warm paper background")
+    return hits
+
+
 def load_stars() -> dict[str, bool]:
     return json.loads(STARS.read_text(encoding="utf-8")) if STARS.exists() else {}
 
@@ -196,6 +215,19 @@ def main() -> None:
     elif cmd == "summary":
         rows = list(map(json.loads, RATINGS.read_text(encoding="utf-8").splitlines())) if RATINGS.exists() else []
         print(f"{len(rows)} rated: {tally(rows)}")
+    elif cmd == "style":
+        sys.path.insert(0, str(ROOT))
+        from designmcp import measure
+        for arm in ARMS:
+            scores = []
+            for s in ready():
+                page = BLIND / s / arm / "index.html"
+                bg = (measure.measure(page).get("backgrounds") or [""])[0]
+                hits = house_style(page.read_text(encoding="utf-8", errors="ignore"), bg)
+                scores.append(len(hits))
+                print(f"  {arm:12} {s:11} {len(hits)}/7  {', '.join(hits)}")
+            if scores:
+                print(f"{arm}: mean house-style score {sum(scores) / len(scores):.1f}/7 over {len(scores)} pages")
     elif cmd == "standouts":
         picked = sorted(k for k, v in load_stars().items() if v)
         by_arm = {a: [k.split("/")[0] for k in picked if k.endswith("/" + a)] for a in ARMS}

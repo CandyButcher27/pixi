@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halden Street Bakery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b0b0a;
+  --paper:#fffefb;
+  --yolk:#ffc21a;
+  --crust:#c9781f;
+  --crust-dark:#7a3d0c;
+  --crumb:#fbe6b0;
+  --flour:#f4efe4;
+  --muted:#5d5a52;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;font-stretch:100%;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.display{font-stretch:125%;font-weight:850;letter-spacing:-.045em;line-height:.86}
+.menu{position:fixed;top:28px;left:24px;z-index:20;width:24px;height:14px;border:0;background:none;cursor:pointer}
+.menu::before,.menu::after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--ink)}
+.menu::before{top:0}.menu::after{bottom:0}
+.mark{position:fixed;left:18px;bottom:26px;z-index:20;width:36px;height:58px;border:2px solid var(--ink);background:var(--paper);display:grid;grid-template-columns:1fr 1fr;place-items:center;font-stretch:125%;font-weight:800;font-size:11px;padding:8px 4px;text-decoration:none}
+
+.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden}
+.hero-art{position:absolute;top:-6vh;right:-14vw;width:min(92vw,1180px);height:auto;pointer-events:none}
+.lede{position:relative;z-index:2;max-width:470px;padding:76px 0 0 clamp(64px,10.6vw,154px);font-size:clamp(20px,2vw,28px);line-height:1.22;letter-spacing:-.015em}
+.hero h1{position:absolute;z-index:3;left:clamp(64px,10.6vw,154px);bottom:9vh;font-size:clamp(56px,10.4vw,152px);margin-right:16px}
+.hero h1 .arrow{display:inline-block;font-weight:400;letter-spacing:0;transform:translateY(-.04em);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.hero h1 a{text-decoration:none}
+.hero h1 a:hover .arrow{transform:translate(.18em,-.04em)}
+
+section{padding:clamp(80px,12vw,170px) clamp(24px,10.6vw,154px)}
+.kicker{font-size:15px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;margin-bottom:28px;display:flex;gap:12px;align-items:center}
+.kicker::before{content:"";width:28px;height:2px;background:var(--ink)}
+
+.bake h2{font-size:clamp(44px,7.4vw,108px);max-width:12ch;margin-bottom:clamp(48px,7vw,96px)}
+.shelf{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink)}
+.item{padding:28px 22px 32px 0;border-right:1px solid #d8d3c6}
+.item + .item{padding-left:22px}
+.item:last-child{border-right:0}
+.item svg{width:100%;height:auto;aspect-ratio:1;display:block;margin-bottom:22px;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.item:hover svg{transform:rotate(-4deg) scale(1.04)}
+.item h3{font-stretch:125%;font-weight:800;font-size:22px;letter-spacing:-.03em;margin-bottom:8px}
+.item p{color:var(--muted);font-size:16px;line-height:1.4}
+.item .price{display:block;margin-top:14px;font-weight:700;color:var(--ink)}
+.item .out{color:var(--crust-dark);font-weight:700}
+
+.clock{background:var(--yolk);display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.clock h2{font-size:clamp(44px,6.6vw,96px);margin-bottom:40px}
+.steps{list-style:none;border-top:2px solid var(--ink)}
+.steps li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid rgba(11,11,10,.28);font-size:18px;line-height:1.35}
+.steps b{font-stretch:125%;font-weight:800;font-size:22px;letter-spacing:-.03em}
+.clock svg{width:100%;height:auto;display:block}
+
+.big{padding-top:clamp(60px,9vw,130px);padding-bottom:0;overflow:hidden}
+.big p{font-size:clamp(64px,15vw,230px);white-space:nowrap}
+.big p span{color:var(--crust)}
+.wheat-row{display:block;width:100%;height:auto;margin-top:-2vw}
+
+.visit{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:clamp(32px,5vw,72px);border-top:2px solid var(--ink);margin:0 clamp(24px,10.6vw,154px);padding-left:0;padding-right:0}
+.visit h2{font-size:clamp(36px,4.6vw,64px)}
+.visit h4{font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin-bottom:14px}
+.visit p,.visit dd{font-size:19px;line-height:1.5}
+.visit dl{display:grid;grid-template-columns:auto 1fr;column-gap:22px}
+.visit dt{font-weight:700;font-size:19px;line-height:1.5}
+.order{display:inline-flex;align-items:center;gap:14px;margin-top:28px;background:var(--ink);color:var(--paper);text-decoration:none;font-stretch:125%;font-weight:800;font-size:18px;letter-spacing:-.02em;padding:18px 26px;border-radius:14px;transition:background .25s}
+.order:hover{background:var(--crust-dark)}
+footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:28px clamp(24px,10.6vw,154px) 40px;font-size:14px;color:var(--muted)}
+
+.rise{animation:rise 7s ease-in-out infinite alternate;transform-origin:50% 100%;transform-box:fill-box}
+@keyframes rise{from{transform:scale(1,.9)}to{transform:scale(1.03,1.06)}}
+.steam path{stroke-dasharray:6 10;animation:steam 3.2s linear infinite}
+@keyframes steam{to{stroke-dashoffset:-64}}
+@media (prefers-reduced-motion:reduce){.rise,.steam path{animation:none}}
+
+@media (max-width:900px){
+  .shelf{grid-template-columns:1fr 1fr}
+  .item:nth-child(2){border-right:0}
+  .item:nth-child(3){padding-left:0}
+  .item:nth-child(n+3){border-top:1px solid #d8d3c6}
+  .clock{grid-template-columns:1fr}
+  .visit{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .mark{display:none}
+  .hero-art{top:6vh;right:-42vw;width:150vw}
+  .lede{padding:72px 24px 0}
+  .hero h1{left:24px}
+  .steps li{grid-template-columns:80px 1fr}
+}
+</style>
+</head>
+<body>
+<button class="menu" aria-label="Open menu"></button>
+<a class="mark" href="#top" aria-label="Halden Street Bakery, home"><span>H</span><span>S</span><span>B</span><span>·</span></a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="crustTex" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".022 .035" numOctaves="4" seed="7" result="n"/>
+      <feDiffuseLighting in="n" surfaceScale="5" lighting-color="#fff4d6" result="l"><feDistantLight azimuth="235" elevation="48"/></feDiffuseLighting>
+      <feComposite in="l" in2="SourceGraphic" operator="in" result="lit"/>
+      <feBlend in="SourceGraphic" in2="lit" mode="multiply"/>
+    </filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .98  0 0 0 0 .96  0 0 0 0 .9  0 0 0 -1.6 1.15"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+    <radialGradient id="crustG" cx="42%" cy="34%" r="70%">
+      <stop offset="0" stop-color="#ffcf4a"/><stop offset=".45" stop-color="#e59a27"/><stop offset=".85" stop-color="#a5560f"/><stop offset="1" stop-color="#6b3208"/>
+    </radialGradient>
+    <linearGradient id="earG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff1c4"/><stop offset=".55" stop-color="#ffd25a"/><stop offset="1" stop-color="#d98a1d"/>
+    </linearGradient>
+    <radialGradient id="glossG" cx="50%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#ffd659"/><stop offset=".6" stop-color="#e8961f"/><stop offset="1" stop-color="#9b4d0c"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<main id="top">
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1000 1000" role="img" aria-label="Illustration of a scored sourdough loaf on a floured board with a bread knife">
+    <g opacity=".9">
+      <path d="M140 520 C 120 380 260 250 470 230 C 720 205 930 330 930 520 C 930 700 760 820 520 840 C 300 860 160 700 140 520Z" fill="#f4efe4"/>
+      <g fill="#fff" opacity=".9">
+        <circle cx="210" cy="430" r="3"/><circle cx="240" cy="640" r="2"/><circle cx="880" cy="420" r="3"/><circle cx="860" cy="660" r="2.5"/><circle cx="330" cy="790" r="2"/><circle cx="700" cy="800" r="3"/><circle cx="180" cy="560" r="2"/><circle cx="905" cy="560" r="2"/>
+      </g>
+    </g>
+    <g transform="rotate(-38 560 820)">
+      <rect x="380" y="800" width="520" height="34" rx="6" fill="#e9e6df" stroke="#bdb8ad" stroke-width="2"/>
+      <path d="M384 834 L 900 834" stroke="#fff" stroke-width="3" opacity=".7"/>
+      <path d="M392 802 l8 0 m10 0 l8 0 m10 0 l8 0 m10 0 l8 0 m10 0 l8 0 m10 0 l8 0 m10 0 l8 0 m10 0 l8 0" stroke="#a9a397" stroke-width="2"/>
+      <rect x="250" y="794" width="150" height="46" rx="12" fill="#b9874f"/>
+      <path d="M262 806 C 300 802 340 812 390 806 M262 818 C 310 822 350 812 390 820 M262 830 C 300 826 340 834 390 828" stroke="#8d6034" stroke-width="2" fill="none"/>
+      <circle cx="285" cy="817" r="4" fill="#5b3a1a"/><circle cx="365" cy="817" r="4" fill="#5b3a1a"/>
+    </g>
+    <ellipse cx="535" cy="745" rx="330" ry="48" fill="#6b3208" opacity=".18"/>
+    <g class="rise">
+      <path d="M215 560 C 200 400 340 285 530 280 C 730 275 875 395 860 560 C 848 690 720 760 535 762 C 350 764 228 690 215 560Z" fill="url(#crustG)" filter="url(#crustTex)"/>
+      <path d="M260 520 C 300 410 420 345 560 342 C 660 340 760 380 812 450" fill="none" stroke="#6b3208" stroke-width="30" stroke-linecap="round" opacity=".55"/>
+      <path d="M262 515 C 305 410 420 350 560 346 C 660 344 760 386 810 452 C 760 420 660 395 560 398 C 430 402 330 450 262 515Z" fill="url(#earG)"/>
+      <path d="M290 488 C 350 425 450 388 560 384 C 650 382 730 405 785 438" fill="none" stroke="#fff8e0" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+      <g fill="none" stroke="#7a3d0c" stroke-width="7" stroke-linecap="round" opacity=".7">
+        <path d="M300 610 C 330 585 360 578 395 590"/>
+        <path d="M430 650 C 470 615 520 610 560 628"/>
+        <path d="M600 660 C 640 630 690 625 730 640"/>
+        <path d="M345 690 C 380 672 410 670 440 682"/>
+        <path d="M660 580 C 700 560 740 560 775 575"/>
+      </g>
+      <g fill="none" stroke="#ffe39a" stroke-width="3" stroke-linecap="round" opacity=".9">
+        <path d="M302 604 C 330 582 360 575 393 585"/>
+        <path d="M432 644 C 470 612 520 606 558 622"/>
+        <path d="M602 654 C 640 626 690 620 728 634"/>
+      </g>
+      <rect x="215" y="280" width="645" height="482" filter="url(#grain)" fill="#fff" opacity=".55" style="mix-blend-mode:screen" clip-path="url(#loafClip)"/>
+      <clipPath id="loafClip"><path d="M215 560 C 200 400 340 285 530 280 C 730 275 875 395 860 560 C 848 690 720 760 535 762 C 350 764 228 690 215 560Z"/></clipPath>
+    </g>
+    <g class="steam" fill="none" stroke="#c9b99a" stroke-width="3" stroke-linecap="round" opacity=".7">
+      <path d="M470 250 C 440 210 500 180 470 130 C 445 95 480 70 470 40"/>
+      <path d="M560 240 C 530 200 590 170 560 120 C 540 85 575 60 560 30"/>
+      <path d="M650 255 C 620 215 680 185 650 140"/>
+    </g>
+    <g transform="translate(150 280) rotate(-20)">
+      <path d="M0 0 L 0 -150" stroke="#c9781f" stroke-width="4"/>
+      <g fill="#ffc21a" stroke="#c9781f" stroke-width="2">
+        <ellipse cx="-10" cy="-40" rx="9" ry="20" transform="rotate(-25 -10 -40)"/><ellipse cx="10" cy="-40" rx="9" ry="20" transform="rotate(25 10 -40)"/>
+        <ellipse cx="-10" cy="-75" rx="9" ry="20" transform="rotate(-25 -10 -75)"/><ellipse cx="10" cy="-75" rx="9" ry="20" transform="rotate(25 10 -75)"/>
+        <ellipse cx="-10" cy="-110" rx="9" ry="20" transform="rotate(-25 -10 -110)"/><ellipse cx="10" cy="-110" rx="9" ry="20" transform="rotate(25 10 -110)"/>
+        <ellipse cx="0" cy="-145" rx="9" ry="22"/>
+      </g>
+    </g>
+  </svg>
+
+  <p class="lede">Halden Street bakes slow sourdough, laminated pastry and rye in a wood-fired oven, two doors from the tram stop.</p>
+  <h1 class="display"><a href="#bake">Bread is<br>out of the<br>oven<span class="arrow">&nbsp;&rarr;</span></a></h1>
+</header>
+
+<section class="bake" id="bake">
+  <p class="kicker">Today's bake, Tuesday</p>
+  <h2 class="display">Four things, done properly.</h2>
+  <div class="shelf">
+    <article class="item">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="92" fill="var(--flour)"/>
+        <path d="M30 120 C 40 70 75 50 100 52 C 125 50 160 70 170 120 C 150 135 125 140 100 140 C 75 140 50 135 30 120Z" fill="url(#glossG)" filter="url(#crustTex)"/>
+        <g fill="none" stroke="#7a3d0c" stroke-width="3" stroke-linecap="round" opacity=".75">
+          <path d="M62 132 C 66 100 78 75 92 60"/><path d="M84 138 C 86 108 92 82 100 60"/><path d="M116 138 C 114 108 108 82 100 60"/><path d="M138 132 C 134 100 122 75 108 60"/>
+        </g>
+        <path d="M70 75 C 85 63 105 60 125 66" stroke="#fff1c4" stroke-width="4" fill="none" stroke-linecap="round" opacity=".8"/>
+      </svg>
+      <h3>Croissant</h3>
+      <p>Cultured butter, 27 layers, three-day lamination.</p>
+      <span class="price">$4.50</span>
+    </article>
+    <article class="item">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="92" fill="var(--flour)"/>
+        <g transform="rotate(-32 100 100)">
+          <rect x="18" y="80" width="164" height="40" rx="20" fill="url(#crustG)" filter="url(#crustTex)"/>
+          <g fill="url(#earG)">
+            <path d="M42 96 C 52 86 64 86 72 92 C 62 94 52 96 42 102Z"/><path d="M80 96 C 90 86 102 86 110 92 C 100 94 90 96 80 102Z"/><path d="M118 96 C 128 86 140 86 148 92 C 138 94 128 96 118 102Z"/>
+          </g>
+        </g>
+      </svg>
+      <h3>Baguette</h3>
+      <p>Poolish, French T65, baked every two hours until 4pm.</p>
+      <span class="price">$3.80</span>
+    </article>
+    <article class="item">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="92" fill="var(--flour)"/>
+        <circle cx="100" cy="104" r="62" fill="url(#glossG)" filter="url(#crustTex)"/>
+        <path d="M100 104 m0 -6 a6 6 0 1 1 -6 6 a14 14 0 1 1 14 14 a22 22 0 1 1 -22 -22 a32 32 0 1 1 32 32 a42 42 0 1 1 -42 -42" fill="none" stroke="#6b3208" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+        <g stroke="#fffefb" stroke-width="5" stroke-linecap="round" fill="none" opacity=".95">
+          <path d="M62 82 C 80 92 92 74 110 86 C 124 96 134 80 146 90"/><path d="M58 120 C 76 128 90 112 108 122 C 122 130 136 116 148 124"/>
+        </g>
+      </svg>
+      <h3>Cardamom bun</h3>
+      <p>Freshly cracked pods, pearl sugar, a soft brioche base.</p>
+      <span class="price">$5.00</span>
+    </article>
+    <article class="item">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="92" fill="var(--flour)"/>
+        <path d="M40 72 L160 72 L160 150 C 160 156 155 160 150 160 L50 160 C 45 160 40 156 40 150Z" fill="#5a2e10" filter="url(#crustTex)"/>
+        <path d="M40 72 C 40 58 60 50 100 50 C 140 50 160 58 160 72Z" fill="#7a3d0c"/>
+        <g fill="#e8c27a" opacity=".85"><circle cx="70" cy="96" r="2.5"/><circle cx="92" cy="114" r="2.5"/><circle cx="118" cy="98" r="2.5"/><circle cx="136" cy="128" r="2.5"/><circle cx="64" cy="138" r="2.5"/><circle cx="104" cy="142" r="2.5"/><circle cx="84" cy="84" r="2"/><circle cx="142" cy="90" r="2"/></g>
+        <path d="M58 58 C 80 54 120 54 142 58" stroke="#c9781f" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <h3>Seeded rye</h3>
+      <p>80% rye, sunflower and caraway, best on day two.</p>
+      <span class="price out">Sold out by 11</span>
+    </article>
+  </div>
+</section>
+
+<section class="clock" aria-labelledby="clock-h">
+  <div>
+    <p class="kicker">How a loaf happens</p>
+    <h2 class="display" id="clock-h">Thirty-one hours for one loaf.</h2>
+    <ol class="steps">
+      <li><b>Mon 9am</b><span>Levain is fed with stone-ground wheat from a mill forty minutes away.</span></li>
+      <li><b>Mon 4pm</b><span>Mixed, rested, folded by hand four times through the afternoon.</span></li>
+      <li><b>Overnight</b><span>Shaped loaves sit in a cold room and slowly turn sour.</span></li>
+      <li><b>Tue 4am</b><span>Scored and loaded into an oven fired with hornbeam since 2am.</span></li>
+      <li><b>Tue 7am</b><span>The door opens. The first loaves are still crackling.</span></li>
+    </ol>
+  </div>
+  <svg viewBox="0 0 500 500" role="img" aria-label="Illustration of a wood-fired oven with loaves on a peel">
+    <path d="M60 440 L 60 250 C 60 130 150 60 250 60 C 350 60 440 130 440 250 L 440 440Z" fill="var(--ink)"/>
+    <g stroke="#2b2a26" stroke-width="3">
+      <path d="M60 300 H440 M60 360 H440 M60 420 H440"/>
+      <path d="M140 300 V360 M260 300 V360 M380 300 V360 M200 360 V420 M320 360 V420"/>
+    </g>
+    <path d="M140 300 L 140 240 C 140 175 190 130 250 130 C 310 130 360 175 360 240 L 360 300Z" fill="#2a1406"/>
+    <g>
+      <path d="M170 300 C 180 260 200 250 210 220 C 220 250 240 260 236 300Z" fill="#ff7a1a"/>
+      <path d="M220 300 C 228 250 250 235 262 190 C 274 235 300 255 290 300Z" fill="#ffc21a"/>
+      <path d="M280 300 C 288 270 304 258 312 232 C 322 262 336 272 330 300Z" fill="#ff7a1a"/>
+      <path d="M236 300 C 240 270 252 258 260 232 C 268 258 280 272 278 300Z" fill="#fff1c4"/>
+    </g>
+    <g stroke="#ffc21a" stroke-width="2" fill="none" opacity=".6">
+      <path d="M150 120 C 120 90 170 70 150 40"/><path d="M350 120 C 380 90 330 70 350 40"/>
+    </g>
+    <rect x="30" y="440" width="440" height="20" fill="#0b0b0a"/>
+    <g transform="rotate(-8 250 470)">
+      <rect x="40" y="462" width="420" height="10" rx="5" fill="#b9874f"/>
+      <ellipse cx="300" cy="460" rx="120" ry="14" fill="#d9a668"/>
+      <path d="M210 455 C 215 420 255 405 290 405 C 330 405 370 420 375 455Z" fill="url(#crustG)"/>
+      <path d="M230 440 C 255 420 300 415 350 432" stroke="url(#earG)" stroke-width="10" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+</section>
+
+<section class="big" aria-hidden="true">
+  <p class="display">Flour, water, <span>salt.</span></p>
+  <svg class="wheat-row" viewBox="0 0 1200 160" preserveAspectRatio="none">
+    <g id="stalk" stroke="#c9781f" stroke-width="2" fill="#ffc21a">
+      <path d="M0 160 C 4 110 2 70 8 20" fill="none" stroke-width="3"/>
+      <ellipse cx="2" cy="60" rx="5" ry="12" transform="rotate(-25 2 60)"/><ellipse cx="14" cy="58" rx="5" ry="12" transform="rotate(25 14 58)"/>
+      <ellipse cx="4" cy="38" rx="5" ry="12" transform="rotate(-25 4 38)"/><ellipse cx="15" cy="36" rx="5" ry="12" transform="rotate(25 15 36)"/>
+      <ellipse cx="9" cy="16" rx="5" ry="13"/>
+    </g>
+  </svg>
+</section>
+
+<section class="visit" id="visit">
+  <div>
+    <p class="kicker">Visit</p>
+    <h2 class="display">Come early. We run out.</h2>
+    <a class="order" href="#visit">Reserve a loaf <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <div>
+    <h4>Where</h4>
+    <p>14 Halden Street<br>Corner of Mill Lane<br>Tram 3, Halden stop</p>
+  </div>
+  <div>
+    <h4>When</h4>
+    <dl>
+      <dt>Tue–Fri</dt><dd>7am – 3pm</dd>
+      <dt>Sat</dt><dd>7am – 1pm</dd>
+      <dt>Sun–Mon</dt><dd>Closed, baking</dd>
+    </dl>
+  </div>
+</section>
+</main>
+<footer>
+  <span>Halden Street Bakery</span>
+  <span>Bake list posted at 6:30am daily</span>
+</footer>
+
+<script>
+const row = document.querySelector('.wheat-row');
+const stalk = document.getElementById('stalk');
+for (let x = 24; x < 1200; x += 22 + Math.random() * 18) {
+  const c = stalk.cloneNode(true);
+  c.removeAttribute('id');
+  const s = .7 + Math.random() * .5;
+  c.setAttribute('transform', `translate(${x} ${160 - 160 * s}) scale(${s}) rotate(${(Math.random() - .5) * 10})`);
+  row.appendChild(c);
+}
+</script>
+</body>
+</html>
