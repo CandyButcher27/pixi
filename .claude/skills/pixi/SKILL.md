@@ -44,7 +44,7 @@ learn from. Use the first good one. If none pass, build without a reference and 
 
 Before any code, write `spec.md` next to the page: a 600-1000 word build brief in this order.
 Building from your own full spec, instead of from rules, is how the Fable 5.2 gallery
-(`PIXI/research/fable52/`, 76 pages with their prompts) avoids the default look.
+(miaai-lab.github.io/Claude-Fable-5.2-HTML-Files, 76 pages with their prompts) avoids the default look.
 
 - **Concept**: one line naming the metaphor the whole page lives inside, taken from the
   project ("the brand is the drawing", "the tins are the heroes, and one of them opens").
@@ -114,6 +114,18 @@ CSS/SVG animations and `requestAnimationFrame` callbacks per second after scroll
 means the page is static, so go back to the motion rule. Any console error is a bug to fix. Report the page
 path, the spec path, the reference URL used, and the score; for the advanced tier also how to run it
 (`npm run dev`, or `npm run preview` after a build).
+
+## 6. Record it in the progression catalogue
+
+`C:\Users\sriva\Desktop\Hackathons\catalogue\catalogue.json` tracks every project through every
+pixi stage. Add the new build as that project's entry for its stage (page, spec, shots, ref,
+score, one-line note). When the method itself changed, append a new stage with its date and what
+changed, and build the page into a new folder (`pixi-v3/`, ...) so earlier stages stay viewable.
+Then rebuild and fix anything it lists as missing:
+
+```
+uv run --project PIXI python PIXI/scripts/build_catalogue.py C:/Users/sriva/Desktop/Hackathons/catalogue/catalogue.json
+```
 
 ## Optional: the catalogue protocol
 
