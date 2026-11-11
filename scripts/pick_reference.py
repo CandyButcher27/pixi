@@ -1,11 +1,14 @@
 """Pick screenshot references for a brief, outside the recurring Claude house style.
 
-  uv run python scripts/pick_reference.py "<brief>" [-n 5]
+  uv run python scripts/pick_reference.py "<brief>" [-n 5] [--feel luxurious|clean|animated|playful]
 
 Looks in the local gallery harvest first. When fewer than n topical candidates exist, it asks
 scrappy (Agents/scraping-agent) to search the web, then visits the found sites itself with
 Playwright after a robots.txt check, and adds them to the harvest. Prints JSON candidates,
 best first; the caller still has to look at each screenshot before using it.
+
+With --feel, candidates come only from the screenshots the owner tagged with that feel in the
+feel picker (scripts/feels.json), plus the Fable 5.2 gallery for clean, animated and playful.
 """
 import argparse
 import hashlib
@@ -27,6 +30,9 @@ from measure_live import OUT, SHOTS, SITES, measure_chunk  # noqa: E402
 SCRAPPY = ROOT.parent / "scraping-agent"
 UA = "pixi-reference-bot"
 HOUSE_FONTS = ("fraunces", "plex", "mono", "newsreader", "gloock")
+FEELS = ROOT / "scripts/feels.json"
+FABLE = ROOT / "research/fable52"
+FABLE_FEELS = {"clean", "animated", "playful"}
 
 
 def slug(url: str) -> str:
@@ -66,6 +72,28 @@ def candidates(brief: str, sites: dict[str, dict]) -> list[dict]:
         tiebreak = hashlib.sha1(f"{brief}|{row['url']}".encode()).hexdigest()
         out.append({"url": row["url"], "screenshot": str(shot), "relevance": len(q & set(tokens(text))),
                     "imagery": row["grammar"].get("imagery"), "_tie": tiebreak})
+    out.sort(key=lambda c: (-c["relevance"], c["_tie"]))
+    return out
+
+
+def feel_candidates(brief: str, feel: str, sites: dict[str, dict]) -> list[dict]:
+    q = set(tokens(brief))
+    picks = json.loads(FEELS.read_text(encoding="utf-8"))["picks"]
+    out = []
+    for key, p in picks.items():
+        if key.startswith("seed:") or feel not in p["feels"]:
+            continue
+        meta = sites.get(p["url"], {})
+        text = " ".join([p["url"], *meta.get("titles", []), *(t.split(":", 1)[-1] for t in meta.get("tags", []))])
+        out.append({"url": p["url"], "screenshot": str(SHOTS.parent / p["shot"]), "relevance": len(q & set(tokens(text)))})
+    if feel in FABLE_FEELS:
+        for page in sorted(FABLE.glob("[0-9]*.html")):
+            thumb = FABLE / "thumbs" / f"{page.stem}.jpg"
+            if thumb.exists():
+                out.append({"url": str(page), "screenshot": str(thumb), "prompt": str(page.with_suffix(".txt")),
+                            "relevance": len(q & set(tokens(page.stem.replace("-", " "))))})
+    for c in out:
+        c["_tie"] = hashlib.sha1(f"{brief}|{c['url']}".encode()).hexdigest()
     out.sort(key=lambda c: (-c["relevance"], c["_tie"]))
     return out
 
@@ -113,10 +141,11 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("brief")
     ap.add_argument("-n", type=int, default=5)
+    ap.add_argument("--feel", choices=["luxurious", "clean", "animated", "playful"])
     args = ap.parse_args()
     sites = load_sites()
-    found = candidates(args.brief, sites)
-    if sum(c["relevance"] > 0 for c in found) < args.n:
+    found = feel_candidates(args.brief, args.feel, sites) if args.feel else candidates(args.brief, sites)
+    if not args.feel and sum(c["relevance"] > 0 for c in found) < args.n:
         print(f"scrappy: fetched {fetch_new(args.brief, sites, args.n * 2)} new references", file=sys.stderr)
         found = candidates(args.brief, sites)
     for c in found:
