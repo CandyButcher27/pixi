@@ -12,10 +12,20 @@ Award-gallery site lists plus 509 full-page screenshots.
 - `screens/*.png`: the screenshot references `scripts/pick_reference.py` returns. Every pixi
   build's reference (madebysix.com, garonzi1925.com, easings.co, wemadethat.co.uk, heyclicky.com)
   came from here.
+- The owner's feel tags (`scripts/feels.json`) point at screenshots here.
 - `measured.jsonl`, `sites_merged.jsonl`: read by `designmcp/catalogue.py` (the `live`
   collection) and written by `scripts/measure_live.py`.
 - Rebuilding it means rerunning `harvest.py`, `merge.py`, `fetch.py` and `measure_live.py`:
   hours of network fetching.
+
+### Fable 5.2 gallery: `research/fable52/` (21 MB, https://miaai-lab.github.io/Claude-Fable-5.2-HTML-Files)
+76 pages with their ~800-word prompts and thumbnails. **Needed:** `pick_reference.py --feel`
+offers these pages (thumbnail + prompt) as references for the clean, animated and playful feels.
+It is also the source of the spec-first stage: the spec order in the pixi skill (concept,
+material, palette, typography, structure, signature moment, motion, reduced motion) is taken
+from how those prompts are written. Measured: a named signature moment 76/76, a designed
+reduced-motion variant 76/76, `requestAnimationFrame` 71/76, canvas 55/76, no external scripts
+or web fonts.
 
 ## Used once, distilled, safe to delete
 
@@ -43,14 +53,6 @@ This is the React component library behind the advanced tier ("React + Astryx").
   override `--color-text-primary` on that block and give padding a more specific selector.
 - The simple and spec-first pages use nothing from Astryx. They are single static HTML files
   with no external scripts or fonts.
-
-### Fable 5.2 gallery: `research/fable52/` (21 MB, https://miaai-lab.github.io/Claude-Fable-5.2-HTML-Files)
-76 pages with their ~800-word prompts. It is the source of the spec-first stage: the spec order
-in the pixi skill (concept, material, palette, typography, structure, signature moment, motion,
-reduced motion) is taken from how those prompts are written. Measured: a named signature moment
-76/76, a designed reduced-motion variant 76/76, `requestAnimationFrame` 71/76, canvas 55/76, no
-external scripts or web fonts. The skill mentions this folder only as an example; the URL above
-serves the same files.
 
 ### Nutlope/inspo screenshots: `research/harvest/Nutlope__inspo/` (7.3 GB)
 Only `scripts/rate.py` reads it: a local pairwise rating page over these screenshots. No rating

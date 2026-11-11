@@ -25,15 +25,30 @@ Ask the user one question only if the purpose is unclear.
 - **Advanced**: a React 19 + Astryx app (Vite) in `pixi-react/` at the project root, built
   around a working demo of the project on its real data. Needs Node; served, not double-clicked.
 
+**Pick the feel.** In the same question, unless the user already said, ask which feel they want.
+Each feel narrows the references to sites the owner tagged by hand and sets defaults for the spec.
+The spec's concept and signature moment still come from the project.
+
+| feel | references | spec defaults |
+|---|---|---|
+| **luxurious** | 28 tagged sites: architecture and fashion studios, garonzi1925.com, jacquesmariemage.com, rapha.cc | Large real or drawn imagery carrying whole sections; lots of empty space; muted rich palette (tan, chocolate, stone, ink) with one restrained accent; display type in a framed or fine serif/sans (Georgia, Palatino, Helvetica light); slow eased reveals (1–1.5s, `cubic-bezier(0.19,1,0.22,1)`); idle motion slow and small (a sway, a drift); the signature moment is tactile and quiet. |
+| **clean** | 22 tagged sites (archier.com.au, round.com.au, lowtechmagazine) + Fable 5.2 | Light ground, strict grid, one accent colour reserved for the action; type does the work, illustration is line-based and precise; motion only in the signature moment and the entrance; no decoration that is not data. |
+| **animated** | 5 tagged sites (basement.studio, madebynull, howmanyplants, forward-festival) + Fable 5.2 | Canvas or WebGL is the primary surface; physics, particles or procedural drawing; constant idle motion and the page acting on its own; scroll- and pointer-driven scenes; the signature moment is a simulation on the project's data; reduced-motion version designed with care. |
+| **playful** | 8 tagged sites (flowfest, dnco.com, letasobierajski) + Fable 5.2 | Saturated colour blocks, illustration and characters, odd or oversized type, stickers and collage; bouncy springs with overshoot; jokes in the copy only where the project allows it. |
+
 ## 2. Pick a reference
 
 ```
-uv run --project PIXI python PIXI/scripts/pick_reference.py "<brief>" -n 5
+uv run --project PIXI python PIXI/scripts/pick_reference.py "<brief>" -n 5 --feel <feel>
 ```
 
-It returns screenshot candidates outside the house style, from the local gallery harvest or,
-when that runs short, fetched fresh through scrappy (`Agents/scraping-agent`) after a
-robots.txt check.
+With `--feel` it returns only that feel's hand-tagged screenshots (and Fable 5.2 pages for clean,
+animated and playful, whose `prompt` field points at the page's full build prompt: read it as a
+model spec). Without `--feel` it returns candidates outside the house style from the local gallery
+harvest or, when that runs short, fetched fresh through scrappy (`Agents/scraping-agent`) after a
+robots.txt check. Retag or add references with the feel picker
+(`uv run --project PIXI python PIXI/scripts/build_feel_picker.py`, then save over
+`PIXI/scripts/feels.json`).
 
 **Visual check:** open each screenshot with the file-reading tool, in order. Reject it if it is
 broken or unusable as design: an age gate, a cookie or consent wall covering most of it, error
