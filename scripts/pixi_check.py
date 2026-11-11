@@ -24,6 +24,48 @@ from blind import house_style  # noqa: E402
 from designmcp import measure  # noqa: E402
 
 
+FLASH_LIMIT = 3
+OPACITY_TRACKS = """document.getAnimations().map(a => {
+  const t = a.effect.getComputedTiming();
+  const ops = a.effect.getKeyframes().map(k => k.opacity).filter(v => v !== undefined).map(Number);
+  return {name: a.animationName || a.id || '', duration: t.duration, iterations: t.iterations, opacity: ops};
+})"""
+REDUCED_PROBE = """document.getAnimations().filter(a => a.playState === 'running' && a.effect.getComputedTiming().iterations === Infinity).length"""
+
+
+def flash_rate(opacity: list[float], duration_ms: float) -> float:
+    if len(opacity) < 2 or not duration_ms:
+        return 0.0
+    swings = sum(abs(b - a) >= 0.5 for a, b in zip(opacity, opacity[1:] + opacity[:1]))
+    return swings / 2 / (duration_ms / 1000)
+
+
+def flashes(tracks: list[dict]) -> list[str]:
+    out = []
+    for t in tracks:
+        if t["iterations"] in (None, 0, 1) or not isinstance(t["duration"], (int, float)):
+            continue
+        rate = flash_rate(t["opacity"], t["duration"])
+        if rate > FLASH_LIMIT:
+            out.append(f"{t['name'] or 'animation'} {rate:.1f}/s")
+    return out
+
+
+def reduced_motion(url: str) -> tuple[int, int]:
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        page = browser.new_page(viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
+        page.add_init_script("window.__raf=0;const r=window.requestAnimationFrame.bind(window);window.requestAnimationFrame=f=>{window.__raf++;return r(f)};")
+        page.goto(url, wait_until="networkidle")
+        page.wait_for_timeout(2500)
+        loops = page.evaluate(REDUCED_PROBE)
+        start = page.evaluate("window.__raf")
+        page.wait_for_timeout(1000)
+        raf = page.evaluate("window.__raf") - start
+        browser.close()
+    return loops, raf
+
+
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *args) -> None:
         pass
@@ -57,6 +99,7 @@ def main() -> None:
             page.wait_for_timeout(120)
         page.wait_for_timeout(1800)
         animations = page.evaluate("document.getAnimations().length")
+        flashing = flashes(page.evaluate(OPACITY_TRACKS))
         raf_start = page.evaluate("window.__raf")
         page.wait_for_timeout(1000)
         raf_per_second = page.evaluate("window.__raf") - raf_start
@@ -65,6 +108,7 @@ def main() -> None:
         page.wait_for_timeout(500)
         page.screenshot(path=str(shot), full_page=True)
         browser.close()
+    reduced_loops, reduced_raf = reduced_motion(f"http://127.0.0.1:{server.server_port}/{page_file.name}")
     server.shutdown()
     bg = body_bg if page_file.parent.name == "dist" else (measure.measure(page_file).get("backgrounds") or [""])[0]
     hits = house_style(source_text(page_file), bg)
@@ -72,6 +116,8 @@ def main() -> None:
     print(f"house style: {len(hits)}/7 {', '.join(hits) or '-'}  (lower is less Claude-looking; 3 or less is good)")
     print(f"motion: {animations} running CSS/SVG animations after scroll (0 means a static page)")
     print(f"motion: {raf_per_second} requestAnimationFrame callbacks per second after scroll (0 means no scripted motion)")
+    print(f"flashing: {', '.join(flashing) or 'none'}  (opacity swings above {FLASH_LIMIT}/s are a seizure risk; fix any)")
+    print(f"reduced motion: {reduced_loops} infinite CSS animations, {reduced_raf} requestAnimationFrame callbacks per second  (both should be 0)")
     print(f"console errors: {len(errors)}" + (f"  first: {errors[0][:200]}" if errors else ""))
 
 

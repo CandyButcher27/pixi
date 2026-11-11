@@ -126,7 +126,10 @@ uv run --project PIXI python PIXI/scripts/pixi_check.py <project>/pixi-react/dis
 Open the `pixi-shot.png` it writes and fix overlaps, cropped text and empty halves. It also
 prints a house-style score; above 3 of 7, push further toward the reference. It counts running
 CSS/SVG animations and `requestAnimationFrame` callbacks per second after scrolling; both 0
-means the page is static, so go back to the motion rule. Any console error is a bug to fix. Report the page
+means the page is static, so go back to the motion rule. It flags any looping opacity swing faster
+than 3 per second (a seizure risk), and reloads the page with reduced motion on: any infinite CSS
+animation or `requestAnimationFrame` callback left there means the reduced-motion version is
+missing. Fix both. Any console error is a bug to fix. Report the page
 path, the spec path, the reference URL used, and the score; for the advanced tier also how to run it
 (`npm run dev`, or `npm run preview` after a build).
 
