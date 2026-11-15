@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pixi feel picker</title>
+<style>
+:root{--bg:#f2f1ed;--ink:#151515;--mute:#6d6c66;--line:#d5d3cb;--card:#fff;--lux:#8a5a2b;--clean:#2d6cdf;--animated:#c2185b;--playful:#2e9b45}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 "Helvetica Neue",Helvetica,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+header h1{font-size:18px;margin:0}header .n{font:12px Menlo,Consolas,monospace;color:var(--mute)}
+header button,.add button{all:unset;cursor:pointer;background:var(--ink);color:#fff;padding:8px 14px;font-size:13px}
+header .sec{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+main{padding:10px 20px 80px;max-width:1700px;margin:0 auto}
+h2{font-size:22px;margin:30px 0 4px}h2 small{font:12px Menlo,monospace;color:var(--mute);font-weight:400}
+.hint{color:var(--mute);margin:0 0 12px;max-width:900px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--card);border:2px solid var(--line)}
+.card.tagged{border-color:var(--ink)}
+.th{display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#e5e4df}
+.th img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.meta{padding:8px 9px 10px}
+.host{display:flex;justify-content:space-between;gap:8px;font-weight:600}.host a{font-weight:400;color:var(--clean);white-space:nowrap}
+.tags{font:10.5px Menlo,monospace;color:var(--mute);margin:4px 0 8px;height:28px;overflow:hidden}
+.btns{display:flex;gap:5px;flex-wrap:wrap}
+.btns button{all:unset;cursor:pointer;font-size:12px;padding:4px 8px;border:1.5px solid var(--line);color:var(--mute)}
+.btns button[aria-pressed=true]{color:#fff;border-color:var(--c);background:var(--c)}
+.btns button:focus-visible,header button:focus-visible{outline:3px solid var(--clean);outline-offset:2px}
+.btns .skip[aria-pressed=true]{background:#999;border-color:#999}
+.add{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.add input,.add select{font:14px inherit;padding:7px 9px;border:1px solid var(--line);background:#fff}.add input{flex:1;min-width:260px}
+#extras li{font:13px Menlo,monospace;margin:4px 0}
+.more{all:unset;cursor:pointer;border:1px solid var(--ink);padding:10px 16px;margin-top:14px;display:inline-block}
+#saved{font:12px Menlo,monospace;color:var(--playful)}
+</style></head><body>
+<header><h1>pixi feel picker</h1><span class="n" id="count"></span>
+<button id="save">Save picks (feels.json)</button><button class="sec" id="copy">Copy as text</button><span id="saved"></span></header>
+<main>
+<p class="hint">Tag every screenshot whose <b>feel</b> you like, regardless of what the site sells. A site can have several feels. Groups are my guess from the galleries' own tags; retag freely. Screenshots cannot show motion: for <b>animated</b>, use "open site". Picks are kept in this browser while you work. When done, press Save: the file lands in Downloads.</p>
+<h2>Your examples <small>already tagged from your message</small></h2><div class="grid" id="seeds"></div>
+<h2>Add a site <small>not in the list? paste it, I screenshot it afterwards</small></h2>
+<div class="add"><input id="url" placeholder="https://..." aria-label="site URL"><select id="urlFeel" aria-label="feel"></select><button id="addBtn">Add</button></div><ul id="extras"></ul>
+<div id="groups"></div>
+</main>
+<script>
+const D=/*DATA*/null;
+const KEY='pixi-feels-v1';
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+S.picks=S.picks||{};S.extras=S.extras||[];
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}count()};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COL={luxurious:'var(--lux)',clean:'var(--clean)',animated:'var(--animated)',playful:'var(--playful)'};
+function card(s,seed){const id=seed?'seed:'+s.label:s.host;const el=document.createElement('div');el.className='card';
+ const img=seed?s.img:s.shot;
+ el.innerHTML=`<a class="th" href="${esc(img)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(img)}" alt="screenshot of ${esc(seed?s.label:s.host)}"></a><div class="meta"><div class="host"><span>${esc(seed?s.label:s.host)}</span>${seed?'':`<a href="${esc(s.url)}" target="_blank" rel="noopener">open site ↗</a>`}</div>${seed?'':`<div class="tags">${esc(s.tags.join(' · '))}</div>`}<div class="btns">${D.feels.map(f=>`<button style="--c:${COL[f]}" data-f="${f}">${f}</button>`).join('')}<button class="skip" data-f="skip">skip</button></div></div>`;
+ if(seed&&!S.picks[id])S.picks[id]={feels:s.feels.slice(),img:s.img,label:s.label};
+ const sync=()=>{const p=S.picks[id];const fs=p?p.feels:[];el.querySelectorAll('.btns button').forEach(b=>b.setAttribute('aria-pressed',fs.includes(b.dataset.f)));el.classList.toggle('tagged',fs.length>0&&!fs.includes('skip'))};
+ el.querySelectorAll('.btns button').forEach(b=>b.onclick=()=>{const f=b.dataset.f;const p=S.picks[id]||(S.picks[id]=seed?{feels:[],img:s.img,label:s.label}:{feels:[],url:s.url,shot:s.shot});
+  if(f==='skip')p.feels=p.feels.includes('skip')?[]:['skip'];else{p.feels=p.feels.filter(x=>x!=='skip');p.feels=p.feels.includes(f)?p.feels.filter(x=>x!==f):[...p.feels,f]}
+  if(!p.feels.length)delete S.picks[id];persist();sync()});
+ sync();return el}
+D.seeds.forEach(s=>document.getElementById('seeds').appendChild(card(s,true)));
+const groups=document.getElementById('groups');
+const LABEL={luxurious:'Probably luxurious',clean:'Probably clean',animated:'Probably animated',playful:'Probably playful'};
+for(const f of D.feels){const list=D.groups[f];const h=document.createElement('h2');h.innerHTML=`${LABEL[f]} <small>${list.length} sites</small>`;groups.appendChild(h);
+ const g=document.createElement('div');g.className='grid';list.forEach(s=>g.appendChild(card(s)));groups.appendChild(g)}
+{const other=D.groups.other;const h=document.createElement('h2');h.innerHTML=`Everything else <small>${other.length} sites, optional</small>`;groups.appendChild(h);
+ const b=document.createElement('button');b.className='more';b.textContent=`Show the other ${other.length}`;groups.appendChild(b);
+ b.onclick=()=>{const g=document.createElement('div');g.className='grid';other.forEach(s=>g.appendChild(card(s)));b.replaceWith(g)}}
+const sel=document.getElementById('urlFeel');sel.innerHTML=D.feels.map(f=>`<option>${f}</option>`).join('');
+function drawExtras(){document.getElementById('extras').innerHTML=S.extras.map((e,i)=>`<li>${esc(e.url)} → ${esc(e.feel)} <button data-i="${i}" style="all:unset;cursor:pointer;color:#c00">remove</button></li>`).join('');
+ document.querySelectorAll('#extras button').forEach(b=>b.onclick=()=>{S.extras.splice(+b.dataset.i,1);persist();drawExtras()})}
+document.getElementById('addBtn').onclick=()=>{const u=document.getElementById('url').value.trim();if(!/^https?:\/\//.test(u))return;S.extras.push({url:u,feel:sel.value});document.getElementById('url').value='';persist();drawExtras()};
+drawExtras();
+function count(){const c={};Object.values(S.picks).forEach(p=>p.feels.forEach(f=>c[f]=(c[f]||0)+1));document.getElementById('count').textContent=D.feels.map(f=>`${f} ${c[f]||0}`).join(' · ')+` · added ${S.extras.length}`}
+const out=()=>JSON.stringify({saved:new Date().toISOString(),picks:S.picks,extras:S.extras},null,1);
+document.getElementById('save').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out()],{type:'application/json'}));a.download='feels.json';a.click();document.getElementById('saved').textContent='saved to Downloads/feels.json'};
+document.getElementById('copy').onclick=async()=>{try{await navigator.clipboard.writeText(out());document.getElementById('saved').textContent='copied: paste it to me'}catch(e){document.getElementById('saved').textContent='copy blocked: use Save'}};
+persist();
+</script></body></html>

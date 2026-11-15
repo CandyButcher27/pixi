@@ -1,0 +1,374 @@
+{
+ "saved": "2026-11-11T07:55:38.010Z",
+ "picks": {
+  "seed:NAVIK spec-first": {
+   "feels": [
+    "clean"
+   ],
+   "img": "file:///C:/Users/sriva/Desktop/Hackathons/SIH/pixi-v2/pixi-shot.png",
+   "label": "NAVIK spec-first"
+  },
+  "seed:NAVIK React + Astryx": {
+   "feels": [
+    "clean"
+   ],
+   "img": "file:///C:/Users/sriva/Desktop/Hackathons/SIH/pixi-react/dist/pixi-shot.png",
+   "label": "NAVIK React + Astryx"
+  },
+  "seed:CoFounders spec-first": {
+   "feels": [
+    "animated"
+   ],
+   "img": "file:///C:/Users/sriva/Desktop/Hackathons/Neurax-CoFounders/pixi-v2/pixi-shot.png",
+   "label": "CoFounders spec-first"
+  },
+  "seed:Foundry prompt rules": {
+   "feels": [
+    "luxurious"
+   ],
+   "img": "file:///C:/Users/sriva/Desktop/Hackathons/Foundry-BuildContext/pixi/pixi-shot.png",
+   "label": "Foundry prompt rules"
+  },
+  "bumblebeespaces.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://bumblebeespaces.com",
+   "shot": "screens/bumblebeespaces.com.png"
+  },
+  "www.daniellelevitt.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://www.daniellelevitt.com",
+   "shot": "screens/www.daniellelevitt.com.png"
+  },
+  "aninterestingday.com": {
+   "feels": [
+    "playful"
+   ],
+   "url": "http://aninterestingday.com",
+   "shot": "screens/aninterestingday.com.png"
+  },
+  "basement.studio": {
+   "feels": [
+    "animated"
+   ],
+   "url": "https://basement.studio",
+   "shot": "screens/basement.studio.png"
+  },
+  "ethnocare.ca": {
+   "feels": [
+    "clean"
+   ],
+   "url": "https://ethnocare.ca",
+   "shot": "screens/ethnocare.ca.png"
+  },
+  "filippobello.com": {
+   "feels": [
+    "clean",
+    "luxurious"
+   ],
+   "url": "https://filippobello.com",
+   "shot": "screens/filippobello.com.png"
+  },
+  "bureau-va.com": {
+   "feels": [
+    "clean",
+    "luxurious"
+   ],
+   "url": "https://bureau-va.com",
+   "shot": "screens/bureau-va.com.png"
+  },
+  "thursday.studio": {
+   "feels": [
+    "clean",
+    "luxurious"
+   ],
+   "url": "https://thursday.studio",
+   "shot": "screens/thursday.studio.png"
+  },
+  "www.goat.com": {
+   "feels": [
+    "skip"
+   ],
+   "url": "https://www.goat.com",
+   "shot": "screens/www.goat.com.png"
+  },
+  "www.etq-amsterdam.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://www.etq-amsterdam.com",
+   "shot": "screens/www.etq-amsterdam.com.png"
+  },
+  "cgthompson.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "http://cgthompson.com",
+   "shot": "screens/cgthompson.com.png"
+  },
+  "aoiofficial.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://aoiofficial.com",
+   "shot": "screens/aoiofficial.com.png"
+  },
+  "www.saramarandi.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "http://www.saramarandi.com",
+   "shot": "screens/www.saramarandi.com.png"
+  },
+  "www.archier.com.au": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "https://www.archier.com.au",
+   "shot": "screens/www.archier.com.au.png"
+  },
+  "www.jacquesmariemage.com": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "https://www.jacquesmariemage.com",
+   "shot": "screens/www.jacquesmariemage.com.png"
+  },
+  "www.rapha.cc": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "https://www.rapha.cc/gb/en",
+   "shot": "screens/www.rapha.cc.png"
+  },
+  "www.round.com.au": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "http://www.round.com.au",
+   "shot": "screens/www.round.com.au.png"
+  },
+  "garonzi1925.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://garonzi1925.com",
+   "shot": "screens/garonzi1925.com.png"
+  },
+  "talent.foam.org": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "https://talent.foam.org",
+   "shot": "screens/talent.foam.org.png"
+  },
+  "synchrodogs.com": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "https://synchrodogs.com",
+   "shot": "screens/synchrodogs.com.png"
+  },
+  "studiobrophy.com": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "https://studiobrophy.com",
+   "shot": "screens/studiobrophy.com.png"
+  },
+  "jacobsutton.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "http://jacobsutton.com",
+   "shot": "screens/jacobsutton.com.png"
+  },
+  "www.richgilligan.com": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "http://www.richgilligan.com",
+   "shot": "screens/www.richgilligan.com.png"
+  },
+  "adasokol.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "http://adasokol.com",
+   "shot": "screens/adasokol.com.png"
+  },
+  "2022.madebynull.com": {
+   "feels": [
+    "animated"
+   ],
+   "url": "https://2022.madebynull.com",
+   "shot": "screens/2022.madebynull.com.png"
+  },
+  "letasobierajski.com": {
+   "feels": [
+    "playful"
+   ],
+   "url": "https://letasobierajski.com",
+   "shot": "screens/letasobierajski.com.png"
+  },
+  "www.flowfest.co.uk": {
+   "feels": [
+    "playful"
+   ],
+   "url": "https://www.flowfest.co.uk",
+   "shot": "screens/www.flowfest.co.uk.png"
+  },
+  "www.nerdo.tv": {
+   "feels": [
+    "playful",
+    "luxurious"
+   ],
+   "url": "https://www.nerdo.tv",
+   "shot": "screens/www.nerdo.tv.png"
+  },
+  "beigeforce.com": {
+   "feels": [
+    "playful",
+    "clean"
+   ],
+   "url": "https://beigeforce.com",
+   "shot": "screens/beigeforce.com.png"
+  },
+  "howmanyplants.com": {
+   "feels": [
+    "animated",
+    "playful"
+   ],
+   "url": "https://howmanyplants.com",
+   "shot": "screens/howmanyplants.com.png"
+  },
+  "regrocery.co": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://regrocery.co",
+   "shot": "screens/regrocery.co.png"
+  },
+  "alisharaf.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "http://alisharaf.com",
+   "shot": "screens/alisharaf.com.png"
+  },
+  "anyother.name": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://anyother.name",
+   "shot": "screens/anyother.name.png"
+  },
+  "chobanifoodservice.com": {
+   "feels": [
+    "luxurious",
+    "clean"
+   ],
+   "url": "http://chobanifoodservice.com",
+   "shot": "screens/chobanifoodservice.com.png"
+  },
+  "dnco.com": {
+   "feels": [
+    "playful"
+   ],
+   "url": "http://dnco.com",
+   "shot": "screens/dnco.com.png"
+  },
+  "forward-festival.com": {
+   "feels": [
+    "animated",
+    "luxurious"
+   ],
+   "url": "http://forward-festival.com",
+   "shot": "screens/forward-festival.com.png"
+  },
+  "heavn-one.webflow.io": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://heavn-one.webflow.io",
+   "shot": "screens/heavn-one.webflow.io.png"
+  },
+  "jeannebataille.com": {
+   "feels": [
+    "playful",
+    "luxurious"
+   ],
+   "url": "https://jeannebataille.com",
+   "shot": "screens/jeannebataille.com.png"
+  },
+  "matelibre.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://matelibre.com",
+   "shot": "screens/matelibre.com.png"
+  },
+  "qiqiglobal.com": {
+   "feels": [
+    "luxurious"
+   ],
+   "url": "https://qiqiglobal.com",
+   "shot": "screens/qiqiglobal.com.png"
+  },
+  "solar.lowtechmagazine.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "https://solar.lowtechmagazine.com",
+   "shot": "screens/solar.lowtechmagazine.com.png"
+  },
+  "themarcus.com": {
+   "feels": [
+    "luxurious",
+    "animated"
+   ],
+   "url": "http://themarcus.com",
+   "shot": "screens/themarcus.com.png"
+  },
+  "www.lamannabakery.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "https://www.lamannabakery.com",
+   "shot": "screens/www.lamannabakery.com.png"
+  },
+  "www.kaltpresse.de": {
+   "feels": [
+    "clean"
+   ],
+   "url": "https://www.kaltpresse.de",
+   "shot": "screens/www.kaltpresse.de.png"
+  },
+  "www.justgowiththeflow.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "https://www.justgowiththeflow.com",
+   "shot": "screens/www.justgowiththeflow.com.png"
+  },
+  "www.juliajohnson.com": {
+   "feels": [
+    "clean"
+   ],
+   "url": "https://www.juliajohnson.com",
+   "shot": "screens/www.juliajohnson.com.png"
+  }
+ },
+ "extras": []
+}
