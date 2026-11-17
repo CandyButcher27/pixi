@@ -3,12 +3,14 @@
   uv run python scripts/pick_reference.py "<brief>" [-n 5] [--feel luxurious|clean|animated|playful]
 
 Looks in the local gallery harvest first. When fewer than n topical candidates exist, it asks
-scrappy (Agents/scraping-agent) to search the web, then visits the found sites itself with
-Playwright after a robots.txt check, and adds them to the harvest. Prints JSON candidates,
-best first; the caller still has to look at each screenshot before using it.
+scrappy to search the web (a sibling scraping-agent checkout when present, else the scrappy repo
+run through uvx), then visits the found sites itself with Playwright after a robots.txt check, and
+adds them to the harvest. Prints JSON candidates, best first; the caller still has to look at each
+screenshot before using it.
 
 With --feel, candidates come only from the screenshots the owner tagged with that feel in the
 feel picker (scripts/feels.json), plus the Fable 5.2 gallery for clean, animated and playful.
+The harvest (research/) is not in git, so on a fresh clone --feel returns no candidates.
 """
 import argparse
 import hashlib
@@ -28,6 +30,7 @@ from designmcp.catalogue import tokens  # noqa: E402
 from measure_live import OUT, SHOTS, SITES, measure_chunk  # noqa: E402
 
 SCRAPPY = ROOT.parent / "scraping-agent"
+SCRAPPY_GIT = "git+https://github.com/CandyButcher27/scrappy"
 UA = "pixi-reference-bot"
 HOUSE_FONTS = ("fraunces", "plex", "mono", "newsreader", "gloock")
 FEELS = ROOT / "scripts/feels.json"
@@ -81,11 +84,12 @@ def feel_candidates(brief: str, feel: str, sites: dict[str, dict]) -> list[dict]
     picks = json.loads(FEELS.read_text(encoding="utf-8"))["picks"]
     out = []
     for key, p in picks.items():
-        if key.startswith("seed:") or feel not in p["feels"]:
+        shot = SHOTS.parent / p.get("shot", "")
+        if key.startswith("seed:") or feel not in p["feels"] or not shot.is_file():
             continue
         meta = sites.get(p["url"], {})
         text = " ".join([p["url"], *meta.get("titles", []), *(t.split(":", 1)[-1] for t in meta.get("tags", []))])
-        out.append({"url": p["url"], "screenshot": str(SHOTS.parent / p["shot"]), "relevance": len(q & set(tokens(text)))})
+        out.append({"url": p["url"], "screenshot": str(shot), "relevance": len(q & set(tokens(text)))})
     if feel in FABLE_FEELS:
         for page in sorted(FABLE.glob("[0-9]*.html")):
             thumb = FABLE / "thumbs" / f"{page.stem}.jpg"
@@ -108,8 +112,12 @@ def allowed(url: str) -> bool:
 
 
 def scrappy_search(brief: str, n: int) -> list[str]:
-    cmd = ["uv", "run", "scrappy", "search", f"{brief} website", "-n", str(n)]
-    res = subprocess.run(cmd, cwd=SCRAPPY, capture_output=True, text=True, encoding="utf-8", timeout=180)
+    args = ["search", f"{brief} website", "-n", str(n)]
+    if SCRAPPY.exists():
+        cmd, cwd = ["uv", "run", "scrappy", *args], SCRAPPY
+    else:
+        cmd, cwd = ["uvx", "--from", SCRAPPY_GIT, "scrappy", *args], ROOT
+    res = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, encoding="utf-8", timeout=300)
     try:
         urls = [r["url"] for r in json.loads(res.stdout).get("results", [])]
         return [u for u in urls if urlparse(u).path in ("", "/")]
@@ -124,7 +132,7 @@ def fetch_new(brief: str, sites: dict[str, dict], limit: int) -> int:
     listed = [u for u, s in sites.items() if u not in done
               and q & set(tokens(" ".join([u, *s.get("titles", []), *s.get("tags", [])])))]
     urls = listed[:limit] if listed else []
-    if len(urls) < limit and SCRAPPY.exists():
+    if len(urls) < limit:
         urls += [u for u in scrappy_search(brief, limit * 2) if u not in done][: limit - len(urls)]
     urls = [u for u in urls if allowed(u)]
     if not urls:
